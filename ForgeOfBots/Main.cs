@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using CefSharp;
-using CefSharp.OffScreen;
-//using CefSharp.WinForms;
+//using CefSharp.OffScreen;
+using CefSharp.WinForms;
 using static CefSharp.LogSeverity;
 using ForgeOfBots.CefBrowserHandler;
 using System.Collections.Generic;
@@ -38,29 +38,63 @@ namespace ForgeOfBots
          browserSettings.LocalStorage = CefState.Enabled;
          browserSettings.WebSecurity = CefState.Disabled;
 
-         cwb = new ChromiumWebBrowser("de.forgeofempires.com");
+         cwb = new ChromiumWebBrowser();
+         cwb.Load("https://de.forgeofempires.com");
          cwb.RequestHandler = new CustomRequestHandler();
          cwb.FrameLoadEnd += Cwb_FrameLoadEnd;
          cwb.MenuHandler = new CustomMenu();
-         //cwb.Dock = DockStyle.Fill;
-         //Controls.Add(cwb);
+         cwb.Dock = DockStyle.Fill;
+         Controls.Add(cwb);
       }
 
       private void Cwb_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
       {
+         cwb.ShowDevTools();
          CookieHandler.CookiesLoaded += OnCookiesLoaded;
          CookieHandler.GetCookies();
       }
 
+      private bool blockedLoginWorld = false;
+      private bool blockedLogin = false;
       private void OnCookiesLoaded(object sender, CookieLoadedEventArgs e)
       {
+         object PlayableWorlds = null;
          AllCookies = e.AllCookies;
          BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
          foreach (var item in AllCookies)
          {
             BeginInvoke(new MethodInvoker(() => lbCookies.Items.Add(item.Key + " -> " + item.Value)));
          }
-
+         if (CurrentState == 0 && !blockedLogin)
+         {
+            blockedLogin = true;
+            CurrentState = 1;
+            string loginJS = resMgr.GetString("preloadLoginWorld");
+            loginJS = loginJS.Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()]).Replace("###USERNAME###", "JohnnyWalker").Replace("###PASSWORD###", "Carlo1509!?");
+            cwb.ExecuteScriptAsync(loginJS);
+            
+         }
+         //else if (CurrentState == 1 && !blockedLoginWorld && AllCookies.ContainsKey("CSRF".ToLower()))
+         //{
+         //   string loginWorld = resMgr.GetString("preloadLoginWorld");
+         //   //loginJS = loginJS.Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()]).Replace("###USERNAME###", "JohnnyWalker").Replace("###PASSWORD###", "Carlo1509!?");
+         //   var task = cwb.EvaluateScriptAsync(loginWorld);
+         //   blockedLoginWorld = true;
+         //   task.ContinueWith(t =>
+         //   {
+         //      if (!t.IsFaulted)
+         //      {
+         //         var response = t.Result;
+         //         PlayableWorlds = response.Success ? (response.Result ?? "null") : response.Message;
+         //         blockedLoginWorld = false;
+         //         CurrentState = 2;
+         //      }
+         //   });
+         //}
+         else if (CurrentState == 2)
+         {
+            var x = "";
+         }
       }
 
       private void Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -82,10 +116,13 @@ namespace ForgeOfBots
             foreach (var item in allCookies)
             {
                //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Add(item.Item1 + " -> " + item.Item2)));
-               if (_allCookies.ContainsKey(item.Item1))
-                  _allCookies[item.Item1] = item.Item2;
+               if (_allCookies.ContainsKey(item.Item1.ToLower()))
+               {
+                  if (_allCookies[item.Item1.ToLower()] != item.Item2)
+                     _allCookies[item.Item1.ToLower()] = item.Item2;
+               }
                else
-                  _allCookies.Add(item.Item1, item.Item2);
+                  _allCookies.Add(item.Item1.ToLower(), item.Item2);
             }
             OnCookiesLoaded(new CookieLoadedEventArgs() { AllCookies = _allCookies });
          });

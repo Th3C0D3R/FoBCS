@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CefBrowserHandler\PlayerWorld.cs" />
     <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
