@@ -61,37 +61,22 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die fetch(&quot;https://###WorldServer###.forgeofempires.com/glps/login_check&quot;, {
-        ///    &quot;credentials&quot;: &quot;include&quot;,
-        ///    &quot;headers&quot;: {
-        ///        &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0&quot;,
-        ///        &quot;Accept&quot;: &quot;application/json, text/plain, */*&quot;,
-        ///        &quot;Accept-Language&quot;: &quot;de,en-US;q=0.7,en;q=0.3&quot;,
-        ///        &quot;X-XSRF-TOKEN&quot;: &quot;###XSRF-TOKEN###&quot;,
-        ///        &quot;Content-type&quot;: &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;,
-        ///        &quot;X-Requested-With&quot;: &quot;XMLHttpRequest&quot;,
-        ///     [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        public static string preloadLogin {
-            get {
-                return ResourceManager.GetString("preloadLogin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die fetch(&quot;https://###WorldServer###0.forgeofempires.com/start/index?action=fetch_worlds_for_login_page&quot;, {
-        ///    &quot;credentials&quot;: &quot;include&quot;,
-        ///    &quot;headers&quot;: {
-        ///        &quot;accept&quot;: &quot;text/plain, */*; q=0.01&quot;,
-        ///        &quot;accept-language&quot;: &quot;de&quot;,
-        ///        &quot;cache-control&quot;: &quot;no-cache&quot;,
-        ///        &quot;content-type&quot;: &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;,
-        ///        &quot;pragma&quot;: &quot;no-cache&quot;,
-        ///        &quot;sec-fetch-mode&quot;: &quot;cors&quot;,
-        ///        &quot;sec-fetch-site&quot;: &quot;same-origin&quot;,
-        ///        &quot;x-requested-with&quot;: &quot;XMLHttpRequest&quot;
-        ///    },
-        ///  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die if (document.readyState == &quot;complete&quot;) FoELogin();
+        ///else {
+        ///    document.addEventListener(&quot;DOMContentLoaded&quot;, () =&gt; {
+        ///        FoELogin();
+        ///    });
+        ///}
+        ///
+        ///async function FoELogin() {
+        ///    console.log(window.location.href);
+        ///    if (window.location.href.indexOf(&quot;de0&quot;) &lt;= 0) {
+        ///        await FoETimer(1000);
+        ///        console.log(1);
+        ///        fetch(&quot;https://de.forgeofempires.com/glps/login_check&quot;, {
+        ///            &quot;credentials&quot;: &quot;include&quot;,
+        ///            &quot;headers&quot;: {
+        ///                &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Wind [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string preloadLoginWorld {
             get {
@@ -100,20 +85,11 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die fetch(&quot;https://###WorldServer###0.forgeofempires.com/start/index?action=play_now_login&quot;, {
-        ///    &quot;credentials&quot;: &quot;include&quot;,
-        ///    &quot;headers&quot;: {
-        ///        &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0&quot;,
-        ///        &quot;Accept&quot;: &quot;text/plain, */*; q=0.01&quot;,
-        ///        &quot;Accept-Language&quot;: &quot;de,en-US;q=0.7,en;q=0.3&quot;,
-        ///        &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded; charset=UTF-8&quot;,
-        ///        &quot;X-Requested-With&quot;: &quot;XMLHttpRequest&quot;,
-        ///        &quot;Pragma&quot;: &quot;no-cache&quot;,
-        ///        &quot;C [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
         /// </summary>
-        public static string preloadSelectWorld {
+        public static string RequestData {
             get {
-                return ResourceManager.GetString("preloadSelectWorld", resourceCulture);
+                return ResourceManager.GetString("RequestData", resourceCulture);
             }
         }
     }

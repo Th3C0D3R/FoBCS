@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForgeOfBots.CefBrowserHandler
+namespace ForgeOfBots.GameClasses
 {
-   public class PlayerWorld
+   public class Player
    {
-      public string PlayableWorlds { get; set; } = "";
+      
    }
 }

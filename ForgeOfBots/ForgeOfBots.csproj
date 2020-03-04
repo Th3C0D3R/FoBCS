@@ -60,8 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CefBrowserHandler\PlayerWorld.cs" />
+    <Compile Include="CefBrowserHandler\InteractionHandler.cs" />
+    <Compile Include="CefBrowserHandler\jsMapInterface.cs" />
+    <Compile Include="CefBrowserHandler\RenderHandler.cs" />
+    <Compile Include="GameClasses\BotData.cs" />
+    <Compile Include="GameClasses\Player.cs" />
     <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,19 +80,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -104,11 +112,15 @@
     <PackageReference Include="CefSharp.WinForms">
       <Version>79.1.360</Version>
     </PackageReference>
+    <PackageReference Include="FiddlerCore">
+      <Version>4.6.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="JSFiles\preloadLogin.js" />
     <EmbeddedResource Include="JSFiles\preloadLoginWorld.js" />
-    <EmbeddedResource Include="JSFiles\preloadSelectWorld.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="JSFiles\RequestData.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
