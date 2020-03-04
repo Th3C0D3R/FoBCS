@@ -112,9 +112,6 @@
     <PackageReference Include="CefSharp.WinForms">
       <Version>79.1.360</Version>
     </PackageReference>
-    <PackageReference Include="FiddlerCore">
-      <Version>4.6.2</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JSFiles\preloadLoginWorld.js" />
