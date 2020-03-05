@@ -60,23 +60,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CefBrowserHandler\InteractionHandler.cs" />
+    <Compile Include="CefBrowserHandler\ResponseHandler.cs" />
     <Compile Include="CefBrowserHandler\jsMapInterface.cs" />
-    <Compile Include="CefBrowserHandler\RenderHandler.cs" />
-    <Compile Include="GameClasses\BotData.cs" />
+    <Compile Include="DataHandler\RequestBuilder.cs" />
+    <Compile Include="Forms\Browser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Browser.Designer.cs">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GameClasses\Data.cs" />
     <Compile Include="GameClasses\Player.cs" />
     <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Main.cs">
+    <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="Forms\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Main.resx">
+    <Compile Include="Utils\Helper.cs" />
+    <EmbeddedResource Include="Forms\Browser.resx">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -112,12 +123,16 @@
     <PackageReference Include="CefSharp.WinForms">
       <Version>79.1.360</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JSFiles\preloadLoginWorld.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="JSFiles\RequestData.js" />
+    <Content Include="JSFiles\fetchMetaData.js" />
+    <Content Include="JSFiles\fetchData.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

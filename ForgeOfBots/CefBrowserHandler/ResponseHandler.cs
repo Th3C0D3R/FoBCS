@@ -8,14 +8,24 @@ using System.Threading.Tasks;
 
 namespace ForgeOfBots.CefBrowserHandler
 {
-   class InteractionHandler
+   class ResponseHandler
    {
       public static ChromiumWebBrowser browser;
       public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
       {
-
          var x = hookEventArgs;
+         var msg = x.message;
+         switch (x.source)
+         {
+            case "Data":
 
+               break;
+            case "MetaData":
+
+               break;
+            default:
+               break;
+         }
       }
    }
 }

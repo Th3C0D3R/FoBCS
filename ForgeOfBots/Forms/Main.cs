@@ -2,18 +2,22 @@
 //using CefSharp.OffScreen;
 using CefSharp.WinForms;
 using ForgeOfBots.CefBrowserHandler;
+using ForgeOfBots.DataHandler;
+using ForgeOfBots.Forms;
+using ForgeOfBots.GameClasses;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 using static CefSharp.LogSeverity;
+using static ForgeOfBots.Utils.Helper;
 using WebClient = System.Net.WebClient;
-using System.ComponentModel;
-using ForgeOfBots.GameClasses;
 
 namespace ForgeOfBots
 {
@@ -24,14 +28,21 @@ namespace ForgeOfBots
       public Dictionary<string, string> AllCookies = new Dictionary<string, string>();
       public BotData BotData = new BotData();
       public SettingData SettingData = new SettingData();
+      public Browser Browser = null;
 
       public int CurrentState = 0;
       public string ForgeHX_FilePath = "";
-      public bool LoginLoaded, ForgeHXLoaded = false;
+      public bool LoginLoaded = false, ForgeHXLoaded = false, UIDLoaded = false;
+
+      private bool blockedLogin = false;
 
       public Main()
       {
          InitializeComponent();
+
+         Browser = new Browser(this);
+         Browser.Show();
+
          var settings = new CefSettings
          {
             LogSeverity = Verbose,
@@ -39,7 +50,7 @@ namespace ForgeOfBots
             PersistSessionCookies = false,
             UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0",
             WindowlessRenderingEnabled = true,
-           
+
          };
          Cef.Initialize(settings);
 
@@ -52,54 +63,61 @@ namespace ForgeOfBots
             WebSecurity = CefState.Disabled,
          };
 
-         //CefSharpSettings.LegacyJavascriptBindingEnabled = true;
-         //CefSharpSettings.WcfEnabled = true;
-
          cwb = new ChromiumWebBrowser("https://de.forgeofempires.com/")
          {
             RequestHandler = new CustomRequestHandler(),
             MenuHandler = new CustomMenu(),
             Dock = DockStyle.Fill,
-            //RenderProcessMessageHandler = new RenderHandler()
          };
-         //InteractionHandler.browser = cwb;
-         //var jsInterface = new jsMapInterface
-         //{
-         //   onHookEvent = InteractionHandler.HookEventHandler
-         //};
-         //cwb.JavascriptObjectRepository.Register("jsInterface", new jsMapInterface(),false, BindingOptions.DefaultBinder);
+         ResponseHandler.browser = cwb;
+         var jsInterface = new jsMapInterface
+         {
+            onHookEvent = ResponseHandler.HookEventHandler
+         };
+         //cwb.JavascriptObjectRepository.Register("jsInterface", jsInterface, true, BindingOptions.DefaultBinder);
+         cwb.JavascriptObjectRepository.ResolveObject += (sender, e) =>
+         {
+            var repo = e.ObjectRepository;
+            if (e.ObjectName == "jsInterface")
+            {
+               BindingOptions bindingOptions = BindingOptions.DefaultBinder;
+               repo.Register("jsInterface", new jsMapInterface() { onHookEvent = ResponseHandler.HookEventHandler }, isAsync: true, options: bindingOptions);
+            }
+         };
          cwb.FrameLoadEnd += Cwb_FrameLoadEnd;
-         Controls.Add(cwb);
-
-
+         Browser.Controls.Add(cwb);
+         //Browser.Hide();
       }
 
       private void Cwb_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
       {
-         //cwb.ShowDevTools();
+         cwb.ShowDevTools();
          CookieHandler.CookiesLoaded += OnCookiesLoaded;
          CookieHandler.GetCookies();
       }
 
-      private bool blockedLogin = false;
       private void OnCookiesLoaded(object sender, CookieLoadedEventArgs e)
       {
          AllCookies = e.AllCookies;
-         BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
-         foreach (var item in AllCookies)
+         if (AllCookies.ContainsKey("CID".ToLower()))
          {
-            BeginInvoke(new MethodInvoker(() => lbCookies.Items.Add(item.Key + " -> " + item.Value)));
-         }
-         if(AllCookies.ContainsKey("CID".ToLower()))
             BotData.CID = AllCookies["CID".ToLower()];
+         }
          if (AllCookies.ContainsKey("CSRF".ToLower()))
+         {
             BotData.CSRF = AllCookies["CSRF".ToLower()];
+         }
          if (AllCookies.ContainsKey("SID".ToLower()))
+         {
             BotData.SID = AllCookies["SID".ToLower()];
+         }
          if (AllCookies.ContainsKey("XSRF-TOKEN".ToLower()))
+         {
             BotData.XSRF = AllCookies["XSRF-TOKEN".ToLower()];
+         }
          if (!blockedLogin)
          {
+            Log(lbLog, "[DEBUG] Doing Login");
             blockedLogin = true;
             Thread.Sleep(500);
             string loginJS = resMgr.GetString("preloadLoginWorld");
@@ -119,15 +137,20 @@ namespace ForgeOfBots
          cwb.ExecuteScriptAsync(loginJS);
       }
 
-      private void UidFound_Event(string uid)
+      private void UidFound_Event(string uid,string wid)
       {
+         if (UIDLoaded) return;
+         Log(lbLog, "[DEBUG] UID loaded");
+         UIDLoaded = true;
          CurrentState = 1;
          BotData.UID = uid;
+         BotData.WID = wid;
       }
 
       private void ForgeHXFound_Event(string forgehx, string filename)
       {
          if (ForgeHXLoaded) return;
+         Log(lbLog, "[DEBUG] Checking ForgeHX File");
          ForgeHXLoaded = true;
          BotData.ForgeHX = filename;
          var AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -135,8 +158,10 @@ namespace ForgeOfBots
          ForgeHX_FilePath = Path.Combine(ProgramPath, filename);
          if (!Directory.Exists(ProgramPath)) Directory.CreateDirectory(ProgramPath);
          FileInfo fi = new FileInfo(ForgeHX_FilePath);
+         Log(lbLog, "[DEBUG] Checking if ForgeHX exists");
          if (!fi.Exists || fi.Length <= 0)
          {
+            Log(lbLog, "[DEBUG] Loading new ForgeHX");
             using (var client = new WebClient())
             {
                Uri uri = new Uri(forgehx.Replace("'", ""));
@@ -150,6 +175,7 @@ namespace ForgeOfBots
          }
          else
          {
+            Log(lbLog, "[DEBUG] Reading ForgeHX");
             var content = File.ReadAllText(ForgeHX_FilePath);
             var regExSecret = new Regex("\\.VERSION_SECRET=\"([a-zA-Z0-9_\\-\\+\\/==]+)\";", RegexOptions.IgnoreCase);
             var regExVersion = new Regex("\\.VERSION_MAJOR_MINOR=\"([0-9+.0-9+.0-9+]+)\";", RegexOptions.IgnoreCase);
@@ -158,16 +184,19 @@ namespace ForgeOfBots
             if (VersionMatch.Success)
             {
                SettingData.Version = VersionMatch.Groups[1].Value;
+               Log(lbLog, "[DEBUG] Version found: " + SettingData.Version);
             }
             if (SecretMatch.Success)
             {
                SettingData.Version_Secret = SecretMatch.Groups[1].Value;
+               Log(lbLog, "[DEBUG] Version Secret found: " + SettingData.Version_Secret);
             }
          }
       }
 
       private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
       {
+         Log(lbLog, "[DEBUG] done Downloading ForgeHX");
          var content = File.ReadAllText(ForgeHX_FilePath);
          var regExSecret = new Regex("\\.VERSION_SECRET=\"([a-zA-Z0-9_\\-\\+\\/==]+)\";", RegexOptions.IgnoreCase);
          var regExVersion = new Regex("\\.VERSION_MAJOR_MINOR=\"([0-9+.0-9+.0-9+]+)\";", RegexOptions.IgnoreCase);
@@ -176,13 +205,26 @@ namespace ForgeOfBots
          if (VersionMatch.Success)
          {
             SettingData.Version = VersionMatch.Groups[1].Value;
+            Log(lbLog, "[DEBUG] Version found: " + SettingData.Version);
          }
          if (SecretMatch.Success)
          {
             SettingData.Version_Secret = SecretMatch.Groups[1].Value;
+            Log(lbLog, "[DEBUG] Version Secret found: " + SettingData.Version_Secret);
          }
          BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
          BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = "IDLE"));
+      }
+
+      private void button1_Click(object sender, EventArgs e)
+      {
+         RequestBuilder.User_Key = BotData.UID;
+         RequestBuilder.VersionSecret = SettingData.Version_Secret;
+         RequestBuilder.Version = SettingData.Version;
+         RequestBuilder.WorldID = BotData.WID;
+         RequestBuilder Startup = new RequestBuilder();
+         var script = Startup.GetRequestScript(RequestType.Startup, "[]");
+         cwb.ExecuteScriptAsync(script);
       }
 
       private void Client_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
@@ -192,6 +234,7 @@ namespace ForgeOfBots
 
       private void Main_FormClosed(object sender, FormClosedEventArgs e)
       {
+         Log(lbLog, "[DEBUG] Closing App");
          Cef.Shutdown();
       }
 

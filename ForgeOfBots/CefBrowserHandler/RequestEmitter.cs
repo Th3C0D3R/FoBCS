@@ -13,7 +13,7 @@ namespace ForgeOfBots.CefBrowserHandler
       private readonly MemoryStream memoryStream = new MemoryStream();
       public delegate void ForgeHX_Found(string forgehx, string filename);
       public static event ForgeHX_Found ForgeHXFoundEvent;
-      public delegate void UID_Found(string uid);
+      public delegate void UID_Found(string uid, string wid);
       public static event UID_Found UidFoundEvent;
       public delegate void ServerStartpage_Loaded();
       public static event ServerStartpage_Loaded ServerStartpageLoadedEvent;
@@ -32,7 +32,7 @@ namespace ForgeOfBots.CefBrowserHandler
                var str = Encoding.UTF8.GetString(bytes);
                if (str.Length > 0)
                {
-                  var regExUserID = new Regex(@"https:\/\/\w{1,2}\d{1,2}\.forgeofempires\.com\/game\/json\?h=(.+)'", RegexOptions.IgnoreCase);
+                  var regExUserID = new Regex(@"https:\/\/(\w{1,2}\d{1,2})\.forgeofempires\.com\/game\/json\?h=(.+)'", RegexOptions.IgnoreCase);
                   var regExForgeHX = new Regex(@"https:\/\/foe\w{1,4}\.innogamescdn\.com\/\/cache\/ForgeHX(.+.js)'", RegexOptions.IgnoreCase);
                   var FHXMatch = regExForgeHX.Match(str);
                   var UIDMatch = regExUserID.Match(str);
@@ -44,8 +44,9 @@ namespace ForgeOfBots.CefBrowserHandler
                   }
                   if (UIDMatch.Success)
                   {
-                     var UID = UIDMatch.Groups[1].Value;
-                     UidFoundEvent?.Invoke(UID);
+                     var UID = UIDMatch.Groups[2].Value;
+                     var WID = UIDMatch.Groups[1].Value;
+                     UidFoundEvent?.Invoke(UID,WID);
                   }
                }
             }

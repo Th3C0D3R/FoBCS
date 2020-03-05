@@ -61,6 +61,44 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die let res = await fetch(&quot;https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##&quot;, {
+        ///    &quot;credentials&quot;: &quot;include&quot;,
+        ///    &quot;headers&quot;: {
+        ///        &quot;accept&quot;: &quot;*/*&quot;,
+        ///        &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
+        ///        &quot;cache-control&quot;: &quot;no-cache&quot;,
+        ///        &quot;client-identification&quot;: &quot;version=##Version##; requiredVersion=##Version##; platform=bro; platformType=html5; platformVersion=web&quot;,
+        ///        &quot;content-type&quot;: &quot;application/json&quot;,
+        ///        &quot;pragma&quot;: &quot;no-cache&quot;,
+        ///        &quot;sec-fetch-mode&quot; [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string fetchData {
+            get {
+                return ResourceManager.GetString("fetchData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die let res = await fetch(##url##, {
+        ///    &quot;credentials&quot;: &quot;include&quot;,
+        ///    &quot;headers&quot;: {
+        ///        &quot;accept&quot;: &quot;*/*&quot;,
+        ///        &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
+        ///        &quot;cache-control&quot;: &quot;no-cache&quot;,
+        ///        &quot;content-type&quot;: &quot;application/json&quot;,
+        ///        &quot;pragma&quot;: &quot;no-cache&quot;,
+        ///        &quot;sec-fetch-mode&quot;: &quot;cors&quot;,
+        ///        &quot;sec-fetch-site&quot;: &quot;same-origin&quot;,
+        ///        &quot;user-agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&quot;
+        ///     [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string fetchMetaData {
+            get {
+                return ResourceManager.GetString("fetchMetaData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die if (document.readyState == &quot;complete&quot;) FoELogin();
         ///else {
         ///    document.addEventListener(&quot;DOMContentLoaded&quot;, () =&gt; {
@@ -81,15 +119,6 @@ namespace ForgeOfBots.Properties {
         public static string preloadLoginWorld {
             get {
                 return ResourceManager.GetString("preloadLoginWorld", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
-        /// </summary>
-        public static string RequestData {
-            get {
-                return ResourceManager.GetString("RequestData", resourceCulture);
             }
         }
     }

@@ -29,21 +29,22 @@
       private void InitializeComponent()
       {
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-         this.lbCookies = new System.Windows.Forms.ListBox();
+         this.lbLog = new System.Windows.Forms.ListBox();
          this.sStripStatus = new System.Windows.Forms.StatusStrip();
          this.tsslProgressState = new System.Windows.Forms.ToolStripStatusLabel();
          this.tspbProgress = new System.Windows.Forms.ToolStripProgressBar();
+         this.button1 = new System.Windows.Forms.Button();
          this.sStripStatus.SuspendLayout();
          this.SuspendLayout();
          // 
-         // lbCookies
+         // lbLog
          // 
-         this.lbCookies.FormattingEnabled = true;
-         this.lbCookies.ItemHeight = 20;
-         this.lbCookies.Location = new System.Drawing.Point(12, 12);
-         this.lbCookies.Name = "lbCookies";
-         this.lbCookies.Size = new System.Drawing.Size(621, 384);
-         this.lbCookies.TabIndex = 0;
+         this.lbLog.FormattingEnabled = true;
+         this.lbLog.ItemHeight = 20;
+         this.lbLog.Location = new System.Drawing.Point(12, 12);
+         this.lbLog.Name = "lbLog";
+         this.lbLog.Size = new System.Drawing.Size(1454, 984);
+         this.lbLog.TabIndex = 0;
          // 
          // sStripStatus
          // 
@@ -71,13 +72,24 @@
          this.tspbProgress.Step = 1;
          this.tspbProgress.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
          // 
+         // button1
+         // 
+         this.button1.Location = new System.Drawing.Point(12, 1005);
+         this.button1.Name = "button1";
+         this.button1.Size = new System.Drawing.Size(143, 42);
+         this.button1.TabIndex = 2;
+         this.button1.Text = "button1";
+         this.button1.UseVisualStyleBackColor = true;
+         this.button1.Click += new System.EventHandler(this.button1_Click);
+         // 
          // Main
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(1489, 1082);
+         this.Controls.Add(this.button1);
          this.Controls.Add(this.sStripStatus);
-         this.Controls.Add(this.lbCookies);
+         this.Controls.Add(this.lbLog);
          this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
          this.Name = "Main";
          this.Text = "Form1";
@@ -91,10 +103,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbCookies;
+        private System.Windows.Forms.ListBox lbLog;
         private System.Windows.Forms.StatusStrip sStripStatus;
         private System.Windows.Forms.ToolStripStatusLabel tsslProgressState;
         private System.Windows.Forms.ToolStripProgressBar tspbProgress;
+        private System.Windows.Forms.Button button1;
     }
 }
 
