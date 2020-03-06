@@ -10,10 +10,6 @@ namespace ForgeOfBots.GameClasses
    {
       public string Version { get; set; }
       public string Version_Secret { get; set; }
-      public string Username { get; set; }
-      public string Password { get; set; }
-      public string LastWorld { get; set; }
-      public string WorldServer { get; set; }
    }
 
    public class BotData

@@ -6,11 +6,10 @@ else {
 }
 
 async function FoELogin() {
-    console.log(window.location.href);
-    if (window.location.href.indexOf("de0") <= 0) {
+    await CefSharp.BindObjectAsync("jsInterface");
+    if (window.location.href.indexOf("##server##0") <= 0) {
         await FoETimer(1000);
-        console.log(1);
-        fetch("https://de.forgeofempires.com/glps/login_check", {
+        fetch("https://##server##.forgeofempires.com/glps/login_check", {
             "credentials": "include",
             "headers": {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0",
@@ -22,22 +21,19 @@ async function FoELogin() {
                 "Pragma": "no-cache",
                 "Cache-Control": "no-cache"
             },
-            "referrer": "https://de.forgeofempires.com/",
+            "referrer": "https://##server##.forgeofempires.com/",
             "body": "login%5Buserid%5D=###USERNAME###&login%5Bpassword%5D=###PASSWORD###&login%5Bremember_me%5D=false",
             "method": "POST",
             "mode": "cors"
         }).catch((e) => {
             console.log(e);
         }).then(async(x) => {
-            window.location = "https://de0.forgeofempires.com/page/";
-            console.log(2);
+            window.location = "https://##server##0.forgeofempires.com/page/";
         });
     }
     else {
         await FoETimer(1000);
-        console.log(1.1);
-        console.log(window.location.href);
-        fetch("https://de0.forgeofempires.com/start/index?action=fetch_worlds_for_login_page", {
+        fetch("https://##server##0.forgeofempires.com/start/index?action=fetch_worlds_for_login_page", {
             "credentials": "include",
             "headers": {
                 "accept": "text/plain, */*; q=0.01",
@@ -49,34 +45,37 @@ async function FoELogin() {
                 "sec-fetch-site": "same-origin",
                 "x-requested-with": "XMLHttpRequest"
             },
-            "referrer": "https://de0.forgeofempires.com/page/",
+            "referrer": "https://##server##0.forgeofempires.com/page/",
             "referrerPolicy": "no-referrer-when-downgrade",
             "body": "json=null",
             "method": "POST",
             "mode": "cors"
         }).then(res => {
             res.text().then(body => {
-                console.log(2.1);
-                console.log(Object.keys(JSON.parse(body)["player_worlds"])[0]);
-                fetch("https://de0.forgeofempires.com/start/index?action=play_now_login", {
-                    "credentials": "include",
-                    "headers": {
-                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0",
-                        "Accept": "text/plain, */*; q=0.01",
-                        "Accept-Language": "de,en-US;q=0.7,en;q=0.3",
-                        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-                        "X-Requested-With": "XMLHttpRequest",
-                        "Pragma": "no-cache",
-                        "Cache-Control": "no-cache"
-                    },
-                    "referrer": "https://de0.forgeofempires.com/page/",
-                    "body": "json=%7B%22world_id%22%3A%22" + Object.keys(JSON.parse(body)["player_worlds"])[0] + "%22%7D",
-                    "method": "POST",
-                    "mode": "cors"
-                }).then(res => res.json()
-                    .then((body) => {
-                        window.location = body['login_url'];
-                    }));
+                if (##t##){
+                    window.jsInterface.hook(Object.keys(JSON.parse(body)["player_worlds"]), "Cities", "ChooseServer");
+                }else {
+                    fetch("https://##server##0.forgeofempires.com/start/index?action=play_now_login", {
+                        "credentials": "include",
+                        "headers": {
+                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0",
+                            "Accept": "text/plain, */*; q=0.01",
+                            "Accept-Language": "de,en-US;q=0.7,en;q=0.3",
+                            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Pragma": "no-cache",
+                            "Cache-Control": "no-cache"
+                        },
+                    "referrer": "https://##server##0.forgeofempires.com/page/",
+                    "body": "json=%7B%22world_id%22%3A%22" + ##city## + "%22%7D",
+                        "method": "POST",
+                        "mode": "cors"
+                    }).then(res => res.json()
+                        .then((body) => {
+                            window.location = body['login_url'];
+                        }));
+                }
+                
             });
         });
     }

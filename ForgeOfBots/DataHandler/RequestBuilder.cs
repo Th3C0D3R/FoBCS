@@ -115,6 +115,11 @@ namespace ForgeOfBots.DataHandler
                _class = "FriendService";
                _methode = "deleteFriend";
                break;
+            case RequestType.GetAllWorlds:
+               _data = new JArray();
+               _class = "WorldService";
+               _methode = "getWorlds";
+               break;
             default:
                _data = new JArray();
                _class = "StartupService";
@@ -128,14 +133,15 @@ namespace ForgeOfBots.DataHandler
          j["requestMethod"] = _methode;
          j["requestId"] = RequestID;
 
-         string jsonString = JsonConvert.SerializeObject(j);
+         string jsonString = "["+JsonConvert.SerializeObject(j)+"]";
          Console.WriteLine(jsonString);
          RequestScript = RequestScript
             .Replace("##RequestData##", jsonString)
             .Replace("##sig##", CalcSig(jsonString, User_Key, VersionSecret))
             .Replace("##WorldID##", WorldID)
             .Replace("##UserKey##", User_Key)
-            .Replace("##Version##", Version);
+            .Replace("##Version##", Version)
+            .Replace("##methode##", type.ToString());
          return RequestScript;
       }
 
@@ -159,6 +165,7 @@ namespace ForgeOfBots.DataHandler
       CollectTavern,
       GetOwnTavern,
       RemovePlayer,
+      GetAllWorlds,
    }
 
 }

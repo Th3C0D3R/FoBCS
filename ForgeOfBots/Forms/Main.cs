@@ -5,7 +5,9 @@ using ForgeOfBots.CefBrowserHandler;
 using ForgeOfBots.DataHandler;
 using ForgeOfBots.Forms;
 using ForgeOfBots.GameClasses;
+using ForgeOfBots.Utils;
 using Newtonsoft.Json.Linq;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +30,11 @@ namespace ForgeOfBots
       public Dictionary<string, string> AllCookies = new Dictionary<string, string>();
       public BotData BotData = new BotData();
       public SettingData SettingData = new SettingData();
+      public Settings UserData;
+      UserDataInput usi = null;
       public Browser Browser = null;
+      public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+      public static string ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
 
       public int CurrentState = 0;
       public string ForgeHX_FilePath = "";
@@ -39,7 +45,7 @@ namespace ForgeOfBots
       public Main()
       {
          InitializeComponent();
-
+         //Log(lbLog, "[DEBUG] Starting Bot");
          Browser = new Browser(this);
          Browser.Show();
 
@@ -62,8 +68,27 @@ namespace ForgeOfBots
             LocalStorage = CefState.Enabled,
             WebSecurity = CefState.Disabled,
          };
+         //Log(lbLog, "[DEBUG] Browser Settings and Cef Settings loaded");
 
-         cwb = new ChromiumWebBrowser("https://de.forgeofempires.com/")
+         if (Settings.SettingsExists())
+            UserData = Settings.ReadSettings();
+         else
+         {
+            //Log(lbLog, "[DEBUG] No Userdata found, creating new one!");
+            UserData = new Settings();
+            usi = new UserDataInput(ListClass.ServerList);
+            usi.UserDataEntered += Usi_UserDataEntered;
+            usi.ShowDialog();
+            Browser.Hide();
+            return;
+         }
+         ContinueExecution();
+         Browser.Hide();
+      }
+
+      private void ContinueExecution()
+      {
+         cwb = new ChromiumWebBrowser("https://" + UserData.WorldServer + ".forgeofempires.com/")
          {
             RequestHandler = new CustomRequestHandler(),
             MenuHandler = new CustomMenu(),
@@ -74,7 +99,6 @@ namespace ForgeOfBots
          {
             onHookEvent = ResponseHandler.HookEventHandler
          };
-         //cwb.JavascriptObjectRepository.Register("jsInterface", jsInterface, true, BindingOptions.DefaultBinder);
          cwb.JavascriptObjectRepository.ResolveObject += (sender, e) =>
          {
             var repo = e.ObjectRepository;
@@ -86,12 +110,21 @@ namespace ForgeOfBots
          };
          cwb.FrameLoadEnd += Cwb_FrameLoadEnd;
          Browser.Controls.Add(cwb);
-         //Browser.Hide();
+      }
+
+      private void Usi_UserDataEntered(string username, string password, string server)
+      {
+         //Log(lbLog, "[DEBUG] Userdata loaded");
+         UserData.Username = username;
+         UserData.Password = password;
+         UserData.WorldServer = server;
+         usi.Close();
+         ContinueExecution();
       }
 
       private void Cwb_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
       {
-         cwb.ShowDevTools();
+         //cwb.ShowDevTools();
          CookieHandler.CookiesLoaded += OnCookiesLoaded;
          CookieHandler.GetCookies();
       }
@@ -117,27 +150,53 @@ namespace ForgeOfBots
          }
          if (!blockedLogin)
          {
-            Log(lbLog, "[DEBUG] Doing Login");
+            //Log(lbLog, "[DEBUG] Doing Login");
             blockedLogin = true;
-            Thread.Sleep(500);
-            string loginJS = resMgr.GetString("preloadLoginWorld");
-            loginJS = loginJS.Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()]).Replace("###USERNAME###", "JohnnyWalker").Replace("###PASSWORD###", "Carlo1509!?");
+            Thread.Sleep(1000);
             CustomResourceRequestHandler.ServerStartpageLoadedEvent += ServerStartupLoaded_Event;
+            string loginJS = resMgr.GetString("preloadLoginWorld");
+            loginJS = loginJS
+               .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
+               .Replace("###USERNAME###", UserData.Username)
+               .Replace("###PASSWORD###", UserData.Password)
+               .Replace("##server##", UserData.WorldServer)
+               .Replace("##t##", "false")
+            .Replace("##city##", "-");
             cwb.ExecuteScriptAsync(loginJS);
          }
       }
 
       private void ServerStartupLoaded_Event()
       {
-         Thread.Sleep(500);
+         Thread.Sleep(1000);
+         ResponseHandler.WorldsLoaded += ResponseHandler_WorldsLoaded;
          string loginJS = resMgr.GetString("preloadLoginWorld");
-         loginJS = loginJS.Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()]).Replace("###USERNAME###", "JohnnyWalker").Replace("###PASSWORD###", "Carlo1509!?");
-         CustomResourceRequestHandler.ForgeHXFoundEvent += ForgeHXFound_Event;
-         CustomResourceRequestHandler.UidFoundEvent += UidFound_Event;
+         loginJS = loginJS
+            .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
+            .Replace("###USERNAME###", UserData.Username)
+            .Replace("###PASSWORD###", UserData.Password)
+            .Replace("##server##", UserData.WorldServer)
+            .Replace("##t##", "true")
+            .Replace("##city##", "-");
          cwb.ExecuteScriptAsync(loginJS);
+         //string loginJS = resMgr.GetString("preloadLoginWorld");
+         //loginJS = loginJS
+         //   .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
+         //      .Replace("###USERNAME###", UserData.Username)
+         //      .Replace("###PASSWORD###", UserData.Password)
+         //      .Replace("###server###", UserData.WorldServer)
+         //   .Replace("##t##", "false");
+         //CustomResourceRequestHandler.ForgeHXFoundEvent += ForgeHXFound_Event;
+         //CustomResourceRequestHandler.UidFoundEvent += UidFound_Event;
+         //cwb.ExecuteScriptAsync(loginJS);
       }
 
-      private void UidFound_Event(string uid,string wid)
+      private void ResponseHandler_WorldsLoaded(object sender)
+      {
+         
+      }
+
+      private void UidFound_Event(string uid, string wid)
       {
          if (UIDLoaded) return;
          Log(lbLog, "[DEBUG] UID loaded");
@@ -153,8 +212,6 @@ namespace ForgeOfBots
          Log(lbLog, "[DEBUG] Checking ForgeHX File");
          ForgeHXLoaded = true;
          BotData.ForgeHX = filename;
-         var AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-         var ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
          ForgeHX_FilePath = Path.Combine(ProgramPath, filename);
          if (!Directory.Exists(ProgramPath)) Directory.CreateDirectory(ProgramPath);
          FileInfo fi = new FileInfo(ForgeHX_FilePath);
@@ -222,8 +279,8 @@ namespace ForgeOfBots
          RequestBuilder.VersionSecret = SettingData.Version_Secret;
          RequestBuilder.Version = SettingData.Version;
          RequestBuilder.WorldID = BotData.WID;
-         RequestBuilder Startup = new RequestBuilder();
-         var script = Startup.GetRequestScript(RequestType.Startup, "[]");
+         RequestBuilder GetWorlds = new RequestBuilder();
+         var script = GetWorlds.GetRequestScript(RequestType.GetAllWorlds, "[]");
          cwb.ExecuteScriptAsync(script);
       }
 
@@ -237,7 +294,7 @@ namespace ForgeOfBots
          Log(lbLog, "[DEBUG] Closing App");
          Cef.Shutdown();
       }
-
+      
    }
    public static class CookieHandler
    {

@@ -1,16 +1,12 @@
 ﻿async function makeRequest() {
-    debugger;
-    console.log(1);
     await CefSharp.BindObjectAsync("jsInterface");
     let res = await fetch("https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##", {
         "credentials": "include",
         "headers": {
             "accept": "*/*",
             "accept-language": "en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7",
-            "cache-control": "no-cache",
             "client-identification": "version=##Version##; requiredVersion=##Version##; platform=bro; platformType=html5; platformVersion=web",
             "content-type": "application/json",
-            "pragma": "no-cache",
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "same-origin",
             "signature": "##sig##",
@@ -18,26 +14,23 @@
         },
         "referrer": "https://##WorldID##.forgeofempires.com/game/index?",
         "referrerPolicy": "no-referrer-when-downgrade",
-        "body": "##RequestData##",
+        "body": '##RequestData##',
         "method": "POST",
         "mode": "cors"
     });
     if (res.status === 200) {
-        console.log(2);
         let body = await res.text();
         try {
-            console.log(3);
             var json = JSON.parse(body);
-            console.log(json);
             if (json[0]["__class__"] === "Error" || json[0]["__class__"] === "Redirect")
-                window.jsInterface.hook("SESSION-EXPIRED", "Data");
-            window.jsInterface.hook(json, "Data");
+                window.jsInterface.hook("SESSION-EXPIRED", "Data", "##methode##");
+            window.jsInterface.hook(json, "Data", "##methode##");
         } catch (error) {
-            window.jsInterface.hook(JSON.parse("[]"), "Data");
+            window.jsInterface.hook(JSON.parse("[]"), "Data","##methode##");
         }
     }
     else
-        window.jsInterface.hook(JSON.parse("[]"), "Data");
+        window.jsInterface.hook(JSON.parse("[]"), "Data", "##methode##");
 }
 
 makeRequest();
