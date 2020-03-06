@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace ForgeOfBots.GameClasses
 {
-   class Incident
+   public class Incident
    {
+      public int ID {get; set;}
+      public string Position {get; set;}
+      public eRarity Rarity {get;set;}
+   }
+   
+   public enum eRarity{
+      common,
+      rare
    }
 }
