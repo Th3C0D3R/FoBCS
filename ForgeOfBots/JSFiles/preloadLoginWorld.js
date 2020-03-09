@@ -53,7 +53,7 @@ async function FoELogin() {
         }).then(res => {
             res.text().then(body => {
                 if (##t##){
-                    window.jsInterface.hook(Object.keys(JSON.parse(body)["player_worlds"]), "Cities", "ChooseServer");
+                    window.jsInterface.hook(body, "Cities", "ChooseServer");
                 }else {
                     fetch("https://##server##0.forgeofempires.com/start/index?action=play_now_login", {
                         "credentials": "include",

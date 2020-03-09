@@ -28,6 +28,7 @@ namespace ForgeOfBots
       public ChromiumWebBrowser cwb;
       public static ResourceManager resMgr = new ResourceManager("ForgeOfBots.Properties.Resources", Assembly.GetExecutingAssembly());
       public Dictionary<string, string> AllCookies = new Dictionary<string, string>();
+      public RequestBuilder ReqBuilder = new RequestBuilder();
       public BotData BotData = new BotData();
       public SettingData SettingData = new SettingData();
       public Settings UserData;
@@ -38,14 +39,14 @@ namespace ForgeOfBots
 
       public int CurrentState = 0;
       public string ForgeHX_FilePath = "";
-      public bool LoginLoaded = false, ForgeHXLoaded = false, UIDLoaded = false;
+      public bool LoginLoaded = false, ForgeHXLoaded = false, UIDLoaded = false, SECRET_LOADED = false;
 
       private bool blockedLogin = false;
 
       public Main()
       {
          InitializeComponent();
-         //Log(lbLog, "[DEBUG] Starting Bot");
+         Log("[DEBUG] Starting Bot");
          Browser = new Browser(this);
          Browser.Show();
 
@@ -68,13 +69,13 @@ namespace ForgeOfBots
             LocalStorage = CefState.Enabled,
             WebSecurity = CefState.Disabled,
          };
-         //Log(lbLog, "[DEBUG] Browser Settings and Cef Settings loaded");
+         Log("[DEBUG] Browser Settings and Cef Settings loaded");
 
          if (Settings.SettingsExists())
             UserData = Settings.ReadSettings();
          else
          {
-            //Log(lbLog, "[DEBUG] No Userdata found, creating new one!");
+            Log("[DEBUG] No Userdata found, creating new one!");
             UserData = new Settings();
             usi = new UserDataInput(ListClass.ServerList);
             usi.UserDataEntered += Usi_UserDataEntered;
@@ -114,7 +115,7 @@ namespace ForgeOfBots
 
       private void Usi_UserDataEntered(string username, string password, string server)
       {
-         //Log(lbLog, "[DEBUG] Userdata loaded");
+         Log("[DEBUG] Userdata loaded");
          UserData.Username = username;
          UserData.Password = password;
          UserData.WorldServer = server;
@@ -148,77 +149,89 @@ namespace ForgeOfBots
          {
             BotData.XSRF = AllCookies["XSRF-TOKEN".ToLower()];
          }
-         if (!blockedLogin)
-         {
-            //Log(lbLog, "[DEBUG] Doing Login");
-            blockedLogin = true;
-            Thread.Sleep(1000);
-            CustomResourceRequestHandler.ServerStartpageLoadedEvent += ServerStartupLoaded_Event;
-            string loginJS = resMgr.GetString("preloadLoginWorld");
-            loginJS = loginJS
-               .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
-               .Replace("###USERNAME###", UserData.Username)
-               .Replace("###PASSWORD###", UserData.Password)
-               .Replace("##server##", UserData.WorldServer)
-               .Replace("##t##", "false")
-            .Replace("##city##", "-");
-            cwb.ExecuteScriptAsync(loginJS);
-         }
       }
 
       private void ServerStartupLoaded_Event()
       {
-         Thread.Sleep(1000);
+         Thread.Sleep(500);
          ResponseHandler.WorldsLoaded += ResponseHandler_WorldsLoaded;
          string loginJS = resMgr.GetString("preloadLoginWorld");
+         string loginCity = "false";
+         if (UserData.LastWorld == null)
+            loginCity = "true";
+
          loginJS = loginJS
             .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
             .Replace("###USERNAME###", UserData.Username)
             .Replace("###PASSWORD###", UserData.Password)
             .Replace("##server##", UserData.WorldServer)
-            .Replace("##t##", "true")
-            .Replace("##city##", "-");
+            .Replace("##t##", loginCity)
+            .Replace("##city##", "\"" + UserData.LastWorld + "\"");
          cwb.ExecuteScriptAsync(loginJS);
-         //string loginJS = resMgr.GetString("preloadLoginWorld");
-         //loginJS = loginJS
-         //   .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
-         //      .Replace("###USERNAME###", UserData.Username)
-         //      .Replace("###PASSWORD###", UserData.Password)
-         //      .Replace("###server###", UserData.WorldServer)
-         //   .Replace("##t##", "false");
-         //CustomResourceRequestHandler.ForgeHXFoundEvent += ForgeHXFound_Event;
-         //CustomResourceRequestHandler.UidFoundEvent += UidFound_Event;
-         //cwb.ExecuteScriptAsync(loginJS);
       }
 
       private void ResponseHandler_WorldsLoaded(object sender)
       {
-         
+         if (ListClass.WorldList.Count > 0)
+         {
+            UserData.PlayableWorlds = ListClass.WorldList.ConvertAll(new Converter<Tuple<string, string, WorldState>, string>(WorldToPlayable));
+            WorldSelection ws = new WorldSelection(ListClass.WorldList);
+            ws.WorldDataEntered += Ws_WorldDataEntered;
+            ws.ShowDialog();
+         }
+      }
+
+      private void Ws_WorldDataEntered(Form ws, string key, string value)
+      {
+         UserData.LastWorld = key;
+         string loginJS = resMgr.GetString("preloadLoginWorld");
+         loginJS = loginJS
+            .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
+               .Replace("###USERNAME###", UserData.Username)
+               .Replace("###PASSWORD###", UserData.Password)
+               .Replace("##server##", UserData.WorldServer)
+               .Replace("##city##", "\"" + UserData.LastWorld + "\"")
+            .Replace("##t##", "false");
+         CustomResourceRequestHandler.ForgeHXFoundEvent += ForgeHXFound_Event;
+         CustomResourceRequestHandler.UidFoundEvent += UidFound_Event;
+         cwb.ExecuteScriptAsync(loginJS);
+         ws.Close();
       }
 
       private void UidFound_Event(string uid, string wid)
       {
          if (UIDLoaded) return;
-         Log(lbLog, "[DEBUG] UID loaded");
+         Log("[DEBUG] UID loaded");
          UIDLoaded = true;
          CurrentState = 1;
          BotData.UID = uid;
          BotData.WID = wid;
+         UserData.SettingsSaved += UserData_SettingsSaved;
+         UserData.SaveSettings();
+         if (SECRET_LOADED)
+         {
+            LoadWorlds();
+         }
+      }
+
+      private void UserData_SettingsSaved(Settings e)
+      {
+         Log("[DEBUG] UserData saved");
       }
 
       private void ForgeHXFound_Event(string forgehx, string filename)
       {
          if (ForgeHXLoaded) return;
-         Log(lbLog, "[DEBUG] Checking ForgeHX File");
+         Log("[DEBUG] Checking ForgeHX File");
          ForgeHXLoaded = true;
          BotData.ForgeHX = filename;
          ForgeHX_FilePath = Path.Combine(ProgramPath, filename);
          if (!Directory.Exists(ProgramPath)) Directory.CreateDirectory(ProgramPath);
          FileInfo fi = new FileInfo(ForgeHX_FilePath);
-         Log(lbLog, "[DEBUG] Checking if ForgeHX exists");
+         Log("[DEBUG] Checking if ForgeHX exists");
          if (!fi.Exists || fi.Length <= 0)
          {
-            Log(lbLog, "[DEBUG] Loading new ForgeHX");
+            Log("[DEBUG] Loading new ForgeHX");
             using (var client = new WebClient())
             {
                Uri uri = new Uri(forgehx.Replace("'", ""));
@@ -232,7 +245,7 @@ namespace ForgeOfBots
          }
          else
          {
-            Log(lbLog, "[DEBUG] Reading ForgeHX");
+            Log("[DEBUG] Reading ForgeHX");
             var content = File.ReadAllText(ForgeHX_FilePath);
             var regExSecret = new Regex("\\.VERSION_SECRET=\"([a-zA-Z0-9_\\-\\+\\/==]+)\";", RegexOptions.IgnoreCase);
             var regExVersion = new Regex("\\.VERSION_MAJOR_MINOR=\"([0-9+.0-9+.0-9+]+)\";", RegexOptions.IgnoreCase);
@@ -241,19 +254,24 @@ namespace ForgeOfBots
             if (VersionMatch.Success)
             {
                SettingData.Version = VersionMatch.Groups[1].Value;
-               Log(lbLog, "[DEBUG] Version found: " + SettingData.Version);
+               Log("[DEBUG] Version found: " + SettingData.Version);
             }
             if (SecretMatch.Success)
             {
                SettingData.Version_Secret = SecretMatch.Groups[1].Value;
-               Log(lbLog, "[DEBUG] Version Secret found: " + SettingData.Version_Secret);
+               Log("[DEBUG] Version Secret found: " + SettingData.Version_Secret);
+               SECRET_LOADED = true;
+               if (UIDLoaded)
+               {
+                  LoadWorlds();
+               }
             }
          }
       }
 
       private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
       {
-         Log(lbLog, "[DEBUG] done Downloading ForgeHX");
+         Log("[DEBUG] done Downloading ForgeHX");
          var content = File.ReadAllText(ForgeHX_FilePath);
          var regExSecret = new Regex("\\.VERSION_SECRET=\"([a-zA-Z0-9_\\-\\+\\/==]+)\";", RegexOptions.IgnoreCase);
          var regExVersion = new Regex("\\.VERSION_MAJOR_MINOR=\"([0-9+.0-9+.0-9+]+)\";", RegexOptions.IgnoreCase);
@@ -262,26 +280,42 @@ namespace ForgeOfBots
          if (VersionMatch.Success)
          {
             SettingData.Version = VersionMatch.Groups[1].Value;
-            Log(lbLog, "[DEBUG] Version found: " + SettingData.Version);
+            Log("[DEBUG] Version found: " + SettingData.Version);
          }
          if (SecretMatch.Success)
          {
             SettingData.Version_Secret = SecretMatch.Groups[1].Value;
-            Log(lbLog, "[DEBUG] Version Secret found: " + SettingData.Version_Secret);
+            Log("[DEBUG] Version Secret found: " + SettingData.Version_Secret);
+            SECRET_LOADED = true;
+            if (UIDLoaded)
+            {
+               LoadWorlds();
+            }
          }
          BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
          BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = "IDLE"));
       }
 
-      private void button1_Click(object sender, EventArgs e)
+      private void tsbLogin_Click(object sender, EventArgs e)
       {
-         RequestBuilder.User_Key = BotData.UID;
-         RequestBuilder.VersionSecret = SettingData.Version_Secret;
-         RequestBuilder.Version = SettingData.Version;
-         RequestBuilder.WorldID = BotData.WID;
-         RequestBuilder GetWorlds = new RequestBuilder();
-         var script = GetWorlds.GetRequestScript(RequestType.GetAllWorlds, "[]");
-         cwb.ExecuteScriptAsync(script);
+         if (!blockedLogin)
+         {
+            Log("[DEBUG] Doing Login");
+            blockedLogin = true;
+            Thread.Sleep(500);
+            CustomResourceRequestHandler.ServerStartpageLoadedEvent += ServerStartupLoaded_Event;
+            string loginJS = resMgr.GetString("preloadLoginWorld");
+            loginJS = loginJS
+               .Replace("###XSRF-TOKEN###", AllCookies["XSRF-TOKEN".ToLower()])
+               .Replace("###USERNAME###", UserData.Username)
+               .Replace("###PASSWORD###", UserData.Password)
+               .Replace("##server##", UserData.WorldServer)
+               .Replace("##t##", "false")
+            .Replace("##city##", UserData.LastWorld);
+            CustomResourceRequestHandler.ForgeHXFoundEvent += ForgeHXFound_Event;
+            CustomResourceRequestHandler.UidFoundEvent += UidFound_Event;
+            cwb.ExecuteScriptAsync(loginJS);
+         }
       }
 
       private void Client_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
@@ -289,12 +323,35 @@ namespace ForgeOfBots
          BeginInvoke(new MethodInvoker(() => tspbProgress.Value = e.ProgressPercentage));
       }
 
+      private void tsbSettings_Click(object sender, EventArgs e)
+      {
+         reloadData();
+      }
+
       private void Main_FormClosed(object sender, FormClosedEventArgs e)
       {
-         Log(lbLog, "[DEBUG] Closing App");
+         Log("[DEBUG] Closing App");
          Cef.Shutdown();
       }
-      
+      private void LoadWorlds()
+      {
+         ReqBuilder.User_Key = BotData.UID;
+         ReqBuilder.VersionSecret = SettingData.Version_Secret;
+         ReqBuilder.Version = SettingData.Version;
+         ReqBuilder.WorldID = BotData.WID;
+         string script = ReqBuilder.GetRequestScript(RequestType.GetAllWorlds, "[]");
+         cwb.ExecuteScriptAsync(script);
+         reloadData();
+      }
+      public void reloadData()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.GetFriends, "[]");
+         cwb.ExecuteScriptAsync(script);
+         script = ReqBuilder.GetRequestScript(RequestType.GetClanMember, "[]");
+         cwb.ExecuteScriptAsync(script);
+         script = ReqBuilder.GetRequestScript(RequestType.GetNeighbor, "[]");
+         cwb.ExecuteScriptAsync(script);
+      }
    }
    public static class CookieHandler
    {

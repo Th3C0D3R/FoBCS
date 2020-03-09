@@ -13,7 +13,7 @@ namespace ForgeOfBots.Utils
       public string Username { get; set; }
       public string Password { get; set; }
       public string LastWorld { get; set; }
-      public string PlayableWorlds { get; set; }
+      public List<string> PlayableWorlds { get; set; }
       public string WorldServer { get; set; }
       public string Language { get; set; } = "en";
 
@@ -40,7 +40,7 @@ namespace ForgeOfBots.Utils
          return File.Exists(DataPath);
       }
 
-      public static event SettingsSavedEvent SettingsSaved;
+      public event SettingsSavedEvent SettingsSaved;
       public static event SettingsLoadedEvent SettingsLoaded;
    }
 

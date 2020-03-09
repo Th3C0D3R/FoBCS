@@ -5,6 +5,12 @@ using ForgeOfBots.GameClasses;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using ForgeOfBots.Utils;
+using ForgeOfBots.Forms;
+using ForgeOfBots.GameClasses.ResponseClasses;
+using WorldSelection = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
 
 namespace ForgeOfBots.CefBrowserHandler
 {
@@ -15,32 +21,42 @@ namespace ForgeOfBots.CefBrowserHandler
       public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
       {
          var x = hookEventArgs;
-         List<object> msg = (List<object>)x.message;
          string methode = x.methode;
          switch (x.source)
          {
             case "Data":
-               HandleResponse(msg, methode);
+               HandleResponse(x.message, methode);
                break;
             case "MetaData":
 
                break;
             case "Cities":
-               HandleCities(msg);
+               HandleCities(x.message);
                break;
             default:
                break;
          }
       }
-      public static void HandleCities(List<object> msg)
+      public static void HandleCities(string msg)
       {
-         foreach (object world in msg)
+         WorldData wd = JsonConvert.DeserializeObject<WorldData>(msg);
+         ListClass.AllWorlds = wd.worlds;
+         foreach (KeyValuePair<string, int> world in wd.player_worlds)
          {
-            ListClass.WorldList.Add(new Tuple<string, string, WorldState>(world.ToString(),world.ToString(),WorldState.active));
+            string worldname = "";
+            foreach (World aworld in wd.worlds)
+            {
+               if (aworld.id == world.Key)
+               {
+                  worldname = aworld.name;
+                  break;
+               }
+            }
+            ListClass.WorldList.Add(new Tuple<string, string, WorldState>(world.Key, worldname, WorldState.active));
          }
          WorldsLoaded?.Invoke("HandleCities");
       }
-      public static void HandleResponse(List<object> msg, string method)
+      public static void HandleResponse(string msg, string method)
       {
          RequestType type = (RequestType)Enum.Parse(typeof(RequestType), method);
          switch (type)
@@ -54,12 +70,18 @@ namespace ForgeOfBots.CefBrowserHandler
             case RequestType.VisitTavern:
                break;
             case RequestType.GetClanMember:
+               Root<ClanMember> clan = JsonConvert.DeserializeObject<Root<ClanMember>>(msg);
+               ListClass.ClanMemberList = clan.responseData;
                break;
             case RequestType.GetEntities:
                break;
             case RequestType.GetFriends:
+               Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(msg);
+               ListClass.FriendList = friends.responseData;
                break;
             case RequestType.GetNeighbor:
+               Root<Neighbor> neighbor = JsonConvert.DeserializeObject<Root<Neighbor>>(msg);
+               ListClass.NeighborList = neighbor.responseData;
                break;
             case RequestType.GetLGs:
                break;
@@ -78,18 +100,13 @@ namespace ForgeOfBots.CefBrowserHandler
             case RequestType.RemovePlayer:
                break;
             case RequestType.GetAllWorlds:
-               foreach (ExpandoObject item in msg)
+               Root<WorldSelection> ws = JsonConvert.DeserializeObject<Root<WorldSelection>>(msg);
+               foreach (WorldSelection item in ws.responseData)
                {
-                  Dictionary<string, object> dItem = new Dictionary<string, object>(item);
-                  if(dItem["requestMethod"].ToString() == "getWorlds")
-                  {
-                     List<object> worlds = (List<object>)dItem["responseData"];
-                     foreach (ExpandoObject world in worlds)
-                     {
-                        Dictionary<string, object> dWorld = new Dictionary<string, object>(world);
-                        ListClass.WorldList.Add(new Tuple<string,string,WorldState>(dWorld["id"].ToString(), dWorld["name"].ToString(), (WorldState)Enum.Parse(typeof(WorldState), dWorld["status"].ToString())));
-                     }
-                  }
+                  if (!ListClass.WorldList.HasCityID(item.id))
+                     ListClass.WorldList.Add(new Tuple<string, string, WorldState>(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status)));
+                  else
+                     ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
                }
                break;
             default:

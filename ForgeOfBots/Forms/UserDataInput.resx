@@ -233,6 +233,9 @@ Please enter your FoE credentials in the form below:</value>
   <data name="txbUsername.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="txbUsername.Text" xml:space="preserve">
+    <value>JohnnyWalker</value>
+  </data>
   <data name="&gt;&gt;txbUsername.Name" xml:space="preserve">
     <value>txbUsername</value>
   </data>
@@ -256,6 +259,9 @@ Please enter your FoE credentials in the form below:</value>
   </data>
   <data name="txbPassword.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="txbPassword.Text" xml:space="preserve">
+    <value>Carlo1509!?</value>
   </data>
   <data name="&gt;&gt;txbPassword.Name" xml:space="preserve">
     <value>txbPassword</value>

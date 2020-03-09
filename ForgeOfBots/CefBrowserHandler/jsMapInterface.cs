@@ -8,7 +8,7 @@ namespace ForgeOfBots.CefBrowserHandler
    public class jsMapInterface
    {
       public Action<hookEvent> onHookEvent = null;
-      public void hook(object message, string source, string methode)
+      public void hook(string message, string source, string methode)
       {
          onHookEvent?.Invoke(new hookEvent()
          {
@@ -20,7 +20,7 @@ namespace ForgeOfBots.CefBrowserHandler
 
       public class hookEvent
       {
-         public object message { get; set; }
+         public string message { get; set; }
          public string source { get; set; }
          public string methode { get; set; }
       }

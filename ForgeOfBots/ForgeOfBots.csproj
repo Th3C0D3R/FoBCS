@@ -87,8 +87,10 @@
     <Compile Include="GameClasses\Good.cs" />
     <Compile Include="GameClasses\Incident.cs" />
     <Compile Include="GameClasses\ListClass.cs" />
-    <Compile Include="GameClasses\Player.cs" />
+    <Compile Include="GameClasses\Me.cs" />
     <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Class1.cs" />
+    <Compile Include="GameClasses\ResponseClasses\ResponseClass.cs" />
     <Compile Include="GameClasses\Tavern.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Forms\Main.cs">
@@ -99,6 +101,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\Helper.cs" />
     <Compile Include="Utils\Settings.cs" />
     <EmbeddedResource Include="Forms\Browser.resx">

@@ -7,14 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using ForgeOfBots.GameClasses;
 
 namespace ForgeOfBots.Utils
 {
    public static class Helper
    {
-      public static void Log(ListBox ctrl, string message)
+      public static void Log(string message)
       {
-         Invoker.CallMethode(ctrl, () => ctrl.Items.Add(message));
+         //Invoker.CallMethode(ctrl, () => ctrl.Items.Add(message));
+         Console.WriteLine(message);
       }
       public static string CalcSig(string data, string userkey, string secret)
       {
@@ -34,6 +36,34 @@ namespace ForgeOfBots.Utils
          }
          return sb.ToString().Replace("-", string.Empty).ToLower();
       }
+      public static string WorldToPlayable(Tuple<string, string, WorldState> world)
+      {
+         return world.Item1;
+      }
+   }
+   public class WorldData
+   {
+      public string player_name { get; set; }
+      public Dictionary<string,int> player_worlds { get; set; }
+      public List<World> worlds { get; set; }
+   }
+   public class World
+   {
+      public string id { get; set; }
+      public string num_id { get; set; }
+      public string name { get; set; }
+      public string url { get; set; }
+      public int started_at { get; set; }
+      public bool register { get; set; }
+      public bool login { get; set; }
+      public bool best { get; set; }
+      public bool premium_world { get; set; }
+      public int rank { get; set; }
+      public object update { get; set; } = null;
+      public string constraint_worlds { get; set; }
+      public string description { get; set; }
+      public int user_limit { get; set; }
+
    }
    public static class Invoker
    {

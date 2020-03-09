@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForgeOfBots.GameClasses
 {
-   public class Player
+   public class Me
    {
       public string PlayerName { get; set; }
       public string World { get; set; }

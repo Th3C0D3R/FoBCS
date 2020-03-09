@@ -116,7 +116,6 @@
          this.Name = "UserDataInput";
          this.ShowIcon = false;
          this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-         this.TopMost = true;
          this.ResumeLayout(false);
          this.PerformLayout();
 

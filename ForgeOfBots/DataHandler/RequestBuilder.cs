@@ -13,13 +13,13 @@ namespace ForgeOfBots.DataHandler
    public class RequestBuilder
    {
       private static int _requestId = 0;
-      public static string User_Key { get; set; }
-      public static string VersionSecret { get; set; }
-      public static string Version { get; set; }
+      public string User_Key { get; set; }
+      public string VersionSecret { get; set; }
+      public string Version { get; set; }
       private static int requestID => _requestId++;
       public int RequestID { get { return requestID; } private set { } }
       private static ResourceManager resMgr = Main.resMgr;
-      public static string WorldID { get; set; }
+      public string WorldID { get; set; }
 
       public string GetRequestScript(RequestType type, string data)
       {
@@ -141,7 +141,8 @@ namespace ForgeOfBots.DataHandler
             .Replace("##WorldID##", WorldID)
             .Replace("##UserKey##", User_Key)
             .Replace("##Version##", Version)
-            .Replace("##methode##", type.ToString());
+            .Replace("##methode##", _methode)
+            .Replace("##resType##", type.ToString());
          return RequestScript;
       }
 

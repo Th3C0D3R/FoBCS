@@ -22,15 +22,23 @@
         let body = await res.text();
         try {
             var json = JSON.parse(body);
+            for (var i = 0; i < json.length; i++) {
+                const resData = json[i];
+                if (resData["requestMethod"] == "##methode##") {
+                    body = JSON.stringify(json[i]);
+                    console.log(body);
+                    break;
+                }
+            }
             if (json[0]["__class__"] === "Error" || json[0]["__class__"] === "Redirect")
-                window.jsInterface.hook("SESSION-EXPIRED", "Data", "##methode##");
-            window.jsInterface.hook(json, "Data", "##methode##");
+                window.jsInterface.hook("SESSION-EXPIRED", "Data", "##resType##");
+            window.jsInterface.hook(body, "Data", "##resType##");
         } catch (error) {
-            window.jsInterface.hook(JSON.parse("[]"), "Data","##methode##");
+            window.jsInterface.hook("{}", "Data","##resType##");
         }
     }
     else
-        window.jsInterface.hook(JSON.parse("[]"), "Data", "##methode##");
+        window.jsInterface.hook("{}", "Data", "##resType##");
 }
 
 makeRequest();
