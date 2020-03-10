@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 
 namespace ForgeOfBots.Utils
 {
@@ -39,6 +40,41 @@ namespace ForgeOfBots.Utils
       public static string WorldToPlayable(Tuple<string, string, WorldState> world)
       {
          return world.Item1;
+      }
+      public static Dictionary<string,List<Good>> GetGoodsEraSorted(List<ResearchEra> eraList, Resources resources,List<ResourceDefinition> resourceDefList)
+      {
+         Dictionary<string, List<Good>> goodList = new Dictionary<string, List<Good>>();
+         foreach (ResearchEra era in eraList)
+         {
+            foreach (ResourceDefinition resDef in resourceDefList)
+            {
+               if (goodList.ContainsKey(era.era) && goodList[era.era].Count >= 5) break;
+               if(resDef.era == era.era)
+               {
+                  foreach(PropertyInfo prop in resources.GetType().GetProperties())
+                  {
+                     int amount = 0;
+                     int.TryParse(prop.GetValue(resources).ToString(),out amount);
+                     if(resDef.id == prop.Name)
+                     {
+                        if (goodList.ContainsKey(era.era))
+                        {
+                           goodList[era.era].Add(new Good() { good_id = resDef.id, name = resDef.name , value = amount });
+                           break;
+                        }
+                        else
+                        {
+                           List<Good> goods = new List<Good>();
+                           goods.Add(new Good() { good_id = resDef.id, name = resDef.name, value = amount });
+                           goodList.Add(era.era, goods);
+                           break;
+                        }
+                     }
+                  }
+               }
+            }
+         }
+         return goodList;
       }
    }
    public class WorldData

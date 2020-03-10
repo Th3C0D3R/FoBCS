@@ -22,13 +22,39 @@
         let body = await res.text();
         try {
             var json = JSON.parse(body);
-            for (var i = 0; i < json.length; i++) {
-                const resData = json[i];
-                if (resData["requestMethod"] == "##methode##") {
-                    body = JSON.stringify(json[i]);
-                    console.log(body);
-                    break;
+            if (##onlyOne##) {
+                for (var i = 0; i < json.length; i++) {
+                    const resData = json[i];
+                    if (resData["requestMethod"] == "##methode##") {
+                        body = JSON.stringify(json[i]);
+                        break;
+                    }
                 }
+            }
+            else {
+                var newBody = "";
+                for (var i = 0; i < json.length; i++) {
+                    const resData = json[i];
+                    if (resData["requestMethod"] == "getData") 
+                        newBody += "getData"+JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getMetadata")
+                        newBody += "getMetadata" +JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getPlayerResources")
+                        newBody += "getPlayerResources" +JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getResourceDefinitions")
+                        newBody += "getResourceDefinitions" +JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getOverview")
+                        newBody += "getOverview" +JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getOtherTavernStates")
+                        newBody += "getOtherTavernStates" +JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getSittingPlayersCount")
+                        newBody += "getSittingPlayersCount" + JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getUpdates")
+                        newBody += "getUpdates" + JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getLimitedBonuses")
+                        newBody += "getLimitedBonuses" + JSON.stringify(json[i]) + "##@##";
+                }
+                body = newBody;
             }
             if (json[0]["__class__"] === "Error" || json[0]["__class__"] === "Redirect")
                 window.jsInterface.hook("SESSION-EXPIRED", "Data", "##resType##");

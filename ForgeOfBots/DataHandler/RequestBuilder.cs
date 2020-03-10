@@ -12,7 +12,7 @@ namespace ForgeOfBots.DataHandler
 {
    public class RequestBuilder
    {
-      private static int _requestId = 0;
+      private static int _requestId = 1;
       public string User_Key { get; set; }
       public string VersionSecret { get; set; }
       public string Version { get; set; }
@@ -26,6 +26,7 @@ namespace ForgeOfBots.DataHandler
          string RequestScript = resMgr.GetString("fetchData");
          string _methode;
          string _class;
+         string onlyOne = "true";
          JToken _data = new JArray();
          switch (type)
          {
@@ -34,6 +35,7 @@ namespace ForgeOfBots.DataHandler
                _class = "StartupService";
                _methode = "getData";
                RequestID = 1;
+               onlyOne = "false";
                break;
             case RequestType.Motivate:
                _data = data;
@@ -134,7 +136,7 @@ namespace ForgeOfBots.DataHandler
          j["requestId"] = RequestID;
 
          string jsonString = "["+JsonConvert.SerializeObject(j)+"]";
-         Console.WriteLine(jsonString);
+         //Console.WriteLine(jsonString);
          RequestScript = RequestScript
             .Replace("##RequestData##", jsonString)
             .Replace("##sig##", CalcSig(jsonString, User_Key, VersionSecret))
@@ -142,6 +144,18 @@ namespace ForgeOfBots.DataHandler
             .Replace("##UserKey##", User_Key)
             .Replace("##Version##", Version)
             .Replace("##methode##", _methode)
+            .Replace("##onlyOne##", onlyOne)
+            .Replace("##resType##", type.ToString());
+         return RequestScript;
+      }
+
+      public string GetMetaDataRequestScript(string url, MetaRequestType type)
+      {
+         string RequestScript = resMgr.GetString("fetchMetaData");
+         //Console.WriteLine(jsonString);
+         RequestScript = RequestScript
+            .Replace("##WorldID##", WorldID)
+            .Replace("##url##", url)
             .Replace("##resType##", type.ToString());
          return RequestScript;
       }
@@ -167,6 +181,12 @@ namespace ForgeOfBots.DataHandler
       GetOwnTavern,
       RemovePlayer,
       GetAllWorlds,
+   }
+
+   public enum MetaRequestType
+   {
+      city_entities,
+      research_eras,
    }
 
 }

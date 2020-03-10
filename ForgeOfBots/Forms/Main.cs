@@ -25,15 +25,15 @@ namespace ForgeOfBots
 {
    public partial class Main : Form
    {
-      public ChromiumWebBrowser cwb;
+      public static ChromiumWebBrowser cwb = null;
       public static ResourceManager resMgr = new ResourceManager("ForgeOfBots.Properties.Resources", Assembly.GetExecutingAssembly());
-      public Dictionary<string, string> AllCookies = new Dictionary<string, string>();
-      public RequestBuilder ReqBuilder = new RequestBuilder();
-      public BotData BotData = new BotData();
-      public SettingData SettingData = new SettingData();
-      public Settings UserData;
+      public static Dictionary<string, string> AllCookies = new Dictionary<string, string>();
+      public static RequestBuilder ReqBuilder = new RequestBuilder();
+      public static BotData BotData = new BotData();
+      public static SettingData SettingData = new SettingData();
+      public static Settings UserData;
       UserDataInput usi = null;
-      public Browser Browser = null;
+      public static Browser Browser = null;
       public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
       public static string ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
 
@@ -300,6 +300,7 @@ namespace ForgeOfBots
       {
          if (!blockedLogin)
          {
+            //cwb.ShowDevTools();
             Log("[DEBUG] Doing Login");
             blockedLogin = true;
             Thread.Sleep(500);
@@ -350,6 +351,8 @@ namespace ForgeOfBots
          script = ReqBuilder.GetRequestScript(RequestType.GetClanMember, "[]");
          cwb.ExecuteScriptAsync(script);
          script = ReqBuilder.GetRequestScript(RequestType.GetNeighbor, "[]");
+         cwb.ExecuteScriptAsync(script);
+         script = ReqBuilder.GetRequestScript(RequestType.Startup, "[]");
          cwb.ExecuteScriptAsync(script);
       }
    }

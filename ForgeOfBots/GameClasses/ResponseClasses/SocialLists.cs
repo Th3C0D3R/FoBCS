@@ -6,13 +6,6 @@ using System.Threading.Tasks;
 
 namespace ForgeOfBots.GameClasses.ResponseClasses
 {
-   public class Root<T>
-   {
-      public List<T> responseData { get; set; }
-      public string requestClass { get; set; }
-      public string requestMethod { get; set; }
-      public string __class__ { get; set; }
-   }
    public partial class Neighbor
    {
       public int score { get; set; }
@@ -92,7 +85,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public string avatar { get; set; }
       public string __class__ { get; set; }
    }
-
    public partial class Clan
    {
       public string description { get; set; }
@@ -104,20 +96,17 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public string flag { get; set; }
       public string __class__ { get; set; }
    }
-
    public class Settings
    {
       public string join { get; set; }
       public string __class__ { get; set; }
    }
-
    public class Topachievement
    {
       public int slot { get; set; }
       public Achievement achievement { get; set; }
       public string __class__ { get; set; }
    }
-
    public class Achievement
    {
       public Currentlevel currentLevel { get; set; }
@@ -128,7 +117,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public string descriptionCityTooltip { get; set; }
       public string __class__ { get; set; }
    }
-
    public class Currentlevel
    {
       public int level { get; set; }
@@ -137,15 +125,12 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int obtainedAt { get; set; }
       public string __class__ { get; set; }
    }
-
    public class Nextlevel
    {
       public int level { get; set; }
       public int progress { get; set; }
       public string __class__ { get; set; }
    }
-
-
    public class WorldSelection
    {
       public string id { get; set; }

@@ -84,13 +84,22 @@
     </Compile>
     <Compile Include="GameClasses\Building.cs" />
     <Compile Include="GameClasses\Data.cs" />
-    <Compile Include="GameClasses\Good.cs" />
     <Compile Include="GameClasses\Incident.cs" />
     <Compile Include="GameClasses\ListClass.cs" />
     <Compile Include="GameClasses\Me.cs" />
     <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
-    <Compile Include="GameClasses\ResponseClasses\Class1.cs" />
-    <Compile Include="GameClasses\ResponseClasses\ResponseClass.cs" />
+    <Compile Include="GameClasses\ResponseClasses\BonusService.cs" />
+    <Compile Include="GameClasses\ResponseClasses\CityEntities.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Metadata.cs" />
+    <Compile Include="GameClasses\ResponseClasses\QuestService.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Research.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Resource.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Startup.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Tavern.cs" />
+    <Compile Include="GameClasses\ResponseClasses\SocialLists.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Root.cs" />
+    <Compile Include="GameClasses\ResponseClasses\test.cs" />
     <Compile Include="GameClasses\Tavern.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Forms\Main.cs">

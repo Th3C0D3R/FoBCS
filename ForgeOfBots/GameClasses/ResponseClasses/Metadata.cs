@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ForgeOfBots.GameClasses.ResponseClasses
 {
-   class Class1
+   public class Metadata
    {
+      public string identifier { get; set; }
+      public string url { get; set; }
+      public string __class__ { get; set; }
    }
+
 }
