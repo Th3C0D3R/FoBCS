@@ -99,8 +99,8 @@
     <Compile Include="GameClasses\ResponseClasses\Tavern.cs" />
     <Compile Include="GameClasses\ResponseClasses\SocialLists.cs" />
     <Compile Include="GameClasses\ResponseClasses\Root.cs" />
-    <Compile Include="GameClasses\ResponseClasses\test.cs" />
     <Compile Include="GameClasses\Tavern.cs" />
+    <Compile Include="GameClasses\test\test.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Forms\Main.cs">
       <SubType>Form</SubType>

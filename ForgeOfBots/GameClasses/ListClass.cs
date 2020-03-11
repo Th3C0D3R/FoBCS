@@ -52,11 +52,12 @@ namespace ForgeOfBots.GameClasses
       public static List<Quest> QuestList { get; set; } = new List<Quest>();
       public static Startup Startup { get; set; } = new Startup();
       public static List<BonusService> Bonus { get; set; } = new List<BonusService>();
-      public static List<Allbuilding> AllBuildings { get; set; } = new List<Allbuilding>();
+      public static List<Building> AllBuildings { get; set; } = new List<Building>();
       public static List<ResearchEra> Eras { get; set; } = new List<ResearchEra>();
       public static List<EntityEx> ResidentialList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> ProductionList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> GoodProductionList { get; set; } = new List<EntityEx>();
+      public static Dictionary<string, List<Good>> GoodsDict { get; set; } = new Dictionary<string, List<Good>>();
    }
    public enum WorldState
    {

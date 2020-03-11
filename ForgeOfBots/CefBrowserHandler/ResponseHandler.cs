@@ -20,6 +20,8 @@ namespace ForgeOfBots.CefBrowserHandler
    {
       public static ChromiumWebBrowser browser;
       public static event WorldsLoadedEvent WorldsLoaded;
+      public static event EverythingImportantLoadedEvent EverythingImportantLoaded;
+      public static bool[] ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
       public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
       {
          var x = hookEventArgs;
@@ -37,6 +39,11 @@ namespace ForgeOfBots.CefBrowserHandler
                break;
             default:
                break;
+         }
+         if(ImportantLoaded.All(b => { return b; }))
+         {
+            ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
+            EverythingImportantLoaded?.Invoke(null);
          }
       }
       public static void HandleCities(string msg)
@@ -73,26 +80,32 @@ namespace ForgeOfBots.CefBrowserHandler
                   {
                      case "getSittingPlayersCount":
                         ListClass.OwnTavern = JsonConvert.DeserializeObject<OwnTavernStates>(body);
+                        ImportantLoaded[0] = true;
                         break;
                      case "getOtherTavernStates":
                         FriendsTavernRoot rootTavern = JsonConvert.DeserializeObject<FriendsTavernRoot>(body);
                         ListClass.FriendTaverns = rootTavern.responseData.ToList();
+                        ImportantLoaded[1] = true;
                         break;
                      case "getOverview":
                         HiddenRewardRoot rootHiddenReward = JsonConvert.DeserializeObject<HiddenRewardRoot>(body);
                         ListClass.HiddenRewards = rootHiddenReward.responseData.hiddenRewards.ToList();
+                        ImportantLoaded[2] = true;
                         break;
                      case "getResourceDefinitions":
                         ResourceDefinitionRoot rootResourceDefinition = JsonConvert.DeserializeObject<ResourceDefinitionRoot>(body);
                         ListClass.ResourceDefinitions = rootResourceDefinition.responseData.ToList();
+                        ImportantLoaded[3] = true;
                         break;
                      case "getPlayerResources":
                         ResourceRoot rootResource = JsonConvert.DeserializeObject<ResourceRoot>(body);
                         ListClass.Resources = rootResource.responseData.resources;
+                        ImportantLoaded[4] = true;
                         break;
                      case "getMetadata":
                         MetadataRoot rootMetadata = JsonConvert.DeserializeObject<MetadataRoot>(body);
                         ListClass.MetaDataList = rootMetadata.responseData.ToList();
+                        ImportantLoaded[5] = true;
                         if (Main.cwb == null) break;
                         string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "city_entities"); }).url;
                         string script = Main.ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.city_entities);
@@ -104,14 +117,17 @@ namespace ForgeOfBots.CefBrowserHandler
                      case "getUpdates":
                         QuestServiceRoot rootQuest = JsonConvert.DeserializeObject<QuestServiceRoot>(body);
                         ListClass.QuestList = rootQuest.responseData.ToList();
+                        ImportantLoaded[6] = true;
                         break;
                      case "getData":
                         StartupRoot rootStartup = JsonConvert.DeserializeObject<StartupRoot>(body);
                         ListClass.Startup = rootStartup.responseData;
+                        ImportantLoaded[7] = true;
                         break;
                      case "getLimitedBonuses":
                         BonusServiceRoot rootBonusService = JsonConvert.DeserializeObject<BonusServiceRoot>(body);
                         ListClass.Bonus = rootBonusService.responseData.ToList();
+                        ImportantLoaded[8] = true;
                         break;
                      default:
                         break;
@@ -127,16 +143,19 @@ namespace ForgeOfBots.CefBrowserHandler
             case RequestType.GetClanMember:
                Root<ClanMember> clan = JsonConvert.DeserializeObject<Root<ClanMember>>(msg);
                ListClass.ClanMemberList = clan.responseData;
+               ImportantLoaded[9] = true;
                break;
             case RequestType.GetEntities:
                break;
             case RequestType.GetFriends:
                Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(msg);
                ListClass.FriendList = friends.responseData;
+               ImportantLoaded[10] = true;
                break;
             case RequestType.GetNeighbor:
                Root<Neighbor> neighbor = JsonConvert.DeserializeObject<Root<Neighbor>>(msg);
                ListClass.NeighborList = neighbor.responseData;
+               ImportantLoaded[11] = true;
                break;
             case RequestType.GetLGs:
                break;
@@ -163,9 +182,15 @@ namespace ForgeOfBots.CefBrowserHandler
                   else
                      ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
                }
+               ImportantLoaded[12] = true;
                break;
             default:
                break;
+         }
+         if (ImportantLoaded.All(b => { return b; }))
+         {
+            ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
+            EverythingImportantLoaded?.Invoke(null);
          }
       }
       public static void HandleMetadata(string msg, string metaType)
@@ -174,19 +199,21 @@ namespace ForgeOfBots.CefBrowserHandler
          switch (type)
          {
             case MetaRequestType.city_entities:
-               BuildingsRoot rootBuilding = JsonConvert.DeserializeObject<BuildingsRoot>("{\"allbuildings\":" + msg + "}");
-               ListClass.AllBuildings = rootBuilding.allbuildings.ToList();
+               BuildingsRoot rootBuilding = JsonConvert.DeserializeObject<BuildingsRoot>("{\"buildings\":" + msg + "}");
+               ListClass.AllBuildings = rootBuilding.buildings.ToList();
+               ImportantLoaded[13] = true;
                foreach (Entity cityEntity in ListClass.Startup.city_map.entities.ToList())
                {
-                  foreach (Allbuilding metaEntity in ListClass.AllBuildings)
+                  foreach (Building metaEntity in ListClass.AllBuildings)
                   {
                      if (cityEntity.cityentity_id == metaEntity.id)
                      {
-                        EntityEx entity = GameClassHelper.DeepCopy(cityEntity);
+                        EntityEx entity = GameClassHelper.CopyFrom(cityEntity);
                         entity.name = metaEntity.name;
-                        entity.available_products = metaEntity.available_products.ToList();
+                        if(metaEntity.available_products != null)
+                           entity.available_products = metaEntity.available_products.ToList();
                         entity.type = metaEntity.type;
-                        if (entity.type == "production" && entity.connected == 1 && GameClassHelper.hasOnlySupplyProduction(entity.available_products))
+                        if (entity.type == "production" && metaEntity.available_products != null && entity.connected == 1 && GameClassHelper.hasOnlySupplyProduction(entity.available_products))
                            ListClass.ProductionList.Add(entity);
                         else if (entity.type == "residential" && entity.connected == 1)
                            ListClass.ResidentialList.Add(entity);
@@ -195,16 +222,25 @@ namespace ForgeOfBots.CefBrowserHandler
                      }
                   }
                }
+               ImportantLoaded[14] = ImportantLoaded[15] = ImportantLoaded[16] = true;
                break;
             case MetaRequestType.research_eras:
                ResearchEraRoot rootResearch = JsonConvert.DeserializeObject<ResearchEraRoot>("{\"reserach\":" + msg+"}");
                ListClass.Eras = rootResearch.reserach.ToList();
-               Dictionary<string, List<Good>> x = Helper.GetGoodsEraSorted(ListClass.Eras, ListClass.Resources, ListClass.ResourceDefinitions);
+               ImportantLoaded[17] = true;
+               ListClass.GoodsDict = Helper.GetGoodsEraSorted(ListClass.Eras, ListClass.Resources, ListClass.ResourceDefinitions);
+               ImportantLoaded[18] = true;
                break;
             default:
                break;
          }
+         if (ImportantLoaded.All(b => { return b; }))
+         {
+            ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
+            EverythingImportantLoaded?.Invoke(null);
+         }
       }
    }
    public delegate void WorldsLoadedEvent(object sender);
+   public delegate void EverythingImportantLoadedEvent(object sender);
 }

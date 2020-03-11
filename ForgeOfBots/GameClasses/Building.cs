@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -30,16 +32,24 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
    }
    public static class GameClassHelper
    {
-      public static EntityEx DeepCopy(Entity other)
+      public static EntityEx CopyFrom(Entity other)
       {
-         using (MemoryStream ms = new MemoryStream())
+         EntityEx ex = new EntityEx
          {
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Context = new StreamingContext(StreamingContextStates.Clone);
-            formatter.Serialize(ms, other);
-            ms.Position = 0;
-            return (EntityEx)formatter.Deserialize(ms);
-         }
+            id = other.id,
+            player_id = other.player_id,
+            cityentity_id = other.cityentity_id,
+            type = other.type,
+            x = other.x,
+            y = other.y,
+            connected = other.connected,
+            state = other.state,
+            level = other.level,
+            unitSlots = other.unitSlots,
+            max_level = other.max_level,
+            bonus = other.bonus
+         };
+         return ex;
       }
       public static bool hasOnlySupplyProduction(List<Available_Products> list)
       {
@@ -49,11 +59,14 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
          {
             if(item.product != null)
                if(item.product.resources != null)
-                  if(item.product.resources.supplies > 0)
+               {
+                  JObject o = (JObject)item.product.resources;
+                  if(o.GetValue("supplies") != null)
                   {
                      checkBool[i] = true;
                      i += 1;
                   }
+               }
          }
          return checkBool.All(x => { return x; });
       }

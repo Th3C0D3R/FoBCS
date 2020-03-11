@@ -5,12 +5,12 @@ using ForgeOfBots.CefBrowserHandler;
 using ForgeOfBots.DataHandler;
 using ForgeOfBots.Forms;
 using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
-using Newtonsoft.Json.Linq;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Resources;
@@ -19,7 +19,10 @@ using System.Threading;
 using System.Windows.Forms;
 using static CefSharp.LogSeverity;
 using static ForgeOfBots.Utils.Helper;
+using static System.Windows.Forms.ListViewItem;
 using WebClient = System.Net.WebClient;
+using Settings = ForgeOfBots.Utils.Settings;
+using WorldSelection = ForgeOfBots.Forms.WorldSelection;
 
 namespace ForgeOfBots
 {
@@ -36,7 +39,7 @@ namespace ForgeOfBots
       public static Browser Browser = null;
       public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
       public static string ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
-
+      public static Stopwatch RunningTime = new Stopwatch();
       public int CurrentState = 0;
       public string ForgeHX_FilePath = "";
       public bool LoginLoaded = false, ForgeHXLoaded = false, UIDLoaded = false, SECRET_LOADED = false;
@@ -46,6 +49,8 @@ namespace ForgeOfBots
       public Main()
       {
          InitializeComponent();
+         RunningTime.Start();
+         bwTimerUpdate.RunWorkerAsync();
          Log("[DEBUG] Starting Bot");
          Browser = new Browser(this);
          Browser.Show();
@@ -85,8 +90,14 @@ namespace ForgeOfBots
          }
          ContinueExecution();
          Browser.Hide();
+         Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
+         ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
       }
-
+      private void ResponseHandler_EverythingImportantLoaded(object sender)
+      {
+         LoadGUI();
+         Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, false);
+      }
       private void ContinueExecution()
       {
          cwb = new ChromiumWebBrowser("https://" + UserData.WorldServer + ".forgeofempires.com/")
@@ -96,10 +107,6 @@ namespace ForgeOfBots
             Dock = DockStyle.Fill,
          };
          ResponseHandler.browser = cwb;
-         var jsInterface = new jsMapInterface
-         {
-            onHookEvent = ResponseHandler.HookEventHandler
-         };
          cwb.JavascriptObjectRepository.ResolveObject += (sender, e) =>
          {
             var repo = e.ObjectRepository;
@@ -112,7 +119,6 @@ namespace ForgeOfBots
          cwb.FrameLoadEnd += Cwb_FrameLoadEnd;
          Browser.Controls.Add(cwb);
       }
-
       private void Usi_UserDataEntered(string username, string password, string server)
       {
          Log("[DEBUG] Userdata loaded");
@@ -122,14 +128,12 @@ namespace ForgeOfBots
          usi.Close();
          ContinueExecution();
       }
-
       private void Cwb_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
       {
          //cwb.ShowDevTools();
          CookieHandler.CookiesLoaded += OnCookiesLoaded;
          CookieHandler.GetCookies();
       }
-
       private void OnCookiesLoaded(object sender, CookieLoadedEventArgs e)
       {
          AllCookies = e.AllCookies;
@@ -148,9 +152,9 @@ namespace ForgeOfBots
          if (AllCookies.ContainsKey("XSRF-TOKEN".ToLower()))
          {
             BotData.XSRF = AllCookies["XSRF-TOKEN".ToLower()];
+            Invoker.SetProperty(lblPleaseLogin, () => lblPleaseLogin.Text, "Please Login now...");
          }
       }
-
       private void ServerStartupLoaded_Event()
       {
          Thread.Sleep(500);
@@ -169,7 +173,6 @@ namespace ForgeOfBots
             .Replace("##city##", "\"" + UserData.LastWorld + "\"");
          cwb.ExecuteScriptAsync(loginJS);
       }
-
       private void ResponseHandler_WorldsLoaded(object sender)
       {
          if (ListClass.WorldList.Count > 0)
@@ -180,7 +183,6 @@ namespace ForgeOfBots
             ws.ShowDialog();
          }
       }
-
       private void Ws_WorldDataEntered(Form ws, string key, string value)
       {
          UserData.LastWorld = key;
@@ -197,7 +199,6 @@ namespace ForgeOfBots
          cwb.ExecuteScriptAsync(loginJS);
          ws.Close();
       }
-
       private void UidFound_Event(string uid, string wid)
       {
          if (UIDLoaded) return;
@@ -213,12 +214,10 @@ namespace ForgeOfBots
             LoadWorlds();
          }
       }
-
       private void UserData_SettingsSaved(Settings e)
       {
          Log("[DEBUG] UserData saved");
       }
-
       private void ForgeHXFound_Event(string forgehx, string filename)
       {
          if (ForgeHXLoaded) return;
@@ -268,7 +267,6 @@ namespace ForgeOfBots
             }
          }
       }
-
       private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
       {
          Log("[DEBUG] done Downloading ForgeHX");
@@ -295,9 +293,9 @@ namespace ForgeOfBots
          BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
          BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = "IDLE"));
       }
-
       private void tsbLogin_Click(object sender, EventArgs e)
       {
+         //pnlLoading.Visible = true;
          if (!blockedLogin)
          {
             //cwb.ShowDevTools();
@@ -318,22 +316,36 @@ namespace ForgeOfBots
             cwb.ExecuteScriptAsync(loginJS);
          }
       }
-
       private void Client_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
       {
          BeginInvoke(new MethodInvoker(() => tspbProgress.Value = e.ProgressPercentage));
       }
-
       private void tsbSettings_Click(object sender, EventArgs e)
       {
          reloadData();
       }
-
+      private void Main_Load(object sender, EventArgs e)
+      {
+         foreach (ColumnHeader column in listView1.Columns)
+         {
+            column.Width = (listView1.Width-10) / listView1.Columns.Count;
+         }
+      }
       private void Main_FormClosed(object sender, FormClosedEventArgs e)
       {
          Log("[DEBUG] Closing App");
+         RunningTime.Stop();
          Cef.Shutdown();
       }
+      private void bwTimerUpdate_DoWork(object sender, DoWorkEventArgs e)
+      {
+         while (true)
+         {
+            Invoker.SetProperty(lblRunSinceValue, () => lblRunSinceValue.Text, RunningTime.Elapsed.ToString("h'h 'm'm 's's'"));
+            Thread.Sleep(999);
+         }
+      }
+
       private void LoadWorlds()
       {
          ReqBuilder.User_Key = BotData.UID;
@@ -354,6 +366,28 @@ namespace ForgeOfBots
          cwb.ExecuteScriptAsync(script);
          script = ReqBuilder.GetRequestScript(RequestType.Startup, "[]");
          cwb.ExecuteScriptAsync(script);
+      }
+      public void LoadGUI()
+      {
+         Invoker.SetProperty(lblCurValue, () => lblCurValue.Text, ListClass.WorldList.Find(x => x.Item3 == WorldState.current).Item2);
+         Invoker.SetProperty(lblPlayerValue, () => lblPlayerValue.Text, UserData.Username);
+         Invoker.SetProperty(lblSuppliesValue, () => lblSuppliesValue.Text, ListClass.Resources.supplies.ToString("N"));
+         Invoker.SetProperty(lblMoneyValue, () => lblMoneyValue.Text, ListClass.Resources.money.ToString("N"));
+         Invoker.SetProperty(lblDiaValue, () => lblDiaValue.Text, ListClass.Resources.premium.ToString("N"));
+         Invoker.SetProperty(lblMedsValue, () => lblMedsValue.Text, ListClass.Resources.medals.ToString("N"));
+         foreach (KeyValuePair<string,List<Good>> item in ListClass.GoodsDict)
+         {
+            if(item.Value.Find(x => x.value > 0) != null)
+            {
+               ListViewItem lvi = new ListViewItem(item.Key);
+               foreach (Good good in item.Value)
+               {
+                  ListViewSubItem lvSi = new ListViewSubItem(lvi,$"{good.name} ({good.value})");
+                  lvi.SubItems.Add(lvSi);
+               }
+               Invoker.CallMethode(listView1, () => listView1.Items.Add(lvi));
+            }
+         }
       }
    }
    public static class CookieHandler

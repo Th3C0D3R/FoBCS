@@ -17,15 +17,19 @@
         let body = await res.text();
         try {
             var json = JSON.parse(body);
-            console.log(body);
+            //console.log(body);
             if (json[0]["__class__"] === "Error" || json[0]["__class__"] === "Redirect")
-                window.jsInterface.hook("SESSION-EXPIRED", "MetaData", "##resType##");
-            window.jsInterface.hook(body, "MetaData", "##resType##");
+                if (window.jsInterface.hook)
+                    window.jsInterface.hook("SESSION-EXPIRED", "MetaData", "##resType##");
+            if (window.jsInterface.hook)
+                window.jsInterface.hook(body, "MetaData", "##resType##");
         } catch (error) {
-            window.jsInterface.hook(JSON.parse("[]"), "MetaData", "##resType##");
+            if (window.jsInterface.hook)
+                window.jsInterface.hook(JSON.parse("[]"), "MetaData", "##resType##");
         }
     }
     else
-        window.jsInterface.hook(JSON.parse("[]"), "MetaData", "##resType##");
+        if (window.jsInterface.hook)
+            window.jsInterface.hook(JSON.parse("[]"), "MetaData", "##resType##");
 }
 makeRequest();

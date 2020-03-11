@@ -87,7 +87,7 @@
       public string __class__ { get; set; }
       public Guildproduct guildProduct { get; set; }
       public int deposit_boost_factor { get; set; }
-      public Requirements requirements { get; set; }
+      public RequirementsB requirements { get; set; }
       public int production_option { get; set; }
       public Good[] goods { get; set; }
       public int slot { get; set; }
@@ -101,11 +101,6 @@
    public class Guildproduct
    {
       public Resources resources { get; set; }
-      public string __class__ { get; set; }
-   }
-   public class Requirements
-   {
-      public Cost cost { get; set; }
       public string __class__ { get; set; }
    }
    public class Good
