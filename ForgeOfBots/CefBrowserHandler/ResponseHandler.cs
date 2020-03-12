@@ -1,7 +1,7 @@
-﻿using CefSharp.WinForms;
+﻿//using CefSharp.WinForms;
 using ForgeOfBots.DataHandler;
 using ForgeOfBots.GameClasses;
-//using CefSharp.OffScreen;
+using CefSharp.OffScreen;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -21,6 +21,20 @@ namespace ForgeOfBots.CefBrowserHandler
       public static ChromiumWebBrowser browser;
       public static event WorldsLoadedEvent WorldsLoaded;
       public static event EverythingImportantLoadedEvent EverythingImportantLoaded;
+      public static event StartupLoadedEvent StartupLoaded;
+      public static event ListLoadedEvent ListLoaded;
+      private static EventHandler _friendRemoved;
+      public static event EventHandler FriendRemoved {
+         add
+         {
+            if (_friendRemoved == null || !_friendRemoved.GetInvocationList().Contains(value))
+               _friendRemoved += value;
+         }
+         remove
+         {
+            _friendRemoved -= value;
+         }
+      }
       public static bool[] ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
       public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
       {
@@ -132,7 +146,9 @@ namespace ForgeOfBots.CefBrowserHandler
                      default:
                         break;
                   }
+                  StartupLoaded?.Invoke(RequestType.Startup);
                }
+
                break;
             case RequestType.Motivate:
                break;
@@ -144,6 +160,7 @@ namespace ForgeOfBots.CefBrowserHandler
                Root<ClanMember> clan = JsonConvert.DeserializeObject<Root<ClanMember>>(msg);
                ListClass.ClanMemberList = clan.responseData;
                ImportantLoaded[9] = true;
+               ListLoaded?.Invoke(RequestType.GetClanMember);
                break;
             case RequestType.GetEntities:
                break;
@@ -151,11 +168,13 @@ namespace ForgeOfBots.CefBrowserHandler
                Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(msg);
                ListClass.FriendList = friends.responseData;
                ImportantLoaded[10] = true;
+               ListLoaded?.Invoke(RequestType.GetFriends);
                break;
             case RequestType.GetNeighbor:
                Root<Neighbor> neighbor = JsonConvert.DeserializeObject<Root<Neighbor>>(msg);
                ListClass.NeighborList = neighbor.responseData;
                ImportantLoaded[11] = true;
+               ListLoaded?.Invoke(RequestType.GetNeighbor);
                break;
             case RequestType.GetLGs:
                break;
@@ -172,6 +191,7 @@ namespace ForgeOfBots.CefBrowserHandler
             case RequestType.GetOwnTavern:
                break;
             case RequestType.RemovePlayer:
+               _friendRemoved?.Invoke(null);
                break;
             case RequestType.GetAllWorlds:
                Root<WorldSelection> ws = JsonConvert.DeserializeObject<Root<WorldSelection>>(msg);
@@ -190,6 +210,11 @@ namespace ForgeOfBots.CefBrowserHandler
          if (ImportantLoaded.All(b => { return b; }))
          {
             ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
+
+            var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
+            var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
+            var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
+            ListClass.Motivateable.AddDistinctRange(friendMotivate.Cast<Player>().ToList(), clanMotivate.Cast<Player>().ToList(), neighborlist.Cast<Player>().ToList());
             EverythingImportantLoaded?.Invoke(null);
          }
       }
@@ -243,4 +268,6 @@ namespace ForgeOfBots.CefBrowserHandler
    }
    public delegate void WorldsLoadedEvent(object sender);
    public delegate void EverythingImportantLoadedEvent(object sender);
+   public delegate void StartupLoadedEvent(RequestType type);
+   public delegate void ListLoadedEvent(RequestType type);
 }

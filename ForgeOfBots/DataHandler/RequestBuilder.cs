@@ -21,13 +21,19 @@ namespace ForgeOfBots.DataHandler
       private static ResourceManager resMgr = Main.resMgr;
       public string WorldID { get; set; }
 
-      public string GetRequestScript(RequestType type, string data)
+      public string GetRequestScript(RequestType type, dynamic data)
       {
+         int[] queryData = new int[]{ 0, 0 };
+         int idData = 0;
+         if (type == RequestType.QueryProduction)
+            queryData = (int[])data;
+         else if(data != "" && data != "[]")
+            idData = int.Parse(data);
          string RequestScript = resMgr.GetString("fetchData");
          string _methode;
          string _class;
          string onlyOne = "true";
-         JToken _data = new JArray();
+         JToken _data;
          switch (type)
          {
             case RequestType.Startup:
@@ -38,17 +44,17 @@ namespace ForgeOfBots.DataHandler
                onlyOne = "false";
                break;
             case RequestType.Motivate:
-               _data = data;
+               _data = new JArray(idData);
                _class = "OtherPlayerService";
                _methode = "polivateRandomBuilding";
                break;
             case RequestType.CollectIncident:
-               _data = data;
+               _data = new JArray(idData);
                _class = "HiddenRewardService";
                _methode = "collectReward";
                break;
             case RequestType.VisitTavern:
-               _data = data;
+               _data = new JArray(idData);
                _class = "FriendsTavernService";
                _methode = "getOtherTavern";
                break;
@@ -73,7 +79,7 @@ namespace ForgeOfBots.DataHandler
                _methode = "getNeighborList";
                break;
             case RequestType.GetLGs:
-               _data = data;
+               _data = new JArray(idData);
                _class = "GreatBuildingsService";
                _methode = "getOtherPlayerOverview";
                break;
@@ -93,12 +99,12 @@ namespace ForgeOfBots.DataHandler
                _methode = "pickupProduction";
                break;
             case RequestType.QueryProduction:
-               _data = data;
+               _data = new JArray(queryData[0],queryData[1]);
                _class = "CityProductionService";
                _methode = "startProduction";
                break;
             case RequestType.CancelProduction:
-               _data = data;
+               _data = new JArray(idData);
                _class = "CityProductionService";
                _methode = "cancelProduction";
                break;
@@ -113,7 +119,7 @@ namespace ForgeOfBots.DataHandler
                _methode = "getOwnTavern";
                break;
             case RequestType.RemovePlayer:
-               _data = data;
+               _data = new JArray(idData);
                _class = "FriendService";
                _methode = "deleteFriend";
                break;

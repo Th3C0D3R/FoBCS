@@ -48,25 +48,24 @@ namespace ForgeOfBots.Utils
          {
             foreach (ResourceDefinition resDef in resourceDefList)
             {
-               if (goodList.ContainsKey(era.era) && goodList[era.era].Count >= 5) break;
+               if (goodList.ContainsKey(era.name) && goodList[era.name].Count >= 5) break;
                if(resDef.era == era.era)
                {
                   foreach(PropertyInfo prop in resources.GetType().GetProperties())
                   {
-                     int amount = 0;
-                     int.TryParse(prop.GetValue(resources).ToString(),out amount);
-                     if(resDef.id == prop.Name)
+                     int.TryParse(prop.GetValue(resources).ToString(), out int amount);
+                     if (resDef.id == prop.Name)
                      {
-                        if (goodList.ContainsKey(era.era))
+                        if (goodList.ContainsKey(era.name))
                         {
-                           goodList[era.era].Add(new Good() { good_id = resDef.id, name = resDef.name , value = amount });
+                           goodList[era.name].Add(new Good() { good_id = resDef.id, name = resDef.name , value = amount });
                            break;
                         }
                         else
                         {
                            List<Good> goods = new List<Good>();
                            goods.Add(new Good() { good_id = resDef.id, name = resDef.name, value = amount });
-                           goodList.Add(era.era, goods);
+                           goodList.Add(era.name, goods);
                            break;
                         }
                      }

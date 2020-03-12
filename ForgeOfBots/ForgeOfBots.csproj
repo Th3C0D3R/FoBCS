@@ -64,6 +64,7 @@
     <Compile Include="CefBrowserHandler\ResponseHandler.cs" />
     <Compile Include="CefBrowserHandler\jsMapInterface.cs" />
     <Compile Include="DataHandler\RequestBuilder.cs" />
+    <Compile Include="DataHandler\Update.cs" />
     <Compile Include="Forms\Browser.cs">
       <SubType>Form</SubType>
     </Compile>

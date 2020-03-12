@@ -1,6 +1,6 @@
 ﻿using CefSharp;
-//using CefSharp.OffScreen;
-using CefSharp.WinForms;
+using CefSharp.OffScreen;
+//using CefSharp.WinForms;
 using ForgeOfBots.CefBrowserHandler;
 using ForgeOfBots.DataHandler;
 using ForgeOfBots.Forms;
@@ -23,6 +23,7 @@ using static System.Windows.Forms.ListViewItem;
 using WebClient = System.Net.WebClient;
 using Settings = ForgeOfBots.Utils.Settings;
 using WorldSelection = ForgeOfBots.Forms.WorldSelection;
+using CUpdate = ForgeOfBots.DataHandler.Update;
 
 namespace ForgeOfBots
 {
@@ -32,6 +33,7 @@ namespace ForgeOfBots
       public static ResourceManager resMgr = new ResourceManager("ForgeOfBots.Properties.Resources", Assembly.GetExecutingAssembly());
       public static Dictionary<string, string> AllCookies = new Dictionary<string, string>();
       public static RequestBuilder ReqBuilder = new RequestBuilder();
+      public static CUpdate Updater;
       public static BotData BotData = new BotData();
       public static SettingData SettingData = new SettingData();
       public static Settings UserData;
@@ -92,6 +94,7 @@ namespace ForgeOfBots
          Browser.Hide();
          Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
          ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
+         Updater = new CUpdate(cwb, ReqBuilder);
       }
       private void ResponseHandler_EverythingImportantLoaded(object sender)
       {
@@ -104,7 +107,7 @@ namespace ForgeOfBots
          {
             RequestHandler = new CustomRequestHandler(),
             MenuHandler = new CustomMenu(),
-            Dock = DockStyle.Fill,
+            //Dock = DockStyle.Fill,
          };
          ResponseHandler.browser = cwb;
          cwb.JavascriptObjectRepository.ResolveObject += (sender, e) =>
@@ -117,7 +120,7 @@ namespace ForgeOfBots
             }
          };
          cwb.FrameLoadEnd += Cwb_FrameLoadEnd;
-         Browser.Controls.Add(cwb);
+         //Browser.Controls.Add(cwb);
       }
       private void Usi_UserDataEntered(string username, string password, string server)
       {
@@ -152,7 +155,8 @@ namespace ForgeOfBots
          if (AllCookies.ContainsKey("XSRF-TOKEN".ToLower()))
          {
             BotData.XSRF = AllCookies["XSRF-TOKEN".ToLower()];
-            Invoker.SetProperty(lblPleaseLogin, () => lblPleaseLogin.Text, "Please Login now...");
+            if (!blockedLogin)
+               Invoker.SetProperty(lblPleaseLogin, () => lblPleaseLogin.Text, "Please Login now...");
          }
       }
       private void ServerStartupLoaded_Event()
@@ -298,6 +302,7 @@ namespace ForgeOfBots
          //pnlLoading.Visible = true;
          if (!blockedLogin)
          {
+            Invoker.SetProperty(lblPleaseLogin, () => lblPleaseLogin.Text, "Please wait (again)!\nLoggin in...");
             //cwb.ShowDevTools();
             Log("[DEBUG] Doing Login");
             blockedLogin = true;
@@ -328,7 +333,7 @@ namespace ForgeOfBots
       {
          foreach (ColumnHeader column in listView1.Columns)
          {
-            column.Width = (listView1.Width-10) / listView1.Columns.Count;
+            column.Width = (listView1.Width - 10) / listView1.Columns.Count;
          }
       }
       private void Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -358,36 +363,151 @@ namespace ForgeOfBots
       }
       public void reloadData()
       {
-         string script = ReqBuilder.GetRequestScript(RequestType.GetFriends, "[]");
-         cwb.ExecuteScriptAsync(script);
-         script = ReqBuilder.GetRequestScript(RequestType.GetClanMember, "[]");
-         cwb.ExecuteScriptAsync(script);
-         script = ReqBuilder.GetRequestScript(RequestType.GetNeighbor, "[]");
-         cwb.ExecuteScriptAsync(script);
-         script = ReqBuilder.GetRequestScript(RequestType.Startup, "[]");
-         cwb.ExecuteScriptAsync(script);
+         Updater.UpdatePlayerLists();
+         Updater.UpdateStartUp();
+         CUpdate.UpdateFinished += CUpdate_UpdateFinished;
+      }
+      private void CUpdate_UpdateFinished(RequestType type)
+      {
+         switch (type)
+         {
+            case RequestType.Startup:
+               UpdateOverView();
+               break;
+            case RequestType.Motivate:
+               break;
+            case RequestType.CollectIncident:
+               break;
+            case RequestType.VisitTavern:
+               break;
+            case RequestType.GetClanMember:
+            case RequestType.GetFriends:
+            case RequestType.GetNeighbor:
+               UpdateOtherPlayers();
+               break;
+            case RequestType.GetEntities:
+               break;
+            case RequestType.GetLGs:
+               break;
+            case RequestType.LogService:
+               break;
+            case RequestType.CollectProduction:
+               break;
+            case RequestType.QueryProduction:
+               break;
+            case RequestType.CancelProduction:
+               break;
+            case RequestType.CollectTavern:
+               break;
+            case RequestType.GetOwnTavern:
+               break;
+            case RequestType.RemovePlayer:
+               break;
+            case RequestType.GetAllWorlds:
+               break;
+            default:
+               break;
+         }
       }
       public void LoadGUI()
       {
+         UpdateOverView();
+         UpdateOtherPlayers();
+      }
+      private void RemoveFriend(object senderObj, EventArgs e)
+      {
+         Button sender = ((Button)senderObj);
+         if (sender.Tag != null)
+         {
+            string playerid = sender.Tag.ToString();
+            string script = ReqBuilder.GetRequestScript(RequestType.RemovePlayer, playerid);
+            cwb.ExecuteScriptAsync(script);
+            ResponseHandler.FriendRemoved += OnFriendRemoved;
+         }
+      }
+      private void OnFriendRemoved(object sender)
+      {
+         Updater.UpdateFirends();
+      }
+      private void UpdateOverView()
+      {
+         #region "Overview"
          Invoker.SetProperty(lblCurValue, () => lblCurValue.Text, ListClass.WorldList.Find(x => x.Item3 == WorldState.current).Item2);
          Invoker.SetProperty(lblPlayerValue, () => lblPlayerValue.Text, UserData.Username);
-         Invoker.SetProperty(lblSuppliesValue, () => lblSuppliesValue.Text, ListClass.Resources.supplies.ToString("N"));
-         Invoker.SetProperty(lblMoneyValue, () => lblMoneyValue.Text, ListClass.Resources.money.ToString("N"));
-         Invoker.SetProperty(lblDiaValue, () => lblDiaValue.Text, ListClass.Resources.premium.ToString("N"));
-         Invoker.SetProperty(lblMedsValue, () => lblMedsValue.Text, ListClass.Resources.medals.ToString("N"));
-         foreach (KeyValuePair<string,List<Good>> item in ListClass.GoodsDict)
+         Invoker.SetProperty(lblSuppliesValue, () => lblSuppliesValue.Text, ListClass.Resources.supplies.ToString("N0"));
+         Invoker.SetProperty(lblMoneyValue, () => lblMoneyValue.Text, ListClass.Resources.money.ToString("N0"));
+         Invoker.SetProperty(lblDiaValue, () => lblDiaValue.Text, ListClass.Resources.premium.ToString("N0"));
+         Invoker.SetProperty(lblMedsValue, () => lblMedsValue.Text, ListClass.Resources.medals.ToString("N0"));
+         if(ListClass.ResourceDefinitions.Count > 0)
          {
-            if(item.Value.Find(x => x.value > 0) != null)
+            Invoker.SetProperty(lblMoney, () => lblMoney.Text, ListClass.ResourceDefinitions.Find(x => x.id == "money").name);
+            Invoker.SetProperty(lblSupplies, () => lblSupplies.Text, ListClass.ResourceDefinitions.Find(x => x.id == "supplies").name);
+            Invoker.SetProperty(lblMeds, () => lblMeds.Text, ListClass.ResourceDefinitions.Find(x => x.id == "medals").name);
+            Invoker.SetProperty(lblDiamonds, () => lblDiamonds.Text, ListClass.ResourceDefinitions.Find(x => x.id == "premium").name);
+         }
+         foreach (KeyValuePair<string, List<Good>> item in ListClass.GoodsDict)
+         {
+            if (item.Value.Find(x => x.value > 0) != null)
             {
                ListViewItem lvi = new ListViewItem(item.Key);
                foreach (Good good in item.Value)
                {
-                  ListViewSubItem lvSi = new ListViewSubItem(lvi,$"{good.name} ({good.value})");
+                  ListViewSubItem lvSi = new ListViewSubItem(lvi, $"{good.name} ({good.value})");
                   lvi.SubItems.Add(lvSi);
                }
                Invoker.CallMethode(listView1, () => listView1.Items.Add(lvi));
             }
          }
+         #endregion
+      }
+      private void UpdateOtherPlayers()
+      {
+         #region "other Players"
+         var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
+         var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
+         var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
+         Invoker.SetProperty(lblFriends, () => lblFriends.Text, "Friends");
+         Invoker.SetProperty(lblClanMember, () => lblClanMember.Text, "Clanmemebrs");
+         Invoker.SetProperty(lblNeighbor, () => lblNeighbor.Text, "Neighbors");
+         Invoker.SetProperty(lblFriendsCount, () => lblFriendsCount.Text, $"{friendMotivate.Count}/{ListClass.FriendList.Count}");
+         Invoker.SetProperty(lblClanMemberCount, () => lblClanMemberCount.Text, $"{clanMotivate.Count}/{ListClass.ClanMemberList.Count}");
+         Invoker.SetProperty(lblNeighborCount, () => lblNeighborCount.Text, $"{neighborlist.Count}/{ListClass.NeighborList.Count}");
+         Invoker.SetProperty(lblInactiveFriends, () => lblInactiveFriends.Text, "Inactive Friends");
+
+         var inactiveFriends = ListClass.FriendList.FindAll(f => (f.is_active == false && f.is_self == false));
+         int row = 0;
+         Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Clear());
+         Invoker.SetProperty(tlpInactiveFriends, () => tlpInactiveFriends.RowCount, inactiveFriends.Count);
+         foreach (var item in inactiveFriends)
+         {
+            int col = 0;
+            Label lblName = new Label();
+            lblName.Dock = DockStyle.Top;
+            lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+            lblName.Text = item.name;
+            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Add(lblName));
+            col += 1;
+            Label lblScore = new Label();
+            lblScore.Dock = DockStyle.Top;
+            lblScore.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+            lblScore.Text = item.score.ToString("N0");
+            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Add(lblScore));
+            col += 1;
+            Button btnRemove = new Button();
+            btnRemove.Tag = item.player_id;
+            btnRemove.Text = "Remove";
+            btnRemove.Dock = DockStyle.Top;
+            btnRemove.AutoSize = true;
+            btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+            btnRemove.Click += RemoveFriend;
+            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Add(btnRemove));
+            row += 1;
+            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
+         }
+
+         #endregion
       }
    }
    public static class CookieHandler

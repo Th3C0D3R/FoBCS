@@ -1,4 +1,5 @@
 ﻿using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,17 @@ namespace ForgeOfBots.Utils
                newList.Add(item);
          }
          return newList;
+      }
+      public static void AddDistinctRange<P>(this List<P> list, params List<P>[] lists) where P : Player
+      {
+         foreach (List<P> item in lists.ToList())
+         {
+            foreach (P obj in item)
+            {
+               if (!list.Exists(x => x.player_id == obj.player_id))
+                  list.Add(obj);
+            }
+         }
       }
    }
 }

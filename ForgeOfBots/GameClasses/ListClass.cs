@@ -58,6 +58,7 @@ namespace ForgeOfBots.GameClasses
       public static List<EntityEx> ProductionList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> GoodProductionList { get; set; } = new List<EntityEx>();
       public static Dictionary<string, List<Good>> GoodsDict { get; set; } = new Dictionary<string, List<Good>>();
+      public static List<Player> Motivateable { get; set; } = new List<Player>();
    }
    public enum WorldState
    {
@@ -66,5 +67,11 @@ namespace ForgeOfBots.GameClasses
       active,
       suggestion,
       none,
+   }
+   public enum ListType
+   {
+      friends,
+      members,
+      neighbors
    }
 }
