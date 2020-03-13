@@ -22,7 +22,7 @@ namespace ForgeOfBots.Utils
          string json = JsonConvert.SerializeObject(this);
          string DataPath = Path.Combine(Main.ProgramPath, "userdata.json");
          File.WriteAllText(DataPath, json);
-         SettingsSaved?.Invoke(this);
+         _SettingsSaved?.Invoke(null, new OneTArgs<Settings> { t1 = this });
       }
 
       public static Settings ReadSettings()
@@ -30,7 +30,7 @@ namespace ForgeOfBots.Utils
          string DataPath = Path.Combine(Main.ProgramPath, "userdata.json");
          string json = File.ReadAllText(DataPath);
          Settings s = JsonConvert.DeserializeObject<Settings>(json);
-         SettingsLoaded?.Invoke(s);
+         _SettingsLoaded?.Invoke(null,new OneTArgs<Settings> { t1 = s});
          return s;
       }
 
@@ -40,10 +40,32 @@ namespace ForgeOfBots.Utils
          return File.Exists(DataPath);
       }
 
-      public event SettingsSavedEvent SettingsSaved;
-      public static event SettingsLoadedEvent SettingsLoaded;
-   }
+      private static EventHandler<OneTArgs<Settings>> _SettingsLoaded;
+      public static event EventHandler<OneTArgs<Settings>> SettingsLoaded
+      {
+         add
+         {
+            if (_SettingsLoaded == null || !_SettingsLoaded.GetInvocationList().ToList().Contains(value))
+               _SettingsLoaded += value;
+         }
+         remove
+         {
+            _SettingsLoaded -= value;
+         }
+      }
+      private EventHandler<OneTArgs<Settings>> _SettingsSaved;
+      public event EventHandler<OneTArgs<Settings>> SettingsSaved
+      {
+         add
+         {
+            if (_SettingsSaved == null || !_SettingsSaved.GetInvocationList().ToList().Contains(value))
+               _SettingsSaved += value;
+         }
+         remove
+         {
+            _SettingsSaved -= value;
+         }
+      }
 
-   public delegate void SettingsSavedEvent(Settings e);
-   public delegate void SettingsLoadedEvent(Settings e);
+   }
 }

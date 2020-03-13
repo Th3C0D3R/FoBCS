@@ -24,6 +24,7 @@ using WebClient = System.Net.WebClient;
 using Settings = ForgeOfBots.Utils.Settings;
 using WorldSelection = ForgeOfBots.Forms.WorldSelection;
 using CUpdate = ForgeOfBots.DataHandler.Update;
+using System.Linq;
 
 namespace ForgeOfBots
 {
@@ -95,6 +96,7 @@ namespace ForgeOfBots
          Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
          ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
          Updater = new CUpdate(cwb, ReqBuilder);
+         Name += Assembly.GetExecutingAssembly().GetName().Version.ToString();
       }
       private void ResponseHandler_EverythingImportantLoaded(object sender)
       {
@@ -156,10 +158,13 @@ namespace ForgeOfBots
          {
             BotData.XSRF = AllCookies["XSRF-TOKEN".ToLower()];
             if (!blockedLogin)
+            {
                Invoker.SetProperty(lblPleaseLogin, () => lblPleaseLogin.Text, "Please Login now...");
+               Invoker.SetProperty(pictureBox1, () => pictureBox1.Visible, false);
+            }
          }
       }
-      private void ServerStartupLoaded_Event()
+      private void ServerStartupLoaded_Event(object sender, EventArgs e)
       {
          Thread.Sleep(500);
          ResponseHandler.WorldsLoaded += ResponseHandler_WorldsLoaded;
@@ -203,14 +208,14 @@ namespace ForgeOfBots
          cwb.ExecuteScriptAsync(loginJS);
          ws.Close();
       }
-      private void UidFound_Event(string uid, string wid)
+      private void UidFound_Event(object sender, TwoStringArgs args)
       {
          if (UIDLoaded) return;
          Log("[DEBUG] UID loaded");
          UIDLoaded = true;
          CurrentState = 1;
-         BotData.UID = uid;
-         BotData.WID = wid;
+         BotData.UID = args.s1;
+         BotData.WID = args.s2;
          UserData.SettingsSaved += UserData_SettingsSaved;
          UserData.SaveSettings();
          if (SECRET_LOADED)
@@ -218,17 +223,17 @@ namespace ForgeOfBots
             LoadWorlds();
          }
       }
-      private void UserData_SettingsSaved(Settings e)
+      private void UserData_SettingsSaved(object sender, OneTArgs<Settings> args)
       {
          Log("[DEBUG] UserData saved");
       }
-      private void ForgeHXFound_Event(string forgehx, string filename)
+      private void ForgeHXFound_Event(object sender, TwoStringArgs args)
       {
          if (ForgeHXLoaded) return;
          Log("[DEBUG] Checking ForgeHX File");
          ForgeHXLoaded = true;
-         BotData.ForgeHX = filename;
-         ForgeHX_FilePath = Path.Combine(ProgramPath, filename);
+         BotData.ForgeHX = args.s2;
+         ForgeHX_FilePath = Path.Combine(ProgramPath, args.s2);
          if (!Directory.Exists(ProgramPath)) Directory.CreateDirectory(ProgramPath);
          FileInfo fi = new FileInfo(ForgeHX_FilePath);
          Log("[DEBUG] Checking if ForgeHX exists");
@@ -237,11 +242,11 @@ namespace ForgeOfBots
             Log("[DEBUG] Loading new ForgeHX");
             using (var client = new WebClient())
             {
-               Uri uri = new Uri(forgehx.Replace("'", ""));
+               Uri uri = new Uri(args.s1.Replace("'", ""));
                client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0");
                client.DownloadProgressChanged += Client_DownloadProgressChanged;
                client.DownloadFileCompleted += Client_DownloadFileCompleted;
-               BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = "Downloading " + filename));
+               BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = "Downloading " + args.s2));
                BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
                client.DownloadFileAsync(uri, ForgeHX_FilePath);
             }
@@ -302,6 +307,7 @@ namespace ForgeOfBots
          //pnlLoading.Visible = true;
          if (!blockedLogin)
          {
+            Invoker.SetProperty(pictureBox1, () => pictureBox1.Visible, true);
             Invoker.SetProperty(lblPleaseLogin, () => lblPleaseLogin.Text, "Please wait (again)!\nLoggin in...");
             //cwb.ShowDevTools();
             Log("[DEBUG] Doing Login");
@@ -400,6 +406,7 @@ namespace ForgeOfBots
             case RequestType.CollectTavern:
                break;
             case RequestType.GetOwnTavern:
+               UpdateTavern();
                break;
             case RequestType.RemovePlayer:
                break;
@@ -413,6 +420,7 @@ namespace ForgeOfBots
       {
          UpdateOverView();
          UpdateOtherPlayers();
+         UpdateTavern();
       }
       private void RemoveFriend(object senderObj, EventArgs e)
       {
@@ -509,6 +517,75 @@ namespace ForgeOfBots
 
          #endregion
       }
+      private void UpdateTavern()
+      {
+         #region "Tavern"
+         Invoker.SetProperty(lblTavernSilverValue, () => lblTavernSilverValue.Text, ListClass.Resources.tavern_silver.ToString("N0"));
+         Invoker.SetProperty(lblTavernstate, () => lblTavernstate.Text, "Tavernstate");
+         Invoker.SetProperty(lblVisitable, () => lblVisitable.Text, "Visitable");
+         Invoker.SetProperty(btnCollect, () => btnCollect.Text, "Collect Tavern");
+         Invoker.SetProperty(lblTavernstateValue, () => lblTavernstateValue.Text, ListClass.OwnTavern.responseData[1].ToString() + "/"+ ListClass.OwnTavern.responseData[2].ToString());
+         if (ListClass.ResourceDefinitions.Count > 0)
+         {
+            Invoker.SetProperty(lblTavernSilver, () => lblTavernSilver.Text, ListClass.ResourceDefinitions.Find(x => x.id == "tavern_silver").name);
+         }
+
+         var visitable = ListClass.FriendTaverns.FindAll(f => (f.sittingPlayerCount < f.unlockedChairCount));
+         Invoker.SetProperty(lblVisitableValue, () => lblVisitableValue.Text, visitable.Count.ToString());
+         Invoker.SetProperty(lblCurSitting, () => lblCurSitting.Text, "Currently Sitting Players: ");
+         var ownTavern = ListClass.OwnTavernData.view.visitors.ToList();
+         int row = 0;
+         Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Clear());
+         Invoker.SetProperty(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowCount, ownTavern.Count);
+         foreach (var item in ownTavern)
+         {
+            int col = 0;
+            Label lblName = new Label();
+            lblName.Dock = DockStyle.Top;
+            lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+            lblName.Text = item.name;
+            Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lblName));
+            col += 1;
+            Label lblScore = new Label();
+            lblScore.Dock = DockStyle.Top;
+            lblScore.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+            lblScore.Text = item.player_id.ToString();
+            Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lblScore));
+            col += 1;
+            
+            if(visitable.Exists(f => f.ownerId == item.player_id))
+            {
+               Button btnRemove = new Button();
+               btnRemove.Tag = item.player_id;
+               btnRemove.Text = "Sit down";
+               btnRemove.Dock = DockStyle.Top;
+               btnRemove.AutoSize = true;
+               btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+               btnRemove.Click += SitAtTavern;
+               Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(btnRemove));
+            }
+            else
+            {
+               Label lnlSitState = new Label();
+               lnlSitState.Dock = DockStyle.Top;
+               lnlSitState.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+               lnlSitState.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular); 
+               lnlSitState.Text = "CAN NOT SIT DOWN";
+               Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lnlSitState));
+            }
+            row += 1;
+            Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
+         }
+
+         #endregion
+      }
+
+      private void SitAtTavern(object sender, EventArgs e)
+      {
+         throw new NotImplementedException();
+      }
    }
    public static class CookieHandler
    {
@@ -539,10 +616,23 @@ namespace ForgeOfBots
 
       public static void OnCookiesLoaded(CookieLoadedEventArgs e)
       {
-         CookiesLoaded?.Invoke("CookieHandler", e);
+         _CookiesLoaded?.Invoke("CookieHandler", e);
       }
 
-      public static event CookieLoadedEventHandler CookiesLoaded;
+      private static CookieLoadedEventHandler _CookiesLoaded;
+      public static event CookieLoadedEventHandler CookiesLoaded
+      {
+         add
+         {
+            if (_CookiesLoaded == null || !_CookiesLoaded.GetInvocationList().ToList().Contains(value))
+               _CookiesLoaded += value;
+         }
+         remove
+         {
+            _CookiesLoaded -= value;
+         }
+      }
+
    }
    public delegate void CookieLoadedEventHandler(object sender, CookieLoadedEventArgs e);
    class CookieMonster : ICookieVisitor

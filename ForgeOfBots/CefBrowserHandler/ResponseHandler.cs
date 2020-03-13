@@ -19,12 +19,60 @@ namespace ForgeOfBots.CefBrowserHandler
    class ResponseHandler
    {
       public static ChromiumWebBrowser browser;
-      public static event WorldsLoadedEvent WorldsLoaded;
-      public static event EverythingImportantLoadedEvent EverythingImportantLoaded;
-      public static event StartupLoadedEvent StartupLoaded;
-      public static event ListLoadedEvent ListLoaded;
-      private static EventHandler _friendRemoved;
-      public static event EventHandler FriendRemoved {
+      private static WorldsLoadedEvent _WorldsLoaded;
+      public static event WorldsLoadedEvent WorldsLoaded
+      {
+         add
+         {
+            if (_WorldsLoaded == null || !_WorldsLoaded.GetInvocationList().Contains(value))
+               _WorldsLoaded += value;
+         }
+         remove
+         {
+            _WorldsLoaded -= value;
+         }
+      }
+      private static EverythingImportantLoadedEvent _EverythingImportantLoaded;
+      public static event EverythingImportantLoadedEvent EverythingImportantLoaded
+      {
+         add
+         {
+            if (_EverythingImportantLoaded == null || !_EverythingImportantLoaded.GetInvocationList().Contains(value))
+               _EverythingImportantLoaded += value;
+         }
+         remove
+         {
+            _EverythingImportantLoaded -= value;
+         }
+      }
+      private static StartupLoadedEvent _StartupLoaded;
+      public static event StartupLoadedEvent StartupLoaded
+      {
+         add
+         {
+            if (_StartupLoaded == null || !_StartupLoaded.GetInvocationList().Contains(value))
+               _StartupLoaded += value;
+         }
+         remove
+         {
+            _StartupLoaded -= value;
+         }
+      }
+      private static ListLoadedEvent _ListLoaded;
+      public static event ListLoadedEvent ListLoaded
+      {
+         add
+         {
+            if (_ListLoaded == null || !_ListLoaded.GetInvocationList().Contains(value))
+               _ListLoaded += value;
+         }
+         remove
+         {
+            _ListLoaded -= value;
+         }
+      }
+      private static CustomEvent _friendRemoved;
+      public static event CustomEvent FriendRemoved {
          add
          {
             if (_friendRemoved == null || !_friendRemoved.GetInvocationList().Contains(value))
@@ -35,7 +83,7 @@ namespace ForgeOfBots.CefBrowserHandler
             _friendRemoved -= value;
          }
       }
-      public static bool[] ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
+      public static bool[] ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
       public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
       {
          var x = hookEventArgs;
@@ -54,10 +102,19 @@ namespace ForgeOfBots.CefBrowserHandler
             default:
                break;
          }
-         if(ImportantLoaded.All(b => { return b; }))
+         if (!ImportantLoaded[19] && ImportantLoaded.ToList().FindAll(p => p).Count == 19)
          {
-            ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
-            EverythingImportantLoaded?.Invoke(null);
+            if (Main.cwb != null)
+            {
+               ImportantLoaded[19] = true;
+               string script = Main.ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
+               Main.cwb.ExecuteScriptAsync(script);
+            }
+            
+         }else if(ImportantLoaded.All(b => { return b; }))
+         {
+            ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
+            _EverythingImportantLoaded?.Invoke(null);
          }
       }
       public static void HandleCities(string msg)
@@ -77,7 +134,7 @@ namespace ForgeOfBots.CefBrowserHandler
             }
             ListClass.WorldList.Add(new Tuple<string, string, WorldState>(world.Key, worldname, WorldState.active));
          }
-         WorldsLoaded?.Invoke("HandleCities");
+         _WorldsLoaded?.Invoke("HandleCities");
       }
       public static void HandleResponse(string msg, string method)
       {
@@ -146,7 +203,7 @@ namespace ForgeOfBots.CefBrowserHandler
                      default:
                         break;
                   }
-                  StartupLoaded?.Invoke(RequestType.Startup);
+                  _StartupLoaded?.Invoke(RequestType.Startup);
                }
 
                break;
@@ -158,23 +215,23 @@ namespace ForgeOfBots.CefBrowserHandler
                break;
             case RequestType.GetClanMember:
                Root<ClanMember> clan = JsonConvert.DeserializeObject<Root<ClanMember>>(msg);
-               ListClass.ClanMemberList = clan.responseData;
+               ListClass.ClanMemberList = clan.responseData.FindAll(c => c.is_self == false && c.is_friend == false);
                ImportantLoaded[9] = true;
-               ListLoaded?.Invoke(RequestType.GetClanMember);
+               _ListLoaded?.Invoke(RequestType.GetClanMember);
                break;
             case RequestType.GetEntities:
                break;
             case RequestType.GetFriends:
                Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(msg);
-               ListClass.FriendList = friends.responseData;
+               ListClass.FriendList = friends.responseData.FindAll(f => f.is_self == false);
                ImportantLoaded[10] = true;
-               ListLoaded?.Invoke(RequestType.GetFriends);
+               _ListLoaded?.Invoke(RequestType.GetFriends);
                break;
             case RequestType.GetNeighbor:
                Root<Neighbor> neighbor = JsonConvert.DeserializeObject<Root<Neighbor>>(msg);
-               ListClass.NeighborList = neighbor.responseData;
+               ListClass.NeighborList = neighbor.responseData.FindAll(n => n.is_self == false && n.is_friend == false);
                ImportantLoaded[11] = true;
-               ListLoaded?.Invoke(RequestType.GetNeighbor);
+               _ListLoaded?.Invoke(RequestType.GetNeighbor);
                break;
             case RequestType.GetLGs:
                break;
@@ -189,6 +246,9 @@ namespace ForgeOfBots.CefBrowserHandler
             case RequestType.CollectTavern:
                break;
             case RequestType.GetOwnTavern:
+               OwnTavernDataRoot otdr = JsonConvert.DeserializeObject<OwnTavernDataRoot>(msg);
+               ListClass.OwnTavernData = otdr.responseData;
+               ImportantLoaded[19] = true;
                break;
             case RequestType.RemovePlayer:
                _friendRemoved?.Invoke(null);
@@ -207,15 +267,25 @@ namespace ForgeOfBots.CefBrowserHandler
             default:
                break;
          }
-         if (ImportantLoaded.All(b => { return b; }))
+         if (!ImportantLoaded[19] && ImportantLoaded.ToList().FindAll(p => p).Count == 19)
          {
-            ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
+            if (Main.cwb != null)
+            {
+               ImportantLoaded[19] = true;
+               string script = Main.ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
+               Main.cwb.ExecuteScriptAsync(script);
+            }
+
+         }
+         else if (ImportantLoaded.All(b => { return b; }))
+         {
+            ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
 
             var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
             var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
             var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
             ListClass.Motivateable.AddDistinctRange(friendMotivate.Cast<Player>().ToList(), clanMotivate.Cast<Player>().ToList(), neighborlist.Cast<Player>().ToList());
-            EverythingImportantLoaded?.Invoke(null);
+            _EverythingImportantLoaded?.Invoke(null);
          }
       }
       public static void HandleMetadata(string msg, string metaType)
@@ -262,7 +332,7 @@ namespace ForgeOfBots.CefBrowserHandler
          if (ImportantLoaded.All(b => { return b; }))
          {
             ImportantLoaded = Enumerable.Repeat(false, 19).ToArray();
-            EverythingImportantLoaded?.Invoke(null);
+            _EverythingImportantLoaded?.Invoke(null);
          }
       }
    }
@@ -270,4 +340,5 @@ namespace ForgeOfBots.CefBrowserHandler
    public delegate void EverythingImportantLoadedEvent(object sender);
    public delegate void StartupLoadedEvent(RequestType type);
    public delegate void ListLoadedEvent(RequestType type);
+   public delegate void CustomEvent(object sender);
 }

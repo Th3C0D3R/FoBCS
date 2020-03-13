@@ -119,4 +119,14 @@ namespace ForgeOfBots.Utils
          @this.Invoke(action);
       }
    }
+
+   public class TwoStringArgs : EventArgs
+   {
+      public string s1 { get; set; }
+      public string s2 { get; set; }
+   }
+   public class OneTArgs<T> : EventArgs
+   {
+      public T t1 { get; set; }
+   }
 }

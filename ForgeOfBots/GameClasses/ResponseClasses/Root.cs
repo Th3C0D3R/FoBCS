@@ -70,5 +70,13 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int requestId { get; set; }
       public string __class__ { get; set; }
    }
+   public class OwnTavernDataRoot
+   {
+      public TavernData responseData { get; set; }
+      public string requestClass { get; set; }
+      public string requestMethod { get; set; }
+      public int requestId { get; set; }
+      public string __class__ { get; set; }
+   }
 
 }

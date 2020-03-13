@@ -48,10 +48,10 @@
          this.panel1 = new System.Windows.Forms.Panel();
          this.lblDiamonds = new System.Windows.Forms.Label();
          this.lblDiaValue = new System.Windows.Forms.Label();
+         this.lblSupplies = new System.Windows.Forms.Label();
          this.lblMoneyValue = new System.Windows.Forms.Label();
          this.lblMedsValue = new System.Windows.Forms.Label();
          this.lblMoney = new System.Windows.Forms.Label();
-         this.lblSupplies = new System.Windows.Forms.Label();
          this.lblSuppliesValue = new System.Windows.Forms.Label();
          this.lblMeds = new System.Windows.Forms.Label();
          this.panel2 = new System.Windows.Forms.Panel();
@@ -63,6 +63,18 @@
          this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
          this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
          this.tpOthers = new System.Windows.Forms.TabPage();
+         this.panel5 = new System.Windows.Forms.Panel();
+         this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+         this.lblInactiveFriends = new System.Windows.Forms.Label();
+         this.tlpInactiveFriends = new System.Windows.Forms.TableLayoutPanel();
+         this.panel4 = new System.Windows.Forms.Panel();
+         this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+         this.lblClanMemberCount = new System.Windows.Forms.Label();
+         this.lblFriendsCount = new System.Windows.Forms.Label();
+         this.lblClanMember = new System.Windows.Forms.Label();
+         this.lblFriends = new System.Windows.Forms.Label();
+         this.lblNeighbor = new System.Windows.Forms.Label();
+         this.lblNeighborCount = new System.Windows.Forms.Label();
          this.tpTavern = new System.Windows.Forms.TabPage();
          this.tpBots = new System.Windows.Forms.TabPage();
          this.tpProduction = new System.Windows.Forms.TabPage();
@@ -71,18 +83,20 @@
          this.pnlLoading = new System.Windows.Forms.Panel();
          this.lblPleaseLogin = new System.Windows.Forms.Label();
          this.pictureBox1 = new System.Windows.Forms.PictureBox();
-         this.panel4 = new System.Windows.Forms.Panel();
-         this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-         this.lblNeighbor = new System.Windows.Forms.Label();
-         this.lblNeighborCount = new System.Windows.Forms.Label();
-         this.lblFriends = new System.Windows.Forms.Label();
-         this.lblClanMember = new System.Windows.Forms.Label();
-         this.lblFriendsCount = new System.Windows.Forms.Label();
-         this.lblClanMemberCount = new System.Windows.Forms.Label();
-         this.panel5 = new System.Windows.Forms.Panel();
-         this.tlpInactiveFriends = new System.Windows.Forms.TableLayoutPanel();
-         this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-         this.lblInactiveFriends = new System.Windows.Forms.Label();
+         this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+         this.panel6 = new System.Windows.Forms.Panel();
+         this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+         this.lblTavernstateValue = new System.Windows.Forms.Label();
+         this.lblTavernSilverValue = new System.Windows.Forms.Label();
+         this.lblTavernstate = new System.Windows.Forms.Label();
+         this.lblTavernSilver = new System.Windows.Forms.Label();
+         this.lblVisitable = new System.Windows.Forms.Label();
+         this.lblVisitableValue = new System.Windows.Forms.Label();
+         this.btnCollect = new System.Windows.Forms.Button();
+         this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+         this.tlpCurrentSittingPlayer = new System.Windows.Forms.TableLayoutPanel();
+         this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+         this.lblCurSitting = new System.Windows.Forms.Label();
          this.sStripStatus.SuspendLayout();
          this.toolStrip1.SuspendLayout();
          this.tcMenu.SuspendLayout();
@@ -91,12 +105,18 @@
          this.panel1.SuspendLayout();
          this.panel2.SuspendLayout();
          this.tpOthers.SuspendLayout();
-         this.pnlLoading.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-         this.panel4.SuspendLayout();
-         this.tableLayoutPanel1.SuspendLayout();
          this.panel5.SuspendLayout();
          this.tableLayoutPanel3.SuspendLayout();
+         this.panel4.SuspendLayout();
+         this.tableLayoutPanel1.SuspendLayout();
+         this.tpTavern.SuspendLayout();
+         this.pnlLoading.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+         this.tableLayoutPanel2.SuspendLayout();
+         this.panel6.SuspendLayout();
+         this.tableLayoutPanel4.SuspendLayout();
+         this.tableLayoutPanel5.SuspendLayout();
+         this.tableLayoutPanel7.SuspendLayout();
          this.SuspendLayout();
          // 
          // sStripStatus
@@ -154,7 +174,7 @@
          // toolStripSeparator1
          // 
          this.toolStripSeparator1.Name = "toolStripSeparator1";
-         this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
+         this.toolStripSeparator1.Size = new System.Drawing.Size(6, 34);
          // 
          // tsbSettings
          // 
@@ -164,7 +184,7 @@
          this.tsbSettings.Image = ((System.Drawing.Image)(resources.GetObject("tsbSettings.Image")));
          this.tsbSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
          this.tsbSettings.Name = "tsbSettings";
-         this.tsbSettings.Size = new System.Drawing.Size(80, 33);
+         this.tsbSettings.Size = new System.Drawing.Size(80, 29);
          this.tsbSettings.Text = "Settings";
          this.tsbSettings.Click += new System.EventHandler(this.tsbSettings_Click);
          // 
@@ -194,7 +214,7 @@
          this.tpOverview.Location = new System.Drawing.Point(4, 58);
          this.tpOverview.Name = "tpOverview";
          this.tpOverview.Padding = new System.Windows.Forms.Padding(3);
-         this.tpOverview.Size = new System.Drawing.Size(1453, 1099);
+         this.tpOverview.Size = new System.Drawing.Size(1456, 1036);
          this.tpOverview.TabIndex = 0;
          this.tpOverview.Text = "Overview";
          this.tpOverview.UseVisualStyleBackColor = true;
@@ -309,6 +329,16 @@
          this.lblDiaValue.TabIndex = 11;
          this.lblDiaValue.Text = "asdafsgdh";
          // 
+         // lblSupplies
+         // 
+         this.lblSupplies.AutoSize = true;
+         this.lblSupplies.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblSupplies.Location = new System.Drawing.Point(20, 30);
+         this.lblSupplies.Name = "lblSupplies";
+         this.lblSupplies.Size = new System.Drawing.Size(121, 29);
+         this.lblSupplies.TabIndex = 4;
+         this.lblSupplies.Text = "Supplies:";
+         // 
          // lblMoneyValue
          // 
          this.lblMoneyValue.AutoSize = true;
@@ -338,16 +368,6 @@
          this.lblMoney.Size = new System.Drawing.Size(97, 29);
          this.lblMoney.TabIndex = 6;
          this.lblMoney.Text = "Money:";
-         // 
-         // lblSupplies
-         // 
-         this.lblSupplies.AutoSize = true;
-         this.lblSupplies.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblSupplies.Location = new System.Drawing.Point(20, 30);
-         this.lblSupplies.Name = "lblSupplies";
-         this.lblSupplies.Size = new System.Drawing.Size(121, 29);
-         this.lblSupplies.TabIndex = 4;
-         this.lblSupplies.Text = "Supplies:";
          // 
          // lblSuppliesValue
          // 
@@ -433,83 +453,62 @@
          this.tpOthers.Location = new System.Drawing.Point(4, 58);
          this.tpOthers.Name = "tpOthers";
          this.tpOthers.Padding = new System.Windows.Forms.Padding(3);
-         this.tpOthers.Size = new System.Drawing.Size(1456, 1040);
+         this.tpOthers.Size = new System.Drawing.Size(1456, 1036);
          this.tpOthers.TabIndex = 1;
          this.tpOthers.Text = "Other Players";
          this.tpOthers.UseVisualStyleBackColor = true;
          // 
-         // tpTavern
+         // panel5
          // 
-         this.tpTavern.Location = new System.Drawing.Point(4, 58);
-         this.tpTavern.Name = "tpTavern";
-         this.tpTavern.Size = new System.Drawing.Size(1453, 1099);
-         this.tpTavern.TabIndex = 2;
-         this.tpTavern.Text = "Tavern";
-         this.tpTavern.UseVisualStyleBackColor = true;
+         this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+         this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+         this.panel5.Controls.Add(this.tableLayoutPanel3);
+         this.panel5.Controls.Add(this.tlpInactiveFriends);
+         this.panel5.Location = new System.Drawing.Point(8, 267);
+         this.panel5.Name = "panel5";
+         this.panel5.Size = new System.Drawing.Size(1439, 763);
+         this.panel5.TabIndex = 1;
          // 
-         // tpBots
+         // tableLayoutPanel3
          // 
-         this.tpBots.Location = new System.Drawing.Point(4, 58);
-         this.tpBots.Name = "tpBots";
-         this.tpBots.Size = new System.Drawing.Size(1453, 1099);
-         this.tpBots.TabIndex = 3;
-         this.tpBots.Text = "Bots";
-         this.tpBots.UseVisualStyleBackColor = true;
+         this.tableLayoutPanel3.ColumnCount = 1;
+         this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+         this.tableLayoutPanel3.Controls.Add(this.lblInactiveFriends, 0, 0);
+         this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+         this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+         this.tableLayoutPanel3.RowCount = 1;
+         this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+         this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+         this.tableLayoutPanel3.Size = new System.Drawing.Size(1431, 100);
+         this.tableLayoutPanel3.TabIndex = 1;
          // 
-         // tpProduction
+         // lblInactiveFriends
          // 
-         this.tpProduction.Location = new System.Drawing.Point(4, 58);
-         this.tpProduction.Name = "tpProduction";
-         this.tpProduction.Size = new System.Drawing.Size(1453, 1099);
-         this.tpProduction.TabIndex = 4;
-         this.tpProduction.Text = "Production";
-         this.tpProduction.UseVisualStyleBackColor = true;
+         this.lblInactiveFriends.AutoSize = true;
+         this.lblInactiveFriends.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.lblInactiveFriends.Location = new System.Drawing.Point(3, 0);
+         this.lblInactiveFriends.Name = "lblInactiveFriends";
+         this.lblInactiveFriends.Size = new System.Drawing.Size(1425, 100);
+         this.lblInactiveFriends.TabIndex = 0;
+         this.lblInactiveFriends.Text = "label1";
+         this.lblInactiveFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
-         // tpManually
+         // tlpInactiveFriends
          // 
-         this.tpManually.Location = new System.Drawing.Point(4, 58);
-         this.tpManually.Name = "tpManually";
-         this.tpManually.Size = new System.Drawing.Size(1453, 1099);
-         this.tpManually.TabIndex = 5;
-         this.tpManually.Text = "Manually";
-         this.tpManually.UseVisualStyleBackColor = true;
-         // 
-         // bwTimerUpdate
-         // 
-         this.bwTimerUpdate.WorkerSupportsCancellation = true;
-         this.bwTimerUpdate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwTimerUpdate_DoWork);
-         // 
-         // pnlLoading
-         // 
-         this.pnlLoading.Controls.Add(this.lblPleaseLogin);
-         this.pnlLoading.Controls.Add(this.pictureBox1);
-         this.pnlLoading.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.pnlLoading.Location = new System.Drawing.Point(0, 34);
-         this.pnlLoading.Name = "pnlLoading";
-         this.pnlLoading.Size = new System.Drawing.Size(1464, 1102);
-         this.pnlLoading.TabIndex = 12;
-         this.pnlLoading.Visible = false;
-         // 
-         // lblPleaseLogin
-         // 
-         this.lblPleaseLogin.AutoSize = true;
-         this.lblPleaseLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblPleaseLogin.Location = new System.Drawing.Point(516, 298);
-         this.lblPleaseLogin.Name = "lblPleaseLogin";
-         this.lblPleaseLogin.Size = new System.Drawing.Size(399, 69);
-         this.lblPleaseLogin.TabIndex = 1;
-         this.lblPleaseLogin.Text = "Please wait...";
-         // 
-         // pictureBox1
-         // 
-         this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-         this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-         this.pictureBox1.Location = new System.Drawing.Point(595, 437);
-         this.pictureBox1.Name = "pictureBox1";
-         this.pictureBox1.Size = new System.Drawing.Size(200, 200);
-         this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-         this.pictureBox1.TabIndex = 0;
-         this.pictureBox1.TabStop = false;
+         this.tlpInactiveFriends.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+         this.tlpInactiveFriends.AutoScroll = true;
+         this.tlpInactiveFriends.ColumnCount = 3;
+         this.tlpInactiveFriends.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tlpInactiveFriends.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tlpInactiveFriends.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tlpInactiveFriends.Location = new System.Drawing.Point(3, 109);
+         this.tlpInactiveFriends.Name = "tlpInactiveFriends";
+         this.tlpInactiveFriends.RowCount = 1;
+         this.tlpInactiveFriends.RowStyles.Add(new System.Windows.Forms.RowStyle());
+         this.tlpInactiveFriends.Size = new System.Drawing.Size(1431, 649);
+         this.tlpInactiveFriends.TabIndex = 0;
          // 
          // panel4
          // 
@@ -541,6 +540,62 @@
          this.tableLayoutPanel1.Size = new System.Drawing.Size(1439, 253);
          this.tableLayoutPanel1.TabIndex = 0;
          // 
+         // lblClanMemberCount
+         // 
+         this.lblClanMemberCount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.lblClanMemberCount.AutoSize = true;
+         this.lblClanMemberCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblClanMemberCount.Location = new System.Drawing.Point(482, 126);
+         this.lblClanMemberCount.Name = "lblClanMemberCount";
+         this.lblClanMemberCount.Size = new System.Drawing.Size(473, 127);
+         this.lblClanMemberCount.TabIndex = 9;
+         this.lblClanMemberCount.Text = "label5";
+         this.lblClanMemberCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         // 
+         // lblFriendsCount
+         // 
+         this.lblFriendsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.lblFriendsCount.AutoSize = true;
+         this.lblFriendsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblFriendsCount.Location = new System.Drawing.Point(3, 126);
+         this.lblFriendsCount.Name = "lblFriendsCount";
+         this.lblFriendsCount.Size = new System.Drawing.Size(473, 127);
+         this.lblFriendsCount.TabIndex = 8;
+         this.lblFriendsCount.Text = "label4";
+         this.lblFriendsCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         // 
+         // lblClanMember
+         // 
+         this.lblClanMember.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.lblClanMember.AutoSize = true;
+         this.lblClanMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblClanMember.Location = new System.Drawing.Point(482, 0);
+         this.lblClanMember.Name = "lblClanMember";
+         this.lblClanMember.Size = new System.Drawing.Size(473, 126);
+         this.lblClanMember.TabIndex = 7;
+         this.lblClanMember.Text = "label2";
+         this.lblClanMember.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         // 
+         // lblFriends
+         // 
+         this.lblFriends.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.lblFriends.AutoSize = true;
+         this.lblFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblFriends.Location = new System.Drawing.Point(3, 0);
+         this.lblFriends.Name = "lblFriends";
+         this.lblFriends.Size = new System.Drawing.Size(473, 126);
+         this.lblFriends.TabIndex = 6;
+         this.lblFriends.Text = "label1";
+         this.lblFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         // 
          // lblNeighbor
          // 
          this.lblNeighbor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -569,113 +624,283 @@
          this.lblNeighborCount.Text = "label6";
          this.lblNeighborCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
-         // lblFriends
+         // tpTavern
          // 
-         this.lblFriends.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+         this.tpTavern.Controls.Add(this.tableLayoutPanel7);
+         this.tpTavern.Controls.Add(this.tlpCurrentSittingPlayer);
+         this.tpTavern.Controls.Add(this.tableLayoutPanel5);
+         this.tpTavern.Controls.Add(this.panel6);
+         this.tpTavern.Location = new System.Drawing.Point(4, 58);
+         this.tpTavern.Name = "tpTavern";
+         this.tpTavern.Size = new System.Drawing.Size(1456, 1040);
+         this.tpTavern.TabIndex = 2;
+         this.tpTavern.Text = "Tavern";
+         this.tpTavern.UseVisualStyleBackColor = true;
+         // 
+         // tpBots
+         // 
+         this.tpBots.Location = new System.Drawing.Point(4, 58);
+         this.tpBots.Name = "tpBots";
+         this.tpBots.Size = new System.Drawing.Size(1456, 1040);
+         this.tpBots.TabIndex = 3;
+         this.tpBots.Text = "Bots";
+         this.tpBots.UseVisualStyleBackColor = true;
+         // 
+         // tpProduction
+         // 
+         this.tpProduction.Location = new System.Drawing.Point(4, 58);
+         this.tpProduction.Name = "tpProduction";
+         this.tpProduction.Size = new System.Drawing.Size(1456, 1040);
+         this.tpProduction.TabIndex = 4;
+         this.tpProduction.Text = "Production";
+         this.tpProduction.UseVisualStyleBackColor = true;
+         // 
+         // tpManually
+         // 
+         this.tpManually.Location = new System.Drawing.Point(4, 58);
+         this.tpManually.Name = "tpManually";
+         this.tpManually.Size = new System.Drawing.Size(1456, 1040);
+         this.tpManually.TabIndex = 5;
+         this.tpManually.Text = "Manually";
+         this.tpManually.UseVisualStyleBackColor = true;
+         // 
+         // bwTimerUpdate
+         // 
+         this.bwTimerUpdate.WorkerSupportsCancellation = true;
+         this.bwTimerUpdate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwTimerUpdate_DoWork);
+         // 
+         // pnlLoading
+         // 
+         this.pnlLoading.Controls.Add(this.tableLayoutPanel2);
+         this.pnlLoading.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.pnlLoading.Location = new System.Drawing.Point(0, 34);
+         this.pnlLoading.Name = "pnlLoading";
+         this.pnlLoading.Size = new System.Drawing.Size(1464, 1102);
+         this.pnlLoading.TabIndex = 12;
+         this.pnlLoading.Visible = false;
+         // 
+         // lblPleaseLogin
+         // 
+         this.lblPleaseLogin.AutoSize = true;
+         this.lblPleaseLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.lblPleaseLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblPleaseLogin.Location = new System.Drawing.Point(3, 0);
+         this.lblPleaseLogin.Name = "lblPleaseLogin";
+         this.lblPleaseLogin.Size = new System.Drawing.Size(1458, 138);
+         this.lblPleaseLogin.TabIndex = 1;
+         this.lblPleaseLogin.Text = "Please wait...";
+         this.lblPleaseLogin.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+         // 
+         // pictureBox1
+         // 
+         this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
+         this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+         this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+         this.pictureBox1.Location = new System.Drawing.Point(3, 141);
+         this.pictureBox1.Name = "pictureBox1";
+         this.pictureBox1.Size = new System.Drawing.Size(1458, 200);
+         this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+         this.pictureBox1.TabIndex = 0;
+         this.pictureBox1.TabStop = false;
+         // 
+         // tableLayoutPanel2
+         // 
+         this.tableLayoutPanel2.ColumnCount = 1;
+         this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+         this.tableLayoutPanel2.Controls.Add(this.pictureBox1, 0, 1);
+         this.tableLayoutPanel2.Controls.Add(this.lblPleaseLogin, 0, 0);
+         this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+         this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+         this.tableLayoutPanel2.RowCount = 2;
+         this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.61343F));
+         this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.38657F));
+         this.tableLayoutPanel2.Size = new System.Drawing.Size(1464, 1102);
+         this.tableLayoutPanel2.TabIndex = 2;
+         // 
+         // panel6
+         // 
+         this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+         this.panel6.Controls.Add(this.tableLayoutPanel4);
+         this.panel6.Location = new System.Drawing.Point(7, 3);
+         this.panel6.Name = "panel6";
+         this.panel6.Size = new System.Drawing.Size(1441, 255);
+         this.panel6.TabIndex = 1;
+         // 
+         // tableLayoutPanel4
+         // 
+         this.tableLayoutPanel4.ColumnCount = 3;
+         this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tableLayoutPanel4.Controls.Add(this.lblTavernstateValue, 1, 1);
+         this.tableLayoutPanel4.Controls.Add(this.lblTavernSilverValue, 0, 1);
+         this.tableLayoutPanel4.Controls.Add(this.lblTavernstate, 1, 0);
+         this.tableLayoutPanel4.Controls.Add(this.lblTavernSilver, 0, 0);
+         this.tableLayoutPanel4.Controls.Add(this.lblVisitable, 2, 0);
+         this.tableLayoutPanel4.Controls.Add(this.lblVisitableValue, 2, 1);
+         this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+         this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+         this.tableLayoutPanel4.RowCount = 2;
+         this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+         this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+         this.tableLayoutPanel4.Size = new System.Drawing.Size(1439, 253);
+         this.tableLayoutPanel4.TabIndex = 0;
+         // 
+         // lblTavernstateValue
+         // 
+         this.lblTavernstateValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-         this.lblFriends.AutoSize = true;
-         this.lblFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblFriends.Location = new System.Drawing.Point(3, 0);
-         this.lblFriends.Name = "lblFriends";
-         this.lblFriends.Size = new System.Drawing.Size(473, 126);
-         this.lblFriends.TabIndex = 6;
-         this.lblFriends.Text = "label1";
-         this.lblFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.lblTavernstateValue.AutoSize = true;
+         this.lblTavernstateValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblTavernstateValue.Location = new System.Drawing.Point(482, 126);
+         this.lblTavernstateValue.Name = "lblTavernstateValue";
+         this.lblTavernstateValue.Size = new System.Drawing.Size(473, 127);
+         this.lblTavernstateValue.TabIndex = 9;
+         this.lblTavernstateValue.Text = "label5";
+         this.lblTavernstateValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
-         // lblClanMember
+         // lblTavernSilverValue
          // 
-         this.lblClanMember.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+         this.lblTavernSilverValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-         this.lblClanMember.AutoSize = true;
-         this.lblClanMember.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblClanMember.Location = new System.Drawing.Point(482, 0);
-         this.lblClanMember.Name = "lblClanMember";
-         this.lblClanMember.Size = new System.Drawing.Size(473, 126);
-         this.lblClanMember.TabIndex = 7;
-         this.lblClanMember.Text = "label2";
-         this.lblClanMember.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.lblTavernSilverValue.AutoSize = true;
+         this.lblTavernSilverValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblTavernSilverValue.Location = new System.Drawing.Point(3, 126);
+         this.lblTavernSilverValue.Name = "lblTavernSilverValue";
+         this.lblTavernSilverValue.Size = new System.Drawing.Size(473, 127);
+         this.lblTavernSilverValue.TabIndex = 8;
+         this.lblTavernSilverValue.Text = "label4";
+         this.lblTavernSilverValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
-         // lblFriendsCount
+         // lblTavernstate
          // 
-         this.lblFriendsCount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+         this.lblTavernstate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-         this.lblFriendsCount.AutoSize = true;
-         this.lblFriendsCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblFriendsCount.Location = new System.Drawing.Point(3, 126);
-         this.lblFriendsCount.Name = "lblFriendsCount";
-         this.lblFriendsCount.Size = new System.Drawing.Size(473, 127);
-         this.lblFriendsCount.TabIndex = 8;
-         this.lblFriendsCount.Text = "label4";
-         this.lblFriendsCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.lblTavernstate.AutoSize = true;
+         this.lblTavernstate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblTavernstate.Location = new System.Drawing.Point(482, 0);
+         this.lblTavernstate.Name = "lblTavernstate";
+         this.lblTavernstate.Size = new System.Drawing.Size(473, 126);
+         this.lblTavernstate.TabIndex = 7;
+         this.lblTavernstate.Text = "label2";
+         this.lblTavernstate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
-         // lblClanMemberCount
+         // lblTavernSilver
          // 
-         this.lblClanMemberCount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+         this.lblTavernSilver.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-         this.lblClanMemberCount.AutoSize = true;
-         this.lblClanMemberCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblClanMemberCount.Location = new System.Drawing.Point(482, 126);
-         this.lblClanMemberCount.Name = "lblClanMemberCount";
-         this.lblClanMemberCount.Size = new System.Drawing.Size(473, 127);
-         this.lblClanMemberCount.TabIndex = 9;
-         this.lblClanMemberCount.Text = "label5";
-         this.lblClanMemberCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.lblTavernSilver.AutoSize = true;
+         this.lblTavernSilver.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblTavernSilver.Location = new System.Drawing.Point(3, 0);
+         this.lblTavernSilver.Name = "lblTavernSilver";
+         this.lblTavernSilver.Size = new System.Drawing.Size(473, 126);
+         this.lblTavernSilver.TabIndex = 6;
+         this.lblTavernSilver.Text = "label1";
+         this.lblTavernSilver.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
-         // panel5
+         // lblVisitable
          // 
-         this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+         this.lblVisitable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.lblVisitable.AutoSize = true;
+         this.lblVisitable.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblVisitable.Location = new System.Drawing.Point(961, 0);
+         this.lblVisitable.Name = "lblVisitable";
+         this.lblVisitable.Size = new System.Drawing.Size(475, 126);
+         this.lblVisitable.TabIndex = 2;
+         this.lblVisitable.Text = "label3";
+         this.lblVisitable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         // 
+         // lblVisitableValue
+         // 
+         this.lblVisitableValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.lblVisitableValue.AutoSize = true;
+         this.lblVisitableValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblVisitableValue.Location = new System.Drawing.Point(961, 126);
+         this.lblVisitableValue.Name = "lblVisitableValue";
+         this.lblVisitableValue.Size = new System.Drawing.Size(475, 127);
+         this.lblVisitableValue.TabIndex = 5;
+         this.lblVisitableValue.Text = "label6";
+         this.lblVisitableValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         // 
+         // btnCollect
+         // 
+         this.btnCollect.Dock = System.Windows.Forms.DockStyle.Top;
+         this.btnCollect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+         this.btnCollect.FlatAppearance.BorderSize = 2;
+         this.btnCollect.FlatStyle = System.Windows.Forms.FlatStyle.System;
+         this.btnCollect.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.btnCollect.Location = new System.Drawing.Point(579, 3);
+         this.btnCollect.Name = "btnCollect";
+         this.btnCollect.Size = new System.Drawing.Size(282, 60);
+         this.btnCollect.TabIndex = 2;
+         this.btnCollect.Text = "button1";
+         this.btnCollect.UseVisualStyleBackColor = true;
+         // 
+         // tableLayoutPanel5
+         // 
+         this.tableLayoutPanel5.ColumnCount = 5;
+         this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+         this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+         this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+         this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+         this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+         this.tableLayoutPanel5.Controls.Add(this.btnCollect, 2, 0);
+         this.tableLayoutPanel5.Location = new System.Drawing.Point(7, 264);
+         this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+         this.tableLayoutPanel5.RowCount = 1;
+         this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+         this.tableLayoutPanel5.Size = new System.Drawing.Size(1441, 84);
+         this.tableLayoutPanel5.TabIndex = 3;
+         // 
+         // tlpCurrentSittingPlayer
+         // 
+         this.tlpCurrentSittingPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-         this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-         this.panel5.Controls.Add(this.tableLayoutPanel3);
-         this.panel5.Controls.Add(this.tlpInactiveFriends);
-         this.panel5.Location = new System.Drawing.Point(8, 267);
-         this.panel5.Name = "panel5";
-         this.panel5.Size = new System.Drawing.Size(1439, 767);
-         this.panel5.TabIndex = 1;
+         this.tlpCurrentSittingPlayer.AutoScroll = true;
+         this.tlpCurrentSittingPlayer.ColumnCount = 3;
+         this.tlpCurrentSittingPlayer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tlpCurrentSittingPlayer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tlpCurrentSittingPlayer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+         this.tlpCurrentSittingPlayer.Location = new System.Drawing.Point(7, 457);
+         this.tlpCurrentSittingPlayer.Name = "tlpCurrentSittingPlayer";
+         this.tlpCurrentSittingPlayer.RowCount = 1;
+         this.tlpCurrentSittingPlayer.RowStyles.Add(new System.Windows.Forms.RowStyle());
+         this.tlpCurrentSittingPlayer.Size = new System.Drawing.Size(1441, 580);
+         this.tlpCurrentSittingPlayer.TabIndex = 4;
          // 
-         // tlpInactiveFriends
+         // tableLayoutPanel7
          // 
-         this.tlpInactiveFriends.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-         this.tlpInactiveFriends.AutoScroll = true;
-         this.tlpInactiveFriends.ColumnCount = 3;
-         this.tlpInactiveFriends.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-         this.tlpInactiveFriends.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-         this.tlpInactiveFriends.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-         this.tlpInactiveFriends.Location = new System.Drawing.Point(3, 109);
-         this.tlpInactiveFriends.Name = "tlpInactiveFriends";
-         this.tlpInactiveFriends.RowCount = 1;
-         this.tlpInactiveFriends.RowStyles.Add(new System.Windows.Forms.RowStyle());
-         this.tlpInactiveFriends.Size = new System.Drawing.Size(1431, 653);
-         this.tlpInactiveFriends.TabIndex = 0;
+         this.tableLayoutPanel7.ColumnCount = 1;
+         this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+         this.tableLayoutPanel7.Controls.Add(this.lblCurSitting, 0, 0);
+         this.tableLayoutPanel7.Location = new System.Drawing.Point(7, 354);
+         this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+         this.tableLayoutPanel7.RowCount = 1;
+         this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+         this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+         this.tableLayoutPanel7.Size = new System.Drawing.Size(1441, 100);
+         this.tableLayoutPanel7.TabIndex = 5;
          // 
-         // tableLayoutPanel3
+         // lblCurSitting
          // 
-         this.tableLayoutPanel3.ColumnCount = 1;
-         this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-         this.tableLayoutPanel3.Controls.Add(this.lblInactiveFriends, 0, 0);
-         this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-         this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-         this.tableLayoutPanel3.RowCount = 1;
-         this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-         this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-         this.tableLayoutPanel3.Size = new System.Drawing.Size(1431, 100);
-         this.tableLayoutPanel3.TabIndex = 1;
-         // 
-         // lblInactiveFriends
-         // 
-         this.lblInactiveFriends.AutoSize = true;
-         this.lblInactiveFriends.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.lblInactiveFriends.Location = new System.Drawing.Point(3, 0);
-         this.lblInactiveFriends.Name = "lblInactiveFriends";
-         this.lblInactiveFriends.Size = new System.Drawing.Size(1425, 100);
-         this.lblInactiveFriends.TabIndex = 0;
-         this.lblInactiveFriends.Text = "label1";
-         this.lblInactiveFriends.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.lblCurSitting.AutoSize = true;
+         this.lblCurSitting.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.lblCurSitting.Location = new System.Drawing.Point(3, 0);
+         this.lblCurSitting.Name = "lblCurSitting";
+         this.lblCurSitting.Size = new System.Drawing.Size(1435, 100);
+         this.lblCurSitting.TabIndex = 0;
+         this.lblCurSitting.Text = "label1";
+         this.lblCurSitting.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
          // Main
          // 
@@ -688,7 +913,7 @@
          this.Controls.Add(this.sStripStatus);
          this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
          this.Name = "Main";
-         this.Text = "Form1";
+         this.Text = "Forge of Bots v";
          this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
          this.Load += new System.EventHandler(this.Main_Load);
          this.sStripStatus.ResumeLayout(false);
@@ -703,15 +928,23 @@
          this.panel1.PerformLayout();
          this.panel2.ResumeLayout(false);
          this.tpOthers.ResumeLayout(false);
-         this.pnlLoading.ResumeLayout(false);
-         this.pnlLoading.PerformLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-         this.panel4.ResumeLayout(false);
-         this.tableLayoutPanel1.ResumeLayout(false);
-         this.tableLayoutPanel1.PerformLayout();
          this.panel5.ResumeLayout(false);
          this.tableLayoutPanel3.ResumeLayout(false);
          this.tableLayoutPanel3.PerformLayout();
+         this.panel4.ResumeLayout(false);
+         this.tableLayoutPanel1.ResumeLayout(false);
+         this.tableLayoutPanel1.PerformLayout();
+         this.tpTavern.ResumeLayout(false);
+         this.pnlLoading.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+         this.tableLayoutPanel2.ResumeLayout(false);
+         this.tableLayoutPanel2.PerformLayout();
+         this.panel6.ResumeLayout(false);
+         this.tableLayoutPanel4.ResumeLayout(false);
+         this.tableLayoutPanel4.PerformLayout();
+         this.tableLayoutPanel5.ResumeLayout(false);
+         this.tableLayoutPanel7.ResumeLayout(false);
+         this.tableLayoutPanel7.PerformLayout();
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -772,6 +1005,20 @@
         private System.Windows.Forms.TableLayoutPanel tlpInactiveFriends;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label lblInactiveFriends;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label lblTavernstateValue;
+        private System.Windows.Forms.Label lblTavernSilverValue;
+        private System.Windows.Forms.Label lblTavernstate;
+        private System.Windows.Forms.Label lblTavernSilver;
+        private System.Windows.Forms.Label lblVisitable;
+        private System.Windows.Forms.Label lblVisitableValue;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button btnCollect;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.Label lblCurSitting;
+        private System.Windows.Forms.TableLayoutPanel tlpCurrentSittingPlayer;
     }
 }
 

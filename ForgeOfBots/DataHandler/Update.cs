@@ -14,7 +14,19 @@ namespace ForgeOfBots.DataHandler
       public ChromiumWebBrowser browser { get; private set; }
       public RequestBuilder ReqBuilder { get; private set; }
 
-      public static event UpdateFinishedEvent UpdateFinished;
+      private static UpdateFinishedEvent _UpdateFinished;
+      public static event UpdateFinishedEvent UpdateFinished
+      {
+         add
+         {
+            if (_UpdateFinished == null || !_UpdateFinished.GetInvocationList().Contains(value))
+               _UpdateFinished += value;
+         }
+         remove
+         {
+            _UpdateFinished -= value;
+         }
+      }
 
       public Update(ChromiumWebBrowser cwb, RequestBuilder reqbuilder)
       {
@@ -49,7 +61,7 @@ namespace ForgeOfBots.DataHandler
 
       private void OnUpdateFinished(RequestType type)
       {
-         UpdateFinished?.Invoke(type);
+         _UpdateFinished?.Invoke(type);
       }
    }
 

@@ -1,22 +1,58 @@
 ﻿using CefSharp;
-using System.IO;
-using System.Text;
-using CefSharp.ResponseFilter;
 using CefSharp.Handler;
+using CefSharp.ResponseFilter;
+using ForgeOfBots.Utils;
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 namespace ForgeOfBots.CefBrowserHandler
 {
    public class CustomResourceRequestHandler : ResourceRequestHandler
    {
       private readonly MemoryStream memoryStream = new MemoryStream();
-      public delegate void ForgeHX_Found(string forgehx, string filename);
-      public static event ForgeHX_Found ForgeHXFoundEvent;
-      public delegate void UID_Found(string uid, string wid);
-      public static event UID_Found UidFoundEvent;
-      public delegate void ServerStartpage_Loaded();
-      public static event ServerStartpage_Loaded ServerStartpageLoadedEvent;
+
+      private static EventHandler<TwoStringArgs> _ForgeHXFoundEvent;
+      public static event EventHandler<TwoStringArgs> ForgeHXFoundEvent
+      {
+         add
+         {
+            if (_ForgeHXFoundEvent == null || !_ForgeHXFoundEvent.GetInvocationList().ToList().Contains(value))
+               _ForgeHXFoundEvent += value;
+         }
+         remove
+         {
+            _ForgeHXFoundEvent -= value;
+         }
+      }
+      private static EventHandler<TwoStringArgs> _UidFoundEvent;
+      public static event EventHandler<TwoStringArgs> UidFoundEvent
+      {
+         add
+         {
+            if (_UidFoundEvent == null || !_UidFoundEvent.GetInvocationList().ToList().Contains(value))
+               _UidFoundEvent += value;
+         }
+         remove
+         {
+            _UidFoundEvent -= value;
+         }
+      }
+      private static EventHandler _ServerStartpageLoadedEvent;
+      public static event EventHandler ServerStartpageLoadedEvent
+      {
+         add
+         {
+            if (_ServerStartpageLoadedEvent == null || !_ServerStartpageLoadedEvent.GetInvocationList().ToList().Contains(value))
+               _ServerStartpageLoadedEvent += value;
+         }
+         remove
+         {
+            _ServerStartpageLoadedEvent -= value;
+         }
+      }
       protected override IResponseFilter GetResourceResponseFilter(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, IResponse response)
       {
          return new StreamResponseFilter(memoryStream);
@@ -40,24 +76,23 @@ namespace ForgeOfBots.CefBrowserHandler
                   {
                      var ForgeHX = FHXMatch.Value;
                      var Filename = "ForgeHX" + FHXMatch.Groups[1].Value;
-                     ForgeHXFoundEvent?.Invoke(ForgeHX, Filename);
+                     _ForgeHXFoundEvent?.Invoke(null, new TwoStringArgs { s1 = ForgeHX, s2 = Filename });
                   }
                   if (UIDMatch.Success)
                   {
                      var UID = UIDMatch.Groups[2].Value;
                      var WID = UIDMatch.Groups[1].Value;
-                     UidFoundEvent?.Invoke(UID,WID);
+                     _UidFoundEvent?.Invoke(null, new TwoStringArgs { s1 = UID, s2 = WID });
                   }
                }
             }
             else if (frame.Url.Contains("/page/"))
             {
-               ServerStartpageLoadedEvent?.Invoke();
+               _ServerStartpageLoadedEvent?.Invoke(null,EventArgs.Empty);
             }
          }
       }
    }
-
    public class CustomRequestHandler : RequestHandler
    {
       protected override IResourceRequestHandler GetResourceRequestHandler(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IRequest request, bool isNavigation, bool isDownload, string requestInitiator, ref bool disableDefaultHandling)
