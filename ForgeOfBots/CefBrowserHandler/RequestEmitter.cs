@@ -63,7 +63,7 @@ namespace ForgeOfBots.CefBrowserHandler
 
          if (response.Charset == "utf-8")
          {
-            if (frame.Url.Contains("/game/index?"))
+            if (frame.IsValid && frame.Url.Contains("/game/index?"))
             {
                var str = Encoding.UTF8.GetString(bytes);
                if (str.Length > 0)
@@ -86,7 +86,7 @@ namespace ForgeOfBots.CefBrowserHandler
                   }
                }
             }
-            else if (frame.Url.Contains("/page/"))
+            else if (frame.IsValid && frame.Url.Contains("/page/"))
             {
                _ServerStartpageLoadedEvent?.Invoke(null,EventArgs.Empty);
             }

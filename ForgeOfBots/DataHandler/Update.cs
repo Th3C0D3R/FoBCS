@@ -51,8 +51,7 @@ namespace ForgeOfBots.DataHandler
          browser.ExecuteScriptAsync(script);
          ResponseHandler.ListLoaded += OnUpdateFinished;
       }
-
-      public void UpdateStartUp()
+        public void UpdateStartUp()
       {
          string script = ReqBuilder.GetRequestScript(RequestType.Startup, "[]");
          browser.ExecuteScriptAsync(script);
