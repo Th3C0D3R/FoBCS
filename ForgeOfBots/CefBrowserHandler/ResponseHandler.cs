@@ -13,6 +13,7 @@ using ForgeOfBots.GameClasses.ResponseClasses;
 using WorldSelection = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
 using System.Linq;
 using CefSharp;
+using System.Windows.Forms;
 
 namespace ForgeOfBots.CefBrowserHandler
 {
@@ -224,10 +225,25 @@ namespace ForgeOfBots.CefBrowserHandler
 
                     break;
                 case RequestType.Motivate:
+                    Polivate motivation = JsonConvert.DeserializeObject<Polivate>(msg);
+                    if(motivation.responseData.action == "polish")
+                        ListClass.doneMotivate.Add(motivation.responseData.mapEntity.player_id, true);
+                    else
+                        MessageBox.Show($"unknown Action: {motivation.responseData.action}");
                     break;
                 case RequestType.CollectIncident:
                     break;
                 case RequestType.VisitTavern:
+                    try
+                    {
+                        _taverSitted?.Invoke(null);
+                    }
+                    catch (Exception)
+                    {
+                        TavernResult tavernresult = JsonConvert.DeserializeObject<TavernResult>(msg);
+                        if (tavernresult.responseData.state == "isSitting")
+                            ListClass.doneTavern.Add(tavernresult.responseData.ownerId, true);
+                    }
                     break;
                 case RequestType.GetClanMember:
                     Root<ClanMember> clan = JsonConvert.DeserializeObject<Root<ClanMember>>(msg);

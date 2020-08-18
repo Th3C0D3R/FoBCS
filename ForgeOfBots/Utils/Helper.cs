@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
+using System.ComponentModel;
+using ForgeOfBots.DataHandler;
 
 namespace ForgeOfBots.Utils
 {
@@ -129,4 +131,9 @@ namespace ForgeOfBots.Utils
    {
       public T t1 { get; set; }
    }
+    public class TwoTArgs<T,Y>
+    {
+        public T RequestType { get; set; }
+        public Y argument2 { get; set; }
+    }
 }

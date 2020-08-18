@@ -92,6 +92,7 @@
     <Compile Include="GameClasses\ResponseClasses\BonusService.cs" />
     <Compile Include="GameClasses\ResponseClasses\CityEntities.cs" />
     <Compile Include="GameClasses\ResponseClasses\Metadata.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Polivate.cs" />
     <Compile Include="GameClasses\ResponseClasses\QuestService.cs" />
     <Compile Include="GameClasses\ResponseClasses\Research.cs" />
     <Compile Include="GameClasses\ResponseClasses\Resource.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="GameClasses\ResponseClasses\Tavern.cs" />
     <Compile Include="GameClasses\ResponseClasses\SocialLists.cs" />
     <Compile Include="GameClasses\ResponseClasses\Root.cs" />
+    <Compile Include="GameClasses\ResponseClasses\TavernResult.cs" />
     <Compile Include="GameClasses\Tavern.cs" />
     <Compile Include="GameClasses\test\test.cs" />
     <Compile Include="GlobalSuppressions.cs" />

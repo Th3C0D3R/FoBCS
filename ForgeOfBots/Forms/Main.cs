@@ -393,6 +393,7 @@ namespace ForgeOfBots
                 case RequestType.CollectIncident:
                     break;
                 case RequestType.VisitTavern:
+                    UpdateTavern();
                     break;
                 case RequestType.GetClanMember:
                 case RequestType.GetFriends:
@@ -461,6 +462,7 @@ namespace ForgeOfBots
                 Invoker.SetProperty(lblMeds, () => lblMeds.Text, ListClass.ResourceDefinitions.Find(x => x.id == "medals").name);
                 Invoker.SetProperty(lblDiamonds, () => lblDiamonds.Text, ListClass.ResourceDefinitions.Find(x => x.id == "premium").name);
             }
+            Invoker.CallMethode(listView1, () => listView1.Clear());
             foreach (KeyValuePair<string, List<Good>> item in ListClass.GoodsDict)
             {
                 if (item.Value.Find(x => x.value > 0) != null)
@@ -525,6 +527,17 @@ namespace ForgeOfBots
 
             #endregion
         }
+
+        private void tsmiVisitAll_Click(object sender, EventArgs e)
+        {
+            VisitAllTavern();
+        }
+        private void tsmiDoAll_Click(object sender, EventArgs e)
+        {
+            Motivate(E_Motivate.All);
+            VisitAllTavern();
+        }
+
         private void UpdateTavern()
         {
             #region "Tavern"
@@ -532,13 +545,13 @@ namespace ForgeOfBots
             Invoker.SetProperty(lblTavernstate, () => lblTavernstate.Text, "Tavernstate");
             Invoker.SetProperty(lblVisitable, () => lblVisitable.Text, "Visitable");
             Invoker.SetProperty(btnCollect, () => btnCollect.Text, "Collect Tavern");
-            Invoker.SetProperty(lblTavernstateValue, () => lblTavernstateValue.Text, ListClass.OwnTavern.responseData[1].ToString() + "/" + ListClass.OwnTavern.responseData[2].ToString());
+            Invoker.SetProperty(lblTavernstateValue, () => lblTavernstateValue.Text, ListClass.OwnTavern.responseData[2].ToString() + "/" + ListClass.OwnTavern.responseData[1].ToString());
             if (ListClass.ResourceDefinitions.Count > 0)
             {
                 Invoker.SetProperty(lblTavernSilver, () => lblTavernSilver.Text, ListClass.ResourceDefinitions.Find(x => x.id == "tavern_silver").name);
             }
 
-            var visitable = ListClass.FriendTaverns.FindAll(f => (f.sittingPlayerCount < f.unlockedChairCount));
+            var visitable = ListClass.FriendTaverns.FindAll(f => (f.sittingPlayerCount < f.unlockedChairCount && f.state != "alreadyVisited"));
             Invoker.SetProperty(lblVisitableValue, () => lblVisitableValue.Text, visitable.Count.ToString());
             Invoker.SetProperty(lblCurSitting, () => lblCurSitting.Text, "Currently Sitting Players: ");
             var ownTavern = ListClass.OwnTavernData.view.visitors.ToList();
@@ -589,6 +602,106 @@ namespace ForgeOfBots
 
             #endregion
         }
+        private void Motivate(E_Motivate player_type)
+        {
+            //string script = ReqBuilder.GetRequestScript(RequestType.Motivate, "[]");
+            TwoTArgs<RequestType, E_Motivate> param = new TwoTArgs<RequestType, E_Motivate> { RequestType = RequestType.Motivate, argument2 = player_type };
+            bwScriptExecuter.RunWorkerAsync(param);
+        }
+
+        private void VisitAllTavern()
+        {
+            //string script = ReqBuilder.GetRequestScript(RequestType.VisitTavern, "[]");
+            TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.VisitTavern, argument2 = null };
+            bwScriptExecuter.RunWorkerAsync(param);
+        }
+        private void bwScriptExecuter_DoWork(object sender, DoWorkEventArgs e)
+        {
+            TwoTArgs<RequestType, object> param = (TwoTArgs<RequestType, object>)e.Argument;
+            switch (param.RequestType)
+            {
+                case RequestType.Motivate:
+                    E_Motivate e_Motivate = (E_Motivate)Enum.Parse(typeof(E_Motivate), param.argument2.ToString());
+                    List<Player> list = new List<Player>();
+                    Player last = null;
+                    switch (e_Motivate)
+                    {
+                        case E_Motivate.Clan:
+                            var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
+                            list.AddRange(clanMotivate);
+                            break;
+                        case E_Motivate.Neighbor:
+                            var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
+                            list.AddRange(neighborlist);
+                            break;
+                        case E_Motivate.Friend:
+                            var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
+                            list.AddRange(friendMotivate);
+                            break;
+                        case E_Motivate.All:
+                            list.AddRange(ListClass.Motivateable);
+                            break;
+                        default:
+                            break;
+                    }
+                    foreach (Player item in list)
+                    {
+                        last = item;
+                        string script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
+                        cwb.ExecuteScriptAsync(script);
+                        Random r = new Random();
+                        int rInt = r.Next(750, 1500);
+                        while (!ListClass.doneMotivate.ContainsKey(last.player_id))
+                        {
+                            Thread.Sleep(1);
+                        }
+                        BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = $"Motivating {ListClass.doneMotivate.Count} / {list.Count}"));
+                        BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
+                        Thread.Sleep(rInt);
+                    }
+                    ListClass.doneMotivate.Clear();
+                    break;
+                case RequestType.CollectIncident:
+                    break;
+                case RequestType.VisitTavern:
+                    //return (undefined !== friend.taverninfo && undefined === friend.taverninfo["state"] && friend.taverninfo["sittingPlayerCount"] < friend.taverninfo["unlockedChairCount"])
+                    FriendTavernState FTSlast = null;
+                    ResponseHandler.TaverSitted -= ResponseHandler_TaverSitted;
+                    ListClass.FriendTaverns = (List<FriendTavernState>)ListClass.FriendTaverns.Where((f) => f.sittingPlayerCount < f.unlockedChairCount);
+                    foreach (FriendTavernState item in ListClass.FriendTaverns)
+                    {
+                        FTSlast = item;
+                        string script = ReqBuilder.GetRequestScript(param.RequestType, item.ownerId);
+                        cwb.ExecuteScriptAsync(script);
+                        Random r = new Random();
+                        int rInt = r.Next(750, 1500);
+                        while (!ListClass.doneTavern.ContainsKey(FTSlast.ownerId))
+                        {
+                            Thread.Sleep(1);
+                        }
+                        Thread.Sleep(rInt);
+                    }
+                    break;
+                case RequestType.CollectProduction:
+                    break;
+                case RequestType.QueryProduction:
+                    break;
+                case RequestType.CancelProduction:
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void bwScriptExecuter_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+
+        private void bwScriptExecuter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
         private void SitAtTavern(object senderObj, EventArgs e)
         {
             Button sender = ((Button)senderObj);
@@ -596,13 +709,13 @@ namespace ForgeOfBots
             {
                 string playerid = sender.Tag.ToString();
                 string script = ReqBuilder.GetRequestScript(RequestType.VisitTavern, playerid);
+                ResponseHandler.TaverSitted += ResponseHandler_TaverSitted;
                 cwb.ExecuteScriptAsync(script);
-                ResponseHandler.TaverSitted += ResponseHandler_TaverSitted; ;
             }
         }
         private void ResponseHandler_TaverSitted(object sender)
         {
-            Updater.UpdatePlayerLists();
+            LoadGUI();
         }
     }
     public static class CookieHandler
@@ -614,8 +727,8 @@ namespace ForgeOfBots
             CookieManager = Cef.GetGlobalCookieManager();
             var visitor = new CookieMonster(allCookies =>
             {
-             //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
-             foreach (var item in allCookies)
+                //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
+                foreach (var item in allCookies)
                 {
                     if (item.Item1 == null) continue;
                     if (item.Item2 == null) continue;

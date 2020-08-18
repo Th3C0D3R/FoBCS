@@ -189,6 +189,14 @@ namespace ForgeOfBots.DataHandler
       GetAllWorlds,
    }
 
+    public enum E_Motivate
+    {
+        Clan,
+        Neighbor,
+        Friend,
+        All
+    }
+
    public enum MetaRequestType
    {
       city_entities,

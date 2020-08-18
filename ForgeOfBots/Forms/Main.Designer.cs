@@ -35,6 +35,18 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbLogin = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsddFunctions = new System.Windows.Forms.ToolStripDropDownButton();
+            this.aidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aidFriendsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aidClanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aidNeiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.aidAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiVisitAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDoAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsddSettings = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSettings = new System.Windows.Forms.ToolStripButton();
             this.tcMenu = new System.Windows.Forms.TabControl();
             this.tpOverview = new System.Windows.Forms.TabPage();
@@ -97,6 +109,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblPleaseLogin = new System.Windows.Forms.Label();
+            this.bwScriptExecuter = new System.ComponentModel.BackgroundWorker();
             this.sStripStatus.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tcMenu.SuspendLayout();
@@ -148,11 +161,15 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.Black;
+            this.toolStrip1.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbLogin,
             this.toolStripSeparator1,
+            this.tsddFunctions,
+            this.toolStripSeparator3,
+            this.tsddSettings,
+            this.toolStripSeparator2,
             this.tsbSettings});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -163,7 +180,7 @@
             // tsbLogin
             // 
             this.tsbLogin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbLogin.ForeColor = System.Drawing.Color.White;
+            this.tsbLogin.ForeColor = System.Drawing.Color.Black;
             this.tsbLogin.Image = ((System.Drawing.Image)(resources.GetObject("tsbLogin.Image")));
             this.tsbLogin.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLogin.Name = "tsbLogin";
@@ -177,16 +194,104 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsddFunctions
+            // 
+            this.tsddFunctions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsddFunctions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aidToolStripMenuItem,
+            this.tsmiVisitAll,
+            this.tsmiDoAll});
+            this.tsddFunctions.Image = ((System.Drawing.Image)(resources.GetObject("tsddFunctions.Image")));
+            this.tsddFunctions.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsddFunctions.Name = "tsddFunctions";
+            this.tsddFunctions.Size = new System.Drawing.Size(72, 22);
+            this.tsddFunctions.Text = "Functions";
+            // 
+            // aidToolStripMenuItem
+            // 
+            this.aidToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aidFriendsToolStripMenuItem,
+            this.aidClanToolStripMenuItem,
+            this.aidNeiToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.aidAllToolStripMenuItem});
+            this.aidToolStripMenuItem.Name = "aidToolStripMenuItem";
+            this.aidToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.aidToolStripMenuItem.Text = "Aid";
+            // 
+            // aidFriendsToolStripMenuItem
+            // 
+            this.aidFriendsToolStripMenuItem.Name = "aidFriendsToolStripMenuItem";
+            this.aidFriendsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.aidFriendsToolStripMenuItem.Text = "Aid Friends";
+            // 
+            // aidClanToolStripMenuItem
+            // 
+            this.aidClanToolStripMenuItem.Name = "aidClanToolStripMenuItem";
+            this.aidClanToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.aidClanToolStripMenuItem.Text = "Aid Clan";
+            // 
+            // aidNeiToolStripMenuItem
+            // 
+            this.aidNeiToolStripMenuItem.Name = "aidNeiToolStripMenuItem";
+            this.aidNeiToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.aidNeiToolStripMenuItem.Text = "Aid Neighbors";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(147, 6);
+            // 
+            // aidAllToolStripMenuItem
+            // 
+            this.aidAllToolStripMenuItem.Name = "aidAllToolStripMenuItem";
+            this.aidAllToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.aidAllToolStripMenuItem.Text = "Aid All";
+            // 
+            // tsmiVisitAll
+            // 
+            this.tsmiVisitAll.Name = "tsmiVisitAll";
+            this.tsmiVisitAll.Size = new System.Drawing.Size(160, 22);
+            this.tsmiVisitAll.Text = "Visit Tavern";
+            this.tsmiVisitAll.Click += new System.EventHandler(this.tsmiVisitAll_Click);
+            // 
+            // tsmiDoAll
+            // 
+            this.tsmiDoAll.Name = "tsmiDoAll";
+            this.tsmiDoAll.Size = new System.Drawing.Size(160, 22);
+            this.tsmiDoAll.Text = "Aid all && Visit all";
+            this.tsmiDoAll.Click += new System.EventHandler(this.tsmiDoAll_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsddSettings
+            // 
+            this.tsddSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsddSettings.ForeColor = System.Drawing.Color.Black;
+            this.tsddSettings.Image = ((System.Drawing.Image)(resources.GetObject("tsddSettings.Image")));
+            this.tsddSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsddSettings.Name = "tsddSettings";
+            this.tsddSettings.Size = new System.Drawing.Size(62, 22);
+            this.tsddSettings.Text = "Settings";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // tsbSettings
             // 
-            this.tsbSettings.BackColor = System.Drawing.Color.Black;
+            this.tsbSettings.BackColor = System.Drawing.Color.Transparent;
             this.tsbSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbSettings.ForeColor = System.Drawing.Color.White;
+            this.tsbSettings.ForeColor = System.Drawing.Color.Black;
             this.tsbSettings.Image = ((System.Drawing.Image)(resources.GetObject("tsbSettings.Image")));
             this.tsbSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSettings.Name = "tsbSettings";
-            this.tsbSettings.Size = new System.Drawing.Size(53, 22);
-            this.tsbSettings.Text = "Settings";
+            this.tsbSettings.Size = new System.Drawing.Size(47, 22);
+            this.tsbSettings.Text = "Reload";
             this.tsbSettings.Click += new System.EventHandler(this.tsbSettings_Click);
             // 
             // tcMenu
@@ -925,7 +1030,7 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.61343F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.38657F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(976, 711);
@@ -955,7 +1060,15 @@
             this.lblPleaseLogin.Size = new System.Drawing.Size(972, 89);
             this.lblPleaseLogin.TabIndex = 1;
             this.lblPleaseLogin.Text = "Please wait...";
-            this.lblPleaseLogin.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblPleaseLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // bwScriptExecuter
+            // 
+            this.bwScriptExecuter.WorkerReportsProgress = true;
+            this.bwScriptExecuter.WorkerSupportsCancellation = true;
+            this.bwScriptExecuter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwScriptExecuter_DoWork);
+            this.bwScriptExecuter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bwScriptExecuter_ProgressChanged);
+            this.bwScriptExecuter.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bwScriptExecuter_RunWorkerCompleted);
             // 
             // Main
             // 
@@ -1075,6 +1188,19 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Label lblCurSitting;
         private System.Windows.Forms.TableLayoutPanel tlpCurrentSittingPlayer;
+        private System.Windows.Forms.ToolStripDropDownButton tsddSettings;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripDropDownButton tsddFunctions;
+        private System.Windows.Forms.ToolStripMenuItem aidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aidFriendsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aidClanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aidNeiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem aidAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiVisitAll;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDoAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.ComponentModel.BackgroundWorker bwScriptExecuter;
     }
 }
 
