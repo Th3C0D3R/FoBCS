@@ -624,6 +624,8 @@ namespace ForgeOfBots
                     E_Motivate e_Motivate = (E_Motivate)Enum.Parse(typeof(E_Motivate), param.argument2.ToString());
                     List<Player> list = new List<Player>();
                     Player last = null;
+                    int steps = 100 / list.Count;
+                    BeginInvoke(new MethodInvoker(() => tspbProgress.Value += steps));
                     switch (e_Motivate)
                     {
                         case E_Motivate.Clan:
@@ -656,7 +658,6 @@ namespace ForgeOfBots
                             Thread.Sleep(1);
                         }
                         BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = $"Motivating {ListClass.doneMotivate.Count} / {list.Count}"));
-                        BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
                         Thread.Sleep(rInt);
                     }
                     ListClass.doneMotivate.Clear();
