@@ -15,7 +15,7 @@ namespace ForgeOfBots.GameClasses
       {
          {"en", "en.forgeofempires.com"},
          {"de", "de.forgeofempires.com"},
-         {"zz (Beta)", "beta.forgeofempires.com"},
+         {"zz (Beta)", "zz.forgeofempires.com"},
          {"us", "us.forgeofempires.com"},
          {"fr", "fr.forgeofempires.com"},
          {"nl", "nl.forgeofempires.com"},

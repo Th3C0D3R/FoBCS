@@ -23,4 +23,21 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
         public int requestId { get; set; }
         public string __class__ { get; set; }
     }
+
+
+    public class CollectResult
+    {
+        public Responsedata responseData { get; set; }
+        public string requestClass { get; set; }
+        public string requestMethod { get; set; }
+        public int requestId { get; set; }
+        public string __class__ { get; set; }
+    }
+
+    public class Responsedata
+    {
+        public string __class__ { get; set; }
+    }
+
+
 }

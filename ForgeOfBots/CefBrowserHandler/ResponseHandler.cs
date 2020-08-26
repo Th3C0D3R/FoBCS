@@ -98,7 +98,20 @@ namespace ForgeOfBots.CefBrowserHandler
                 _taverSitted -= value;
             }
         }
-        
+        private static CustomEvent _collectTavern;
+        public static event CustomEvent TavernCollected
+        {
+            add
+            {
+                if (_collectTavern == null || !_collectTavern.GetInvocationList().Contains(value))
+                    _collectTavern += value;
+            }
+            remove
+            {
+                _collectTavern -= value;
+            }
+        }
+
         public static bool[] ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
         public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
         {
@@ -226,7 +239,7 @@ namespace ForgeOfBots.CefBrowserHandler
                     break;
                 case RequestType.Motivate:
                     Polivate motivation = JsonConvert.DeserializeObject<Polivate>(msg);
-                    if(motivation.responseData.action == "polish")
+                    if (motivation.responseData.action == "polish")
                         ListClass.doneMotivate.Add(motivation.responseData.mapEntity.player_id, true);
                     else
                         MessageBox.Show($"unknown Action: {motivation.responseData.action}");
@@ -243,6 +256,8 @@ namespace ForgeOfBots.CefBrowserHandler
                         TavernResult tavernresult = JsonConvert.DeserializeObject<TavernResult>(msg);
                         if (tavernresult.responseData.state == "isSitting")
                             ListClass.doneTavern.Add(tavernresult.responseData.ownerId, true);
+                        else
+                            MessageBox.Show($"unknown Action: {JsonConvert.SerializeObject(tavernresult.responseData)}");
                     }
                     break;
                 case RequestType.GetClanMember:
@@ -276,6 +291,20 @@ namespace ForgeOfBots.CefBrowserHandler
                 case RequestType.CancelProduction:
                     break;
                 case RequestType.CollectTavern:
+                    try
+                    {
+                        CollectResult cr = JsonConvert.DeserializeObject<CollectResult>(msg);
+                        if(cr.responseData.__class__.ToLower() == "success")
+                            _collectTavern?.Invoke(null);
+                        else
+                        {
+                            MessageBox.Show($"Something went wrong collecting tavern");
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show($"unknown Action: {msg}");
+                    }
                     break;
                 case RequestType.GetOwnTavern:
                     OwnTavernDataRoot otdr = JsonConvert.DeserializeObject<OwnTavernDataRoot>(msg);
@@ -372,5 +401,5 @@ namespace ForgeOfBots.CefBrowserHandler
     public delegate void EverythingImportantLoadedEvent(object sender);
     public delegate void StartupLoadedEvent(RequestType type);
     public delegate void ListLoadedEvent(RequestType type);
-    public delegate void CustomEvent(object sender);
+    public delegate void CustomEvent(object sender, dynamic data = null);
 }

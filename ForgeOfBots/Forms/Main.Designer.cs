@@ -851,6 +851,7 @@
             this.btnCollect.TabIndex = 2;
             this.btnCollect.Text = "button1";
             this.btnCollect.UseVisualStyleBackColor = true;
+            this.btnCollect.Click += new System.EventHandler(this.btnCollect_Click);
             // 
             // panel6
             // 
@@ -1033,6 +1034,7 @@
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.61343F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.38657F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(976, 711);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
@@ -1041,7 +1043,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(2, 91);
+            this.pictureBox1.Location = new System.Drawing.Point(2, 89);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(972, 130);
@@ -1057,7 +1059,7 @@
             this.lblPleaseLogin.Location = new System.Drawing.Point(2, 0);
             this.lblPleaseLogin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPleaseLogin.Name = "lblPleaseLogin";
-            this.lblPleaseLogin.Size = new System.Drawing.Size(972, 89);
+            this.lblPleaseLogin.Size = new System.Drawing.Size(972, 87);
             this.lblPleaseLogin.TabIndex = 1;
             this.lblPleaseLogin.Text = "Please wait...";
             this.lblPleaseLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
