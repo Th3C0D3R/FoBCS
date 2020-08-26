@@ -680,8 +680,10 @@ namespace ForgeOfBots
                         {
                             Thread.Sleep(1);
                         }
+                        BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = $"Sitting at Tavern {ListClass.doneTavern.Count} / {ListClass.FriendTaverns.Count}"));
                         Thread.Sleep(rInt);
                     }
+                    ResponseHandler.TaverSitted += ResponseHandler_TaverSitted;
                     break;
                 case RequestType.CollectProduction:
                     break;

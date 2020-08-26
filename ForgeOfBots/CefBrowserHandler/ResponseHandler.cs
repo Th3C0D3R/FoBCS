@@ -98,7 +98,7 @@ namespace ForgeOfBots.CefBrowserHandler
                 _taverSitted -= value;
             }
         }
-        
+
         public static bool[] ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
         public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
         {
@@ -226,7 +226,7 @@ namespace ForgeOfBots.CefBrowserHandler
                     break;
                 case RequestType.Motivate:
                     Polivate motivation = JsonConvert.DeserializeObject<Polivate>(msg);
-                    if(motivation.responseData.action == "polish")
+                    if (motivation.responseData.action == "polish")
                         ListClass.doneMotivate.Add(motivation.responseData.mapEntity.player_id, true);
                     else
                         MessageBox.Show($"unknown Action: {motivation.responseData.action}");
@@ -243,6 +243,8 @@ namespace ForgeOfBots.CefBrowserHandler
                         TavernResult tavernresult = JsonConvert.DeserializeObject<TavernResult>(msg);
                         if (tavernresult.responseData.state == "isSitting")
                             ListClass.doneTavern.Add(tavernresult.responseData.ownerId, true);
+                        else
+                            MessageBox.Show($"unknown Action: {JsonConvert.SerializeObject(tavernresult.responseData)}");
                     }
                     break;
                 case RequestType.GetClanMember:
