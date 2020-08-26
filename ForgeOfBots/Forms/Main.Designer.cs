@@ -851,6 +851,7 @@
             this.btnCollect.TabIndex = 2;
             this.btnCollect.Text = "button1";
             this.btnCollect.UseVisualStyleBackColor = true;
+            this.btnCollect.Click += new System.EventHandler(this.btnCollect_Click);
             // 
             // panel6
             // 

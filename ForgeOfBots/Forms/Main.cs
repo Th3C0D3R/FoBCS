@@ -105,7 +105,7 @@ namespace ForgeOfBots
         private void ResponseHandler_EverythingImportantLoaded(object sender)
         {
             LoadGUI();
-            //Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, false);
+            Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, false);
         }
         private void ContinueExecution()
         {
@@ -381,9 +381,9 @@ namespace ForgeOfBots
         }
         public void reloadData()
         {
+            CUpdate.UpdateFinished += CUpdate_UpdateFinished;
             Updater.UpdatePlayerLists();
             Updater.UpdateStartUp();
-            CUpdate.UpdateFinished += CUpdate_UpdateFinished;
         }
         private void CUpdate_UpdateFinished(RequestType type)
         {
@@ -391,6 +391,7 @@ namespace ForgeOfBots
             {
                 case RequestType.Startup:
                     UpdateOverView();
+                    UpdateTavern();
                     break;
                 case RequestType.Motivate:
                     break;
@@ -446,7 +447,7 @@ namespace ForgeOfBots
                 ResponseHandler.FriendRemoved += OnFriendRemoved;
             }
         }
-        private void OnFriendRemoved(object sender)
+        private void OnFriendRemoved(object sender, dynamic data = null)
         {
             Updater.UpdateFirends();
         }
@@ -555,55 +556,57 @@ namespace ForgeOfBots
                 Invoker.SetProperty(lblTavernSilver, () => lblTavernSilver.Text, ListClass.ResourceDefinitions.Find(x => x.id == "tavern_silver").name);
             }
 
-            var visitable = ListClass.FriendTaverns.FindAll(f => (f.sittingPlayerCount < f.unlockedChairCount && f.state != "alreadyVisited"));
+            var visitable = ListClass.FriendTaverns.FindAll(f => (f.sittingPlayerCount < f.unlockedChairCount && f.state != "alreadyVisited" && f.state != "isSitting"));
             Invoker.SetProperty(lblVisitableValue, () => lblVisitableValue.Text, visitable.Count.ToString());
             Invoker.SetProperty(lblCurSitting, () => lblCurSitting.Text, "Currently Sitting Players: ");
-            var ownTavern = ListClass.OwnTavernData.view.visitors.ToList();
-            int row = 0;
-            Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Clear());
-            Invoker.SetProperty(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowCount, ownTavern.Count);
-            foreach (var item in ownTavern)
+            if (ListClass.OwnTavernData.view != null)
             {
-                int col = 0;
-                Label lblName = new Label();
-                lblName.Dock = DockStyle.Top;
-                lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-                lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
-                lblName.Text = item.name;
-                Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lblName));
-                col += 1;
-                Label lblScore = new Label();
-                lblScore.Dock = DockStyle.Top;
-                lblScore.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-                lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
-                lblScore.Text = item.player_id.ToString();
-                Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lblScore));
-                col += 1;
+                var ownTavern = ListClass.OwnTavernData.view.visitors.ToList();
+                int row = 0;
+                Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Clear());
+                Invoker.SetProperty(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowCount, ownTavern.Count);
+                foreach (var item in ownTavern)
+                {
+                    int col = 0;
+                    Label lblName = new Label();
+                    lblName.Dock = DockStyle.Top;
+                    lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+                    lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+                    lblName.Text = item.name;
+                    Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lblName));
+                    col += 1;
+                    Label lblScore = new Label();
+                    lblScore.Dock = DockStyle.Top;
+                    lblScore.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+                    lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+                    lblScore.Text = item.player_id.ToString();
+                    Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lblScore));
+                    col += 1;
 
-                if (visitable.Exists(f => f.ownerId == item.player_id))
-                {
-                    Button btnSitDown = new Button();
-                    btnSitDown.Tag = item.player_id;
-                    btnSitDown.Text = "Sit down";
-                    btnSitDown.Dock = DockStyle.Top;
-                    btnSitDown.AutoSize = true;
-                    btnSitDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
-                    btnSitDown.Click += SitAtTavern;
-                    Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(btnSitDown));
+                    if (visitable.Exists(f => f.ownerId == item.player_id))
+                    {
+                        Button btnSitDown = new Button();
+                        btnSitDown.Tag = item.player_id;
+                        btnSitDown.Text = "Sit down";
+                        btnSitDown.Dock = DockStyle.Top;
+                        btnSitDown.AutoSize = true;
+                        btnSitDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+                        btnSitDown.Click += SitAtTavern;
+                        Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(btnSitDown));
+                    }
+                    else
+                    {
+                        Label lnlSitState = new Label();
+                        lnlSitState.Dock = DockStyle.Top;
+                        lnlSitState.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+                        lnlSitState.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
+                        lnlSitState.Text = "CAN NOT SIT DOWN";
+                        Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lnlSitState));
+                    }
+                    row += 1;
+                    Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
                 }
-                else
-                {
-                    Label lnlSitState = new Label();
-                    lnlSitState.Dock = DockStyle.Top;
-                    lnlSitState.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-                    lnlSitState.Font = new System.Drawing.Font("Microsoft Sans Serif", 15, System.Drawing.FontStyle.Regular);
-                    lnlSitState.Text = "CAN NOT SIT DOWN";
-                    Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lnlSitState));
-                }
-                row += 1;
-                Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
             }
-
             #endregion
         }
         private void Motivate(E_Motivate player_type)
@@ -704,6 +707,17 @@ namespace ForgeOfBots
 
         }
 
+        private void btnCollect_Click(object sender, EventArgs e)
+        {
+            string script = ReqBuilder.GetRequestScript(RequestType.CollectTavern, "");
+            ResponseHandler.TavernCollected += ResponseHandler_TavernCollected; ;
+            cwb.ExecuteScriptAsync(script);
+        }
+
+        private void ResponseHandler_TavernCollected(object sender, dynamic data = null)
+        { 
+            reloadData();
+        }
 
         private void bwScriptExecuter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -720,9 +734,9 @@ namespace ForgeOfBots
                 cwb.ExecuteScriptAsync(script);
             }
         }
-        private void ResponseHandler_TaverSitted(object sender)
+        private void ResponseHandler_TaverSitted(object sender, dynamic data = null)
         {
-            LoadGUI();
+            reloadData();
         }
     }
     public static class CookieHandler
