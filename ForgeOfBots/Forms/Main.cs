@@ -61,7 +61,7 @@ namespace ForgeOfBots
             var settings = new CefSettings
             {
                 LogSeverity = Verbose,
-                CachePath = "cache",
+                CachePath = Path.GetFullPath("cache"),
                 PersistSessionCookies = false,
                 UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0",
                 WindowlessRenderingEnabled = true,
