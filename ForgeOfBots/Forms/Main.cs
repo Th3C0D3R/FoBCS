@@ -89,6 +89,10 @@ namespace ForgeOfBots
                 usi.UserDataEntered += Usi_UserDataEntered;
                 usi.ShowDialog();
                 Browser.Hide();
+                Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
+                ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
+                Updater = new CUpdate(cwb, ReqBuilder);
+                Name += Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 return;
             }
             ContinueExecution();
@@ -101,7 +105,7 @@ namespace ForgeOfBots
         private void ResponseHandler_EverythingImportantLoaded(object sender)
         {
             LoadGUI();
-            Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, false);
+            //Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, false);
         }
         private void ContinueExecution()
         {
