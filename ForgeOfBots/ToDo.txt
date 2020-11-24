@@ -1,0 +1,31 @@
+TODO:
+!!! ProdBotDebuggen
+
+[]Bots:
+	- Add possible Bots (dynamic)
+	- Tavern Bot:
+	  - Check every hour for Tavern and collect if full
+	  - Save remaining time at Exit and continue next start
+	- Incident Bot:
+	  - Check every hour for new collectable Incidents
+	  - Save remaining time at Exit and continue next start
+	- Moppel Bot:
+	  - Check every day if Player can polivate and does it automatically 
+	  - Saves DateTime and checks next run or after 24h if 24h has passed
+	- RQ-Bot:
+	  - Player gets current RQ-Quests and can select which Quests should be done, and saved (see what can be saved)
+	  - Bot skips other quests
+	  
+	
+Improvments:
+[]Update as few as possible while Bot and every Subbot is running
+[]Out-Source the Main.cs to make it look nicer
+
+
+Premium Validation:
+[x] Register with Serial, HWID
+[x] Serverside calculate Key with HWID and Serial, save it to DB/File
+[x] Serverside encrypt dlls bytes with Key and send it to Client
+[x] Client Check if dll already loaded
+[x] Client decrypt with Serial + HWID and load it.
+[x] DLL (BackgroundWorker) sends ping to server wit Serial & HWID to check if its allowed, if not -> crash

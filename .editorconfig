@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE1006: Benennungsstile
+dotnet_diagnostic.IDE1006.severity = silent
+
+# IDE0060: Nicht verwendete Parameter entfernen
+dotnet_code_quality_unused_parameters = all:silent
