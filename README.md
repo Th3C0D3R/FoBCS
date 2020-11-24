@@ -32,8 +32,10 @@ Just to support my work. All donations are going to keep up the server were I te
 | Paypal |
 | ------ |
 | [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=G2D7BK2E7WJZY) 
+
 ![overview](https://github.com/Th3C0D3R/FoBCS/blob/master/Overview.png)![other players](https://github.com/Th3C0D3R/FoBCS/blob/master/OtherPlayers.png)
 ![tavern](https://github.com/Th3C0D3R/FoBCS/blob/master/Tavern.png)![bots](https://github.com/Th3C0D3R/FoBCS/blob/master/Bots.png)![production](https://github.com/Th3C0D3R/FoBCS/blob/master/Production.png)![manually](https://github.com/Th3C0D3R/FoBCS/blob/master/Manually.png)
+
 License
 -------
 Copyright 2020 - Th3C0D3R
