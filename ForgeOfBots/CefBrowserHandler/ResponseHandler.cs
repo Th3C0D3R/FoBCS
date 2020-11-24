@@ -165,6 +165,7 @@ namespace ForgeOfBots.CefBrowserHandler
       }
 
       public static bool[] ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
+      static readonly object _locker = new object();
       public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
       {
          var x = hookEventArgs;
@@ -366,7 +367,7 @@ namespace ForgeOfBots.CefBrowserHandler
                      Reward = ColIncRes["responseData"][0][0]["name"];
                      if (successed)
                      {
-                        _incidentCollected?.Invoke(RequestType.CollectIncident,Reward);
+                        _incidentCollected?.Invoke(RequestType.CollectIncident, Reward);
                      }
                   }
                }
@@ -435,37 +436,40 @@ namespace ForgeOfBots.CefBrowserHandler
                {
                   if (ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "IdleState")
                   {
-                     List<int> CollectedIDs = new List<int>();
-                     foreach (var item in ColRes["responseData"]?["updatedEntities"])
+                     lock (_locker)
                      {
-                        CollectedIDs.Add(int.Parse(item["id"].ToString()));
-                        int exIndex = ListClass.ProductionList.FindIndex(e => e.id == int.Parse(item["id"].ToString()));
-                        if(exIndex >= 0)
+                        List<int> CollectedIDs = new List<int>();
+                        foreach (var item in ColRes["responseData"]?["updatedEntities"])
                         {
-                           EntityEx old = ListClass.ProductionList[exIndex];
-                           ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(item.ToString());
-                           ListClass.ProductionList[exIndex].name = old.name;
-                           ListClass.ProductionList[exIndex].type = old.type;
-                           ListClass.ProductionList[exIndex].available_products = old.available_products;
-                        }
-                        else
-                        {
-                           exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(item["id"].ToString()));
+                           CollectedIDs.Add(int.Parse(item["id"].ToString()));
+                           int exIndex = ListClass.ProductionList.FindIndex(e => e.id == int.Parse(item["id"].ToString()));
                            if (exIndex >= 0)
                            {
-                              EntityEx old = ListClass.GoodProductionList[exIndex];
-                              ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(item.ToString());
-                              ListClass.GoodProductionList[exIndex].name = old.name;
-                              ListClass.GoodProductionList[exIndex].type = old.type;
-                              ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                              EntityEx old = ListClass.ProductionList[exIndex];
+                              ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(item.ToString());
+                              ListClass.ProductionList[exIndex].name = old.name;
+                              ListClass.ProductionList[exIndex].type = old.type;
+                              ListClass.ProductionList[exIndex].available_products = old.available_products;
+                           }
+                           else
+                           {
+                              exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(item["id"].ToString()));
+                              if (exIndex >= 0)
+                              {
+                                 EntityEx old = ListClass.GoodProductionList[exIndex];
+                                 ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(item.ToString());
+                                 ListClass.GoodProductionList[exIndex].name = old.name;
+                                 ListClass.GoodProductionList[exIndex].type = old.type;
+                                 ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                              }
                            }
                         }
+                        if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
+                        ListClass.CollectedIDs = CollectedIDs;
+                        _productionCollected?.Invoke(RequestType.CollectProduction, ListClass.CollectedIDs);
+                        return;
                      }
-                     ListClass.CollectedIDs = CollectedIDs;
-                     _productionCollected?.Invoke(RequestType.CollectProduction, ListClass.CollectedIDs);
                   }
-                  ListClass.CollectedIDs = new List<int>();
-                  _productionCollected?.Invoke(RequestType.CollectProduction);
                }
                catch (Exception ex)
                { MessageBox.Show(ex.ToString(), strings.CollectingError); }
@@ -476,35 +480,41 @@ namespace ForgeOfBots.CefBrowserHandler
                {
                   if (QueryRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "ProducingState")
                   {
-                     int id = int.Parse(QueryRes["responseData"]?["updatedEntities"]?[0]?["id"].ToString());
-                     if (ListClass.AddedToQuery.Contains(id))
+                     lock (_locker)
                      {
-                        ListClass.doneQuery.Add(id);
-                        int exIndex = ListClass.ProductionList.FindIndex(e => e.id == id);
-                        if (exIndex >= 0)
+                        int id = int.Parse(QueryRes["responseData"]?["updatedEntities"]?[0]?["id"].ToString());
+                        if (ListClass.AddedToQuery.Contains(id))
                         {
-                           EntityEx old = ListClass.ProductionList[exIndex];
-                           ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
-                           ListClass.ProductionList[exIndex].name = old.name;
-                           ListClass.ProductionList[exIndex].type = old.type;
-                           ListClass.ProductionList[exIndex].available_products = old.available_products;
-                        }
-                        else
-                        {
-                           exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0].ToString()));
+                           ListClass.doneQuery.Add(id);
+                           int exIndex = ListClass.ProductionList.FindIndex(e => e.id == id);
                            if (exIndex >= 0)
                            {
-                              EntityEx old = ListClass.GoodProductionList[exIndex];
-                              ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
-                              ListClass.GoodProductionList[exIndex].name = old.name;
-                              ListClass.GoodProductionList[exIndex].type = old.type;
-                              ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                              EntityEx old = ListClass.ProductionList[exIndex];
+                              ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                              ListClass.ProductionList[exIndex].name = old.name;
+                              ListClass.ProductionList[exIndex].type = old.type;
+                              ListClass.ProductionList[exIndex].available_products = old.available_products;
+                           }
+                           else
+                           {
+                              exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0].ToString()));
+                              if (exIndex >= 0)
+                              {
+                                 EntityEx old = ListClass.GoodProductionList[exIndex];
+                                 ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                                 ListClass.GoodProductionList[exIndex].name = old.name;
+                                 ListClass.GoodProductionList[exIndex].type = old.type;
+                                 ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                              }
                            }
                         }
-                     }
-                     var a = ListClass.doneQuery.All(ListClass.AddedToQuery.Contains) && ListClass.AddedToQuery.Count == ListClass.doneQuery.Count;
-                     if (a) { 
-                        _productionStarted?.Invoke(RequestType.QueryProduction);
+                        var a = ListClass.doneQuery.All(ListClass.AddedToQuery.Contains) && ListClass.AddedToQuery.Count == ListClass.doneQuery.Count;
+                        if (a)
+                        {
+                           if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] doneQuery Count = {ListClass.doneQuery.Count}\ndoneQuery Count = {ListClass.AddedToQuery.Count}");
+                           _productionStarted?.Invoke(RequestType.QueryProduction);
+                        }
+                        return;
                      }
                   }
                }

@@ -66,11 +66,12 @@ namespace ForgeOfBots
       public bool LoginLoaded = false, ForgeHXLoaded = false, UIDLoaded = false, SECRET_LOADED = false;
       private bool blockedLogin = false;
       private bool blockExpireBox = false;
-      private bool blockControl = false;
+      public static bool DEBUGMODE = false;
+      static readonly object _locker = new object();
 
       private int xcounter = 0;
 
-      public Main()
+      public Main(string[] args)
       {
 #if RELEASE
          AntiDebug.HideOsThreads();
@@ -87,6 +88,13 @@ namespace ForgeOfBots
             stimer.Start();
          }
 #endif
+         if (args != null)
+         {
+            if (args.Length > 0)
+               if (args[0].StartsWith("/"))
+                  if (args[0].Substring(1).ToLower().Equals("debug"))
+                     DEBUGMODE = true;
+         }
          if (Settings.SettingsExists())
          {
             UserData = Settings.ReadSettings();
@@ -94,6 +102,13 @@ namespace ForgeOfBots
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
+         }
+         else
+         {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
          }
          InitializeComponent();
          Application.ApplicationExit += handleExit;
@@ -744,7 +759,7 @@ namespace ForgeOfBots
                   else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
                   {
                      var product = item.Value.First().state["current_product"]["product"]["resources"].Children().First().Children().First();
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {product} ({(int.Parse(product.ToString()))* item.Value.Count})", "");
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {product} ({(int.Parse(product.ToString())) * item.Value.Count})", "");
                      pli.ProductionState = ProductionState.Producing;
                      string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
                      string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
@@ -801,13 +816,12 @@ namespace ForgeOfBots
       {
          if (data == null) return;
          if (!UserData.ProductionBot) return;
-         if (!blockControl)
+         lock (_locker)
          {
-            blockControl = true;
+            if (DEBUGMODE) Log($"[{DateTime.Now}] Production Idle Event", lbOutputWindow);
             Debug.WriteLine($"[{DateTime.Now}] Production Idle Event");
             mbtQuery_Click(this, null);
             xcounter += 1;
-            blockControl = false;
          }
       }
       private void UpdateProductionView()
@@ -819,6 +833,7 @@ namespace ForgeOfBots
             if (UserData.GroupedView)
             {
                groupedList = GetGroupedList(ListClass.ProductionList);
+               if (DEBUGMODE) Log($"[{DateTime.Now}] Groupe Update", lbOutputWindow);
                Debug.WriteLine($"[{DateTime.Now}] Groupe Update");
                foreach (KeyValuePair<string, List<EntityEx>> item in groupedList)
                {
@@ -853,6 +868,7 @@ namespace ForgeOfBots
             }
             else
             {
+               if (DEBUGMODE) Log($"[{DateTime.Now}] Single Update", lbOutputWindow);
                Debug.WriteLine($"[{DateTime.Now}] Single Update");
                foreach (EntityEx item in ListClass.ProductionList)
                {
@@ -890,6 +906,7 @@ namespace ForgeOfBots
       {
          if (data == null) return;
          if (!UserData.ProductionBot) return;
+         if (DEBUGMODE) Log($"[{DateTime.Now}] Production Done Event", lbOutputWindow);
          Debug.WriteLine($"[{DateTime.Now}] Production Done Event");
          if (((object)data).GetType() == typeof(List<int>))
          {
@@ -906,6 +923,7 @@ namespace ForgeOfBots
             ListClass.CollectedIDs.Clear();
             return;
          }
+         if (DEBUGMODE) Log($"[{DateTime.Now}] Production Collected Event", lbOutputWindow);
          Debug.WriteLine($"[{DateTime.Now}] Production Collected Event");
          mbtQuery_Click(this, null);
          xcounter += 1;
@@ -1302,13 +1320,12 @@ namespace ForgeOfBots
       }
       private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
       {
+         if (DEBUGMODE) Log($"[{DateTime.Now}] Production Query Complete", lbOutputWindow);
          Debug.WriteLine($"[{DateTime.Now}] Production Query Complete");
-         if(!blockControl)
+         lock (_locker)
          {
-            blockControl = true;
             UpdateProductionView();
             UpdateGoodProductionView();
-            blockControl = false;
          }
       }
       private void mbtCollect_Click(object sender, EventArgs e)
@@ -1450,13 +1467,12 @@ namespace ForgeOfBots
       }
       private void ResponseHandler_ProdStarted(object sender, dynamic data = null)
       {
+         if (DEBUGMODE) Log($"[{DateTime.Now}] ProdStarted Handler", lbOutputWindow);
          Debug.WriteLine($"[{DateTime.Now}] ProdStarted Handler");
-         if (!blockControl)
+         lock (_locker)
          {
-            blockControl = true;
             reloadData();
             LoadGUI();
-            blockControl = false;
          }
       }
       private void tsmiAbout_Click(object sender, EventArgs e)
@@ -1477,7 +1493,7 @@ namespace ForgeOfBots
       }
       public static void ToggleTavernBot(object sender, dynamic e = null)
       {
-         if (e is int &&  e == -1) return;
+         if (e is int && e == -1) return;
          UserData.TavernBot = ((UCPremium)sender).Checked;
       }
       public static void ToggleIncidentBot(object sender, dynamic e = null)

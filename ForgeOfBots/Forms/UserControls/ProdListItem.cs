@@ -86,18 +86,21 @@ namespace ForgeOfBots.Forms.UserControls
       {
          if (_diff.TotalSeconds <= 0 || ProductionState == ProductionState.Finished || ProductionState == ProductionState.Idle)
          {
-            Debug.WriteLine($"[{DateTime.Now}] Production done");
             timer.Stop();
             if (ProductionState != ProductionState.Idle)
             {
+               Debug.WriteLine($"[{DateTime.Now}] Production done");
+               ProductionState = ProductionState.Finished;
                _ProductionDone?.Invoke(null, EntityIDs);
                //ProductionState = ProductionState.Finished;
                return;
             }
             else if(ProductionState == ProductionState.Idle)
             {
+               Debug.WriteLine($"[{DateTime.Now}] Production idle");
+               ProductionState = ProductionState.Idle;
                _ProductionIdle?.Invoke(null, EntityIDs);
-               ProductionState = ProductionState.Producing;
+               //ProductionState = ProductionState.Producing;
                return;
             }
          }

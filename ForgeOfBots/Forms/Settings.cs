@@ -74,7 +74,7 @@ namespace ForgeOfBots.Forms
          mtbSerialKey.Text = Main.UserData.SerialKey;
          mtAutoLogin.Checked = Main.UserData.AutoLogin;
 
-         if(Main.UserData.PlayableWorlds == null)
+         if (Main.UserData.PlayableWorlds == null)
          {
             mcbCitySelection.Enabled = false;
             mbSaveReload.Enabled = false;
@@ -92,7 +92,7 @@ namespace ForgeOfBots.Forms
          }
          foreach (string item in GetDescriptions(typeof(Languages)).ToList())
          {
-            string[] code = item.Split(new string[] { "|" },StringSplitOptions.RemoveEmptyEntries);
+            string[] code = item.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
             LanguageItem languageItem = new LanguageItem()
             {
                Code = code[1],
@@ -153,26 +153,36 @@ namespace ForgeOfBots.Forms
       private void mtProduction_CheckedChanged(object sender, EventArgs e)
       {
          Main.UserData.ProductionBot = mtProduction.Checked;
+         if (mainForm != null)
+            mainForm.UpdateBotView();
          Main.UserData.SaveSettings();
       }
       private void mtTavern_CheckedChanged(object sender, EventArgs e)
       {
          Main.UserData.TavernBot = mtTavern.Checked;
+         if (mainForm != null)
+            mainForm.UpdateBotView();
          Main.UserData.SaveSettings();
       }
       private void mtMoppel_CheckedChanged(object sender, EventArgs e)
       {
          Main.UserData.MoppelBot = mtMoppel.Checked;
+         if (mainForm != null)
+            mainForm.UpdateBotView();
          Main.UserData.SaveSettings();
       }
       private void mtIncident_CheckedChanged(object sender, EventArgs e)
       {
          Main.UserData.IncidentBot = mtIncident.Checked;
+         if (mainForm != null)
+            mainForm.UpdateBotView();
          Main.UserData.SaveSettings();
       }
       private void mtRQBot_CheckedChanged(object sender, EventArgs e)
       {
          Main.UserData.RQBot = mtRQBot.Checked;
+         if (mainForm != null)
+            mainForm.UpdateBotView();
          Main.UserData.SaveSettings();
       }
       private CustomEvent _GroupedChanged;
@@ -245,7 +255,7 @@ namespace ForgeOfBots.Forms
       private void mbCheckSerial_Click(object sender, EventArgs e)
       {
          object ret = TcpConnection.SendAuthData(mtbSerialKey.Text, FingerPrint.Value(), false);
-         if(ret is Result)
+         if (ret is Result)
          {
             Enum.TryParse(ret.ToString(), out Result result);
             if (result == Result.Success)
@@ -254,7 +264,7 @@ namespace ForgeOfBots.Forms
                mainForm.Text = mainForm.Tag.ToString() + $"{Main.Version.Major}.{Main.Version.Minor} (PREMIUM) | by TH3C0D3R";
                Main.UserData.SerialKey = mtbSerialKey.Text;
                Main.UserData.SaveSettings();
-               object retList = Helper.ExecuteMethod(Main.PremAssembly, "EntryPoint", "AddPremiumControl",null);
+               object retList = Helper.ExecuteMethod(Main.PremAssembly, "EntryPoint", "AddPremiumControl", null);
                if (retList is List<UCPremium> list)
                {
                   mainForm.tlpPremium.Controls.AddRange(list.ToArray());

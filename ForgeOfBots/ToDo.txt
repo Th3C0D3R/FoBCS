@@ -21,11 +21,5 @@ Improvments:
 []Update as few as possible while Bot and every Subbot is running
 []Out-Source the Main.cs to make it look nicer
 
-
-Premium Validation:
-[x] Register with Serial, HWID
-[x] Serverside calculate Key with HWID and Serial, save it to DB/File
-[x] Serverside encrypt dlls bytes with Key and send it to Client
-[x] Client Check if dll already loaded
-[x] Client decrypt with Serial + HWID and load it.
-[x] DLL (BackgroundWorker) sends ping to server wit Serial & HWID to check if its allowed, if not -> crash
+Motivationpack:
+[{"__class__":"ServerRequest","requestData":[{"__class__":"UseItemOnBuildingPayload","itemId":7147831,"mapEntityId":6440,"optionIndex":0}],"requestClass":"InventoryService","requestMethod":"useItem","requestId":217}]

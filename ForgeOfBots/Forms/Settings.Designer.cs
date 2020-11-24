@@ -111,9 +111,8 @@
          this.mtcSettings.Controls.Add(this.mtpPremium);
          this.mtcSettings.Controls.Add(this.mtpData);
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
-         this.mtcSettings.HotTrack = true;
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 4;
+         this.mtcSettings.SelectedIndex = 0;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          // 
          // mtpProduction
