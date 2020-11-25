@@ -150,17 +150,41 @@
   <data name="DetachMain" xml:space="preserve">
     <value>Lösen</value>
   </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Wird heruntergeladen:</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>ABGELAUFEN</value>
+  </data>
+  <data name="FailedToActivate" xml:space="preserve">
+    <value>FEHLER BEIM AKTIVIEREN</value>
+  </data>
   <data name="Friends" xml:space="preserve">
     <value>Freund</value>
   </data>
   <data name="InactiveFriends" xml:space="preserve">
     <value>Inaktive Freunde</value>
   </data>
+  <data name="IncidentBot" xml:space="preserve">
+    <value>Ereignis Bot</value>
+  </data>
   <data name="IncidentCollected" xml:space="preserve">
     <value>Ereignisse eingesammelt</value>
   </data>
+  <data name="LicenceNotValid" xml:space="preserve">
+    <value>Fehler beim Login mit dem Lizenzschlüssel und diesem Gerät!!
+
+Entweder wurde die Lizenz auf einem anderen Gerät aktiviert
+oder die Lizenz ist nicht gültig!</value>
+  </data>
   <data name="LoggingIn" xml:space="preserve">
     <value>Es wird eingeloggt</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="Motivating" xml:space="preserve">
     <value>Motiviere</value>
@@ -177,8 +201,23 @@
   <data name="PleaseWaitAgain" xml:space="preserve">
     <value>Bitte wieder warten!</value>
   </data>
+  <data name="PleaseWaitShutdown" xml:space="preserve">
+    <value>Bitte warten...</value>
+  </data>
+  <data name="PleaseWaitShutdown2" xml:space="preserve">
+    <value>Bot wird heruntergefahren</value>
+  </data>
+  <data name="PolivateBot" xml:space="preserve">
+    <value>Moppel Bot</value>
+  </data>
+  <data name="Premium" xml:space="preserve">
+    <value>PREMIUM</value>
+  </data>
   <data name="ProducingState" xml:space="preserve">
     <value>produziere</value>
+  </data>
+  <data name="ProductionBot" xml:space="preserve">
+    <value>Produktions Bot</value>
   </data>
   <data name="ProductionFinishedState" xml:space="preserve">
     <value>Produktion fertig</value>
@@ -198,6 +237,9 @@
   <data name="Reward" xml:space="preserve">
     <value>Belohnung</value>
   </data>
+  <data name="RQBot" xml:space="preserve">
+    <value>Wiederkehrende-Quest Bot</value>
+  </data>
   <data name="ShowingNotify" xml:space="preserve">
     <value>Zeige Benachrichtigung</value>
   </data>
@@ -209,6 +251,21 @@
   </data>
   <data name="StartingError" xml:space="preserve">
     <value>FEHLER BEIM STARTEN NEUER PRODUKTIONEN</value>
+  </data>
+  <data name="SubExpiredTitle" xml:space="preserve">
+    <value>LIZENZ ABGELAUFEN</value>
+  </data>
+  <data name="SubscriptionExpired" xml:space="preserve">
+    <value>Deine Lizenz ist abgelaufen.
+
+Bitte kauf eine neue Lizenz und aktiviere diese
+Mit 'Ja' kommst du zum Shop
+
+ansonsten wird die kostenlose Version weiter genutzt
+Mit 'Nein' gehts mit der kostenlosen Version weiter</value>
+  </data>
+  <data name="TavernBot" xml:space="preserve">
+    <value>Tavernen Bot</value>
   </data>
   <data name="TavernDone" xml:space="preserve">
     <value>Tavernebesuche erledigt</value>

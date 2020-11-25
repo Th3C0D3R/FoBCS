@@ -497,7 +497,7 @@ namespace ForgeOfBots.CefBrowserHandler
                            }
                            else
                            {
-                              exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0].ToString()));
+                              exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0]?["id"].ToString()));
                               if (exIndex >= 0)
                               {
                                  EntityEx old = ListClass.GoodProductionList[exIndex];
@@ -511,7 +511,7 @@ namespace ForgeOfBots.CefBrowserHandler
                         var a = ListClass.doneQuery.All(ListClass.AddedToQuery.Contains) && ListClass.AddedToQuery.Count == ListClass.doneQuery.Count;
                         if (a)
                         {
-                           if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] doneQuery Count = {ListClass.doneQuery.Count}\ndoneQuery Count = {ListClass.AddedToQuery.Count}");
+                           if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] doneQuery Count = {ListClass.doneQuery.Count}\n[{DateTime.Now}] AddedToQuery Count = {ListClass.AddedToQuery.Count}");
                            _productionStarted?.Invoke(RequestType.QueryProduction);
                         }
                         return;

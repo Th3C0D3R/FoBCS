@@ -74,7 +74,7 @@ namespace ForgeOfBots.Forms
          mtbSerialKey.Text = Main.UserData.SerialKey;
          mtAutoLogin.Checked = Main.UserData.AutoLogin;
 
-         if (Main.UserData.PlayableWorlds == null)
+         if (Main.UserData.PlayableWorlds == null || Main.UserData.PlayableWorlds.Count == 0)
          {
             mcbCitySelection.Enabled = false;
             mbSaveReload.Enabled = false;
@@ -261,7 +261,7 @@ namespace ForgeOfBots.Forms
             if (result == Result.Success)
             {
 
-               mainForm.Text = mainForm.Tag.ToString() + $"{Main.Version.Major}.{Main.Version.Minor} (PREMIUM) | by TH3C0D3R";
+               mainForm.Text = mainForm.Tag.ToString() + $"{Main.Version.Major}.{Main.Version.Minor} ({strings.Premium}) | by TH3C0D3R";
                Main.UserData.SerialKey = mtbSerialKey.Text;
                Main.UserData.SaveSettings();
                object retList = Helper.ExecuteMethod(Main.PremAssembly, "EntryPoint", "AddPremiumControl", null);
@@ -273,15 +273,15 @@ namespace ForgeOfBots.Forms
             }
             else if (result == Result.Expired)
             {
-               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Main.Version.Major}.{Main.Version.Minor} (EXPIRED) | by TH3C0D3R");
+               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Main.Version.Major}.{Main.Version.Minor} ({strings.Expired}) | by TH3C0D3R");
                if (!blockExpireBox)
-                  MessageBox.Show(Owner, "Your Subscription is expired.\n\nPlease purchase a new Subscribtion and acitvate it, else you are continue using the Free-Version", "SUBSCRIPTION EXPIRED");
+                  MessageBox.Show(Owner, $"{strings.SubscriptionExpired}", $"{strings.SubExpiredTitle}");
                blockExpireBox = true;
             }
             else
             {
                mainForm.Text = mainForm.Tag.ToString() + $"{Main.Version.Major}.{Main.Version.Minor} | by TH3C0D3R";
-               MessageBox.Show(Owner, "There was a problem using this Serial-Key with your Device!!\n\nEither you activated the Serial-Key on a other Device\nor the Serial-Key is not valid!", "FAILED TO ACTIVATE");
+               MessageBox.Show(Owner, $"{strings.LicenceNotValid}", $"{strings.FailedToActivate}");
             }
          }
       }

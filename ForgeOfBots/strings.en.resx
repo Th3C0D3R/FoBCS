@@ -150,17 +150,41 @@
   <data name="DetachMain" xml:space="preserve">
     <value>Detach from Main</value>
   </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Downloading </value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>EXPIRED</value>
+  </data>
+  <data name="FailedToActivate" xml:space="preserve">
+    <value>FAILED TO ACTIVATE</value>
+  </data>
   <data name="Friends" xml:space="preserve">
     <value>Friends</value>
   </data>
   <data name="InactiveFriends" xml:space="preserve">
     <value>Inactive Friends</value>
   </data>
+  <data name="IncidentBot" xml:space="preserve">
+    <value>Incident Bot</value>
+  </data>
   <data name="IncidentCollected" xml:space="preserve">
     <value>Incident collected</value>
   </data>
+  <data name="LicenceNotValid" xml:space="preserve">
+    <value>There was a problem using this Serial-Key with your Device!!
+
+Either you activated the Serial-Key on a other Device
+or the Serial-Key is not valid!</value>
+  </data>
   <data name="LoggingIn" xml:space="preserve">
     <value>Logging in...</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
   <data name="Motivating" xml:space="preserve">
     <value>Motivating</value>
@@ -177,8 +201,23 @@
   <data name="PleaseWaitAgain" xml:space="preserve">
     <value>Please wait (again)!</value>
   </data>
+  <data name="PleaseWaitShutdown" xml:space="preserve">
+    <value>Please wait...</value>
+  </data>
+  <data name="PleaseWaitShutdown2" xml:space="preserve">
+    <value>Shutingdown Bot</value>
+  </data>
+  <data name="PolivateBot" xml:space="preserve">
+    <value>Polivate Bot</value>
+  </data>
+  <data name="Premium" xml:space="preserve">
+    <value>PREMIUM</value>
+  </data>
   <data name="ProducingState" xml:space="preserve">
     <value>Producing</value>
+  </data>
+  <data name="ProductionBot" xml:space="preserve">
+    <value>Production Bot</value>
   </data>
   <data name="ProductionFinishedState" xml:space="preserve">
     <value>Production finished!</value>
@@ -198,6 +237,9 @@
   <data name="Reward" xml:space="preserve">
     <value>Reward</value>
   </data>
+  <data name="RQBot" xml:space="preserve">
+    <value>Recurring-Quest Bot</value>
+  </data>
   <data name="ShowingNotify" xml:space="preserve">
     <value>Showing Notification</value>
   </data>
@@ -209,6 +251,21 @@
   </data>
   <data name="StartingError" xml:space="preserve">
     <value>ERROR WHILE STARTING NEW PRODUCTION</value>
+  </data>
+  <data name="SubExpiredTitle" xml:space="preserve">
+    <value>SUBSCRIPTION EXPIRED</value>
+  </data>
+  <data name="SubscriptionExpired" xml:space="preserve">
+    <value>Your Subscription is expired.
+
+Please purchase a new Subscribtion and acitvate it
+Press 'Yes' to open the Store
+
+else you are continue using the Free-Version
+Press 'No' for the Free Version</value>
+  </data>
+  <data name="TavernBot" xml:space="preserve">
+    <value>Tavern Bot</value>
   </data>
   <data name="TavernDone" xml:space="preserve">
     <value>Tavern Visit DONE</value>

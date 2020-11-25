@@ -20,6 +20,7 @@ using Windows.Foundation.Collections;
 using System.Diagnostics;
 using Windows.Foundation;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace ForgeOfBots.Utils
 {
@@ -99,6 +100,17 @@ namespace ForgeOfBots.Utils
       public static string WorldToPlayable(Tuple<string, string, WorldState> world)
       {
          return world.Item1;
+      }
+      public static bool IsOnScreen(Form form)
+      {
+         Screen[] screens = Screen.AllScreens;
+         foreach (Screen screen in screens)
+         {
+            Rectangle formRectangle = new Rectangle(form.Left, form.Top,form.Width, form.Height);
+            if (screen.WorkingArea.Contains(formRectangle))
+               return true;
+         }
+         return false;
       }
       public static Dictionary<string, List<Good>> GetGoodsEraSorted(List<ResearchEra> eraList, JObject resources, JObject resourceDefList)
       {

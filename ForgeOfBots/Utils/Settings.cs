@@ -11,11 +11,11 @@ namespace ForgeOfBots.Utils
 {
    public class Settings
    {
-      public string Username { get; set; }
-      public string Password { get; set; }
-      public string LastWorld { get; set; }
-      public List<string> PlayableWorlds { get; set; }
-      public string WorldServer { get; set; }
+      public string Username { get; set; } = "";
+      public string Password { get; set; } = "";
+      public string LastWorld { get; set; } = "";
+      public List<string> PlayableWorlds { get; set; } = new List<string>();
+      public string WorldServer { get; set; } = "";
       public LanguageItem Language { get; set; } = new LanguageItem() { Code = "en",Description="English",Language=0};
       public string SerialKey { get; set; } = "";
 

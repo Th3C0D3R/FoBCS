@@ -160,6 +160,33 @@ namespace ForgeOfBots {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Downloading  ähnelt.
+        /// </summary>
+        public static string Downloading {
+            get {
+                return ResourceManager.GetString("Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die EXPIRED ähnelt.
+        /// </summary>
+        public static string Expired {
+            get {
+                return ResourceManager.GetString("Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die FAILED TO ACTIVATE ähnelt.
+        /// </summary>
+        public static string FailedToActivate {
+            get {
+                return ResourceManager.GetString("FailedToActivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Friends ähnelt.
         /// </summary>
         public static string Friends {
@@ -196,11 +223,41 @@ namespace ForgeOfBots {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die There was a problem using this Serial-Key with your Device!!
+        ///
+        ///Either you activated the Serial-Key on a other Device
+        ///or the Serial-Key is not valid! ähnelt.
+        /// </summary>
+        public static string LicenceNotValid {
+            get {
+                return ResourceManager.GetString("LicenceNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Logging in... ähnelt.
         /// </summary>
         public static string LoggingIn {
             get {
                 return ResourceManager.GetString("LoggingIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Login ähnelt.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Logout ähnelt.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -250,11 +307,38 @@ namespace ForgeOfBots {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please wait... ähnelt.
+        /// </summary>
+        public static string PleaseWaitShutdown {
+            get {
+                return ResourceManager.GetString("PleaseWaitShutdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Shutingdown Bot ähnelt.
+        /// </summary>
+        public static string PleaseWaitShutdown2 {
+            get {
+                return ResourceManager.GetString("PleaseWaitShutdown2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Polivate Bot ähnelt.
         /// </summary>
         public static string PolivateBot {
             get {
                 return ResourceManager.GetString("PolivateBot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PREMIUM ähnelt.
+        /// </summary>
+        public static string Premium {
+            get {
+                return ResourceManager.GetString("Premium", resourceCulture);
             }
         }
         
@@ -372,6 +456,30 @@ namespace ForgeOfBots {
         public static string StartingError {
             get {
                 return ResourceManager.GetString("StartingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SUBSCRIPTION EXPIRED ähnelt.
+        /// </summary>
+        public static string SubExpiredTitle {
+            get {
+                return ResourceManager.GetString("SubExpiredTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your Subscription is expired.
+        ///
+        ///Please purchase a new Subscribtion and acitvate it
+        ///Press &apos;Yes&apos; to open the Store
+        ///
+        ///else you are continue using the Free-Version
+        ///Press &apos;No&apos; for the Free Version ähnelt.
+        /// </summary>
+        public static string SubscriptionExpired {
+            get {
+                return ResourceManager.GetString("SubscriptionExpired", resourceCulture);
             }
         }
         

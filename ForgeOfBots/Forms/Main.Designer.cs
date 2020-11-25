@@ -29,12 +29,11 @@
       private void InitializeComponent()
       {
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-         this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+         this.tsMain = new System.Windows.Forms.ToolStrip();
          this.tsbLogin = new System.Windows.Forms.ToolStripButton();
          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
          this.tsddSettings = new System.Windows.Forms.ToolStripDropDownButton();
          this.tsmiLog = new System.Windows.Forms.ToolStripMenuItem();
-         this.detachToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
          this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -154,7 +153,7 @@
          this.sStripStatus = new System.Windows.Forms.StatusStrip();
          this.tsslLog = new System.Windows.Forms.ToolStripStatusLabel();
          this.tsslLogValue = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolStrip1.SuspendLayout();
+         this.tsMain.SuspendLayout();
          this.tcMenu.SuspendLayout();
          this.tpOverview.SuspendLayout();
          this.panel3.SuspendLayout();
@@ -194,11 +193,11 @@
          this.sStripStatus.SuspendLayout();
          this.SuspendLayout();
          // 
-         // toolStrip1
+         // tsMain
          // 
-         this.toolStrip1.BackColor = System.Drawing.Color.Transparent;
-         this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-         this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+         this.tsMain.BackColor = System.Drawing.Color.Transparent;
+         this.tsMain.ImageScalingSize = new System.Drawing.Size(24, 24);
+         this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbLogin,
             this.toolStripSeparator1,
             this.tsddSettings,
@@ -208,8 +207,8 @@
             this.tsbReload,
             this.toolStripSeparator5,
             this.toolStripButton1});
-         resources.ApplyResources(this.toolStrip1, "toolStrip1");
-         this.toolStrip1.Name = "toolStrip1";
+         resources.ApplyResources(this.tsMain, "tsMain");
+         this.tsMain.Name = "tsMain";
          // 
          // tsbLogin
          // 
@@ -238,17 +237,9 @@
          // 
          // tsmiLog
          // 
-         this.tsmiLog.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.detachToolStripMenuItem});
          this.tsmiLog.Name = "tsmiLog";
          resources.ApplyResources(this.tsmiLog, "tsmiLog");
          this.tsmiLog.Click += new System.EventHandler(this.tsmiLog_Click);
-         // 
-         // detachToolStripMenuItem
-         // 
-         resources.ApplyResources(this.detachToolStripMenuItem, "detachToolStripMenuItem");
-         this.detachToolStripMenuItem.Name = "detachToolStripMenuItem";
-         this.detachToolStripMenuItem.Click += new System.EventHandler(this.detachToolStripMenuItem_Click);
          // 
          // settingsToolStripMenuItem
          // 
@@ -1009,15 +1000,14 @@
          resources.ApplyResources(this, "$this");
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.Controls.Add(this.tcMenu);
-         this.Controls.Add(this.toolStrip1);
+         this.Controls.Add(this.tsMain);
          this.Controls.Add(this.sStripStatus);
          this.Controls.Add(this.pnlLoading);
          this.Name = "Main";
          this.Tag = "Forge of Bots v";
          this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
-         this.LocationChanged += new System.EventHandler(this.Main_LocationChanged);
-         this.toolStrip1.ResumeLayout(false);
-         this.toolStrip1.PerformLayout();
+         this.tsMain.ResumeLayout(false);
+         this.tsMain.PerformLayout();
          this.tcMenu.ResumeLayout(false);
          this.tpOverview.ResumeLayout(false);
          this.panel3.ResumeLayout(false);
@@ -1073,7 +1063,7 @@
       }
 
       #endregion
-      private System.Windows.Forms.ToolStrip toolStrip1;
+      private System.Windows.Forms.ToolStrip tsMain;
       private System.Windows.Forms.ToolStripButton tsbLogin;
       private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
       private System.Windows.Forms.ToolStripButton tsbReload;
@@ -1158,7 +1148,6 @@
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
       private System.Windows.Forms.Label label2;
       private System.Windows.Forms.ToolStripMenuItem tsmiLog;
-      private System.Windows.Forms.ToolStripMenuItem detachToolStripMenuItem;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
       private System.Windows.Forms.Label lblFP;
       private System.Windows.Forms.Label lblFPValue;

@@ -62,6 +62,10 @@
          this.mtpManually = new MetroFramework.Controls.MetroTabPage();
          this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
          this.mtBigRoads = new MetroFramework.Controls.MetroToggle();
+         this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
+         this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
+         this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
+         this.mtbSerialKey = new MetroFramework.Controls.MetroTextBox();
          this.mtpMisc = new MetroFramework.Controls.MetroTabPage();
          this.lblAutoLogin = new MetroFramework.Controls.MetroLabel();
          this.mtAutoLogin = new MetroFramework.Controls.MetroToggle();
@@ -71,11 +75,6 @@
          this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
          this.lblLanguage = new MetroFramework.Controls.MetroLabel();
          this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
-         this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
-         this.panel1 = new System.Windows.Forms.Panel();
-         this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
-         this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
-         this.mtbSerialKey = new MetroFramework.Controls.MetroTextBox();
          this.mtpData = new MetroFramework.Controls.MetroTabPage();
          this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
          this.mbSaveReload = new MetroFramework.Controls.MetroButton();
@@ -89,9 +88,8 @@
          this.mpProdCycle.SuspendLayout();
          this.mtpBots.SuspendLayout();
          this.mtpManually.SuspendLayout();
-         this.mtpMisc.SuspendLayout();
          this.mtpPremium.SuspendLayout();
-         this.panel1.SuspendLayout();
+         this.mtpMisc.SuspendLayout();
          this.mtpData.SuspendLayout();
          this.SuspendLayout();
          // 
@@ -104,19 +102,20 @@
          // 
          // mtcSettings
          // 
+         resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.Controls.Add(this.mtpProduction);
          this.mtcSettings.Controls.Add(this.mtpBots);
          this.mtcSettings.Controls.Add(this.mtpManually);
-         this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpPremium);
+         this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpData);
-         resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 0;
+         this.mtcSettings.SelectedIndex = 5;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          // 
          // mtpProduction
          // 
+         resources.ApplyResources(this.mtpProduction, "mtpProduction");
          this.mtpProduction.Controls.Add(this.metroLabel5);
          this.mtpProduction.Controls.Add(this.mpGoodCycle);
          this.mtpProduction.Controls.Add(this.mpProdCycle);
@@ -125,19 +124,19 @@
          this.mtpProduction.Controls.Add(this.metroLabel1);
          this.mtpProduction.Controls.Add(this.mtView);
          this.mtpProduction.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpProduction, "mtpProduction");
          this.mtpProduction.Name = "mtpProduction";
          this.mtpProduction.VerticalScrollbarBarColor = true;
          // 
          // metroLabel5
          // 
+         resources.ApplyResources(this.metroLabel5, "metroLabel5");
          this.metroLabel5.FontSize = MetroFramework.MetroLabelSize.Small;
          this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-         resources.ApplyResources(this.metroLabel5, "metroLabel5");
          this.metroLabel5.Name = "metroLabel5";
          // 
          // mpGoodCycle
          // 
+         resources.ApplyResources(this.mpGoodCycle, "mpGoodCycle");
          this.mpGoodCycle.Controls.Add(this.mrbG2d);
          this.mpGoodCycle.Controls.Add(this.mrbG1d);
          this.mpGoodCycle.Controls.Add(this.mrbG8h);
@@ -145,7 +144,6 @@
          this.mpGoodCycle.HorizontalScrollbarBarColor = true;
          this.mpGoodCycle.HorizontalScrollbarHighlightOnWheel = false;
          this.mpGoodCycle.HorizontalScrollbarSize = 10;
-         resources.ApplyResources(this.mpGoodCycle, "mpGoodCycle");
          this.mpGoodCycle.Name = "mpGoodCycle";
          this.mpGoodCycle.VerticalScrollbarBarColor = true;
          this.mpGoodCycle.VerticalScrollbarHighlightOnWheel = false;
@@ -187,6 +185,7 @@
          // 
          // mpProdCycle
          // 
+         resources.ApplyResources(this.mpProdCycle, "mpProdCycle");
          this.mpProdCycle.Controls.Add(this.mrb1d);
          this.mpProdCycle.Controls.Add(this.mrb8);
          this.mpProdCycle.Controls.Add(this.mrb4);
@@ -196,7 +195,6 @@
          this.mpProdCycle.HorizontalScrollbarBarColor = true;
          this.mpProdCycle.HorizontalScrollbarHighlightOnWheel = false;
          this.mpProdCycle.HorizontalScrollbarSize = 10;
-         resources.ApplyResources(this.mpProdCycle, "mpProdCycle");
          this.mpProdCycle.Name = "mpProdCycle";
          this.mpProdCycle.VerticalScrollbarBarColor = true;
          this.mpProdCycle.VerticalScrollbarHighlightOnWheel = false;
@@ -269,6 +267,7 @@
          // 
          // mtpBots
          // 
+         resources.ApplyResources(this.mtpBots, "mtpBots");
          this.mtpBots.Controls.Add(this.mtRQBot);
          this.mtpBots.Controls.Add(this.metroLabel10);
          this.mtpBots.Controls.Add(this.mtIncident);
@@ -280,7 +279,6 @@
          this.mtpBots.Controls.Add(this.metroLabel7);
          this.mtpBots.Controls.Add(this.metroLabel6);
          this.mtpBots.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpBots, "mtpBots");
          this.mtpBots.Name = "mtpBots";
          this.mtpBots.VerticalScrollbarBarColor = true;
          // 
@@ -346,10 +344,10 @@
          // 
          // mtpManually
          // 
+         resources.ApplyResources(this.mtpManually, "mtpManually");
          this.mtpManually.Controls.Add(this.metroLabel4);
          this.mtpManually.Controls.Add(this.mtBigRoads);
          this.mtpManually.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpManually, "mtpManually");
          this.mtpManually.Name = "mtpManually";
          this.mtpManually.VerticalScrollbarBarColor = true;
          // 
@@ -365,8 +363,38 @@
          this.mtBigRoads.UseVisualStyleBackColor = true;
          this.mtBigRoads.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
          // 
+         // mtpPremium
+         // 
+         resources.ApplyResources(this.mtpPremium, "mtpPremium");
+         this.mtpPremium.Controls.Add(this.mbCheckSerial);
+         this.mtpPremium.Controls.Add(this.lblSerialKey);
+         this.mtpPremium.Controls.Add(this.mtbSerialKey);
+         this.mtpPremium.HorizontalScrollbarBarColor = true;
+         this.mtpPremium.Name = "mtpPremium";
+         this.mtpPremium.VerticalScrollbarBarColor = true;
+         // 
+         // mbCheckSerial
+         // 
+         resources.ApplyResources(this.mbCheckSerial, "mbCheckSerial");
+         this.mbCheckSerial.Name = "mbCheckSerial";
+         this.mbCheckSerial.Click += new System.EventHandler(this.mbCheckSerial_Click);
+         // 
+         // lblSerialKey
+         // 
+         resources.ApplyResources(this.lblSerialKey, "lblSerialKey");
+         this.lblSerialKey.Name = "lblSerialKey";
+         // 
+         // mtbSerialKey
+         // 
+         resources.ApplyResources(this.mtbSerialKey, "mtbSerialKey");
+         this.mtbSerialKey.Multiline = true;
+         this.mtbSerialKey.Name = "mtbSerialKey";
+         this.mtbSerialKey.PasswordChar = '*';
+         this.mtbSerialKey.PromptText = "Input SerialKey here";
+         // 
          // mtpMisc
          // 
+         resources.ApplyResources(this.mtpMisc, "mtpMisc");
          this.mtpMisc.Controls.Add(this.lblAutoLogin);
          this.mtpMisc.Controls.Add(this.mtAutoLogin);
          this.mtpMisc.Controls.Add(this.lblRestartNeeded);
@@ -376,7 +404,6 @@
          this.mtpMisc.Controls.Add(this.lblLanguage);
          this.mtpMisc.Controls.Add(this.mcbLanguage);
          this.mtpMisc.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpMisc, "mtpMisc");
          this.mtpMisc.Name = "mtpMisc";
          this.mtpMisc.VerticalScrollbarBarColor = true;
          // 
@@ -394,10 +421,10 @@
          // 
          // lblRestartNeeded
          // 
+         resources.ApplyResources(this.lblRestartNeeded, "lblRestartNeeded");
          this.lblRestartNeeded.CustomForeColor = true;
          this.lblRestartNeeded.FontSize = MetroFramework.MetroLabelSize.Small;
          this.lblRestartNeeded.ForeColor = System.Drawing.Color.Red;
-         resources.ApplyResources(this.lblRestartNeeded, "lblRestartNeeded");
          this.lblRestartNeeded.Name = "lblRestartNeeded";
          this.lblRestartNeeded.UseStyleColors = true;
          // 
@@ -424,50 +451,15 @@
          // 
          // mcbLanguage
          // 
+         resources.ApplyResources(this.mcbLanguage, "mcbLanguage");
          this.mcbLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
          this.mcbLanguage.FormattingEnabled = true;
-         resources.ApplyResources(this.mcbLanguage, "mcbLanguage");
          this.mcbLanguage.Name = "mcbLanguage";
          this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
          // 
-         // mtpPremium
-         // 
-         this.mtpPremium.Controls.Add(this.panel1);
-         this.mtpPremium.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpPremium, "mtpPremium");
-         this.mtpPremium.Name = "mtpPremium";
-         this.mtpPremium.VerticalScrollbarBarColor = true;
-         // 
-         // panel1
-         // 
-         this.panel1.BackColor = System.Drawing.Color.White;
-         this.panel1.Controls.Add(this.mbCheckSerial);
-         this.panel1.Controls.Add(this.lblSerialKey);
-         this.panel1.Controls.Add(this.mtbSerialKey);
-         resources.ApplyResources(this.panel1, "panel1");
-         this.panel1.Name = "panel1";
-         // 
-         // mbCheckSerial
-         // 
-         resources.ApplyResources(this.mbCheckSerial, "mbCheckSerial");
-         this.mbCheckSerial.Name = "mbCheckSerial";
-         this.mbCheckSerial.Click += new System.EventHandler(this.mbCheckSerial_Click);
-         // 
-         // lblSerialKey
-         // 
-         resources.ApplyResources(this.lblSerialKey, "lblSerialKey");
-         this.lblSerialKey.Name = "lblSerialKey";
-         // 
-         // mtbSerialKey
-         // 
-         resources.ApplyResources(this.mtbSerialKey, "mtbSerialKey");
-         this.mtbSerialKey.Multiline = true;
-         this.mtbSerialKey.Name = "mtbSerialKey";
-         this.mtbSerialKey.PasswordChar = '*';
-         this.mtbSerialKey.PromptText = "Input SerialKey here";
-         // 
          // mtpData
          // 
+         resources.ApplyResources(this.mtpData, "mtpData");
          this.mtpData.Controls.Add(this.metroLabel11);
          this.mtpData.Controls.Add(this.mbSaveReload);
          this.mtpData.Controls.Add(this.lblChooseWorld);
@@ -475,18 +467,17 @@
          this.mtpData.Controls.Add(this.mbDeleteData);
          this.mtpData.Controls.Add(this.lblDeleteData);
          this.mtpData.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpData, "mtpData");
          this.mtpData.Name = "mtpData";
          this.mtpData.VerticalScrollbarBarColor = true;
          // 
          // metroLabel11
          // 
+         resources.ApplyResources(this.metroLabel11, "metroLabel11");
          this.metroLabel11.BackColor = System.Drawing.SystemColors.Control;
          this.metroLabel11.CustomForeColor = true;
          this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
          this.metroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Regular;
          this.metroLabel11.ForeColor = System.Drawing.Color.Red;
-         resources.ApplyResources(this.metroLabel11, "metroLabel11");
          this.metroLabel11.Name = "metroLabel11";
          // 
          // mbSaveReload
@@ -502,9 +493,9 @@
          // 
          // mcbCitySelection
          // 
+         resources.ApplyResources(this.mcbCitySelection, "mcbCitySelection");
          this.mcbCitySelection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
          this.mcbCitySelection.FormattingEnabled = true;
-         resources.ApplyResources(this.mcbCitySelection, "mcbCitySelection");
          this.mcbCitySelection.Name = "mcbCitySelection";
          // 
          // mbDeleteData
@@ -537,9 +528,8 @@
          this.mpProdCycle.PerformLayout();
          this.mtpBots.ResumeLayout(false);
          this.mtpManually.ResumeLayout(false);
-         this.mtpMisc.ResumeLayout(false);
          this.mtpPremium.ResumeLayout(false);
-         this.panel1.ResumeLayout(false);
+         this.mtpMisc.ResumeLayout(false);
          this.mtpData.ResumeLayout(false);
          this.ResumeLayout(false);
 
@@ -597,7 +587,6 @@
       private MetroFramework.Controls.MetroLabel lblAutoLogin;
       private MetroFramework.Controls.MetroToggle mtAutoLogin;
       private MetroFramework.Controls.MetroTabPage mtpPremium;
-      private System.Windows.Forms.Panel panel1;
       private MetroFramework.Controls.MetroButton mbCheckSerial;
       private MetroFramework.Controls.MetroLabel lblSerialKey;
       private MetroFramework.Controls.MetroTextBox mtbSerialKey;

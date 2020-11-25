@@ -11,7 +11,6 @@ using ForgeOfBots.Forms.UserControls;
 using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
-using MetroFramework.Controls;
 
 using System;
 using System.Collections.Generic;
@@ -39,6 +38,7 @@ using WebClient = System.Net.WebClient;
 using WorldSelection = ForgeOfBots.Forms.WorldSelection;
 using ForgeOfBots.Utils.Premium;
 using UCPremiumLibrary;
+using Newtonsoft.Json.Linq;
 
 namespace ForgeOfBots
 {
@@ -61,9 +61,8 @@ namespace ForgeOfBots
       public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
       public static string ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
       public static Stopwatch RunningTime = new Stopwatch();
-      public int CurrentState = 0;
-      public string ForgeHX_FilePath = "";
-      public bool LoginLoaded = false, ForgeHXLoaded = false, UIDLoaded = false, SECRET_LOADED = false;
+      private string ForgeHX_FilePath = "";
+      private bool ForgeHXLoaded = false, UIDLoaded = false, SECRET_LOADED = false;
       private bool blockedLogin = false;
       private bool blockExpireBox = false;
       public static bool DEBUGMODE = false;
@@ -95,6 +94,12 @@ namespace ForgeOfBots
                   if (args[0].Substring(1).ToLower().Equals("debug"))
                      DEBUGMODE = true;
          }
+
+         Contruct();
+      }
+
+      public void Contruct()
+      {
          if (Settings.SettingsExists())
          {
             UserData = Settings.ReadSettings();
@@ -110,6 +115,7 @@ namespace ForgeOfBots
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
          }
+         Controls.Clear();
          InitializeComponent();
          Application.ApplicationExit += handleExit;
          RunningTime.Start();
@@ -120,10 +126,16 @@ namespace ForgeOfBots
          CefSettings settings = null;
          BrowserSettings browserSettings = null;
 
-         if (!Settings.SettingsExists())
+         if (!Settings.SettingsExists() ||
+            string.IsNullOrWhiteSpace(UserData.Username) ||
+            string.IsNullOrWhiteSpace(UserData.Password) ||
+            string.IsNullOrWhiteSpace(UserData.LastWorld) ||
+            string.IsNullOrWhiteSpace(UserData.WorldServer) ||
+            UserData.PlayableWorlds.Count <= 0)
          {
-            Log("[DEBUG] No Userdata found, creating new one!", lbOutputWindow);
-            UserData = new Settings();
+            Log("[DEBUG] empty or none userdata, creating new one!", lbOutputWindow);
+            if (!Settings.SettingsExists())
+               UserData = new Settings();
             settings = new CefSettings
             {
                LogSeverity = Verbose,
@@ -169,7 +181,8 @@ namespace ForgeOfBots
                WindowlessRenderingEnabled = true,
 
             };
-            Cef.Initialize(settings);
+            if (!Cef.IsInitialized)
+               Cef.Initialize(settings);
 
             browserSettings = new BrowserSettings
             {
@@ -192,6 +205,8 @@ namespace ForgeOfBots
             LogWnd = new Log(new Point(Location.X + Size.Width, Location.Y));
             ToggleGUI(false);
             pnlLoading.BringToFront();
+            tsbLogin.Click -= TsButton_Click;
+            tsbLogin.Click += tsbLogin_Click;
          }
       }
 
@@ -212,7 +227,60 @@ namespace ForgeOfBots
          LoadGUI();
          ToggleGUI(true, true);
          Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, false);
+         if (InvokeRequired)
+         {
+            tsMain.CallMethode(() =>
+            {
+               ToolStripButton tsButton = (ToolStripButton)tsMain.Items.Find(tsbLogin.Name, true).First();
+               tsButton.Text = strings.Logout;
+               tsButton.Click -= tsbLogin_Click;
+               tsButton.Click += TsButton_Click;
+            });
+         }
+         else
+         {
+            tsbLogin.Text = strings.Logout;
+            tsbLogin.Click -= tsbLogin_Click;
+            tsbLogin.Click += TsButton_Click;
+         }
       }
+
+      private void TsButton_Click(object sender, EventArgs e)
+      {
+         UserData.AutoLogin = false;
+         UserData.LastWorld = "";
+         UserData.Password = "";
+         UserData.Username = "";
+         UserData.WorldServer = "";
+         UserData.PlayableWorlds = new List<string>();
+         UserData.SaveSettings();
+         if (File.Exists(ForgeHX_FilePath))
+            File.Delete(ForgeHX_FilePath);
+
+         if (InvokeRequired)
+         {
+            tsMain.CallMethode(() =>
+            {
+               ToolStripButton tsButton = (ToolStripButton)tsMain.Items.Find(tsbLogin.Name, true).First();
+               tsButton.Text = strings.Login;
+               tsButton.Click += tsbLogin_Click;
+               tsButton.Click -= TsButton_Click;
+            });
+         }
+         else
+         {
+            tsbLogin.Text = strings.Login;
+            tsbLogin.Click += tsbLogin_Click;
+            tsbLogin.Click -= TsButton_Click;
+         }
+         bwTimerUpdate.CancelAsync();
+         bwScriptExecuter.CancelAsync();
+         bwScriptExecuterOneArg.CancelAsync();
+         while (bwTimerUpdate.IsBusy || bwScriptExecuter.IsBusy || bwScriptExecuterOneArg.IsBusy) { Application.DoEvents(); }
+         RunningTime.Reset();
+         Contruct();
+      }
+
       private void ContinueExecution()
       {
          cwb = new ChromiumWebBrowser("https://" + UserData.WorldServer + "0.forgeofempires.com/")
@@ -313,20 +381,20 @@ namespace ForgeOfBots
             Enum.TryParse(ret.ToString(), out Result result);
             if (result == Result.Success)
             {
-               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} (PREMIUM) | by TH3C0D3R");
+               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} ({strings.Premium}) | by TH3C0D3R");
                object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
                if (retList is List<UCPremium> list)
                {
-                  Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} (PREMIUM) | by TH3C0D3R");
+                  Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} ({strings.Premium}) | by TH3C0D3R");
                   e.Result = true;
                }
             }
             else if (result == Result.Expired)
             {
-               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} (EXPIRED) | by TH3C0D3R");
+               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} ({strings.Expired}) | by TH3C0D3R");
                if (!blockExpireBox)
                {
-                  DialogResult dlgRes = MessageBox.Show(Owner, "Your Subscription is expired.\n\nPlease purchase a new Subscribtion and acitvate it\nPress 'Yes' to open the Store\n\nelse you are continue using the Free-Version\nPress 'No' for the Free Version", "SUBSCRIPTION EXPIRED", MessageBoxButtons.YesNo);
+                  DialogResult dlgRes = MessageBox.Show(Owner, $"{strings.SubscriptionExpired}", $"{strings.SubExpiredTitle}", MessageBoxButtons.YesNo);
                   if (dlgRes == DialogResult.Yes)
                   {
                      Process.Start("https://th3c0d3r.selly.store/");
@@ -344,7 +412,7 @@ namespace ForgeOfBots
             else
             {
                Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} | by TH3C0D3R");
-               MessageBox.Show(Owner, "There was a problem using this Serial-Key with your Device!!\n\nEither you activated the Serial-Key on a other Device\nor the Serial-Key is not valid!", "FAILED TO ACTIVATE");
+               MessageBox.Show(Owner, $"{strings.LicenceNotValid}", $"{strings.FailedToActivate}");
             }
          }
       }
@@ -397,7 +465,6 @@ namespace ForgeOfBots
          if (UIDLoaded) return;
          Log("[DEBUG] UID loaded", lbOutputWindow);
          UIDLoaded = true;
-         CurrentState = 1;
          BotData.UID = args.s1;
          BotData.WID = args.s2;
          UserData.SettingsSaved += UserData_SettingsSaved;
@@ -430,7 +497,7 @@ namespace ForgeOfBots
                client.Headers.Add("User-Agent", UserData.CustomUserAgent);
                client.DownloadProgressChanged += Client_DownloadProgressChanged;
                client.DownloadFileCompleted += Client_DownloadFileCompleted;
-               BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = "Downloading " + args.s2));
+               BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = strings.Downloading + args.s2));
                BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
                client.DownloadFileAsync(uri, ForgeHX_FilePath);
             }
@@ -492,7 +559,7 @@ namespace ForgeOfBots
             }
          }
          BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
-         BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = "IDLE"));
+         BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = strings.ProductionIdle));
       }
       private void tsbLogin_Click(object sender, EventArgs e)
       {
@@ -537,12 +604,14 @@ namespace ForgeOfBots
       private void Main_FormClosed(object sender, FormClosedEventArgs e)
       {
          Log("[DEBUG] Closing App", lbOutputWindow);
+         pnlLoading.BringToFront();
+         lblPleaseLogin.Text = $"{strings.PleaseWaitShutdown}\n{strings.PleaseWaitShutdown2}";
          RunningTime.Stop();
          Cef.Shutdown();
       }
       private void bwTimerUpdate_DoWork(object sender, DoWorkEventArgs e)
       {
-         while (true)
+         while (!bwTimerUpdate.CancellationPending)
          {
             Invoker.SetProperty(lblRunSinceValue, () => lblRunSinceValue.Text, RunningTime.Elapsed.ToString("h'h 'm'm 's's'"));
             Thread.Sleep(999);
@@ -566,6 +635,7 @@ namespace ForgeOfBots
       }
       private void CUpdate_UpdateFinished(RequestType type)
       {
+         if (DEBUGMODE) Log($"[{DateTime.Now}] UpdateFinished {type}", lbOutputWindow);
          switch (type)
          {
             case RequestType.Startup:
@@ -638,7 +708,7 @@ namespace ForgeOfBots
             Enum.TryParse(ret.ToString(), out Result result);
             if (result == Result.Success)
             {
-               Text = Tag.ToString() + $"{Version.Major}.{Version.Minor} (PREMIUM) | by TH3C0D3R";
+               Text = Tag.ToString() + $"{Version.Major}.{Version.Minor} ({strings.Premium}) | by TH3C0D3R";
                object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
                if (retList is List<UCPremium> list)
                {
@@ -688,21 +758,20 @@ namespace ForgeOfBots
             }
             else if (result == Result.Expired)
             {
-               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} (EXPIRED) | by TH3C0D3R");
+               Invoker.SetProperty(this, () => Text, Tag.ToString() + $"{Version.Major}.{Version.Minor} ({strings.Expired}) | by TH3C0D3R");
                if (!blockExpireBox)
-                  MessageBox.Show(Owner, "Your Subscription is expired.\n\nPlease purchase a new Subscribtion and acitvate it, else you are continue using the Free-Version", "SUBSCRIPTION EXPIRED");
+                  MessageBox.Show(Owner, $"{strings.SubscriptionExpired}", $"{strings.SubExpiredTitle}");
                blockExpireBox = true;
             }
             else
             {
                Text = Tag.ToString() + $"{Version.Major}.{Version.Minor} | by TH3C0D3R";
-               MessageBox.Show(Owner, "There was a problem using this Serial-Key with your Device!!\n\nEither you activated the Serial-Key on a other Device\nor the Serial-Key is not valid!", "FAILED TO ACTIVATE");
+               MessageBox.Show(Owner, $"{strings.LicenceNotValid}", $"{strings.FailedToActivate}");
             }
          }
       }
       private void UpdateHiddenRewardsView()
       {
-         if (ListClass.HiddenRewards.Count == 0) return;
          if (pnlIncident.InvokeRequired)
          {
             Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Clear());
@@ -711,6 +780,7 @@ namespace ForgeOfBots
          {
             pnlIncident.Controls.Clear();
          }
+         if (ListClass.HiddenRewards.Count == 0) return;
          foreach (HiddenReward item in ListClass.HiddenRewards)
          {
             if (!item.isVisible) continue;
@@ -758,8 +828,10 @@ namespace ForgeOfBots
                   }
                   else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
                   {
-                     var product = item.Value.First().state["current_product"]["product"]["resources"].Children().First().Children().First();
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {product} ({(int.Parse(product.ToString())) * item.Value.Count})", "");
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
                      pli.ProductionState = ProductionState.Producing;
                      string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
                      string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
@@ -845,8 +917,10 @@ namespace ForgeOfBots
                   }
                   else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
                   {
-                     var product = item.Value.First().state["current_product"]["product"]["resources"].Children().First().Children().First();
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {product} ({(int.Parse(product.ToString())) * item.Value.Count})", "");
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
                      //pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProducingState}", strings.ProducingState);
                      pli.ProductionState = ProductionState.Producing;
                      string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
@@ -1040,12 +1114,11 @@ namespace ForgeOfBots
       {
          if (useInvoker)
          {
-            Invoker.SetProperty(toolStrip1, () => toolStrip1.Enabled, newState);
+            Invoker.SetProperty(tsMain, () => tsMain.Enabled, newState);
          }
          else
          {
-            toolStrip1.Enabled = newState;
-            detachToolStripMenuItem.Enabled = newState;
+            tsMain.Enabled = newState;
          }
       }
       private void tsmiVisitAll_Click(object sender, EventArgs e)
@@ -1274,20 +1347,8 @@ namespace ForgeOfBots
             LogWnd.Show();
             LogWnd.FillLog(MSGHistory);
             LogWnd.mainForm = this;
-         }
-      }
-      private void Main_LocationChanged(object sender, EventArgs e)
-      {
-         if (LogWnd != null)
-            if (LogWnd.Created && LogWnd.AttachState)
-               LogWnd.UpdateLocation(new Point(Location.X + Size.Width, Location.Y));
-      }
-      private void detachToolStripMenuItem_Click(object sender, EventArgs e)
-      {
-         if (LogWnd != null)
-         {
-            LogWnd.SwitchAttachState(!LogWnd.AttachState);
-            detachToolStripMenuItem.Text = LogWnd.AttachState ? strings.DetachMain : strings.AttachMain;
+            if (!IsOnScreen(LogWnd))
+               LogWnd.DesktopLocation = new Point(Location.X, Location.Y);
          }
       }
       private void tsddSettings_Click(object sender, EventArgs e)
@@ -1352,6 +1413,7 @@ namespace ForgeOfBots
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerAsync(param);
       }
+      List<bool> testBool = new List<bool>();
       private void bwScriptExecuterOneArg_DoWork(object sender, DoWorkEventArgs e)
       {
          OneTArgs<RequestType> param = (OneTArgs<RequestType>)e.Argument;
@@ -1367,44 +1429,47 @@ namespace ForgeOfBots
                ResponseHandler.ProdCollected += ProdCollected;
                break;
             case RequestType.QueryProduction:
-               ListClass.AddedToQuery.Clear();
-               if (ListClass.CollectedIDs.Count > 0)
+               lock (_locker)
                {
-                  ListClass.AddedToQuery.AddRange(ListClass.CollectedIDs);
-                  int[] Query = ListClass.AddedToQuery.ToArray();
-                  foreach (int id in Query)
+                  ListClass.AddedToQuery.Clear();
+                  if (ListClass.CollectedIDs.Count > 0)
                   {
-                     if (UserData.GoodProductionOption.id < UserData.ProductionOption.id && UserData.ProductionOption.id > 4)
+                     ListClass.AddedToQuery.AddRange(ListClass.CollectedIDs);
+                     int[] Query = ListClass.AddedToQuery.ToArray();
+                     foreach (int id in Query)
                      {
-                        bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
-                        if (hasID)
-                           script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                        if (UserData.GoodProductionOption.id < UserData.ProductionOption.id && UserData.ProductionOption.id > 4)
+                        {
+                           bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
+                           if (hasID)
+                              script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                           else
+                              script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                        }
                         else
                            script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                        cwb.ExecuteScriptAsync(script);
+                        Thread.Sleep(100);
                      }
-                     else
+                  }
+                  else
+                  {
+                     ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+                     ListClass.AddedToQuery.AddRange(ids);
+                     foreach (int id in ids)
+                     {
+                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                        cwb.ExecuteScriptAsync(script);
+                        Thread.Sleep(100);
+                     }
+                     ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+                     ListClass.AddedToQuery.AddRange(ids);
+                     foreach (int id in ids)
+                     {
                         script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                     cwb.ExecuteScriptAsync(script);
-                     Thread.Sleep(100);
-                  }
-               }
-               else
-               {
-                  ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
-                  ListClass.AddedToQuery.AddRange(ids);
-                  foreach (int id in ids)
-                  {
-                     script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
-                     cwb.ExecuteScriptAsync(script);
-                     Thread.Sleep(100);
-                  }
-                  ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
-                  ListClass.AddedToQuery.AddRange(ids);
-                  foreach (int id in ids)
-                  {
-                     script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                     cwb.ExecuteScriptAsync(script);
-                     Thread.Sleep(100);
+                        cwb.ExecuteScriptAsync(script);
+                        Thread.Sleep(100);
+                     }
                   }
                }
                ResponseHandler.ProdStarted += ResponseHandler_ProdStarted;
@@ -1427,6 +1492,7 @@ namespace ForgeOfBots
                break;
             case RequestType.CollectIncident:
                ResponseHandler.IncidentCollected += ResponseHandler_IncidentCollected;
+               testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.Count).ToList();
                foreach (HiddenReward item in ListClass.HiddenRewards)
                {
                   if (!item.isVisible) continue;
@@ -1442,23 +1508,38 @@ namespace ForgeOfBots
       }
       private void ResponseHandler_IncidentCollected(object sender, dynamic data = null)
       {
-         string reward = data.ToString();
-         reloadData();
-         LoadGUI();
-         if (tsslLogValue.GetCurrentParent().InvokeRequired)
+         lock (_locker)
          {
-            tsslLogValue.InvokeAction(t =>
+            string reward = data.ToString();
+            if (tsslLogValue.GetCurrentParent().InvokeRequired)
             {
-               t.Text = $"{strings.IncidentCollected} - {strings.Reward}: {reward}";
-            });
-            Log($"{strings.IncidentCollected} - {strings.Reward}: {reward}", lbOutputWindow);
-         }
-         else
-         {
-            tsslLogValue.Text = $"{strings.IncidentCollected} - {strings.Reward}: {reward}";
-            Log($"{strings.IncidentCollected} - {strings.Reward}: {reward}", lbOutputWindow);
+               tsslLogValue.InvokeAction(t =>
+               {
+                  t.Text = $"{strings.IncidentCollected} - {strings.Reward}: {reward}";
+               });
+               Log($"{strings.IncidentCollected} - {strings.Reward}: {reward}", lbOutputWindow);
+            }
+            else
+            {
+               tsslLogValue.Text = $"{strings.IncidentCollected} - {strings.Reward}: {reward}";
+               Log($"{strings.IncidentCollected} - {strings.Reward}: {reward}", lbOutputWindow);
+            }
+            int indexlastFalse = testBool.FindIndex(b => !b);
+            if (indexlastFalse < 0)
+            {
+               reloadData();
+               LoadGUI();
+            }
+            else
+            {
+               testBool[indexlastFalse] = true;
+            }
          }
          //NotificationHelper.ShowNotify("Incident collected",$"Reward: {reward}",NotificationHelper.NotifyDuration.Long,Activated);
+      }
+      private void RewardsCollectedCompleted()
+      {
+
       }
       private void toolStripButton1_Click(object sender, EventArgs e)
       {

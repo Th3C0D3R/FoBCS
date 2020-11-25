@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="mtpProduction.Text" xml:space="preserve">
-    <value>Produktionen</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="metroLabel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 19</value>
@@ -135,6 +132,9 @@
   </data>
   <data name="metroLabel1.Text" xml:space="preserve">
     <value>Ansicht umschalten:</value>
+  </data>
+  <data name="mtpProduction.Text" xml:space="preserve">
+    <value>Produktionen</value>
   </data>
   <data name="mtRQBot.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 158</value>
@@ -178,9 +178,6 @@
   <data name="metroLabel6.Text" xml:space="preserve">
     <value>Produktions Bot:</value>
   </data>
-  <data name="mtpManually.Text" xml:space="preserve">
-    <value>Manuell</value>
-  </data>
   <data name="metroLabel4.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 15</value>
   </data>
@@ -190,8 +187,11 @@
   <data name="metroLabel4.Text" xml:space="preserve">
     <value>Große Straßen verstecken:</value>
   </data>
-  <data name="mtpMisc.Text" xml:space="preserve">
-    <value>Sonstiges</value>
+  <data name="mtpManually.Text" xml:space="preserve">
+    <value>Manuell</value>
+  </data>
+  <data name="mbCheckSerial.Text" xml:space="preserve">
+    <value>Registrieren</value>
   </data>
   <data name="lblAutoLogin.Text" xml:space="preserve">
     <value>Auto Login:</value>
@@ -211,11 +211,8 @@
   <data name="lblLanguage.Text" xml:space="preserve">
     <value>Sprache:</value>
   </data>
-  <data name="mbCheckSerial.Text" xml:space="preserve">
-    <value>Registrieren</value>
-  </data>
-  <data name="mtpData.Text" xml:space="preserve">
-    <value>Daten</value>
+  <data name="mtpMisc.Text" xml:space="preserve">
+    <value>Sonstiges</value>
   </data>
   <data name="metroLabel11.Size" type="System.Drawing.Size, System.Drawing">
     <value>345, 71</value>
@@ -240,6 +237,9 @@ MUSST DU DICH MIT DEINEM SERIALKEY NEU EINLOGGEN</value>
   </data>
   <data name="lblDeleteData.Text" xml:space="preserve">
     <value>Daten löschen</value>
+  </data>
+  <data name="mtpData.Text" xml:space="preserve">
+    <value>Daten</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -442,9 +442,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(Obfuscar)" obfuscar.xml
-del *.xml
-
+    <PostBuildEvent>del *.xml
+del *.pdb
 del *.exe.config
 del *.dll.config
 del README.txt
