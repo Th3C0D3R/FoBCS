@@ -16,11 +16,11 @@ About the currently Features:
 2. Aid Friends
 3. Remove Inactive Friends
 ### - Bots:
-1. Production Bot (Start &amp; Collects Productions)
-2. Tavern Bot - NOT IMPLEMENTED NOW (Will collect own Tavern every time its full and sits every 24h at friends tavern)
-3. Incident Bot - NOT IMPLEMENTED NOW (Will collect Incidents after a given time)
-4. Polivate Bot - NOT IMPLEMENTED NOW (Will motivate all Players after 24h)
-5. RQ-Bot - NOT IMPLEMENTED NOW (Will do selected Recurring Quests automatically after given time)
+1. **[FREE] Production Bot** (Start &amp; Collects Productions)
+2. **[PREMIUM] Tavern Bot** - NOT IMPLEMENTED NOW (Will collect own Tavern every time its full and sits every 24h at friends tavern)
+3. **[PREMIUM] Incident Bot** - NOT IMPLEMENTED NOW (Will collect Incidents after a given time)
+4. **[PREMIUM] Polivate Bot** - NOT IMPLEMENTED NOW (Will motivate all Players after 24h)
+5. **[PREMIUM] RQ-Bot** - NOT IMPLEMENTED NOW (Will do selected Recurring Quests automatically after given time)
 
 ## Translation
 
@@ -45,5 +45,5 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcyODQwMDU2XX0=
+eyJoaXN0b3J5IjpbNTc4ODUwMDA4LC03Mjg0MDA1Nl19
 -->
