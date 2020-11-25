@@ -25,9 +25,11 @@ About the currently Features:
 ## Translation
 
 To contribute a translation do the following:
-1. Cl
+1. Clone the latest version of the repository
 2. Check if you language is already added
-3. If not, **duplicate** those two files: [strings.en.resx](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.resx) and [strings.en.Designer.cs](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.Designer.cs) and rename the duplicates to the coressponding language code, eg: ***strings.fr.resx*** and ***strings.fr.Designer.cs*** and change the 
+3. If not, **duplicate** those two files: [strings.en.resx](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.resx) and [strings.en.Designer.cs](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.Designer.cs) and rename the duplicates to the coressponding language code, eg: ***strings.fr.resx*** and ***strings.fr.Designer.cs*** and edit the strings (Visual Sutdio recomended)
+4. Create a Pull-Request as soon as your done and wait for response
+5. 
 
 ### Donation
 Just to support my work. All donations are going to keep up the server were I test the Bot 24/7.
@@ -43,5 +45,5 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM3Mjk2NzQxM119
+eyJoaXN0b3J5IjpbMTc4NDUyOTU0N119
 -->
