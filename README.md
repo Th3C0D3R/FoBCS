@@ -1,6 +1,6 @@
 
 # **Forge of Empires Bot** 
-![Discord](https://img.shields.io/discord/743455118338293810?label=Discord) [](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/thetruetigers/842954ac-9c32-48b8-8308-4f72a8a29bcc/2)
+![Discord](https://img.shields.io/discord/743455118338293810?label=Discord) [](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/thetruetigers/842954ac-9c32-48b8-8308-4f72a8a29bcc/2?label=Build)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Th3C0D3R/FoBCS?include_prereleases) ![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Premium%20Server&up_color=green&up_message=online&url=https%3A%2F%2Fth3c0d3r.xyz) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Th3C0D3R/FoBCS)
 
 
@@ -49,7 +49,7 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUwMzM2NTIzNCwtODQxNTkzNjQ4LDIxMz
-g4NzAzNDUsMzUyOTIxNjMyLDExOTM5ODkxNjAsOTIwMTY4Mjg2
-LDc2OTYwMjY0OCwtNzI4NDAwNTZdfQ==
+eyJoaXN0b3J5IjpbLTU1NzYxNzQ2NCwtNTAzMzY1MjM0LC04ND
+E1OTM2NDgsMjEzODg3MDM0NSwzNTI5MjE2MzIsMTE5Mzk4OTE2
+MCw5MjAxNjgyODYsNzY5NjAyNjQ4LC03Mjg0MDA1Nl19
 -->
