@@ -1,5 +1,5 @@
 
-# **Forge of Empires Bot** [![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS)](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Th3C0D3R/FoBCS?include_prereleases)
+# **Forge of Empires Bot** [![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS)](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Th3C0D3R/FoBCS?include_prereleases) ![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=http://th3c0d3r.xyz:1337)
 
 
 This Bot was made by me and is one, if not the only one, which is currently public available and working.
@@ -47,6 +47,6 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5Mzk4OTE2MCw5MjAxNjgyODYsNzY5Nj
-AyNjQ4LC03Mjg0MDA1Nl19
+eyJoaXN0b3J5IjpbLTExMzcxODAyMTgsMTE5Mzk4OTE2MCw5Mj
+AxNjgyODYsNzY5NjAyNjQ4LC03Mjg0MDA1Nl19
 -->
