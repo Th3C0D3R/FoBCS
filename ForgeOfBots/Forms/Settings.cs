@@ -1,4 +1,5 @@
 ﻿using ForgeOfBots.CefBrowserHandler;
+using ForgeOfBots.GameClasses;
 using ForgeOfBots.LanguageFiles;
 using ForgeOfBots.Utils;
 using ForgeOfBots.Utils.Premium;
@@ -91,14 +92,13 @@ namespace ForgeOfBots.Forms
             mcbCitySelection.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             mcbCitySelection.SelectedIndex = Main.UserData.PlayableWorlds.FindIndex(e => e == Main.UserData.LastWorld);
          }
-         foreach (string item in GetDescriptions(typeof(Languages)).ToList())
+         foreach (Language item in ListClass.AvailableLanguages.Languages)
          {
-            string[] code = item.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
             LanguageItem languageItem = new LanguageItem()
             {
-               Code = code[1],
-               Description = code[0],
-               Language = (Languages)Enum.Parse(typeof(Languages), code[2])
+               Code = item.code,
+               Description = item.language,
+               Language = item.index
             };
             mcbLanguage.Items.Add(languageItem);
          }

@@ -48,9 +48,12 @@ namespace ForgeOfBots.Utils
             MSGHistory.Add(message);
             try
             {
-               Invoker.CallMethode(listbox, () => listbox.Items.AddRange(msgHistory.ToArray()));
-               Invoker.SetProperty(listbox, () => listbox.TopIndex, listbox.Items.Count - 1);
-               msgHistory.Clear();
+               if (msgHistory.Count > 0)
+               {
+                  Invoker.CallMethode(listbox, () => listbox.Items.AddRange(msgHistory.ToArray()));
+                  Invoker.SetProperty(listbox, () => listbox.TopIndex, listbox.Items.Count - 1);
+                  msgHistory.Clear();
+               }
             }
             catch
             { }
@@ -62,9 +65,13 @@ namespace ForgeOfBots.Utils
                 MSGHistory.Add(message);
                 try
                 {
-                    Invoker.CallMethode(listbox, () => listbox.Items.AddRange(msgHistory.ToArray()));
-                    Invoker.SetProperty(listbox, () => listbox.TopIndex, listbox.Items.Count - 1);
-                    msgHistory.Clear();
+                    
+               if(msgHistory.Count > 0)
+               {
+                  Invoker.CallMethode(listbox, () => listbox.Items.AddRange(msgHistory.ToArray()));
+                  Invoker.SetProperty(listbox, () => listbox.TopIndex, listbox.Items.Count - 1);
+                  msgHistory.Clear();
+               }
                 }
                 catch
                 { }
@@ -81,10 +88,10 @@ namespace ForgeOfBots.Utils
          {
             using (var client = new WebClient())
             using (var stream = client.OpenRead("http://www.google.com"))
-             return true;
+               return true;
          }
          catch { return false; }
-           
+
       }
       public static string CalcSig(string data, string userkey, string secret)
       {
@@ -119,7 +126,7 @@ namespace ForgeOfBots.Utils
          Screen[] screens = Screen.AllScreens;
          foreach (Screen screen in screens)
          {
-            Rectangle formRectangle = new Rectangle(form.Left, form.Top,form.Width, form.Height);
+            Rectangle formRectangle = new Rectangle(form.Left, form.Top, form.Width, form.Height);
             if (screen.WorkingArea.Contains(formRectangle))
                return true;
          }

@@ -26,7 +26,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 //using Windows.UI.Notifications;
-using AntiDebugging;
 
 using static CefSharp.LogSeverity;
 using static ForgeOfBots.Utils.Helper;
@@ -75,21 +74,6 @@ namespace ForgeOfBots
 
       public Main(string[] args)
       {
-#if RELEASE
-         AntiDebug.HideOsThreads();
-         if (AntiDebug.CheckDebuggerManagedPresent() ||
-            AntiDebug.CheckDebuggerUnmanagedPresent() ||
-            AntiDebug.CheckDebugPort() ||
-            AntiDebug.CheckKernelDebugInformation() ||
-            AntiDebug.CheckRemoteDebugger())
-         {
-            System.Timers.Timer stimer = new System.Timers.Timer();
-            stimer.Enabled = true;
-            stimer.Interval = 1000;
-            stimer.Elapsed += Stimer_Elapsed;
-            stimer.Start();
-         }
-#endif
          if (args != null)
          {
             if (args.Length > 0)
@@ -219,29 +203,17 @@ namespace ForgeOfBots
          if (!CheckForInternetConnection()) return;
          string contents = "";
          using (var wc = new WebClient())
-            contents = wc.DownloadString("https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/languages.json");
+            contents = wc.DownloadString("https://raw.githubusercontent.com/Th3C0D3R/FoBCS/master/ForgeOfBots/languages.json");
          try
          {
-            var x = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-            var languages = JsonConvert.DeserializeObject(contents);
+            LanguageList languages = JsonConvert.DeserializeObject<LanguageList>(contents);
+            foreach (Language item in languages.Languages)
+            {
+               ListClass.AvailableLanguages.Languages.Add(item);
+            }
          }
          catch (Exception)
-         {
-
-         }
-      }
-
-      readonly int counter = 10;
-      private void Stimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-      {
-         for (int i = 0; i < counter; i++)
-         {
-            Thread.Sleep(1000);
-         }
-         AntiDebug.DetachFromDebuggerProcess();
-         System.Timers.Timer t = (System.Timers.Timer)sender;
-         t.Enabled = false;
-         Application.Exit();
+         {}
       }
       private void ResponseHandler_EverythingImportantLoaded(object sender)
       {

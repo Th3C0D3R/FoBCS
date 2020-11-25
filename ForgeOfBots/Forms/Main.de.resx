@@ -133,8 +133,17 @@
         TgDQASA1MVpwzwAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="tsmiLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 22</value>
+  </data>
+  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 22</value>
+  </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 22</value>
   </data>
   <data name="tsmiAbout.Text" xml:space="preserve">
     <value>Über</value>
@@ -300,6 +309,9 @@
   </data>
   <data name="tpOverview.Text" xml:space="preserve">
     <value>Überblick</value>
+  </data>
+  <data name="tlpInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
+    <value>954, 388</value>
   </data>
   <data name="tpOthers.Text" xml:space="preserve">
     <value>Andere Spieler</value>

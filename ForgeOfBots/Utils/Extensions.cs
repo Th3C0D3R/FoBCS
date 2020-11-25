@@ -262,7 +262,7 @@ namespace ForgeOfBots.Utils
 
    public class LanguageItem
    {
-      public Languages Language;
+      public int Language;
       public string Code;
       public string Description;
 

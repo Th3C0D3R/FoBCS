@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using System;
 using System.Windows.Forms;
 
 namespace ForgeOfBots
@@ -16,6 +16,7 @@ namespace ForgeOfBots
       {
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
+         AppCenter.Start("03071928-d7cf-4bf5-b512-da1c9bb25975", typeof(Analytics), typeof(Crashes));
          Application.Run(new Main(args));
       }
    }
