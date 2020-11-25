@@ -28,8 +28,9 @@ To contribute a translation do the following:
 1. Clone the latest version of the repository
 2. Check if you language is already added
 3. If not, **duplicate** those two files: [strings.en.resx](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.resx) and [strings.en.Designer.cs](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.Designer.cs) and rename the duplicates to the coressponding language code, eg: ***strings.fr.resx*** and ***strings.fr.Designer.cs*** and edit the strings (Visual Sutdio recomended)
-4. Create a Pull-Request as soon as your done and wait for response
-5. The new Language will be added to the Bot dynamically and does not need a new version update
+4. Add the language inside this file [languages.json](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/languages.json) and use the next number for the *index*-field
+5. Create a Pull-Request as soon as your done and wait for response
+6. The new Language will be added to the Bot dynamically and does not need a new version update
 
 ### Donation
 Just to support my work. All donations are going to keep up the server were I test the Bot 24/7.
@@ -45,5 +46,5 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc4ODUwMDA4LC03Mjg0MDA1Nl19
+eyJoaXN0b3J5IjpbLTEwMTMxOTAzNTEsLTcyODQwMDU2XX0=
 -->
