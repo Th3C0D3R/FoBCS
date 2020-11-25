@@ -1,5 +1,5 @@
 
-# **Forge of Empires Bot** [![Build Status](https://travis-ci.com/Th3C0D3R/FoBCS.svg?token=RwyETmryp2rK95JJsgYq&branch=master)](https://travis-ci.com/Th3C0D3R/FoBCS)
+# **Forge of Empires Bot** [![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS)](https://github.com/Th3C0D3R/FoBCS/issues)
 
 This Bot was made by me and is one, if not the only one, which is currently public available and working.
 I made this Bot after working on a JavaScript Version (Electron App) which had it's difficulties while and after. Know, after a Year of development, lots of trial and error and 0 banned Accounts, I will publish this Bot for free
@@ -46,6 +46,6 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTIwMTY4Mjg2LDc2OTYwMjY0OCwtNzI4ND
-AwNTZdfQ==
+eyJoaXN0b3J5IjpbLTE4ODEyMzU3MzgsOTIwMTY4Mjg2LDc2OT
+YwMjY0OCwtNzI4NDAwNTZdfQ==
 -->
