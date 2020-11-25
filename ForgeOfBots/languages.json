@@ -1,0 +1,14 @@
+﻿{
+  "Languages": [
+    {
+      "code": "en",
+      "language": "English",
+      "index": 0
+    },
+    {
+      "code": "de",
+      "language": "Deutsch",
+      "index": 1
+    }
+  ]
+}

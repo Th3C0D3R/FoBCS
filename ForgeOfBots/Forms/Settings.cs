@@ -1,4 +1,5 @@
 ﻿using ForgeOfBots.CefBrowserHandler;
+using ForgeOfBots.LanguageFiles;
 using ForgeOfBots.Utils;
 using ForgeOfBots.Utils.Premium;
 using MetroFramework.Controls;

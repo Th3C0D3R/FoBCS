@@ -21,6 +21,8 @@ using System.Diagnostics;
 using Windows.Foundation;
 using System.ComponentModel;
 using System.Drawing;
+using ForgeOfBots.LanguageFiles;
+using System.Net;
 
 namespace ForgeOfBots.Utils
 {
@@ -72,6 +74,17 @@ namespace ForgeOfBots.Utils
                 Console.WriteLine(message);
             }
 #endif
+      }
+      public static bool CheckForInternetConnection()
+      {
+         try
+         {
+            using (var client = new WebClient())
+            using (var stream = client.OpenRead("http://www.google.com"))
+             return true;
+         }
+         catch { return false; }
+           
       }
       public static string CalcSig(string data, string userkey, string secret)
       {

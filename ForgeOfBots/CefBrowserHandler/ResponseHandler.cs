@@ -7,6 +7,7 @@ using CefSharp.WinForms;
 using ForgeOfBots.DataHandler;
 using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
+using ForgeOfBots.LanguageFiles;
 using ForgeOfBots.Utils;
 using Newtonsoft.Json;
 using System;

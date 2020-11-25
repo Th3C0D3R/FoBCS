@@ -222,6 +222,7 @@
     <Compile Include="GameClasses\Building.cs" />
     <Compile Include="GameClasses\Data.cs" />
     <Compile Include="GameClasses\Incident.cs" />
+    <Compile Include="GameClasses\Language.cs" />
     <Compile Include="GameClasses\ListClass.cs" />
     <Compile Include="GameClasses\Me.cs" />
     <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
@@ -269,15 +270,16 @@
     <EmbeddedResource Include="Forms\WorldSelection.de.resx">
       <DependentUpon>WorldSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="strings.en.resx">
+    <EmbeddedResource Include="LanguageFiles\strings.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="strings.de.resx">
+    <EmbeddedResource Include="LanguageFiles\strings.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.de.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>LanguageFiles</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="strings.resx">
+    <EmbeddedResource Include="LanguageFiles\strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -297,17 +299,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="strings.en.Designer.cs">
+    <Compile Include="LanguageFiles\strings.en.Designer.cs">
       <DependentUpon>strings.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="strings.de.Designer.cs">
+    <Compile Include="LanguageFiles\strings.de.Designer.cs">
       <DependentUpon>strings.de.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="strings.Designer.cs">
+    <Compile Include="LanguageFiles\strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>strings.resx</DependentUpon>
@@ -351,6 +353,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app.manifest" />
+    <None Include="languages.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

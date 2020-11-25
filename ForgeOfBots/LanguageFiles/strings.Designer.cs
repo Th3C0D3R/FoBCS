@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ForgeOfBots {
+namespace ForgeOfBots.LanguageFiles {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ForgeOfBots {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ForgeOfBots.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ForgeOfBots.LanguageFiles.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

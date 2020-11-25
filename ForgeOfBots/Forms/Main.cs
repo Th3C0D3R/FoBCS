@@ -39,6 +39,9 @@ using WorldSelection = ForgeOfBots.Forms.WorldSelection;
 using ForgeOfBots.Utils.Premium;
 using UCPremiumLibrary;
 using Newtonsoft.Json.Linq;
+using ForgeOfBots.LanguageFiles;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ForgeOfBots
 {
@@ -116,6 +119,7 @@ namespace ForgeOfBots
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
          }
          Controls.Clear();
+         Task.Factory.StartNew(CheckLanguages).Wait();
          InitializeComponent();
          Application.ApplicationExit += handleExit;
          RunningTime.Start();
@@ -207,6 +211,23 @@ namespace ForgeOfBots
             pnlLoading.BringToFront();
             tsbLogin.Click -= TsButton_Click;
             tsbLogin.Click += tsbLogin_Click;
+         }
+      }
+
+      private void CheckLanguages()
+      {
+         if (!CheckForInternetConnection()) return;
+         string contents = "";
+         using (var wc = new WebClient())
+            contents = wc.DownloadString("https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/languages.json");
+         try
+         {
+            var x = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            var languages = JsonConvert.DeserializeObject(contents);
+         }
+         catch (Exception)
+         {
+
          }
       }
 
