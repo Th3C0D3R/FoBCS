@@ -69,7 +69,6 @@ namespace ForgeOfBots
       private bool blockExpireBox = false;
       public static bool DEBUGMODE = false;
       static readonly object _locker = new object();
-
       private int xcounter = 0;
 
       public Main(string[] args)
@@ -84,7 +83,6 @@ namespace ForgeOfBots
 
          Contruct();
       }
-
       public void Contruct()
       {
          if (Settings.SettingsExists())
@@ -133,7 +131,8 @@ namespace ForgeOfBots
                WindowlessRenderingEnabled = true,
 
             };
-            Cef.Initialize(settings);
+            if (!Cef.IsInitialized)
+               Cef.Initialize(settings);
             browserSettings = new BrowserSettings
             {
                DefaultEncoding = "UTF-8",
@@ -197,7 +196,6 @@ namespace ForgeOfBots
             tsbLogin.Click += tsbLogin_Click;
          }
       }
-
       private void CheckLanguages()
       {
          if (!CheckForInternetConnection()) return;
@@ -213,7 +211,7 @@ namespace ForgeOfBots
             }
          }
          catch (Exception)
-         {}
+         { }
       }
       private void ResponseHandler_EverythingImportantLoaded(object sender)
       {
@@ -237,7 +235,6 @@ namespace ForgeOfBots
             tsbLogin.Click += TsButton_Click;
          }
       }
-
       private void TsButton_Click(object sender, EventArgs e)
       {
          UserData.AutoLogin = false;
@@ -273,7 +270,6 @@ namespace ForgeOfBots
          RunningTime.Reset();
          Contruct();
       }
-
       private void ContinueExecution()
       {
          cwb = new ChromiumWebBrowser("https://" + UserData.WorldServer + "0.forgeofempires.com/")
@@ -299,6 +295,347 @@ namespace ForgeOfBots
       Browser.Controls.Add(cwb);
 #endif
       }
+
+
+      #region "Production"
+      private void UpdateGoodProductionView()
+      {
+         Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Clear());
+         if (ListClass.GoodProductionList.Count > 0)
+         {
+            List<KeyValuePair<string, List<EntityEx>>> groupedList = new List<KeyValuePair<string, List<EntityEx>>>();
+            if (UserData.GroupedView)
+            {
+               groupedList = GetGroupedList(ListClass.GoodProductionList);
+               foreach (KeyValuePair<string, List<EntityEx>> item in groupedList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.Value.First().state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
+                  {
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
+               }
+            }
+            else
+            {
+               foreach (EntityEx item in ListClass.GoodProductionList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.state["__class__"].ToString() == "ProducingState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", "");
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.id);
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
+               }
+            }
+         }
+         Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Invalidate());
+      }
+      private void UpdateProductionView()
+      {
+         Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Clear());
+         if (ListClass.ProductionList.Count > 0)
+         {
+            List<KeyValuePair<string, List<EntityEx>>> groupedList = new List<KeyValuePair<string, List<EntityEx>>>();
+            if (UserData.GroupedView)
+            {
+               groupedList = GetGroupedList(ListClass.ProductionList);
+               if (DEBUGMODE) Log($"[{DateTime.Now}] Groupe Update", lbOutputWindow);
+               foreach (KeyValuePair<string, List<EntityEx>> item in groupedList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.Value.First().state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
+                  {
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
+               }
+            }
+            else
+            {
+               if (DEBUGMODE) Log($"[{DateTime.Now}] Single Update", lbOutputWindow);
+               foreach (EntityEx item in ListClass.ProductionList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.state["__class__"].ToString() == "ProducingState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", strings.ProducingState);
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.id);
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
+               }
+            }
+         }
+         Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Invalidate());
+      }
+      private void Pli_ProductionIdle(object sender, dynamic data = null)
+      {
+         lock (_locker)
+         {
+            ListClass.State = 0;
+            string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
+            cwb.ExecuteScriptAsync(script);
+            if (DEBUGMODE) Log($"[{DateTime.Now}] Idle STATE: {ListClass.State}", lbOutputWindow);
+            ResponseHandler.EntitiesUpdated += ResponseHandler_EntitiesUpdated;
+         }
+      }
+      private void ResponseHandler_EntitiesUpdated(object sender, dynamic data = null)
+      {
+         UpdateProductionView();
+         UpdateGoodProductionView();
+         if (!UserData.ProductionBot) return;
+         if (sender is int state)
+         {
+            if (DEBUGMODE) Log($"[{DateTime.Now}] STATE: {state}", lbOutputWindow);
+            switch (state)
+            {
+               case 0:
+                  if (DEBUGMODE) Log($"[{DateTime.Now}] Production Idle Event", lbOutputWindow);
+                  mbtQuery_Click(this, null);
+                  xcounter += 1;
+                  ListClass.State = 2;
+                  break;
+               case 1:
+                  if (DEBUGMODE) Log($"[{DateTime.Now}] Production Done Event", lbOutputWindow);
+                  mbtCollect_Click(this, null);
+                  ListClass.State = 0;
+                  break;
+               default:
+                  break;
+            }
+         }
+
+      }
+      private void Pli_ProductionDone(object sender, dynamic data = null)
+      {
+         lock (_locker)
+         {
+            ListClass.State = 1;
+            string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
+            cwb.ExecuteScriptAsync(script);
+            if (DEBUGMODE) Log($"[{DateTime.Now}] Done STATE: {ListClass.State}", lbOutputWindow);
+            ResponseHandler.EntitiesUpdated += ResponseHandler_EntitiesUpdated;
+         }
+      }
+      private void ProdCollected(object sender, dynamic data = null)
+      {
+         if (!UserData.ProductionBot)
+         {
+            ListClass.CollectedIDs.Clear();
+            string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
+            cwb.ExecuteScriptAsync(script);
+            if (DEBUGMODE) Log($"[{DateTime.Now}] UpdateBuildings", lbOutputWindow);
+            ResponseHandler.EntitiesUpdated += ResponseHandler_EntitiesUpdated;
+            return;
+         }
+         lock (_locker)
+         {
+            if (DEBUGMODE) Log($"[{DateTime.Now}] Production Collected Event", lbOutputWindow);
+            mbtQuery_Click(this, null);
+            xcounter += 1;
+            ListClass.State = 2;
+         }
+      }
+      private void ResponseHandler_ProdStarted(object sender, dynamic data = null)
+      {
+         if (DEBUGMODE) Log($"[{DateTime.Now}] Refresh", lbOutputWindow);
+         Debug.WriteLine($"[{DateTime.Now}] Refresh");
+         lock (_locker)
+         {
+            reloadData();
+            LoadGUI();
+            ListClass.State = 2;
+         }
+      }
+      private void mbtQuery_Click(object sender, EventArgs e)
+      {
+         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.QueryProduction };
+         bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+      }
+      private void mbtCollect_Click(object sender, EventArgs e)
+      {
+         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectProduction };
+         bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+      }
+      private void bwScriptExecuterOneArg_DoWork(object sender, DoWorkEventArgs e)
+      {
+         OneTArgs<RequestType> param = (OneTArgs<RequestType>)e.Argument;
+         int[] ids;
+         string script = "";
+         switch (param.t1)
+         {
+            case RequestType.CollectProduction:
+               ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate" && x.state["__class__"].ToString().ToLower() != "producingstate"; }).ToList().Select(y => y.id).ToArray();
+               ids = ids.Concat(ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate" && x.state["__class__"].ToString().ToLower() != "producingstate"; }).ToList().Select(y => y.id).ToArray()).ToArray();
+               script = ReqBuilder.GetRequestScript(param.t1, ids);
+               cwb.ExecuteScriptAsync(script);
+               ResponseHandler.ProdCollected += ProdCollected;
+               break;
+            case RequestType.QueryProduction:
+               lock (_locker)
+               {
+                  if (ListClass.CollectedIDs.Count > 0)
+                  {
+                     int[] Query = ListClass.CollectedIDs.ToArray();
+                     ListClass.AddedToQuery.AddRange(ListClass.CollectedIDs);
+                     foreach (int id in Query)
+                     {
+                        if (UserData.GoodProductionOption.id < UserData.ProductionOption.id && UserData.ProductionOption.id > 4)
+                        {
+                           bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
+                           if (hasID)
+                              script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                           else
+                              script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                        }
+                        else
+                           script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                        cwb.ExecuteScriptAsync(script);
+                        Thread.Sleep(100);
+                     }
+                  }
+                  else
+                  {
+                     ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+                     ListClass.AddedToQuery.AddRange(ids);
+                     foreach (int id in ids)
+                     {
+                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                        cwb.ExecuteScriptAsync(script);
+                        Thread.Sleep(100);
+                     }
+                     ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+                     ListClass.AddedToQuery.AddRange(ids);
+                     foreach (int id in ids)
+                     {
+                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                        cwb.ExecuteScriptAsync(script);
+                        Thread.Sleep(100);
+                     }
+                  }
+               }
+               ResponseHandler.ProdStarted += ResponseHandler_ProdStarted;
+               break;
+            case RequestType.CancelProduction:
+               ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate"; }).ToList().Select(y => y.id).ToArray();
+               foreach (int id in ids)
+               {
+                  script = ReqBuilder.GetRequestScript(param.t1, id);
+                  cwb.ExecuteScriptAsync(script);
+                  Thread.Sleep(100);
+               }
+               ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate"; }).ToList().Select(y => y.id).ToArray();
+               foreach (int id in ids)
+               {
+                  script = ReqBuilder.GetRequestScript(param.t1, id);
+                  cwb.ExecuteScriptAsync(script);
+                  Thread.Sleep(100);
+               }
+               break;
+            case RequestType.CollectIncident:
+               ResponseHandler.IncidentCollected += ResponseHandler_IncidentCollected;
+               testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.Count).ToList();
+               foreach (HiddenReward item in ListClass.HiddenRewards)
+               {
+                  if (!item.isVisible) continue;
+                  if (!UserData.ShowBigRoads && item.position.context == "cityRoadBig") continue;
+                  script = ReqBuilder.GetRequestScript(param.t1, item.hiddenRewardId);
+                  cwb.ExecuteScriptAsync(script);
+                  Thread.Sleep(100);
+               }
+               break;
+            default:
+               break;
+         }
+      }
+      #endregion
+
+
       private void Usi_UserDataEntered(string username, string password, string server)
       {
          Log("[DEBUG] Userdata loaded", lbOutputWindow);
@@ -658,6 +995,8 @@ namespace ForgeOfBots
             case RequestType.CollectProduction:
                break;
             case RequestType.QueryProduction:
+               //UpdateProductionView();
+               //UpdateGoodProductionView();
                break;
             case RequestType.CancelProduction:
                break;
@@ -802,199 +1141,7 @@ namespace ForgeOfBots
             pnlIncident.Invalidate();
          }
       }
-      private void UpdateGoodProductionView()
-      {
-         Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Clear());
-         if (ListClass.GoodProductionList.Count > 0)
-         {
-            List<KeyValuePair<string, List<EntityEx>>> groupedList = new List<KeyValuePair<string, List<EntityEx>>>();
-            if (UserData.GroupedView)
-            {
-               groupedList = GetGroupedList(ListClass.GoodProductionList);
-               foreach (KeyValuePair<string, List<EntityEx>> item in groupedList)
-               {
-                  ProdListItem pli = new ProdListItem();
-                  if (item.Value.First().state["__class__"].ToString() == "IdleState")
-                  {
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
-                     pli.ProductionState = ProductionState.Idle;
-                  }
-                  else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
-                  {
-                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
-                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
-                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
-                     pli.ProductionState = ProductionState.Producing;
-                     string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
-                     string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
-                     pli.AddTime(greatestDur, greatestEnd);
-                  }
-                  else if (item.Value.First().state["__class__"].ToString() == "ProductionFinishedState")
-                  {
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionFinishedState}", strings.ProductionFinishedState);
-                     pli.ProductionState = ProductionState.Finished;
-                  }
-                  pli.Dock = DockStyle.Top;
-                  pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
-                  pli.StartProductionGUI();
-                  Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
-               }
-            }
-            else
-            {
-               foreach (EntityEx item in ListClass.GoodProductionList)
-               {
-                  ProdListItem pli = new ProdListItem();
-                  if (item.state["__class__"].ToString() == "IdleState")
-                  {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
-                     pli.ProductionState = ProductionState.Idle;
-                  }
-                  else if (item.state["__class__"].ToString() == "ProducingState")
-                  {
-                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", "");
-                     pli.ProductionState = ProductionState.Producing;
-                     string greatestDur = item.state["next_state_transition_in"].ToString();
-                     string greatestEnd = item.state["next_state_transition_at"].ToString();
-                     pli.AddTime(greatestDur, greatestEnd);
-                  }
-                  else if (item.state["__class__"].ToString() == "ProductionFinishedState")
-                  {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
-                     pli.ProductionState = ProductionState.Finished;
-                  }
-                  pli.Dock = DockStyle.Top;
-                  pli.AddEntities(item.id);
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
-                  pli.StartProductionGUI();
-                  Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
-               }
-            }
-         }
-         Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Invalidate());
-      }
-      private void Pli_ProductionIdle(object sender, dynamic data = null)
-      {
-         if (data == null) return;
-         if (!UserData.ProductionBot) return;
-         lock (_locker)
-         {
-            if (DEBUGMODE) Log($"[{DateTime.Now}] Production Idle Event", lbOutputWindow);
-            Debug.WriteLine($"[{DateTime.Now}] Production Idle Event");
-            mbtQuery_Click(this, null);
-            xcounter += 1;
-         }
-      }
-      private void UpdateProductionView()
-      {
-         Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Clear());
-         if (ListClass.ProductionList.Count > 0)
-         {
-            List<KeyValuePair<string, List<EntityEx>>> groupedList = new List<KeyValuePair<string, List<EntityEx>>>();
-            if (UserData.GroupedView)
-            {
-               groupedList = GetGroupedList(ListClass.ProductionList);
-               if (DEBUGMODE) Log($"[{DateTime.Now}] Groupe Update", lbOutputWindow);
-               Debug.WriteLine($"[{DateTime.Now}] Groupe Update");
-               foreach (KeyValuePair<string, List<EntityEx>> item in groupedList)
-               {
-                  ProdListItem pli = new ProdListItem();
-                  if (item.Value.First().state["__class__"].ToString() == "IdleState")
-                  {
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
-                     pli.ProductionState = ProductionState.Idle;
-                  }
-                  else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
-                  {
-                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
-                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
-                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
-                     //pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProducingState}", strings.ProducingState);
-                     pli.ProductionState = ProductionState.Producing;
-                     string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
-                     string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
-                     pli.AddTime(greatestDur, greatestEnd);
-                  }
-                  else if (item.Value.First().state["__class__"].ToString() == "ProductionFinishedState")
-                  {
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionFinishedState}", strings.ProductionFinishedState);
-                     pli.ProductionState = ProductionState.Finished;
-                  }
-                  pli.Dock = DockStyle.Top;
-                  pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
-                  pli.StartProductionGUI();
-                  Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
-               }
-            }
-            else
-            {
-               if (DEBUGMODE) Log($"[{DateTime.Now}] Single Update", lbOutputWindow);
-               Debug.WriteLine($"[{DateTime.Now}] Single Update");
-               foreach (EntityEx item in ListClass.ProductionList)
-               {
-                  ProdListItem pli = new ProdListItem();
-                  if (item.state["__class__"].ToString() == "IdleState")
-                  {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
-                     pli.ProductionState = ProductionState.Idle;
-                  }
-                  else if (item.state["__class__"].ToString() == "ProducingState")
-                  {
-                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", strings.ProducingState);
-                     pli.ProductionState = ProductionState.Producing;
-                     string greatestDur = item.state["next_state_transition_in"].ToString();
-                     string greatestEnd = item.state["next_state_transition_at"].ToString();
-                     pli.AddTime(greatestDur, greatestEnd);
-                  }
-                  else if (item.state["__class__"].ToString() == "ProductionFinishedState")
-                  {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
-                     pli.ProductionState = ProductionState.Finished;
-                  }
-                  pli.Dock = DockStyle.Top;
-                  pli.AddEntities(item.id);
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
-                  pli.StartProductionGUI();
-                  Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
-               }
-            }
-         }
-         Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Invalidate());
-      }
-      private void Pli_ProductionDone(object sender, dynamic data = null)
-      {
-         if (data == null) return;
-         if (!UserData.ProductionBot) return;
-         if (DEBUGMODE) Log($"[{DateTime.Now}] Production Done Event", lbOutputWindow);
-         Debug.WriteLine($"[{DateTime.Now}] Production Done Event");
-         if (((object)data).GetType() == typeof(List<int>))
-         {
-            List<int> ids = (List<int>)data;
-            string script = ReqBuilder.GetRequestScript(RequestType.CollectProduction, ids.ToArray());
-            cwb.ExecuteScriptAsync(script);
-            ResponseHandler.ProdCollected += ProdCollected;
-         }
-      }
-      private void ProdCollected(object sender, dynamic data = null)
-      {
-         if (!UserData.ProductionBot)
-         {
-            ListClass.CollectedIDs.Clear();
-            return;
-         }
-         if (DEBUGMODE) Log($"[{DateTime.Now}] Production Collected Event", lbOutputWindow);
-         Debug.WriteLine($"[{DateTime.Now}] Production Collected Event");
-         mbtQuery_Click(this, null);
-         xcounter += 1;
-      }
+
       private void RemoveFriend(object senderObj, EventArgs e)
       {
          Button sender = ((Button)senderObj);
@@ -1274,11 +1421,13 @@ namespace ForgeOfBots
                ListClass.doneMotivate.Clear();
                BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
                BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = strings.MotivationDone));
+               reloadData();
+               LoadGUI();
                break;
             case RequestType.VisitTavern:
                FriendTavernState FTSlast = null;
                ListClass.FriendTaverns = ListClass.FriendTaverns.Where((f) => f.sittingPlayerCount < f.unlockedChairCount && f.state == null).ToList();
-               if (ListClass.FriendList.Count == 0) return;
+               if (ListClass.FriendTaverns.Count == 0 || ListClass.FriendList.Count == 0) return;
                steps = (int)Math.Round((double)(100 / ListClass.FriendTaverns.Count), MidpointRounding.AwayFromZero);
                foreach (FriendTavernState item in ListClass.FriendTaverns)
                {
@@ -1363,15 +1512,7 @@ namespace ForgeOfBots
          UpdateGoodProductionView();
          UpdateProductionView();
       }
-      private void mbtQuery_Click(object sender, EventArgs e)
-      {
-         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.QueryProduction };
-         BackgroundWorker bw = new BackgroundWorker();
-         bw.DoWork += bwScriptExecuterOneArg_DoWork;
-         bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
-         bw.WorkerSupportsCancellation = true;
-         bw.RunWorkerAsync(param);
-      }
+
       private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
       {
          if (DEBUGMODE) Log($"[{DateTime.Now}] Production Query Complete", lbOutputWindow);
@@ -1382,14 +1523,7 @@ namespace ForgeOfBots
             UpdateGoodProductionView();
          }
       }
-      private void mbtCollect_Click(object sender, EventArgs e)
-      {
-         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectProduction };
-         BackgroundWorker bw = new BackgroundWorker();
-         bw.DoWork += bwScriptExecuterOneArg_DoWork;
-         bw.WorkerSupportsCancellation = true;
-         bw.RunWorkerAsync(param);
-      }
+
       private void mbtCancel_Click(object sender, EventArgs e)
       {
          OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CancelProduction };
@@ -1407,98 +1541,7 @@ namespace ForgeOfBots
          bw.RunWorkerAsync(param);
       }
       List<bool> testBool = new List<bool>();
-      private void bwScriptExecuterOneArg_DoWork(object sender, DoWorkEventArgs e)
-      {
-         OneTArgs<RequestType> param = (OneTArgs<RequestType>)e.Argument;
-         int[] ids;
-         string script = "";
-         switch (param.t1)
-         {
-            case RequestType.CollectProduction:
-               ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate" && x.state["__class__"].ToString().ToLower() != "producingstate"; }).ToList().Select(y => y.id).ToArray();
-               ids = ids.Concat(ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate" && x.state["__class__"].ToString().ToLower() != "producingstate"; }).ToList().Select(y => y.id).ToArray()).ToArray();
-               script = ReqBuilder.GetRequestScript(param.t1, ids);
-               cwb.ExecuteScriptAsync(script);
-               ResponseHandler.ProdCollected += ProdCollected;
-               break;
-            case RequestType.QueryProduction:
-               lock (_locker)
-               {
-                  ListClass.AddedToQuery.Clear();
-                  if (ListClass.CollectedIDs.Count > 0)
-                  {
-                     ListClass.AddedToQuery.AddRange(ListClass.CollectedIDs);
-                     int[] Query = ListClass.AddedToQuery.ToArray();
-                     foreach (int id in Query)
-                     {
-                        if (UserData.GoodProductionOption.id < UserData.ProductionOption.id && UserData.ProductionOption.id > 4)
-                        {
-                           bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
-                           if (hasID)
-                              script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
-                           else
-                              script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                        }
-                        else
-                           script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                        cwb.ExecuteScriptAsync(script);
-                        Thread.Sleep(100);
-                     }
-                  }
-                  else
-                  {
-                     ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
-                     ListClass.AddedToQuery.AddRange(ids);
-                     foreach (int id in ids)
-                     {
-                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
-                        cwb.ExecuteScriptAsync(script);
-                        Thread.Sleep(100);
-                     }
-                     ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
-                     ListClass.AddedToQuery.AddRange(ids);
-                     foreach (int id in ids)
-                     {
-                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                        cwb.ExecuteScriptAsync(script);
-                        Thread.Sleep(100);
-                     }
-                  }
-               }
-               ResponseHandler.ProdStarted += ResponseHandler_ProdStarted;
-               break;
-            case RequestType.CancelProduction:
-               ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate"; }).ToList().Select(y => y.id).ToArray();
-               foreach (int id in ids)
-               {
-                  script = ReqBuilder.GetRequestScript(param.t1, id);
-                  cwb.ExecuteScriptAsync(script);
-                  Thread.Sleep(100);
-               }
-               ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate"; }).ToList().Select(y => y.id).ToArray();
-               foreach (int id in ids)
-               {
-                  script = ReqBuilder.GetRequestScript(param.t1, id);
-                  cwb.ExecuteScriptAsync(script);
-                  Thread.Sleep(100);
-               }
-               break;
-            case RequestType.CollectIncident:
-               ResponseHandler.IncidentCollected += ResponseHandler_IncidentCollected;
-               testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.Count).ToList();
-               foreach (HiddenReward item in ListClass.HiddenRewards)
-               {
-                  if (!item.isVisible) continue;
-                  if (!UserData.ShowBigRoads && item.position.context == "cityRoadBig") continue;
-                  script = ReqBuilder.GetRequestScript(param.t1, item.hiddenRewardId);
-                  cwb.ExecuteScriptAsync(script);
-                  Thread.Sleep(100);
-               }
-               break;
-            default:
-               break;
-         }
-      }
+
       private void ResponseHandler_IncidentCollected(object sender, dynamic data = null)
       {
          lock (_locker)
@@ -1520,8 +1563,9 @@ namespace ForgeOfBots
             int indexlastFalse = testBool.FindIndex(b => !b);
             if (indexlastFalse < 0)
             {
-               reloadData();
-               LoadGUI();
+               ResponseHandler.IncidentUpdated += IncidentUpdated;
+               string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
+               cwb.ExecuteScriptAsync(script);
             }
             else
             {
@@ -1530,25 +1574,25 @@ namespace ForgeOfBots
          }
          //NotificationHelper.ShowNotify("Incident collected",$"Reward: {reward}",NotificationHelper.NotifyDuration.Long,Activated);
       }
+
+      private void IncidentUpdated(object sender, dynamic data = null)
+      {
+         reloadData();
+         LoadGUI();
+      }
+
       private void RewardsCollectedCompleted()
       {
 
       }
       private void toolStripButton1_Click(object sender, EventArgs e)
       {
-         object ret = TcpConnection.SendAuthData("IAVvAuYHY0JxjgnBarwue1JPfvvD6drnK9UVYRFAmW0D0M9D5t1AXD7R1GPP8VL5JgnjLSmJlwHIBFYTvsHNmqQGCDeSB0BRL54UjZ1nGsZk5zQvr6ePN8ScPghIxUHvv06FLEtV1dG4RqKNxslEVvENmbEC2szwkoyF2KkmNJYt1YLjVUVFsCZ9vtct9qdInTTm1FVmH81MXUVOPfqhXuDiOzUIr0ngpPFhEirQ9s7uKMlaYOdd95u3QvYBuM5R", FingerPrint.Value(), true);
-         _ = ret is bool;
+         //object ret = TcpConnection.SendAuthData("IAVvAuYHY0JxjgnBarwue1JPfvvD6drnK9UVYRFAmW0D0M9D5t1AXD7R1GPP8VL5JgnjLSmJlwHIBFYTvsHNmqQGCDeSB0BRL54UjZ1nGsZk5zQvr6ePN8ScPghIxUHvv06FLEtV1dG4RqKNxslEVvENmbEC2szwkoyF2KkmNJYt1YLjVUVFsCZ9vtct9qdInTTm1FVmH81MXUVOPfqhXuDiOzUIr0ngpPFhEirQ9s7uKMlaYOdd95u3QvYBuM5R", FingerPrint.Value(), true);
+         //_ = ret is bool;
+         //string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
+         //cwb.ExecuteScriptAsync(script);
       }
-      private void ResponseHandler_ProdStarted(object sender, dynamic data = null)
-      {
-         if (DEBUGMODE) Log($"[{DateTime.Now}] ProdStarted Handler", lbOutputWindow);
-         Debug.WriteLine($"[{DateTime.Now}] ProdStarted Handler");
-         lock (_locker)
-         {
-            reloadData();
-            LoadGUI();
-         }
-      }
+
       private void tsmiAbout_Click(object sender, EventArgs e)
       {
          About frmAbout = new About();
@@ -1604,6 +1648,7 @@ namespace ForgeOfBots
             cwb.ExecuteScriptAsync(script);
          }
       }
+
       private void ResponseHandler_TaverSitted(object sender, dynamic data = null)
       {
          reloadData();

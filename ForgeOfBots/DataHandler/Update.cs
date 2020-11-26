@@ -61,17 +61,23 @@ namespace ForgeOfBots.DataHandler
          browser.ExecuteScriptAsync(script);
          ResponseHandler.StartupLoaded += OnUpdateFinished;
       }
+      public void UpdateOwnTavern()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
+         browser.ExecuteScriptAsync(script);
+         ResponseHandler.StartupLoaded += OnUpdateFinished;
+      }
       public void UpdatedSortedGoodList()
       {
          ListClass.GoodsDict = Helper.GetGoodsEraSorted(ListClass.Eras, ListClass.Resources, ListClass.ResourceDefinitions);
       }
-      public void UpdateBuildings()
+      public void UpdateBuildings(JToken entities)
       {
          if (ListClass.Startup.Count <= 0 || ListClass.AllBuildings.Count <= 0) return;
          ListClass.ProductionList.Clear();
          ListClass.ResidentialList.Clear();
          ListClass.GoodProductionList.Clear();
-         foreach (JToken cityEntity in ListClass.Startup["responseData"]["city_map"]["entities"].ToList())
+         foreach (JToken cityEntity in entities.ToList())
          {
             foreach (Building metaEntity in ListClass.AllBuildings)
             {

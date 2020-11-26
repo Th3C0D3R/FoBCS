@@ -1,4 +1,5 @@
 ﻿using ForgeOfBots.CefBrowserHandler;
+using ForgeOfBots.GameClasses;
 using ForgeOfBots.LanguageFiles;
 using ForgeOfBots.Utils;
 using System;
@@ -87,23 +88,36 @@ namespace ForgeOfBots.Forms.UserControls
       {
          if (_diff.TotalSeconds <= 0 || ProductionState == ProductionState.Finished || ProductionState == ProductionState.Idle)
          {
-            timer.Stop();
-            if (ProductionState != ProductionState.Idle)
+            if (ProductionState != ProductionState.Idle && timer.Enabled)
             {
+               timer.Enabled = false;
+               timer.Stop();
                Debug.WriteLine($"[{DateTime.Now}] Production done");
                ProductionState = ProductionState.Finished;
-               _ProductionDone?.Invoke(null, EntityIDs);
-               //ProductionState = ProductionState.Finished;
+               if (lblState.InvokeRequired)
+                  Invoker.SetProperty(lblState, () => lblState.Text, strings.ProductionFinishedState);
+               else
+                  lblState.Text = strings.ProductionFinishedState;
+               if (ListClass.State != 1)
+                  _ProductionDone?.Invoke(null, EntityIDs);
                return;
             }
-            else if(ProductionState == ProductionState.Idle)
+            else if (ProductionState == ProductionState.Idle && timer.Enabled)
             {
+               timer.Enabled = false;
+               timer.Stop();
                Debug.WriteLine($"[{DateTime.Now}] Production idle");
                ProductionState = ProductionState.Idle;
-               _ProductionIdle?.Invoke(null, EntityIDs);
-               //ProductionState = ProductionState.Producing;
+               if (lblState.InvokeRequired)
+                  Invoker.SetProperty(lblState, () => lblState.Text, strings.ProductionIdle);
+               else
+                  lblState.Text = strings.ProductionIdle;
+               if (ListClass.State != 0)
+                  _ProductionIdle?.Invoke(null, EntityIDs);
                return;
             }
+            else if (!timer.Enabled)
+               return;
          }
          UpdateGUI();
       }
@@ -126,6 +140,8 @@ namespace ForgeOfBots.Forms.UserControls
             {
                if (isFinished)
                   Invoker.SetProperty(lblState, () => lblState.Text, strings.ReadyToCollect);
+               else if (ProductionState == ProductionState.Idle)
+                  Invoker.SetProperty(lblState, () => lblState.Text, strings.ProductionIdle);
                else
                {
                   string days = "";
@@ -138,6 +154,8 @@ namespace ForgeOfBots.Forms.UserControls
             {
                if (isFinished || ProductionState == ProductionState.Finished)
                   lblState.Text = strings.ReadyToCollect;
+               else if (ProductionState == ProductionState.Idle)
+                  lblState.Text = strings.ProductionIdle;
                else
                {
                   string days = "";

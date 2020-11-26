@@ -10,6 +10,7 @@ using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.LanguageFiles;
 using ForgeOfBots.Utils;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -164,6 +165,32 @@ namespace ForgeOfBots.CefBrowserHandler
             _incidentCollected -= value;
          }
       }
+      private static CustomEvent _entitiesUpdated;
+      public static event CustomEvent EntitiesUpdated
+      {
+         add
+         {
+            if (_entitiesUpdated == null || !_entitiesUpdated.GetInvocationList().Contains(value))
+               _entitiesUpdated += value;
+         }
+         remove
+         {
+            _entitiesUpdated -= value;
+         }
+      }
+      private static CustomEvent _IncidentUpdated;
+      public static event CustomEvent IncidentUpdated
+      {
+         add
+         {
+            if (_IncidentUpdated == null || !_IncidentUpdated.GetInvocationList().Contains(value))
+               _IncidentUpdated += value;
+         }
+         remove
+         {
+            _IncidentUpdated -= value;
+         }
+      }
 
       public static bool[] ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
       static readonly object _locker = new object();
@@ -295,7 +322,7 @@ namespace ForgeOfBots.CefBrowserHandler
                      case "getData":
                         ress = JsonConvert.DeserializeObject(body);
                         ListClass.Startup = ress;
-                        Main.Updater.UpdateBuildings();
+                        Main.Updater.UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
                         ImportantLoaded[16] = ImportantLoaded[15] = ImportantLoaded[14] = ListClass.Startup.Count > 0;
                         ImportantLoaded[7] = true;
                         break;
@@ -382,7 +409,9 @@ namespace ForgeOfBots.CefBrowserHandler
                   TavernResult tavernresult = null;
                   foreach (string res in TavResponse)
                   {
-                     dynamic resItem = JsonConvert.DeserializeObject(res);
+                     var methode = res.Substring(0, res.IndexOf("{"));
+                     var body = res.Substring(res.IndexOf("{"));
+                     dynamic resItem = JsonConvert.DeserializeObject(body);
                      if (resItem["requestMethod"] == "getOtherTavern")
                      {
                         rewardTavern = resItem["responseData"]["rewardResources"];
@@ -412,6 +441,9 @@ namespace ForgeOfBots.CefBrowserHandler
                _ListLoaded?.Invoke(RequestType.GetClanMember);
                break;
             case RequestType.GetEntities:
+               dynamic entities = JsonConvert.DeserializeObject(msg);
+               Main.Updater.UpdateBuildings(entities["responseData"]);
+               _entitiesUpdated?.Invoke(ListClass.State, RequestType.GetEntities);
                break;
             case RequestType.GetFriends:
                Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(msg);
@@ -430,15 +462,16 @@ namespace ForgeOfBots.CefBrowserHandler
             case RequestType.LogService:
                break;
             case RequestType.CollectProduction:
-               dynamic ColRes = JsonConvert.DeserializeObject(msg);
+               JToken ColRes = JsonConvert.DeserializeObject<JToken>(msg);
                try
                {
-                  if (ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "IdleState")
+                  if (ColRes["responseData"]?["updatedEntities"]?.ToList().Count > 0
+                     && ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "IdleState")
                   {
                      lock (_locker)
                      {
                         List<int> CollectedIDs = new List<int>();
-                        foreach (var item in ColRes["responseData"]?["updatedEntities"])
+                        foreach (var item in ColRes["responseData"]?["updatedEntities"].ToList())
                         {
                            CollectedIDs.Add(int.Parse(item["id"].ToString()));
                            int exIndex = ListClass.ProductionList.FindIndex(e => e.id == int.Parse(item["id"].ToString()));
@@ -466,7 +499,6 @@ namespace ForgeOfBots.CefBrowserHandler
                         if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
                         ListClass.CollectedIDs = CollectedIDs;
                         _productionCollected?.Invoke(RequestType.CollectProduction, ListClass.CollectedIDs);
-                        return;
                      }
                   }
                }
@@ -474,10 +506,11 @@ namespace ForgeOfBots.CefBrowserHandler
                { MessageBox.Show(ex.ToString(), strings.CollectingError); }
                break;
             case RequestType.QueryProduction:
-               dynamic QueryRes = JsonConvert.DeserializeObject(msg);
+               JToken QueryRes = JsonConvert.DeserializeObject<JToken>(msg);
                try
                {
-                  if (QueryRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "ProducingState")
+                  if (QueryRes["responseData"]?["updatedEntities"]?.ToList().Count > 0
+                     && QueryRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "ProducingState")
                   {
                      lock (_locker)
                      {
@@ -486,34 +519,35 @@ namespace ForgeOfBots.CefBrowserHandler
                         {
                            ListClass.doneQuery.Add(id);
                            int exIndex = ListClass.ProductionList.FindIndex(e => e.id == id);
+                        if (exIndex >= 0)
+                        {
+                           EntityEx old = ListClass.ProductionList[exIndex];
+                           ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                           ListClass.ProductionList[exIndex].name = old.name;
+                           ListClass.ProductionList[exIndex].type = old.type;
+                           ListClass.ProductionList[exIndex].available_products = old.available_products;
+                        }
+                        else
+                        {
+                           exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0]?["id"].ToString()));
                            if (exIndex >= 0)
                            {
-                              EntityEx old = ListClass.ProductionList[exIndex];
-                              ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
-                              ListClass.ProductionList[exIndex].name = old.name;
-                              ListClass.ProductionList[exIndex].type = old.type;
-                              ListClass.ProductionList[exIndex].available_products = old.available_products;
+                              EntityEx old = ListClass.GoodProductionList[exIndex];
+                              ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                              ListClass.GoodProductionList[exIndex].name = old.name;
+                              ListClass.GoodProductionList[exIndex].type = old.type;
+                              ListClass.GoodProductionList[exIndex].available_products = old.available_products;
                            }
-                           else
-                           {
-                              exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0]?["id"].ToString()));
-                              if (exIndex >= 0)
-                              {
-                                 EntityEx old = ListClass.GoodProductionList[exIndex];
-                                 ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
-                                 ListClass.GoodProductionList[exIndex].name = old.name;
-                                 ListClass.GoodProductionList[exIndex].type = old.type;
-                                 ListClass.GoodProductionList[exIndex].available_products = old.available_products;
-                              }
                            }
                         }
                         var a = ListClass.doneQuery.All(ListClass.AddedToQuery.Contains) && ListClass.AddedToQuery.Count == ListClass.doneQuery.Count;
                         if (a)
                         {
+                           ListClass.doneQuery.Clear();
+                           ListClass.AddedToQuery.Clear();
                            if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] doneQuery Count = {ListClass.doneQuery.Count}\n[{DateTime.Now}] AddedToQuery Count = {ListClass.AddedToQuery.Count}");
                            _productionStarted?.Invoke(RequestType.QueryProduction);
                         }
-                        return;
                      }
                   }
                }
@@ -560,6 +594,18 @@ namespace ForgeOfBots.CefBrowserHandler
                }
                ImportantLoaded[12] = true;
                break;
+            case RequestType.GetIncidents:
+               HiddenRewardRoot newHiddenRewards = JsonConvert.DeserializeObject<HiddenRewardRoot>(msg);
+               foreach (HiddenReward item in newHiddenRewards.responseData.hiddenRewards)
+               {
+                  DateTime endTime = Helper.UnixTimeStampToDateTime(item.expireTime);
+                  DateTime startTime = Helper.UnixTimeStampToDateTime(item.startTime);
+                  bool vis = (endTime > DateTime.Now) && (startTime < DateTime.Now);
+                  item.isVisible = vis;
+               }
+               ListClass.HiddenRewards = newHiddenRewards.responseData.hiddenRewards.ToList();
+               _IncidentUpdated?.Invoke(null, null);
+               break;
             default:
                break;
          }
@@ -593,7 +639,7 @@ namespace ForgeOfBots.CefBrowserHandler
                BuildingsRoot rootBuilding = JsonConvert.DeserializeObject<BuildingsRoot>("{\"buildings\":" + msg + "}");
                ListClass.AllBuildings = rootBuilding.buildings.ToList();
                ImportantLoaded[13] = true;
-               Main.Updater.UpdateBuildings();
+               Main.Updater.UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
                ImportantLoaded[14] = ListClass.Startup.Count > 0;
                ImportantLoaded[15] = ListClass.ProductionList.Count > 0;
                ImportantLoaded[16] = ListClass.ResidentialList.Count > 0;

@@ -58,6 +58,11 @@ namespace ForgeOfBots.DataHandler
                _class = "HiddenRewardService";
                _methode = "collectReward";
                break;
+            case RequestType.GetIncidents:
+               _data = new JArray(idData);
+               _class = "HiddenRewardService";
+               _methode = "getOverview";
+               break;
             case RequestType.VisitTavern:
                _data = new JArray(idData);
                _class = "FriendsTavernService";
@@ -205,6 +210,7 @@ namespace ForgeOfBots.DataHandler
       GetOwnTavern,
       RemovePlayer,
       GetAllWorlds,
+      GetIncidents,
    }
 
     public enum E_Motivate

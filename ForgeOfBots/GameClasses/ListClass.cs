@@ -68,6 +68,14 @@ namespace ForgeOfBots.GameClasses
       public static List<int> doneQuery { get; set; } = new List<int>();
       public static List<int> AddedToQuery { get; set; } = new List<int>();
       public static List<int> CollectedIDs { get; set; } = new List<int>();
+
+      /// <summary>
+      /// Indicates the state of the ProductionCycle
+      /// 0 = Idle -> Producing
+      /// 1 = Producing Finished -> Idle
+      /// 2 = Producing
+      /// </summary>
+      public static int State { get; set; } = -1;
    }
    public enum WorldState
    {
