@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForgeOfBots.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +16,7 @@ namespace ForgeOfBots.Forms
       public About()
       {
          InitializeComponent();
-         lblTitle.Text += $"{Main.Version.Major}.{Main.Version.Minor}";
+         lblTitle.Text += $"{StaticData.Version.Major}.{StaticData.Version.Minor}";
          lblVersion.Text = GetVersionNumber(typeof(Main), false);
          lblInternalVersion.Text = GetVersionNumber(typeof(Main), true);
       }

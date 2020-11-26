@@ -117,374 +117,1874 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;metroLabel2.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
-  </data>
-  <data name="&gt;&gt;mtBigRoads.Name" xml:space="preserve">
-    <value>mtBigRoads</value>
-  </data>
-  <data name="&gt;&gt;mrb4.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="mrb15.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="mtpPremium.Text" xml:space="preserve">
-    <value>Premium</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="mpProdCycle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 60</value>
+  <data name="mtView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 12</value>
   </data>
-  <data name="&gt;&gt;mpGoodCycle.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroPanel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="lblCustomUserAgent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 23</value>
-  </data>
-  <data name="&gt;&gt;mrbG2d.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtbCustomUserAgent.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrbG8h.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;mtpMisc.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="metroLabel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 19</value>
-  </data>
-  <data name="mtpData.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;metroLabel3.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrbG2d.Location" type="System.Drawing.Point, System.Drawing">
-    <value>170, 4</value>
-  </data>
-  <data name="lblRestartNeeded.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="mtIncident.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="&gt;&gt;mrb4.Name" xml:space="preserve">
-    <value>mrb4</value>
-  </data>
-  <data name="&gt;&gt;lblLanguage.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mbSaveReload.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 14</value>
-  </data>
-  <data name="&gt;&gt;mpProdCycle.Name" xml:space="preserve">
-    <value>mpProdCycle</value>
-  </data>
-  <data name="mpProdCycle.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="mrb1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="&gt;&gt;mtAutoLogin.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="metroLabel8.Text" xml:space="preserve">
-    <value>Moppel Bot:</value>
-  </data>
-  <data name="&gt;&gt;metroLabel2.Parent" xml:space="preserve">
-    <value>mtpProduction</value>
-  </data>
-  <data name="&gt;&gt;metroLabel4.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mpGoodCycle.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="mrb4.Text" xml:space="preserve">
-    <value>4h</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Name" xml:space="preserve">
-    <value>lblSerialKey</value>
-  </data>
-  <data name="metroLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 12</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.Name" xml:space="preserve">
-    <value>metroLabel8</value>
-  </data>
-  <data name="&gt;&gt;metroLabel3.Name" xml:space="preserve">
-    <value>metroLabel3</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;metroLabel3.Parent" xml:space="preserve">
-    <value>mtpProduction</value>
-  </data>
-  <data name="metroLabel6.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
-  </data>
-  <data name="metroLabel11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 91</value>
-  </data>
-  <data name="&gt;&gt;metroLabel7.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrb8.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrb8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 25</value>
-  </data>
-  <data name="lblSerialKey.Text" xml:space="preserve">
-    <value>Serial-Key:</value>
-  </data>
-  <data name="&gt;&gt;mrb15.Parent" xml:space="preserve">
-    <value>mpProdCycle</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="&gt;&gt;mrb15.Name" xml:space="preserve">
-    <value>mrb15</value>
-  </data>
-  <data name="mcbLanguage.ItemHeight" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;mtpManually.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;mrbG8h.Name" xml:space="preserve">
-    <value>mrbG8h</value>
-  </data>
-  <data name="metroLabel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 19</value>
-  </data>
-  <data name="lblRestartNeeded.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 213</value>
-  </data>
-  <data name="metroLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 19</value>
-  </data>
-  <data name="&gt;&gt;metroLabel4.Parent" xml:space="preserve">
-    <value>mtpManually</value>
-  </data>
-  <data name="&gt;&gt;lblAutoLogin.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="mbCheckSerial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 32</value>
-  </data>
-  <data name="&gt;&gt;mrb1d.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mcbLanguage.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrb4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLanguage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopRight</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="&gt;&gt;mrbG1d.Name" xml:space="preserve">
-    <value>mrbG1d</value>
-  </data>
-  <data name="metroLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="metroLabel10.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="mrbG1d.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="metroLabel3.Text" xml:space="preserve">
-    <value>Toggle Goods Production Cycle:</value>
-  </data>
-  <data name="metroLabel5.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;mcbLanguage.Parent" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrb8.Text" xml:space="preserve">
-    <value>8h</value>
-  </data>
-  <data name="mrb5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="mtbSerialKey.Text" xml:space="preserve">
-    <value>SerialKey</value>
-  </data>
-  <data name="mrb4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 24</value>
-  </data>
-  <data name="mcbCitySelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 29</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtpMisc.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mtpProduction.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="mtbSave.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="metroLabel11.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;metroLabel6.Name" xml:space="preserve">
-    <value>metroLabel6</value>
-  </data>
-  <data name="mtpPremium.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="metroLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 15</value>
-  </data>
-  <data name="&gt;&gt;mtbCustomUserAgent.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="mtbCustomUserAgent.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="mrbG1d.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 4</value>
-  </data>
-  <data name="&gt;&gt;metroLabel3.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="mcbCitySelection.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="mtProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 23</value>
-  </data>
-  <data name="mtpProduction.Text" xml:space="preserve">
-    <value>Production</value>
-  </data>
-  <data name="mrbG4h.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.Name" xml:space="preserve">
-    <value>metroLabel10</value>
-  </data>
-  <data name="&gt;&gt;mpProdCycle.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="mtAutoLogin.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mtView.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 19</value>
   </data>
-  <data name="&gt;&gt;lblRestartNeeded.Name" xml:space="preserve">
-    <value>lblRestartNeeded</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mtView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="metroLabel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 55</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mtMoppel.Text" xml:space="preserve">
+  <data name="mtView.Text" xml:space="preserve">
     <value>Aus</value>
   </data>
-  <data name="&gt;&gt;mtbSerialKey.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
+  <data name="&gt;&gt;mtView.Name" xml:space="preserve">
+    <value>mtView</value>
   </data>
-  <data name="&gt;&gt;mtpBots.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  <data name="&gt;&gt;mtView.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
   </data>
   <data name="&gt;&gt;mtView.Parent" xml:space="preserve">
     <value>mtpProduction</value>
   </data>
-  <data name="metroLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="&gt;&gt;mtView.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.Name" xml:space="preserve">
+    <value>metroLabel5</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.Name" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroPanel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.Name" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroPanel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.Name" xml:space="preserve">
+    <value>metroLabel3</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.Name" xml:space="preserve">
+    <value>metroLabel2</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.Name" xml:space="preserve">
+    <value>metroLabel1</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="mtpProduction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpProduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 251</value>
+  </data>
+  <data name="mtpProduction.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="mtpProduction.Text" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="&gt;&gt;mtpProduction.Name" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;mtpProduction.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpProduction.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpProduction.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="metroLabel12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 94</value>
+  </data>
+  <data name="metroLabel12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 19</value>
+  </data>
+  <data name="metroLabel12.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="metroLabel12.Text" xml:space="preserve">
+    <value>DarkMode:</value>
+  </data>
+  <data name="metroLabel12.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="mtpManually.Text" xml:space="preserve">
-    <value>Manually</value>
+  <data name="&gt;&gt;metroLabel12.Name" xml:space="preserve">
+    <value>metroLabel12</value>
   </data>
-  <data name="metroLabel10.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="&gt;&gt;metroLabel12.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel12.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;metroLabel12.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mtDarkMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtDarkMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 94</value>
+  </data>
+  <data name="mtDarkMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 19</value>
+  </data>
+  <data name="mtDarkMode.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="mtDarkMode.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtDarkMode.Name" xml:space="preserve">
+    <value>mtDarkMode</value>
+  </data>
+  <data name="&gt;&gt;mtDarkMode.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtDarkMode.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;mtDarkMode.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblAutoLogin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 69</value>
+  </data>
+  <data name="lblAutoLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 19</value>
+  </data>
+  <data name="lblAutoLogin.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblAutoLogin.Text" xml:space="preserve">
+    <value>Autologin:</value>
+  </data>
+  <data name="lblAutoLogin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblAutoLogin.Name" xml:space="preserve">
+    <value>lblAutoLogin</value>
+  </data>
+  <data name="&gt;&gt;lblAutoLogin.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblAutoLogin.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;lblAutoLogin.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mtAutoLogin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtAutoLogin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 69</value>
+  </data>
+  <data name="mtAutoLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 19</value>
+  </data>
+  <data name="mtAutoLogin.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="mtAutoLogin.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtAutoLogin.Name" xml:space="preserve">
+    <value>mtAutoLogin</value>
+  </data>
+  <data name="&gt;&gt;mtAutoLogin.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtAutoLogin.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;mtAutoLogin.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblRestartNeeded.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 213</value>
+  </data>
+  <data name="lblRestartNeeded.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 30</value>
+  </data>
+  <data name="lblRestartNeeded.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblRestartNeeded.Text" xml:space="preserve">
+    <value>RESTART NEEDED</value>
+  </data>
+  <data name="lblRestartNeeded.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lblRestartNeeded.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblRestartNeeded.Name" xml:space="preserve">
+    <value>lblRestartNeeded</value>
+  </data>
+  <data name="&gt;&gt;lblRestartNeeded.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblRestartNeeded.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;lblRestartNeeded.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="mtbSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>324, 213</value>
+  </data>
+  <data name="mtbSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 30</value>
+  </data>
+  <data name="mtbSave.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="mtbSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;mtbSave.Name" xml:space="preserve">
+    <value>mtbSave</value>
+  </data>
+  <data name="&gt;&gt;mtbSave.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtbSave.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;mtbSave.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="mtbCustomUserAgent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 40</value>
+  </data>
+  <data name="mtbCustomUserAgent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 23</value>
+  </data>
+  <data name="mtbCustomUserAgent.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="mtbCustomUserAgent.Text" xml:space="preserve">
+    <value>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0</value>
+  </data>
+  <data name="&gt;&gt;mtbCustomUserAgent.Name" xml:space="preserve">
+    <value>mtbCustomUserAgent</value>
+  </data>
+  <data name="&gt;&gt;mtbCustomUserAgent.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
   </data>
   <data name="&gt;&gt;mtbCustomUserAgent.Parent" xml:space="preserve">
     <value>mtpMisc</value>
   </data>
+  <data name="&gt;&gt;mtbCustomUserAgent.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblCustomUserAgent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="lblCustomUserAgent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 23</value>
+  </data>
+  <data name="lblCustomUserAgent.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblCustomUserAgent.Text" xml:space="preserve">
+    <value>Custom User-Agent:</value>
+  </data>
+  <data name="lblCustomUserAgent.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblCustomUserAgent.Name" xml:space="preserve">
+    <value>lblCustomUserAgent</value>
+  </data>
+  <data name="&gt;&gt;lblCustomUserAgent.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblCustomUserAgent.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;lblCustomUserAgent.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 5</value>
+  </data>
+  <data name="lblLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 20</value>
+  </data>
+  <data name="lblLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblLanguage.Text" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="lblLanguage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Name" xml:space="preserve">
+    <value>lblLanguage</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="mcbLanguage.ItemHeight" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="mcbLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 5</value>
+  </data>
+  <data name="mcbLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 29</value>
+  </data>
+  <data name="mcbLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mcbLanguage.Name" xml:space="preserve">
+    <value>mcbLanguage</value>
+  </data>
+  <data name="&gt;&gt;mcbLanguage.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mcbLanguage.Parent" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;mcbLanguage.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="mtpMisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpMisc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 251</value>
+  </data>
+  <data name="mtpMisc.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="mtpMisc.Text" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="&gt;&gt;mtpMisc.Name" xml:space="preserve">
+    <value>mtpMisc</value>
+  </data>
+  <data name="&gt;&gt;mtpMisc.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpMisc.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpMisc.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Name" xml:space="preserve">
+    <value>mtRQBot</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Name" xml:space="preserve">
+    <value>metroLabel10</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Name" xml:space="preserve">
+    <value>mtIncident</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Name" xml:space="preserve">
+    <value>mtMoppel</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Name" xml:space="preserve">
+    <value>mtTavern</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Name" xml:space="preserve">
+    <value>mtProduction</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Name" xml:space="preserve">
+    <value>metroLabel9</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Name" xml:space="preserve">
+    <value>metroLabel8</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.Name" xml:space="preserve">
+    <value>metroLabel7</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.Name" xml:space="preserve">
+    <value>metroLabel6</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="mtpBots.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpBots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 251</value>
+  </data>
+  <data name="mtpBots.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="mtpBots.Text" xml:space="preserve">
+    <value>Bots</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.Name" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.Name" xml:space="preserve">
+    <value>metroLabel4</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.Parent" xml:space="preserve">
+    <value>mtpManually</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mtBigRoads.Name" xml:space="preserve">
+    <value>mtBigRoads</value>
+  </data>
+  <data name="&gt;&gt;mtBigRoads.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
   <data name="&gt;&gt;mtBigRoads.Parent" xml:space="preserve">
     <value>mtpManually</value>
+  </data>
+  <data name="&gt;&gt;mtBigRoads.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mtpManually.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpManually.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 251</value>
+  </data>
+  <data name="mtpManually.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="mtpManually.Text" xml:space="preserve">
+    <value>Manually</value>
+  </data>
+  <data name="&gt;&gt;mtpManually.Name" xml:space="preserve">
+    <value>mtpManually</value>
+  </data>
+  <data name="&gt;&gt;mtpManually.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpManually.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpManually.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Name" xml:space="preserve">
+    <value>mbCheckSerial</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Name" xml:space="preserve">
+    <value>lblSerialKey</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Name" xml:space="preserve">
+    <value>mtbSerialKey</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mtpPremium.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpPremium.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 251</value>
+  </data>
+  <data name="mtpPremium.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="mtpPremium.Text" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Name" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Name" xml:space="preserve">
+    <value>metroLabel11</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Name" xml:space="preserve">
+    <value>mbSaveReload</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Name" xml:space="preserve">
+    <value>lblChooseWorld</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Name" xml:space="preserve">
+    <value>mcbCitySelection</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Name" xml:space="preserve">
+    <value>mbDeleteData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Name" xml:space="preserve">
+    <value>lblDeleteData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="mtpData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 251</value>
+  </data>
+  <data name="mtpData.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="mtpData.Text" xml:space="preserve">
+    <value>Userdata</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Name" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpData.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mtcSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="mtcSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mtcSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>451, 290</value>
+  </data>
+  <data name="mtcSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;mtcSettings.Name" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtcSettings.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabControl, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtcSettings.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mtcSettings.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="metroLabel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>291, 12</value>
+  </data>
+  <data name="metroLabel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 19</value>
+  </data>
+  <data name="metroLabel5.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="metroLabel5.Text" xml:space="preserve">
+    <value>Enabled = Grouped</value>
+  </data>
+  <data name="metroLabel5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.Name" xml:space="preserve">
+    <value>metroLabel5</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.Name" xml:space="preserve">
+    <value>mrbG2d</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.Name" xml:space="preserve">
+    <value>mrbG1d</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mrbG8h.Name" xml:space="preserve">
+    <value>mrbG8h</value>
+  </data>
+  <data name="&gt;&gt;mrbG8h.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG8h.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG8h.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.Name" xml:space="preserve">
+    <value>mrbG4h</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mpGoodCycle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 122</value>
+  </data>
+  <data name="mpGoodCycle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 30</value>
+  </data>
+  <data name="mpGoodCycle.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.Name" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroPanel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;mpGoodCycle.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mrbG2d.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrbG2d.Location" type="System.Drawing.Point, System.Drawing">
+    <value>170, 4</value>
+  </data>
+  <data name="mrbG2d.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrbG2d.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="mrbG2d.Text" xml:space="preserve">
+    <value>2d</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.Name" xml:space="preserve">
+    <value>mrbG2d</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG2d.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mrbG1d.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrbG1d.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 4</value>
+  </data>
+  <data name="mrbG1d.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrbG1d.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="mrbG1d.Text" xml:space="preserve">
+    <value>1d</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.Name" xml:space="preserve">
+    <value>mrbG1d</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG1d.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mrbG8h.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrbG8h.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 4</value>
+  </data>
+  <data name="mrbG8h.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrbG8h.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
   <data name="mrbG8h.Text" xml:space="preserve">
     <value>8h</value>
   </data>
-  <data name="lblSerialKey.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;mrbG8h.Name" xml:space="preserve">
+    <value>mrbG8h</value>
+  </data>
+  <data name="&gt;&gt;mrbG8h.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG8h.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG8h.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mrbG4h.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrbG4h.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="mrbG4h.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrbG4h.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="mrbG4h.Text" xml:space="preserve">
+    <value>4h</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.Name" xml:space="preserve">
+    <value>mrbG4h</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.Parent" xml:space="preserve">
+    <value>mpGoodCycle</value>
+  </data>
+  <data name="&gt;&gt;mrbG4h.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.Name" xml:space="preserve">
+    <value>mrb1d</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mrb8.Name" xml:space="preserve">
+    <value>mrb8</value>
+  </data>
+  <data name="&gt;&gt;mrb8.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb8.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb8.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mrb4.Name" xml:space="preserve">
+    <value>mrb4</value>
+  </data>
+  <data name="&gt;&gt;mrb4.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb4.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb4.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mrb1.Name" xml:space="preserve">
+    <value>mrb1</value>
+  </data>
+  <data name="&gt;&gt;mrb1.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb1.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;mrb15.Name" xml:space="preserve">
+    <value>mrb15</value>
+  </data>
+  <data name="&gt;&gt;mrb15.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb15.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb15.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;mrb5.Name" xml:space="preserve">
+    <value>mrb5</value>
+  </data>
+  <data name="&gt;&gt;mrb5.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb5.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb5.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="mpProdCycle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>205, 60</value>
+  </data>
+  <data name="mpProdCycle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 48</value>
+  </data>
+  <data name="mpProdCycle.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.Name" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroPanel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;mpProdCycle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mrb1d.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrb1d.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 25</value>
+  </data>
+  <data name="mrb1d.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrb1d.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="mrb1d.Text" xml:space="preserve">
+    <value>1d</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.Name" xml:space="preserve">
+    <value>mrb1d</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb1d.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mrb8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrb8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 25</value>
+  </data>
+  <data name="mrb8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrb8.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="mrb8.Text" xml:space="preserve">
+    <value>8h</value>
+  </data>
+  <data name="&gt;&gt;mrb8.Name" xml:space="preserve">
+    <value>mrb8</value>
+  </data>
+  <data name="&gt;&gt;mrb8.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb8.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb8.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mrb4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrb4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 24</value>
+  </data>
+  <data name="mrb4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrb4.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="mrb4.Text" xml:space="preserve">
+    <value>4h</value>
+  </data>
+  <data name="&gt;&gt;mrb4.Name" xml:space="preserve">
+    <value>mrb4</value>
+  </data>
+  <data name="&gt;&gt;mrb4.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb4.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb4.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mrb1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrb1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 4</value>
+  </data>
+  <data name="mrb1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="mrb1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="mrb1.Text" xml:space="preserve">
+    <value>1h</value>
+  </data>
+  <data name="&gt;&gt;mrb1.Name" xml:space="preserve">
+    <value>mrb1</value>
+  </data>
+  <data name="&gt;&gt;mrb1.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb1.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mrb15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrb15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 4</value>
+  </data>
+  <data name="mrb15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 15</value>
+  </data>
+  <data name="mrb15.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="mrb15.Text" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="&gt;&gt;mrb15.Name" xml:space="preserve">
+    <value>mrb15</value>
+  </data>
+  <data name="&gt;&gt;mrb15.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb15.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb15.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="mrb5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mrb5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="mrb5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 15</value>
+  </data>
+  <data name="mrb5.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="mrb5.Text" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="&gt;&gt;mrb5.Name" xml:space="preserve">
+    <value>mrb5</value>
+  </data>
+  <data name="&gt;&gt;mrb5.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mrb5.Parent" xml:space="preserve">
+    <value>mpProdCycle</value>
+  </data>
+  <data name="&gt;&gt;mrb5.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="metroLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 122</value>
+  </data>
+  <data name="metroLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 19</value>
+  </data>
+  <data name="metroLabel3.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="metroLabel3.Text" xml:space="preserve">
+    <value>Toggle Goods Production Cycle:</value>
+  </data>
+  <data name="metroLabel3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.Name" xml:space="preserve">
+    <value>metroLabel3</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel3.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="metroLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 60</value>
+  </data>
+  <data name="metroLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 19</value>
+  </data>
+  <data name="metroLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="metroLabel2.Text" xml:space="preserve">
+    <value>Toggle Production Cycle:</value>
+  </data>
+  <data name="metroLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.Name" xml:space="preserve">
+    <value>metroLabel2</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="metroLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 12</value>
+  </data>
+  <data name="metroLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 19</value>
+  </data>
+  <data name="metroLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="metroLabel1.Text" xml:space="preserve">
+    <value>Toggle View:</value>
+  </data>
+  <data name="metroLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.Name" xml:space="preserve">
+    <value>metroLabel1</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.Parent" xml:space="preserve">
+    <value>mtpProduction</value>
+  </data>
+  <data name="&gt;&gt;metroLabel1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="mtRQBot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 158</value>
+  </data>
+  <data name="mtRQBot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtRQBot.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="mtRQBot.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Name" xml:space="preserve">
+    <value>mtRQBot</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="metroLabel10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 158</value>
+  </data>
+  <data name="metroLabel10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 19</value>
+  </data>
+  <data name="metroLabel10.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="metroLabel10.Text" xml:space="preserve">
+    <value>Requrring Quest Bot:</value>
+  </data>
+  <data name="metroLabel10.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Name" xml:space="preserve">
+    <value>metroLabel10</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mtIncident.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 125</value>
+  </data>
+  <data name="mtIncident.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtIncident.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="mtIncident.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Name" xml:space="preserve">
+    <value>mtIncident</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mtMoppel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 91</value>
+  </data>
+  <data name="mtMoppel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtMoppel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="mtMoppel.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Name" xml:space="preserve">
+    <value>mtMoppel</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mtTavern.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 55</value>
   </data>
   <data name="mtTavern.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 19</value>
+  </data>
+  <data name="mtTavern.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="mtTavern.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Name" xml:space="preserve">
+    <value>mtTavern</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="mtProduction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 19</value>
+  </data>
+  <data name="mtProduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 23</value>
+  </data>
+  <data name="mtProduction.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="mtProduction.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Name" xml:space="preserve">
+    <value>mtProduction</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="metroLabel9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 125</value>
+  </data>
+  <data name="metroLabel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 19</value>
+  </data>
+  <data name="metroLabel9.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="metroLabel9.Text" xml:space="preserve">
+    <value>Incident Bot:</value>
+  </data>
+  <data name="metroLabel9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Name" xml:space="preserve">
+    <value>metroLabel9</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="metroLabel8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 91</value>
+  </data>
+  <data name="metroLabel8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 19</value>
+  </data>
+  <data name="metroLabel8.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="metroLabel8.Text" xml:space="preserve">
+    <value>Moppel Bot:</value>
+  </data>
+  <data name="metroLabel8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Name" xml:space="preserve">
+    <value>metroLabel8</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="metroLabel7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 55</value>
+  </data>
+  <data name="metroLabel7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 19</value>
+  </data>
+  <data name="metroLabel7.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="metroLabel7.Text" xml:space="preserve">
+    <value>Tavern Bot:</value>
+  </data>
+  <data name="metroLabel7.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.Name" xml:space="preserve">
+    <value>metroLabel7</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel7.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="metroLabel6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="metroLabel6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="metroLabel6.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="metroLabel6.Text" xml:space="preserve">
+    <value>Production Bot:</value>
+  </data>
+  <data name="metroLabel6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.Name" xml:space="preserve">
+    <value>metroLabel6</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel6.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="metroLabel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 15</value>
+  </data>
+  <data name="metroLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 19</value>
+  </data>
+  <data name="metroLabel4.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="metroLabel4.Text" xml:space="preserve">
+    <value>Toggle 2-Lane Road Incidents:</value>
+  </data>
+  <data name="metroLabel4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.Name" xml:space="preserve">
+    <value>metroLabel4</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.Parent" xml:space="preserve">
+    <value>mtpManually</value>
+  </data>
+  <data name="&gt;&gt;metroLabel4.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mtBigRoads.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 15</value>
+  </data>
+  <data name="mtBigRoads.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 19</value>
+  </data>
+  <data name="mtBigRoads.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="mtBigRoads.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtBigRoads.Name" xml:space="preserve">
+    <value>mtBigRoads</value>
+  </data>
+  <data name="&gt;&gt;mtBigRoads.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtBigRoads.Parent" xml:space="preserve">
+    <value>mtpManually</value>
+  </data>
+  <data name="&gt;&gt;mtBigRoads.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mbCheckSerial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 98</value>
+  </data>
+  <data name="mbCheckSerial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 32</value>
+  </data>
+  <data name="mbCheckSerial.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="mbCheckSerial.Text" xml:space="preserve">
+    <value>Register / Login</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Name" xml:space="preserve">
+    <value>mbCheckSerial</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblSerialKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 17</value>
+  </data>
+  <data name="lblSerialKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 29</value>
+  </data>
+  <data name="lblSerialKey.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblSerialKey.Text" xml:space="preserve">
+    <value>Serial-Key:</value>
+  </data>
+  <data name="lblSerialKey.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Name" xml:space="preserve">
+    <value>lblSerialKey</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mtbSerialKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 17</value>
+  </data>
+  <data name="mtbSerialKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 75</value>
+  </data>
+  <data name="mtbSerialKey.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="mtbSerialKey.Text" xml:space="preserve">
+    <value>SerialKey</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Name" xml:space="preserve">
+    <value>mtbSerialKey</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="metroLabel11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 91</value>
+  </data>
+  <data name="metroLabel11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 70</value>
+  </data>
+  <data name="metroLabel11.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="metroLabel11.Text" xml:space="preserve">
+    <value>!!! DELETING USERDATA WILL RESTART THE BOT !!!
+
+TO USE PREMIUM FEATURES YOU NEED TO
+LOGIN WITH YOUR SERIALKEY AGAIN</value>
+  </data>
+  <data name="metroLabel11.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Name" xml:space="preserve">
+    <value>metroLabel11</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mbSaveReload.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 14</value>
+  </data>
+  <data name="mbSaveReload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 29</value>
+  </data>
+  <data name="mbSaveReload.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="mbSaveReload.Text" xml:space="preserve">
+    <value>Save &amp;&amp; Reload</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Name" xml:space="preserve">
+    <value>mbSaveReload</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblChooseWorld.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 14</value>
+  </data>
+  <data name="lblChooseWorld.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 29</value>
+  </data>
+  <data name="lblChooseWorld.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblChooseWorld.Text" xml:space="preserve">
+    <value>Change City:</value>
+  </data>
+  <data name="lblChooseWorld.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Name" xml:space="preserve">
+    <value>lblChooseWorld</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mcbCitySelection.ItemHeight" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="mcbCitySelection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>187, 14</value>
+  </data>
+  <data name="mcbCitySelection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 29</value>
+  </data>
+  <data name="mcbCitySelection.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Name" xml:space="preserve">
+    <value>mcbCitySelection</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mbDeleteData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>187, 59</value>
+  </data>
+  <data name="mbDeleteData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 29</value>
+  </data>
+  <data name="mbDeleteData.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="mbDeleteData.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Name" xml:space="preserve">
+    <value>mbDeleteData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblDeleteData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 59</value>
+  </data>
+  <data name="lblDeleteData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 29</value>
+  </data>
+  <data name="lblDeleteData.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblDeleteData.Text" xml:space="preserve">
+    <value>Delete Userdata:</value>
+  </data>
+  <data name="lblDeleteData.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Name" xml:space="preserve">
+    <value>lblDeleteData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>451, 290</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1040,1018 +2540,16 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mbDeleteData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 59</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblDeleteData.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.Name" xml:space="preserve">
-    <value>mtProduction</value>
-  </data>
-  <data name="&gt;&gt;mrb1.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrb1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="mrbG2d.Text" xml:space="preserve">
-    <value>2d</value>
-  </data>
-  <data name="mtcSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;mrb1.Name" xml:space="preserve">
-    <value>mrb1</value>
-  </data>
-  <data name="mtpPremium.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lblChooseWorld.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="mrb1d.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="metroLabel4.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;mrb8.Name" xml:space="preserve">
-    <value>mrb8</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtView.Name" xml:space="preserve">
-    <value>mtView</value>
-  </data>
-  <data name="lblSerialKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 17</value>
-  </data>
-  <data name="&gt;&gt;mrb4.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mtRQBot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mtAutoLogin.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="mtBigRoads.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="lblSerialKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 29</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="lblAutoLogin.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="metroLabel4.Text" xml:space="preserve">
-    <value>Toggle 2-Lane Road Incidents:</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="metroLabel4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="mtIncident.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 125</value>
-  </data>
-  <data name="lblLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 5</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;mtpMisc.Name" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="mrb5.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="metroLabel9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 125</value>
-  </data>
-  <data name="mrb4.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="metroLabel6.Text" xml:space="preserve">
-    <value>Production Bot:</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Name" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="mtRQBot.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;mtAutoLogin.Name" xml:space="preserve">
-    <value>mtAutoLogin</value>
-  </data>
-  <data name="lblChooseWorld.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="mtcSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="mrbG8h.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;mrb8.Parent" xml:space="preserve">
-    <value>mpProdCycle</value>
-  </data>
-  <data name="&gt;&gt;mtpBots.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrbG2d.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="mtView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 19</value>
-  </data>
-  <data name="mrbG4h.Text" xml:space="preserve">
-    <value>4h</value>
-  </data>
-  <data name="mrb8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;mtcSettings.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="metroLabel11.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblRestartNeeded.Parent" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="metroLabel3.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;mrbG2d.Name" xml:space="preserve">
-    <value>mrbG2d</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mrb5.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;mpGoodCycle.Name" xml:space="preserve">
-    <value>mpGoodCycle</value>
-  </data>
-  <data name="mtbCustomUserAgent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 40</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Name" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="metroLabel10.Text" xml:space="preserve">
-    <value>Requrring Quest Bot:</value>
-  </data>
-  <data name="mtIncident.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="mrb5.Text" xml:space="preserve">
-    <value>5min</value>
-  </data>
-  <data name="mtbCustomUserAgent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 23</value>
-  </data>
-  <data name="mrb1d.Text" xml:space="preserve">
-    <value>1d</value>
-  </data>
-  <data name="mbCheckSerial.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="mtbSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 30</value>
-  </data>
-  <data name="&gt;&gt;mtpProduction.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="lblCustomUserAgent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="&gt;&gt;mcbLanguage.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="mtAutoLogin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 69</value>
-  </data>
-  <data name="metroLabel2.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Name" xml:space="preserve">
-    <value>lblChooseWorld</value>
-  </data>
-  <data name="&gt;&gt;mtpProduction.Name" xml:space="preserve">
-    <value>mtpProduction</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Name" xml:space="preserve">
-    <value>metroLabel11</value>
-  </data>
-  <data name="&gt;&gt;mrb15.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblChooseWorld.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 14</value>
-  </data>
-  <data name="&gt;&gt;mtcSettings.Name" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="metroLabel8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;mtpManually.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="mrb4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="mtMoppel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="mtpProduction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="&gt;&gt;mtbSave.Parent" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="&gt;&gt;lblRestartNeeded.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="lblSerialKey.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="mtbSerialKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 75</value>
-  </data>
-  <data name="lblRestartNeeded.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mtMoppel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 91</value>
-  </data>
-  <data name="&gt;&gt;mrbG8h.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mtbSave.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="lblAutoLogin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 69</value>
-  </data>
-  <data name="mtProduction.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="lblRestartNeeded.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mpGoodCycle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 30</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Name" xml:space="preserve">
-    <value>mbCheckSerial</value>
-  </data>
-  <data name="mrb1.Text" xml:space="preserve">
-    <value>1h</value>
-  </data>
-  <data name="mtRQBot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 158</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Name" xml:space="preserve">
-    <value>mbSaveReload</value>
-  </data>
-  <data name="mtbCustomUserAgent.Text" xml:space="preserve">
-    <value>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0</value>
-  </data>
-  <data name="mrb15.Text" xml:space="preserve">
-    <value>15min</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Name" xml:space="preserve">
-    <value>mcbCitySelection</value>
-  </data>
-  <data name="mtpManually.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 251</value>
-  </data>
-  <data name="mtpData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="&gt;&gt;mrbG1d.Parent" xml:space="preserve">
-    <value>mpGoodCycle</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="mrbG8h.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="mbCheckSerial.Text" xml:space="preserve">
-    <value>Register / Login</value>
-  </data>
-  <data name="mtMoppel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mrb15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel7.Text" xml:space="preserve">
-    <value>Tavern Bot:</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrbG1d.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrbG8h.Parent" xml:space="preserve">
-    <value>mpGoodCycle</value>
-  </data>
-  <data name="mrb8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="&gt;&gt;metroLabel6.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="mbSaveReload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 29</value>
-  </data>
-  <data name="&gt;&gt;mpProdCycle.Parent" xml:space="preserve">
-    <value>mtpProduction</value>
-  </data>
-  <data name="mrb1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 4</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Name" xml:space="preserve">
-    <value>mbDeleteData</value>
-  </data>
-  <data name="mtTavern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 55</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="mbDeleteData.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="mtbSave.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="&gt;&gt;mrb15.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mtpData.Text" xml:space="preserve">
-    <value>Userdata</value>
-  </data>
-  <data name="mrb8.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="lblCustomUserAgent.Text" xml:space="preserve">
-    <value>Custom User-Agent:</value>
-  </data>
-  <data name="&gt;&gt;lblAutoLogin.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrbG2d.Parent" xml:space="preserve">
-    <value>mpGoodCycle</value>
-  </data>
-  <data name="mrbG2d.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;mpProdCycle.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroPanel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrb1d.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="mrb5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;mtpManually.Name" xml:space="preserve">
-    <value>mtpManually</value>
-  </data>
-  <data name="mtbSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>324, 213</value>
-  </data>
-  <data name="&gt;&gt;mrb4.Parent" xml:space="preserve">
-    <value>mpProdCycle</value>
-  </data>
-  <data name="lblDeleteData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 59</value>
-  </data>
-  <data name="metroLabel1.Text" xml:space="preserve">
-    <value>Toggle View:</value>
-  </data>
-  <data name="mtProduction.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="mtpMisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 251</value>
-  </data>
-  <data name="lblAutoLogin.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="mtView.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mrb1d.Parent" xml:space="preserve">
-    <value>mpProdCycle</value>
-  </data>
-  <data name="&gt;&gt;mrb8.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;mtBigRoads.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mtpData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 251</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblLanguage.Name" xml:space="preserve">
-    <value>lblLanguage</value>
-  </data>
-  <data name="mtbSerialKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 17</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.Name" xml:space="preserve">
-    <value>mtMoppel</value>
-  </data>
-  <data name="&gt;&gt;metroLabel4.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblRestartNeeded.Text" xml:space="preserve">
-    <value>RESTART NEEDED</value>
-  </data>
-  <data name="metroLabel5.Text" xml:space="preserve">
-    <value>Enabled = Grouped</value>
-  </data>
-  <data name="metroLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 23</value>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="mtView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 12</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblChooseWorld.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 29</value>
-  </data>
-  <data name="&gt;&gt;metroLabel1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="mtView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="metroLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 19</value>
-  </data>
-  <data name="&gt;&gt;mrb5.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrb1d.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mtpMisc.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblRestartNeeded.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="mtpMisc.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="metroLabel3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="mrbG4h.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="&gt;&gt;mrb1d.Name" xml:space="preserve">
-    <value>mrb1d</value>
-  </data>
-  <data name="metroLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;mrb5.Name" xml:space="preserve">
-    <value>mrb5</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="metroLabel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 70</value>
-  </data>
-  <data name="mrbG1d.Text" xml:space="preserve">
-    <value>1d</value>
-  </data>
-  <data name="metroLabel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 12</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtcSettings.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabControl, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrbG4h.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="mtTavern.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;metroLabel5.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="metroLabel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 19</value>
-  </data>
-  <data name="metroLabel10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 158</value>
-  </data>
-  <data name="&gt;&gt;mtView.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="mpProdCycle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 48</value>
-  </data>
-  <data name="mbCheckSerial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>319, 98</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.Name" xml:space="preserve">
-    <value>mtRQBot</value>
-  </data>
-  <data name="mtBigRoads.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="metroLabel5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;metroLabel5.Name" xml:space="preserve">
-    <value>metroLabel5</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Name" xml:space="preserve">
-    <value>mtbSerialKey</value>
-  </data>
-  <data name="mtAutoLogin.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mtAutoLogin.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mcbLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 29</value>
-  </data>
-  <data name="&gt;&gt;mcbLanguage.Name" xml:space="preserve">
-    <value>mcbLanguage</value>
-  </data>
-  <data name="metroLabel9.Text" xml:space="preserve">
-    <value>Incident Bot:</value>
-  </data>
-  <data name="&gt;&gt;mtbSave.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;metroLabel6.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="mrb5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 15</value>
-  </data>
-  <data name="&gt;&gt;mtpData.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;mtBigRoads.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="mrb1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;mrbG8h.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtbCustomUserAgent.Name" xml:space="preserve">
-    <value>mtbCustomUserAgent</value>
-  </data>
-  <data name="mrb15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 4</value>
-  </data>
-  <data name="mtTavern.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="mrbG8h.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 4</value>
-  </data>
-  <data name="metroLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 60</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Name" xml:space="preserve">
-    <value>lblDeleteData</value>
-  </data>
-  <data name="mtpBots.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;metroLabel7.Name" xml:space="preserve">
-    <value>metroLabel7</value>
-  </data>
-  <data name="mtBigRoads.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 15</value>
-  </data>
-  <data name="mrbG2d.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrb5.Parent" xml:space="preserve">
-    <value>mpProdCycle</value>
-  </data>
-  <data name="mtbSerialKey.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="metroLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 122</value>
-  </data>
-  <data name="mtpProduction.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="mtpProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 251</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.Name" xml:space="preserve">
-    <value>mtIncident</value>
-  </data>
-  <data name="&gt;&gt;lblCustomUserAgent.Name" xml:space="preserve">
-    <value>lblCustomUserAgent</value>
-  </data>
-  <data name="mcbLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblLanguage.Text" xml:space="preserve">
-    <value>Language:</value>
-  </data>
-  <data name="mtAutoLogin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="metroLabel11.Text" xml:space="preserve">
-    <value>!!! DELETING USERDATA WILL RESTART THE BOT !!!
-
-TO USE PREMIUM FEATURES YOU NEED TO
-LOGIN WITH YOUR SERIALKEY AGAIN</value>
-  </data>
-  <data name="&gt;&gt;mtView.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mtpBots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 251</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="lblCustomUserAgent.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;mtbSave.Name" xml:space="preserve">
-    <value>mtbSave</value>
-  </data>
-  <data name="&gt;&gt;mtcSettings.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="mbDeleteData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 29</value>
-  </data>
-  <data name="mpGoodCycle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 122</value>
-  </data>
-  <data name="mcbCitySelection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 14</value>
-  </data>
-  <data name="&gt;&gt;mtpManually.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="&gt;&gt;mtpBots.Name" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel5.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblAutoLogin.Parent" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="&gt;&gt;mrbG4h.Parent" xml:space="preserve">
-    <value>mpGoodCycle</value>
-  </data>
-  <data name="lblAutoLogin.Text" xml:space="preserve">
-    <value>Autologin:</value>
-  </data>
-  <data name="mtcSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>451, 290</value>
-  </data>
-  <data name="&gt;&gt;lblCustomUserAgent.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="metroLabel6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="lblDeleteData.Text" xml:space="preserve">
-    <value>Delete Userdata:</value>
-  </data>
-  <data name="mtpBots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="metroLabel2.Text" xml:space="preserve">
-    <value>Toggle Production Cycle:</value>
-  </data>
-  <data name="mtpMisc.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
-  <data name="lblChooseWorld.Text" xml:space="preserve">
-    <value>Change City:</value>
-  </data>
-  <data name="metroLabel7.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblCustomUserAgent.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mtpPremium.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 251</value>
-  </data>
-  <data name="mrbG1d.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;metroLabel6.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mrbG4h.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 19</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.Name" xml:space="preserve">
-    <value>metroLabel9</value>
-  </data>
-  <data name="mrb1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="mrb1d.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 25</value>
-  </data>
-  <data name="&gt;&gt;mtpProduction.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="metroLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 19</value>
-  </data>
-  <data name="&gt;&gt;metroLabel1.Name" xml:space="preserve">
-    <value>metroLabel1</value>
-  </data>
-  <data name="lblDeleteData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 29</value>
-  </data>
-  <data name="&gt;&gt;mrbG1d.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>451, 290</value>
-  </data>
-  <data name="metroLabel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 91</value>
-  </data>
-  <data name="mtProduction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 19</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mrbG4h.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="mcbLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 5</value>
-  </data>
-  <data name="metroLabel7.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;metroLabel5.Parent" xml:space="preserve">
-    <value>mtpProduction</value>
-  </data>
-  <data name="mtcSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="mbSaveReload.Text" xml:space="preserve">
-    <value>Save &amp;&amp; Reload</value>
-  </data>
-  <data name="&gt;&gt;metroLabel2.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="mbDeleteData.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lblRestartNeeded.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 30</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="mrb1d.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 19</value>
-  </data>
-  <data name="&gt;&gt;mtpBots.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="metroLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 19</value>
-  </data>
-  <data name="&gt;&gt;mrb1.Parent" xml:space="preserve">
-    <value>mpProdCycle</value>
-  </data>
-  <data name="mrb15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 15</value>
-  </data>
-  <data name="&gt;&gt;mpGoodCycle.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="mrbG1d.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="mtpManually.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="metroLabel9.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;metroLabel7.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="mtIncident.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;mtAutoLogin.Parent" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="lblLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="metroLabel8.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblAutoLogin.Name" xml:space="preserve">
-    <value>lblAutoLogin</value>
-  </data>
-  <data name="lblDeleteData.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="metroLabel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 19</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="mbSaveReload.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblCustomUserAgent.Parent" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="lblAutoLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 19</value>
-  </data>
-  <data name="mtpManually.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="mcbCitySelection.ItemHeight" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="mtpBots.Text" xml:space="preserve">
-    <value>Bots</value>
-  </data>
-  <data name="mtpMisc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="&gt;&gt;lblLanguage.Parent" xml:space="preserve">
-    <value>mtpMisc</value>
-  </data>
-  <data name="&gt;&gt;mrbG2d.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="mtBigRoads.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 19</value>
-  </data>
-  <data name="&gt;&gt;metroLabel1.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.Name" xml:space="preserve">
-    <value>mtTavern</value>
-  </data>
-  <data name="&gt;&gt;mrbG4h.Name" xml:space="preserve">
-    <value>mrbG4h</value>
-  </data>
-  <data name="&gt;&gt;metroLabel1.Parent" xml:space="preserve">
-    <value>mtpProduction</value>
-  </data>
-  <data name="lblCustomUserAgent.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel2.Name" xml:space="preserve">
-    <value>metroLabel2</value>
-  </data>
-  <data name="&gt;&gt;metroLabel4.Name" xml:space="preserve">
-    <value>metroLabel4</value>
-  </data>
-  <data name="metroLabel9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel7.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="mtRQBot.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mrbG4h.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroRadioButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mpGoodCycle.Parent" xml:space="preserve">
-    <value>mtpProduction</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
 </root>

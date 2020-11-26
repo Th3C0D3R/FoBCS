@@ -1,6 +1,6 @@
 ﻿namespace ForgeOfBots
 {
-   partial class Main
+   partial class MainDark
    {
       /// <summary>
       /// Erforderliche Designervariable.
@@ -28,7 +28,7 @@
       /// </summary>
       private void InitializeComponent()
       {
-         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainDark));
          this.tsMain = new System.Windows.Forms.ToolStrip();
          this.tsbLogin = new System.Windows.Forms.ToolStripButton();
          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -195,7 +195,7 @@
          // 
          // tsMain
          // 
-         this.tsMain.BackColor = System.Drawing.Color.Transparent;
+         this.tsMain.BackColor = System.Drawing.Color.Black;
          this.tsMain.ImageScalingSize = new System.Drawing.Size(24, 24);
          this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbLogin,
@@ -212,8 +212,9 @@
          // 
          // tsbLogin
          // 
+         this.tsbLogin.BackColor = System.Drawing.Color.Black;
          this.tsbLogin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-         this.tsbLogin.ForeColor = System.Drawing.Color.Black;
+         this.tsbLogin.ForeColor = System.Drawing.Color.White;
          resources.ApplyResources(this.tsbLogin, "tsbLogin");
          this.tsbLogin.Name = "tsbLogin";
          this.tsbLogin.Tag = "login";
@@ -221,6 +222,7 @@
          // 
          // toolStripSeparator1
          // 
+         this.toolStripSeparator1.ForeColor = System.Drawing.Color.White;
          this.toolStripSeparator1.Name = "toolStripSeparator1";
          resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
          // 
@@ -231,30 +233,37 @@
             this.tsmiLog,
             this.settingsToolStripMenuItem,
             this.tsmiAbout});
-         this.tsddSettings.ForeColor = System.Drawing.Color.Black;
+         this.tsddSettings.ForeColor = System.Drawing.Color.White;
          resources.ApplyResources(this.tsddSettings, "tsddSettings");
          this.tsddSettings.Name = "tsddSettings";
          // 
          // tsmiLog
          // 
+         this.tsmiLog.BackColor = System.Drawing.Color.Black;
+         this.tsmiLog.ForeColor = System.Drawing.Color.White;
          this.tsmiLog.Name = "tsmiLog";
          resources.ApplyResources(this.tsmiLog, "tsmiLog");
          this.tsmiLog.Click += new System.EventHandler(this.tsmiLog_Click);
          // 
          // settingsToolStripMenuItem
          // 
+         this.settingsToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+         this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
          this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
          resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
          this.settingsToolStripMenuItem.Click += new System.EventHandler(this.tsddSettings_Click);
          // 
          // tsmiAbout
          // 
+         this.tsmiAbout.BackColor = System.Drawing.Color.Black;
+         this.tsmiAbout.ForeColor = System.Drawing.Color.White;
          this.tsmiAbout.Name = "tsmiAbout";
          resources.ApplyResources(this.tsmiAbout, "tsmiAbout");
          this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
          // 
          // toolStripSeparator3
          // 
+         this.toolStripSeparator3.ForeColor = System.Drawing.Color.White;
          this.toolStripSeparator3.Name = "toolStripSeparator3";
          resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
          // 
@@ -265,62 +274,80 @@
             this.aidToolStripMenuItem,
             this.tsmiVisitAll,
             this.tsmiDoAll});
+         this.tsddFunctions.ForeColor = System.Drawing.Color.White;
          resources.ApplyResources(this.tsddFunctions, "tsddFunctions");
          this.tsddFunctions.Name = "tsddFunctions";
          // 
          // aidToolStripMenuItem
          // 
+         this.aidToolStripMenuItem.BackColor = System.Drawing.Color.Black;
          this.aidToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aidFriendsToolStripMenuItem,
             this.aidClanToolStripMenuItem,
             this.aidNeiToolStripMenuItem,
             this.toolStripSeparator4,
             this.aidAllToolStripMenuItem});
+         this.aidToolStripMenuItem.ForeColor = System.Drawing.Color.White;
          this.aidToolStripMenuItem.Name = "aidToolStripMenuItem";
          resources.ApplyResources(this.aidToolStripMenuItem, "aidToolStripMenuItem");
          // 
          // aidFriendsToolStripMenuItem
          // 
+         this.aidFriendsToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+         this.aidFriendsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
          this.aidFriendsToolStripMenuItem.Name = "aidFriendsToolStripMenuItem";
          resources.ApplyResources(this.aidFriendsToolStripMenuItem, "aidFriendsToolStripMenuItem");
          this.aidFriendsToolStripMenuItem.Click += new System.EventHandler(this.aidFriendsToolStripMenuItem_Click);
          // 
          // aidClanToolStripMenuItem
          // 
+         this.aidClanToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+         this.aidClanToolStripMenuItem.ForeColor = System.Drawing.Color.White;
          this.aidClanToolStripMenuItem.Name = "aidClanToolStripMenuItem";
          resources.ApplyResources(this.aidClanToolStripMenuItem, "aidClanToolStripMenuItem");
          this.aidClanToolStripMenuItem.Click += new System.EventHandler(this.aidClanToolStripMenuItem_Click);
          // 
          // aidNeiToolStripMenuItem
          // 
+         this.aidNeiToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+         this.aidNeiToolStripMenuItem.ForeColor = System.Drawing.Color.White;
          this.aidNeiToolStripMenuItem.Name = "aidNeiToolStripMenuItem";
          resources.ApplyResources(this.aidNeiToolStripMenuItem, "aidNeiToolStripMenuItem");
          this.aidNeiToolStripMenuItem.Click += new System.EventHandler(this.aidNeiToolStripMenuItem_Click);
          // 
          // toolStripSeparator4
          // 
+         this.toolStripSeparator4.BackColor = System.Drawing.Color.Black;
+         this.toolStripSeparator4.ForeColor = System.Drawing.Color.White;
          this.toolStripSeparator4.Name = "toolStripSeparator4";
          resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
          // 
          // aidAllToolStripMenuItem
          // 
+         this.aidAllToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+         this.aidAllToolStripMenuItem.ForeColor = System.Drawing.Color.White;
          this.aidAllToolStripMenuItem.Name = "aidAllToolStripMenuItem";
          resources.ApplyResources(this.aidAllToolStripMenuItem, "aidAllToolStripMenuItem");
          // 
          // tsmiVisitAll
          // 
+         this.tsmiVisitAll.BackColor = System.Drawing.Color.Black;
+         this.tsmiVisitAll.ForeColor = System.Drawing.Color.White;
          this.tsmiVisitAll.Name = "tsmiVisitAll";
          resources.ApplyResources(this.tsmiVisitAll, "tsmiVisitAll");
          this.tsmiVisitAll.Click += new System.EventHandler(this.tsmiVisitAll_Click);
          // 
          // tsmiDoAll
          // 
+         this.tsmiDoAll.BackColor = System.Drawing.Color.Black;
+         this.tsmiDoAll.ForeColor = System.Drawing.Color.White;
          this.tsmiDoAll.Name = "tsmiDoAll";
          resources.ApplyResources(this.tsmiDoAll, "tsmiDoAll");
          this.tsmiDoAll.Click += new System.EventHandler(this.tsmiDoAll_Click);
          // 
          // toolStripSeparator2
          // 
+         this.toolStripSeparator2.ForeColor = System.Drawing.Color.White;
          this.toolStripSeparator2.Name = "toolStripSeparator2";
          resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
          // 
@@ -328,19 +355,21 @@
          // 
          this.tsbReload.BackColor = System.Drawing.Color.Transparent;
          this.tsbReload.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-         this.tsbReload.ForeColor = System.Drawing.Color.Black;
+         this.tsbReload.ForeColor = System.Drawing.Color.White;
          resources.ApplyResources(this.tsbReload, "tsbReload");
          this.tsbReload.Name = "tsbReload";
          this.tsbReload.Click += new System.EventHandler(this.tsbSettings_Click);
          // 
          // toolStripSeparator5
          // 
+         this.toolStripSeparator5.ForeColor = System.Drawing.Color.White;
          this.toolStripSeparator5.Name = "toolStripSeparator5";
          resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
          // 
          // toolStripButton1
          // 
          this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+         this.toolStripButton1.ForeColor = System.Drawing.Color.White;
          resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
          this.toolStripButton1.Name = "toolStripButton1";
          this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
@@ -360,16 +389,18 @@
          // 
          // tpOverview
          // 
+         this.tpOverview.BackColor = System.Drawing.Color.Black;
          this.tpOverview.Controls.Add(this.panel3);
          this.tpOverview.Controls.Add(this.panel1);
          this.tpOverview.Controls.Add(this.panel2);
          resources.ApplyResources(this.tpOverview, "tpOverview");
+         this.tpOverview.ForeColor = System.Drawing.Color.White;
          this.tpOverview.Name = "tpOverview";
          this.tpOverview.Tag = "0";
-         this.tpOverview.UseVisualStyleBackColor = true;
          // 
          // panel3
          // 
+         resources.ApplyResources(this.panel3, "panel3");
          this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
          this.panel3.Controls.Add(this.lblCur);
          this.panel3.Controls.Add(this.lblRunSince);
@@ -377,7 +408,6 @@
          this.panel3.Controls.Add(this.lblPlayerValue);
          this.panel3.Controls.Add(this.lblPlayer);
          this.panel3.Controls.Add(this.lblRunSinceValue);
-         resources.ApplyResources(this.panel3, "panel3");
          this.panel3.Name = "panel3";
          // 
          // lblCur
@@ -412,9 +442,9 @@
          // 
          // panel1
          // 
+         resources.ApplyResources(this.panel1, "panel1");
          this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
          this.panel1.Controls.Add(this.tableLayoutPanel8);
-         resources.ApplyResources(this.panel1, "panel1");
          this.panel1.Name = "panel1";
          // 
          // tableLayoutPanel8
@@ -490,6 +520,7 @@
          // 
          // lvGoods
          // 
+         this.lvGoods.BackColor = System.Drawing.Color.Black;
          this.lvGoods.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -498,6 +529,7 @@
             this.columnHeader5,
             this.columnHeader6});
          resources.ApplyResources(this.lvGoods, "lvGoods");
+         this.lvGoods.ForeColor = System.Drawing.Color.White;
          this.lvGoods.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
          this.lvGoods.HideSelection = false;
          this.lvGoods.MultiSelect = false;
@@ -533,11 +565,12 @@
          // tpOthers
          // 
          resources.ApplyResources(this.tpOthers, "tpOthers");
+         this.tpOthers.BackColor = System.Drawing.Color.Black;
          this.tpOthers.Controls.Add(this.panel5);
          this.tpOthers.Controls.Add(this.panel4);
+         this.tpOthers.ForeColor = System.Drawing.Color.White;
          this.tpOthers.Name = "tpOthers";
          this.tpOthers.Tag = "1";
-         this.tpOthers.UseVisualStyleBackColor = true;
          // 
          // panel5
          // 
@@ -614,13 +647,14 @@
          // tpTavern
          // 
          resources.ApplyResources(this.tpTavern, "tpTavern");
+         this.tpTavern.BackColor = System.Drawing.Color.Black;
          this.tpTavern.Controls.Add(this.tableLayoutPanel7);
          this.tpTavern.Controls.Add(this.tlpCurrentSittingPlayer);
          this.tpTavern.Controls.Add(this.tableLayoutPanel5);
          this.tpTavern.Controls.Add(this.panel6);
+         this.tpTavern.ForeColor = System.Drawing.Color.White;
          this.tpTavern.Name = "tpTavern";
          this.tpTavern.Tag = "2";
-         this.tpTavern.UseVisualStyleBackColor = true;
          // 
          // tableLayoutPanel7
          // 
@@ -703,11 +737,12 @@
          // 
          // tpBots
          // 
+         this.tpBots.BackColor = System.Drawing.Color.Black;
          this.tpBots.Controls.Add(this.tlpPremium);
+         this.tpBots.ForeColor = System.Drawing.Color.White;
          resources.ApplyResources(this.tpBots, "tpBots");
          this.tpBots.Name = "tpBots";
          this.tpBots.Tag = "3";
-         this.tpBots.UseVisualStyleBackColor = true;
          // 
          // tlpPremium
          // 
@@ -717,11 +752,12 @@
          // tpProduction
          // 
          resources.ApplyResources(this.tpProduction, "tpProduction");
+         this.tpProduction.BackColor = System.Drawing.Color.Black;
          this.tpProduction.Controls.Add(this.pnlGood);
          this.tpProduction.Controls.Add(this.pnlProd);
+         this.tpProduction.ForeColor = System.Drawing.Color.White;
          this.tpProduction.Name = "tpProduction";
          this.tpProduction.Tag = "4";
-         this.tpProduction.UseVisualStyleBackColor = true;
          // 
          // pnlGood
          // 
@@ -838,11 +874,12 @@
          // tpManually
          // 
          resources.ApplyResources(this.tpManually, "tpManually");
+         this.tpManually.BackColor = System.Drawing.Color.Black;
          this.tpManually.Controls.Add(this.pnlIncident);
          this.tpManually.Controls.Add(this.tableLayoutPanel11);
+         this.tpManually.ForeColor = System.Drawing.Color.White;
          this.tpManually.Name = "tpManually";
          this.tpManually.Tag = "5";
-         this.tpManually.UseVisualStyleBackColor = true;
          // 
          // pnlIncident
          // 
@@ -889,8 +926,10 @@
          // 
          // pnlLoading
          // 
+         this.pnlLoading.BackColor = System.Drawing.Color.Black;
          this.pnlLoading.Controls.Add(this.tableLayoutPanel2);
          resources.ApplyResources(this.pnlLoading, "pnlLoading");
+         this.pnlLoading.ForeColor = System.Drawing.Color.White;
          this.pnlLoading.Name = "pnlLoading";
          // 
          // tableLayoutPanel2
@@ -928,7 +967,9 @@
          // 
          // lbOutputWindow
          // 
+         this.lbOutputWindow.BackColor = System.Drawing.Color.Black;
          resources.ApplyResources(this.lbOutputWindow, "lbOutputWindow");
+         this.lbOutputWindow.ForeColor = System.Drawing.Color.White;
          this.lbOutputWindow.FormattingEnabled = true;
          this.lbOutputWindow.Name = "lbOutputWindow";
          this.lbOutputWindow.SelectionMode = System.Windows.Forms.SelectionMode.None;
@@ -965,10 +1006,12 @@
          // tsslProgressState
          // 
          resources.ApplyResources(this.tsslProgressState, "tsslProgressState");
+         this.tsslProgressState.ForeColor = System.Drawing.Color.White;
          this.tsslProgressState.Name = "tsslProgressState";
          // 
          // tspbProgress
          // 
+         this.tspbProgress.ForeColor = System.Drawing.Color.White;
          this.tspbProgress.Name = "tspbProgress";
          resources.ApplyResources(this.tspbProgress, "tspbProgress");
          this.tspbProgress.Step = 1;
@@ -976,6 +1019,7 @@
          // 
          // sStripStatus
          // 
+         this.sStripStatus.BackColor = System.Drawing.Color.Black;
          this.sStripStatus.ImageScalingSize = new System.Drawing.Size(24, 24);
          this.sStripStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslProgressState,
@@ -987,23 +1031,25 @@
          // 
          // tsslLog
          // 
+         this.tsslLog.ForeColor = System.Drawing.Color.White;
          this.tsslLog.Name = "tsslLog";
          resources.ApplyResources(this.tsslLog, "tsslLog");
          // 
          // tsslLogValue
          // 
+         this.tsslLogValue.ForeColor = System.Drawing.Color.White;
          this.tsslLogValue.Name = "tsslLogValue";
          resources.ApplyResources(this.tsslLogValue, "tsslLogValue");
          // 
-         // Main
+         // MainDark
          // 
          resources.ApplyResources(this, "$this");
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+         this.Controls.Add(this.pnlLoading);
          this.Controls.Add(this.tcMenu);
          this.Controls.Add(this.tsMain);
          this.Controls.Add(this.sStripStatus);
-         this.Controls.Add(this.pnlLoading);
-         this.Name = "Main";
+         this.Name = "MainDark";
          this.Tag = "Forge of Bots v";
          this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
          this.tsMain.ResumeLayout(false);

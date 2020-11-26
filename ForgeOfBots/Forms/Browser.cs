@@ -16,8 +16,8 @@ namespace ForgeOfBots.Forms
    {
 
       public ChromiumWebBrowser cwb;
-      public Main Main;
-      public Browser(Main _main)
+      public Form Main;
+      public Browser(Form _main)
       {
          Main = _main;
          InitializeComponent();

@@ -6,6 +6,7 @@ using System.Resources;
 using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
+using ForgeOfBots.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using static ForgeOfBots.Utils.Helper;
@@ -20,7 +21,7 @@ namespace ForgeOfBots.DataHandler
       public string Version { get; set; }
       private static int requestID => _requestId++;
       public int RequestID { get { return requestID; } private set { } }
-      private static readonly ResourceManager resMgr = Main.resMgr;
+      private static readonly ResourceManager resMgr = StaticData.resMgr;
       public string WorldID { get; set; }
 
       public string GetRequestScript(RequestType type, dynamic data)

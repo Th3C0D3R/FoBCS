@@ -247,9 +247,9 @@ namespace ForgeOfBots.Utils
          var methodInfo = type.GetMethod(methodename);
          if (methodInfo != null)
          {
-            if (Main.PremInstance == null)
-               Main.PremInstance = Activator.CreateInstance(type);
-            return methodInfo.Invoke(Main.PremInstance, param);
+            if (StaticData.PremInstance == null)
+               StaticData.PremInstance = Activator.CreateInstance(type);
+            return methodInfo.Invoke(StaticData.PremInstance, param);
          }
          return null;
       }

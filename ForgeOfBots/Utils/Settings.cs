@@ -30,18 +30,19 @@ namespace ForgeOfBots.Utils
       public bool RQBot { get; set; } = false;
       public string CustomUserAgent { get; set; } = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0";
       public bool AutoLogin { get; set; } = false;
+      public bool DarkMode { get; set; } = false;
 
       public void SaveSettings()
       {
          string json = JsonConvert.SerializeObject(this);
-         string DataPath = Path.Combine(Main.ProgramPath, "userdata.json");
-         Directory.CreateDirectory(Main.ProgramPath);
+         string DataPath = Path.Combine(StaticData.ProgramPath, "userdata.json");
+         Directory.CreateDirectory(StaticData.ProgramPath);
          File.WriteAllText(DataPath, json);
          _SettingsSaved?.Invoke(null, new OneTArgs<Settings> { t1 = this });
       }
       public static Settings ReadSettings()
       {
-         string DataPath = Path.Combine(Main.ProgramPath, "userdata.json");
+         string DataPath = Path.Combine(StaticData.ProgramPath, "userdata.json");
          string json = File.ReadAllText(DataPath);
          Settings s = JsonConvert.DeserializeObject<Settings>(json);
          _SettingsLoaded?.Invoke(null, new OneTArgs<Settings> { t1 = s });
@@ -49,12 +50,12 @@ namespace ForgeOfBots.Utils
       }
       public static bool SettingsExists()
       {
-         string DataPath = Path.Combine(Main.ProgramPath, "userdata.json");
+         string DataPath = Path.Combine(StaticData.ProgramPath, "userdata.json");
          return File.Exists(DataPath);
       }
       public void Delete()
       {
-         string DataPath = Path.Combine(Main.ProgramPath, "userdata.json");
+         string DataPath = Path.Combine(StaticData.ProgramPath, "userdata.json");
          if (File.Exists(DataPath))
             File.Delete(DataPath);
       }

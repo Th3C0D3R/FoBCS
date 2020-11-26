@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static ForgeOfBots.Utils.Helper;
+using static ForgeOfBots.Utils.StaticData;
 
 namespace ForgeOfBots.Utils.Premium
 {
@@ -94,8 +95,8 @@ namespace ForgeOfBots.Utils.Premium
                   var domainAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
                   if (domainAssemblies.Find(da => da.GetName().Name == "FoBPremiumNET") == null)
                   {
-                     Main.PremAssembly = Assembly.Load(buffer);
-                     ExecuteMethod(Main.PremAssembly, "EntryPoint", "LoadPremium", new object[] { serial, hwid });
+                     PremAssembly = Assembly.Load(buffer);
+                     ExecuteMethod(PremAssembly, "EntryPoint", "LoadPremium", new object[] { serial, hwid });
                      ret = Result.Success;
                      done = true;
                   }

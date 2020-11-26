@@ -45,16 +45,16 @@ using static ForgeOfBots.Utils.StaticData;
 
 namespace ForgeOfBots
 {
-   public partial class Main : Form
+   public partial class MainDark : Form
    {
-      
       private bool ForgeHXLoaded = false, UIDLoaded = false, SECRET_LOADED = false;
       private bool blockedLogin = false;
       private bool blockExpireBox = false;
+      public static bool DEBUGMODE = false;
       static readonly object _locker = new object();
       private int xcounter = 0;
 
-      public Main(string[] args)
+      public MainDark(string[] args)
       {
          if (args != null)
          {
@@ -133,7 +133,7 @@ namespace ForgeOfBots
             if (dlgRes == DialogResult.Cancel) Environment.Exit(0);
             Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
             ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
-            Updater = Updater = new CUpdate(cwb, ReqBuilder);
+            Updater = new CUpdate(cwb, ReqBuilder);
             Text = Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
             LogWnd = new Log(new Point(Location.X + Size.Width, Location.Y));
             ToggleGUI(false);
@@ -170,7 +170,7 @@ namespace ForgeOfBots
 #endif
             Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
             ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
-            Updater = Updater = new CUpdate(cwb, ReqBuilder);
+            Updater = new CUpdate(cwb, ReqBuilder);
             Text = Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
             LogWnd = new Log(new Point(Location.X + Size.Width, Location.Y));
             ToggleGUI(false);
@@ -1653,104 +1653,5 @@ namespace ForgeOfBots
       {
          UserData.SaveSettings();
       }
-   }
-   public static class CookieHandler
-   {
-      public static ICookieManager CookieManager { private set; get; }
-      public static Dictionary<string, string> _allCookies = new Dictionary<string, string>();
-      public static void GetCookies()
-      {
-         CookieManager = Cef.GetGlobalCookieManager();
-         var visitor = new CookieMonster(allCookies =>
-         {
-            //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
-            foreach (var item in allCookies)
-            {
-               if (item.Item1 == null) continue;
-               if (item.Item2 == null) continue;
-               if (_allCookies.ContainsKey(item.Item1.ToLower()))
-               {
-                  if (_allCookies[item.Item1.ToLower()] != item.Item2)
-                     _allCookies[item.Item1.ToLower()] = item.Item2;
-               }
-               else
-                  _allCookies.Add(item.Item1.ToLower(), item.Item2);
-            }
-            OnCookiesLoaded(new CookieLoadedEventArgs() { AllCookies = _allCookies });
-         });
-         CookieManager.VisitAllCookies(visitor);
-      }
-
-      public static void OnCookiesLoaded(CookieLoadedEventArgs e)
-      {
-         _CookiesLoaded?.Invoke("CookieHandler", e);
-      }
-
-      private static CookieLoadedEventHandler _CookiesLoaded;
-      public static event CookieLoadedEventHandler CookiesLoaded
-      {
-         add
-         {
-            if (_CookiesLoaded == null || !_CookiesLoaded.GetInvocationList().ToList().Contains(value))
-               _CookiesLoaded += value;
-         }
-         remove
-         {
-            _CookiesLoaded -= value;
-         }
-      }
-
-   }
-   public delegate void CookieLoadedEventHandler(object sender, CookieLoadedEventArgs e);
-   class CookieMonster : ICookieVisitor
-   {
-      readonly List<Tuple<string, string>> cookies = new List<Tuple<string, string>>();
-      readonly Action<IEnumerable<Tuple<string, string>>> useAllCookies;
-
-      public CookieMonster(Action<IEnumerable<Tuple<string, string>>> useAllCookies)
-      {
-         this.useAllCookies = useAllCookies;
-      }
-
-      public void Dispose()
-      {
-
-      }
-
-      public bool Visit(Cookie cookie, int count, int total, ref bool deleteCookie)
-      {
-         cookies.Add(new Tuple<string, string>(cookie.Name, cookie.Value));
-
-         if (count == total - 1)
-            useAllCookies(cookies);
-
-         return true;
-      }
-   }
-   public class CustomMenu : IContextMenuHandler
-   {
-      public void OnBeforeContextMenu(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IContextMenuParams parameters, IMenuModel model)
-      {
-         return;
-      }
-
-      public bool OnContextMenuCommand(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IContextMenuParams parameters, CefMenuCommand commandId, CefEventFlags eventFlags)
-      {
-         return false;
-      }
-
-      public void OnContextMenuDismissed(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame)
-      {
-         return;
-      }
-
-      public bool RunContextMenu(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, IContextMenuParams parameters, IMenuModel model, IRunContextMenuCallback callback)
-      {
-         return false;
-      }
-   }
-   public class CookieLoadedEventArgs : EventArgs
-   {
-      public Dictionary<string, string> AllCookies { get; set; }
    }
 }

@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{824BEE3A-55A4-4CAA-B223-E1F42388A657}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialKeyGenerator", "..\ForgeOfBots_Private\SerialKeyGenerator\SerialKeyGenerator.csproj", "{AD01C9E1-527F-4FBF-90BE-BE071289E1A0}"

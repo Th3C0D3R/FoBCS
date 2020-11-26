@@ -1,6 +1,6 @@
 
 # **Forge of Empires Bot** 
-![Discord](https://img.shields.io/discord/743455118338293810?label=Discord) [](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/thetruetigers/842954ac-9c32-48b8-8308-4f72a8a29bcc/2?label=Build)
+![Discord](https://img.shields.io/discord/743455118338293810?label=Discord) [](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/thetruetigers/842954ac-9c32-48b8-8308-4f72a8a29bcc/3?label=Build)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Th3C0D3R/FoBCS?include_prereleases) ![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Premium%20Server&up_color=green&up_message=online&url=https%3A%2F%2Fth3c0d3r.xyz) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Th3C0D3R/FoBCS)
 
 

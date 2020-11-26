@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using WorldSelection = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
+using static ForgeOfBots.Utils.StaticData;
 
 namespace ForgeOfBots.CefBrowserHandler
 {
@@ -214,11 +215,11 @@ namespace ForgeOfBots.CefBrowserHandler
          }
          if (!ImportantLoaded[19] && ImportantLoaded.ToList().FindAll(p => p).Count == 19)
          {
-            if (Main.cwb != null)
+            if (cwb != null)
             {
                ImportantLoaded[19] = true;
-               string script = Main.ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
-               Main.cwb.ExecuteScriptAsync(script);
+               string script = ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
+               cwb.ExecuteScriptAsync(script);
             }
 
          }
@@ -285,14 +286,14 @@ namespace ForgeOfBots.CefBrowserHandler
                      case "getResourceDefinitions":
                         ress = JsonConvert.DeserializeObject(body);
                         ListClass.ResourceDefinitions = ress;
-                        Main.Updater.UpdatedSortedGoodList();
+                        Updater.UpdatedSortedGoodList();
                         ImportantLoaded[18] = ListClass.GoodsDict.Count > 0;
                         ImportantLoaded[3] = true;
                         break;
                      case "getPlayerResources":
                         ress = JsonConvert.DeserializeObject(body);
                         ListClass.Resources = ress;
-                        Main.Updater.UpdatedSortedGoodList();
+                        Updater.UpdatedSortedGoodList();
                         ImportantLoaded[18] = ListClass.GoodsDict.Count > 0;
                         ImportantLoaded[4] = true;
                         break;
@@ -300,18 +301,18 @@ namespace ForgeOfBots.CefBrowserHandler
                         MetadataRoot rootMetadata = JsonConvert.DeserializeObject<MetadataRoot>(body);
                         ListClass.MetaDataList = rootMetadata.responseData.ToList();
                         ImportantLoaded[5] = true;
-                        if (Main.cwb == null) break;
+                        if (cwb == null) break;
                         if (ListClass.AllBuildings.Count <= 0)
                         {
                            string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "city_entities"); }).url;
-                           string script = Main.ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.city_entities);
-                           Main.cwb.ExecuteScriptAsync(script);
+                           string script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.city_entities);
+                          cwb.ExecuteScriptAsync(script);
                         }
                         if (ListClass.Eras.Count <= 0)
                         {
                            string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "research_eras"); }).url;
-                           string script = Main.ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.research_eras);
-                           Main.cwb.ExecuteScriptAsync(script);
+                           string script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.research_eras);
+                           cwb.ExecuteScriptAsync(script);
                         }
                         break;
                      case "getUpdates":
@@ -322,7 +323,7 @@ namespace ForgeOfBots.CefBrowserHandler
                      case "getData":
                         ress = JsonConvert.DeserializeObject(body);
                         ListClass.Startup = ress;
-                        Main.Updater.UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
+                        Updater.UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
                         ImportantLoaded[16] = ImportantLoaded[15] = ImportantLoaded[14] = ListClass.Startup.Count > 0;
                         ImportantLoaded[7] = true;
                         break;
@@ -442,7 +443,7 @@ namespace ForgeOfBots.CefBrowserHandler
                break;
             case RequestType.GetEntities:
                dynamic entities = JsonConvert.DeserializeObject(msg);
-               Main.Updater.UpdateBuildings(entities["responseData"]);
+               Updater.UpdateBuildings(entities["responseData"]);
                _entitiesUpdated?.Invoke(ListClass.State, RequestType.GetEntities);
                break;
             case RequestType.GetFriends:
@@ -496,7 +497,7 @@ namespace ForgeOfBots.CefBrowserHandler
                               }
                            }
                         }
-                        if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
+                        if (DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
                         ListClass.CollectedIDs = CollectedIDs;
                         _productionCollected?.Invoke(RequestType.CollectProduction, ListClass.CollectedIDs);
                      }
@@ -545,7 +546,7 @@ namespace ForgeOfBots.CefBrowserHandler
                         {
                            ListClass.doneQuery.Clear();
                            ListClass.AddedToQuery.Clear();
-                           if (Main.DEBUGMODE) Helper.Log($"[{DateTime.Now}] doneQuery Count = {ListClass.doneQuery.Count}\n[{DateTime.Now}] AddedToQuery Count = {ListClass.AddedToQuery.Count}");
+                           if (DEBUGMODE) Helper.Log($"[{DateTime.Now}] doneQuery Count = {ListClass.doneQuery.Count}\n[{DateTime.Now}] AddedToQuery Count = {ListClass.AddedToQuery.Count}");
                            _productionStarted?.Invoke(RequestType.QueryProduction);
                         }
                      }
@@ -611,11 +612,11 @@ namespace ForgeOfBots.CefBrowserHandler
          }
          if (!ImportantLoaded[19] && ImportantLoaded.ToList().FindAll(p => p).Count == 19)
          {
-            if (Main.cwb != null)
+            if (cwb != null)
             {
                ImportantLoaded[19] = true;
-               string script = Main.ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
-               Main.cwb.ExecuteScriptAsync(script);
+               string script = ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
+              cwb.ExecuteScriptAsync(script);
             }
 
          }
@@ -639,7 +640,7 @@ namespace ForgeOfBots.CefBrowserHandler
                BuildingsRoot rootBuilding = JsonConvert.DeserializeObject<BuildingsRoot>("{\"buildings\":" + msg + "}");
                ListClass.AllBuildings = rootBuilding.buildings.ToList();
                ImportantLoaded[13] = true;
-               Main.Updater.UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
+               Updater.UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
                ImportantLoaded[14] = ListClass.Startup.Count > 0;
                ImportantLoaded[15] = ListClass.ProductionList.Count > 0;
                ImportantLoaded[16] = ListClass.ResidentialList.Count > 0;
@@ -648,7 +649,7 @@ namespace ForgeOfBots.CefBrowserHandler
                ResearchEraRoot rootResearch = JsonConvert.DeserializeObject<ResearchEraRoot>("{\"reserach\":" + msg + "}");
                ListClass.Eras = rootResearch.reserach.ToList();
                ImportantLoaded[17] = true;
-               Main.Updater.UpdatedSortedGoodList();
+               Updater.UpdatedSortedGoodList();
                ImportantLoaded[18] = ListClass.GoodsDict.Count > 0;
                break;
             default:

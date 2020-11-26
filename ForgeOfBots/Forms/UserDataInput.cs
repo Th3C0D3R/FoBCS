@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using ForgeOfBots.Utils;
 
 namespace ForgeOfBots.Forms
 {
@@ -9,8 +10,8 @@ namespace ForgeOfBots.Forms
       public UserDataInput(Dictionary<string, string> serverList)
       {
          InitializeComponent();
-         Text += $" | FoBots v{Main.Version.Major}.{Main.Version.Minor} by TH3C0D3R";
-         label2.Text = $"{label2.Tag}{Main.Version.Major}.{Main.Version.Minor}";
+         Text += $" | FoBots v{StaticData.Version.Major}.{StaticData.Version.Minor} by TH3C0D3R";
+         label2.Text = $"{label2.Tag}{StaticData.Version.Major}.{StaticData.Version.Minor}";
          cbServer.Items.Clear();
          foreach (var item in serverList)
          {

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ForgeOfBots.Utils;
 
 namespace ForgeOfBots.Forms
 {
@@ -17,8 +18,8 @@ namespace ForgeOfBots.Forms
       public WorldSelection(List<Tuple<string, string, WorldState>> serverList)
       {
          InitializeComponent();
-         Text += $" | FoBots v{Main.Version.Major}.{Main.Version.Minor} by TH3C0D3R";
-         label2.Text += $"{Main.Version.Major}.{Main.Version.Minor}";
+         Text += $" | FoBots v{StaticData.Version.Major}.{StaticData.Version.Minor} by TH3C0D3R";
+         label2.Text += $"{StaticData.Version.Major}.{StaticData.Version.Minor}";
          foreach (var item in serverList)
          {
             if (!cbCities.Items.Contains(item.Item1 + " (" + item.Item2 + ")"))
