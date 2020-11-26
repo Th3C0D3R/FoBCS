@@ -82,11 +82,11 @@ namespace ForgeOfBots.DataHandler
                   if (metaEntity.available_products != null)
                      entity.available_products = metaEntity.available_products.ToList();
                   entity.type = metaEntity.type;
-                  if (entity.type == "production" && metaEntity.available_products != null && entity.connected == 1 && GameClassHelper.hasOnlySupplyProduction(entity.available_products))
+                  if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && GameClassHelper.hasOnlySupplyProduction(entity.available_products))
                      ListClass.ProductionList.Add(entity);
-                  else if (entity.type == "residential" && entity.connected == 1)
+                  else if (entity.type == "residential" && entity.connected >= 1)
                      ListClass.ResidentialList.Add(entity);
-                  else if (entity.type == "goods" && entity.connected == 1)
+                  else if (entity.type == "goods" && entity.connected >= 1)
                      ListClass.GoodProductionList.Add(entity);
                }
             }

@@ -296,9 +296,7 @@ namespace ForgeOfBots.CefBrowserHandler
                         ress = JsonConvert.DeserializeObject(body);
                         ListClass.Startup = ress;
                         Main.Updater.UpdateBuildings();
-                        ImportantLoaded[14] = ListClass.GoodProductionList.Count > 0;
-                        ImportantLoaded[15] = ListClass.ProductionList.Count > 0;
-                        ImportantLoaded[16] = ListClass.ResidentialList.Count > 0;
+                        ImportantLoaded[16] = ImportantLoaded[15] = ImportantLoaded[14] = ListClass.Startup.Count > 0;
                         ImportantLoaded[7] = true;
                         break;
                      case "getLimitedBonuses":
@@ -596,7 +594,7 @@ namespace ForgeOfBots.CefBrowserHandler
                ListClass.AllBuildings = rootBuilding.buildings.ToList();
                ImportantLoaded[13] = true;
                Main.Updater.UpdateBuildings();
-               ImportantLoaded[14] = ListClass.GoodProductionList.Count > 0;
+               ImportantLoaded[14] = ListClass.Startup.Count > 0;
                ImportantLoaded[15] = ListClass.ProductionList.Count > 0;
                ImportantLoaded[16] = ListClass.ResidentialList.Count > 0;
                break;

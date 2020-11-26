@@ -15,6 +15,6 @@ namespace ForgeOfBots.GameClasses
 
    public class LanguageList
    {
-      public List<Language> Languages { get; set; }
+      public List<Language> Languages { get; set; } = new List<Language>();
    }
 }
