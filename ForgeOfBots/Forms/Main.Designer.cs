@@ -344,6 +344,9 @@
          resources.ApplyResources(this.toolStripButton1, "toolStripButton1");
          this.toolStripButton1.Name = "toolStripButton1";
          this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+#if RELEASE
+         this.toolStripButton1.Visible = false;
+#endif
          // 
          // tcMenu
          // 
