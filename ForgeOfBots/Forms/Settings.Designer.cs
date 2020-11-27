@@ -48,20 +48,6 @@
          this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
          this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
          this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-         this.mtpBots = new MetroFramework.Controls.MetroTabPage();
-         this.mtRQBot = new MetroFramework.Controls.MetroToggle();
-         this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
-         this.mtIncident = new MetroFramework.Controls.MetroToggle();
-         this.mtMoppel = new MetroFramework.Controls.MetroToggle();
-         this.mtTavern = new MetroFramework.Controls.MetroToggle();
-         this.mtProduction = new MetroFramework.Controls.MetroToggle();
-         this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
-         this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-         this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
-         this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-         this.mtpManually = new MetroFramework.Controls.MetroTabPage();
-         this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-         this.mtBigRoads = new MetroFramework.Controls.MetroToggle();
          this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
          this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
          this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
@@ -77,6 +63,20 @@
          this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
          this.lblLanguage = new MetroFramework.Controls.MetroLabel();
          this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
+         this.mtpBots = new MetroFramework.Controls.MetroTabPage();
+         this.mtRQBot = new MetroFramework.Controls.MetroToggle();
+         this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+         this.mtIncident = new MetroFramework.Controls.MetroToggle();
+         this.mtMoppel = new MetroFramework.Controls.MetroToggle();
+         this.mtTavern = new MetroFramework.Controls.MetroToggle();
+         this.mtProduction = new MetroFramework.Controls.MetroToggle();
+         this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+         this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+         this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+         this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+         this.mtpManually = new MetroFramework.Controls.MetroTabPage();
+         this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+         this.mtBigRoads = new MetroFramework.Controls.MetroToggle();
          this.mtpData = new MetroFramework.Controls.MetroTabPage();
          this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
          this.mbSaveReload = new MetroFramework.Controls.MetroButton();
@@ -88,10 +88,10 @@
          this.mtpProduction.SuspendLayout();
          this.mpGoodCycle.SuspendLayout();
          this.mpProdCycle.SuspendLayout();
-         this.mtpBots.SuspendLayout();
-         this.mtpManually.SuspendLayout();
          this.mtpPremium.SuspendLayout();
          this.mtpMisc.SuspendLayout();
+         this.mtpBots.SuspendLayout();
+         this.mtpManually.SuspendLayout();
          this.mtpData.SuspendLayout();
          this.SuspendLayout();
          // 
@@ -105,15 +105,15 @@
          // mtcSettings
          // 
          this.mtcSettings.Controls.Add(this.mtpProduction);
-         this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpBots);
          this.mtcSettings.Controls.Add(this.mtpManually);
          this.mtcSettings.Controls.Add(this.mtpPremium);
+         this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpData);
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 4;
+         this.mtcSettings.SelectedIndex = 5;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          this.mtcSettings.UseStyleColors = true;
          // 
@@ -269,104 +269,6 @@
          resources.ApplyResources(this.metroLabel1, "metroLabel1");
          this.metroLabel1.Name = "metroLabel1";
          // 
-         // mtpBots
-         // 
-         this.mtpBots.Controls.Add(this.mtRQBot);
-         this.mtpBots.Controls.Add(this.metroLabel10);
-         this.mtpBots.Controls.Add(this.mtIncident);
-         this.mtpBots.Controls.Add(this.mtMoppel);
-         this.mtpBots.Controls.Add(this.mtTavern);
-         this.mtpBots.Controls.Add(this.mtProduction);
-         this.mtpBots.Controls.Add(this.metroLabel9);
-         this.mtpBots.Controls.Add(this.metroLabel8);
-         this.mtpBots.Controls.Add(this.metroLabel7);
-         this.mtpBots.Controls.Add(this.metroLabel6);
-         this.mtpBots.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpBots, "mtpBots");
-         this.mtpBots.Name = "mtpBots";
-         this.mtpBots.VerticalScrollbarBarColor = true;
-         // 
-         // mtRQBot
-         // 
-         resources.ApplyResources(this.mtRQBot, "mtRQBot");
-         this.mtRQBot.Name = "mtRQBot";
-         this.mtRQBot.UseVisualStyleBackColor = true;
-         this.mtRQBot.CheckedChanged += new System.EventHandler(this.mtRQBot_CheckedChanged);
-         // 
-         // metroLabel10
-         // 
-         resources.ApplyResources(this.metroLabel10, "metroLabel10");
-         this.metroLabel10.Name = "metroLabel10";
-         // 
-         // mtIncident
-         // 
-         resources.ApplyResources(this.mtIncident, "mtIncident");
-         this.mtIncident.Name = "mtIncident";
-         this.mtIncident.UseVisualStyleBackColor = true;
-         this.mtIncident.CheckedChanged += new System.EventHandler(this.mtIncident_CheckedChanged);
-         // 
-         // mtMoppel
-         // 
-         resources.ApplyResources(this.mtMoppel, "mtMoppel");
-         this.mtMoppel.Name = "mtMoppel";
-         this.mtMoppel.UseVisualStyleBackColor = true;
-         this.mtMoppel.CheckedChanged += new System.EventHandler(this.mtMoppel_CheckedChanged);
-         // 
-         // mtTavern
-         // 
-         resources.ApplyResources(this.mtTavern, "mtTavern");
-         this.mtTavern.Name = "mtTavern";
-         this.mtTavern.UseVisualStyleBackColor = true;
-         this.mtTavern.CheckedChanged += new System.EventHandler(this.mtTavern_CheckedChanged);
-         // 
-         // mtProduction
-         // 
-         resources.ApplyResources(this.mtProduction, "mtProduction");
-         this.mtProduction.Name = "mtProduction";
-         this.mtProduction.UseVisualStyleBackColor = true;
-         this.mtProduction.CheckedChanged += new System.EventHandler(this.mtProduction_CheckedChanged);
-         // 
-         // metroLabel9
-         // 
-         resources.ApplyResources(this.metroLabel9, "metroLabel9");
-         this.metroLabel9.Name = "metroLabel9";
-         // 
-         // metroLabel8
-         // 
-         resources.ApplyResources(this.metroLabel8, "metroLabel8");
-         this.metroLabel8.Name = "metroLabel8";
-         // 
-         // metroLabel7
-         // 
-         resources.ApplyResources(this.metroLabel7, "metroLabel7");
-         this.metroLabel7.Name = "metroLabel7";
-         // 
-         // metroLabel6
-         // 
-         resources.ApplyResources(this.metroLabel6, "metroLabel6");
-         this.metroLabel6.Name = "metroLabel6";
-         // 
-         // mtpManually
-         // 
-         this.mtpManually.Controls.Add(this.metroLabel4);
-         this.mtpManually.Controls.Add(this.mtBigRoads);
-         this.mtpManually.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpManually, "mtpManually");
-         this.mtpManually.Name = "mtpManually";
-         this.mtpManually.VerticalScrollbarBarColor = true;
-         // 
-         // metroLabel4
-         // 
-         resources.ApplyResources(this.metroLabel4, "metroLabel4");
-         this.metroLabel4.Name = "metroLabel4";
-         // 
-         // mtBigRoads
-         // 
-         resources.ApplyResources(this.mtBigRoads, "mtBigRoads");
-         this.mtBigRoads.Name = "mtBigRoads";
-         this.mtBigRoads.UseVisualStyleBackColor = true;
-         this.mtBigRoads.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
-         // 
          // mtpPremium
          // 
          this.mtpPremium.Controls.Add(this.mbCheckSerial);
@@ -477,6 +379,104 @@
          this.mcbLanguage.Name = "mcbLanguage";
          this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
          // 
+         // mtpBots
+         // 
+         this.mtpBots.Controls.Add(this.mtRQBot);
+         this.mtpBots.Controls.Add(this.metroLabel10);
+         this.mtpBots.Controls.Add(this.mtIncident);
+         this.mtpBots.Controls.Add(this.mtMoppel);
+         this.mtpBots.Controls.Add(this.mtTavern);
+         this.mtpBots.Controls.Add(this.mtProduction);
+         this.mtpBots.Controls.Add(this.metroLabel9);
+         this.mtpBots.Controls.Add(this.metroLabel8);
+         this.mtpBots.Controls.Add(this.metroLabel7);
+         this.mtpBots.Controls.Add(this.metroLabel6);
+         this.mtpBots.HorizontalScrollbarBarColor = true;
+         resources.ApplyResources(this.mtpBots, "mtpBots");
+         this.mtpBots.Name = "mtpBots";
+         this.mtpBots.VerticalScrollbarBarColor = true;
+         // 
+         // mtRQBot
+         // 
+         resources.ApplyResources(this.mtRQBot, "mtRQBot");
+         this.mtRQBot.Name = "mtRQBot";
+         this.mtRQBot.UseVisualStyleBackColor = true;
+         this.mtRQBot.CheckedChanged += new System.EventHandler(this.mtRQBot_CheckedChanged);
+         // 
+         // metroLabel10
+         // 
+         resources.ApplyResources(this.metroLabel10, "metroLabel10");
+         this.metroLabel10.Name = "metroLabel10";
+         // 
+         // mtIncident
+         // 
+         resources.ApplyResources(this.mtIncident, "mtIncident");
+         this.mtIncident.Name = "mtIncident";
+         this.mtIncident.UseVisualStyleBackColor = true;
+         this.mtIncident.CheckedChanged += new System.EventHandler(this.mtIncident_CheckedChanged);
+         // 
+         // mtMoppel
+         // 
+         resources.ApplyResources(this.mtMoppel, "mtMoppel");
+         this.mtMoppel.Name = "mtMoppel";
+         this.mtMoppel.UseVisualStyleBackColor = true;
+         this.mtMoppel.CheckedChanged += new System.EventHandler(this.mtMoppel_CheckedChanged);
+         // 
+         // mtTavern
+         // 
+         resources.ApplyResources(this.mtTavern, "mtTavern");
+         this.mtTavern.Name = "mtTavern";
+         this.mtTavern.UseVisualStyleBackColor = true;
+         this.mtTavern.CheckedChanged += new System.EventHandler(this.mtTavern_CheckedChanged);
+         // 
+         // mtProduction
+         // 
+         resources.ApplyResources(this.mtProduction, "mtProduction");
+         this.mtProduction.Name = "mtProduction";
+         this.mtProduction.UseVisualStyleBackColor = true;
+         this.mtProduction.CheckedChanged += new System.EventHandler(this.mtProduction_CheckedChanged);
+         // 
+         // metroLabel9
+         // 
+         resources.ApplyResources(this.metroLabel9, "metroLabel9");
+         this.metroLabel9.Name = "metroLabel9";
+         // 
+         // metroLabel8
+         // 
+         resources.ApplyResources(this.metroLabel8, "metroLabel8");
+         this.metroLabel8.Name = "metroLabel8";
+         // 
+         // metroLabel7
+         // 
+         resources.ApplyResources(this.metroLabel7, "metroLabel7");
+         this.metroLabel7.Name = "metroLabel7";
+         // 
+         // metroLabel6
+         // 
+         resources.ApplyResources(this.metroLabel6, "metroLabel6");
+         this.metroLabel6.Name = "metroLabel6";
+         // 
+         // mtpManually
+         // 
+         this.mtpManually.Controls.Add(this.metroLabel4);
+         this.mtpManually.Controls.Add(this.mtBigRoads);
+         this.mtpManually.HorizontalScrollbarBarColor = true;
+         resources.ApplyResources(this.mtpManually, "mtpManually");
+         this.mtpManually.Name = "mtpManually";
+         this.mtpManually.VerticalScrollbarBarColor = true;
+         // 
+         // metroLabel4
+         // 
+         resources.ApplyResources(this.metroLabel4, "metroLabel4");
+         this.metroLabel4.Name = "metroLabel4";
+         // 
+         // mtBigRoads
+         // 
+         resources.ApplyResources(this.mtBigRoads, "mtBigRoads");
+         this.mtBigRoads.Name = "mtBigRoads";
+         this.mtBigRoads.UseVisualStyleBackColor = true;
+         this.mtBigRoads.CheckedChanged += new System.EventHandler(this.metroToggle1_CheckedChanged);
+         // 
          // mtpData
          // 
          this.mtpData.Controls.Add(this.metroLabel11);
@@ -546,10 +546,10 @@
          this.mpGoodCycle.PerformLayout();
          this.mpProdCycle.ResumeLayout(false);
          this.mpProdCycle.PerformLayout();
-         this.mtpBots.ResumeLayout(false);
-         this.mtpManually.ResumeLayout(false);
          this.mtpPremium.ResumeLayout(false);
          this.mtpMisc.ResumeLayout(false);
+         this.mtpBots.ResumeLayout(false);
+         this.mtpManually.ResumeLayout(false);
          this.mtpData.ResumeLayout(false);
          this.ResumeLayout(false);
 

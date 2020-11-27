@@ -306,6 +306,7 @@
          // 
          this.aidAllToolStripMenuItem.Name = "aidAllToolStripMenuItem";
          resources.ApplyResources(this.aidAllToolStripMenuItem, "aidAllToolStripMenuItem");
+         this.aidAllToolStripMenuItem.Click += new System.EventHandler(this.AidAllToolStripMenuItem_Click);
          // 
          // tsmiVisitAll
          // 

@@ -194,46 +194,46 @@
     <value>6, 25</value>
   </data>
   <data name="aidFriendsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="aidFriendsToolStripMenuItem.Text" xml:space="preserve">
     <value>Aid Friends</value>
   </data>
   <data name="aidClanToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="aidClanToolStripMenuItem.Text" xml:space="preserve">
     <value>Aid Clan</value>
   </data>
   <data name="aidNeiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="aidNeiToolStripMenuItem.Text" xml:space="preserve">
     <value>Aid Neighbors</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="aidAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="aidAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Aid All</value>
   </data>
   <data name="aidToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="aidToolStripMenuItem.Text" xml:space="preserve">
     <value>Aid</value>
   </data>
   <data name="tsmiVisitAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiVisitAll.Text" xml:space="preserve">
     <value>Visit Tavern</value>
   </data>
   <data name="tsmiDoAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiDoAll.Text" xml:space="preserve">
     <value>Aid all &amp;&amp; Visit all</value>
@@ -1213,7 +1213,7 @@
     <value>1</value>
   </data>
   <data name="tlpInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>954, 384</value>
+    <value>954, 382</value>
   </data>
   <data name="tlpInactiveFriends.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

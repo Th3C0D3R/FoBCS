@@ -419,7 +419,7 @@ namespace ForgeOfBots.CefBrowserHandler
                      }
                      else if (resItem["requestMethod"] == "getOtherTavernState")
                      {
-                        tavernresult = JsonConvert.DeserializeObject<TavernResult>(res);
+                        tavernresult = JsonConvert.DeserializeObject<TavernResult>(body);
                      }
                      else if (resItem["requestMethod"] == "getOtherTavern")
                      {

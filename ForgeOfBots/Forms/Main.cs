@@ -602,7 +602,7 @@ namespace ForgeOfBots
                break;
             case RequestType.CollectIncident:
                ResponseHandler.IncidentCollected += ResponseHandler_IncidentCollected;
-               testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.Count).ToList();
+               testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.FindAll(x => x.isVisible).ToList().Count).ToList();
                foreach (HiddenReward item in ListClass.HiddenRewards)
                {
                   if (!item.isVisible) continue;
@@ -1433,7 +1433,6 @@ namespace ForgeOfBots
                BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
                BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = strings.TavernDone));
                ResponseHandler_TaverSitted(this);
-               ResponseHandler.TaverSitted += ResponseHandler_TaverSitted;
                break;
             default:
                break;
@@ -1495,7 +1494,6 @@ namespace ForgeOfBots
          UpdateGoodProductionView();
          UpdateProductionView();
       }
-
       private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
       {
          if (DEBUGMODE) Log($"[{DateTime.Now}] Production Query Complete", lbOutputWindow);
@@ -1506,7 +1504,6 @@ namespace ForgeOfBots
             UpdateGoodProductionView();
          }
       }
-
       private void mbtCancel_Click(object sender, EventArgs e)
       {
          OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CancelProduction };
@@ -1524,7 +1521,6 @@ namespace ForgeOfBots
          bw.RunWorkerAsync(param);
       }
       List<bool> testBool = new List<bool>();
-
       private void ResponseHandler_IncidentCollected(object sender, dynamic data = null)
       {
          lock (_locker)
@@ -1557,17 +1553,17 @@ namespace ForgeOfBots
          }
          //NotificationHelper.ShowNotify("Incident collected",$"Reward: {reward}",NotificationHelper.NotifyDuration.Long,Activated);
       }
-
       private void IncidentUpdated(object sender, dynamic data = null)
       {
+         Log("[DEBUG] Incident Updated", lbOutputWindow);
          reloadData();
          LoadGUI();
       }
-
       private void RewardsCollectedCompleted()
       {
 
       }
+
       private void toolStripButton1_Click(object sender, EventArgs e)
       {
          //object ret = TcpConnection.SendAuthData("IAVvAuYHY0JxjgnBarwue1JPfvvD6drnK9UVYRFAmW0D0M9D5t1AXD7R1GPP8VL5JgnjLSmJlwHIBFYTvsHNmqQGCDeSB0BRL54UjZ1nGsZk5zQvr6ePN8ScPghIxUHvv06FLEtV1dG4RqKNxslEVvENmbEC2szwkoyF2KkmNJYt1YLjVUVFsCZ9vtct9qdInTTm1FVmH81MXUVOPfqhXuDiOzUIr0ngpPFhEirQ9s7uKMlaYOdd95u3QvYBuM5R", FingerPrint.Value(), true);
@@ -1631,7 +1627,10 @@ namespace ForgeOfBots
             cwb.ExecuteScriptAsync(script);
          }
       }
-
+      private void AidAllToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         Motivate(E_Motivate.All);
+      }
       private void ResponseHandler_TaverSitted(object sender, dynamic data = null)
       {
          reloadData();
