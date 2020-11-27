@@ -42,6 +42,7 @@ using ForgeOfBots.LanguageFiles;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using static ForgeOfBots.Utils.StaticData;
+using static ForgeOfBots.FoBUpdater.FoBUpdater;
 
 namespace ForgeOfBots
 {
@@ -86,6 +87,7 @@ namespace ForgeOfBots
          Controls.Clear();
          Task.Factory.StartNew(CheckLanguages).Wait();
          InitializeComponent();
+         CheckForUpdate();
          Application.ApplicationExit += handleExit;
          RunningTime.Start();
          bwTimerUpdate.RunWorkerAsync();

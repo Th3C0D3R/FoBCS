@@ -240,6 +240,7 @@
     <Compile Include="GameClasses\ResponseClasses\Research.cs" />
     <Compile Include="GameClasses\ResponseClasses\Resource.cs" />
     <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
+    <Compile Include="Updater\Updater.cs" />
     <Compile Include="Utils\StaticData.cs" />
     <EmbeddedResource Include="Forms\About.de.resx">
       <DependentUpon>About.cs</DependentUpon>
@@ -396,6 +397,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official">
+      <Version>1.6.4</Version>
+    </PackageReference>
     <PackageReference Include="CefSharp.OffScreen">
       <Version>86.0.241</Version>
     </PackageReference>
