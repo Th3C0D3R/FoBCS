@@ -11,7 +11,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
     <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -227,13 +227,12 @@
     </Compile>
     <Compile Include="GameClasses\Building.cs" />
     <Compile Include="GameClasses\Data.cs" />
-    <Compile Include="GameClasses\Incident.cs" />
     <Compile Include="GameClasses\Language.cs" />
     <Compile Include="GameClasses\ListClass.cs" />
-    <Compile Include="GameClasses\Me.cs" />
     <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
     <Compile Include="GameClasses\ResponseClasses\BonusService.cs" />
     <Compile Include="GameClasses\ResponseClasses\CityEntities.cs" />
+    <Compile Include="GameClasses\ResponseClasses\GuildExpedition.cs" />
     <Compile Include="GameClasses\ResponseClasses\Metadata.cs" />
     <Compile Include="GameClasses\ResponseClasses\Polivate.cs" />
     <Compile Include="GameClasses\ResponseClasses\QuestService.cs" />
@@ -241,6 +240,7 @@
     <Compile Include="GameClasses\ResponseClasses\Resource.cs" />
     <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
     <Compile Include="Updater\Updater.cs" />
+    <Compile Include="Utils\GEHelper.cs" />
     <Compile Include="Utils\StaticData.cs" />
     <EmbeddedResource Include="Forms\About.de.resx">
       <DependentUpon>About.cs</DependentUpon>
@@ -312,7 +312,6 @@
     <Compile Include="GameClasses\ResponseClasses\SocialLists.cs" />
     <Compile Include="GameClasses\ResponseClasses\Root.cs" />
     <Compile Include="GameClasses\ResponseClasses\TavernResult.cs" />
-    <Compile Include="GameClasses\Tavern.cs" />
     <Compile Include="GameClasses\test\test.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Forms\Main.cs">

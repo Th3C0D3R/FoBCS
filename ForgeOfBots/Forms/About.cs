@@ -23,9 +23,9 @@ namespace ForgeOfBots.Forms
       public string GetVersionNumber(Type className, bool withInternal)
       {
          if (withInternal)
-            return className.Assembly.GetName().Version.Minor + "." + className.Assembly.GetName().Version.Build + ((className.Assembly.GetName().Version.Revision) == 0 ? ".0" : "." + className.Assembly.GetName().Version.Revision.ToString());
+            return className.Assembly.GetName().Version.Major + "." + className.Assembly.GetName().Version.Minor + "." + className.Assembly.GetName().Version.Build + ((className.Assembly.GetName().Version.Revision) == 0 ? ".0" : "." + className.Assembly.GetName().Version.Revision.ToString());
          else
-            return className.Assembly.GetName().Version.Minor + "." + className.Assembly.GetName().Version.Build;
+            return className.Assembly.GetName().Version.Major + "." + className.Assembly.GetName().Version.Minor + "." + className.Assembly.GetName().Version.Build;
       }
 
    }

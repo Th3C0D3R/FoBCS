@@ -27,11 +27,14 @@ namespace ForgeOfBots.DataHandler
       public string GetRequestScript(RequestType type, dynamic data)
       {
          int[] queryData = new int[] { };
+         int[,] armyData = new int[2,8];
          int idData = 0;
          if (type == RequestType.QueryProduction || type == RequestType.CollectProduction)
             queryData = (int[])data;
-         else if (((object)data).GetType() == typeof(int))
-            idData = (int)data;
+         else if (type == RequestType.GEAttack)
+            armyData = (int[,])data;
+         else if (data is int iData)
+            idData = iData;
          else if (data != "" && data != "[]")
             idData = int.Parse(data);
          string RequestScript = resMgr.GetString("fetchData");
@@ -142,6 +145,27 @@ namespace ForgeOfBots.DataHandler
                _class = "WorldService";
                _methode = "getWorlds";
                break;
+            case RequestType.GEServiceOverview:
+               _data = new JArray();
+               _class = "GuildExpeditionService";
+               _methode = "getOverview";
+               break;
+            case RequestType.GEServiceEncounter:
+               _data = new JArray(idData);
+               _class = "GuildExpeditionService";
+               _methode = "getEncounter";
+               break;
+            case RequestType.GEServiceCollectChest:
+               _data = new JArray(idData);
+               _class = "GuildExpeditionService";
+               _methode = "openChest";
+               break;
+            case RequestType.GEAttack:
+               _data = new JArray();
+               doHack = true;
+               _class = "ArmyUnitManagementService";
+               _methode = "updatePools";
+               break;
             default:
                _data = new JArray();
                _class = "StartupService";
@@ -160,7 +184,20 @@ namespace ForgeOfBots.DataHandler
          string jsonString = "["+JsonConvert.SerializeObject(j)+"]";
          if (doHack)
          {
-            jsonString = jsonString.Replace("\"requestData\":[", "\"requestData\":[[").Replace("],\"requestClass\"", "]],\"requestClass\"");
+            if(type == RequestType.GEAttack)
+            {
+               if (armyData.Length != 2) return "";
+               string before = "[[{\"__class__\": \"ArmyPool\",\"units\": [";
+               string myTroops = string.Join(",", armyData.GetTroopRow(0));
+               string after = "],\"type\":\"attacking\"},{\"__class__\":\"ArmyPool\",\"units\":[";
+               string enemyTroops = string.Join(",", armyData.GetTroopRow(1));
+               string end = "],\"type\":\"defending\"},{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}],{\"__class__\":\"ArmyContext\",\"content\":\"main\"}]";
+               string startJson = jsonString.Substring(0, jsonString.IndexOf("\"requestData\":[") + ("\"requestData\":[").Length - 1);
+               string endJson = jsonString.Substring(jsonString.IndexOf(",\"requestClass\""));
+               jsonString = $"{startJson}{before}{myTroops}{after}{enemyTroops}{end}{endJson}";
+            }
+            else if(type == RequestType.CollectProduction)
+               jsonString = jsonString.Replace("\"requestData\":[", "\"requestData\":[[").Replace("],\"requestClass\"", "]],\"requestClass\"");
          }
          //Console.WriteLine(jsonString);
          RequestScript = RequestScript
@@ -212,6 +249,11 @@ namespace ForgeOfBots.DataHandler
       RemovePlayer,
       GetAllWorlds,
       GetIncidents,
+      GEServiceOverview,
+      GEServiceEncounter,
+      OwnArmy,
+      GEAttack,
+      GEServiceCollectChest
    }
 
     public enum E_Motivate

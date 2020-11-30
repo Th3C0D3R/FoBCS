@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using ForgeOfBots.Utils;
 
 namespace ForgeOfBots.GameClasses.ResponseClasses
 {
@@ -69,6 +70,21 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
                }
          }
          return checkBool.All(x => { return x; });
+      }
+      public static bool isTF(EntityEx entity)
+      {
+         if (entity.cityentity_id.Equals("P_MultiAge_Expedition16b") || entity.cityentity_id.Equals("P_MultiAge_Expedition16")) return true;
+         else return false;
+      }
+      public static bool hasSupplyProdAt(this EntityEx entity,ProductionOption option)
+      {
+         if (entity.available_products != null)
+            if (entity.available_products[option.id] != null)
+               if (entity.available_products[option.id].product != null)
+                  if (entity.available_products[option.id].product.resources != null)
+                     if (((JObject)entity.available_products[option.id].product.resources).GetValue("supplies") != null)
+                        return true;
+         return false;
       }
    }
 }

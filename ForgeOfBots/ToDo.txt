@@ -1,5 +1,4 @@
 TODO:
-!!! ProdBotDebuggen
 
 []Bots:
 	- Add possible Bots (dynamic)

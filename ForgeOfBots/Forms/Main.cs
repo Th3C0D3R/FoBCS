@@ -48,7 +48,7 @@ namespace ForgeOfBots
 {
    public partial class Main : Form
    {
-      
+
       private bool ForgeHXLoaded = false, UIDLoaded = false, SECRET_LOADED = false;
       private bool blockedLogin = false;
       private bool blockExpireBox = false;
@@ -64,8 +64,12 @@ namespace ForgeOfBots
                   if (args[0].Substring(1).ToLower().Equals("debug"))
                      DEBUGMODE = true;
          }
-
+         MainInstance = this;
          Contruct();
+      }
+      public Main()
+      {
+
       }
       public void Contruct()
       {
@@ -1332,7 +1336,7 @@ namespace ForgeOfBots
          }
          #endregion
       }
-      private void Motivate(E_Motivate player_type)
+      public void Motivate(E_Motivate player_type)
       {
          TwoTArgs<RequestType, E_Motivate> param = new TwoTArgs<RequestType, E_Motivate> { RequestType = RequestType.Motivate, argument2 = player_type };
          BackgroundWorker bw = new BackgroundWorker();
@@ -1404,6 +1408,8 @@ namespace ForgeOfBots
                   Thread.Sleep(rInt);
                }
                ListClass.doneMotivate.Clear();
+               UserData.LastPolivateTime = DateTime.Now;
+               UserData.SaveSettings();
                BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
                BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = strings.MotivationDone));
                reloadData();
@@ -1570,8 +1576,10 @@ namespace ForgeOfBots
       {
          //object ret = TcpConnection.SendAuthData("IAVvAuYHY0JxjgnBarwue1JPfvvD6drnK9UVYRFAmW0D0M9D5t1AXD7R1GPP8VL5JgnjLSmJlwHIBFYTvsHNmqQGCDeSB0BRL54UjZ1nGsZk5zQvr6ePN8ScPghIxUHvv06FLEtV1dG4RqKNxslEVvENmbEC2szwkoyF2KkmNJYt1YLjVUVFsCZ9vtct9qdInTTm1FVmH81MXUVOPfqhXuDiOzUIr0ngpPFhEirQ9s7uKMlaYOdd95u3QvYBuM5R", FingerPrint.Value(), true);
          //_ = ret is bool;
-         //string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
+         //int[,] troops = new int[2, 8] { { 38920, 36872, 34885, 32837, 30789, 28741, 26693, 24645 }, { 29, 2077, 4125, 35, 2083, 3, 16, 34 } };
+         //string script = ReqBuilder.GetRequestScript(RequestType.GEAttack, troops);
          //cwb.ExecuteScriptAsync(script);
+         //ExecuteMethod(PremAssembly, "MoppelBot", "Run", new object[] { DateTime.Now.Subtract(new TimeSpan(10, 0, 0)), this });
       }
 
       private void tsmiAbout_Click(object sender, EventArgs e)
@@ -1602,8 +1610,15 @@ namespace ForgeOfBots
       }
       public static void TogglePolivateBot(object sender, dynamic e = null)
       {
-         if (e is int && e == -1) return;
+         if ((e is int && e == -1) || MainInstance == null) return;
          UserData.MoppelBot = ((UCPremium)sender).Checked;
+         if (UserData.MoppelBot)
+            ExecuteMethod(PremAssembly, "MoppelBot", "Run", new object[] { UserData.LastPolivateTime, MainInstance });
+         else
+         {
+            ExecuteMethod(PremAssembly, "MoppelBot", "Stop", new object[] { });
+         }
+         UserData.SaveSettings();
       }
       public static void ToggleRQBot(object sender, dynamic e = null)
       {

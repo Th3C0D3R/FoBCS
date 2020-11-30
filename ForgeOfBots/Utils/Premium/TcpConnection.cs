@@ -96,7 +96,7 @@ namespace ForgeOfBots.Utils.Premium
                   if (domainAssemblies.Find(da => da.GetName().Name == "FoBPremiumNET") == null)
                   {
                      PremAssembly = Assembly.Load(buffer);
-                     ExecuteMethod(PremAssembly, "EntryPoint", "LoadPremium", new object[] { serial, hwid });
+                     ExecuteMethod(PremAssembly, "EntryPoint", "LoadPremium", new object[] { serial, hwid, Assembly.GetExecutingAssembly() });
                      ret = Result.Success;
                      done = true;
                   }

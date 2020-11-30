@@ -88,7 +88,7 @@ namespace ForgeOfBots.DataHandler
                   if (metaEntity.available_products != null)
                      entity.available_products = metaEntity.available_products.ToList();
                   entity.type = metaEntity.type;
-                  if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && GameClassHelper.hasOnlySupplyProduction(entity.available_products))
+                  if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && entity.hasSupplyProdAt(StaticData.UserData.ProductionOption))
                      ListClass.ProductionList.Add(entity);
                   else if (entity.type == "residential" && entity.connected >= 1)
                      ListClass.ResidentialList.Add(entity);

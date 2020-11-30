@@ -358,18 +358,25 @@ namespace ForgeOfBots.CefBrowserHandler
                         break;
                   }
                }
-               if (motivation == null) MessageBox.Show($"{strings.CriticalError} {strings.ResponseNotValid}");
-               if (motivation.responseData.action == "polish" || motivation.responseData.action == "motivate" || (motivation.responseData.action == "polivate_failed" && rewardResources != null))
+               if (motivation == null && msg.Contains("\"error_code\":202,\"__class__\":\"Error\""))
                {
-                  int playerid = 0;
-                  if (motivation.responseData.action == "polivate_failed")
-                     playerid = int.Parse(idData);
-                  else
-                     playerid = motivation.responseData.mapEntity.player_id;
-                  ListClass.doneMotivate.Add(playerid, (true, rewardResources));
+                  ListClass.doneMotivate.Add(int.Parse(idData), (false, null));
+                  break;
                }
                else
-                  MessageBox.Show($"{strings.UnknownAction} {motivation.responseData.action}");
+               {
+                  if (motivation.responseData.action == "polish" || motivation.responseData.action == "motivate" || (motivation.responseData.action == "polivate_failed" && rewardResources != null))
+                  {
+                     int playerid = 0;
+                     if (motivation.responseData.action == "polivate_failed")
+                        playerid = int.Parse(idData);
+                     else
+                        playerid = motivation.responseData.mapEntity.player_id;
+                     ListClass.doneMotivate.Add(playerid, (true, rewardResources));
+                  }
+                  else
+                     MessageBox.Show($"{strings.UnknownAction} {motivation.responseData.action}");
+               }
                break;
             case RequestType.CollectIncident:
                string[] ciResponse = msg.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
@@ -606,6 +613,18 @@ namespace ForgeOfBots.CefBrowserHandler
                }
                ListClass.HiddenRewards = newHiddenRewards.responseData.hiddenRewards.ToList();
                _IncidentUpdated?.Invoke(null, null);
+               break;
+            case RequestType.GEServiceOverview:
+               dynamic GEOverview = JsonConvert.DeserializeObject(msg);
+               break;
+            case RequestType.GEServiceEncounter:
+               dynamic GEEncounter = JsonConvert.DeserializeObject(msg);
+               break;
+            case RequestType.GEServiceCollectChest:
+               dynamic GECollectChest = JsonConvert.DeserializeObject(msg);
+               break;
+            case RequestType.GEAttack:
+               dynamic GEAttack = JsonConvert.DeserializeObject(msg);
                break;
             default:
                break;

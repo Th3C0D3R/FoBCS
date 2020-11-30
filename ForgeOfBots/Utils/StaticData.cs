@@ -28,7 +28,6 @@ namespace ForgeOfBots.Utils
       public static Settings UserData;
       public static Assembly PremAssembly = null;
       public static Version Version = Assembly.GetExecutingAssembly().GetName().Version;
-      public static object PremInstance = null;
       public static UserDataInput usi = null;
       public static Browser Browser = null;
       public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -36,5 +35,6 @@ namespace ForgeOfBots.Utils
       public static Stopwatch RunningTime = new Stopwatch();
       public static bool DEBUGMODE = false;
       public static string ForgeHX_FilePath = "";
+      public static object MainInstance = null;
    }
 }
