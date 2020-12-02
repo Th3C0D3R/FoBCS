@@ -100,6 +100,9 @@ namespace ForgeOfBots
          StaticData.Browser.Show();
          CefSettings settings = null;
          BrowserSettings browserSettings = null;
+#if RELEASE
+         toolStripButton1.Visible = false;
+#endif
 
          if (!Settings.SettingsExists() ||
             string.IsNullOrWhiteSpace(UserData.Username) ||
@@ -609,6 +612,7 @@ namespace ForgeOfBots
             case RequestType.CollectIncident:
                ResponseHandler.IncidentCollected += ResponseHandler_IncidentCollected;
                testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.FindAll(x => x.isVisible).ToList().Count).ToList();
+               UserData.LastIncidentTime = DateTime.Now;
                foreach (HiddenReward item in ListClass.HiddenRewards)
                {
                   if (!item.isVisible) continue;
@@ -623,7 +627,6 @@ namespace ForgeOfBots
          }
       }
       #endregion
-
 
       private void Usi_UserDataEntered(string username, string password, string server)
       {
@@ -1250,7 +1253,7 @@ namespace ForgeOfBots
             tsMain.Enabled = newState;
          }
       }
-      private void tsmiVisitAll_Click(object sender, EventArgs e)
+      public void tsmiVisitAll_Click(object sender, EventArgs e)
       {
          VisitAllTavern();
       }
@@ -1402,7 +1405,8 @@ namespace ForgeOfBots
                   }
                   if (tspbProgress.Value >= 100)
                      BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 100));
-                  BeginInvoke(new MethodInvoker(() => tspbProgress.Value += steps));
+                  else
+                     BeginInvoke(new MethodInvoker(() => tspbProgress.Value += steps));
                   BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = $"{strings.Motivating} {ListClass.doneMotivate.Count} / {list.Count}"));
                   last = item;
                   Thread.Sleep(rInt);
@@ -1520,7 +1524,7 @@ namespace ForgeOfBots
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerAsync(param);
       }
-      private void mbtIncidents_Click(object sender, EventArgs e)
+      public void mbtIncidents_Click(object sender, EventArgs e)
       {
          OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectIncident };
          BackgroundWorker bw = new BackgroundWorker();
@@ -1548,7 +1552,7 @@ namespace ForgeOfBots
                Log($"{strings.IncidentCollected} - {strings.Reward}: {reward}", lbOutputWindow);
             }
             int indexlastFalse = testBool.FindIndex(b => !b);
-            if (indexlastFalse < 0)
+            if (indexlastFalse == testBool.Count - 1)
             {
                ResponseHandler.IncidentUpdated += IncidentUpdated;
                string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
@@ -1560,6 +1564,21 @@ namespace ForgeOfBots
             }
          }
          //NotificationHelper.ShowNotify("Incident collected",$"Reward: {reward}",NotificationHelper.NotifyDuration.Long,Activated);
+      }
+      public void SelfUpdateIncidents(object sender, dynamic data = null)
+      {
+         if(!(data is int))
+         {
+            ResponseHandler.IncidentUpdated += SelfUpdateIncidents;
+            string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
+            cwb.ExecuteScriptAsync(script);
+         }
+         else
+         {
+            ResponseHandler.IncidentUpdated -= SelfUpdateIncidents;
+            UpdateHiddenRewardsView();
+            ExecuteMethod(PremAssembly, "IncidentBot", "IncidentsUpdated", new object[] { });
+         }
       }
       private void IncidentUpdated(object sender, dynamic data = null)
       {
@@ -1577,7 +1596,7 @@ namespace ForgeOfBots
          //object ret = TcpConnection.SendAuthData("IAVvAuYHY0JxjgnBarwue1JPfvvD6drnK9UVYRFAmW0D0M9D5t1AXD7R1GPP8VL5JgnjLSmJlwHIBFYTvsHNmqQGCDeSB0BRL54UjZ1nGsZk5zQvr6ePN8ScPghIxUHvv06FLEtV1dG4RqKNxslEVvENmbEC2szwkoyF2KkmNJYt1YLjVUVFsCZ9vtct9qdInTTm1FVmH81MXUVOPfqhXuDiOzUIr0ngpPFhEirQ9s7uKMlaYOdd95u3QvYBuM5R", FingerPrint.Value(), true);
          //_ = ret is bool;
          //int[,] troops = new int[2, 8] { { 38920, 36872, 34885, 32837, 30789, 28741, 26693, 24645 }, { 29, 2077, 4125, 35, 2083, 3, 16, 34 } };
-         //string script = ReqBuilder.GetRequestScript(RequestType.GEAttack, troops);
+         //string script = ReqBuilder.GetRequestScript(RequestType.GEServiceOverview, "");
          //cwb.ExecuteScriptAsync(script);
          //ExecuteMethod(PremAssembly, "MoppelBot", "Run", new object[] { DateTime.Now.Subtract(new TimeSpan(10, 0, 0)), this });
       }
@@ -1607,6 +1626,13 @@ namespace ForgeOfBots
       {
          if (e is int && e == -1) return;
          UserData.IncidentBot = ((UCPremium)sender).Checked;
+         if (UserData.MoppelBot)
+            ExecuteMethod(PremAssembly, "IncidentBot", "Run", new object[] { UserData.LastIncidentTime, MainInstance,UserData.IntervalIncidentBot });
+         else
+         {
+            ExecuteMethod(PremAssembly, "IncidentBot", "Stop", new object[] { });
+         }
+         UserData.SaveSettings();
       }
       public static void TogglePolivateBot(object sender, dynamic e = null)
       {
@@ -1644,7 +1670,7 @@ namespace ForgeOfBots
             cwb.ExecuteScriptAsync(script);
          }
       }
-      private void AidAllToolStripMenuItem_Click(object sender, EventArgs e)
+      public void AidAllToolStripMenuItem_Click(object sender, EventArgs e)
       {
          Motivate(E_Motivate.All);
       }

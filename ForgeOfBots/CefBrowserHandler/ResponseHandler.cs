@@ -360,7 +360,8 @@ namespace ForgeOfBots.CefBrowserHandler
                }
                if (motivation == null && msg.Contains("\"error_code\":202,\"__class__\":\"Error\""))
                {
-                  ListClass.doneMotivate.Add(int.Parse(idData), (false, null));
+                  if(!ListClass.doneMotivate.ContainsKey(int.Parse(idData)))
+                     ListClass.doneMotivate.Add(int.Parse(idData), (false, null));
                   break;
                }
                else
@@ -612,13 +613,35 @@ namespace ForgeOfBots.CefBrowserHandler
                   item.isVisible = vis;
                }
                ListClass.HiddenRewards = newHiddenRewards.responseData.hiddenRewards.ToList();
-               _IncidentUpdated?.Invoke(null, null);
+               _IncidentUpdated?.Invoke(null, -1);
                break;
             case RequestType.GEServiceOverview:
                dynamic GEOverview = JsonConvert.DeserializeObject(msg);
+               GEOverview = GEOverview["responseData"];
+               GuildExpedition ge = new GuildExpedition();
+               ge.state = GEOverview["state"].ToString();
+               ge.chests = new List<Chest>();
+               GEProgress progress = new GEProgress();
+               progress.CurrentEntityId = int.Parse(GEOverview["progress"]["currentEntityId"].ToString());
+               progress.difficulty = Enum.Parse(typeof(E_Difficulty), GEOverview["progress"]["difficulty"].ToString());
+               ge.progress = progress;
+               foreach (dynamic item in GEOverview["chests"])
+               {
+                  Chest c = new Chest();
+                  c.chest = item["chest"];
+                  c.id = int.Parse(item["id"].ToString());
+                  ge.chests.Add(c);
+               }
                break;
             case RequestType.GEServiceEncounter:
                dynamic GEEncounter = JsonConvert.DeserializeObject(msg);
+               if(GEX != null)
+               {
+                  if (!GEX.isChest())
+                  {
+
+                  }
+               }
                break;
             case RequestType.GEServiceCollectChest:
                dynamic GECollectChest = JsonConvert.DeserializeObject(msg);

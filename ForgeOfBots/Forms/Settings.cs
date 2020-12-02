@@ -462,5 +462,14 @@ namespace ForgeOfBots.Forms
          mtBigRoads.UseStyleColors = dark;
          Refresh();
       }
+
+      private void MtbIntervalIncident_TextChanged(object sender, EventArgs e)
+      {
+         if(int.TryParse(mtbIntervalIncident.Text,out int interval))
+            StaticData.UserData.IntervalIncidentBot = interval;
+         else
+            StaticData.UserData.IntervalIncidentBot = 1;
+         StaticData.UserData.SaveSettings();
+      }
    }
 }

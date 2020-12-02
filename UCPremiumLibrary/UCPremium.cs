@@ -29,9 +29,8 @@ namespace UCPremiumLibrary
          }
          set
          {
-            data = -1;
-            mtToggle.Checked = value;
             data = 1;
+            mtToggle.Checked = value;
          }
       }
       public BotType Type{ get; set; }

@@ -2,6 +2,7 @@
 using ForgeOfBots.DataHandler;
 using ForgeOfBots.Forms;
 using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,5 +37,6 @@ namespace ForgeOfBots.Utils
       public static bool DEBUGMODE = false;
       public static string ForgeHX_FilePath = "";
       public static object MainInstance = null;
+      public static GuildExpedition GEX = null;
    }
 }
