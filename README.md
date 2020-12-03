@@ -7,7 +7,7 @@
 This Bot was made by me and is one, if not the only one, which is currently public available and working.
 I made this Bot after working on a JavaScript Version (Electron App) which had it's difficulties while and after. Know, after a Year of development, lots of trial and error and 0 banned Accounts, I will publish this Bot for free
 
-As soon as the Premium Features are implemented (not right now) you can get a Serial Key from here: [TH3C0D3R-Shop](https://th3c0d3r.selly.store/)
+For implemented Premium Features you can get a Serial Key from here: [TH3C0D3R-Shop](https://th3c0d3r.selly.store/)
 
 About the currently Features:
 ### - Own Player Actions:
@@ -49,8 +49,8 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4Mjk4NjQ0NTAsLTU1NzYxNzQ2NCwtNT
-AzMzY1MjM0LC04NDE1OTM2NDgsMjEzODg3MDM0NSwzNTI5MjE2
-MzIsMTE5Mzk4OTE2MCw5MjAxNjgyODYsNzY5NjAyNjQ4LC03Mj
-g0MDA1Nl19
+eyJoaXN0b3J5IjpbMjAwMzk2NTE0MSwtMTgyOTg2NDQ1MCwtNT
+U3NjE3NDY0LC01MDMzNjUyMzQsLTg0MTU5MzY0OCwyMTM4ODcw
+MzQ1LDM1MjkyMTYzMiwxMTkzOTg5MTYwLDkyMDE2ODI4Niw3Nj
+k2MDI2NDgsLTcyODQwMDU2XX0=
 -->
