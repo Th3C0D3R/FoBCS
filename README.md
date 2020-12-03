@@ -36,7 +36,8 @@ To contribute a translation do the following:
 6. The new Language will be added to the Bot dynamically and does not need a new version update
 
 ### Donation
-Just to support my work. All donations are going to keep up the server were I test the Bot 24/7.
+Don't want to buy premium but want to support me?
+All donations are going to keep up the server for the Bot.
 
 | Paypal |
 | ------ |
@@ -49,8 +50,8 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAwMzk2NTE0MSwtMTgyOTg2NDQ1MCwtNT
-U3NjE3NDY0LC01MDMzNjUyMzQsLTg0MTU5MzY0OCwyMTM4ODcw
-MzQ1LDM1MjkyMTYzMiwxMTkzOTg5MTYwLDkyMDE2ODI4Niw3Nj
-k2MDI2NDgsLTcyODQwMDU2XX0=
+eyJoaXN0b3J5IjpbLTExNzgxMDA3MDUsLTE4Mjk4NjQ0NTAsLT
+U1NzYxNzQ2NCwtNTAzMzY1MjM0LC04NDE1OTM2NDgsMjEzODg3
+MDM0NSwzNTI5MjE2MzIsMTE5Mzk4OTE2MCw5MjAxNjgyODYsNz
+Y5NjAyNjQ4LC03Mjg0MDA1Nl19
 -->
