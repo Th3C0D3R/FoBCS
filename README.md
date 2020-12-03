@@ -20,10 +20,10 @@ About the currently Features:
 3. Remove Inactive Friends
 ### - Bots:
 1. **[FREE] Production Bot** (Start &amp; Collects Productions)
-2. **[PREMIUM] Tavern Bot** - NOT IMPLEMENTED NOW (Will collect own Tavern every time its full and sits every 24h at friends tavern)
-3. **[PREMIUM] Incident Bot** - NOT IMPLEMENTED NOW (Will collect Incidents after a given time)
-4. **[PREMIUM] Polivate Bot** - NOT IMPLEMENTED NOW (Will motivate all Players after 24h)
-5. **[PREMIUM] RQ-Bot** - NOT IMPLEMENTED NOW (Will do selected Recurring Quests automatically after given time)
+2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
+3. **[PREMIUM] Polivate Bot** - motivate/polish all Players after 24h
+4. **[PREMIUM] RQ-Bot** - NOT IMPLEMENTED NOW (Will do selected Recurring Quests automatically after given time)
+5. **[PREMIUM] Tavern Bot** - NOT IMPLEMENTED NOW (Will collect own Tavern every time its full and sits every 24h at friends tavern)
 
 ## Translation
 
@@ -49,7 +49,8 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1NzYxNzQ2NCwtNTAzMzY1MjM0LC04ND
-E1OTM2NDgsMjEzODg3MDM0NSwzNTI5MjE2MzIsMTE5Mzk4OTE2
-MCw5MjAxNjgyODYsNzY5NjAyNjQ4LC03Mjg0MDA1Nl19
+eyJoaXN0b3J5IjpbLTE4Mjk4NjQ0NTAsLTU1NzYxNzQ2NCwtNT
+AzMzY1MjM0LC04NDE1OTM2NDgsMjEzODg3MDM0NSwzNTI5MjE2
+MzIsMTE5Mzk4OTE2MCw5MjAxNjgyODYsNzY5NjAyNjQ4LC03Mj
+g0MDA1Nl19
 -->
