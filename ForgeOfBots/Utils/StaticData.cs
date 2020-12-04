@@ -38,5 +38,6 @@ namespace ForgeOfBots.Utils
       public static string ForgeHX_FilePath = "";
       public static object MainInstance = null;
       public static GuildExpedition GEX = null;
+      public static bool HasLastCrash = false;
    }
 }

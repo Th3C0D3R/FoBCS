@@ -17,6 +17,8 @@ using System.Linq;
 using System.Windows.Forms;
 using WorldSelection = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
 using static ForgeOfBots.Utils.StaticData;
+using Microsoft.AppCenter.Crashes;
+using System.IO;
 
 namespace ForgeOfBots.CefBrowserHandler
 {
@@ -306,7 +308,7 @@ namespace ForgeOfBots.CefBrowserHandler
                         {
                            string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "city_entities"); }).url;
                            string script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.city_entities);
-                          cwb.ExecuteScriptAsync(script);
+                           cwb.ExecuteScriptAsync(script);
                         }
                         if (ListClass.Eras.Count <= 0)
                         {
@@ -360,7 +362,7 @@ namespace ForgeOfBots.CefBrowserHandler
                }
                if (motivation == null && msg.Contains("\"error_code\":202,\"__class__\":\"Error\""))
                {
-                  if(!ListClass.doneMotivate.ContainsKey(int.Parse(idData)))
+                  if (!ListClass.doneMotivate.ContainsKey(int.Parse(idData)))
                      ListClass.doneMotivate.Add(int.Parse(idData), (false, null));
                   break;
                }
@@ -512,7 +514,12 @@ namespace ForgeOfBots.CefBrowserHandler
                   }
                }
                catch (Exception ex)
-               { MessageBox.Show(ex.ToString(), strings.CollectingError); }
+               {
+                  NLog.LogManager.Flush();
+                  var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+                  var properties = new Dictionary<string, string> { { "CollectProduction", msg } };
+                  Crashes.TrackError(ex, properties, attachments);
+               }
                break;
             case RequestType.QueryProduction:
                JToken QueryRes = JsonConvert.DeserializeObject<JToken>(msg);
@@ -528,25 +535,25 @@ namespace ForgeOfBots.CefBrowserHandler
                         {
                            ListClass.doneQuery.Add(id);
                            int exIndex = ListClass.ProductionList.FindIndex(e => e.id == id);
-                        if (exIndex >= 0)
-                        {
-                           EntityEx old = ListClass.ProductionList[exIndex];
-                           ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
-                           ListClass.ProductionList[exIndex].name = old.name;
-                           ListClass.ProductionList[exIndex].type = old.type;
-                           ListClass.ProductionList[exIndex].available_products = old.available_products;
-                        }
-                        else
-                        {
-                           exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0]?["id"].ToString()));
                            if (exIndex >= 0)
                            {
-                              EntityEx old = ListClass.GoodProductionList[exIndex];
-                              ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
-                              ListClass.GoodProductionList[exIndex].name = old.name;
-                              ListClass.GoodProductionList[exIndex].type = old.type;
-                              ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                              EntityEx old = ListClass.ProductionList[exIndex];
+                              ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                              ListClass.ProductionList[exIndex].name = old.name;
+                              ListClass.ProductionList[exIndex].type = old.type;
+                              ListClass.ProductionList[exIndex].available_products = old.available_products;
                            }
+                           else
+                           {
+                              exIndex = ListClass.GoodProductionList.FindIndex(e => e.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0]?["id"].ToString()));
+                              if (exIndex >= 0)
+                              {
+                                 EntityEx old = ListClass.GoodProductionList[exIndex];
+                                 ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                                 ListClass.GoodProductionList[exIndex].name = old.name;
+                                 ListClass.GoodProductionList[exIndex].type = old.type;
+                                 ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                              }
                            }
                         }
                         var a = ListClass.doneQuery.All(ListClass.AddedToQuery.Contains) && ListClass.AddedToQuery.Count == ListClass.doneQuery.Count;
@@ -561,7 +568,12 @@ namespace ForgeOfBots.CefBrowserHandler
                   }
                }
                catch (Exception ex)
-               { MessageBox.Show(ex.ToString(), strings.StartingError); }
+               {
+                  NLog.LogManager.Flush();
+                  var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+                  var properties = new Dictionary<string, string> { { "QueryProduction", msg } };
+                  Crashes.TrackError(ex, properties, attachments);
+               }
                break;
             case RequestType.CancelProduction:
                var can = msg;
@@ -579,9 +591,12 @@ namespace ForgeOfBots.CefBrowserHandler
                      MessageBox.Show(strings.CollectingTavernError);
                   }
                }
-               catch (Exception)
+               catch (Exception ex)
                {
-                  MessageBox.Show($"{strings.UnknownAction} {msg}");
+                  NLog.LogManager.Flush();
+                  var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+                  var properties = new Dictionary<string, string> { { "CollectTavern", msg } };
+                  Crashes.TrackError(ex, properties, attachments);
                }
                break;
             case RequestType.GetOwnTavern:
@@ -618,24 +633,30 @@ namespace ForgeOfBots.CefBrowserHandler
             case RequestType.GEServiceOverview:
                dynamic GEOverview = JsonConvert.DeserializeObject(msg);
                GEOverview = GEOverview["responseData"];
-               GuildExpedition ge = new GuildExpedition();
-               ge.state = GEOverview["state"].ToString();
-               ge.chests = new List<Chest>();
-               GEProgress progress = new GEProgress();
-               progress.CurrentEntityId = int.Parse(GEOverview["progress"]["currentEntityId"].ToString());
-               progress.difficulty = Enum.Parse(typeof(E_Difficulty), GEOverview["progress"]["difficulty"].ToString());
+               GuildExpedition ge = new GuildExpedition
+               {
+                  state = GEOverview["state"].ToString(),
+                  chests = new List<Chest>()
+               };
+               GEProgress progress = new GEProgress
+               {
+                  CurrentEntityId = int.Parse(GEOverview["progress"]["currentEntityId"].ToString()),
+                  difficulty = Enum.Parse(typeof(E_Difficulty), GEOverview["progress"]["difficulty"].ToString())
+               };
                ge.progress = progress;
                foreach (dynamic item in GEOverview["chests"])
                {
-                  Chest c = new Chest();
-                  c.chest = item["chest"];
-                  c.id = int.Parse(item["id"].ToString());
+                  Chest c = new Chest
+                  {
+                     chest = item["chest"],
+                     id = int.Parse(item["id"].ToString())
+                  };
                   ge.chests.Add(c);
                }
                break;
             case RequestType.GEServiceEncounter:
                dynamic GEEncounter = JsonConvert.DeserializeObject(msg);
-               if(GEX != null)
+               if (GEX != null)
                {
                   if (!GEX.isChest())
                   {
@@ -658,7 +679,7 @@ namespace ForgeOfBots.CefBrowserHandler
             {
                ImportantLoaded[19] = true;
                string script = ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
-              cwb.ExecuteScriptAsync(script);
+               cwb.ExecuteScriptAsync(script);
             }
 
          }

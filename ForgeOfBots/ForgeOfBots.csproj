@@ -241,6 +241,7 @@
     <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
     <Compile Include="Updater\Updater.cs" />
     <Compile Include="Utils\GEHelper.cs" />
+    <Compile Include="Utils\CrashHelper.cs" />
     <Compile Include="Utils\StaticData.cs" />
     <EmbeddedResource Include="Forms\About.de.resx">
       <DependentUpon>About.cs</DependentUpon>
@@ -426,6 +427,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
+    <PackageReference Include="NLog">
+      <Version>4.7.5</Version>
+    </PackageReference>
     <PackageReference Include="Obfuscar">
       <Version>2.2.28</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -442,7 +446,6 @@
     <Content Include="obfuscar.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Utils\DarkMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

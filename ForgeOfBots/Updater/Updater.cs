@@ -42,9 +42,7 @@ namespace ForgeOfBots.FoBUpdater
                {
                   dialogResult =
                       MessageBox.Show(
-                          $@"There is new version {args.CurrentVersion} available. You are using version {
-                                  args.InstalledVersion
-                              }. Do you want to update the application now?", @"Update Available",
+                          $@"There is new version {args.CurrentVersion} available. You are using version { args.InstalledVersion }. Do you want to update the application now?", @"Update Available",
                           MessageBoxButtons.YesNo,
                           MessageBoxIcon.Information);
                }

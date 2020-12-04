@@ -44,11 +44,11 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
             x = other["x"] != null ? other["x"].ToObject<int>() : -1,
             y = other["y"] != null ? other["y"].ToObject<int>() : -1,
             connected = other["connected"] != null ? other["connected"].ToObject<int>() : -1,
-            state = other["state"] != null ? other["state"] : null,
+            state = other["state"] ?? null,
             level = other["level"] != null ? other["level"].ToObject<int>() : -1,
-            unitSlots = other["unitSlots"] != null ? other["unitSlots"] : null,
+            unitSlots = other["unitSlots"] ?? null,
             max_level = other["max_level"] != null ? other["max_level"].ToObject<int>() : -1,
-            bonus = other["bonus"] != null ? other["bonus"] : null,
+            bonus = other["bonus"] ?? null,
          };
          return ex;
       }

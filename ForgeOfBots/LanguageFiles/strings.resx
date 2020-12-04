@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AskCrashLog" xml:space="preserve">
+    <value>Allow sending Crashlogs</value>
+  </data>
   <data name="Attach" xml:space="preserve">
     <value>Attach</value>
   </data>
@@ -272,6 +275,13 @@ Press 'No' for the Free Version</value>
   </data>
   <data name="TavernState" xml:space="preserve">
     <value>Tavernstate</value>
+  </data>
+  <data name="TextCrashLog" xml:space="preserve">
+    <value>Please allow sending crashlogs to help the team fixing the problems
+
+"Yes" -&gt; allow for ever
+"No" -&gt; allow only this time
+"Cancel"-&gt; allow never</value>
   </data>
   <data name="UnknownAction" xml:space="preserve">
     <value>UNKNOWN ACTION:</value>

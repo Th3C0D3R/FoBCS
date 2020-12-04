@@ -61,6 +61,15 @@ namespace ForgeOfBots.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Allow sending Crashlogs ähnelt.
+        /// </summary>
+        public static string AskCrashLog {
+            get {
+                return ResourceManager.GetString("AskCrashLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Attach ähnelt.
         /// </summary>
         public static string Attach {
@@ -507,6 +516,19 @@ namespace ForgeOfBots.LanguageFiles {
         public static string TavernState {
             get {
                 return ResourceManager.GetString("TavernState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please allow sending crashlogs to help the team fixing the problems
+        ///
+        ///&quot;Yes&quot; -&gt; allow for ever
+        ///&quot;No&quot; -&gt; allow only this time
+        ///&quot;Cancel&quot;-&gt; allow never ähnelt.
+        /// </summary>
+        public static string TextCrashLog {
+            get {
+                return ResourceManager.GetString("TextCrashLog", resourceCulture);
             }
         }
         

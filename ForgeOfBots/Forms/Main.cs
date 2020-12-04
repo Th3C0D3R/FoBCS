@@ -4,13 +4,6 @@ using CefSharp.OffScreen;
 #elif DEBUGFORM
 using CefSharp.WinForms;
 #endif
-using ForgeOfBots.CefBrowserHandler;
-using ForgeOfBots.DataHandler;
-using ForgeOfBots.Forms;
-using ForgeOfBots.Forms.UserControls;
-using ForgeOfBots.GameClasses;
-using ForgeOfBots.GameClasses.ResponseClasses;
-using ForgeOfBots.Utils;
 
 using System;
 using System.Collections.Generic;
@@ -25,24 +18,32 @@ using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using WebClient = System.Net.WebClient;
+using static System.Windows.Forms.ListViewItem;
 //using Windows.UI.Notifications;
 
 using static CefSharp.LogSeverity;
-using static ForgeOfBots.Utils.Helper;
-using static System.Windows.Forms.ListViewItem;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 using CUpdate = ForgeOfBots.DataHandler.Update;
 using Settings = ForgeOfBots.Utils.Settings;
-using WebClient = System.Net.WebClient;
 using WorldSelection = ForgeOfBots.Forms.WorldSelection;
-using ForgeOfBots.Utils.Premium;
 using UCPremiumLibrary;
-using Newtonsoft.Json.Linq;
+using ForgeOfBots.Utils.Premium;
 using ForgeOfBots.LanguageFiles;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using ForgeOfBots.CefBrowserHandler;
+using ForgeOfBots.DataHandler;
+using ForgeOfBots.Forms;
+using ForgeOfBots.Forms.UserControls;
+using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
+using ForgeOfBots.Utils;
 using static ForgeOfBots.Utils.StaticData;
 using static ForgeOfBots.FoBUpdater.FoBUpdater;
+using static ForgeOfBots.Utils.Helper;
+using Microsoft.AppCenter.Crashes;
 
 namespace ForgeOfBots
 {
@@ -53,6 +54,7 @@ namespace ForgeOfBots
       private bool blockedLogin = false;
       private bool blockExpireBox = false;
       static readonly object _locker = new object();
+      private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
       private int xcounter = 0;
 
       public Main(string[] args)
@@ -64,17 +66,19 @@ namespace ForgeOfBots
                   if (args[0].Substring(1).ToLower().Equals("debug"))
                      DEBUGMODE = true;
          }
+         logger.Info($"Debugmode {(DEBUGMODE ? "activated" : "deactivated")}");
          MainInstance = this;
          Contruct();
       }
       public Main()
-      {
-
-      }
+      { }
       public void Contruct()
       {
+         logger.Info($"Check if settings exists");
          if (Settings.SettingsExists())
          {
+            logger.Info($"settings exists");
+            logger.Info($"changing language");
             UserData = Settings.ReadSettings();
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
@@ -83,18 +87,32 @@ namespace ForgeOfBots
          }
          else
          {
+            logger.Info($"changing language to default 'en'");
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
          }
          Controls.Clear();
+         logger.Info($"check available languages");
          Task.Factory.StartNew(CheckLanguages).Wait();
          InitializeComponent();
+         logger.Info($"check for updates");
          CheckForUpdate();
+         if (HasLastCrash)
+         {
+            logger.Info($"request send last crash");
+            if (UserData.AllowSendCrashLog == UserConfirmation.Send)
+               CrashHelper.WaitForUserConfirmation(false);
+            else if (UserData.AllowSendCrashLog == UserConfirmation.AlwaysSend)
+               CrashHelper.WaitForUserConfirmation(true);
+            else if (UserData.AllowSendCrashLog == UserConfirmation.DontSend)
+               Crashes.SetEnabledAsync(false).Wait();
+         }
          Application.ApplicationExit += handleExit;
          RunningTime.Start();
          bwTimerUpdate.RunWorkerAsync();
+         logger.Info($"Starting Bot");
          Log("[DEBUG] Starting Bot", lbOutputWindow);
          StaticData.Browser = new Browser(this);
          StaticData.Browser.Show();
@@ -111,6 +129,7 @@ namespace ForgeOfBots
             string.IsNullOrWhiteSpace(UserData.WorldServer) ||
             UserData.PlayableWorlds.Count <= 0)
          {
+            logger.Info($"empty or none userdata, creating new one");
             Log("[DEBUG] empty or none userdata, creating new one!", lbOutputWindow);
             if (!Settings.SettingsExists())
                UserData = new Settings();
@@ -171,6 +190,7 @@ namespace ForgeOfBots
                LocalStorage = CefState.Enabled,
                WebSecurity = CefState.Disabled,
             };
+            logger.Info($"Browser Settings and Cef Settings loaded");
             Log("[DEBUG] Browser Settings and Cef Settings loaded", lbOutputWindow);
 
             ContinueExecution();
@@ -202,8 +222,13 @@ namespace ForgeOfBots
                ListClass.AvailableLanguages.Languages.Add(item);
             }
          }
-         catch (Exception)
-         { }
+         catch (Exception ex)
+         {
+            NLog.LogManager.Flush();
+            var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+            var properties = new Dictionary<string, string> { { "CheckLanguages", ex.Message } };
+            Crashes.TrackError(ex, properties, attachments);
+         }
       }
       private void ResponseHandler_EverythingImportantLoaded(object sender)
       {
@@ -268,7 +293,8 @@ namespace ForgeOfBots
                }
             }
             catch (Exception)
-            {}
+            {
+            }
          }
          RunningTime.Reset();
          Contruct();
@@ -1597,7 +1623,7 @@ namespace ForgeOfBots
       }
       public void SelfUpdateIncidents(object sender, dynamic data = null)
       {
-         if(!(data is int))
+         if (!(data is int))
          {
             ResponseHandler.IncidentUpdated += SelfUpdateIncidents;
             string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
@@ -1657,7 +1683,7 @@ namespace ForgeOfBots
          if (e is int && e == -1) return;
          UserData.IncidentBot = ((UCPremium)sender).Checked;
          if (UserData.MoppelBot)
-            ExecuteMethod(PremAssembly, "IncidentBot", "Run", new object[] { UserData.LastIncidentTime, MainInstance,UserData.IntervalIncidentBot });
+            ExecuteMethod(PremAssembly, "IncidentBot", "Run", new object[] { UserData.LastIncidentTime, MainInstance, UserData.IntervalIncidentBot });
          else
          {
             ExecuteMethod(PremAssembly, "IncidentBot", "Stop", new object[] { });

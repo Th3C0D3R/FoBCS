@@ -23,6 +23,7 @@ using System.ComponentModel;
 using System.Drawing;
 using ForgeOfBots.LanguageFiles;
 using System.Net;
+using Microsoft.AppCenter.Crashes;
 
 namespace ForgeOfBots.Utils
 {
@@ -358,7 +359,10 @@ namespace ForgeOfBots.Utils
          }
          catch (Exception ex)
          {
-            MessageBox.Show($"{strings.CriticalError} {strings.ShowingNotify}", ex.ToString());
+            NLog.LogManager.Flush();
+            var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+            var properties = new Dictionary<string, string> { { "ShowNotify", strings.ShowingNotify } };
+            Crashes.TrackError(ex, properties, attachments);
          }
       }
       private static void ToastActivated(ToastNotification sender, object e)

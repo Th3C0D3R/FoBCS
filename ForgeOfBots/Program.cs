@@ -35,6 +35,19 @@ namespace ForgeOfBots
          //      Application.Run(new Main(args));
          //}
          //else
+         var config = new NLog.Config.LoggingConfiguration();
+
+         // Targets where to log to: File and Console
+         var logfile = new NLog.Targets.FileTarget("logfile") { FileName = "log.foblog" };
+
+         // Rules for mapping loggers to targets            
+         config.AddRule(NLog.LogLevel.Info, NLog.LogLevel.Fatal, logfile);
+         NLog.LogManager.Configuration = config;
+         if (Crashes.IsEnabledAsync().Result)
+         {
+               StaticData.HasLastCrash = CrashHelper.HasCrashedLastSession();
+         }
+         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
          Application.Run(new Main(args));
       }
    }

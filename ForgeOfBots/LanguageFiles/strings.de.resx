@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AskCrashLog" xml:space="preserve">
+    <value>Senden von Crashlogs</value>
+  </data>
   <data name="Attach" xml:space="preserve">
     <value>fixiered</value>
   </data>
@@ -272,6 +275,14 @@ Mit 'Nein' gehts mit der kostenlosen Version weiter</value>
   </data>
   <data name="TavernState" xml:space="preserve">
     <value>Tavernenstatus</value>
+  </data>
+  <data name="TextCrashLog" xml:space="preserve">
+    <value>Bitte erlaube das Senden von Crashlogs um den aktuellen und alle zukünftige Fehler und Probleme direkt an die Entwicklung weiterzugeben.
+
+"JA" -&gt; für immer erlauben
+"NEIN" -&gt; nur dieses Mal erlauben
+"Abbrechen" -&gt; niemals erlauben
+</value>
   </data>
   <data name="UnknownAction" xml:space="preserve">
     <value>UNBEKANNTE AKTION</value>
