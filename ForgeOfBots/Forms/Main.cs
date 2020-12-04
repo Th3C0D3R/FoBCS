@@ -256,9 +256,20 @@ namespace ForgeOfBots
             tsbLogin.Click -= TsButton_Click;
          }
          bwTimerUpdate.CancelAsync();
-         bwScriptExecuter.CancelAsync();
-         bwScriptExecuterOneArg.CancelAsync();
-         while (bwTimerUpdate.IsBusy || bwScriptExecuter.IsBusy || bwScriptExecuterOneArg.IsBusy) { Application.DoEvents(); }
+         while (bwTimerUpdate.IsBusy) { Application.DoEvents(); }
+         foreach (BackgroundWorker item in ListClass.BackgroundWorkers)
+         {
+            try
+            {
+               if (item.WorkerSupportsCancellation)
+               {
+                  item.CancelAsync();
+                  while (item.IsBusy) Application.DoEvents();
+               }
+            }
+            catch (Exception)
+            {}
+         }
          RunningTime.Reset();
          Contruct();
       }
@@ -678,7 +689,10 @@ namespace ForgeOfBots
                   BackgroundWorker bwPremium = new BackgroundWorker();
                   bwPremium.DoWork += CheckPremium;
                   bwPremium.RunWorkerCompleted += CheckPremiumComplete;
+                  bwPremium.WorkerSupportsCancellation = true;
+                  bwPremium.RunWorkerCompleted += workerComplete;
                   bwPremium.RunWorkerAsync();
+                  ListClass.BackgroundWorkers.Add(bwPremium);
                }
             }
             CustomResourceRequestHandler.ServerStartpageLoadedEvent += ServerStartupLoaded_Event;
@@ -1346,12 +1360,18 @@ namespace ForgeOfBots
          bw.DoWork += bwScriptExecuter_DoWork;
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
       }
       private void VisitAllTavern()
       {
          //string script = ReqBuilder.GetRequestScript(RequestType.VisitTavern, "[]");
          TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.VisitTavern, argument2 = null };
-         bwScriptExecuter.RunWorkerAsync(param);
+         BackgroundWorker bw = new BackgroundWorker();
+         bw.DoWork += bwScriptExecuter_DoWork;
+         bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerCompleted += workerComplete;
+         bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
       }
       private void bwScriptExecuter_DoWork(object sender, DoWorkEventArgs e)
       {
@@ -1522,15 +1542,25 @@ namespace ForgeOfBots
          BackgroundWorker bw = new BackgroundWorker();
          bw.DoWork += bwScriptExecuterOneArg_DoWork;
          bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerCompleted += workerComplete;
          bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
       }
+
+      private void workerComplete(object sender, RunWorkerCompletedEventArgs e)
+      {
+         ListClass.BackgroundWorkers.Remove((BackgroundWorker)sender);
+      }
+
       public void mbtIncidents_Click(object sender, EventArgs e)
       {
          OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectIncident };
          BackgroundWorker bw = new BackgroundWorker();
          bw.DoWork += bwScriptExecuterOneArg_DoWork;
          bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerCompleted += workerComplete;
          bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
       }
       List<bool> testBool = new List<bool>();
       private void ResponseHandler_IncidentCollected(object sender, dynamic data = null)

@@ -146,8 +146,6 @@
          this.panel8 = new System.Windows.Forms.Panel();
          this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
          this.label2 = new System.Windows.Forms.Label();
-         this.bwScriptExecuter = new System.ComponentModel.BackgroundWorker();
-         this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
          this.tsslProgressState = new System.Windows.Forms.ToolStripStatusLabel();
          this.tspbProgress = new System.Windows.Forms.ToolStripProgressBar();
          this.sStripStatus = new System.Windows.Forms.StatusStrip();
@@ -951,18 +949,6 @@
          resources.ApplyResources(this.label2, "label2");
          this.label2.Name = "label2";
          // 
-         // bwScriptExecuter
-         // 
-         this.bwScriptExecuter.WorkerReportsProgress = true;
-         this.bwScriptExecuter.WorkerSupportsCancellation = true;
-         this.bwScriptExecuter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwScriptExecuter_DoWork);
-         // 
-         // bwScriptExecuterOneArg
-         // 
-         this.bwScriptExecuterOneArg.WorkerReportsProgress = true;
-         this.bwScriptExecuterOneArg.WorkerSupportsCancellation = true;
-         this.bwScriptExecuterOneArg.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwScriptExecuterOneArg_DoWork);
-         // 
          // tsslProgressState
          // 
          resources.ApplyResources(this.tsslProgressState, "tsslProgressState");
@@ -1141,7 +1127,6 @@
       private System.Windows.Forms.ToolStripMenuItem tsmiVisitAll;
       private System.Windows.Forms.ToolStripMenuItem tsmiDoAll;
       private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-      private System.ComponentModel.BackgroundWorker bwScriptExecuter;
       private System.Windows.Forms.Panel panel7;
       private System.Windows.Forms.Panel panel9;
       private System.Windows.Forms.ListBox lbOutputWindow;
@@ -1177,7 +1162,6 @@
       private MetroFramework.Controls.MetroButton mbtIncidents;
       private MetroFramework.Controls.MetroButton mbtCancel;
       private MetroFramework.Controls.MetroButton mbtCollect;
-      private System.ComponentModel.BackgroundWorker bwScriptExecuterOneArg;
       private System.Windows.Forms.Panel pnlIncident;
       private System.Windows.Forms.ToolStripStatusLabel tsslProgressState;
       private System.Windows.Forms.ToolStripProgressBar tspbProgress;

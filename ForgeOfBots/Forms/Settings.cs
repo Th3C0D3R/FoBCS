@@ -111,6 +111,7 @@ namespace ForgeOfBots.Forms
          bw.DoWork += Bw_DoWork;
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerAsync();
+         ListClass.BackgroundWorkers.Add(bw);
       }
 
       private void Bw_DoWork(object sender, DoWorkEventArgs e)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace ForgeOfBots.GameClasses
 {
@@ -68,6 +69,7 @@ namespace ForgeOfBots.GameClasses
       public static List<int> doneQuery { get; set; } = new List<int>();
       public static List<int> AddedToQuery { get; set; } = new List<int>();
       public static List<int> CollectedIDs { get; set; } = new List<int>();
+      public static List<BackgroundWorker> BackgroundWorkers { get; set; } = new List<BackgroundWorker>();
 
       /// <summary>
       /// Indicates the state of the ProductionCycle

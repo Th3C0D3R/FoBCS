@@ -5,10 +5,10 @@ TODO:
 	- Tavern Bot:
 	  - Check every hour for Tavern and collect if full
 	  - Save remaining time at Exit and continue next start
-	- Incident Bot:
+	X Incident Bot:
 	  - Check every hour for new collectable Incidents
 	  - Save remaining time at Exit and continue next start
-	- Moppel Bot:
+	X Moppel Bot:
 	  - Check every day if Player can polivate and does it automatically 
 	  - Saves DateTime and checks next run or after 24h if 24h has passed
 	- RQ-Bot:
@@ -19,6 +19,3 @@ TODO:
 Improvments:
 []Update as few as possible while Bot and every Subbot is running
 []Out-Source the Main.cs to make it look nicer
-
-Motivationpack:
-[{"__class__":"ServerRequest","requestData":[{"__class__":"UseItemOnBuildingPayload","itemId":7147831,"mapEntityId":6440,"optionIndex":0}],"requestClass":"InventoryService","requestMethod":"useItem","requestId":217}]
