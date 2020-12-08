@@ -267,6 +267,14 @@ Mit 'Ja' kommst du zum Shop
 ansonsten wird die kostenlose Version weiter genutzt
 Mit 'Nein' gehts mit der kostenlosen Version weiter</value>
   </data>
+  <data name="SuccessText" xml:space="preserve">
+    <value>Der Crash-Report wurde erfolgreich übertragen
+
+Vielen Dank für deine Hilfe</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Erfolgreich übertragen</value>
+  </data>
   <data name="TavernBot" xml:space="preserve">
     <value>Tavernen Bot</value>
   </data>

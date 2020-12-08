@@ -101,6 +101,7 @@ namespace ForgeOfBots
          CheckForUpdate();
          if (HasLastCrash)
          {
+            
             logger.Info($"request send last crash");
             if (UserData.AllowSendCrashLog == UserConfirmation.Send)
                CrashHelper.WaitForUserConfirmation(false);

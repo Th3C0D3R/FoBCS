@@ -12,6 +12,7 @@ namespace ForgeOfBots.Utils
 {
    public static class CrashHelper
    {
+      private static readonly Logger logger = LogManager.GetCurrentClassLogger();
       public static bool HasCrashedLastSession()
       {
          return Crashes.HasCrashedInLastSessionAsync().Result;
@@ -31,17 +32,24 @@ namespace ForgeOfBots.Utils
                   Crashes.NotifyUserConfirmation(UserConfirmation.DontSend);
                   Crashes.SendingErrorReport += (sender, e) =>
                   {
-                     
+                     logger.Info($"Sending Error Report...");
+                  };
+                  Crashes.SentErrorReport += (sender, e) =>
+                  {
+                     logger.Info($"Error Report send successfull");
+                     MessageBox.Show(strings.SuccessTitle, strings.SuccessText);
                   };
                   StaticData.UserData.AllowSendCrashLog = UserConfirmation.DontSend;
                   break;
                case DialogResult.Yes:
                   Crashes.NotifyUserConfirmation(UserConfirmation.AlwaysSend);
                   StaticData.UserData.AllowSendCrashLog = UserConfirmation.AlwaysSend;
+                  logger.Info($"Allow AlwaysSend Error Report...");
                   break;
                case DialogResult.No:
                   Crashes.NotifyUserConfirmation(UserConfirmation.Send);
                   StaticData.UserData.AllowSendCrashLog = UserConfirmation.Send;
+                  logger.Info($"Allow Error Report send once...");
                   break;
                default:
                   break;

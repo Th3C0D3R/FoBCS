@@ -493,6 +493,26 @@ namespace ForgeOfBots.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The Crash Report successfull transmitted.
+        ///
+        ///Thank you for your help! ähnelt.
+        /// </summary>
+        public static string SuccessText {
+            get {
+                return ResourceManager.GetString("SuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Successful transmitted ähnelt.
+        /// </summary>
+        public static string SuccessTitle {
+            get {
+                return ResourceManager.GetString("SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Tavern Bot ähnelt.
         /// </summary>
         public static string TavernBot {

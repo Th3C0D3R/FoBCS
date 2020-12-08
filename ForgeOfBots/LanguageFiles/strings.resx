@@ -267,6 +267,14 @@ Press 'Yes' to open the Store
 else you are continue using the Free-Version
 Press 'No' for the Free Version</value>
   </data>
+  <data name="SuccessText" xml:space="preserve">
+    <value>The Crash Report successfull transmitted.
+
+Thank you for your help!</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Successful transmitted</value>
+  </data>
   <data name="TavernBot" xml:space="preserve">
     <value>Tavern Bot</value>
   </data>
