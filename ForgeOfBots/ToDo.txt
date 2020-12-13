@@ -13,3 +13,4 @@ TODO:
 Improvments:
 []Update as few as possible while Bot and every Subbot is running
 []Out-Source the Main.cs to make it look nicer
+[]Better Log output & analytics 
