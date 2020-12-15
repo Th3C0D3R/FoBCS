@@ -243,6 +243,25 @@ namespace ForgeOfBots.Utils
       }
       #endregion
    }
+   public static class Identifier
+   {
+      public static string GetInfo(string qry, string prop)
+      {
+         ManagementObjectSearcher searcher;
+         try
+         {
+            searcher = new ManagementObjectSearcher("SELECT * FROM " + qry);
+            foreach (ManagementObject mo in searcher.Get())
+            {
+               PropertyDataCollection searcherProperties = mo.Properties;
+               return searcherProperties[prop].Value.ToString() ?? "";
+            }
+         }
+         catch (Exception ex)
+         {}
+         return "";
+      }
+   }
    public class ProductionOption
    {
       public int id;

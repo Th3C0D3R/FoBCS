@@ -141,6 +141,9 @@
   <data name="CollectTavern" xml:space="preserve">
     <value>Taverne einsammeln</value>
   </data>
+  <data name="CountLabel" xml:space="preserve">
+    <value>##Done##/##End## done</value>
+  </data>
   <data name="CriticalError" xml:space="preserve">
     <value>KRITISCHER FEHLER</value>
   </data>
@@ -213,6 +216,9 @@ oder die Lizenz ist nicht gültig!</value>
   <data name="PolivateBot" xml:space="preserve">
     <value>Moppel Bot</value>
   </data>
+  <data name="PolivateTitle" xml:space="preserve">
+    <value>Motivate/Polish</value>
+  </data>
   <data name="Premium" xml:space="preserve">
     <value>PREMIUM</value>
   </data>
@@ -254,6 +260,9 @@ oder die Lizenz ist nicht gültig!</value>
   </data>
   <data name="StartingError" xml:space="preserve">
     <value>FEHLER BEIM STARTEN NEUER PRODUKTIONEN</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Current Status:</value>
   </data>
   <data name="SubExpiredTitle" xml:space="preserve">
     <value>LIZENZ ABGELAUFEN</value>
@@ -297,5 +306,8 @@ Vielen Dank für deine Hilfe</value>
   </data>
   <data name="Visitable" xml:space="preserve">
     <value>Besuchbar</value>
+  </data>
+  <data name="VisitAllTitle" xml:space="preserve">
+    <value>Visiting all Taverns</value>
   </data>
 </root>

@@ -118,103 +118,103 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AskCrashLog" xml:space="preserve">
-    <value>Allow sending Crashlogs</value>
+    <value>Toujours envoyer les crashs-rapports</value>
   </data>
   <data name="Attach" xml:space="preserve">
-    <value>Attach</value>
+    <value>Attacher</value>
   </data>
   <data name="AttachMain" xml:space="preserve">
-    <value>Attach to Main</value>
+    <value>Attacher au menu principal</value>
   </data>
   <data name="CanNotSitDown" xml:space="preserve">
-    <value>Can't sit down</value>
+    <value>Impossible de s'assoir</value>
   </data>
   <data name="Clanmembers" xml:space="preserve">
-    <value>Clanmembers</value>
+    <value>Membres du clan</value>
   </data>
   <data name="CollectingError" xml:space="preserve">
-    <value>ERROR WHILE COLLECTING PRODUCTION</value>
+    <value>ERREUR DURANT LA COLLECTION DES PRODUCTIONS</value>
   </data>
   <data name="CollectingTavernError" xml:space="preserve">
     <value>Something went wrong collecting tavern</value>
   </data>
   <data name="CollectTavern" xml:space="preserve">
-    <value>Collect Tavern</value>
+    <value>En train de collecter la taverne</value>
   </data>
   <data name="CountLabel" xml:space="preserve">
     <value>##Done##/##End## done</value>
   </data>
   <data name="CriticalError" xml:space="preserve">
-    <value>CRITICAL ERROR: </value>
+    <value>ERREUR CRITIQUE: </value>
   </data>
   <data name="CurrentlySittingPlayers" xml:space="preserve">
-    <value>Currently Sitting Players: </value>
+    <value>Joueurs assis en ce moment: </value>
   </data>
   <data name="Detach" xml:space="preserve">
-    <value>Detach</value>
+    <value>Detacher</value>
   </data>
   <data name="DetachMain" xml:space="preserve">
-    <value>Detach from Main</value>
+    <value>Detacher du menu principal</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Downloading </value>
+    <value>Téléchargement </value>
   </data>
   <data name="Expired" xml:space="preserve">
-    <value>EXPIRED</value>
+    <value>EXPIRE</value>
   </data>
   <data name="FailedToActivate" xml:space="preserve">
-    <value>FAILED TO ACTIVATE</value>
+    <value>IMPOSSIBLE D'ACTIVER</value>
   </data>
   <data name="Friends" xml:space="preserve">
-    <value>Friends</value>
+    <value>Amis</value>
   </data>
   <data name="InactiveFriends" xml:space="preserve">
-    <value>Inactive Friends</value>
+    <value>Amis Inactifs</value>
   </data>
   <data name="IncidentBot" xml:space="preserve">
-    <value>Incident Bot</value>
+    <value>Bot d'incident</value>
   </data>
   <data name="IncidentCollected" xml:space="preserve">
-    <value>Incident collected</value>
+    <value>Incidents collectés</value>
   </data>
   <data name="LicenceNotValid" xml:space="preserve">
-    <value>There was a problem using this Serial-Key with your Device!!
-
-Either you activated the Serial-Key on a other Device
-or the Serial-Key is not valid!</value>
+    <value>Un problème est survenu lors de l'utilisation de cette clé de série avec votre appareil !!
+     
+Soit vous avez activé la clé de série sur un autre appareil
+ou la clé de série n'est pas valide!</value>
   </data>
   <data name="LoggingIn" xml:space="preserve">
-    <value>Logging in...</value>
+    <value>Connection...</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Se Connecter</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Se Deconnecter</value>
   </data>
   <data name="Motivating" xml:space="preserve">
-    <value>Motivating</value>
+    <value>Motiver</value>
   </data>
   <data name="MotivationDone" xml:space="preserve">
-    <value>Motivation DONE</value>
+    <value>Motivation FAIT</value>
   </data>
   <data name="Neighbors" xml:space="preserve">
-    <value>Neighbors</value>
+    <value>Voisins</value>
   </data>
   <data name="PleaseLoginNow" xml:space="preserve">
-    <value>Please Login now...</value>
+    <value>Veuillez vous connecter maintenant...</value>
   </data>
   <data name="PleaseWaitAgain" xml:space="preserve">
-    <value>Please wait (again)!</value>
+    <value>Veuillez attendre (ouais encore)!</value>
   </data>
   <data name="PleaseWaitShutdown" xml:space="preserve">
-    <value>Please wait...</value>
+    <value>Veuillez attendre...</value>
   </data>
   <data name="PleaseWaitShutdown2" xml:space="preserve">
-    <value>Shutingdown Bot</value>
+    <value>Arrêt du bot</value>
   </data>
   <data name="PolivateBot" xml:space="preserve">
-    <value>Polivate Bot</value>
+    <value>Bot de poliment</value>
   </data>
   <data name="PolivateTitle" xml:space="preserve">
     <value>Motivate/Polish</value>
@@ -223,49 +223,49 @@ or the Serial-Key is not valid!</value>
     <value>PREMIUM</value>
   </data>
   <data name="ProducingState" xml:space="preserve">
-    <value>Producing</value>
+    <value>En train de produire</value>
   </data>
   <data name="ProductionBot" xml:space="preserve">
-    <value>Production Bot</value>
+    <value>Bot de Production</value>
   </data>
   <data name="ProductionFinishedState" xml:space="preserve">
-    <value>Production finished!</value>
+    <value>Production fini!</value>
   </data>
   <data name="ProductionIdle" xml:space="preserve">
-    <value>Nothing</value>
+    <value>Rien</value>
   </data>
   <data name="ReadyToCollect" xml:space="preserve">
-    <value>READY TO COLLECT</value>
+    <value>PRÊT POUR COLLECTER</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Suprimmer</value>
   </data>
   <data name="ResponseNotValid" xml:space="preserve">
-    <value>Response from server was not valid</value>
+    <value>Le reponse de notre serveur est invalide</value>
   </data>
   <data name="Reward" xml:space="preserve">
-    <value>Reward</value>
+    <value>Récompense</value>
   </data>
   <data name="RQBot" xml:space="preserve">
-    <value>Recurring-Quest Bot</value>
+    <value>Bot de quête récurrente</value>
   </data>
   <data name="ShowingNotify" xml:space="preserve">
-    <value>Showing Notification</value>
+    <value>Affichage des notifications</value>
   </data>
   <data name="SitDown" xml:space="preserve">
-    <value>Sit down</value>
+    <value>Assayez-vous</value>
   </data>
   <data name="SittingAtTavern" xml:space="preserve">
-    <value>Sitting at Tavern</value>
+    <value>Assis dans la Taverne</value>
   </data>
   <data name="StartingError" xml:space="preserve">
-    <value>ERROR WHILE STARTING NEW PRODUCTION</value>
+    <value>ERREUR DANS LE LANCEMENT D'UNE NOUVELLE PRODUCTION</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Current Status:</value>
   </data>
   <data name="SubExpiredTitle" xml:space="preserve">
-    <value>SUBSCRIPTION EXPIRED</value>
+    <value>ABONNEMENT EXPIRÉ</value>
   </data>
   <data name="SubscriptionExpired" xml:space="preserve">
     <value>Your Subscription is expired.
@@ -277,31 +277,32 @@ else you are continue using the Free-Version
 Press 'No' for the Free Version</value>
   </data>
   <data name="SuccessText" xml:space="preserve">
-    <value>The Crash Report successfull transmitted.
+    <value>Le crash-rapport a été transmis avec succès.
 
-Thank you for your help!</value>
+Merci de votre aide!</value>
   </data>
   <data name="SuccessTitle" xml:space="preserve">
-    <value>Successful transmitted</value>
+    <value>Transmission réussie</value>
   </data>
   <data name="TavernBot" xml:space="preserve">
-    <value>Tavern Bot</value>
+    <value>Bot de Taverne</value>
   </data>
   <data name="TavernDone" xml:space="preserve">
-    <value>Tavern Visit DONE</value>
+    <value>Visite de la Taverne FAIT</value>
   </data>
   <data name="TavernState" xml:space="preserve">
-    <value>Tavernstate</value>
+    <value>Place dans la taverne</value>
   </data>
   <data name="TextCrashLog" xml:space="preserve">
-    <value>Please allow sending crashlogs to help the team fixing the problems
+    <value>Veuillez autoriser l'envoi des crashlogs pour aider l'équipe à résoudre les problèmes
 
-"Yes" -&gt; allow for ever
-"No" -&gt; allow only this time
-"Cancel"-&gt; allow never</value>
+"Oui" - &gt; permettre pour toujours
+"Non" - &gt; permettre seulement cette fois
+"Annuler" - &gt; permettre jamais
+</value>
   </data>
   <data name="UnknownAction" xml:space="preserve">
-    <value>UNKNOWN ACTION:</value>
+    <value>ACTION INCONNU:</value>
   </data>
   <data name="Visitable" xml:space="preserve">
     <value>Visitable</value>

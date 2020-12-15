@@ -9,6 +9,11 @@
       "code": "de",
       "language": "Deutsch",
       "index": 1
+    },
+    {
+      "code": "fr",
+      "language": "Français",
+      "index": 2
     }
   ]
 }

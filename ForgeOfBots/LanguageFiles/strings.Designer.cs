@@ -133,6 +133,15 @@ namespace ForgeOfBots.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ##Done##/##End## done ähnelt.
+        /// </summary>
+        public static string CountLabel {
+            get {
+                return ResourceManager.GetString("CountLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die CRITICAL ERROR:  ähnelt.
         /// </summary>
         public static string CriticalError {
@@ -343,6 +352,15 @@ namespace ForgeOfBots.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Motivate/Polish ähnelt.
+        /// </summary>
+        public static string PolivateTitle {
+            get {
+                return ResourceManager.GetString("PolivateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die PREMIUM ähnelt.
         /// </summary>
         public static string Premium {
@@ -469,6 +487,15 @@ namespace ForgeOfBots.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Current Status: ähnelt.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die SUBSCRIPTION EXPIRED ähnelt.
         /// </summary>
         public static string SubExpiredTitle {
@@ -567,6 +594,15 @@ namespace ForgeOfBots.LanguageFiles {
         public static string Visitable {
             get {
                 return ResourceManager.GetString("Visitable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Visiting all Taverns ähnelt.
+        /// </summary>
+        public static string VisitAllTitle {
+            get {
+                return ResourceManager.GetString("VisitAllTitle", resourceCulture);
             }
         }
     }

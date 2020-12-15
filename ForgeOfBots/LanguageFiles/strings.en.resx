@@ -141,6 +141,9 @@
   <data name="CollectTavern" xml:space="preserve">
     <value>Collect Tavern</value>
   </data>
+  <data name="CountLabel" xml:space="preserve">
+    <value>##Done##/##End## done</value>
+  </data>
   <data name="CriticalError" xml:space="preserve">
     <value>CRITICAL ERROR: </value>
   </data>
@@ -213,6 +216,9 @@ or the Serial-Key is not valid!</value>
   <data name="PolivateBot" xml:space="preserve">
     <value>Polivate Bot</value>
   </data>
+  <data name="PolivateTitle" xml:space="preserve">
+    <value>Motivate/Polish</value>
+  </data>
   <data name="Premium" xml:space="preserve">
     <value>PREMIUM</value>
   </data>
@@ -254,6 +260,9 @@ or the Serial-Key is not valid!</value>
   </data>
   <data name="StartingError" xml:space="preserve">
     <value>ERROR WHILE STARTING NEW PRODUCTION</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Current Status:</value>
   </data>
   <data name="SubExpiredTitle" xml:space="preserve">
     <value>SUBSCRIPTION EXPIRED</value>
@@ -297,5 +306,8 @@ Thank you for your help!</value>
   </data>
   <data name="Visitable" xml:space="preserve">
     <value>Visitable</value>
+  </data>
+  <data name="VisitAllTitle" xml:space="preserve">
+    <value>Visiting all Taverns</value>
   </data>
 </root>

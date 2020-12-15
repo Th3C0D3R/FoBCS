@@ -24,6 +24,7 @@ using System.Drawing;
 using ForgeOfBots.LanguageFiles;
 using System.Net;
 using Microsoft.AppCenter.Crashes;
+using System.Threading.Tasks;
 
 namespace ForgeOfBots.Utils
 {
@@ -252,6 +253,11 @@ namespace ForgeOfBots.Utils
             return methodInfo.Invoke(instanceType, param);
          }
          return null;
+      }
+      public static async Task setTimeout(Action action, int timeoutInMilliseconds)
+      {
+         await Task.Delay(timeoutInMilliseconds);
+         action();
       }
       public enum Result
       {

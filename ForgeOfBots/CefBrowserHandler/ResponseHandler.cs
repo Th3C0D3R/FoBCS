@@ -426,14 +426,11 @@ namespace ForgeOfBots.CefBrowserHandler
                      if (resItem["requestMethod"] == "getOtherTavern")
                      {
                         rewardTavern = resItem["responseData"]["rewardResources"];
+                        TavernResultSitting = resItem["responseData"]["state"];
                      }
                      else if (resItem["requestMethod"] == "getOtherTavernState")
                      {
                         tavernresult = JsonConvert.DeserializeObject<TavernResult>(body);
-                     }
-                     else if (resItem["requestMethod"] == "getOtherTavern")
-                     {
-                        TavernResultSitting = resItem["responseData"]["state"];
                      }
                   }
 

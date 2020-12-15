@@ -13,8 +13,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -26,6 +24,7 @@ using static System.Windows.Forms.ListViewItem;
 using static CefSharp.LogSeverity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.AppCenter.Crashes;
 
 using CUpdate = ForgeOfBots.DataHandler.Update;
 using Settings = ForgeOfBots.Utils.Settings;
@@ -43,7 +42,7 @@ using ForgeOfBots.Utils;
 using static ForgeOfBots.Utils.StaticData;
 using static ForgeOfBots.FoBUpdater.FoBUpdater;
 using static ForgeOfBots.Utils.Helper;
-using Microsoft.AppCenter.Crashes;
+using static ForgeOfBots.Utils.Testing.Test;
 
 namespace ForgeOfBots
 {
@@ -101,7 +100,7 @@ namespace ForgeOfBots
          CheckForUpdate();
          if (HasLastCrash)
          {
-            
+
             logger.Info($"request send last crash");
             if (UserData.AllowSendCrashLog == UserConfirmation.Send)
                CrashHelper.WaitForUserConfirmation(false);
@@ -322,7 +321,7 @@ namespace ForgeOfBots
             }
          };
 #if DEBUGFORM
-      Browser.Controls.Add(cwb);
+      StaticData.Browser.Controls.Add(cwb);
 #endif
       }
 
@@ -1382,6 +1381,25 @@ namespace ForgeOfBots
       }
       public void Motivate(E_Motivate player_type)
       {
+         WorkerItem wi = new WorkerItem()
+         {
+            Title = strings.PolivateTitle,
+            BeforeCountText = strings.Status,
+            CountText = strings.CountLabel,
+            ID = PolivateWorkerID
+         };
+         if (Application.OpenForms["WorkerList"] == null)
+         {
+            StaticData.WorkerList = new WorkerList();
+            StaticData.WorkerList.Show();
+            if (!IsOnScreen(StaticData.WorkerList))
+               StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
+         }
+         else
+            StaticData.WorkerList.BringToFront();
+         StaticData.WorkerList.AddWorkerItem(wi);
+
+
          TwoTArgs<RequestType, E_Motivate> param = new TwoTArgs<RequestType, E_Motivate> { RequestType = RequestType.Motivate, argument2 = player_type };
          BackgroundWorker bw = new BackgroundWorker();
          bw.DoWork += bwScriptExecuter_DoWork;
@@ -1392,6 +1410,24 @@ namespace ForgeOfBots
       private void VisitAllTavern()
       {
          //string script = ReqBuilder.GetRequestScript(RequestType.VisitTavern, "[]");
+         WorkerItem wi = new WorkerItem()
+         {
+            Title = strings.VisitAllTitle,
+            BeforeCountText = strings.Status,
+            CountText = strings.CountLabel,
+            ID = TavernVisitWorkerID
+         };
+         if (Application.OpenForms["WorkerList"] == null)
+         {
+            StaticData.WorkerList = new WorkerList();
+            StaticData.WorkerList.Show();
+            if (!IsOnScreen(StaticData.WorkerList))
+               StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
+         }
+         else
+            StaticData.WorkerList.BringToFront();
+         StaticData.WorkerList.AddWorkerItem(wi);
+
          TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.VisitTavern, argument2 = null };
          BackgroundWorker bw = new BackgroundWorker();
          bw.DoWork += bwScriptExecuter_DoWork;
@@ -1411,7 +1447,6 @@ namespace ForgeOfBots
          {
             param = (TwoTArgs<RequestType, E_Motivate>)e.Argument;
          }
-         int steps = 0;
          switch (param.RequestType)
          {
             case RequestType.Motivate:
@@ -1438,8 +1473,10 @@ namespace ForgeOfBots
                   default:
                      break;
                }
-               steps = (int)Math.Round((double)(100 / list.Count), MidpointRounding.AwayFromZero);
                last = list[0];
+               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, 0, list.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", list.Count.ToString()));
+
                foreach (Player item in list)
                {
                   string script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
@@ -1450,19 +1487,31 @@ namespace ForgeOfBots
                   {
                      Thread.Sleep(1);
                   }
-                  if (tspbProgress.Value >= 100)
-                     BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 100));
-                  else
-                     BeginInvoke(new MethodInvoker(() => tspbProgress.Value += steps));
-                  BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = $"{strings.Motivating} {ListClass.doneMotivate.Count} / {list.Count}"));
+                  StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, ListClass.doneMotivate.Count, list.Count);
+                  StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", ListClass.doneMotivate.Count.ToString()).Replace("##End##", list.Count.ToString()));
                   last = item;
                   Thread.Sleep(rInt);
                }
                ListClass.doneMotivate.Clear();
+               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, ListClass.doneMotivate.Count, list.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.MotivationDone);
                UserData.LastPolivateTime = DateTime.Now;
                UserData.SaveSettings();
-               BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
-               BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = strings.MotivationDone));
+               setTimeout(() =>
+               {
+                  (bool,bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(PolivateWorkerID);
+                  if (returnVal.Item2)
+                  {
+                     if (InvokeRequired)
+                     {
+                        StaticData.WorkerList.Invoke((MethodInvoker)delegate {
+                           StaticData.WorkerList.Close();
+                        });
+                     }
+                     else
+                        StaticData.WorkerList.Close();
+                  }
+               }, 1000).Wait();
                reloadData();
                LoadGUI();
                break;
@@ -1470,7 +1519,9 @@ namespace ForgeOfBots
                FriendTavernState FTSlast = null;
                ListClass.FriendTaverns = ListClass.FriendTaverns.Where((f) => f.sittingPlayerCount < f.unlockedChairCount && f.state == null).ToList();
                if (ListClass.FriendTaverns.Count == 0 || ListClass.FriendList.Count == 0) return;
-               steps = (int)Math.Round((double)(100 / ListClass.FriendTaverns.Count), MidpointRounding.AwayFromZero);
+               StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, 0, ListClass.FriendTaverns.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
+
                foreach (FriendTavernState item in ListClass.FriendTaverns)
                {
                   FTSlast = item;
@@ -1482,15 +1533,28 @@ namespace ForgeOfBots
                   {
                      Thread.Sleep(1);
                   }
-                  if (tspbProgress.Value >= 100)
-                     BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 100));
-                  BeginInvoke(new MethodInvoker(() => tspbProgress.Value += steps));
-                  BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = $"{strings.SittingAtTavern} {ListClass.doneTavern.Count} / {ListClass.FriendTaverns.Count}"));
+                  StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, ListClass.doneTavern.Count, ListClass.FriendTaverns.Count);
+                  StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.CountLabel.Replace("##Done##", ListClass.doneTavern.Count.ToString()).Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
                   Thread.Sleep(rInt);
                }
                ListClass.doneTavern.Clear();
-               BeginInvoke(new MethodInvoker(() => tspbProgress.Value = 0));
-               BeginInvoke(new MethodInvoker(() => tsslProgressState.Text = strings.TavernDone));
+               StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, ListClass.doneTavern.Count, ListClass.FriendTaverns.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.TavernDone);
+               setTimeout(() =>
+               {
+                  (bool, bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(TavernVisitWorkerID);
+                  if (returnVal.Item2)
+                  {
+                     if (InvokeRequired)
+                     {
+                        StaticData.WorkerList.Invoke((MethodInvoker)delegate {
+                           StaticData.WorkerList.Close();
+                        });
+                     }
+                     else
+                        StaticData.WorkerList.Close();
+                  }
+               }, 1000).Wait();
                ResponseHandler_TaverSitted(this);
                break;
             default:
@@ -1650,6 +1714,7 @@ namespace ForgeOfBots
 
       private void toolStripButton1_Click(object sender, EventArgs e)
       {
+         TestWorkerList(Location.X, Location.Y);
          //object ret = TcpConnection.SendAuthData("IAVvAuYHY0JxjgnBarwue1JPfvvD6drnK9UVYRFAmW0D0M9D5t1AXD7R1GPP8VL5JgnjLSmJlwHIBFYTvsHNmqQGCDeSB0BRL54UjZ1nGsZk5zQvr6ePN8ScPghIxUHvv06FLEtV1dG4RqKNxslEVvENmbEC2szwkoyF2KkmNJYt1YLjVUVFsCZ9vtct9qdInTTm1FVmH81MXUVOPfqhXuDiOzUIr0ngpPFhEirQ9s7uKMlaYOdd95u3QvYBuM5R", FingerPrint.Value(), true);
          //_ = ret is bool;
          //int[,] troops = new int[2, 8] { { 38920, 36872, 34885, 32837, 30789, 28741, 26693, 24645 }, { 29, 2077, 4125, 35, 2083, 3, 16, 34 } };

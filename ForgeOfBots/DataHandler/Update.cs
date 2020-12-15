@@ -88,11 +88,11 @@ namespace ForgeOfBots.DataHandler
                   if (metaEntity.available_products != null)
                      entity.available_products = metaEntity.available_products.ToList();
                   entity.type = metaEntity.type;
-                  if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && (/*entity.hasSupplyProdAt(StaticData.UserData.ProductionOption)|| */GameClassHelper.hasOnlySupplyProduction(entity.available_products)))
+                  if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && /*entity.hasSupplyProdAt(StaticData.UserData.ProductionOption)|| */GameClassHelper.hasOnlySupplyProduction(entity.available_products) && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
                      ListClass.ProductionList.Add(entity);
-                  else if (entity.type == "residential" && entity.connected >= 1)
+                  else if (entity.type == "residential" && entity.connected >= 1 && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
                      ListClass.ResidentialList.Add(entity);
-                  else if (entity.type == "goods" && entity.connected >= 1)
+                  else if (entity.type == "goods" && entity.connected >= 1 && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
                      ListClass.GoodProductionList.Add(entity);
                }
             }

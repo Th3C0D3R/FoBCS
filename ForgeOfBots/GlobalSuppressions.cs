@@ -6,4 +6,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "<Ausstehend>", Scope = "type", Target = "~T:ForgeOfBots.CefBrowserHandler.jsMapInterface.hookEvent")]
-[assembly: SuppressMessage("Style", "IDE0044:Modifizierer \"readonly\" hinzufügen", Justification = "<Ausstehend>", Scope = "member", Target = "~F:ForgeOfBots.Main.usi")]
+[assembly: SuppressMessage("Style", "IDE0044:Modifizierer \"readonly\" hinzufügen", Justification = "<Ausstehend>", Scope = "member", Target = "~F:ForgeOfBots.Forms.WorkerList.WorkerItems")]
+[assembly: SuppressMessage("CodeQuality", "IDE0052:Ungelesene private Member entfernen", Justification = "<Ausstehend>", Scope = "member", Target = "~F:ForgeOfBots.Forms.WorkerList.WorkerItems")]

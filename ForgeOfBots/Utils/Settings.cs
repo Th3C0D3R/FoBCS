@@ -39,7 +39,7 @@ namespace ForgeOfBots.Utils
 
       public void SaveSettings()
       {
-         string json = JsonConvert.SerializeObject(this);
+         string json = JsonConvert.SerializeObject(this,Formatting.Indented);
          string DataPath = Path.Combine(StaticData.ProgramPath, "userdata.json");
          Directory.CreateDirectory(StaticData.ProgramPath);
          File.WriteAllText(DataPath, json);
@@ -92,12 +92,4 @@ namespace ForgeOfBots.Utils
       }
 
    }
-   public enum Languages
-   {
-      [Description("English|en|0")]
-      English,
-      [Description("German|de|1")]
-      German
-   }
-
 }
