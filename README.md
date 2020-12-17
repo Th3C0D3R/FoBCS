@@ -1,4 +1,5 @@
 
+
 # **Forge of Empires Bot** 
 ![Discord](https://img.shields.io/discord/743455118338293810?label=Discord) [](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/thetruetigers/842954ac-9c32-48b8-8308-4f72a8a29bcc/3?label=Build)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Th3C0D3R/FoBCS?include_prereleases) ![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Premium%20Server&up_color=green&up_message=online&url=https%3A%2F%2Fth3c0d3r.xyz) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Th3C0D3R/FoBCS)
@@ -35,7 +36,7 @@ To download the Bot use the following methodes:
 To contribute a translation do the following:
 1. Clone the latest version of the repository
 2. Check if you language is already added
-3. If not, **duplicate** those two files: [strings.en.resx](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.resx) and [strings.en.Designer.cs](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.Designer.cs) and rename the duplicates to the coressponding language code, eg: ***strings.fr.resx*** and ***strings.fr.Designer.cs*** and edit the strings (Visual Sutdio recomended)
+3. If not, **duplicate** this file: [strings.en.resx](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.resx) and rename the duplicates to the coressponding language code, eg: ***strings.fr.resx***  and edit the strings (Visual Sutdio recomended)
 4. Add the language inside this file [languages.json](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/languages.json) and use the next number for the *index*-field. For the *language*-field use the name of your language (for example: *German* is *Deutsch*, *English* is *English*,*French* is *Français*)
 5. Create a Pull-Request as soon as your done and wait for response
 6. The new Language will be added to the Bot dynamically and does not need a new version update
