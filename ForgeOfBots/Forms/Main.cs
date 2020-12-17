@@ -848,6 +848,7 @@ namespace ForgeOfBots
          StaticData.BotData.ForgeHX = args.s2;
          ForgeHX_FilePath = Path.Combine(ProgramPath, args.s2);
          if (!Directory.Exists(ProgramPath)) Directory.CreateDirectory(ProgramPath);
+         Download:
          FileInfo fi = new FileInfo(ForgeHX_FilePath);
          Log("[DEBUG] Checking if ForgeHX exists", lbOutputWindow);
          if (!fi.Exists || fi.Length <= 0)
@@ -868,28 +869,36 @@ namespace ForgeOfBots
          {
             Log("[DEBUG] Reading ForgeHX", lbOutputWindow);
             var content = File.ReadAllText(ForgeHX_FilePath);
-            var startIndex = content.IndexOf(".BUILD_NUMBER=\"");
-            var endIndex = content.IndexOf(".TILE_SPEC_NAME_CONTEMPORARY_BUSHES=\"");
-            content = content.Substring(startIndex, endIndex - startIndex);
-            content = content.Replace("\n", "").Replace("\r", "");
-            var regExSecret = new Regex("\\.VERSION_SECRET=\"([a-zA-Z0-9_\\-\\+\\/==]+)\";", RegexOptions.IgnoreCase);
-            var regExVersion = new Regex("\\.VERSION_MAJOR_MINOR=\"([0-9+.0-9+.0-9+]+)\";", RegexOptions.IgnoreCase);
-            var VersionMatch = regExVersion.Match(content);
-            var SecretMatch = regExSecret.Match(content);
-            if (VersionMatch.Success)
+            try
             {
-               StaticData.SettingData.Version = VersionMatch.Groups[1].Value;
-               Log("[DEBUG] Version found: " + StaticData.SettingData.Version, lbOutputWindow);
-            }
-            if (SecretMatch.Success)
-            {
-               StaticData.SettingData.Version_Secret = SecretMatch.Groups[1].Value;
-               Log("[DEBUG] Version Secret found: " + StaticData.SettingData.Version_Secret, lbOutputWindow);
-               SECRET_LOADED = true;
-               if (UIDLoaded)
+               var startIndex = content.IndexOf(".BUILD_NUMBER=\"");
+               var endIndex = content.IndexOf(".TILE_SPEC_NAME_CONTEMPORARY_BUSHES=\"");
+               content = content.Substring(startIndex, endIndex - startIndex);
+               content = content.Replace("\n", "").Replace("\r", "");
+               var regExSecret = new Regex("\\.VERSION_SECRET=\"([a-zA-Z0-9_\\-\\+\\/==]+)\";", RegexOptions.IgnoreCase);
+               var regExVersion = new Regex("\\.VERSION_MAJOR_MINOR=\"([0-9+.0-9+.0-9+]+)\";", RegexOptions.IgnoreCase);
+               var VersionMatch = regExVersion.Match(content);
+               var SecretMatch = regExSecret.Match(content);
+               if (VersionMatch.Success)
                {
-                  LoadWorlds();
+                  StaticData.SettingData.Version = VersionMatch.Groups[1].Value;
+                  Log("[DEBUG] Version found: " + StaticData.SettingData.Version, lbOutputWindow);
                }
+               if (SecretMatch.Success)
+               {
+                  StaticData.SettingData.Version_Secret = SecretMatch.Groups[1].Value;
+                  Log("[DEBUG] Version Secret found: " + StaticData.SettingData.Version_Secret, lbOutputWindow);
+                  SECRET_LOADED = true;
+                  if (UIDLoaded)
+                  {
+                     LoadWorlds();
+                  }
+               }
+            }
+            catch (Exception)
+            {
+               fi.Delete();
+               goto Download;
             }
          }
       }
