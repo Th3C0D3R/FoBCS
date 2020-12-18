@@ -142,7 +142,7 @@
     <value>Taverne einsammeln</value>
   </data>
   <data name="CountLabel" xml:space="preserve">
-    <value>##Done##/##End## done</value>
+    <value>##Done##/##End## erledigt</value>
   </data>
   <data name="CriticalError" xml:space="preserve">
     <value>KRITISCHER FEHLER</value>
@@ -216,8 +216,11 @@ oder die Lizenz ist nicht gültig!</value>
   <data name="PolivateBot" xml:space="preserve">
     <value>Moppel Bot</value>
   </data>
+  <data name="PolivateResult" xml:space="preserve">
+    <value>Belohnung Motivieren</value>
+  </data>
   <data name="PolivateTitle" xml:space="preserve">
-    <value>Motivate/Polish</value>
+    <value>Motivieren/Polieren</value>
   </data>
   <data name="Premium" xml:space="preserve">
     <value>PREMIUM</value>
@@ -262,7 +265,7 @@ oder die Lizenz ist nicht gültig!</value>
     <value>FEHLER BEIM STARTEN NEUER PRODUKTIONEN</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>Current Status:</value>
+    <value>Aktueller Status:</value>
   </data>
   <data name="SubExpiredTitle" xml:space="preserve">
     <value>LIZENZ ABGELAUFEN</value>
@@ -290,6 +293,9 @@ Vielen Dank für deine Hilfe</value>
   <data name="TavernDone" xml:space="preserve">
     <value>Tavernebesuche erledigt</value>
   </data>
+  <data name="TavernResult" xml:space="preserve">
+    <value>Belohnung Tavernenbesuch</value>
+  </data>
   <data name="TavernState" xml:space="preserve">
     <value>Tavernenstatus</value>
   </data>
@@ -308,6 +314,6 @@ Vielen Dank für deine Hilfe</value>
     <value>Besuchbar</value>
   </data>
   <data name="VisitAllTitle" xml:space="preserve">
-    <value>Visiting all Taverns</value>
+    <value>Besuche alle Tavernen</value>
   </data>
 </root>

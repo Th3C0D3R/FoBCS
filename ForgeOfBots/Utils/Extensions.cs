@@ -257,7 +257,7 @@ namespace ForgeOfBots.Utils
                return searcherProperties[prop].Value.ToString() ?? "";
             }
          }
-         catch (Exception ex)
+         catch (Exception)
          {}
          return "";
       }

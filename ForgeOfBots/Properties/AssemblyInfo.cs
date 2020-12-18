@@ -33,4 +33,6 @@ using System.Runtime.InteropServices;
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.5.*")]
 [assembly: AssemblyVersion("1.6.*")]
+#pragma warning disable CS7035 // Die angegebene Versionszeichenfolge entspricht nicht dem empfohlenen Format: Hauptversion.Nebenversion.Build.Revision
 [assembly: AssemblyFileVersion("1.6.*")]
+#pragma warning restore CS7035 // Die angegebene Versionszeichenfolge entspricht nicht dem empfohlenen Format: Hauptversion.Nebenversion.Build.Revision

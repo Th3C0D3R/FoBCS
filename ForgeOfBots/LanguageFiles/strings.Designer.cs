@@ -352,6 +352,15 @@ namespace ForgeOfBots.LanguageFiles {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Polivate-Result ähnelt.
+        /// </summary>
+        public static string PolivateResult {
+            get {
+                return ResourceManager.GetString("PolivateResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Motivate/Polish ähnelt.
         /// </summary>
         public static string PolivateTitle {
@@ -554,6 +563,15 @@ namespace ForgeOfBots.LanguageFiles {
         public static string TavernDone {
             get {
                 return ResourceManager.GetString("TavernDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tavern-Result ähnelt.
+        /// </summary>
+        public static string TavernResult {
+            get {
+                return ResourceManager.GetString("TavernResult", resourceCulture);
             }
         }
         

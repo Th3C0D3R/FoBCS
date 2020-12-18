@@ -308,6 +308,12 @@
     <EmbeddedResource Include="Forms\UserDataInput.en.resx">
       <DependentUpon>UserDataInput.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WorkerList.de.resx">
+      <DependentUpon>WorkerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WorkerList.en.resx">
+      <DependentUpon>WorkerList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\WorkerList.resx">
       <DependentUpon>WorkerList.cs</DependentUpon>
     </EmbeddedResource>

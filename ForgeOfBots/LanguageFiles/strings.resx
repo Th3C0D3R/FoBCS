@@ -216,6 +216,9 @@ or the Serial-Key is not valid!</value>
   <data name="PolivateBot" xml:space="preserve">
     <value>Polivate Bot</value>
   </data>
+  <data name="PolivateResult" xml:space="preserve">
+    <value>Polivate-Result</value>
+  </data>
   <data name="PolivateTitle" xml:space="preserve">
     <value>Motivate/Polish</value>
   </data>
@@ -289,6 +292,9 @@ Thank you for your help!</value>
   </data>
   <data name="TavernDone" xml:space="preserve">
     <value>Tavern Visit DONE</value>
+  </data>
+  <data name="TavernResult" xml:space="preserve">
+    <value>Tavern-Result</value>
   </data>
   <data name="TavernState" xml:space="preserve">
     <value>Tavernstate</value>

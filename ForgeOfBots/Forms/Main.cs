@@ -1485,7 +1485,6 @@ namespace ForgeOfBots
                last = list[0];
                StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, 0, list.Count);
                StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", list.Count.ToString()));
-
                foreach (Player item in list)
                {
                   string script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
@@ -1496,24 +1495,45 @@ namespace ForgeOfBots
                   {
                      Thread.Sleep(1);
                   }
+
                   StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, ListClass.doneMotivate.Count, list.Count);
                   StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", ListClass.doneMotivate.Count.ToString()).Replace("##End##", list.Count.ToString()));
                   last = item;
                   Thread.Sleep(rInt);
                }
+               Dictionary<string, int> results = new Dictionary<string, int>();
+               foreach (var item in ListClass.doneMotivate)
+               {
+                  if (item.Value.Item1)
+                  {
+                     var jtokenlist = ((JObject)item.Value.Item2)["responseData"]["resources"].ToList();
+                     foreach (var jtoken in jtokenlist)
+                     {
+                        var resource = jtoken.Path.Substring(jtoken.Path.LastIndexOf(".")+1);
+                        string name = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == resource)["name"].ToString();
+                        if (results.ContainsKey(name))
+                           results[name] += int.Parse(jtoken.First.ToString());
+                        else
+                           results.Add(name, int.Parse(jtoken.First.ToString()));
+                     }
+                  }
+               }
+               foreach (var resItem in results)
+                  Log($"[{DateTime.Now}] {strings.PolivateResult} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
                ListClass.doneMotivate.Clear();
-               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, ListClass.doneMotivate.Count, list.Count);
+               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, list.Count, list.Count);
                StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.MotivationDone);
                UserData.LastPolivateTime = DateTime.Now;
                UserData.SaveSettings();
                setTimeout(() =>
                {
-                  (bool,bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(PolivateWorkerID);
+                  (bool, bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(PolivateWorkerID);
                   if (returnVal.Item2)
                   {
                      if (InvokeRequired)
                      {
-                        StaticData.WorkerList.Invoke((MethodInvoker)delegate {
+                        StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                        {
                            StaticData.WorkerList.Close();
                         });
                      }
@@ -1546,6 +1566,25 @@ namespace ForgeOfBots
                   StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.CountLabel.Replace("##Done##", ListClass.doneTavern.Count.ToString()).Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
                   Thread.Sleep(rInt);
                }
+               Dictionary<string, int> resultsTavern = new Dictionary<string, int>();
+               foreach (var item in ListClass.doneTavern)
+               {
+                  if (item.Value.Item1)
+                  {
+                     var jtokenlist = ((JObject)item.Value.Item2)["resources"].ToList();
+                     foreach (var jtoken in jtokenlist)
+                     {
+                        var resource = jtoken.Path.Substring(jtoken.Path.LastIndexOf(".") + 1);
+                        string name = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == resource)["name"].ToString();
+                        if (resultsTavern.ContainsKey(name))
+                           resultsTavern[name] += int.Parse(jtoken.First.ToString());
+                        else
+                           resultsTavern.Add(name, int.Parse(jtoken.First.ToString()));
+                     }
+                  }
+               }
+               foreach (var resItem in resultsTavern)
+                  Log($"[{DateTime.Now}] {strings.TavernResult} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
                ListClass.doneTavern.Clear();
                StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, ListClass.doneTavern.Count, ListClass.FriendTaverns.Count);
                StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.TavernDone);
@@ -1556,7 +1595,8 @@ namespace ForgeOfBots
                   {
                      if (InvokeRequired)
                      {
-                        StaticData.WorkerList.Invoke((MethodInvoker)delegate {
+                        StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                        {
                            StaticData.WorkerList.Close();
                         });
                      }
