@@ -14,13 +14,7 @@ namespace ForgeOfBots.FoBUpdater
    {
       public static void CheckForUpdate()
       {
-         AutoUpdater.ShowSkipButton = false;
-         AutoUpdater.ShowRemindLaterButton = false;
-         AutoUpdater.HttpUserAgent = "AutoUpdater";
-         AutoUpdater.ReportErrors = true;
-         AutoUpdater.RunUpdateAsAdmin = false;
-         AutoUpdater.CheckForUpdateEvent += AutoUpdater_CheckForUpdateEvent;
-         AutoUpdater.Start("https://th3c0d3r.xyz/version.xml");
+         
       }
 
       private static void AutoUpdater_CheckForUpdateEvent(UpdateInfoEventArgs args)
