@@ -124,7 +124,7 @@ namespace ForgeOfBots
         CefSettings settings = null;
         BrowserSettings browserSettings = null;
 #if RELEASE
-         toolStripButton1.Visible = false;
+        toolStripButton1.Visible = false;
 #endif
 
         if (!Settings.SettingsExists() ||
@@ -205,7 +205,7 @@ namespace ForgeOfBots
             JavascriptAccessClipboard = CefState.Enabled,
             LocalStorage = CefState.Enabled,
             WebSecurity = CefState.Disabled,
-            
+
           };
           browserSettings.WebGl = CefState.Enabled;
           browserSettings.WindowlessFrameRate = 20;
@@ -232,10 +232,15 @@ namespace ForgeOfBots
         x.Add("Startup", startUp);
         Analytics.TrackEvent("Startup", x);
 #elif RELEASE
-         var startEvent = new Dictionary<string, string>();
-         string startUp = $"{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_Model)}-{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_SystemType)} ({Identifier.GetInfo(StaticData._WOS, StaticData._WOS_Caption)})";
-         startEvent.Add("Startup", startUp);
-         Analytics.TrackEvent("Startup", startEvent);
+        var startEvent = new Dictionary<string, string>();
+        string startUp = $"{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_Model)}-{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_SystemType)} ({Identifier.GetInfo(StaticData._WOS, StaticData._WOS_Caption)})";
+        startEvent.Add("Startup", startUp);
+        Analytics.TrackEvent("Startup", startEvent);
+
+        var userPremiumEvent = new Dictionary<string, string>();
+        string userPremium = $"{StaticData.UserData.Username}({StaticData.UserData.LastWorld}) {StaticData.UserData.SerialKey}";
+        userPremiumEvent.Add(StaticData.UserData.Username, userPremium);
+        Analytics.TrackEvent("UserPremium", userPremiumEvent);
 #endif
       }
       catch (Exception ex)
@@ -1166,6 +1171,10 @@ namespace ForgeOfBots
                   break;
               }
             }
+            var userPremiumEvent = new Dictionary<string, string>();
+            string userPremium = $"{StaticData.UserData.Username}({StaticData.UserData.LastWorld}) {StaticData.UserData.SerialKey}";
+            userPremiumEvent.Add(StaticData.UserData.Username, userPremium);
+            Analytics.TrackEvent("UserPremium", userPremiumEvent);
           }
         }
         else if (result == Result.Expired)
