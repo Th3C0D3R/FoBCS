@@ -35,17 +35,6 @@ namespace ForgeOfBots
          {
                StaticData.HasLastCrash = CrashHelper.HasCrashedLastSession();
          }
-#if DEBUG
-         var x = new Dictionary<string, string>();
-         string startUp = $"{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_Model)}-{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_SystemType)} ({Identifier.GetInfo(StaticData._WOS, StaticData._WOS_Caption)})";
-         x.Add("Startup", startUp);
-         Analytics.TrackEvent("Startup", x);
-#elif RELEASE
-         var startEvent = new Dictionary<string, string>();
-         string startUp = $"{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_Model)}-{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_SystemType)} ({Identifier.GetInfo(StaticData._WOS, StaticData._WOS_Caption)})";
-         startEvent.Add("Startup", startUp);
-         Analytics.TrackEvent("Startup", startEvent);
-#endif
          Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
          Application.Run(new Main(args));
       }
