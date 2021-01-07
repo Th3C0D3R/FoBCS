@@ -6,6 +6,8 @@
 
 ![DISCORD INVITE](https://discord.gg/DJv8rNsbP7)
 
+[![Gitter](https://badges.gitter.im/ForgeOfBots/community.svg)](https://gitter.im/ForgeOfBots/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 This Bot was made by me and is one, if not the only one, which is currently public available and working.
 I made this Bot after working on a JavaScript Version (Electron App) which had it's difficulties while and after. Know, after a Year of development, lots of trial and error and 0 banned Accounts, I will publish this Bot for free
 
