@@ -305,8 +305,6 @@ namespace ForgeOfBots
       UserData.WorldServer = "";
       UserData.PlayableWorlds = new List<string>();
       UserData.SaveSettings();
-      if (File.Exists(ForgeHX_FilePath))
-        File.Delete(ForgeHX_FilePath);
 
       if (InvokeRequired)
       {
@@ -324,6 +322,12 @@ namespace ForgeOfBots
         tsbLogin.Click += tsbLogin_Click;
         tsbLogin.Click -= TsButton_Click;
       }
+      Reload();
+    }
+    public void Reload()
+    {
+      if (File.Exists(ForgeHX_FilePath))
+        File.Delete(ForgeHX_FilePath);
       bwTimerUpdate.CancelAsync();
       while (bwTimerUpdate.IsBusy) { Application.DoEvents(); }
       foreach (BackgroundWorker item in ListClass.BackgroundWorkers)

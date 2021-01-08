@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.5.*")]
-[assembly: AssemblyVersion("1.6.*")]
+[assembly: AssemblyVersion("1.7.*")]
 #pragma warning disable CS7035 // Die angegebene Versionszeichenfolge entspricht nicht dem empfohlenen Format: Hauptversion.Nebenversion.Build.Revision
-[assembly: AssemblyFileVersion("1.6.*")]
+[assembly: AssemblyFileVersion("1.7.*")]
 #pragma warning restore CS7035 // Die angegebene Versionszeichenfolge entspricht nicht dem empfohlenen Format: Hauptversion.Nebenversion.Build.Revision
