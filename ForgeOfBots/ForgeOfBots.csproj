@@ -153,6 +153,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Nevron.Nov.Barcode, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.Chart, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.Diagram, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.Grid, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.Host.WinForm, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.Presentation, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.Schedule, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.Text, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
+    <Reference Include="Nevron.Nov.WinFormControls, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -182,6 +191,12 @@
     </Compile>
     <Compile Include="Forms\Browser.Designer.cs">
       <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Log.cs">
       <SubType>Form</SubType>
@@ -245,6 +260,7 @@
     <Compile Include="GameClasses\ResponseClasses\BonusService.cs" />
     <Compile Include="GameClasses\ResponseClasses\CityEntities.cs" />
     <Compile Include="GameClasses\ResponseClasses\GuildExpedition.cs" />
+    <Compile Include="GameClasses\ResponseClasses\LG.cs" />
     <Compile Include="GameClasses\ResponseClasses\Metadata.cs" />
     <Compile Include="GameClasses\ResponseClasses\Polivate.cs" />
     <Compile Include="GameClasses\ResponseClasses\QuestService.cs" />
@@ -254,6 +270,7 @@
     <Compile Include="Updater\Updater.cs" />
     <Compile Include="Utils\GEHelper.cs" />
     <Compile Include="Utils\CrashHelper.cs" />
+    <Compile Include="Utils\i18n.cs" />
     <Compile Include="Utils\StaticData.cs" />
     <Compile Include="Utils\Testing\Test.cs" />
     <EmbeddedResource Include="Forms\About.de.resx">
@@ -264,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main_DarkMode.de-BE.resx">
       <DependentUpon>Main_DarkMode.cs</DependentUpon>
@@ -411,6 +431,9 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app.manifest" />
+    <EmbeddedResource Include="LanguageFiles\en.json" />
+    <EmbeddedResource Include="LanguageFiles\fr.json" />
+    <EmbeddedResource Include="LanguageFiles\de.json" />
     <None Include="languages.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -440,6 +463,10 @@
     <Content Include="obfuscar.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\dashbord.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\minus.png" />
+    <None Include="Resources\error.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ForgeOfBots.GameClasses.ResponseClasses
+{
+
+   public class SnipRoot
+   {
+      public SnipResponse responseData { get; set; }
+      public string requestClass { get; set; }
+      public string requestMethod { get; set; }
+      public int requestId { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class SnipResponse
+   {
+      public Ranking[] rankings { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class Ranking
+   {
+      public int rank { get; set; }
+      public Player player { get; set; }
+      public int forge_points { get; set; }
+      public SnipReward reward { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class SnipReward
+   {
+      public int blueprints { get; set; }
+      public int strategy_point_amount { get; set; }
+      public SnipResources resources { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class SnipResources
+   {
+      public int medals { get; set; }
+      public string __class__ { get; set; }
+   }
+
+   public class LGRootObject
+   {
+      public LGData[] responseData { get; set; }
+      public string requestClass { get; set; }
+      public string requestMethod { get; set; }
+      public int requestId { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class LGData
+   {
+      public int entity_id { get; set; }
+      public string city_entity_id { get; set; }
+      public string name { get; set; }
+      public int level { get; set; }
+      public int? current_progress { get; set; }
+      public int max_progress { get; set; }
+      public Player player { get; set; }
+      public LGState state { get; set; }
+      public string __class__ { get; set; }
+      public int? rank { get; set; } = null;
+   }
+   public class LGState
+   {
+      public int invested_forge_points { get; set; }
+      public int forge_points_for_level_up { get; set; }
+   }
+
+   public class LGSnip : LGData
+   {
+      public string GewinnString = "";
+      public string KurzString = "";
+   }
+   public static class LG
+   {
+      public static List<Player> HasGB(List<Neighbor> neighbors, List<Friend> friends)
+      {
+         List<Player> PlayersWithGB = new List<Player>();
+         foreach (Neighbor item in neighbors)
+         {
+            if (item.has_great_building && item.is_active && !item.is_guild_member)
+            {
+               PlayersWithGB.Add(item);
+            }
+         }
+         foreach (Friend item in friends)
+         {
+            if (item.has_great_building && item.is_active && !item.is_guild_member)
+            {
+               PlayersWithGB.Add(item);
+            }
+         }
+         return PlayersWithGB;
+      }
+   }
+}

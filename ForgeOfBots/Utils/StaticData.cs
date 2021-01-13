@@ -45,6 +45,7 @@ namespace ForgeOfBots.Utils
       public static List<PropertyData> PCData = new List<PropertyData>();
       public static int TavernVisitWorkerID = 0;
       public static int PolivateWorkerID = 1;
+      public static int LGSnipWorkerID = 2;
 
       public const string _WCS = "Win32_ComputerSystem";
       public const string _WCS_Model = "Model";

@@ -8,7 +8,7 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
 {
    public class Player
    {
-      public int player_id { get; set; }
+      public int? player_id { get; set; } = null;
       public string name { get; set; }
       public int next_interaction_in { get; set; }
    }

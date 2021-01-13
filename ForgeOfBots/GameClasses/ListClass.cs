@@ -63,6 +63,8 @@ namespace ForgeOfBots.GameClasses
       public static List<Player> Motivateable { get; set; } = new List<Player>();
       public static TavernData OwnTavernData { get; set; } = new TavernData();
       public static LanguageList AvailableLanguages { get; set; } = new LanguageList();
+      public static List<LGSnip> PossibleSnipLGs { get; set; } = new List<LGSnip>();
+      public static List<Player> SnipablePlayers { get; set; } = new List<Player>();
 
       public static Dictionary<int, (bool, object)> doneMotivate { get; set; } = new Dictionary<int, (bool, object)>();
       public static Dictionary<int, (bool, object)> doneTavern { get; set; } = new Dictionary<int, (bool, object)>();
@@ -78,6 +80,8 @@ namespace ForgeOfBots.GameClasses
       /// 2 = Producing
       /// </summary>
       public static int State { get; set; } = -1;
+      public static float ArcBonus { get; set; } = 190;
+      public static JObject UserData { get; set; } = new JObject();
    }
    public enum WorldState
    {

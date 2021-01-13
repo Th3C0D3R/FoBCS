@@ -61,16 +61,55 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die let res = await fetch(&quot;https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##&quot;, {
-        ///    &quot;credentials&quot;: &quot;include&quot;,
-        ///    &quot;headers&quot;: {
-        ///        &quot;accept&quot;: &quot;*/*&quot;,
-        ///        &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
-        ///        &quot;cache-control&quot;: &quot;no-cache&quot;,
-        ///        &quot;client-identification&quot;: &quot;version=##Version##; requiredVersion=##Version##; platform=bro; platformType=html5; platformVersion=web&quot;,
-        ///        &quot;content-type&quot;: &quot;application/json&quot;,
-        ///        &quot;pragma&quot;: &quot;no-cache&quot;,
-        ///        &quot;sec-fetch-mode&quot; [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap dashbord {
+            get {
+                object obj = ResourceManager.GetObject("dashbord", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        public static byte[] de {
+            get {
+                object obj = ResourceManager.GetObject("de", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        public static byte[] en {
+            get {
+                object obj = ResourceManager.GetObject("en", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap error {
+            get {
+                object obj = ResourceManager.GetObject("error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die async function makeRequest() {
+        ///    await CefSharp.BindObjectAsync(&quot;jsInterface&quot;);
+        ///    let res = await fetch(&quot;https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##&quot;, {
+        ///        &quot;credentials&quot;: &quot;include&quot;,
+        ///        &quot;headers&quot;: {
+        ///            &quot;accept&quot;: &quot;*/*&quot;,
+        ///            &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
+        ///            &quot;client-identification&quot;: &quot;version=##Version##; requiredVersion=##Version##; platform=bro; platformType=html5; platformVersion=web&quot;,
+        ///            &quot;content-type&quot;: &quot;a [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string fetchData {
             get {
@@ -79,22 +118,51 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die let res = await fetch(##url##, {
-        ///    &quot;credentials&quot;: &quot;include&quot;,
-        ///    &quot;headers&quot;: {
-        ///        &quot;accept&quot;: &quot;*/*&quot;,
-        ///        &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
-        ///        &quot;cache-control&quot;: &quot;no-cache&quot;,
-        ///        &quot;content-type&quot;: &quot;application/json&quot;,
-        ///        &quot;pragma&quot;: &quot;no-cache&quot;,
-        ///        &quot;sec-fetch-mode&quot;: &quot;cors&quot;,
-        ///        &quot;sec-fetch-site&quot;: &quot;same-origin&quot;,
-        ///        &quot;user-agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&quot;
-        ///     [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die async function makeRequest() {
+        ///    await CefSharp.BindObjectAsync(&quot;jsInterface&quot;);
+        ///    let res = await fetch(&quot;##url##&quot;, {
+        ///        &quot;headers&quot;: {
+        ///            &quot;accept&quot;: &quot;*/*&quot;,
+        ///            &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
+        ///            &quot;sec-fetch-mode&quot;: &quot;cors&quot;,
+        ///            &quot;sec-fetch-site&quot;: &quot;same-origin&quot;,
+        ///            &quot;user-agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&quot;
+        ///        },
+        ///        &quot;referrer&quot;: &quot;ht [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string fetchMetaData {
             get {
                 return ResourceManager.GetString("fetchMetaData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        public static byte[] fr {
+            get {
+                object obj = ResourceManager.GetObject("fr", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap minus {
+            get {
+                object obj = ResourceManager.GetObject("minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap plus {
+            get {
+                object obj = ResourceManager.GetObject("plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -107,14 +175,13 @@ namespace ForgeOfBots.Properties {
         ///}
         ///
         ///async function FoELogin() {
-        ///    console.log(window.location.href);
-        ///    if (window.location.href.indexOf(&quot;de0&quot;) &lt;= 0) {
+        ///    await CefSharp.BindObjectAsync(&quot;jsInterface&quot;);
+        ///    if (window.location.href.indexOf(&quot;##server##0&quot;) &lt;= 0) {
         ///        await FoETimer(1000);
-        ///        console.log(1);
-        ///        fetch(&quot;https://de.forgeofempires.com/glps/login_check&quot;, {
+        ///        fetch(&quot;https://##server##.forgeofempires.com/glps/login_check&quot;, {
         ///            &quot;credentials&quot;: &quot;include&quot;,
         ///            &quot;headers&quot;: {
-        ///                &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Wind [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///                &quot;User-Agent&quot;: &quot;Mozilla/5.0 (W [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string preloadLoginWorld {
             get {

@@ -135,6 +135,11 @@ namespace ForgeOfBots.DataHandler
                _class = "FriendsTavernService";
                _methode = "getOwnTavern";
                break;
+            case RequestType.SnipLG:
+               _data = new JArray(queryData[0], queryData[1]);
+               _class = "GreatBuildingsService";
+               _methode = "getConstruction";
+               break;
             case RequestType.RemovePlayer:
                _data = new JArray(idData);
                _class = "FriendService";
@@ -211,6 +216,8 @@ namespace ForgeOfBots.DataHandler
             .Replace("##resType##", type.ToString());
          if (type == RequestType.VisitTavern || type == RequestType.Motivate)
             RequestScript = RequestScript.Replace("##IdData##", idData.ToString());
+         else if (type == RequestType.SnipLG)
+            RequestScript = RequestScript.Replace("##IdData##", queryData[0].ToString());
          else
             RequestScript = RequestScript.Replace("##IdData##", "");
          return RequestScript;
@@ -253,7 +260,8 @@ namespace ForgeOfBots.DataHandler
       GEServiceEncounter,
       OwnArmy,
       GEAttack,
-      GEServiceCollectChest
+      GEServiceCollectChest,
+      SnipLG
    }
 
     public enum E_Motivate
