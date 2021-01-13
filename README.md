@@ -3,9 +3,7 @@
 # **Forge of Empires Bot** 
 ![Discord](https://img.shields.io/discord/743455118338293810?label=Discord)[](https://github.com/Th3C0D3R/FoBCS/issues) ![GitHub issues](https://img.shields.io/github/issues/Th3C0D3R/FoBCS) ![Azure DevOps builds](https://img.shields.io/azure-devops/build/thetruetigers/842954ac-9c32-48b8-8308-4f72a8a29bcc/3?label=Build)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Th3C0D3R/FoBCS?include_prereleases) ![Website](https://img.shields.io/website?down_color=red&down_message=offline&label=Premium%20Server&up_color=green&up_message=online&url=https%3A%2F%2Fth3c0d3r.xyz) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Th3C0D3R/FoBCS)
-
-![DISCORD INVITE](https://discord.gg/DJv8rNsbP7)
-
+![Discord](https://img.shields.io/discord/743455118338293810?style=flat-square) [Invite](https://discord.gg/DJv8rNsbP7)
 [![Gitter](https://badges.gitter.im/ForgeOfBots/community.svg)](https://gitter.im/ForgeOfBots/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 This Bot was made by me and is one, if not the only one, which is currently public available and working.
@@ -43,7 +41,8 @@ To contribute a translation do the following:
 5. Create a Pull-Request as soon as your done and wait for response
 6. The new Language will be added to the Bot dynamically and does not need a new version update
 
-### Donation
+
+## Donation
 Don't want to buy premium but want to support me?
 All donations are going to keep up the server for the Bot.
 
@@ -58,9 +57,9 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMT
-E3ODEwMDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMz
-NjUyMzQsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMi
-wxMTkzOTg5MTYwLDkyMDE2ODI4Niw3Njk2MDI2NDgsLTcyODQw
-MDU2XX0=
+eyJoaXN0b3J5IjpbLTg1MjMyMTg3NywtMTI1NjkzMDMwLDE1Nj
+g0ODIzMjMsLTIwNjc3Njc5NzcsLTExNzgxMDA3MDUsLTE4Mjk4
+NjQ0NTAsLTU1NzYxNzQ2NCwtNTAzMzY1MjM0LC04NDE1OTM2ND
+gsMjEzODg3MDM0NSwzNTI5MjE2MzIsMTE5Mzk4OTE2MCw5MjAx
+NjgyODYsNzY5NjAyNjQ4LC03Mjg0MDA1Nl19
 -->
