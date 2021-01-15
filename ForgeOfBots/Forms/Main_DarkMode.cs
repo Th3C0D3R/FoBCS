@@ -1390,7 +1390,7 @@ namespace ForgeOfBots
                   cwb.ExecuteScriptAsync(script);
                   Random r = new Random();
                   int rInt = r.Next(750, 1500);
-                  while (!ListClass.doneMotivate.ContainsKey(last.player_id))
+                  while (!ListClass.doneMotivate.ContainsKey(last.player_id.Value))
                   {
                      Thread.Sleep(1);
                   }

@@ -8,15 +8,14 @@ namespace ForgeOfBots.CefBrowserHandler
    public class jsMapInterface
    {
       public Action<hookEvent> onHookEvent { get; set; } = null;
-      public void hook(string message, string source, string methode, string idData, string headers)
+      public void hook(string message, string source, string methode, string idData)
       {
          onHookEvent?.Invoke(new hookEvent()
          {
             message = message,
             source = source,
             methode = methode,
-            idData = idData,
-            headers = headers
+            idData = idData
          });
       }
 
@@ -26,7 +25,6 @@ namespace ForgeOfBots.CefBrowserHandler
          public string source { get; set; }
          public string methode { get; set; }
          public string idData { get; set; }
-         public string headers { get; set; }
       }
    }
 }

@@ -66,6 +66,10 @@
                         newBody += "getUpdates" + JSON.stringify(json[i]) + "##@##";
                     if (resData["requestMethod"] == "getLimitedBonuses")
                         newBody += "getLimitedBonuses" + JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "updateEntity")
+                        newBody += "updateEntity" + JSON.stringify(json[i]) + "##@##";
+                    if (resData["requestMethod"] == "getConstruction")
+                        newBody += "getConstruction" + JSON.stringify(json[i]) + "##@##";
                 }
                 body = newBody;
             }

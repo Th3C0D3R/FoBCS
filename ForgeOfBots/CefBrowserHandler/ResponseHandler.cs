@@ -20,6 +20,10 @@ using static ForgeOfBots.Utils.StaticData;
 using Microsoft.AppCenter.Crashes;
 using System.IO;
 using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
+using ForgeOfBots.Forms.UserControls;
+using ForgeOfBots.Forms;
 
 namespace ForgeOfBots.CefBrowserHandler
 {
@@ -198,6 +202,8 @@ namespace ForgeOfBots.CefBrowserHandler
 
       public static bool[] ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
       static readonly object _locker = new object();
+      static readonly object _lockerLG = new object();
+      static readonly object _lockerSnip = new object();
       public static void HookEventHandler(jsMapInterface.hookEvent hookEventArgs)
       {
          var x = hookEventArgs;
@@ -469,241 +475,291 @@ namespace ForgeOfBots.CefBrowserHandler
                _ListLoaded?.Invoke(RequestType.GetNeighbor);
                break;
             case RequestType.GetLGs:
+               if (msg.Length <= 4) break;
                LGRootObject lgs = JsonConvert.DeserializeObject<LGRootObject>(msg);
                List<LGData> LGData = lgs.responseData.ToList();
                if (LGData.Count == 0) break;
+               List<Player> allPlayers = ListClass.NeighborList.Select(x => new Player()
+               {
+                  is_active = x.is_active,
+                  is_friend = x.is_friend,
+                  is_guild_member = x.is_guild_member,
+                  is_neighbor = x.is_neighbor,
+                  score = x.score,
+                  player_id = x.player_id,
+                  name = x.name,
+                  next_interaction_in = x.next_interaction_in
+               }).ToList();
+               allPlayers.AddRange(ListClass.FriendList.Select(x => new Player()
+               {
+                  is_active = x.is_active,
+                  is_friend = x.is_friend,
+                  is_guild_member = x.is_guild_member,
+                  is_neighbor = x.is_neighbor,
+                  score = x.score,
+                  player_id = x.player_id,
+                  name = x.name,
+                  next_interaction_in = x.next_interaction_in
+               }).ToList());
+
                foreach (LGData item in LGData)
                {
-                  string _PlayerName = item.player.name;
-                  int _PlayerID = item.player.player_id.Value;
-                  int Gewinn = -1;
-                  int UnderScorePos = item.city_entity_id.IndexOf("_");
-                  string AgeString = item.city_entity_id.Substring(UnderScorePos + 1);
-                  string GewinnString = "???", KurzString = "??? %";
-                  UnderScorePos = AgeString.IndexOf("_");
-                  AgeString = AgeString.Substring(0, UnderScorePos);
-                  if (item.current_progress == null)
-                     item.current_progress = 0;
-                  int P1 = Helper.GetP1(AgeString, item.level);
-                  ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
-                  if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
-                  if (item.rank == null && P1 * ListClass.ArcBonus >= (item.max_progress - item.current_progress) / 2)
+                  lock (_lockerLG)
                   {
-                     if (Gewinn == -1 || Gewinn >= 0)
-                     {
-                        if (item.current_progress == 0)
-                        {
-                           GewinnString = $"{(decimal)Math.Round(P1 * ListClass.ArcBonus) - Math.Ceiling((decimal)(item.max_progress - item.current_progress) / 2)}";
-                           double kurz = Math.Round((double)(item.max_progress / P1 / 2 * 1000)) / 10;
-                           KurzString = kurz == 0 ? "-" : $"{kurz} %";
-                           LGSnip snip = new LGSnip()
-                           {
-                              player = item.player,
-                              entity_id = item.entity_id,
-                              city_entity_id = item.city_entity_id,
-                              name = item.name,
-                              level = item.level,
-                              state = item.state,
-                              GewinnString = GewinnString,
-                              KurzString = KurzString,
-                              current_progress = item.current_progress,
-                              max_progress = item.max_progress,
-                              rank = item.rank,
-                              __class__ = item.__class__
-                           };
-                           ListClass.PossibleSnipLGs.Add(snip);
-                        }
-                        else if (Gewinn == -1)
-                        {
+                     Player player = allPlayers.Find(p => p.player_id == item.player.player_id);
 
-                           LGSnip snip = new LGSnip()
-                           {
-                              player = item.player,
-                              entity_id = item.entity_id,
-                              city_entity_id = item.city_entity_id,
-                              name = item.name,
-                              level = item.level,
-                              state = item.state,
-                              GewinnString = GewinnString,
-                              KurzString = KurzString,
-                              current_progress = item.current_progress,
-                              max_progress = item.max_progress,
-                              rank = item.rank,
-                              __class__ = item.__class__
-                           };
-                           ListClass.PossibleSnipLGs.Add(snip);
-                           string script = ReqBuilder.GetRequestScript(RequestType.GetLGs, new int[] { item.entity_id, item.player.player_id.Value });
-                           cwb.ExecuteScriptAsync(script);
-                        }
-                        else
+                     string _PlayerName = player.name;
+                     int _PlayerID = player.player_id.Value;
+                     int Gewinn = -1;
+                     int UnderScorePos = item.city_entity_id.IndexOf("_");
+                     string AgeString = item.city_entity_id.Substring(UnderScorePos + 1);
+                     string GewinnString = "???", KurzString = "??? %";
+                     UnderScorePos = AgeString.IndexOf("_");
+                     AgeString = AgeString.Substring(0, UnderScorePos);
+                     if (item.current_progress == null)
+                        item.current_progress = 0;
+                     int P1 = Helper.GetP1(AgeString, item.level);
+                     ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
+                     if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
+                     if (item.rank == null && P1 * ListClass.ArcBonus >= (item.max_progress - item.current_progress) / 2)
+                     {
+                        if (Gewinn == -1 || Gewinn >= 0)
                         {
-                           GewinnString = Gewinn.ToString();
-                           LGSnip snip = new LGSnip()
+                           if (item.current_progress == 0)
                            {
-                              player = item.player,
-                              entity_id = item.entity_id,
-                              city_entity_id = item.city_entity_id,
-                              name = item.name,
-                              level = item.level,
-                              state = item.state,
-                              GewinnString = GewinnString,
-                              KurzString = KurzString,
-                              current_progress = item.current_progress,
-                              max_progress = item.max_progress,
-                              rank = item.rank,
-                              __class__ = item.__class__
-                           };
-                           ListClass.PossibleSnipLGs.Add(snip);
+                              GewinnString = $"{(decimal)Math.Round(P1 * ListClass.ArcBonus) - Math.Ceiling((decimal)(item.max_progress - item.current_progress) / 2)}";
+                              double kurz = Math.Round((double)(item.max_progress / P1 / 2 * 1000)) / 10;
+                              KurzString = kurz == 0 ? "-" : $"{kurz} %";
+                              LGSnip snip = new LGSnip()
+                              {
+                                 player = player,
+                                 entity_id = item.entity_id,
+                                 city_entity_id = item.city_entity_id,
+                                 name = item.name,
+                                 level = item.level,
+                                 state = item.state,
+                                 GewinnString = GewinnString,
+                                 KurzString = KurzString,
+                                 current_progress = item.current_progress,
+                                 max_progress = item.max_progress,
+                                 rank = item.rank,
+                                 __class__ = item.__class__
+                              };
+                              ListClass.PossibleSnipLGs.Add(snip);
+                           }
+                           else if (Gewinn == -1)
+                           {
+
+                              LGSnip snip = new LGSnip()
+                              {
+                                 player = player,
+                                 entity_id = item.entity_id,
+                                 city_entity_id = item.city_entity_id,
+                                 name = item.name,
+                                 level = item.level,
+                                 state = item.state,
+                                 GewinnString = GewinnString,
+                                 KurzString = KurzString,
+                                 current_progress = item.current_progress,
+                                 max_progress = item.max_progress,
+                                 rank = item.rank,
+                                 __class__ = item.__class__,
+                                 check = true
+                              };
+                              ListClass.PossibleSnipLGs.Add(snip);
+                           }
+                           else
+                           {
+                              GewinnString = Gewinn.ToString();
+                              LGSnip snip = new LGSnip()
+                              {
+                                 player = player,
+                                 entity_id = item.entity_id,
+                                 city_entity_id = item.city_entity_id,
+                                 name = item.name,
+                                 level = item.level,
+                                 state = item.state,
+                                 GewinnString = GewinnString,
+                                 KurzString = KurzString,
+                                 current_progress = item.current_progress,
+                                 max_progress = item.max_progress,
+                                 rank = item.rank,
+                                 __class__ = item.__class__
+                              };
+                              ListClass.PossibleSnipLGs.Add(snip);
+                           }
                         }
                      }
                   }
+               }
+               foreach (LGSnip item in ListClass.PossibleSnipLGs)
+               {
+                  string script = ReqBuilder.GetRequestScript(RequestType.getConstruction, new int[] { item.entity_id, item.player.player_id.Value });
+                  cwb.ExecuteScriptAsync(script);
                }
                break;
-            case RequestType.SnipLG:
-               string message = "Result:\n\n";
-               LGSnip LGsnip = ListClass.PossibleSnipLGs.Find(e => e.entity_id.ToString() == idData);
-               SnipRoot SnipeRoot = JsonConvert.DeserializeObject<SnipRoot>(msg);
-               SnipResponse SnipResponse = SnipeRoot.responseData;
-               Ranking[] Rankings = SnipResponse.rankings;
-
-               ArrayList hFordern = new ArrayList();
-               ArrayList hBPMeds = new ArrayList();
-               ArrayList hSnipen = new ArrayList();
-               int BestKurs = 999999;
-               int? BestKursNettoFP = null;
-               int? BestKursEinsatz = null;
-               var arc = ListClass.ArcBonus >= 2 ? (ListClass.ArcBonus / 100) + 1 : ListClass.ArcBonus;
-               var ForderArc = arc;
-               int EigenPos = 0, EigenBetrag = 0;
-               for (int i = 0; i < Rankings.Length; i++)
+            case RequestType.getConstruction:
+               lock (_lockerSnip)
                {
-                  if (Rankings[i].player != null && Rankings[i].player.player_id == int.Parse(ListClass.UserData["player_id"].ToString()))
+                  string[] snipResponse = msg.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
+                  LGSnip LGsnip = ListClass.PossibleSnipLGs.Find(e => e.entity_id.ToString() == idData);
+                  foreach (var res in snipResponse)
                   {
-                     EigenPos = i;
-                     EigenBetrag = Rankings[i].forge_points >= 0 ? Rankings[i].forge_points : 0;
-                     break;
+                     var methode = res.Substring(0, res.IndexOf("{"));
+                     var body = res.Substring(res.IndexOf("{"));
+                     dynamic resItem = JsonConvert.DeserializeObject(body);
+                     if (resItem["requestMethod"] == "updateEntity")
+                     {
+                        LGsnip.state = new LGState()
+                        {
+                           forge_points_for_level_up = (int?)resItem["responseData"][0]["state"]["forge_points_for_level_up"],
+                           invested_forge_points = (int?)resItem["responseData"][0]["state"]["invested_forge_points"]
+                        };
+                        LGsnip.maxLevel = (int)resItem["responseData"][0]["max_level"];
+                     }
+                     else if (resItem["requestMethod"] == "getConstruction")
+                     {
+                        SnipRoot SnipeRoot = JsonConvert.DeserializeObject<SnipRoot>(body);
+                        SnipResponse SnipResponse = SnipeRoot.responseData;
+                        Ranking[] Rankings = SnipResponse.rankings;
+
+                        ArrayList hFordern = new ArrayList();
+                        ArrayList hBPMeds = new ArrayList();
+                        ArrayList hSnipen = new ArrayList();
+                        var arc = ListClass.ArcBonus >= 2 ? (ListClass.ArcBonus / 100) + 1 : ListClass.ArcBonus;
+                        var ForderArc = 1.90f;
+                        int EigenPos = 0, EigenBetrag = 0;
+                        for (int i = 0; i < Rankings.Length; i++)
+                        {
+                           if (Rankings[i].player != null && Rankings[i].player.player_id == int.Parse(ListClass.UserData["player_id"].ToString()))
+                           {
+                              EigenPos = i;
+                              EigenBetrag = Rankings[i].forge_points >= 0 ? Rankings[i].forge_points : 0;
+                              break;
+                           }
+                        }
+                        string[] ForderStates = new string[6];
+                        string[] SnipeStates = new string[6];
+                        int[] FPNettoRewards = new int[6];
+                        int[] FPRewards = new int[6];
+                        int[] BPRewards = new int[6];
+                        int[] MedalRewards = new int[6];
+                        int[] ForderFPRewards = new int[6];
+                        int[] ForderRankCosts = new int[6];
+                        int[] SnipeRankCosts = new int[6];
+                        int[] Einzahlungen = new int[6];
+                        int BestGewinn = -999999;
+                        int RankProfit = -1;
+
+                        for (int i = 0; i < Rankings.Length; i++)
+                        {
+                           Ranking rang = Rankings[i];
+                           int Rank = -1, CurrentFP = 0, TotalFP = 0, RestFP = 0;
+                           bool IsSelf = false;
+                           if (rang.rank < 0) continue;
+                           else Rank = rang.rank - 1;
+                           if (rang.reward == null) continue;
+                           ForderStates[Rank] = "";
+                           SnipeStates[Rank] = "";
+                           FPNettoRewards[Rank] = 0;
+                           FPRewards[Rank] = 0;
+                           BPRewards[Rank] = 0;
+                           MedalRewards[Rank] = 0;
+                           ForderFPRewards[Rank] = 0;
+                           ForderRankCosts[Rank] = -1;
+                           SnipeRankCosts[Rank] = -1;
+                           Einzahlungen[Rank] = 0;
+
+                           if (rang.reward.strategy_point_amount >= 0)
+                              FPNettoRewards[Rank] = rang.reward.strategy_point_amount;
+                           if (rang.reward.blueprints >= 0)
+                              BPRewards[Rank] = rang.reward.blueprints;
+                           if (rang.reward.resources.medals >= 0)
+                              MedalRewards[Rank] = rang.reward.resources.medals;
+
+                           FPRewards[Rank] = (int)Math.Round((double)FPNettoRewards[Rank] * arc);
+                           BPRewards[Rank] = (int)Math.Round((double)BPRewards[Rank] * arc);
+                           MedalRewards[Rank] = (int)Math.Round((double)MedalRewards[Rank] * arc);
+                           ForderFPRewards[Rank] = (int)Math.Round((double)FPNettoRewards[Rank] * ForderArc);
+
+                           if (rang.player != null && Rankings[i].player.player_id == int.Parse(ListClass.UserData["player_id"].ToString()))
+                              IsSelf = true;
+
+                           if (rang.forge_points >= 0)
+                              Einzahlungen[Rank] = rang.forge_points;
+                           if (LGsnip.state != null)
+                           {
+                              if (LGsnip.state.invested_forge_points == null) LGsnip.state.invested_forge_points = 0;
+                              CurrentFP = (LGsnip.state.invested_forge_points.Value >= 0 ? LGsnip.state.invested_forge_points.Value : 0) - EigenBetrag;
+                              TotalFP = LGsnip.state.forge_points_for_level_up.Value;
+                              RestFP = TotalFP - CurrentFP;
+                           }
+                           if (!IsSelf)
+                           {
+                              SnipeRankCosts[Rank] = (int)Math.Round((double)(Einzahlungen[Rank] + RestFP) / 2);
+                              ForderRankCosts[Rank] = Math.Max(ForderFPRewards[Rank], SnipeRankCosts[Rank]);
+                              ForderRankCosts[Rank] = Math.Min(ForderRankCosts[Rank], RestFP);
+                              bool exitLoop = false;
+                              if (SnipeRankCosts[Rank] <= Einzahlungen[Rank])
+                              {
+                                 ForderRankCosts[Rank] = 0;
+                                 ForderStates[Rank] = "NotPossible";
+                                 exitLoop = true;
+                              }
+                              else
+                              {
+                                 if (ForderRankCosts[Rank] == RestFP)
+                                    ForderStates[Rank] = "LevelWarning";
+                                 else if (ForderRankCosts[Rank] <= ForderFPRewards[Rank])
+                                    ForderStates[Rank] = "Profit";
+                                 else
+                                    ForderStates[Rank] = "NegativeProfit";
+                              }
+                              if (SnipeRankCosts[Rank] <= Einzahlungen[Rank])
+                              {
+                                 SnipeRankCosts[Rank] = 0;
+                                 SnipeStates[Rank] = "NotPossible";
+                                 exitLoop = true;
+                              }
+                              else
+                              {
+                                 if (SnipeRankCosts[Rank] == RestFP)
+                                    SnipeStates[Rank] = "LevelWarning";
+                                 else if (FPRewards[Rank] <= SnipeRankCosts[Rank])
+                                    SnipeStates[Rank] = "NegativeProfit";
+                                 else
+                                 {
+                                    SnipeStates[Rank] = "Profit";
+                                    var CurrentGewinn = FPRewards[Rank] - SnipeRankCosts[Rank];
+                                    if (CurrentGewinn > BestGewinn)
+                                    {
+                                       if (SnipeStates[Rank] == "Profit")
+                                       {
+                                          BestGewinn = CurrentGewinn;
+                                          RankProfit = Rank;
+                                          exitLoop = true;
+                                       }
+                                    }
+                                 }
+                              }
+                              if (exitLoop)
+                                 continue;
+                           }
+                        }
+                        if (SnipeStates.Contains("Profit"))
+                        {
+                           if (ListClass.SnipWithProfit.Find(e => e.entity_id == LGsnip.entity_id && e.player.player_id == LGsnip.player.player_id) != null) continue;
+                           if (LGsnip.level == LGsnip.maxLevel) continue;
+                           int SnipCost = FPRewards[RankProfit] - BestGewinn;
+                           LGsnip.KurzString = $"{(float)FPRewards[RankProfit] / SnipCost * 100} %";
+                           LGsnip.GewinnString = $"{BestGewinn}";
+                           ListClass.SnipWithProfit.Add(LGsnip);
+                        }
+                        if (ListClass.AllLGs.Find(e => e.entity_id == LGsnip.entity_id && e.player.player_id == LGsnip.player.player_id) != null) continue;
+                        ListClass.AllLGs.Add(LGsnip);
+                     }
                   }
                }
-               ArrayList ForderStates = new ArrayList();
-               ArrayList SnipeStates = new ArrayList();
-               ArrayList FPNettoRewards = new ArrayList();
-               ArrayList FPRewards = new ArrayList();
-               ArrayList BPRewards = new ArrayList();
-               ArrayList MedalRewards = new ArrayList();
-               ArrayList ForderFPRewards = new ArrayList();
-               ArrayList ForderRankCosts = new ArrayList();
-               ArrayList SnipeRankCosts = new ArrayList();
-               ArrayList Einzahlungen = new ArrayList();
-               int BestGewinn = -999999;
-               dynamic SnipeLastRankCost = null;
-
-               for (int i = 0; i < Rankings.Length; i++)
-               {
-                  Ranking rang = Rankings[i];
-                  int Rank = -1, CurrentFP = 0, TotalFP = 0, RestFP = 0;
-                  bool IsSelf = false;
-                  if (rang.rank < 0) continue;
-                  else Rank = rang.rank - 1;
-                  if (rang.reward == null) break;
-                  ForderStates[Rank] = null;
-                  SnipeStates[Rank] = null;
-                  FPNettoRewards[Rank] = 0;
-                  FPRewards[Rank] = 0;
-                  BPRewards[Rank] = 0;
-                  MedalRewards[Rank] = 0;
-                  ForderFPRewards[Rank] = 0;
-                  ForderRankCosts[Rank] = null;
-                  SnipeRankCosts[Rank] = null;
-                  Einzahlungen[Rank] = 0;
-
-                  if (rang.reward.strategy_point_amount >= 0)
-                     FPNettoRewards[Rank] = rang.reward.strategy_point_amount;
-                  if (rang.reward.blueprints >= 0)
-                     BPRewards[Rank] = rang.reward.blueprints;
-                  if (rang.reward.resources.medals >= 0)
-                     MedalRewards[Rank] = rang.reward.resources.medals;
-
-                  FPRewards[Rank] = Math.Round((double)FPNettoRewards[Rank] * arc);
-                  BPRewards[Rank] = Math.Round((double)BPRewards[Rank] * arc);
-                  MedalRewards[Rank] = Math.Round((double)MedalRewards[Rank] * arc);
-                  ForderFPRewards[Rank] = Math.Round((double)FPNettoRewards[Rank] * ForderArc);
-
-                  if (rang.player != null && Rankings[i].player.player_id == int.Parse(ListClass.UserData["player_id"].ToString()))
-                     IsSelf = true;
-
-                  if (rang.forge_points >= 0)
-                     Einzahlungen[Rank] = rang.forge_points;
-
-                  CurrentFP = (LGsnip.state.invested_forge_points >= 0 ? LGsnip.state.invested_forge_points : 0) - EigenBetrag;
-                  TotalFP = LGsnip.state.forge_points_for_level_up;
-                  RestFP = TotalFP - CurrentFP;
-
-                  if (!IsSelf)
-                  {
-                     SnipeRankCosts[Rank] = Math.Round((double)((int)Einzahlungen[Rank] + RestFP) / 2);
-                     ForderRankCosts[Rank] = Math.Max((int)ForderFPRewards[Rank], (int)SnipeRankCosts[Rank]);
-                     ForderRankCosts[Rank] = Math.Min((int)ForderRankCosts[Rank], RestFP);
-                     bool exitLoop = false;
-                     if ((int)SnipeRankCosts[Rank] <= (int)Einzahlungen[Rank])
-                     {
-                        ForderRankCosts[Rank] = 0;
-                        ForderStates[Rank] = "NotPossible";
-                        exitLoop = true;
-                     }
-                     else
-                     {
-                        if ((int)ForderRankCosts[Rank] == RestFP)
-                           ForderStates[Rank] = "LevelWarning";
-                        else if ((int)ForderRankCosts[Rank] <= (int)ForderFPRewards[Rank])
-                           ForderStates[Rank] = "Profit";
-                        else
-                           ForderStates[Rank] = "NegativeProfit";
-                     }
-                     if ((int)SnipeRankCosts[Rank] <= (int)Einzahlungen[Rank])
-                     {
-                        SnipeRankCosts[Rank] = 0;
-                        SnipeStates[Rank] = "NotPossible";
-                        exitLoop = true;
-                     }
-                     else
-                     {
-                        if ((int)SnipeRankCosts[Rank] == RestFP)
-                           SnipeStates[Rank] = "LevelWarning";
-                        else if ((int)FPRewards[Rank] <= (int)SnipeRankCosts[Rank])
-                           SnipeStates[Rank] = "NegativeProfit";
-                        else
-                           SnipeStates[Rank] = "Profit";
-                     }
-                     if (exitLoop)
-                        continue;
-
-                     if(SnipeLastRankCost >= 0 && SnipeRankCosts[Rank] == SnipeLastRankCost)
-                     {
-                        ForderStates[Rank] = "NotPossible";
-                        ForderRankCosts[Rank] = null;
-                        SnipeStates[Rank] = "NotPossible";
-                        SnipeRankCosts[Rank] = null;
-                        exitLoop = true;
-                     }
-                     else SnipeLastRankCost = SnipeRankCosts[Rank];
-                     if (exitLoop) continue;
-                     int CurrentGewinn = (int)FPRewards[Rank] - (int)SnipeRankCosts[Rank];
-                     if(CurrentGewinn > BestGewinn)
-                     {
-                        if (SnipeStates[Rank].ToString() != "LevelWarning")
-                           BestGewinn = CurrentGewinn;
-                     }
-                     else
-                     {
-                        SnipeStates[Rank] = "WorseProfit";
-                        ForderStates[Rank] = "WorseProfit";
-                     }
-                  }
-               }
-               LGsnip.KurzString = $"{Math.Round((double)(BestKursEinsatz / BestKursNettoFP * 1000) / 10)} %";
-               LGsnip.GewinnString = $"{Math.Round((double)(BestKursNettoFP *arc) - BestKursEinsatz.Value)}";
-               message += $"{LGsnip.player.name}: {LGsnip.name} -> {LGsnip.GewinnString} ({LGsnip.KurzString})\n";
-               MessageBox.Show(message);
                break;
             case RequestType.LogService:
                break;

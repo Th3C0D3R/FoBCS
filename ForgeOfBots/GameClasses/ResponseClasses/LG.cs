@@ -64,14 +64,16 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
    }
    public class LGState
    {
-      public int invested_forge_points { get; set; }
-      public int forge_points_for_level_up { get; set; }
+      public int? invested_forge_points { get; set; }
+      public int? forge_points_for_level_up { get; set; }
    }
 
    public class LGSnip : LGData
    {
       public string GewinnString = "";
       public string KurzString = "";
+      public bool check = false;
+      public int maxLevel = -1;
    }
    public static class LG
    {

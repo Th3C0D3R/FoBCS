@@ -63,6 +63,8 @@ namespace ForgeOfBots.GameClasses
       public static List<Player> Motivateable { get; set; } = new List<Player>();
       public static TavernData OwnTavernData { get; set; } = new TavernData();
       public static LanguageList AvailableLanguages { get; set; } = new LanguageList();
+      public static List<LGSnip> AllLGs { get; set; } = new List<LGSnip>();
+      public static List<LGSnip> SnipWithProfit { get; set; } = new List<LGSnip>();
       public static List<LGSnip> PossibleSnipLGs { get; set; } = new List<LGSnip>();
       public static List<Player> SnipablePlayers { get; set; } = new List<Player>();
 

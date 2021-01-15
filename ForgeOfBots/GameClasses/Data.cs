@@ -22,4 +22,9 @@ namespace ForgeOfBots.GameClasses
       public string WID { get; set; }
       public string ForgeHX { get; set; }
    }
+
+   public static class DataCenter
+   {
+      public static string LGSnipMessage { get; set; }
+   }
 }

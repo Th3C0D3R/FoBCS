@@ -267,6 +267,9 @@ namespace ForgeOfBots
         userPremiumEvent.Add(StaticData.UserData.Username, userPremium);
         Analytics.TrackEvent("UserPremium", userPremiumEvent);
 #endif
+
+            //cwb.ShowDevTools();
+            //StaticData.Browser.Show();
          }
          catch (Exception ex)
          {
@@ -1513,7 +1516,7 @@ namespace ForgeOfBots
             StaticData.WorkerList.BringToFront();
          StaticData.WorkerList.AddWorkerItem(wi);
 
-         TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.SnipLG, argument2 = null };
+         TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.GetLGs, argument2 = null };
          BackgroundWorker bw = new BackgroundWorker();
          bw.DoWork += bwScriptExecuter_DoWork;
          bw.WorkerSupportsCancellation = true;
@@ -1521,6 +1524,7 @@ namespace ForgeOfBots
          bw.RunWorkerAsync(param);
          ListClass.BackgroundWorkers.Add(bw);
       }
+
       private void VisitAllTavern()
       {
          //string script = ReqBuilder.GetRequestScript(RequestType.VisitTavern, "[]");
@@ -1596,7 +1600,7 @@ namespace ForgeOfBots
                   cwb.ExecuteScriptAsync(script);
                   Random r = new Random();
                   int rInt = r.Next(750, 1500);
-                  while (!ListClass.doneMotivate.ContainsKey(last.player_id))
+                  while (!ListClass.doneMotivate.ContainsKey(last.player_id.Value))
                   {
                      Thread.Sleep(1);
                   }
@@ -1639,8 +1643,8 @@ namespace ForgeOfBots
                      {
                         StaticData.WorkerList.Invoke((MethodInvoker)delegate
                         {
-                             StaticData.WorkerList.Close();
-                          });
+                           StaticData.WorkerList.Close();
+                        });
                      }
                      else
                         StaticData.WorkerList.Close();
@@ -1701,8 +1705,8 @@ namespace ForgeOfBots
                      {
                         StaticData.WorkerList.Invoke((MethodInvoker)delegate
                         {
-                             StaticData.WorkerList.Close();
-                          });
+                           StaticData.WorkerList.Close();
+                        });
                      }
                      else
                         StaticData.WorkerList.Close();
@@ -1710,8 +1714,10 @@ namespace ForgeOfBots
                }, 1000).Wait();
                ResponseHandler_TaverSitted(this);
                break;
-            case RequestType.SnipLG:
+            case RequestType.GetLGs:
                Player lastPlayer = null;
+               ListClass.PossibleSnipLGs = new List<LGSnip>();
+               ListClass.SnipWithProfit = new List<LGSnip>();
                ListClass.SnipablePlayers = LG.HasGB(ListClass.NeighborList, ListClass.FriendList);
                if (ListClass.SnipablePlayers.Count == 0) return;
                StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
@@ -1724,9 +1730,23 @@ namespace ForgeOfBots
                   Random r = new Random();
                   int rInt = r.Next(333, 1000);
                   StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, ListClass.PossibleSnipLGs.Count, ListClass.SnipablePlayers.Count);
-                  StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, strings.CountLabel.Replace("##Done##", ListClass.PossibleSnipLGs.Count.ToString()).Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
+                  StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"Searching Player {item.name}..." );
                   Thread.Sleep(rInt);
                }
+               StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, ListClass.SnipablePlayers.Count, ListClass.SnipablePlayers.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"FINISHED");
+               List<string> message = new List<string>();
+               foreach (LGSnip LGsnip in ListClass.SnipWithProfit)
+               {
+                  string status = LGsnip.player.is_friend ? "Friend" : LGsnip.player.is_guild_member ? "Guildmember" : "Neighbor";
+                  message.Add($"({status} - {(LGsnip.player.is_active ? "Active" : "InActive")}) {LGsnip.player.name} -> {LGsnip.name} Profit: {LGsnip.GewinnString} ({LGsnip.KurzString})");
+               }
+               message = message.OrderBy(q => q).ToList();
+               Thread thread = new Thread(() => Clipboard.SetText(string.Join("\n", message)));
+               thread.SetApartmentState(ApartmentState.STA);
+               thread.Start();
+               thread.Join();
+               MessageBox.Show(string.Join("\n",message), "Snip");
                break;
             default:
                break;
@@ -1885,10 +1905,11 @@ namespace ForgeOfBots
 
       private void toolStripButton1_Click(object sender, EventArgs e)
       {
-         ListClass.SnipablePlayers = LG.HasGB(ListClass.NeighborList, ListClass.FriendList);
-         if (ListClass.SnipablePlayers.Count == 0) return;
-         string script = ReqBuilder.GetRequestScript(RequestType.GetLGs, ListClass.SnipablePlayers[0].player_id);
-         cwb.ExecuteScriptAsync(script);
+         GetSnipableLGs();
+         //ListClass.SnipablePlayers = LG.HasGB(ListClass.NeighborList, ListClass.FriendList);
+         //if (ListClass.SnipablePlayers.Count == 0) return;
+         //string script = ReqBuilder.GetRequestScript(RequestType.GetLGs, ListClass.SnipablePlayers[0].player_id);
+         //cwb.ExecuteScriptAsync(script);
          //object ret = TcpConnection.SendAuthData("IAVvAuYHY0JxjgnBarwue1JPfvvD6drnK9UVYRFAmW0D0M9D5t1AXD7R1GPP8VL5JgnjLSmJlwHIBFYTvsHNmqQGCDeSB0BRL54UjZ1nGsZk5zQvr6ePN8ScPghIxUHvv06FLEtV1dG4RqKNxslEVvENmbEC2szwkoyF2KkmNJYt1YLjVUVFsCZ9vtct9qdInTTm1FVmH81MXUVOPfqhXuDiOzUIr0ngpPFhEirQ9s7uKMlaYOdd95u3QvYBuM5R", FingerPrint.Value(), true);
          //_ = ret is bool;
          //int[,] troops = new int[2, 8] { { 38920, 36872, 34885, 32837, 30789, 28741, 26693, 24645 }, { 29, 2077, 4125, 35, 2083, 3, 16, 34 } };
@@ -2001,8 +2022,8 @@ namespace ForgeOfBots
          CookieManager = Cef.GetGlobalCookieManager();
          var visitor = new CookieMonster(allCookies =>
          {
-         //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
-         foreach (var item in allCookies)
+            //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
+            foreach (var item in allCookies)
             {
                if (item.Item1 == null) continue;
                if (item.Item2 == null) continue;

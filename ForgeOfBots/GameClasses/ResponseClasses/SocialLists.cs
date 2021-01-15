@@ -11,15 +11,17 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int? player_id { get; set; } = null;
       public string name { get; set; }
       public int next_interaction_in { get; set; }
+      public bool is_friend { get; set; }
+      public bool is_neighbor { get; set; }
+      public bool is_guild_member { get; set; }
+      public bool is_active { get; set; }
+      public int score { get; set; }
    }
    public partial class Neighbor : Player
    {
       public int score { get; set; }
       public int rank { get; set; }
       public bool is_online { get; set; }
-      public bool is_friend { get; set; }
-      public bool is_neighbor { get; set; }
-      public bool is_guild_member { get; set; }
       public bool isInvitedToClan { get; set; }
       public bool is_self { get; set; }
       public string profile_text { get; set; }
@@ -27,7 +29,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int clan_id { get; set; }
       public Clan clan { get; set; }
       public bool has_great_building { get; set; }
-      public bool is_active { get; set; }
       public bool canSabotage { get; set; }
       public Topachievement[] topAchievements { get; set; }
       public string avatar { get; set; }
@@ -43,9 +44,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public bool rewarded { get; set; }
       public int score { get; set; }
       public int rank { get; set; }
-      public bool is_friend { get; set; }
-      public bool is_neighbor { get; set; }
-      public bool is_guild_member { get; set; }
       public bool isInvitedToClan { get; set; }
       public bool isInvitedFriend { get; set; }
       public bool is_self { get; set; }
@@ -54,7 +52,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int clan_id { get; set; }
       public Clan clan { get; set; }
       public bool has_great_building { get; set; }
-      public bool is_active { get; set; }
       public bool canSabotage { get; set; }
       public string avatar { get; set; }
       public string __class__ { get; set; }
@@ -66,9 +63,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int score { get; set; }
       public int rank { get; set; }
       public bool is_online { get; set; }
-      public bool is_friend { get; set; }
-      public bool is_neighbor { get; set; }
-      public bool is_guild_member { get; set; }
       public bool is_self { get; set; }
       public string profile_text { get; set; }
       public string city_name { get; set; }
@@ -76,7 +70,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public Clan clan { get; set; }
       public int won_battles { get; set; }
       public bool has_great_building { get; set; }
-      public bool is_active { get; set; }
       public bool canSabotage { get; set; }
       public Topachievement[] topAchievements { get; set; }
       public string avatar { get; set; }

@@ -29,7 +29,7 @@ namespace ForgeOfBots.DataHandler
          int[] queryData = new int[] { };
          int[,] armyData = new int[2,8];
          int idData = 0;
-         if (type == RequestType.QueryProduction || type == RequestType.CollectProduction)
+         if (type == RequestType.QueryProduction || type == RequestType.CollectProduction || type == RequestType.getConstruction)
             queryData = (int[])data;
          else if (type == RequestType.GEAttack)
             armyData = (int[,])data;
@@ -135,10 +135,11 @@ namespace ForgeOfBots.DataHandler
                _class = "FriendsTavernService";
                _methode = "getOwnTavern";
                break;
-            case RequestType.SnipLG:
+            case RequestType.getConstruction:
                _data = new JArray(queryData[0], queryData[1]);
                _class = "GreatBuildingsService";
                _methode = "getConstruction";
+               onlyOne = "false";
                break;
             case RequestType.RemovePlayer:
                _data = new JArray(idData);
@@ -216,7 +217,7 @@ namespace ForgeOfBots.DataHandler
             .Replace("##resType##", type.ToString());
          if (type == RequestType.VisitTavern || type == RequestType.Motivate)
             RequestScript = RequestScript.Replace("##IdData##", idData.ToString());
-         else if (type == RequestType.SnipLG)
+         else if (type == RequestType.getConstruction)
             RequestScript = RequestScript.Replace("##IdData##", queryData[0].ToString());
          else
             RequestScript = RequestScript.Replace("##IdData##", "");
@@ -261,7 +262,7 @@ namespace ForgeOfBots.DataHandler
       OwnArmy,
       GEAttack,
       GEServiceCollectChest,
-      SnipLG
+      getConstruction
    }
 
     public enum E_Motivate
