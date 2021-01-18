@@ -253,7 +253,7 @@ namespace ForgeOfBots
             }
 #if DEBUG
             var x = new Dictionary<string, string>();
-            string startUp = $"{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_Model)}-{Identifier.GetInfo(StaticData._WCS, StaticData._WCS_SystemType)} ({Identifier.GetInfo(StaticData._WOS, StaticData._WOS_Caption)})";
+            string startUp = $"{Identifier.GetInfo(_WCS, _WCS_Model)}-{Identifier.GetInfo(_WCS, _WCS_SystemType)} ({Identifier.GetInfo(_WOS, _WOS_Caption)})";
             x.Add("Startup", startUp);
             Analytics.TrackEvent("Startup", x);
 #elif RELEASE
@@ -400,7 +400,6 @@ namespace ForgeOfBots
       StaticData.Browser.Controls.Add(cwb);
 #endif
       }
-
 
       #region "Production"
       private void UpdateGoodProductionView()
@@ -1204,8 +1203,8 @@ namespace ForgeOfBots
                      }
                   }
                   var userPremiumEvent = new Dictionary<string, string>();
-                  string userPremium = $"{StaticData.UserData.Username}({StaticData.UserData.LastWorld}) {StaticData.UserData.SerialKey}";
-                  userPremiumEvent.Add(StaticData.UserData.Username, userPremium);
+                  string userPremium = $"{UserData.Username}({UserData.LastWorld}) {UserData.SerialKey}";
+                  userPremiumEvent.Add(UserData.Username, userPremium);
                   Analytics.TrackEvent("UserPremium", userPremiumEvent);
                }
             }
@@ -1643,8 +1642,8 @@ namespace ForgeOfBots
                      {
                         StaticData.WorkerList.Invoke((MethodInvoker)delegate
                         {
-                           StaticData.WorkerList.Close();
-                        });
+                             StaticData.WorkerList.Close();
+                          });
                      }
                      else
                         StaticData.WorkerList.Close();
@@ -1705,8 +1704,8 @@ namespace ForgeOfBots
                      {
                         StaticData.WorkerList.Invoke((MethodInvoker)delegate
                         {
-                           StaticData.WorkerList.Close();
-                        });
+                             StaticData.WorkerList.Close();
+                          });
                      }
                      else
                         StaticData.WorkerList.Close();
@@ -1718,7 +1717,12 @@ namespace ForgeOfBots
                Player lastPlayer = null;
                ListClass.PossibleSnipLGs = new List<LGSnip>();
                ListClass.SnipWithProfit = new List<LGSnip>();
-               ListClass.SnipablePlayers = LG.HasGB(ListClass.NeighborList, ListClass.FriendList);
+               ListClass.SnipablePlayers = new List<Player>();
+               if (UserData.SelectedSnipTarget == SnipTarget.none) return;
+               if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends)) ListClass.SnipablePlayers.AddRange(ListClass.FriendList);
+               if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors)) ListClass.SnipablePlayers.AddRange(ListClass.NeighborList);
+               if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
+               ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
                StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
                StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
@@ -1730,7 +1734,7 @@ namespace ForgeOfBots
                   Random r = new Random();
                   int rInt = r.Next(333, 1000);
                   StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, ListClass.PossibleSnipLGs.Count, ListClass.SnipablePlayers.Count);
-                  StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"Searching Player {item.name}..." );
+                  StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"Searching Player {item.name}...");
                   Thread.Sleep(rInt);
                }
                StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, ListClass.SnipablePlayers.Count, ListClass.SnipablePlayers.Count);
@@ -1742,11 +1746,23 @@ namespace ForgeOfBots
                   message.Add($"({status} - {(LGsnip.player.is_active ? "Active" : "InActive")}) {LGsnip.player.name} -> {LGsnip.name} Profit: {LGsnip.GewinnString} ({LGsnip.KurzString})");
                }
                message = message.OrderBy(q => q).ToList();
-               Thread thread = new Thread(() => Clipboard.SetText(string.Join("\n", message)));
-               thread.SetApartmentState(ApartmentState.STA);
-               thread.Start();
-               thread.Join();
-               MessageBox.Show(string.Join("\n",message), "Snip");
+               setTimeout(() =>
+               {
+                  (bool, bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(LGSnipWorkerID);
+                  if (returnVal.Item2)
+                  {
+                     if (InvokeRequired)
+                     {
+                        StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                        {
+                           StaticData.WorkerList.Close();
+                        });
+                     }
+                     else
+                        StaticData.WorkerList.Close();
+                  }
+               }, 1000).Wait();
+               MessageBox.Show(string.Join("\n", message), "Snip");
                break;
             default:
                break;
@@ -2022,8 +2038,8 @@ namespace ForgeOfBots
          CookieManager = Cef.GetGlobalCookieManager();
          var visitor = new CookieMonster(allCookies =>
          {
-            //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
-            foreach (var item in allCookies)
+         //BeginInvoke(new MethodInvoker(() => lbCookies.Items.Clear()));
+         foreach (var item in allCookies)
             {
                if (item.Item1 == null) continue;
                if (item.Item2 == null) continue;

@@ -750,8 +750,9 @@ namespace ForgeOfBots.CefBrowserHandler
                         {
                            if (ListClass.SnipWithProfit.Find(e => e.entity_id == LGsnip.entity_id && e.player.player_id == LGsnip.player.player_id) != null) continue;
                            if (LGsnip.level == LGsnip.maxLevel) continue;
+                           if (BestGewinn < StaticData.UserData.MinProfit) continue;
                            int SnipCost = FPRewards[RankProfit] - BestGewinn;
-                           LGsnip.KurzString = $"{(float)FPRewards[RankProfit] / SnipCost * 100} %";
+                           LGsnip.KurzString = $"{(int)((float)FPRewards[RankProfit] / SnipCost * 100)} %";
                            LGsnip.GewinnString = $"{BestGewinn}";
                            ListClass.SnipWithProfit.Add(LGsnip);
                         }

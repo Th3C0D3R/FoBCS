@@ -1,4 +1,5 @@
-﻿using Microsoft.AppCenter.Crashes;
+﻿using ForgeOfBots.GameClasses;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,6 @@ namespace ForgeOfBots.Utils
     public string WorldServer { get; set; } = "";
     public LanguageItem Language { get; set; } = new LanguageItem() { Code = "en", Description = "English", Language = 0 };
     public string SerialKey { get; set; } = "";
-
     public ProductionOption ProductionOption { get; set; } = Extensions.GetProductionOption();
     public ProductionOption GoodProductionOption { get; set; } = Extensions.GetGoodProductionOption();
     public bool GroupedView { get; set; } = true;
@@ -32,6 +32,8 @@ namespace ForgeOfBots.Utils
     public string CustomUserAgent { get; set; } = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0";
     public bool AutoLogin { get; set; } = false;
     public bool DarkMode { get; set; } = false;
+    public int MinProfit { get; set; } = 20;
+    public SnipTarget SelectedSnipTarget { get; set; } = SnipTarget.neighbors | SnipTarget.friends;
     public UserConfirmation AllowSendCrashLog { get; set; } = UserConfirmation.Send;
     public int IntervalIncidentBot { get; set; } = 1;
     public DateTime LastPolivateTime { get; set; } = DateTime.MinValue;
