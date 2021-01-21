@@ -7,6 +7,7 @@ using ForgeOfBots.DataHandler;
 using ForgeOfBots.Forms;
 using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ using System.IO;
 using System.Management;
 using System.Reflection;
 using System.Resources;
+using System.Windows.Forms;
 using CUpdate = ForgeOfBots.DataHandler.Update;
 
 namespace ForgeOfBots.Utils
@@ -33,6 +35,10 @@ namespace ForgeOfBots.Utils
       public static Version Version = Assembly.GetExecutingAssembly().GetName().Version;
       public static UserDataInput usi = null;
       public static Browser Browser = null;
+      public static ImageList GoodImageList = null;
+      public static IJavaScriptExecutor jsExecutor;
+      public static ICookieJar cookieJar;
+      public static IWebDriver driver;
       public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
       public static string ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
       public static Stopwatch RunningTime = new Stopwatch();

@@ -1,5 +1,5 @@
-﻿async function makeRequest() {
-    await CefSharp.BindObjectAsync("jsInterface");
+﻿var callback = arguments[arguments.length - 1];
+async function makeRequest() {
     let res = await fetch("##url##", {
         "headers": {
             "accept": "*/*",
@@ -17,19 +17,15 @@
         let body = await res.text();
         try {
             var json = JSON.parse(body);
-            //console.log(body);
             if (json[0]["__class__"] === "Error" || json[0]["__class__"] === "Redirect")
-                if (window.jsInterface.hook)
-                    window.jsInterface.hook("SESSION-EXPIRED", "MetaData", "##resType##","");
-            if (window.jsInterface.hook)
-                window.jsInterface.hook(body, "MetaData", "##resType##","");
+                callback("SESSION-EXPIRED");
+            callback(body);
         } catch (error) {
-            if (window.jsInterface.hook)
-                window.jsInterface.hook(JSON.parse("[]"), "MetaData", "##resType##","");
+            callback("[]");
         }
     }
     else
-        if (window.jsInterface.hook)
-            window.jsInterface.hook(JSON.parse("[]"), "MetaData", "##resType##","");
+        callback("");
+        
 }
 makeRequest();

@@ -1,5 +1,5 @@
-﻿async function makeRequest() {
-    await CefSharp.BindObjectAsync("jsInterface");
+﻿var callback = arguments[arguments.length - 1];
+async function makeRequest() {
     let res = await fetch("https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##", {
         "credentials": "include",
         "headers": {
@@ -74,14 +74,14 @@
                 body = newBody;
             }
             if (json[0]["__class__"] === "Error" || json[0]["__class__"] === "Redirect")
-                window.jsInterface.hook(body, "Data", "##resType##", "SESSION-EXPIRED");
-            window.jsInterface.hook(body, "Data", "##resType##", "##IdData##");
+                callback("SESSION-EXPIRED");
+            callback(body);
         } catch (error) {
-            window.jsInterface.hook("{}", "Data", "##resType##", "##IdData##");
+            callback("{}");
         }
     }
     else
-        window.jsInterface.hook("{}", "Data", "##resType##", "##IdData##");
+        callback("{}");
 }
 
 makeRequest();

@@ -176,8 +176,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CefBrowserHandler\ResponseHandler.cs" />
     <Compile Include="CefBrowserHandler\jsMapInterface.cs" />
+    <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
+    <Compile Include="CefBrowserHandler\ResponseHandler.cs" />
     <Compile Include="DataHandler\RequestBuilder.cs" />
     <Compile Include="DataHandler\Update.cs" />
     <Compile Include="Forms\About.cs">
@@ -198,11 +199,23 @@
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Log.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Log.Designer.cs">
       <DependentUpon>Log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Main_DarkMode.cs">
       <SubType>Form</SubType>
@@ -268,7 +281,6 @@
     <Compile Include="GameClasses\Data.cs" />
     <Compile Include="GameClasses\Language.cs" />
     <Compile Include="GameClasses\ListClass.cs" />
-    <Compile Include="CefBrowserHandler\RequestEmitter.cs" />
     <Compile Include="GameClasses\ResponseClasses\BonusService.cs" />
     <Compile Include="GameClasses\ResponseClasses\CityEntities.cs" />
     <Compile Include="GameClasses\ResponseClasses\GuildExpedition.cs" />
@@ -279,11 +291,15 @@
     <Compile Include="GameClasses\ResponseClasses\Research.cs" />
     <Compile Include="GameClasses\ResponseClasses\Resource.cs" />
     <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
+    <Compile Include="GameClasses\ResponseClasses\World.cs" />
     <Compile Include="Updater\Updater.cs" />
+    <Compile Include="Utils\ForgeHX.cs" />
     <Compile Include="Utils\GEHelper.cs" />
     <Compile Include="Utils\CrashHelper.cs" />
+    <Compile Include="Utils\GoodImageExtractor.cs" />
     <Compile Include="Utils\i18n.cs" />
     <Compile Include="Utils\StaticData.cs" />
+    <Compile Include="Utils\TelegramNotify.cs" />
     <Compile Include="Utils\Testing\Test.cs" />
     <EmbeddedResource Include="Forms\About.de.resx">
       <DependentUpon>About.cs</DependentUpon>
@@ -296,6 +312,26 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.de-BE.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.de.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.en.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.nqo.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main_DarkMode.de-BE.resx">
       <DependentUpon>Main_DarkMode.cs</DependentUpon>
@@ -312,19 +348,6 @@
     <EmbeddedResource Include="Forms\Main_DarkMode.resx">
       <DependentUpon>Main_DarkMode.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main.de-BE.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main.de.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main.en.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main.nqo.resx">
-      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings.de.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -389,12 +412,6 @@
     <Compile Include="GameClasses\ResponseClasses\Root.cs" />
     <Compile Include="GameClasses\ResponseClasses\TavernResult.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Forms\Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Main.Designer.cs">
-      <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LanguageFiles\strings.en.Designer.cs">
@@ -427,10 +444,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Log.resx">
       <DependentUpon>Log.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -482,6 +495,9 @@
     <EmbeddedResource Include="JSFiles\preloadLoginWorld.js" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="JSFiles\fetchMetaData.js" />
     <Content Include="JSFiles\fetchData.js" />
@@ -555,6 +571,9 @@
     </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.7.6</Version>
+    </PackageReference>
+    <PackageReference Include="Selenium.WebDriver">
+      <Version>4.0.0-alpha07</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

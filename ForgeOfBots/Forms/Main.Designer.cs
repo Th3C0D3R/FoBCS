@@ -46,6 +46,7 @@
          this.aidAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiVisitAll = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiDoAll = new System.Windows.Forms.ToolStripMenuItem();
+         this.sNipLGsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
          this.tsbReload = new System.Windows.Forms.ToolStripButton();
          this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -262,7 +263,8 @@
          this.tsddFunctions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aidToolStripMenuItem,
             this.tsmiVisitAll,
-            this.tsmiDoAll});
+            this.tsmiDoAll,
+            this.sNipLGsToolStripMenuItem});
          resources.ApplyResources(this.tsddFunctions, "tsddFunctions");
          this.tsddFunctions.Name = "tsddFunctions";
          // 
@@ -317,6 +319,12 @@
          this.tsmiDoAll.Name = "tsmiDoAll";
          resources.ApplyResources(this.tsmiDoAll, "tsmiDoAll");
          this.tsmiDoAll.Click += new System.EventHandler(this.tsmiDoAll_Click);
+         // 
+         // sNipLGsToolStripMenuItem
+         // 
+         this.sNipLGsToolStripMenuItem.Name = "sNipLGsToolStripMenuItem";
+         resources.ApplyResources(this.sNipLGsToolStripMenuItem, "sNipLGsToolStripMenuItem");
+         this.sNipLGsToolStripMenuItem.Click += new System.EventHandler(this.SNipLGsToolStripMenuItem_Click);
          // 
          // toolStripSeparator2
          // 
@@ -1172,6 +1180,7 @@
       private System.Windows.Forms.ToolStripButton toolStripButton1;
       private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
       public System.Windows.Forms.Panel tlpPremium;
+      private System.Windows.Forms.ToolStripMenuItem sNipLGsToolStripMenuItem;
    }
 }
 

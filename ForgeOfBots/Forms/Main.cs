@@ -128,6 +128,7 @@ namespace ForgeOfBots
             InitializeComponent();
             logger.Info($"check for updates");
             CheckForUpdate();
+            TelegramNotify.Send($"Session started {UserData.Username}");
             if (HasLastCrash)
             {
 
@@ -169,7 +170,7 @@ namespace ForgeOfBots
                   CachePath = Path.GetFullPath("cache"),
                   PersistSessionCookies = false,
                   UserAgent = UserData.CustomUserAgent,
-                  WindowlessRenderingEnabled = false,
+                  WindowlessRenderingEnabled = true,
                   IgnoreCertificateErrors = true
                };
                settings.CefCommandLineArgs.Add("disable-gpu", "1");
@@ -197,7 +198,7 @@ namespace ForgeOfBots
                if (dlgRes == DialogResult.Cancel) Environment.Exit(0);
                Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
                ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
-               Updater = Updater = new CUpdate(cwb, ReqBuilder);
+               Updater = Updater = new CUpdate( ReqBuilder);
                Text = Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
                LogWnd = new Log(new Point(Location.X + Size.Width, Location.Y));
                ToggleGUI(false);
@@ -212,7 +213,7 @@ namespace ForgeOfBots
                   CachePath = Path.GetFullPath("cache"),
                   PersistSessionCookies = false,
                   UserAgent = UserData.CustomUserAgent,
-                  WindowlessRenderingEnabled = false,
+                  WindowlessRenderingEnabled = true,
                   IgnoreCertificateErrors = true
 
                };
@@ -243,7 +244,7 @@ namespace ForgeOfBots
 #endif
                Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
                ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
-               Updater = Updater = new CUpdate(cwb, ReqBuilder);
+               Updater = Updater = new CUpdate( ReqBuilder);
                Text = Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
                LogWnd = new Log(new Point(Location.X + Size.Width, Location.Y));
                ToggleGUI(false);
@@ -1075,7 +1076,7 @@ namespace ForgeOfBots
       }
       public void reloadData()
       {
-         CUpdate.UpdateFinished += CUpdate_UpdateFinished;
+         //CUpdate.UpdateFinished += CUpdate_UpdateFinished;
          Updater.UpdatePlayerLists();
          Updater.UpdateStartUp();
       }
@@ -1726,6 +1727,7 @@ namespace ForgeOfBots
                if (ListClass.SnipablePlayers.Count == 0) return;
                StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
                StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
+               ResponseHandler.AllLGsStepped += AllLGsStepped;
                foreach (Player item in ListClass.SnipablePlayers)
                {
                   lastPlayer = item;
@@ -1737,37 +1739,69 @@ namespace ForgeOfBots
                   StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"Searching Player {item.name}...");
                   Thread.Sleep(rInt);
                }
-               StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, ListClass.SnipablePlayers.Count, ListClass.SnipablePlayers.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"FINISHED");
-               List<string> message = new List<string>();
-               foreach (LGSnip LGsnip in ListClass.SnipWithProfit)
-               {
-                  string status = LGsnip.player.is_friend ? "Friend" : LGsnip.player.is_guild_member ? "Guildmember" : "Neighbor";
-                  message.Add($"({status} - {(LGsnip.player.is_active ? "Active" : "InActive")}) {LGsnip.player.name} -> {LGsnip.name} Profit: {LGsnip.GewinnString} ({LGsnip.KurzString})");
-               }
-               message = message.OrderBy(q => q).ToList();
-               setTimeout(() =>
-               {
-                  (bool, bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(LGSnipWorkerID);
-                  if (returnVal.Item2)
-                  {
-                     if (InvokeRequired)
-                     {
-                        StaticData.WorkerList.Invoke((MethodInvoker)delegate
-                        {
-                           StaticData.WorkerList.Close();
-                        });
-                     }
-                     else
-                        StaticData.WorkerList.Close();
-                  }
-               }, 1000).Wait();
-               MessageBox.Show(string.Join("\n", message), "Snip");
                break;
             default:
                break;
          }
       }
+
+      private void AllLGsStepped(object sender, dynamic data = null)
+      {
+         foreach (LGSnip item in ListClass.PossibleSnipLGs)
+         {
+            string script = ReqBuilder.GetRequestScript(RequestType.getConstruction, new int[] { item.entity_id, item.player.player_id.Value });
+            cwb.ExecuteScriptAsync(script);
+            Random r = new Random();
+            int rInt = r.Next(333, 1000);
+            StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, ListClass.SnipWithProfit.Count, ListClass.PossibleSnipLGs.Count);
+            StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"Searching LGs {item.name}...");
+            Thread.Sleep(rInt);
+         }
+         StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, ListClass.SnipablePlayers.Count, ListClass.SnipablePlayers.Count);
+         StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"FINISHED");
+#if DEBUG
+         List<string> message = new List<string>();
+         foreach (LGSnip LGsnip in ListClass.SnipWithProfit)
+         {
+            string status = LGsnip.player.is_friend ? "Friend" : LGsnip.player.is_guild_member ? "Guildmember" : "Neighbor";
+            message.Add($"({status} - {(LGsnip.player.is_active ? "Active" : "InActive")}) {LGsnip.player.name} -> {LGsnip.name} Profit: {LGsnip.GewinnString} ({LGsnip.KurzString})");
+         }
+         message = message.OrderBy(q => q).ToList();
+         setTimeout(() =>
+         {
+            (bool, bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(LGSnipWorkerID);
+            if (returnVal.Item2)
+            {
+               if (InvokeRequired)
+               {
+                  StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                  {
+                     StaticData.WorkerList.Close();
+                  });
+               }
+               else
+                  StaticData.WorkerList.Close();
+            }
+         }, 1000).Wait();
+         if (message.Count == 0) message.Add("EMPTY");
+         MessageBox.Show(string.Join("\n", message), "Snip");
+#else
+         SnipLG snipForm = new SnipLG();
+         foreach (LGSnip snip in ListClass.SnipWithProfit)
+         {
+            LGSnipItem lsi = new LGSnipItem()
+            {
+               LG = snip.name,
+               SnipTag = $"{snip.player.player_id}|{snip.entity_id}|{snip.level}",
+               Profit = snip.GewinnString
+            };
+            snipForm.Add(lsi);
+         }
+         snipForm.Show();
+         snipForm.BringToFront();
+#endif
+      }
+
       private void btnCollect_Click(object sender, EventArgs e)
       {
          string script = ReqBuilder.GetRequestScript(RequestType.CollectTavern, "");
@@ -2007,6 +2041,12 @@ namespace ForgeOfBots
       {
          Motivate(E_Motivate.All);
       }
+
+      private void SNipLGsToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         GetSnipableLGs();
+      }
+
       private void ResponseHandler_TaverSitted(object sender, dynamic data = null)
       {
          reloadData();
@@ -2026,6 +2066,7 @@ namespace ForgeOfBots
       //}
       private void handleExit(object sender, EventArgs e)
       {
+         TelegramNotify.Send($"Session ended {UserData.Username} {lblRunSinceValue.Text}");
          UserData.SaveSettings();
       }
    }

@@ -9,11 +9,16 @@ using System.Globalization;
 using System.Collections.Generic;
 
 using static ForgeOfBots.Utils.Extensions;
+using ForgeOfBots.Forms;
+using System.ComponentModel;
 
 namespace ForgeOfBots
 {
    static class Program
    {
+
+      public static Loading LoadingFrm = null; 
+
       /// <summary>
       /// Der Haupteinstiegspunkt für die Anwendung.
       /// </summary>
@@ -35,8 +40,13 @@ namespace ForgeOfBots
          {
                StaticData.HasLastCrash = CrashHelper.HasCrashedLastSession();
          }
+         StaticData.RunningTime.Start();
          Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
-         Application.Run(new Main(args));
+
+         LoadingFrm = new Loading();
+         LoadingFrm.Show();
+
+         Application.Run(new frmMain(args));
       }
    }
 }

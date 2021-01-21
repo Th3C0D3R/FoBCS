@@ -133,7 +133,7 @@ namespace ForgeOfBots
             if (dlgRes == DialogResult.Cancel) Environment.Exit(0);
             Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
             ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
-            Updater = new CUpdate(cwb, ReqBuilder);
+            Updater = new CUpdate(ReqBuilder);
             Text = Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
             LogWnd = new Log(new Point(Location.X + Size.Width, Location.Y));
             ToggleGUI(false);
@@ -170,7 +170,7 @@ namespace ForgeOfBots
 #endif
             Invoker.SetProperty(pnlLoading, () => pnlLoading.Visible, true);
             ResponseHandler.EverythingImportantLoaded += ResponseHandler_EverythingImportantLoaded;
-            Updater = new CUpdate(cwb, ReqBuilder);
+            Updater = new CUpdate( ReqBuilder);
             Text = Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
             LogWnd = new Log(new Point(Location.X + Size.Width, Location.Y));
             ToggleGUI(false);
@@ -942,7 +942,7 @@ namespace ForgeOfBots
       }
       public void reloadData()
       {
-         CUpdate.UpdateFinished += CUpdate_UpdateFinished;
+         //CUpdate.UpdateFinished += CUpdate_UpdateFinished;
          Updater.UpdatePlayerLists();
          Updater.UpdateStartUp();
       }

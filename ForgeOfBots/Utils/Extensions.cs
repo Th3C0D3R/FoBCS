@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
+using System.Collections.ObjectModel;
 
 namespace ForgeOfBots.Utils
 {
@@ -103,6 +105,15 @@ namespace ForgeOfBots.Utils
          {
             return e.Types.Where(t => t != null);
          }
+      }
+      public static (bool,string) HasCookie(this ReadOnlyCollection<Cookie> cookies,string key)
+      {
+         foreach (Cookie cookie in cookies)
+         {
+            if (cookie.Name.ToLower() == key.ToLower())
+               return (true,cookie.Value);
+         }
+         return (false,"");
       }
    }
    /// <summary>

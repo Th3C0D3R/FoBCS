@@ -70,6 +70,13 @@
          this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
          this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
          this.mtpManually = new MetroFramework.Controls.MetroTabPage();
+         this.groupBox1 = new System.Windows.Forms.GroupBox();
+         this.lblTarget = new MetroFramework.Controls.MetroLabel();
+         this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
+         this.nudMinProfit = new System.Windows.Forms.NumericUpDown();
+         this.mcbGuild = new MetroFramework.Controls.MetroCheckBox();
+         this.mcbFriends = new MetroFramework.Controls.MetroCheckBox();
+         this.mcbNeighbor = new MetroFramework.Controls.MetroCheckBox();
          this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
          this.mtBigRoads = new MetroFramework.Controls.MetroToggle();
          this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
@@ -87,13 +94,7 @@
          this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
          this.lblLanguage = new MetroFramework.Controls.MetroLabel();
          this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
-         this.groupBox1 = new System.Windows.Forms.GroupBox();
-         this.mcbNeighbor = new MetroFramework.Controls.MetroCheckBox();
-         this.mcbFriends = new MetroFramework.Controls.MetroCheckBox();
-         this.mcbGuild = new MetroFramework.Controls.MetroCheckBox();
-         this.nudMinProfit = new System.Windows.Forms.NumericUpDown();
-         this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
-         this.lblTarget = new MetroFramework.Controls.MetroLabel();
+         this.mcbAutoInvest = new MetroFramework.Controls.MetroCheckBox();
          this.mtcSettings.SuspendLayout();
          this.mtpProduction.SuspendLayout();
          this.mpGoodCycle.SuspendLayout();
@@ -101,10 +102,10 @@
          this.mtpData.SuspendLayout();
          this.mtpBots.SuspendLayout();
          this.mtpManually.SuspendLayout();
-         this.mtpPremium.SuspendLayout();
-         this.mtpMisc.SuspendLayout();
          this.groupBox1.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).BeginInit();
+         this.mtpPremium.SuspendLayout();
+         this.mtpMisc.SuspendLayout();
          this.SuspendLayout();
          // 
          // mtView
@@ -117,9 +118,9 @@
          // mtcSettings
          // 
          this.mtcSettings.Controls.Add(this.mtpProduction);
+         this.mtcSettings.Controls.Add(this.mtpManually);
          this.mtcSettings.Controls.Add(this.mtpData);
          this.mtcSettings.Controls.Add(this.mtpBots);
-         this.mtcSettings.Controls.Add(this.mtpManually);
          this.mtcSettings.Controls.Add(this.mtpPremium);
          this.mtcSettings.Controls.Add(this.mtpMisc);
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
@@ -139,11 +140,9 @@
          this.mtpProduction.Controls.Add(this.metroLabel1);
          this.mtpProduction.Controls.Add(this.mtView);
          this.mtpProduction.HorizontalScrollbarBarColor = true;
-         this.mtpProduction.HorizontalScrollbarSize = 12;
          resources.ApplyResources(this.mtpProduction, "mtpProduction");
          this.mtpProduction.Name = "mtpProduction";
          this.mtpProduction.VerticalScrollbarBarColor = true;
-         this.mtpProduction.VerticalScrollbarSize = 13;
          // 
          // metroLabel5
          // 
@@ -160,12 +159,12 @@
          this.mpGoodCycle.Controls.Add(this.mrbG4h);
          this.mpGoodCycle.HorizontalScrollbarBarColor = true;
          this.mpGoodCycle.HorizontalScrollbarHighlightOnWheel = false;
-         this.mpGoodCycle.HorizontalScrollbarSize = 12;
+         this.mpGoodCycle.HorizontalScrollbarSize = 10;
          resources.ApplyResources(this.mpGoodCycle, "mpGoodCycle");
          this.mpGoodCycle.Name = "mpGoodCycle";
          this.mpGoodCycle.VerticalScrollbarBarColor = true;
          this.mpGoodCycle.VerticalScrollbarHighlightOnWheel = false;
-         this.mpGoodCycle.VerticalScrollbarSize = 13;
+         this.mpGoodCycle.VerticalScrollbarSize = 10;
          // 
          // mrbG2d
          // 
@@ -211,12 +210,12 @@
          this.mpProdCycle.Controls.Add(this.mrb5);
          this.mpProdCycle.HorizontalScrollbarBarColor = true;
          this.mpProdCycle.HorizontalScrollbarHighlightOnWheel = false;
-         this.mpProdCycle.HorizontalScrollbarSize = 12;
+         this.mpProdCycle.HorizontalScrollbarSize = 10;
          resources.ApplyResources(this.mpProdCycle, "mpProdCycle");
          this.mpProdCycle.Name = "mpProdCycle";
          this.mpProdCycle.VerticalScrollbarBarColor = true;
          this.mpProdCycle.VerticalScrollbarHighlightOnWheel = false;
-         this.mpProdCycle.VerticalScrollbarSize = 13;
+         this.mpProdCycle.VerticalScrollbarSize = 10;
          // 
          // mrb1d
          // 
@@ -292,11 +291,9 @@
          this.mtpData.Controls.Add(this.mbDeleteData);
          this.mtpData.Controls.Add(this.lblDeleteData);
          this.mtpData.HorizontalScrollbarBarColor = true;
-         this.mtpData.HorizontalScrollbarSize = 12;
          resources.ApplyResources(this.mtpData, "mtpData");
          this.mtpData.Name = "mtpData";
          this.mtpData.VerticalScrollbarBarColor = true;
-         this.mtpData.VerticalScrollbarSize = 13;
          // 
          // metroLabel11
          // 
@@ -353,11 +350,9 @@
          this.mtpBots.Controls.Add(this.metroLabel7);
          this.mtpBots.Controls.Add(this.metroLabel6);
          this.mtpBots.HorizontalScrollbarBarColor = true;
-         this.mtpBots.HorizontalScrollbarSize = 12;
          resources.ApplyResources(this.mtpBots, "mtpBots");
          this.mtpBots.Name = "mtpBots";
          this.mtpBots.VerticalScrollbarBarColor = true;
-         this.mtpBots.VerticalScrollbarSize = 13;
          // 
          // metroLabel14
          // 
@@ -442,11 +437,82 @@
          this.mtpManually.Controls.Add(this.metroLabel4);
          this.mtpManually.Controls.Add(this.mtBigRoads);
          this.mtpManually.HorizontalScrollbarBarColor = true;
-         this.mtpManually.HorizontalScrollbarSize = 12;
          resources.ApplyResources(this.mtpManually, "mtpManually");
          this.mtpManually.Name = "mtpManually";
          this.mtpManually.VerticalScrollbarBarColor = true;
-         this.mtpManually.VerticalScrollbarSize = 13;
+         // 
+         // groupBox1
+         // 
+         this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+         this.groupBox1.Controls.Add(this.mcbAutoInvest);
+         this.groupBox1.Controls.Add(this.lblTarget);
+         this.groupBox1.Controls.Add(this.metroLabel15);
+         this.groupBox1.Controls.Add(this.nudMinProfit);
+         this.groupBox1.Controls.Add(this.mcbGuild);
+         this.groupBox1.Controls.Add(this.mcbFriends);
+         this.groupBox1.Controls.Add(this.mcbNeighbor);
+         resources.ApplyResources(this.groupBox1, "groupBox1");
+         this.groupBox1.Name = "groupBox1";
+         this.groupBox1.TabStop = false;
+         this.groupBox1.Tag = "Settings.Manually.AutoSnip.Options";
+         // 
+         // lblTarget
+         // 
+         resources.ApplyResources(this.lblTarget, "lblTarget");
+         this.lblTarget.BackColor = System.Drawing.SystemColors.Control;
+         this.lblTarget.CustomBackground = true;
+         this.lblTarget.FontSize = MetroFramework.MetroLabelSize.Small;
+         this.lblTarget.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+         this.lblTarget.Name = "lblTarget";
+         this.lblTarget.Tag = "Settings.Manually.AutoSnip.Target";
+         // 
+         // metroLabel15
+         // 
+         resources.ApplyResources(this.metroLabel15, "metroLabel15");
+         this.metroLabel15.BackColor = System.Drawing.SystemColors.Control;
+         this.metroLabel15.CustomBackground = true;
+         this.metroLabel15.FontSize = MetroFramework.MetroLabelSize.Small;
+         this.metroLabel15.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+         this.metroLabel15.Name = "metroLabel15";
+         this.metroLabel15.Tag = "Settings.Manually.AutoSnip.MinProfit";
+         // 
+         // nudMinProfit
+         // 
+         resources.ApplyResources(this.nudMinProfit, "nudMinProfit");
+         this.nudMinProfit.Name = "nudMinProfit";
+         this.nudMinProfit.ValueChanged += new System.EventHandler(this.nudMinProfit_ValueChanged);
+         // 
+         // mcbGuild
+         // 
+         resources.ApplyResources(this.mcbGuild, "mcbGuild");
+         this.mcbGuild.CustomBackground = true;
+         this.mcbGuild.Name = "mcbGuild";
+         this.mcbGuild.Tag = "2";
+         this.mcbGuild.UseVisualStyleBackColor = true;
+         this.mcbGuild.CheckedChanged += new System.EventHandler(this.mcbGuild_CheckedChanged);
+         // 
+         // mcbFriends
+         // 
+         resources.ApplyResources(this.mcbFriends, "mcbFriends");
+         this.mcbFriends.Checked = true;
+         this.mcbFriends.CheckState = System.Windows.Forms.CheckState.Checked;
+         this.mcbFriends.CustomBackground = true;
+         this.mcbFriends.Name = "mcbFriends";
+         this.mcbFriends.Tag = "1";
+         this.mcbFriends.UseVisualStyleBackColor = true;
+         this.mcbFriends.CheckedChanged += new System.EventHandler(this.mcbFriends_CheckedChanged);
+         // 
+         // mcbNeighbor
+         // 
+         resources.ApplyResources(this.mcbNeighbor, "mcbNeighbor");
+         this.mcbNeighbor.BackColor = System.Drawing.SystemColors.Control;
+         this.mcbNeighbor.Checked = true;
+         this.mcbNeighbor.CheckState = System.Windows.Forms.CheckState.Checked;
+         this.mcbNeighbor.CustomBackground = true;
+         this.mcbNeighbor.Name = "mcbNeighbor";
+         this.mcbNeighbor.Tag = "4";
+         this.mcbNeighbor.UseVisualStyleBackColor = false;
+         this.mcbNeighbor.CheckedChanged += new System.EventHandler(this.mcbNeighbor_CheckedChanged);
          // 
          // metroLabel4
          // 
@@ -466,11 +532,9 @@
          this.mtpPremium.Controls.Add(this.lblSerialKey);
          this.mtpPremium.Controls.Add(this.mtbSerialKey);
          this.mtpPremium.HorizontalScrollbarBarColor = true;
-         this.mtpPremium.HorizontalScrollbarSize = 12;
          resources.ApplyResources(this.mtpPremium, "mtpPremium");
          this.mtpPremium.Name = "mtpPremium";
          this.mtpPremium.VerticalScrollbarBarColor = true;
-         this.mtpPremium.VerticalScrollbarSize = 13;
          // 
          // mbCheckSerial
          // 
@@ -504,11 +568,9 @@
          this.mtpMisc.Controls.Add(this.lblLanguage);
          this.mtpMisc.Controls.Add(this.mcbLanguage);
          this.mtpMisc.HorizontalScrollbarBarColor = true;
-         this.mtpMisc.HorizontalScrollbarSize = 12;
          resources.ApplyResources(this.mtpMisc, "mtpMisc");
          this.mtpMisc.Name = "mtpMisc";
          this.mtpMisc.VerticalScrollbarBarColor = true;
-         this.mtpMisc.VerticalScrollbarSize = 13;
          // 
          // metroLabel12
          // 
@@ -574,77 +636,14 @@
          this.mcbLanguage.Name = "mcbLanguage";
          this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
          // 
-         // groupBox1
+         // mcbAutoInvest
          // 
-         this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
-         this.groupBox1.Controls.Add(this.lblTarget);
-         this.groupBox1.Controls.Add(this.metroLabel15);
-         this.groupBox1.Controls.Add(this.nudMinProfit);
-         this.groupBox1.Controls.Add(this.mcbGuild);
-         this.groupBox1.Controls.Add(this.mcbFriends);
-         this.groupBox1.Controls.Add(this.mcbNeighbor);
-         resources.ApplyResources(this.groupBox1, "groupBox1");
-         this.groupBox1.Name = "groupBox1";
-         this.groupBox1.TabStop = false;
-         this.groupBox1.Tag = "Settings.Manually.AutoSnip.Options";
-         // 
-         // mcbNeighbor
-         // 
-         resources.ApplyResources(this.mcbNeighbor, "mcbNeighbor");
-         this.mcbNeighbor.BackColor = System.Drawing.SystemColors.Control;
-         this.mcbNeighbor.Checked = true;
-         this.mcbNeighbor.CheckState = System.Windows.Forms.CheckState.Checked;
-         this.mcbNeighbor.CustomBackground = true;
-         this.mcbNeighbor.Name = "mcbNeighbor";
-         this.mcbNeighbor.Tag = "4";
-         this.mcbNeighbor.UseVisualStyleBackColor = false;
-         this.mcbNeighbor.CheckedChanged += new System.EventHandler(this.mcbNeighbor_CheckedChanged);
-         // 
-         // mcbFriends
-         // 
-         resources.ApplyResources(this.mcbFriends, "mcbFriends");
-         this.mcbFriends.Checked = true;
-         this.mcbFriends.CheckState = System.Windows.Forms.CheckState.Checked;
-         this.mcbFriends.CustomBackground = true;
-         this.mcbFriends.Name = "mcbFriends";
-         this.mcbFriends.Tag = "1";
-         this.mcbFriends.UseVisualStyleBackColor = true;
-         this.mcbFriends.CheckedChanged += new System.EventHandler(this.mcbFriends_CheckedChanged);
-         // 
-         // mcbGuild
-         // 
-         resources.ApplyResources(this.mcbGuild, "mcbGuild");
-         this.mcbGuild.CustomBackground = true;
-         this.mcbGuild.Name = "mcbGuild";
-         this.mcbGuild.Tag = "2";
-         this.mcbGuild.UseVisualStyleBackColor = true;
-         this.mcbGuild.CheckedChanged += new System.EventHandler(this.mcbGuild_CheckedChanged);
-         // 
-         // nudMinProfit
-         // 
-         resources.ApplyResources(this.nudMinProfit, "nudMinProfit");
-         this.nudMinProfit.Name = "nudMinProfit";
-         this.nudMinProfit.ValueChanged += new System.EventHandler(this.nudMinProfit_ValueChanged);
-         // 
-         // metroLabel15
-         // 
-         resources.ApplyResources(this.metroLabel15, "metroLabel15");
-         this.metroLabel15.BackColor = System.Drawing.SystemColors.Control;
-         this.metroLabel15.CustomBackground = true;
-         this.metroLabel15.FontSize = MetroFramework.MetroLabelSize.Small;
-         this.metroLabel15.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-         this.metroLabel15.Name = "metroLabel15";
-         this.metroLabel15.Tag = "Settings.Manually.AutoSnip.MinProfit";
-         // 
-         // lblTarget
-         // 
-         resources.ApplyResources(this.lblTarget, "lblTarget");
-         this.lblTarget.BackColor = System.Drawing.SystemColors.Control;
-         this.lblTarget.CustomBackground = true;
-         this.lblTarget.FontSize = MetroFramework.MetroLabelSize.Small;
-         this.lblTarget.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-         this.lblTarget.Name = "lblTarget";
-         this.lblTarget.Tag = "Settings.Manually.AutoSnip.Target";
+         resources.ApplyResources(this.mcbAutoInvest, "mcbAutoInvest");
+         this.mcbAutoInvest.CustomBackground = true;
+         this.mcbAutoInvest.Name = "mcbAutoInvest";
+         this.mcbAutoInvest.Tag = "2";
+         this.mcbAutoInvest.UseVisualStyleBackColor = true;
+         this.mcbAutoInvest.CheckedChanged += new System.EventHandler(this.McbAutoInvest_CheckedChanged);
          // 
          // Settings
          // 
@@ -666,11 +665,11 @@
          this.mtpData.ResumeLayout(false);
          this.mtpBots.ResumeLayout(false);
          this.mtpManually.ResumeLayout(false);
-         this.mtpPremium.ResumeLayout(false);
-         this.mtpMisc.ResumeLayout(false);
          this.groupBox1.ResumeLayout(false);
          this.groupBox1.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).EndInit();
+         this.mtpPremium.ResumeLayout(false);
+         this.mtpMisc.ResumeLayout(false);
          this.ResumeLayout(false);
 
       }
@@ -742,5 +741,6 @@
     private MetroFramework.Controls.MetroCheckBox mcbNeighbor;
     private MetroFramework.Controls.MetroLabel lblTarget;
     private MetroFramework.Controls.MetroLabel metroLabel15;
-  }
+      private MetroFramework.Controls.MetroCheckBox mcbAutoInvest;
+   }
 }

@@ -77,6 +77,7 @@ namespace ForgeOfBots.Forms
          mtAutoLogin.Checked = StaticData.UserData.AutoLogin;
          mtDarkMode.Checked = StaticData.UserData.DarkMode;
          nudMinProfit.Value = StaticData.UserData.MinProfit;
+         mcbAutoInvest.Checked = StaticData.UserData.AutoInvest;
          mcbFriends.Checked = StaticData.UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends) ? true : false;
          mcbGuild.Checked = StaticData.UserData.SelectedSnipTarget.HasFlag(SnipTarget.members) ? true : false;
          mcbNeighbor.Checked = StaticData.UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors) ? true : false;
@@ -510,6 +511,12 @@ namespace ForgeOfBots.Forms
       private void nudMinProfit_ValueChanged(object sender, EventArgs e)
       {
          StaticData.UserData.MinProfit = (int)nudMinProfit.Value;
+         StaticData.UserData.SaveSettings();
+      }
+
+      private void McbAutoInvest_CheckedChanged(object sender, EventArgs e)
+      {
+         StaticData.UserData.AutoInvest = mcbAutoInvest.Checked;
          StaticData.UserData.SaveSettings();
       }
    }

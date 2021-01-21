@@ -199,6 +199,19 @@ namespace ForgeOfBots.CefBrowserHandler
             _IncidentUpdated -= value;
          }
       }
+      private static CustomEvent _AllLGsStepped;
+      public static event CustomEvent AllLGsStepped
+      {
+         add
+         {
+            if (_AllLGsStepped == null || !_AllLGsStepped.GetInvocationList().Contains(value))
+               _AllLGsStepped += value;
+         }
+         remove
+         {
+            _AllLGsStepped -= value;
+         }
+      }
 
       public static bool[] ImportantLoaded = Enumerable.Repeat(false, 20).ToArray();
       static readonly object _locker = new object();
@@ -479,124 +492,44 @@ namespace ForgeOfBots.CefBrowserHandler
                LGRootObject lgs = JsonConvert.DeserializeObject<LGRootObject>(msg);
                List<LGData> LGData = lgs.responseData.ToList();
                if (LGData.Count == 0) break;
-               List<Player> allPlayers = ListClass.NeighborList.Select(x => new Player()
+               ListClass.SnipablePlayers.Find(p => p.player_id == LGData[0].player.player_id).LGs = LGData;
+               foreach (Player item in ListClass.SnipablePlayers)
                {
-                  is_active = x.is_active,
-                  is_friend = x.is_friend,
-                  is_guild_member = x.is_guild_member,
-                  is_neighbor = x.is_neighbor,
-                  score = x.score,
-                  player_id = x.player_id,
-                  name = x.name,
-                  next_interaction_in = x.next_interaction_in
-               }).ToList();
-               allPlayers.AddRange(ListClass.FriendList.Select(x => new Player()
-               {
-                  is_active = x.is_active,
-                  is_friend = x.is_friend,
-                  is_guild_member = x.is_guild_member,
-                  is_neighbor = x.is_neighbor,
-                  score = x.score,
-                  player_id = x.player_id,
-                  name = x.name,
-                  next_interaction_in = x.next_interaction_in
-               }).ToList());
-
-               foreach (LGData item in LGData)
-               {
-                  lock (_lockerLG)
+                  foreach (LGData lg in item.LGs)
                   {
-                     Player player = allPlayers.Find(p => p.player_id == item.player.player_id);
-
-                     string _PlayerName = player.name;
-                     int _PlayerID = player.player_id.Value;
-                     int Gewinn = -1;
-                     int UnderScorePos = item.city_entity_id.IndexOf("_");
-                     string AgeString = item.city_entity_id.Substring(UnderScorePos + 1);
-                     string GewinnString = "???", KurzString = "??? %";
-                     UnderScorePos = AgeString.IndexOf("_");
-                     AgeString = AgeString.Substring(0, UnderScorePos);
-                     if (item.current_progress == null)
-                        item.current_progress = 0;
-                     int P1 = Helper.GetP1(AgeString, item.level);
-                     ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
-                     if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
-                     if (item.rank == null && P1 * ListClass.ArcBonus >= (item.max_progress - item.current_progress) / 2)
+                     lock (_lockerLG)
                      {
-                        if (Gewinn == -1 || Gewinn >= 0)
+                        int UnderScorePos = lg.city_entity_id.IndexOf("_");
+                        string AgeString = lg.city_entity_id.Substring(UnderScorePos + 1);
+                        UnderScorePos = AgeString.IndexOf("_");
+                        AgeString = AgeString.Substring(0, UnderScorePos);
+                        if (lg.current_progress == null)
+                           lg.current_progress = 0;
+                        int P1 = Helper.GetP1(AgeString, lg.level);
+                        ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
+                        if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
+                        if (lg.rank == null && P1 * ListClass.ArcBonus >= (lg.max_progress - lg.current_progress) / 2)
                         {
-                           if (item.current_progress == 0)
+                           ListClass.PossibleSnipLGs.Add(new LGSnip()
                            {
-                              GewinnString = $"{(decimal)Math.Round(P1 * ListClass.ArcBonus) - Math.Ceiling((decimal)(item.max_progress - item.current_progress) / 2)}";
-                              double kurz = Math.Round((double)(item.max_progress / P1 / 2 * 1000)) / 10;
-                              KurzString = kurz == 0 ? "-" : $"{kurz} %";
-                              LGSnip snip = new LGSnip()
-                              {
-                                 player = player,
-                                 entity_id = item.entity_id,
-                                 city_entity_id = item.city_entity_id,
-                                 name = item.name,
-                                 level = item.level,
-                                 state = item.state,
-                                 GewinnString = GewinnString,
-                                 KurzString = KurzString,
-                                 current_progress = item.current_progress,
-                                 max_progress = item.max_progress,
-                                 rank = item.rank,
-                                 __class__ = item.__class__
-                              };
-                              ListClass.PossibleSnipLGs.Add(snip);
-                           }
-                           else if (Gewinn == -1)
-                           {
-
-                              LGSnip snip = new LGSnip()
-                              {
-                                 player = player,
-                                 entity_id = item.entity_id,
-                                 city_entity_id = item.city_entity_id,
-                                 name = item.name,
-                                 level = item.level,
-                                 state = item.state,
-                                 GewinnString = GewinnString,
-                                 KurzString = KurzString,
-                                 current_progress = item.current_progress,
-                                 max_progress = item.max_progress,
-                                 rank = item.rank,
-                                 __class__ = item.__class__,
-                                 check = true
-                              };
-                              ListClass.PossibleSnipLGs.Add(snip);
-                           }
-                           else
-                           {
-                              GewinnString = Gewinn.ToString();
-                              LGSnip snip = new LGSnip()
-                              {
-                                 player = player,
-                                 entity_id = item.entity_id,
-                                 city_entity_id = item.city_entity_id,
-                                 name = item.name,
-                                 level = item.level,
-                                 state = item.state,
-                                 GewinnString = GewinnString,
-                                 KurzString = KurzString,
-                                 current_progress = item.current_progress,
-                                 max_progress = item.max_progress,
-                                 rank = item.rank,
-                                 __class__ = item.__class__
-                              };
-                              ListClass.PossibleSnipLGs.Add(snip);
-                           }
+                              player = lg.player,
+                              entity_id = lg.entity_id,
+                              city_entity_id = lg.city_entity_id,
+                              name = item.name,
+                              level = lg.level,
+                              state = lg.state,
+                              GewinnString = "",
+                              KurzString = "",
+                              current_progress = lg.current_progress,
+                              max_progress = lg.max_progress,
+                              rank = lg.rank,
+                              __class__ = lg.__class__
+                           });
                         }
                      }
                   }
                }
-               foreach (LGSnip item in ListClass.PossibleSnipLGs)
-               {
-                  string script = ReqBuilder.GetRequestScript(RequestType.getConstruction, new int[] { item.entity_id, item.player.player_id.Value });
-                  cwb.ExecuteScriptAsync(script);
-               }
+               _AllLGsStepped?.Invoke(null, null);
                break;
             case RequestType.getConstruction:
                lock (_lockerSnip)

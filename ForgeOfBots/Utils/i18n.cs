@@ -22,7 +22,7 @@ namespace ForgeOfBots.Utils
             var assembly = Assembly.GetExecutingAssembly();
             string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith($"{language}.json"));
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
+            using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(1252)))
             {
                string jsonString = reader.ReadToEnd();
                jsonObject = JsonConvert.DeserializeObject(jsonString);
@@ -42,7 +42,7 @@ namespace ForgeOfBots.Utils
          }
          catch (Exception)
          {
-            return $"{key} is not defined";
+            return $"{key} not defined";
          }
       }
    }
