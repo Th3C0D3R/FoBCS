@@ -9,12 +9,15 @@ using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -24,11 +27,9 @@ using UCPremiumLibrary;
 using static ForgeOfBots.FoBUpdater.FoBUpdater;
 using static ForgeOfBots.Utils.Helper;
 using static ForgeOfBots.Utils.StaticData;
+using AllWorlds = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
 using CUpdate = ForgeOfBots.DataHandler.Update;
 using WebClient = System.Net.WebClient;
-using AllWorlds = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
-using System.Linq;
-using System.Drawing;
 
 namespace ForgeOfBots.Forms
 {
@@ -54,6 +55,8 @@ namespace ForgeOfBots.Forms
                      DEBUGMODE = true;
          }
          logger.Info($"Debugmode {(DEBUGMODE ? "activated" : "deactivated")}");
+
+         FirewallHelper.OpenFirewallPort(4444,"WebDrive");
          MainInstance = this;
          if (!i18n.initialized)
          {
@@ -156,12 +159,28 @@ namespace ForgeOfBots.Forms
          {
             AcceptInsecureCertificates = true
          };
-         co.AddArguments("--headless", "--disable-extensions", "--disable-gpu");
-         co.LeaveBrowserRunning = true;
+         //FirefoxOptions co = new FirefoxOptions();
+         //co.AddArgument($"--headless");
+         co.AddArguments("--disable-extensions", 
+            "--disable-breakpad", 
+            "--disable-component-update", 
+            "--disable-hang-monitor", 
+            "--disable-logging",
+            "--disable-print-preview",
+            "--disable-metrics-reporting",
+            "--disable-dev-tools",
+            "--ssl-version-min=tl",
+            "--no-sandbox",
+            "--disable-metrics");
+         //"--window-position=-32000,-32000",
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
+         //FirefoxDriverService fds = FirefoxDriverService.CreateDefaultService();
+         //fds.HideCommandPromptWindow = true;
+         //driver = new FirefoxDriver(fds, co);
          var chromeDriverService = ChromeDriverService.CreateDefaultService();
-         chromeDriverService.HideCommandPromptWindow = true;
-         driver = new ChromeDriver(chromeDriverService, co);
+         chromeDriverService.HideCommandPromptWindow = true; 
+         driver = new RemoteWebDriver(new Uri("http://134.255.216.102:4444"), co.ToCapabilities(),TimeSpan.FromSeconds(20));
+         //driver = new ChromeDriver(chromeDriverService, co);
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
          driver.Manage().Window.Minimize();
          cookieJar = driver.Manage().Cookies;
@@ -202,7 +221,8 @@ namespace ForgeOfBots.Forms
                .Replace("##server##", UserData.WorldServer)
              .Replace("##t##", "false")
              .Replace("##city##", "\"" + UserData.LastWorld + "\"");
-            var ret = (string)jsExecutor.ExecuteAsyncScript(loginJS);
+            var x = jsExecutor.ExecuteAsyncScript(loginJS);
+            var ret = (string)x;
             driver.Navigate().GoToUrl(ret);
             GetUIDAndForgeHX(driver.PageSource);
          }
@@ -399,6 +419,7 @@ namespace ForgeOfBots.Forms
       {
          Updater.UpdatePlayerLists();
          Updater.UpdateStartUp();
+         Updater.UpdateOwnTavern();
          UpdateGUI();
       }
       private void UpdateGUI()
@@ -723,9 +744,59 @@ namespace ForgeOfBots.Forms
 
 
 
+      protected override void WndProc(ref Message m)
+      {
+         const int RESIZE_HANDLE_SIZE = 10;
+         switch (m.Msg)
+         {
+            case 0x0084/*NCHITTEST*/ :
+               base.WndProc(ref m);
 
-
-
+               if ((int)m.Result == 0x01/*HTCLIENT*/)
+               {
+                  Point screenPoint = new Point(m.LParam.ToInt32());
+                  Point clientPoint = this.PointToClient(screenPoint);
+                  if (clientPoint.Y <= RESIZE_HANDLE_SIZE)
+                  {
+                     if (clientPoint.X <= RESIZE_HANDLE_SIZE)
+                        m.Result = (IntPtr)13/*HTTOPLEFT*/ ;
+                     else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
+                        m.Result = (IntPtr)12/*HTTOP*/ ;
+                     else
+                        m.Result = (IntPtr)14/*HTTOPRIGHT*/ ;
+                  }
+                  else if (clientPoint.Y <= (Size.Height - RESIZE_HANDLE_SIZE))
+                  {
+                     if (clientPoint.X <= RESIZE_HANDLE_SIZE)
+                        m.Result = (IntPtr)10/*HTLEFT*/ ;
+                     else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
+                        m.Result = (IntPtr)2/*HTCAPTION*/ ;
+                     else
+                        m.Result = (IntPtr)11/*HTRIGHT*/ ;
+                  }
+                  else
+                  {
+                     if (clientPoint.X <= RESIZE_HANDLE_SIZE)
+                        m.Result = (IntPtr)16/*HTBOTTOMLEFT*/ ;
+                     else if (clientPoint.X < (Size.Width - RESIZE_HANDLE_SIZE))
+                        m.Result = (IntPtr)15/*HTBOTTOM*/ ;
+                     else
+                        m.Result = (IntPtr)17/*HTBOTTOMRIGHT*/ ;
+                  }
+               }
+               return;
+         }
+         base.WndProc(ref m);
+      }
+      protected override CreateParams CreateParams
+      {
+         get
+         {
+            CreateParams cp = base.CreateParams;
+            cp.Style |= 0x20000;
+            return cp;
+         }
+      }
       private void FillText()
       {
          tpDashbord.Text = i18n.getString(tpDashbord.Tag.ToString());
@@ -736,6 +807,7 @@ namespace ForgeOfBots.Forms
          tpProduction.Text = i18n.getString(tpProduction.Tag.ToString());
          tpCity.Text = i18n.getString(tpCity.Tag.ToString());
          tpSniper.Text = i18n.getString(tpSniper.Tag.ToString());
+         tpTavern.Text = i18n.getString(tpTavern.Tag.ToString());
          tpSettings.Text = i18n.getString(tpSettings.Tag.ToString());
          gbLog.Text = i18n.getString(gbLog.Tag.ToString());
          gbStatistic.Text = i18n.getString(gbStatistic.Tag.ToString());

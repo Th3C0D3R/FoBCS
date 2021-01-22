@@ -26,7 +26,7 @@ namespace ForgeOfBots.Utils.Premium
 #endif
       public static object SendAuthData(string serial, string hwid, bool CheckOnly = false)
       {
-         FirewallHelper.OpenFirewallPort(port);
+         FirewallHelper.OpenFirewallPort(port,"ForgeOfBots");
          IPAddress ip = IPAddress.Parse(IP);
          TcpClient client = new TcpClient();
          try

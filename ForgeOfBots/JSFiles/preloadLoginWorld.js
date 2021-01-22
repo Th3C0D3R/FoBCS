@@ -36,7 +36,7 @@ async function FoELogin() {
 			"mode": "cors"
 		});
 		window.location = "https://##server##0.forgeofempires.com/page/";
-		return Promise.resolve("redirect");
+		//return Promise.resolve("redirect");
 	} else {
 		await FoETimer(1000);
 		var res = await fetch("https://##server##0.forgeofempires.com/start/index?action=fetch_worlds_for_login_page", {

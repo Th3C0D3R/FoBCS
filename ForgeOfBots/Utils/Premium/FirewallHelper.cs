@@ -9,15 +9,15 @@ namespace ForgeOfBots.Utils.Premium
 {
    public class FirewallHelper
    {
-      public static void OpenFirewallPort(int port)
+      public static void OpenFirewallPort(int port, string name)
       {
          try
          {
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
             try
             {
-               while (firewallPolicy.Rules.Item("ForgeOfBots").Enabled)
-                  firewallPolicy.Rules.Remove("ForgeOfBots");
+               while (firewallPolicy.Rules.Item(name).Enabled)
+                  firewallPolicy.Rules.Remove(name);
             }
             catch (System.IO.FileNotFoundException)
             { }
@@ -35,7 +35,7 @@ namespace ForgeOfBots.Utils.Premium
             firewallRuleOut.RemotePorts = port.ToString();
             firewallRuleOut.Enabled = true;
             firewallRuleOut.InterfaceTypes = "All";
-            firewallRuleOut.Name = "ForgeOfBots";
+            firewallRuleOut.Name = name;
 
             INetFwRule firewallRuleIn = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             firewallRuleIn.Action = NET_FW_ACTION_.NET_FW_ACTION_ALLOW;
@@ -46,7 +46,7 @@ namespace ForgeOfBots.Utils.Premium
             firewallRuleIn.RemotePorts = port.ToString();
             firewallRuleIn.Enabled = true;
             firewallRuleIn.InterfaceTypes = "All";
-            firewallRuleIn.Name = "ForgeOfBots";
+            firewallRuleIn.Name = name;
 
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
             firewallPolicy.Rules.Add(firewallRuleOut);

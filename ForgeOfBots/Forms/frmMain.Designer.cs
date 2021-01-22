@@ -73,15 +73,12 @@ namespace ForgeOfBots.Forms
          this.lblFriends = new System.Windows.Forms.Label();
          this.lblNeighbor = new System.Windows.Forms.Label();
          this.lblNeighborCount = new System.Windows.Forms.Label();
-         this.tpMessageCenter = new System.Windows.Forms.TabPage();
-         this.tpChat = new System.Windows.Forms.TabPage();
-         this.tpArmy = new System.Windows.Forms.TabPage();
-         this.tpProduction = new System.Windows.Forms.TabPage();
-         this.tpCity = new System.Windows.Forms.TabPage();
-         this.tpSniper = new System.Windows.Forms.TabPage();
          this.tpTavern = new System.Windows.Forms.TabPage();
-         this.tpSettings = new System.Windows.Forms.TabPage();
-         this.bwUptime = new System.ComponentModel.BackgroundWorker();
+         this.tlpCurrentSittingPlayer = new System.Windows.Forms.TableLayoutPanel();
+         this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+         this.lblCurSitting = new System.Windows.Forms.Label();
+         this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+         this.btnCollect = new System.Windows.Forms.Button();
          this.panel6 = new System.Windows.Forms.Panel();
          this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
          this.lblTavernstateValue = new System.Windows.Forms.Label();
@@ -90,11 +87,14 @@ namespace ForgeOfBots.Forms
          this.lblTavernSilver = new System.Windows.Forms.Label();
          this.lblVisitable = new System.Windows.Forms.Label();
          this.lblVisitableValue = new System.Windows.Forms.Label();
-         this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-         this.btnCollect = new System.Windows.Forms.Button();
-         this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-         this.lblCurSitting = new System.Windows.Forms.Label();
-         this.tlpCurrentSittingPlayer = new System.Windows.Forms.TableLayoutPanel();
+         this.tpMessageCenter = new System.Windows.Forms.TabPage();
+         this.tpChat = new System.Windows.Forms.TabPage();
+         this.tpArmy = new System.Windows.Forms.TabPage();
+         this.tpProduction = new System.Windows.Forms.TabPage();
+         this.tpCity = new System.Windows.Forms.TabPage();
+         this.tpSniper = new System.Windows.Forms.TabPage();
+         this.tpSettings = new System.Windows.Forms.TabPage();
+         this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -113,10 +113,10 @@ namespace ForgeOfBots.Forms
          this.panel4.SuspendLayout();
          this.tableLayoutPanel1.SuspendLayout();
          this.tpTavern.SuspendLayout();
+         this.tableLayoutPanel7.SuspendLayout();
+         this.tableLayoutPanel5.SuspendLayout();
          this.panel6.SuspendLayout();
          this.tableLayoutPanel4.SuspendLayout();
-         this.tableLayoutPanel5.SuspendLayout();
-         this.tableLayoutPanel7.SuspendLayout();
          this.SuspendLayout();
          // 
          // metroPanel1
@@ -462,48 +462,6 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.lblNeighborCount, "lblNeighborCount");
          this.lblNeighborCount.Name = "lblNeighborCount";
          // 
-         // tpMessageCenter
-         // 
-         resources.ApplyResources(this.tpMessageCenter, "tpMessageCenter");
-         this.tpMessageCenter.Name = "tpMessageCenter";
-         this.tpMessageCenter.Tag = "GUI.Tab.MessageCenter";
-         this.tpMessageCenter.UseVisualStyleBackColor = true;
-         // 
-         // tpChat
-         // 
-         resources.ApplyResources(this.tpChat, "tpChat");
-         this.tpChat.Name = "tpChat";
-         this.tpChat.Tag = "GUI.Tab.Chat";
-         this.tpChat.UseVisualStyleBackColor = true;
-         // 
-         // tpArmy
-         // 
-         resources.ApplyResources(this.tpArmy, "tpArmy");
-         this.tpArmy.Name = "tpArmy";
-         this.tpArmy.Tag = "GUI.Tab.Army";
-         this.tpArmy.UseVisualStyleBackColor = true;
-         // 
-         // tpProduction
-         // 
-         resources.ApplyResources(this.tpProduction, "tpProduction");
-         this.tpProduction.Name = "tpProduction";
-         this.tpProduction.Tag = "GUI.Tab.Production";
-         this.tpProduction.UseVisualStyleBackColor = true;
-         // 
-         // tpCity
-         // 
-         resources.ApplyResources(this.tpCity, "tpCity");
-         this.tpCity.Name = "tpCity";
-         this.tpCity.Tag = "GUI.Tab.City";
-         this.tpCity.UseVisualStyleBackColor = true;
-         // 
-         // tpSniper
-         // 
-         resources.ApplyResources(this.tpSniper, "tpSniper");
-         this.tpSniper.Name = "tpSniper";
-         this.tpSniper.Tag = "GUI.Tab.Sniper";
-         this.tpSniper.UseVisualStyleBackColor = true;
-         // 
          // tpTavern
          // 
          this.tpTavern.Controls.Add(this.tlpCurrentSittingPlayer);
@@ -515,17 +473,36 @@ namespace ForgeOfBots.Forms
          this.tpTavern.Tag = "GUI.Tab.Tavern";
          this.tpTavern.UseVisualStyleBackColor = true;
          // 
-         // tpSettings
+         // tlpCurrentSittingPlayer
          // 
-         resources.ApplyResources(this.tpSettings, "tpSettings");
-         this.tpSettings.Name = "tpSettings";
-         this.tpSettings.Tag = "GUI.Tab.Settings";
-         this.tpSettings.UseVisualStyleBackColor = true;
+         resources.ApplyResources(this.tlpCurrentSittingPlayer, "tlpCurrentSittingPlayer");
+         this.tlpCurrentSittingPlayer.Name = "tlpCurrentSittingPlayer";
          // 
-         // bwUptime
+         // tableLayoutPanel7
          // 
-         this.bwUptime.WorkerSupportsCancellation = true;
-         this.bwUptime.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BwUptime_DoWork);
+         resources.ApplyResources(this.tableLayoutPanel7, "tableLayoutPanel7");
+         this.tableLayoutPanel7.Controls.Add(this.lblCurSitting, 0, 0);
+         this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+         // 
+         // lblCurSitting
+         // 
+         resources.ApplyResources(this.lblCurSitting, "lblCurSitting");
+         this.lblCurSitting.Name = "lblCurSitting";
+         // 
+         // tableLayoutPanel5
+         // 
+         resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+         this.tableLayoutPanel5.Controls.Add(this.btnCollect, 2, 0);
+         this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+         // 
+         // btnCollect
+         // 
+         resources.ApplyResources(this.btnCollect, "btnCollect");
+         this.btnCollect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+         this.btnCollect.FlatAppearance.BorderSize = 2;
+         this.btnCollect.Name = "btnCollect";
+         this.btnCollect.UseVisualStyleBackColor = true;
+         this.btnCollect.Click += new System.EventHandler(this.btnCollect_Click);
          // 
          // panel6
          // 
@@ -575,36 +552,59 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.lblVisitableValue, "lblVisitableValue");
          this.lblVisitableValue.Name = "lblVisitableValue";
          // 
-         // tableLayoutPanel5
+         // tpMessageCenter
          // 
-         resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-         this.tableLayoutPanel5.Controls.Add(this.btnCollect, 2, 0);
-         this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+         resources.ApplyResources(this.tpMessageCenter, "tpMessageCenter");
+         this.tpMessageCenter.Name = "tpMessageCenter";
+         this.tpMessageCenter.Tag = "GUI.Tab.MessageCenter";
+         this.tpMessageCenter.UseVisualStyleBackColor = true;
          // 
-         // btnCollect
+         // tpChat
          // 
-         resources.ApplyResources(this.btnCollect, "btnCollect");
-         this.btnCollect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-         this.btnCollect.FlatAppearance.BorderSize = 2;
-         this.btnCollect.Name = "btnCollect";
-         this.btnCollect.UseVisualStyleBackColor = true;
-         this.btnCollect.Click += new System.EventHandler(this.btnCollect_Click);
+         resources.ApplyResources(this.tpChat, "tpChat");
+         this.tpChat.Name = "tpChat";
+         this.tpChat.Tag = "GUI.Tab.Chat";
+         this.tpChat.UseVisualStyleBackColor = true;
          // 
-         // tableLayoutPanel7
+         // tpArmy
          // 
-         resources.ApplyResources(this.tableLayoutPanel7, "tableLayoutPanel7");
-         this.tableLayoutPanel7.Controls.Add(this.lblCurSitting, 0, 0);
-         this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+         resources.ApplyResources(this.tpArmy, "tpArmy");
+         this.tpArmy.Name = "tpArmy";
+         this.tpArmy.Tag = "GUI.Tab.Army";
+         this.tpArmy.UseVisualStyleBackColor = true;
          // 
-         // lblCurSitting
+         // tpProduction
          // 
-         resources.ApplyResources(this.lblCurSitting, "lblCurSitting");
-         this.lblCurSitting.Name = "lblCurSitting";
+         resources.ApplyResources(this.tpProduction, "tpProduction");
+         this.tpProduction.Name = "tpProduction";
+         this.tpProduction.Tag = "GUI.Tab.Production";
+         this.tpProduction.UseVisualStyleBackColor = true;
          // 
-         // tlpCurrentSittingPlayer
+         // tpCity
          // 
-         resources.ApplyResources(this.tlpCurrentSittingPlayer, "tlpCurrentSittingPlayer");
-         this.tlpCurrentSittingPlayer.Name = "tlpCurrentSittingPlayer";
+         resources.ApplyResources(this.tpCity, "tpCity");
+         this.tpCity.Name = "tpCity";
+         this.tpCity.Tag = "GUI.Tab.City";
+         this.tpCity.UseVisualStyleBackColor = true;
+         // 
+         // tpSniper
+         // 
+         resources.ApplyResources(this.tpSniper, "tpSniper");
+         this.tpSniper.Name = "tpSniper";
+         this.tpSniper.Tag = "GUI.Tab.Sniper";
+         this.tpSniper.UseVisualStyleBackColor = true;
+         // 
+         // tpSettings
+         // 
+         resources.ApplyResources(this.tpSettings, "tpSettings");
+         this.tpSettings.Name = "tpSettings";
+         this.tpSettings.Tag = "GUI.Tab.Settings";
+         this.tpSettings.UseVisualStyleBackColor = true;
+         // 
+         // bwUptime
+         // 
+         this.bwUptime.WorkerSupportsCancellation = true;
+         this.bwUptime.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BwUptime_DoWork);
          // 
          // frmMain
          // 
@@ -612,8 +612,10 @@ namespace ForgeOfBots.Forms
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.Controls.Add(this.mpMenu);
          this.Controls.Add(this.metroPanel1);
+         this.DoubleBuffered = true;
          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
          this.Name = "frmMain";
+         this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
          this.Tag = "Forge of Bots v";
          this.Load += new System.EventHandler(this.FrmMain_Load);
          this.Shown += new System.EventHandler(this.FrmMain_Shown);
@@ -637,12 +639,12 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel1.ResumeLayout(false);
          this.tableLayoutPanel1.PerformLayout();
          this.tpTavern.ResumeLayout(false);
+         this.tableLayoutPanel7.ResumeLayout(false);
+         this.tableLayoutPanel7.PerformLayout();
+         this.tableLayoutPanel5.ResumeLayout(false);
          this.panel6.ResumeLayout(false);
          this.tableLayoutPanel4.ResumeLayout(false);
          this.tableLayoutPanel4.PerformLayout();
-         this.tableLayoutPanel5.ResumeLayout(false);
-         this.tableLayoutPanel7.ResumeLayout(false);
-         this.tableLayoutPanel7.PerformLayout();
          this.ResumeLayout(false);
 
       }
