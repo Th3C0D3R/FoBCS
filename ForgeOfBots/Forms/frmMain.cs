@@ -159,28 +159,26 @@ namespace ForgeOfBots.Forms
          {
             AcceptInsecureCertificates = true
          };
-         //FirefoxOptions co = new FirefoxOptions();
-         //co.AddArgument($"--headless");
-         co.AddArguments("--disable-extensions", 
-            "--disable-breakpad", 
-            "--disable-component-update", 
-            "--disable-hang-monitor", 
+         co.AddArguments("--headless",
+            "--disable-extensions",
+            "--disable-breakpad",
+            "--disable-component-update",
+            "--disable-hang-monitor",
             "--disable-logging",
             "--disable-print-preview",
             "--disable-metrics-reporting",
             "--disable-dev-tools",
             "--ssl-version-min=tl",
             "--no-sandbox",
+            "--remote-debugging-port=9222",
+            "--disable-dev-shm-usage",
+            "--window-position=-32000,-32000",
             "--disable-metrics");
-         //"--window-position=-32000,-32000",
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
-         //FirefoxDriverService fds = FirefoxDriverService.CreateDefaultService();
-         //fds.HideCommandPromptWindow = true;
-         //driver = new FirefoxDriver(fds, co);
          var chromeDriverService = ChromeDriverService.CreateDefaultService();
          chromeDriverService.HideCommandPromptWindow = true; 
-         driver = new RemoteWebDriver(new Uri("http://134.255.216.102:4444"), co.ToCapabilities(),TimeSpan.FromSeconds(20));
-         //driver = new ChromeDriver(chromeDriverService, co);
+         //driver = new RemoteWebDriver(new Uri("http://134.255.216.102:4444/"), co.ToCapabilities(),TimeSpan.FromSeconds(60));
+         driver = new ChromeDriver(chromeDriverService, co);
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
          driver.Manage().Window.Minimize();
          cookieJar = driver.Manage().Cookies;
