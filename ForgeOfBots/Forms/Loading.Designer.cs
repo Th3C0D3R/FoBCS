@@ -222,6 +222,7 @@ namespace ForgeOfBots.Forms
          this.Controls.Add(this.pnlLoading);
          this.Controls.Add(this.metroPanel1);
          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+         this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
          this.Name = "Loading";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "Loading";

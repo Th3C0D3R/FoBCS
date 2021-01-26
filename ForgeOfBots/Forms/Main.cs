@@ -81,7 +81,7 @@ namespace ForgeOfBots
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
-               i18n.Initialize(UserData.Language.Code);
+               //i18n.Initialize(UserData.Language.Code);
             }
             else
             {
@@ -90,7 +90,7 @@ namespace ForgeOfBots
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
-               i18n.Initialize("en");
+               //i18n.Initialize("en");
             }
          }
          Contruct();

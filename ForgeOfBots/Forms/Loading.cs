@@ -19,9 +19,7 @@ namespace ForgeOfBots.Forms
       {
          InitializeComponent();
          mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
-         if (i18n.initialized)
-            lblPleaseLogin.Text = i18n.getString(lblPleaseLogin.Tag.ToString());
-         else
+         if (!i18n.initialized)
          {
             if (Utils.Settings.SettingsExists())
             {
@@ -30,7 +28,7 @@ namespace ForgeOfBots.Forms
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(temp.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(temp.Language.Code);
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo(temp.Language.Code);
-               i18n.Initialize(temp.Language.Code);
+               i18n.Initialize(temp.Language.Code,this);
             }
             else
             {
@@ -38,10 +36,10 @@ namespace ForgeOfBots.Forms
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
-               i18n.Initialize("en");
+               i18n.Initialize("en",this);
             }
-            lblPleaseLogin.Text = i18n.getString(lblPleaseLogin.Tag.ToString());
          }
+         i18n.TranslateForm();
       }
    }
 }

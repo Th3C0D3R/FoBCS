@@ -39,6 +39,7 @@ namespace ForgeOfBots.Utils
          string ForgeHX_FilePath = Path.Combine(ProgramPath, FileName);
          if (!Directory.Exists(ProgramPath)) Directory.CreateDirectory(ProgramPath);
          FileInfo fi = new FileInfo(ForgeHX_FilePath);
+         Console.Write($"Downloading {FileName} [");
          if (!fi.Exists || fi.Length <= 0)
          {
             using (var client = new WebClient())
@@ -48,7 +49,6 @@ namespace ForgeOfBots.Utils
                client.DownloadProgressChanged += Client_DownloadProgressChanged;
                client.DownloadFileCompleted += Client_DownloadFileCompleted;
                client.DownloadFileAsync(uri, ForgeHX_FilePath);
-               Console.Write($"Downloading {FileName} [");
             }
          }
          else

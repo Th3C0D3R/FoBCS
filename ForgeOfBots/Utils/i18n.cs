@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ForgeOfBots.Forms;
 using Newtonsoft;
 using Newtonsoft.Json;
 
@@ -15,8 +16,10 @@ namespace ForgeOfBots.Utils
    {
       public static bool initialized = false;
       public static dynamic jsonObject = null;
-      public static void Initialize(string language)
+      public static Form MainForm = null;
+      public static void Initialize(string language, Form main)
       {
+         MainForm = main;
          try
          {
             var assembly = Assembly.GetExecutingAssembly();
@@ -43,6 +46,40 @@ namespace ForgeOfBots.Utils
          catch (Exception)
          {
             return $"{key} not defined";
+         }
+      }
+      public static void TranslateForm()
+      {
+         TranslateControl(MainForm.Controls);
+      }
+      private static void TranslateControl(Control.ControlCollection control)
+      {
+         foreach (Control item in control)
+         {
+            if (item.Tag != null)
+            {
+               if (item.Tag.ToString().StartsWith("GUI."))
+               {
+                  item.Text = getString(item.Tag.ToString());
+               }
+            }
+            if(item.Controls.Count > 0)
+            {
+               TranslateControl(item.Controls);
+            }
+         }
+      }
+      public static void TranslateCMS(ContextMenuStrip cms)
+      {
+         foreach (ToolStripItem item in cms.Items)
+         {
+            if (item.Tag != null)
+            {
+               if (item.Tag.ToString().StartsWith("GUI."))
+               {
+                  item.Text = getString(item.Tag.ToString());
+               }
+            }
          }
       }
    }

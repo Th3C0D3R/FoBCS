@@ -4,6 +4,7 @@ using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.LanguageFiles;
 using ForgeOfBots.Utils;
 using ForgeOfBots.Utils.Premium;
+using MetroFramework.Controls;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
@@ -26,10 +27,13 @@ using System.Windows.Forms;
 using UCPremiumLibrary;
 using static ForgeOfBots.FoBUpdater.FoBUpdater;
 using static ForgeOfBots.Utils.Helper;
+using static ForgeOfBots.Utils.Extensions;
 using static ForgeOfBots.Utils.StaticData;
 using AllWorlds = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
 using CUpdate = ForgeOfBots.DataHandler.Update;
 using WebClient = System.Net.WebClient;
+using ForgeOfBots.Forms.UserControls;
+using Newtonsoft.Json.Linq;
 
 namespace ForgeOfBots.Forms
 {
@@ -43,6 +47,8 @@ namespace ForgeOfBots.Forms
       public static extern bool ReleaseCapture();
       private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
       private bool blockExpireBox = false;
+      readonly BackgroundWorker bw = new BackgroundWorker();
+      bool Canceled = false;
 
       public frmMain() { }
       public frmMain(string[] args)
@@ -56,7 +62,7 @@ namespace ForgeOfBots.Forms
          }
          logger.Info($"Debugmode {(DEBUGMODE ? "activated" : "deactivated")}");
 
-         FirewallHelper.OpenFirewallPort(4444,"WebDrive");
+         FirewallHelper.OpenFirewallPort(4444, "WebDrive");
          MainInstance = this;
          if (!i18n.initialized)
          {
@@ -70,7 +76,7 @@ namespace ForgeOfBots.Forms
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
-               i18n.Initialize(UserData.Language.Code);
+               i18n.Initialize(UserData.Language.Code, this);
             }
             else
             {
@@ -79,7 +85,7 @@ namespace ForgeOfBots.Forms
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
-               i18n.Initialize("en");
+               i18n.Initialize("en", this);
             }
          }
          Init();
@@ -104,7 +110,7 @@ namespace ForgeOfBots.Forms
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
-               i18n.Initialize(UserData.Language.Code);
+               i18n.Initialize(UserData.Language.Code, this);
             }
             else
             {
@@ -113,13 +119,14 @@ namespace ForgeOfBots.Forms
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
-               i18n.Initialize("en");
+               i18n.Initialize("en", this);
             }
             Controls.Clear();
             logger.Info($"check available languages");
             Task.Factory.StartNew(CheckLanguages).Wait();
             InitializeComponent();
-            FillText();
+            i18n.TranslateForm();
+            i18n.TranslateCMS(cmsMainMenu);
             logger.Info($"check for updates");
             CheckForUpdate();
             if (HasLastCrash)
@@ -134,6 +141,7 @@ namespace ForgeOfBots.Forms
                   Crashes.SetEnabledAsync(false).Wait();
             }
             Application.ApplicationExit += Application_ApplicationExit;
+            InitSettingsTab();
          }
          catch (Exception ex)
          {
@@ -159,24 +167,22 @@ namespace ForgeOfBots.Forms
          {
             AcceptInsecureCertificates = true
          };
-         co.AddArguments("--headless",
+         co.AddArguments(
+            //"--headless",
             "--disable-extensions",
             "--disable-breakpad",
-            "--disable-component-update",
             "--disable-hang-monitor",
             "--disable-logging",
-            "--disable-print-preview",
             "--disable-metrics-reporting",
-            "--disable-dev-tools",
             "--ssl-version-min=tl",
             "--no-sandbox",
-            "--remote-debugging-port=9222",
-            "--disable-dev-shm-usage",
-            "--window-position=-32000,-32000",
-            "--disable-metrics");
+         "--disable-dev-shm-usage",
+         //   //"--window-position=-32000,-32000",
+            "--disable-metrics"
+            );
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
          var chromeDriverService = ChromeDriverService.CreateDefaultService();
-         chromeDriverService.HideCommandPromptWindow = true; 
+         chromeDriverService.HideCommandPromptWindow = true;
          //driver = new RemoteWebDriver(new Uri("http://134.255.216.102:4444/"), co.ToCapabilities(),TimeSpan.FromSeconds(60));
          driver = new ChromeDriver(chromeDriverService, co);
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
@@ -425,11 +431,12 @@ namespace ForgeOfBots.Forms
          UpdateDashbord();
          UpdateSocial();
          UpdateTavern();
+         UpdateProductionView();
+         UpdateGoodProductionView();
+         UpdateHiddenRewardsView();
          //UpdateMessageCenter();
          //UpdateChat();
          //UpdateArmy();
-         //UpdateProduction();
-         //UpdateCity();
       }
       private void UpdateDashbord()
       {
@@ -733,14 +740,865 @@ namespace ForgeOfBots.Forms
             Thread.Sleep(999);
          }
       }
+      private void CmsMainMenu_Opening(object sender, CancelEventArgs e)
+      {
+         if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Social")
+         {
+            tsmiCollectTavern.Enabled = tsmiCollectTavern.Visible = false;
+            tsmiCollectIncidents.Enabled = tsmiCollectIncidents.Visible = false;
+            tsmiVisitTavern.Enabled = tsmiVisitTavern.Visible = false;
+            tsmiCancelProduction.Enabled = tsmiCancelProduction.Visible = false;
+            tsmiCollectProduction.Enabled = tsmiCollectProduction.Visible = false;
+            tsmiStartProduction.Enabled = tsmiStartProduction.Visible = false;
+
+            tsmiMoppleClan.Enabled = tsmiMoppleClan.Visible = true;
+            tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = true;
+            tsmiMoppleNeighbor.Enabled = tsmiMoppleNeighbor.Visible = true;
+            tsmiVisitMopple.Enabled = tsmiVisitMopple.Visible = true;
+         }
+         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Tavern")
+         {
+            tsmiMoppleClan.Enabled = tsmiMoppleClan.Visible = false;
+            tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = false;
+            tsmiMoppleNeighbor.Enabled = tsmiMoppleNeighbor.Visible = false;
+            tsmiCollectIncidents.Enabled = tsmiCollectIncidents.Visible = false;
+            tsmiCancelProduction.Enabled = tsmiCancelProduction.Visible = false;
+            tsmiCollectProduction.Enabled = tsmiCollectProduction.Visible = false;
+            tsmiStartProduction.Enabled = tsmiStartProduction.Visible = false;
+
+            tsmiCollectTavern.Enabled = tsmiCollectTavern.Visible = true;
+            tsmiVisitTavern.Enabled = tsmiVisitTavern.Visible = true;
+            tsmiVisitMopple.Enabled = tsmiVisitMopple.Visible = true;
+         }
+         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.City")
+         {
+            tsmiMoppleClan.Enabled = tsmiMoppleClan.Visible = false;
+            tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = false;
+            tsmiMoppleNeighbor.Enabled = tsmiMoppleNeighbor.Visible = false;
+            tsmiCancelProduction.Enabled = tsmiCancelProduction.Visible = false;
+            tsmiCollectProduction.Enabled = tsmiCollectProduction.Visible = false;
+            tsmiStartProduction.Enabled = tsmiStartProduction.Visible = false;
+            tsmiCollectTavern.Enabled = tsmiCollectTavern.Visible = false;
+            tsmiVisitTavern.Enabled = tsmiVisitTavern.Visible = false;
+            tsmiVisitMopple.Enabled = tsmiVisitMopple.Visible = false;
+
+            tsmiCollectIncidents.Enabled = tsmiCollectIncidents.Visible = true;
+         }
+         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Production")
+         {
+            tsmiMoppleClan.Enabled = tsmiMoppleClan.Visible = false;
+            tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = false;
+            tsmiMoppleNeighbor.Enabled = tsmiMoppleNeighbor.Visible = false;
+            tsmiCancelProduction.Enabled = tsmiCancelProduction.Visible = false;
+            tsmiCollectProduction.Enabled = tsmiCollectProduction.Visible = false;
+            tsmiStartProduction.Enabled = tsmiStartProduction.Visible = false;
+            tsmiCollectTavern.Enabled = tsmiCollectTavern.Visible = false;
+            tsmiVisitTavern.Enabled = tsmiVisitTavern.Visible = false;
+            tsmiVisitMopple.Enabled = tsmiVisitMopple.Visible = false;
+            tsmiCollectIncidents.Enabled = tsmiCollectIncidents.Visible = false;
+
+            tsmiCancelProduction.Enabled = tsmiCancelProduction.Visible = true;
+            tsmiCollectProduction.Enabled = tsmiCollectProduction.Visible = true;
+            tsmiStartProduction.Enabled = tsmiStartProduction.Visible = true;
+         }
+      }
 
 
+      #region "Incident"
+      private void UpdateHiddenRewardsView()
+      {
+         if (pnlIncident.InvokeRequired)
+         {
+            Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Clear());
+         }
+         else
+         {
+            pnlIncident.Controls.Clear();
+         }
+         if (ListClass.HiddenRewards.Count == 0) return;
+         foreach (HiddenReward item in ListClass.HiddenRewards)
+         {
+            if (!item.isVisible) continue;
+            if (!UserData.ShowBigRoads && item.position.context == "cityRoadBig") continue;
+            IncidentListItem iliIncident = new IncidentListItem
+            {
+               ILocation = item.position.context,
+               IRarity = item.rarity,
+               Dock = DockStyle.Top
+            };
+            if (pnlIncident.InvokeRequired)
+            {
+               Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Add(iliIncident));
+            }
+            else
+            {
+               pnlIncident.Controls.Add(iliIncident);
+            }
+         }
+         if (pnlIncident.InvokeRequired)
+         {
+            Invoker.CallMethode(pnlIncident, () => pnlIncident.Invalidate());
+         }
+         else
+         {
+            pnlIncident.Invalidate();
+         }
+      }
+      private void TsmiCollectIncidentsToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectIncident };
+         BackgroundWorker bw = new BackgroundWorker();
+         bw.DoWork += bwScriptExecuterOneArg_DoWork;
+         bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerCompleted += workerComplete;
+         bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
+      }
+      #endregion
 
+      #region "Production"
+      private void UpdateProductionView()
+      {
+         Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Clear());
+         if (ListClass.ProductionList.Count > 0)
+         {
+            List<KeyValuePair<string, List<EntityEx>>> groupedList = new List<KeyValuePair<string, List<EntityEx>>>();
+            if (UserData.GroupedView)
+            {
+               groupedList = GetGroupedList(ListClass.ProductionList);
+               if (DEBUGMODE) Log($"[{DateTime.Now}] Groupe Update", lbOutputWindow);
+               foreach (KeyValuePair<string, List<EntityEx>> item in groupedList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.Value.First().state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
+                  {
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
+               }
+            }
+            else
+            {
+               if (DEBUGMODE) Log($"[{DateTime.Now}] Single Update", lbOutputWindow);
+               foreach (EntityEx item in ListClass.ProductionList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.state["__class__"].ToString() == "ProducingState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", strings.ProducingState);
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.id);
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
+               }
+            }
+         }
+         Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Invalidate());
+      }
+      private void UpdateGoodProductionView()
+      {
+         Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Clear());
+         if (ListClass.GoodProductionList.Count > 0)
+         {
+            List<KeyValuePair<string, List<EntityEx>>> groupedList = new List<KeyValuePair<string, List<EntityEx>>>();
+            if (UserData.GroupedView)
+            {
+               groupedList = GetGroupedList(ListClass.GoodProductionList);
+               foreach (KeyValuePair<string, List<EntityEx>> item in groupedList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.Value.First().state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
+                  {
+                     var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", "");
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_in"].ToString())).First().state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.Value.OrderByDescending(e => double.Parse(e.state["next_state_transition_at"].ToString())).First().state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.Value.First().state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
+               }
+            }
+            else
+            {
+               foreach (EntityEx item in ListClass.GoodProductionList)
+               {
+                  ProdListItem pli = new ProdListItem();
+                  if (item.state["__class__"].ToString() == "IdleState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.ProductionState = ProductionState.Idle;
+                  }
+                  else if (item.state["__class__"].ToString() == "ProducingState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", "");
+                     pli.ProductionState = ProductionState.Producing;
+                     string greatestDur = item.state["next_state_transition_in"].ToString();
+                     string greatestEnd = item.state["next_state_transition_at"].ToString();
+                     pli.AddTime(greatestDur, greatestEnd);
+                  }
+                  else if (item.state["__class__"].ToString() == "ProductionFinishedState")
+                  {
+                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.ProductionState = ProductionState.Finished;
+                  }
+                  pli.Dock = DockStyle.Top;
+                  pli.AddEntities(item.id);
+                  pli.ProductionDone += Pli_ProductionDone;
+                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.StartProductionGUI();
+                  Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
+               }
+            }
+         }
+         Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Invalidate());
+      }
+      private void Pli_ProductionIdle(object sender, dynamic data)
+      {
+         ListClass.State = 0;
+         string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
+         string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+         dynamic entities = JsonConvert.DeserializeObject(ret);
+         Updater.UpdateBuildings(entities["responseData"]);
+         if (DEBUGMODE) Log($"[{DateTime.Now}] Idle STATE: {ListClass.State}", lbOutputWindow);
+         update(ListClass.State);
+      }
+      private void Pli_ProductionDone(object sender, dynamic data)
+      {
+         ListClass.State = 1;
+         string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
+         string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+         dynamic entities = JsonConvert.DeserializeObject(ret);
+         Updater.UpdateBuildings(entities["responseData"]);
+         if (DEBUGMODE) Log($"[{DateTime.Now}] Done STATE: {ListClass.State}", lbOutputWindow);
+         update(ListClass.State);
+      }
+      private void ProductionCollected()
+      {
+         if (!UserData.ProductionBot)
+         {
+            ListClass.CollectedIDs.Clear();
+            string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
+            string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+            dynamic entities = JsonConvert.DeserializeObject(ret);
+            Updater.UpdateBuildings(entities["responseData"]);
+            if (DEBUGMODE) Log($"[{DateTime.Now}] UpdateBuildings", lbOutputWindow);
+            update(ListClass.State);
+            ListClass.State = 2;
+            return;
+         }
+      }
+      private void ProductionStarted()
+      {
+         UpdateGUI();
+         ListClass.State = 2;
+      }
+      private void update(int sender)
+      {
+         UpdateProductionView();
+         UpdateGoodProductionView();
+         if (!UserData.ProductionBot) return;
+         if (sender is int state)
+         {
+            if (DEBUGMODE) Log($"[{DateTime.Now}] STATE: {state}", lbOutputWindow);
+            switch (state)
+            {
+               case 0:
+                  if (DEBUGMODE) Log($"[{DateTime.Now}] Production Idle Event", lbOutputWindow);
+                  StartProduction();
+                  ListClass.State = 2;
+                  break;
+               case 1:
+                  if (DEBUGMODE) Log($"[{DateTime.Now}] Production Done Event", lbOutputWindow);
+                  CollectProduction();
+                  ListClass.State = 0;
+                  break;
+               default:
+                  break;
+            }
+         }
+      }
+      private void StartProduction()
+      {
+         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.QueryProduction };
+         bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+      }
+      private void CollectProduction()
+      {
+         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectProduction };
+         bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+      }
+      private void bwScriptExecuterOneArg_DoWork(object sender, DoWorkEventArgs e)
+      {
+         OneTArgs<RequestType> param = (OneTArgs<RequestType>)e.Argument;
+         int[] ids;
+         string script = "";
+         switch (param.t1)
+         {
+            case RequestType.CollectProduction:
+               ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate" && x.state["__class__"].ToString().ToLower() != "producingstate"; }).ToList().Select(y => y.id).ToArray();
+               ids = ids.Concat(ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate" && x.state["__class__"].ToString().ToLower() != "producingstate"; }).ToList().Select(y => y.id).ToArray()).ToArray();
+               script = ReqBuilder.GetRequestScript(param.t1, ids);
+               string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+               try
+               {
+                  JToken ColRes = JsonConvert.DeserializeObject<JToken>(ret);
+                  if (ColRes["responseData"]?["updatedEntities"]?.ToList().Count > 0
+                     && ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "IdleState")
+                  {
+                     List<int> CollectedIDs = new List<int>();
+                     foreach (var item in ColRes["responseData"]?["updatedEntities"].ToList())
+                     {
+                        CollectedIDs.Add(int.Parse(item["id"].ToString()));
+                        int exIndex = ListClass.ProductionList.FindIndex(x => x.id == int.Parse(item["id"].ToString()));
+                        if (exIndex >= 0)
+                        {
+                           EntityEx old = ListClass.ProductionList[exIndex];
+                           ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(item.ToString());
+                           ListClass.ProductionList[exIndex].name = old.name;
+                           ListClass.ProductionList[exIndex].type = old.type;
+                           ListClass.ProductionList[exIndex].available_products = old.available_products;
+                        }
+                        else
+                        {
+                           exIndex = ListClass.GoodProductionList.FindIndex(g => g.id == int.Parse(item["id"].ToString()));
+                           if (exIndex >= 0)
+                           {
+                              EntityEx old = ListClass.GoodProductionList[exIndex];
+                              ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(item.ToString());
+                              ListClass.GoodProductionList[exIndex].name = old.name;
+                              ListClass.GoodProductionList[exIndex].type = old.type;
+                              ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                           }
+                        }
+                     }
+                     if (DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
+                     ListClass.CollectedIDs = CollectedIDs;
+                  }
+               }
+               catch (Exception ex)
+               {
+                  NLog.LogManager.Flush();
+                  var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+                  var properties = new Dictionary<string, string> { { "CollectProduction", ret } };
+                  Crashes.TrackError(ex, properties, attachments);
+               }
+               ProductionCollected();
+               break;
+            case RequestType.QueryProduction:
+               List<string> retQuery = new List<string>();
+               if (ListClass.CollectedIDs.Count > 0)
+               {
+                  int[] Query = ListClass.CollectedIDs.ToArray();
+                  ListClass.AddedToQuery.AddRange(ListClass.CollectedIDs);
+                  foreach (int id in Query)
+                  {
+                     if (UserData.GoodProductionOption.id < UserData.ProductionOption.id && UserData.ProductionOption.id > 4)
+                     {
+                        bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
+                        if (hasID)
+                           script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                        else
+                           script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                     }
+                     else
+                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                     retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
+                     Thread.Sleep(100);
+                  }
+               }
+               else
+               {
+                  ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+                  ListClass.AddedToQuery.AddRange(ids);
+                  foreach (int id in ids)
+                  {
+                     script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                     retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
+                     Thread.Sleep(100);
+                  }
+                  ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+                  ListClass.AddedToQuery.AddRange(ids);
+                  foreach (int id in ids)
+                  {
+                     script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                     retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
+                     Thread.Sleep(100);
+                  }
+               }
+               foreach (string item in retQuery)
+               {
+                  JToken QueryRes = JsonConvert.DeserializeObject<JToken>(item);
+                  try
+                  {
+                     if (QueryRes["responseData"]?["updatedEntities"]?.ToList().Count > 0
+                        && QueryRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "ProducingState")
+                     {
 
+                        int id = int.Parse(QueryRes["responseData"]?["updatedEntities"]?[0]?["id"].ToString());
+                        if (ListClass.AddedToQuery.Contains(id))
+                        {
+                           ListClass.doneQuery.Add(id);
+                           int exIndex = ListClass.ProductionList.FindIndex(g => g.id == id);
+                           if (exIndex >= 0)
+                           {
+                              EntityEx old = ListClass.ProductionList[exIndex];
+                              ListClass.ProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                              ListClass.ProductionList[exIndex].name = old.name;
+                              ListClass.ProductionList[exIndex].type = old.type;
+                              ListClass.ProductionList[exIndex].available_products = old.available_products;
+                           }
+                           else
+                           {
+                              exIndex = ListClass.GoodProductionList.FindIndex(x => x.id == int.Parse(QueryRes["responseData"]?["updatedEntities"][0]?["id"].ToString()));
+                              if (exIndex >= 0)
+                              {
+                                 EntityEx old = ListClass.GoodProductionList[exIndex];
+                                 ListClass.GoodProductionList[exIndex] = JsonConvert.DeserializeObject<EntityEx>(QueryRes["responseData"]?["updatedEntities"][0].ToString());
+                                 ListClass.GoodProductionList[exIndex].name = old.name;
+                                 ListClass.GoodProductionList[exIndex].type = old.type;
+                                 ListClass.GoodProductionList[exIndex].available_products = old.available_products;
+                              }
+                           }
+                        }
+                        var a = ListClass.doneQuery.All(ListClass.AddedToQuery.Contains) && ListClass.AddedToQuery.Count == ListClass.doneQuery.Count;
+                        if (a)
+                        {
+                           ListClass.doneQuery.Clear();
+                           ListClass.AddedToQuery.Clear();
+                           if (DEBUGMODE) Helper.Log($"[{DateTime.Now}] doneQuery Count = {ListClass.doneQuery.Count}\n[{DateTime.Now}] AddedToQuery Count = {ListClass.AddedToQuery.Count}");
+                        }
+                     }
+                  }
+                  catch (Exception ex)
+                  {
+                     NLog.LogManager.Flush();
+                     var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+                     var properties = new Dictionary<string, string> { { "QueryProduction", string.Join("\n", retQuery.ToArray()) } };
+                     Crashes.TrackError(ex, properties, attachments);
+                  }
+               }
+               break;
+            case RequestType.CancelProduction:
+               List<string> retCancel = new List<string>();
+               ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate"; }).ToList().Select(y => y.id).ToArray();
+               foreach (int id in ids)
+               {
+                  script = ReqBuilder.GetRequestScript(param.t1, id);
+                  retCancel.Add((string)jsExecutor.ExecuteAsyncScript(script));
+                  Thread.Sleep(100);
+               }
+               ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate"; }).ToList().Select(y => y.id).ToArray();
+               foreach (int id in ids)
+               {
+                  script = ReqBuilder.GetRequestScript(param.t1, id);
+                  retCancel.Add((string)jsExecutor.ExecuteAsyncScript(script));
+                  Thread.Sleep(100);
+               }
+               break;
+            case RequestType.CollectIncident:
+               testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.FindAll(x => x.isVisible).ToList().Count).ToList();
+               UserData.LastIncidentTime = DateTime.Now;
+               foreach (HiddenReward item in ListClass.HiddenRewards)
+               {
+                  if (!item.isVisible) continue;
+                  if (!UserData.ShowBigRoads && item.position.context == "cityRoadBig") continue;
+                  script = ReqBuilder.GetRequestScript(param.t1, item.hiddenRewardId);
+                  string retIncident = (string)jsExecutor.ExecuteAsyncScript(script);
+                  string[] ciResponse = retIncident.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
+                  bool successed = false;
+                  dynamic Reward = null;
+                  foreach (string res in ciResponse)
+                  {
+                     var methode = res.Substring(0, res.IndexOf("{"));
+                     var body = res.Substring(res.IndexOf("{"));
+                     dynamic ColIncRes = JsonConvert.DeserializeObject(body);
+                     if (ColIncRes["requestClass"].ToString() == "HiddenRewardService")
+                     {
+                        if (ColIncRes["responseData"]["__class__"].ToString() == "Success")
+                           successed = true;
+                        if (Reward != null)
+                        {
+                           IncidentCollected(Reward.ToString());
+                        }
+                     }
+                     else if (ColIncRes["requestClass"].ToString() == "RewardService")
+                     {
+                        Reward = ColIncRes["responseData"][0][0]["name"];
+                        if (successed)
+                        {
+                           IncidentCollected(Reward.ToString());
+                        }
+                     }
+                  }
+                  Thread.Sleep(333);
+               }
+               break;
+            default:
+               break;
+         }
+      }
+      List<bool> testBool = new List<bool>();
+      private void IncidentCollected(string reward)
+      {
+         Log($"{strings.IncidentCollected} - {strings.Reward}: {reward}", lbOutputWindow);
+         int indexlastFalse = testBool.FindIndex(b => !b);
+         if (indexlastFalse == testBool.Count - 1)
+         {
+            string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
+            string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+            HiddenRewardRoot newHiddenRewards = JsonConvert.DeserializeObject<HiddenRewardRoot>(ret);
+            foreach (HiddenReward item in newHiddenRewards.responseData.hiddenRewards)
+            {
+               DateTime endTime = UnixTimeStampToDateTime(item.expireTime);
+               DateTime startTime = UnixTimeStampToDateTime(item.startTime);
+               bool vis = (endTime > DateTime.Now) && (startTime < DateTime.Now);
+               item.isVisible = vis;
+            }
+            ListClass.HiddenRewards = newHiddenRewards.responseData.hiddenRewards.ToList();
+            UpdateHiddenRewardsView();
+         }
+         else
+         {
+            testBool[indexlastFalse] = true;
+         }
+      }
+      #endregion
 
+      #region "Settings"
+      private void InitSettingsTab()
+      {
+         Control.ControlCollection mrb5s = mpProdCycle.Controls;
+         foreach (Control control in mrb5s)
+         {
+            try
+            {
+               MetroRadioButton mrb = (MetroRadioButton)control;
+               if (int.Parse(mrb.Tag.ToString()) == UserData.ProductionOption.time)
+               {
+                  mrb.Checked = true;
+                  break;
+               }
+            }
+            catch (Exception)
+            {
+            }
 
+         }
+         Control.ControlCollection mrbG4h = mpGoodCycle.Controls;
+         foreach (Control control in mrbG4h)
+         {
+            try
+            {
+               MetroRadioButton mrb = (MetroRadioButton)control;
+               if (int.Parse(mrb.Tag.ToString()) == UserData.GoodProductionOption.time)
+               {
+                  mrb.Checked = true;
+                  break;
+               }
+            }
+            catch (Exception)
+            {
+            }
+         }
+         mtView.Checked = UserData.GroupedView;
+         mtIncident.Checked = UserData.IncidentBot;
+         mtMoppel.Checked = UserData.MoppelBot;
+         mtRQBot.Checked = UserData.RQBot;
+         mtProduction.Checked = UserData.ProductionBot;
+         mtTavern.Checked = UserData.TavernBot;
+         mtBigRoads.Checked = UserData.ShowBigRoads;
+         mtbCustomUserAgent.Text = UserData.CustomUserAgent;
+         mtbSerialKey.Text = UserData.SerialKey;
+         mtAutoLogin.Checked = UserData.AutoLogin;
+         mtDarkMode.Checked = UserData.DarkMode;
+         nudMinProfit.Value = UserData.MinProfit;
+         mcbAutoInvest.Checked = UserData.AutoInvest;
+         mcbFriends.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends) ? true : false;
+         mcbGuild.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.members) ? true : false;
+         mcbNeighbor.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors) ? true : false;
+         if (UserData.PlayableWorlds == null || UserData.PlayableWorlds.Count == 0)
+         {
+            mcbCitySelection.Enabled = false;
+            mbSaveReload.Enabled = false;
+         }
+         else
+         {
+            foreach (string item in UserData.PlayableWorlds)
+            {
+               mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item, WorldName = item.ToUpper() });
+            }
+            mcbCitySelection.DisplayMember = "WorldName";
+            mcbCitySelection.AutoCompleteSource = AutoCompleteSource.ListItems;
+            mcbCitySelection.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            mcbCitySelection.SelectedIndex = UserData.PlayableWorlds.FindIndex(e => e == UserData.LastWorld);
+         }
+         foreach (Language item in ListClass.AvailableLanguages.Languages)
+         {
+            LanguageItem languageItem = new LanguageItem()
+            {
+               Code = item.code,
+               Description = item.language,
+               Language = item.index
+            };
+            mcbLanguage.Items.Add(languageItem);
+         }
+         mcbLanguage.DisplayMember = "Description";
+         mcbLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
+         mcbLanguage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+         mcbLanguage.SelectedIndex = (int)UserData.Language.Language;
 
+         bw.DoWork += Bw_DoWork;
+         bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerAsync();
+         ListClass.BackgroundWorkers.Add(bw);
+      }
+      private void Bw_DoWork(object sender, DoWorkEventArgs e)
+      {
+         while (!bw.CancellationPending)
+         {
+            foreach (MetroFramework.MetroColorStyle foo in Enum.GetValues(typeof(MetroFramework.MetroColorStyle)))
+            {
+               if (foo == MetroFramework.MetroColorStyle.White ||
+                  foo == MetroFramework.MetroColorStyle.Black ||
+                  foo == MetroFramework.MetroColorStyle.Default ||
+                  foo == MetroFramework.MetroColorStyle.Silver) continue;
+               Invoker.SetProperty(mtcSettings, () => mtcSettings.Style, foo);
+               Thread.Sleep(150);
+            }
+         }
+         Canceled = true;
+      }
+      private void mrb5_CheckedChanged(object sender, EventArgs e)
+      {
+         MetroRadioButton mrb = (MetroRadioButton)sender;
+         if (!mrb.Checked) return;
+         int time = int.Parse(mrb.Tag.ToString());
+         UserData.ProductionOption = GetProductionOption(time);
+         UserData.SaveSettings();
+      }
+      private void mrbG4h_CheckedChanged(object sender, EventArgs e)
+      {
+         MetroRadioButton mrb = (MetroRadioButton)sender;
+         if (!mrb.Checked) return;
+         int time = int.Parse(mrb.Tag.ToString());
+         UserData.ProductionOption = GetGoodProductionOption(time);
+         UserData.SaveSettings();
+      }
+      private void mtView_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.GroupedView = mtView.Checked;
+         UserData.SaveSettings();
+      }
+      private void mtProduction_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.ProductionBot = mtProduction.Checked;
+         //UpdateBotView();
+         UserData.SaveSettings();
+      }
+      private void mtTavern_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.TavernBot = mtTavern.Checked;
+         //UpdateBotView();
+         UserData.SaveSettings();
+      }
+      private void mtMoppel_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.MoppelBot = mtMoppel.Checked;
+         //UpdateBotView();
+         UserData.SaveSettings();
+      }
+      private void mtIncident_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.IncidentBot = mtIncident.Checked;
+         //UpdateBotView();
+         UserData.SaveSettings();
+      }
+      private void mtRQBot_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.RQBot = mtRQBot.Checked;
+         //UpdateBotView();
+         UserData.SaveSettings();
+      }
+      private void metroToggle1_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.ShowBigRoads = mtBigRoads.Checked;
+         UserData.SaveSettings();
+      }
+      private void mtbSave_Click(object sender, EventArgs e)
+      {
+         UserData.CustomUserAgent = mtbCustomUserAgent.Text;
+         UserData.Language = (LanguageItem)mcbLanguage.SelectedItem;
+         UserData.SaveSettings();
+      }
+      private void mcbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+      {
+         if (UserData.Language.Language != ((LanguageItem)mcbLanguage.SelectedItem).Language)
+         {
+            lblRestartNeeded.Visible = true;
+            lblRestartNeeded.CustomForeColor = true;
+            lblRestartNeeded.ForeColor = Color.Red;
+         }
+         else
+            lblRestartNeeded.Visible = false;
+      }
+      private void mbSaveReload_Click(object sender, EventArgs e)
+      {
+         UserData.LastWorld = ((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID;
+         UserData.SaveSettings();
+         Close();
+         ReloadData();
+      }
+      private void mbDeleteData_Click(object sender, EventArgs e)
+      {
+         UserData.Delete();
+         Process.Start(Application.ExecutablePath);
+         Environment.Exit(0);
+      }
+      private void mbCheckSerial_Click(object sender, EventArgs e)
+      {
+         object ret = TcpConnection.SendAuthData(mtbSerialKey.Text, FingerPrint.Value(), false);
+         if (ret is Result)
+         {
+            Enum.TryParse(ret.ToString(), out Result result);
+            if (result == Result.Success)
+            {
 
+               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({strings.Premium}) | by TH3C0D3R";
+               UserData.SerialKey = mtbSerialKey.Text;
+               UserData.SaveSettings();
+               object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
+               if (retList is List<UCPremium> list)
+               {
+                  //tlpPremium.Controls.AddRange(list.ToArray());
+                  //tlpPremium.Invalidate(true);
+               }
+            }
+            else if (result == Result.Expired)
+            {
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({strings.Expired}) | by TH3C0D3R");
+               if (!blockExpireBox)
+                  MessageBox.Show(Owner, $"{strings.SubscriptionExpired}", $"{strings.SubExpiredTitle}");
+               blockExpireBox = true;
+            }
+            else
+            {
+               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
+               MessageBox.Show(Owner, $"{strings.LicenceNotValid}", $"{strings.FailedToActivate}");
+            }
+         }
+      }
+      private void MtAutoLogin_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.AutoLogin = mtAutoLogin.Checked;
+         UserData.SaveSettings();
+      }
+      private void MtbIntervalIncident_TextChanged(object sender, EventArgs e)
+      {
+         if (int.TryParse(mtbIntervalIncident.Text, out int interval))
+            UserData.IntervalIncidentBot = interval;
+         else
+            UserData.IntervalIncidentBot = 1;
+         UserData.SaveSettings();
+      }
+      private void mcbNeighbor_CheckedChanged(object sender, EventArgs e)
+      {
+         SnipTargetChanged((MetroCheckBox)sender, e);
+      }
+      private void mcbFriends_CheckedChanged(object sender, EventArgs e)
+      {
+         SnipTargetChanged((MetroCheckBox)sender, e);
+      }
+      private void mcbGuild_CheckedChanged(object sender, EventArgs e)
+      {
+         SnipTargetChanged((MetroCheckBox)sender, e);
+      }
+      private void SnipTargetChanged(MetroCheckBox sender, EventArgs e)
+      {
+         SnipTarget set = (SnipTarget)Enum.Parse(typeof(SnipTarget), sender.Tag.ToString());
+         if (sender.Checked)
+         {
+            UserData.SelectedSnipTarget |= set;
+         }
+         else
+         {
+            if (UserData.SelectedSnipTarget.HasFlag(set))
+            {
+               UserData.SelectedSnipTarget &= ~set;
+            }
+         }
+         UserData.SaveSettings();
+      }
+      private void nudMinProfit_ValueChanged(object sender, EventArgs e)
+      {
+         UserData.MinProfit = (int)nudMinProfit.Value;
+         UserData.SaveSettings();
+      }
+      private void McbAutoInvest_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.AutoInvest = mcbAutoInvest.Checked;
+         UserData.SaveSettings();
+      }
+      #endregion
 
       protected override void WndProc(ref Message m)
       {
@@ -795,22 +1653,6 @@ namespace ForgeOfBots.Forms
             return cp;
          }
       }
-      private void FillText()
-      {
-         tpDashbord.Text = i18n.getString(tpDashbord.Tag.ToString());
-         tpSocial.Text = i18n.getString(tpSocial.Tag.ToString());
-         tpMessageCenter.Text = i18n.getString(tpMessageCenter.Tag.ToString());
-         tpChat.Text = i18n.getString(tpChat.Tag.ToString());
-         tpArmy.Text = i18n.getString(tpArmy.Tag.ToString());
-         tpProduction.Text = i18n.getString(tpProduction.Tag.ToString());
-         tpCity.Text = i18n.getString(tpCity.Tag.ToString());
-         tpSniper.Text = i18n.getString(tpSniper.Tag.ToString());
-         tpTavern.Text = i18n.getString(tpTavern.Tag.ToString());
-         tpSettings.Text = i18n.getString(tpSettings.Tag.ToString());
-         gbLog.Text = i18n.getString(gbLog.Tag.ToString());
-         gbStatistic.Text = i18n.getString(gbStatistic.Tag.ToString());
-         gbGoods.Text = i18n.getString(gbGoods.Tag.ToString());
-         mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
-      }
+
    }
 }
