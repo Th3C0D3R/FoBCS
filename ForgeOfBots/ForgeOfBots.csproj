@@ -472,6 +472,8 @@
     <EmbeddedResource Include="LanguageFiles\en.json" />
     <EmbeddedResource Include="LanguageFiles\fr.json" />
     <EmbeddedResource Include="LanguageFiles\de.json" />
+    <EmbeddedResource Include="LanguageFiles\help\help_en.json" />
+    <EmbeddedResource Include="LanguageFiles\help\help_de.json" />
     <None Include="languages.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

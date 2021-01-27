@@ -16,6 +16,7 @@ namespace ForgeOfBots.Utils
    {
       public static bool initialized = false;
       public static dynamic jsonObject = null;
+      public static dynamic HelpObject = null;
       public static Form MainForm = null;
       public static void Initialize(string language, Form main)
       {
@@ -23,17 +24,29 @@ namespace ForgeOfBots.Utils
          try
          {
             var assembly = Assembly.GetExecutingAssembly();
-            string resourceName = assembly.GetManifestResourceNames().Single(str => str.EndsWith($"{language}.json"));
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(1252)))
+            foreach (string resourceName in assembly.GetManifestResourceNames())
             {
-               string jsonString = reader.ReadToEnd();
-               jsonObject = JsonConvert.DeserializeObject(jsonString);
+               if (resourceName.EndsWith($"{language}.json"))
+               {
+                  using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                  using (StreamReader reader = new StreamReader(stream, Encoding.GetEncoding(1252)))
+                  {
+                     string jsonString = reader.ReadToEnd();
+                     if (resourceName.EndsWith($"help_{language}.json"))
+                     {
+                        HelpObject = JsonConvert.DeserializeObject(jsonString);
+                     }
+                     else
+                     {
+                        jsonObject = JsonConvert.DeserializeObject(jsonString);
+                     }
+                  }
+               }
             }
          }
          catch (Exception ex)
          {
-            MessageBox.Show(ex.Message,"EXCEPTION",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            MessageBox.Show(ex.Message, "EXCEPTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Environment.Exit(1);
          }
       }
@@ -63,7 +76,7 @@ namespace ForgeOfBots.Utils
                   item.Text = getString(item.Tag.ToString());
                }
             }
-            if(item.Controls.Count > 0)
+            if (item.Controls.Count > 0)
             {
                TranslateControl(item.Controls);
             }
@@ -81,6 +94,42 @@ namespace ForgeOfBots.Utils
                }
             }
          }
+      }
+      public static void TranslateHelp(TreeView tv)
+      {
+         tv.Nodes.Clear();
+         try
+         {
+            tv.Nodes.Add(HelpObject["Root"]["Text"].ToString());
+            TreeNode root = tv.Nodes[0];
+            foreach (dynamic c in HelpObject["Root"]["Children"])
+            {
+               TreeNode tn = new TreeNode(c["Title"].ToString());
+               tn.Tag = c["Text"].ToString();
+               if (c["HasChildren"].ToString().ToLower() == "true")
+                  root.Nodes.AddRange(GetChildNode(c["Children"]));
+               else
+                  root.Nodes.Add(tn);
+            }
+         }
+         catch (Exception)
+         {
+            tv.Nodes.Add("FAILED TO PARSE HELP-FILE");
+         }
+      }
+      private static List<TreeNode> GetChildNode(dynamic c)
+      {
+         List<TreeNode> treeNodeChildren = new List<TreeNode>();
+         foreach (var item in c)
+         {
+            TreeNode tn = new TreeNode(item["Title"].ToString());
+            tn.Tag = item["Text"].ToString();
+            if (item["HasChildren"].ToString().ToLower() == "true")
+               treeNodeChildren.AddRange(GetChildNode(item["Children"]));
+            else
+               treeNodeChildren.Add(tn);
+         }
+         return treeNodeChildren;
       }
    }
 }

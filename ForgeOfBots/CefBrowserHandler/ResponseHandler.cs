@@ -488,48 +488,48 @@ namespace ForgeOfBots.CefBrowserHandler
                _ListLoaded?.Invoke(RequestType.GetNeighbor);
                break;
             case RequestType.GetLGs:
-               if (msg.Length <= 4) break;
-               LGRootObject lgs = JsonConvert.DeserializeObject<LGRootObject>(msg);
-               List<LGData> LGData = lgs.responseData.ToList();
-               if (LGData.Count == 0) break;
-               ListClass.SnipablePlayers.Find(p => p.player_id == LGData[0].player.player_id).LGs = LGData;
-               foreach (Player item in ListClass.SnipablePlayers)
-               {
-                  foreach (LGData lg in item.LGs)
-                  {
-                     lock (_lockerLG)
-                     {
-                        int UnderScorePos = lg.city_entity_id.IndexOf("_");
-                        string AgeString = lg.city_entity_id.Substring(UnderScorePos + 1);
-                        UnderScorePos = AgeString.IndexOf("_");
-                        AgeString = AgeString.Substring(0, UnderScorePos);
-                        if (lg.current_progress == null)
-                           lg.current_progress = 0;
-                        int P1 = Helper.GetP1(AgeString, lg.level);
-                        ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
-                        if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
-                        if (lg.rank == null && P1 * ListClass.ArcBonus >= (lg.max_progress - lg.current_progress) / 2)
-                        {
-                           ListClass.PossibleSnipLGs.Add(new LGSnip()
-                           {
-                              player = lg.player,
-                              entity_id = lg.entity_id,
-                              city_entity_id = lg.city_entity_id,
-                              name = item.name,
-                              level = lg.level,
-                              state = lg.state,
-                              GewinnString = "",
-                              KurzString = "",
-                              current_progress = lg.current_progress,
-                              max_progress = lg.max_progress,
-                              rank = lg.rank,
-                              __class__ = lg.__class__
-                           });
-                        }
-                     }
-                  }
-               }
-               _AllLGsStepped?.Invoke(null, null);
+               //if (msg.Length <= 4) break;
+               //LGRootObject lgs = JsonConvert.DeserializeObject<LGRootObject>(msg);
+               //List<LGData> LGData = lgs.responseData.ToList();
+               //if (LGData.Count == 0) break;
+               //ListClass.SnipablePlayers.Find(p => p.player_id == LGData[0].player.player_id).LGs = LGData;
+               //foreach (Player item in ListClass.SnipablePlayers)
+               //{
+               //   foreach (LGData lg in item.LGs)
+               //   {
+               //      lock (_lockerLG)
+               //      {
+               //         int UnderScorePos = lg.city_entity_id.IndexOf("_");
+               //         string AgeString = lg.city_entity_id.Substring(UnderScorePos + 1);
+               //         UnderScorePos = AgeString.IndexOf("_");
+               //         AgeString = AgeString.Substring(0, UnderScorePos);
+               //         if (lg.current_progress == null)
+               //            lg.current_progress = 0;
+               //         int P1 = Helper.GetP1(AgeString, lg.level);
+               //         ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
+               //         if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
+               //         if (lg.rank == null && P1 * ListClass.ArcBonus >= (lg.max_progress - lg.current_progress) / 2)
+               //         {
+               //            ListClass.PossibleSnipLGs.Add(new LGSnip()
+               //            {
+               //               player = lg.player,
+               //               entity_id = lg.entity_id,
+               //               city_entity_id = lg.city_entity_id,
+               //               name = item.name,
+               //               level = lg.level,
+               //               state = lg.state,
+               //               GewinnString = "",
+               //               KurzString = "",
+               //               current_progress = lg.current_progress,
+               //               max_progress = lg.max_progress,
+               //               rank = lg.rank,
+               //               __class__ = lg.__class__
+               //            });
+               //         }
+               //      }
+               //   }
+               //}
+               //_AllLGsStepped?.Invoke(null, null);
                break;
             case RequestType.getConstruction:
                lock (_lockerSnip)

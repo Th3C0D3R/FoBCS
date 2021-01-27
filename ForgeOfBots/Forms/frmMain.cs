@@ -34,6 +34,7 @@ using CUpdate = ForgeOfBots.DataHandler.Update;
 using WebClient = System.Net.WebClient;
 using ForgeOfBots.Forms.UserControls;
 using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace ForgeOfBots.Forms
 {
@@ -687,6 +688,7 @@ namespace ForgeOfBots.Forms
          logger.Info($"Starting Bot");
          Log("[DEBUG] Starting Bot", lbOutputWindow);
          Updater = new CUpdate(ReqBuilder);
+         i18n.TranslateHelp(tvHelp);
          if (!Utils.Settings.SettingsExists() ||
             string.IsNullOrWhiteSpace(UserData.Username) ||
             string.IsNullOrWhiteSpace(UserData.Password) ||
@@ -1600,6 +1602,575 @@ namespace ForgeOfBots.Forms
       }
       #endregion
 
+      #region "Snip"
+      private void MbSearch_Click(object sender, EventArgs e)
+      {
+         WorkerItem wi = new WorkerItem()
+         {
+            Title = i18n.getString("GUI.Sniper.BWTitle"),
+            BeforeCountText = i18n.getString("GUI.Sniper.BWBeforeCountText"),
+            CountText = "Count",
+            ID = LGSnipWorkerID
+         };
+         if (Application.OpenForms["WorkerList"] == null)
+         {
+            StaticData.WorkerList = new WorkerList();
+            StaticData.WorkerList.Show();
+            if (!IsOnScreen(StaticData.WorkerList))
+               StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
+         }
+         else
+            StaticData.WorkerList.BringToFront();
+         StaticData.WorkerList.AddWorkerItem(wi);
+
+         TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.GetLGs, argument2 = null };
+         BackgroundWorker bw = new BackgroundWorker();
+         bw.DoWork += bwScriptExecuter_DoWork;
+         bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerCompleted += workerComplete;
+         bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
+      }
+      private void MbSnip_Click(object sender, EventArgs e)
+      {
+         foreach (Control c in mpSnipItem.Controls)
+         {
+            LGSnipItem lsi = (LGSnipItem)c;
+            if (lsi.mcbSnip.Checked)
+            {
+               string script = ReqBuilder.GetRequestScript(RequestType.contributeForgePoints, new int[] { lsi.LGSnip.entity_id, lsi.LGSnip.player.player_id.Value, lsi.LGSnip.level, lsi.LGSnip.Invest, 0 });
+               string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+               lsi.mcbSnip.Enabled = false;
+               lsi.mcbSnip.Checked = false;
+               lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
+               Application.DoEvents();
+            }
+         }
+      }
+      #endregion
+
+      #region "BackgroundWorker"
+      private void bwScriptExecuter_DoWork(object sender, DoWorkEventArgs e)
+      {
+         Random r = new Random();
+         int counter = 0;
+         dynamic param;
+         try
+         {
+            param = (TwoTArgs<RequestType, dynamic>)e.Argument;
+         }
+         catch (Exception)
+         {
+            param = (TwoTArgs<RequestType, E_Motivate>)e.Argument;
+         }
+         switch (param.RequestType)
+         {
+            case RequestType.Motivate:
+               E_Motivate e_Motivate = (E_Motivate)Enum.Parse(typeof(E_Motivate), param.argument2.ToString());
+               List<Player> list = new List<Player>();
+               switch (e_Motivate)
+               {
+                  case E_Motivate.Clan:
+                     var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
+                     list.AddRange(clanMotivate);
+                     break;
+                  case E_Motivate.Neighbor:
+                     var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
+                     list.AddRange(neighborlist);
+                     break;
+                  case E_Motivate.Friend:
+                     var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
+                     list.AddRange(friendMotivate);
+                     break;
+                  case E_Motivate.All:
+                     list.AddRange(ListClass.Motivateable);
+                     break;
+                  default:
+                     break;
+               }
+               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, 0, list.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", list.Count.ToString()));
+               foreach (Player item in list)
+               {
+                  counter += 1;
+                  StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, counter, list.Count);
+                  StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", counter.ToString()).Replace("##End##", list.Count.ToString()));
+                  string script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
+                  string retMot = (string)jsExecutor.ExecuteAsyncScript(script);
+                  string[] motResponse = retMot.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
+                  Polivate motivation = null;
+                  object rewardResources = null;
+                  foreach (string res in motResponse)
+                  {
+                     var methode = res.Substring(0, res.IndexOf("{"));
+                     var body = res.Substring(res.IndexOf("{"));
+                     switch (methode)
+                     {
+                        case "rewardResources":
+                           rewardResources = JsonConvert.DeserializeObject(body);
+                           break;
+                        case "polivateRandomBuilding":
+                           motivation = JsonConvert.DeserializeObject<Polivate>(body);
+                           break;
+                        default:
+                           break;
+                     }
+                  }
+                  if (motivation != null && !retMot.Contains("\"error_code\":202,\"__class__\":\"Error\""))
+                  {
+                     if (motivation.responseData.action == "polish" || motivation.responseData.action == "motivate" || (motivation.responseData.action == "polivate_failed" && rewardResources != null))
+                     {
+                        int playerid = 0;
+                        if (motivation.responseData.action == "polivate_failed")
+                           playerid = item.player_id.Value;
+                        else
+                           playerid = motivation.responseData.mapEntity.player_id;
+                        ListClass.doneMotivate.Add(playerid, (true, rewardResources));
+                     }
+                     else
+                        MessageBox.Show($"{strings.UnknownAction} {motivation.responseData.action}");
+                  }
+                  int nextInt = r.Next(333, 1000);
+                  Thread.Sleep(nextInt);
+               }
+               Dictionary<string, int> results = new Dictionary<string, int>();
+               foreach (var item in ListClass.doneMotivate)
+               {
+                  if (item.Value.Item1)
+                  {
+                     var jtokenlist = ((JObject)item.Value.Item2)["responseData"]["resources"].ToList();
+                     foreach (var jtoken in jtokenlist)
+                     {
+                        var resource = jtoken.Path.Substring(jtoken.Path.LastIndexOf(".") + 1);
+                        string name = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == resource)["name"].ToString();
+                        if (results.ContainsKey(name))
+                           results[name] += int.Parse(jtoken.First.ToString());
+                        else
+                           results.Add(name, int.Parse(jtoken.First.ToString()));
+                     }
+                  }
+               }
+               foreach (var resItem in results)
+                  Log($"[{DateTime.Now}] {strings.PolivateResult} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
+               ListClass.doneMotivate.Clear();
+               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, list.Count, list.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.MotivationDone);
+               UserData.LastPolivateTime = DateTime.Now;
+               UserData.SaveSettings();
+               (bool, bool) returnValMot = StaticData.WorkerList.RemoveWorkerByID(PolivateWorkerID);
+               if (returnValMot.Item2)
+               {
+                  if (InvokeRequired)
+                  {
+                     StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                     {
+                        StaticData.WorkerList.Close();
+                     });
+                  }
+                  else
+                     StaticData.WorkerList.Close();
+               }
+               break;
+            case RequestType.VisitTavern:
+               ListClass.FriendTaverns = ListClass.FriendTaverns.Where((f) => f.sittingPlayerCount < f.unlockedChairCount && f.state == null).ToList();
+               if (ListClass.FriendTaverns.Count == 0 || ListClass.FriendList.Count == 0) return;
+               StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, 0, ListClass.FriendTaverns.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
+               foreach (FriendTavernState item in ListClass.FriendTaverns)
+               {
+                  string script = ReqBuilder.GetRequestScript(param.RequestType, item.ownerId);
+                  string retTavern = (string)jsExecutor.ExecuteAsyncScript(script);
+
+                  string[] TavResponse = retTavern.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
+                  object rewardTavern = null;
+                  object TavernResultSitting = null;
+                  TavernResult tavernresult = null;
+                  foreach (string res in TavResponse)
+                  {
+                     var methode = res.Substring(0, res.IndexOf("{"));
+                     var body = res.Substring(res.IndexOf("{"));
+                     dynamic resItem = JsonConvert.DeserializeObject(body);
+                     if (resItem["requestMethod"] == "getOtherTavern")
+                     {
+                        rewardTavern = resItem["responseData"]["rewardResources"];
+                        TavernResultSitting = resItem["responseData"]["state"];
+                     }
+                     else if (resItem["requestMethod"] == "getOtherTavernState")
+                        tavernresult = JsonConvert.DeserializeObject<TavernResult>(body);
+                  }
+                  if (TavernResultSitting.ToString() == "satDown")
+                     if (item.ownerId.ToString() != "" && tavernresult.responseData.ownerId == item.ownerId)
+                        ListClass.doneTavern.Add(tavernresult.responseData.ownerId, (true, rewardTavern));
+                  if (TavernResultSitting == null)
+                     MessageBox.Show($"{strings.UnknownAction} {JsonConvert.SerializeObject(TavernResultSitting)}");
+                  int nextIntTavern = r.Next(333, 1000);
+                  StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, ListClass.doneTavern.Count, ListClass.FriendTaverns.Count);
+                  StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.CountLabel.Replace("##Done##", ListClass.doneTavern.Count.ToString()).Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
+                  Thread.Sleep(nextIntTavern);
+               }
+               Dictionary<string, int> resultsTavern = new Dictionary<string, int>();
+               foreach (var item in ListClass.doneTavern)
+               {
+                  if (item.Value.Item1)
+                  {
+                     var jtokenlist = ((JObject)item.Value.Item2)["resources"].ToList();
+                     foreach (var jtoken in jtokenlist)
+                     {
+                        var resource = jtoken.Path.Substring(jtoken.Path.LastIndexOf(".") + 1);
+                        string name = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == resource)["name"].ToString();
+                        if (resultsTavern.ContainsKey(name))
+                           resultsTavern[name] += int.Parse(jtoken.First.ToString());
+                        else
+                           resultsTavern.Add(name, int.Parse(jtoken.First.ToString()));
+                     }
+                  }
+               }
+               foreach (var resItem in resultsTavern)
+                  Log($"[{DateTime.Now}] {strings.TavernResult} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
+               ListClass.doneTavern.Clear();
+               StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, ListClass.doneTavern.Count, ListClass.FriendTaverns.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.TavernDone);
+               (bool, bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(TavernVisitWorkerID);
+               if (returnVal.Item2)
+               {
+                  if (InvokeRequired)
+                  {
+                     StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                     {
+                        StaticData.WorkerList.Close();
+                     });
+                  }
+                  else
+                     StaticData.WorkerList.Close();
+               }
+               break;
+            case RequestType.GetLGs:
+               string retSnip = "";
+               ListClass.SnipWithProfit = new List<LGSnip>();
+               ListClass.SnipablePlayers = new List<Player>();
+               if (UserData.SelectedSnipTarget == SnipTarget.none) return;
+               if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends)) ListClass.SnipablePlayers.AddRange(ListClass.FriendList);
+               if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors)) ListClass.SnipablePlayers.AddRange(ListClass.NeighborList);
+               if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
+               ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
+               if (ListClass.SnipablePlayers.Count == 0) return;
+               StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
+               int rInt = 0;
+               foreach (Player item in ListClass.SnipablePlayers)
+               {
+                  counter += 1;
+                  StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
+                  StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingPlayer")} {item.name}...");
+                  string script = ReqBuilder.GetRequestScript(RequestType.GetLGs, item.player_id);
+                  retSnip = (string)jsExecutor.ExecuteAsyncScript(script);
+                  if (retSnip.Length <= 4) break;
+                  LGRootObject lgs = JsonConvert.DeserializeObject<LGRootObject>(retSnip);
+                  List<LGSnip> LGData = lgs.responseData.ToList();
+                  if (LGData.Count == 0) break;
+                  ListClass.SnipablePlayers.Find(p => p.player_id == LGData[0].player.player_id).LGs = LGData;
+                  foreach (LGSnip lg in item.LGs)
+                  {
+                     StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
+                     StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingLG").Replace("##Player##", item.name)} {lg.name}...");
+
+                     int UnderScorePos = lg.city_entity_id.IndexOf("_");
+                     string AgeString = lg.city_entity_id.Substring(UnderScorePos + 1);
+                     UnderScorePos = AgeString.IndexOf("_");
+                     AgeString = AgeString.Substring(0, UnderScorePos);
+                     if (lg.current_progress == null)
+                        lg.current_progress = 0;
+                     int P1 = GetP1(AgeString, lg.level);
+                     ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
+                     if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
+                     if (lg.rank == null && P1 * ListClass.ArcBonus >= (lg.max_progress - lg.current_progress) / 2)
+                     {
+                        script = ReqBuilder.GetRequestScript(RequestType.getConstruction, new int[] { lg.entity_id, lg.player.player_id.Value });
+                        string retConstruction = (string)jsExecutor.ExecuteAsyncScript(script);
+                        string[] snipResponse = retConstruction.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (var res in snipResponse)
+                        {
+                           var methode = res.Substring(0, res.IndexOf("{"));
+                           var body = res.Substring(res.IndexOf("{"));
+                           dynamic resItem = JsonConvert.DeserializeObject(body);
+                           if (resItem["requestMethod"] == "updateEntity")
+                           {
+                              lg.state = new LGState()
+                              {
+                                 forge_points_for_level_up = (int?)resItem["responseData"][0]["state"]["forge_points_for_level_up"],
+                                 invested_forge_points = (int?)resItem["responseData"][0]["state"]["invested_forge_points"]
+                              };
+                              lg.maxLevel = (int)resItem["responseData"][0]["max_level"];
+                           }
+                           else if (resItem["requestMethod"] == "getConstruction")
+                           {
+                              SnipRoot SnipeRoot = JsonConvert.DeserializeObject<SnipRoot>(body);
+                              SnipResponse SnipResponse = SnipeRoot.responseData;
+                              Ranking[] Rankings = SnipResponse.rankings;
+
+                              ArrayList hFordern = new ArrayList();
+                              ArrayList hBPMeds = new ArrayList();
+                              ArrayList hSnipen = new ArrayList();
+                              var arc = ListClass.ArcBonus >= 2 ? (ListClass.ArcBonus / 100) + 1 : ListClass.ArcBonus;
+                              var ForderArc = 1.90f;
+                              int EigenPos = 0, EigenBetrag = 0;
+                              for (int i = 0; i < Rankings.Length; i++)
+                              {
+                                 if (Rankings[i].player != null && Rankings[i].player.player_id == int.Parse(ListClass.UserData["player_id"].ToString()))
+                                 {
+                                    EigenPos = i;
+                                    EigenBetrag = Rankings[i].forge_points >= 0 ? Rankings[i].forge_points : 0;
+                                    break;
+                                 }
+                              }
+                              string[] ForderStates = new string[6];
+                              string[] SnipeStates = new string[6];
+                              int[] FPNettoRewards = new int[6];
+                              int[] FPRewards = new int[6];
+                              int[] BPRewards = new int[6];
+                              int[] MedalRewards = new int[6];
+                              int[] ForderFPRewards = new int[6];
+                              int[] ForderRankCosts = new int[6];
+                              int[] SnipeRankCosts = new int[6];
+                              int[] Einzahlungen = new int[6];
+                              int BestGewinn = -999999;
+                              int RankProfit = -1;
+
+                              for (int i = 0; i < Rankings.Length; i++)
+                              {
+                                 Ranking rang = Rankings[i];
+                                 int Rank = -1, CurrentFP = 0, TotalFP = 0, RestFP = 0;
+                                 bool IsSelf = false;
+                                 if (rang.rank < 0) continue;
+                                 else Rank = rang.rank - 1;
+                                 if (rang.reward == null) continue;
+                                 ForderStates[Rank] = "";
+                                 SnipeStates[Rank] = "";
+                                 FPNettoRewards[Rank] = 0;
+                                 FPRewards[Rank] = 0;
+                                 BPRewards[Rank] = 0;
+                                 MedalRewards[Rank] = 0;
+                                 ForderFPRewards[Rank] = 0;
+                                 ForderRankCosts[Rank] = -1;
+                                 SnipeRankCosts[Rank] = -1;
+                                 Einzahlungen[Rank] = 0;
+
+                                 if (rang.reward.strategy_point_amount >= 0)
+                                    FPNettoRewards[Rank] = rang.reward.strategy_point_amount;
+                                 if (rang.reward.blueprints >= 0)
+                                    BPRewards[Rank] = rang.reward.blueprints;
+                                 if (rang.reward.resources.medals >= 0)
+                                    MedalRewards[Rank] = rang.reward.resources.medals;
+
+                                 FPRewards[Rank] = (int)Math.Round((double)FPNettoRewards[Rank] * arc);
+                                 BPRewards[Rank] = (int)Math.Round((double)BPRewards[Rank] * arc);
+                                 MedalRewards[Rank] = (int)Math.Round((double)MedalRewards[Rank] * arc);
+                                 ForderFPRewards[Rank] = (int)Math.Round((double)FPNettoRewards[Rank] * ForderArc);
+
+                                 if (rang.player != null && Rankings[i].player.player_id == int.Parse(ListClass.UserData["player_id"].ToString()))
+                                    IsSelf = true;
+
+                                 if (rang.forge_points >= 0)
+                                    Einzahlungen[Rank] = rang.forge_points;
+                                 if (lg.state != null)
+                                 {
+                                    if (lg.state.invested_forge_points == null) lg.state.invested_forge_points = 0;
+                                    CurrentFP = (lg.state.invested_forge_points.Value >= 0 ? lg.state.invested_forge_points.Value : 0) - EigenBetrag;
+                                    TotalFP = lg.state.forge_points_for_level_up.Value;
+                                    RestFP = TotalFP - CurrentFP;
+                                 }
+                                 if (!IsSelf)
+                                 {
+                                    SnipeRankCosts[Rank] = (int)Math.Round((double)(Einzahlungen[Rank] + RestFP) / 2);
+                                    ForderRankCosts[Rank] = Math.Max(ForderFPRewards[Rank], SnipeRankCosts[Rank]);
+                                    ForderRankCosts[Rank] = Math.Min(ForderRankCosts[Rank], RestFP);
+                                    bool exitLoop = false;
+                                    if (SnipeRankCosts[Rank] <= Einzahlungen[Rank])
+                                    {
+                                       ForderRankCosts[Rank] = 0;
+                                       ForderStates[Rank] = "NotPossible";
+                                       exitLoop = true;
+                                    }
+                                    else
+                                    {
+                                       if (ForderRankCosts[Rank] == RestFP)
+                                          ForderStates[Rank] = "LevelWarning";
+                                       else if (ForderRankCosts[Rank] <= ForderFPRewards[Rank])
+                                          ForderStates[Rank] = "Profit";
+                                       else
+                                          ForderStates[Rank] = "NegativeProfit";
+                                    }
+                                    if (SnipeRankCosts[Rank] <= Einzahlungen[Rank])
+                                    {
+                                       SnipeRankCosts[Rank] = 0;
+                                       SnipeStates[Rank] = "NotPossible";
+                                       exitLoop = true;
+                                    }
+                                    else
+                                    {
+                                       if (SnipeRankCosts[Rank] == RestFP)
+                                          SnipeStates[Rank] = "LevelWarning";
+                                       else if (FPRewards[Rank] <= SnipeRankCosts[Rank])
+                                          SnipeStates[Rank] = "NegativeProfit";
+                                       else
+                                       {
+                                          SnipeStates[Rank] = "Profit";
+                                          var CurrentGewinn = FPRewards[Rank] - SnipeRankCosts[Rank];
+                                          if (CurrentGewinn > BestGewinn)
+                                          {
+                                             if (SnipeStates[Rank] == "Profit")
+                                             {
+                                                BestGewinn = CurrentGewinn;
+                                                RankProfit = Rank;
+                                                exitLoop = true;
+                                             }
+                                          }
+                                       }
+                                    }
+                                    if (exitLoop)
+                                       continue;
+                                 }
+                              }
+                              if (SnipeStates.Contains("Profit"))
+                              {
+                                 if (ListClass.SnipWithProfit.Find(g => g.entity_id == lg.entity_id && g.player.player_id == lg.player.player_id) != null) continue;
+                                 if (lg.level == lg.maxLevel) continue;
+                                 if (BestGewinn < UserData.MinProfit) continue;
+                                 int SnipCost = FPRewards[RankProfit] - BestGewinn;
+                                 lg.KurzString = $"{(int)((float)FPRewards[RankProfit] / SnipCost * 100)} %";
+                                 lg.GewinnString = $"{BestGewinn}";
+                                 lg.Invest = SnipCost;
+                                 ListClass.SnipWithProfit.Add(lg);
+                              }
+                              if (ListClass.AllLGs.Find(k => k.entity_id == lg.entity_id && k.player.player_id == lg.player.player_id) != null) continue;
+                              ListClass.AllLGs.Add(lg);
+                           }
+                        }
+                        rInt = r.Next(333, 500);
+                        Thread.Sleep(rInt);
+                     }
+                  }
+                  rInt = r.Next(333, 500);
+                  Thread.Sleep(rInt);
+               }
+               Invoker.CallMethode(mpSnipItem, () => mpSnipItem.Controls.Clear());
+               foreach (LGSnip item in ListClass.SnipWithProfit)
+               {
+                  LGSnipItem lsi = new LGSnipItem()
+                  {
+                     LG = $"{item.player.name} {item.name}",
+                     LGSnip = item,
+                     Profit = item.GewinnString
+                  };
+                  lsi.mcbSnip.Text = i18n.getString(lsi.mcbSnip.Tag.ToString());
+                  lsi.Dock = DockStyle.Top;
+                  Invoker.CallMethode(mpSnipItem, () => mpSnipItem.Controls.Add(lsi));
+                  Invoker.SetProperty(mbSnip, () => mbSnip.Enabled, true);
+               }
+               Invoker.CallMethode(mpSnipItem, () => mpSnipItem.Update());
+               (bool, bool) returnValLG = StaticData.WorkerList.RemoveWorkerByID(LGSnipWorkerID);
+               if (returnValLG.Item2)
+               {
+                  if (InvokeRequired)
+                  {
+                     StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                     {
+                        StaticData.WorkerList.Close();
+                     });
+                  }
+                  else
+                     StaticData.WorkerList.Close();
+               }
+               break;
+            default:
+               break;
+         }
+      }
+      #endregion
+
+      #region "Polivate/Tavern"
+      public void Motivate(E_Motivate player_type)
+      {
+         WorkerItem wi = new WorkerItem()
+         {
+            Title = strings.PolivateTitle,
+            BeforeCountText = strings.Status,
+            CountText = strings.CountLabel,
+            ID = PolivateWorkerID
+         };
+         if (Application.OpenForms["WorkerList"] == null)
+         {
+            StaticData.WorkerList = new WorkerList();
+            StaticData.WorkerList.Show();
+            if (!IsOnScreen(StaticData.WorkerList))
+               StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
+         }
+         else
+            StaticData.WorkerList.BringToFront();
+         StaticData.WorkerList.AddWorkerItem(wi);
+
+
+         TwoTArgs<RequestType, E_Motivate> param = new TwoTArgs<RequestType, E_Motivate> { RequestType = RequestType.Motivate, argument2 = player_type };
+         BackgroundWorker bw = new BackgroundWorker();
+         bw.DoWork += bwScriptExecuter_DoWork;
+         bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
+      }
+      private void VisitAllTavern()
+      {
+         WorkerItem wi = new WorkerItem()
+         {
+            Title = strings.VisitAllTitle,
+            BeforeCountText = strings.Status,
+            CountText = strings.CountLabel,
+            ID = TavernVisitWorkerID
+         };
+         if (Application.OpenForms["WorkerList"] == null)
+         {
+            StaticData.WorkerList = new WorkerList();
+            StaticData.WorkerList.Show();
+            if (!IsOnScreen(StaticData.WorkerList))
+               StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
+         }
+         else
+            StaticData.WorkerList.BringToFront();
+         StaticData.WorkerList.AddWorkerItem(wi);
+
+         TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.VisitTavern, argument2 = null };
+         BackgroundWorker bw = new BackgroundWorker();
+         bw.DoWork += bwScriptExecuter_DoWork;
+         bw.WorkerSupportsCancellation = true;
+         bw.RunWorkerCompleted += workerComplete;
+         bw.RunWorkerAsync(param);
+         ListClass.BackgroundWorkers.Add(bw);
+      }
+      private void TsmiMoppleFriends_Click(object sender, EventArgs e)
+      {
+         Motivate(E_Motivate.Friend);
+      }
+      private void TsmiMoppleClan_Click(object sender, EventArgs e)
+      {
+         Motivate(E_Motivate.Clan);
+      }
+      private void TsmiMoppleNeighbor_Click(object sender, EventArgs e)
+      {
+         Motivate(E_Motivate.Neighbor);
+      }
+      private void TsmiVisitMopple_Click(object sender, EventArgs e)
+      {
+         Motivate(E_Motivate.All);
+      }
+      private void TsmiVisitTavern_Click(object sender, EventArgs e)
+      {
+         VisitAllTavern();
+      }
+      private void TsmiCollectTavern_Click(object sender, EventArgs e)
+      {
+         btnCollect_Click(null, null);
+      }
+      #endregion
+
       protected override void WndProc(ref Message m)
       {
          const int RESIZE_HANDLE_SIZE = 10;
@@ -1654,5 +2225,22 @@ namespace ForgeOfBots.Forms
          }
       }
 
+      private void TsmiStartProduction_Click(object sender, EventArgs e)
+      {
+
+      }
+      private void TsmiCollectProduction_Click(object sender, EventArgs e)
+      {
+
+      }
+      private void TsmiCancelProduction_Click(object sender, EventArgs e)
+      {
+
+      }
+
+      private void TvHelp_AfterSelect(object sender, TreeViewEventArgs e)
+      {
+
+      }
    }
 }

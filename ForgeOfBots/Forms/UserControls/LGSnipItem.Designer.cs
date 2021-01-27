@@ -33,7 +33,7 @@ namespace ForgeOfBots.Forms.UserControls
          this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
          this.lblProfit = new System.Windows.Forms.Label();
          this.lblLG = new System.Windows.Forms.Label();
-         this.btnSnip = new System.Windows.Forms.Button();
+         this.mcbSnip = new MetroFramework.Controls.MetroCheckBox();
          this.panel1.SuspendLayout();
          this.tableLayoutPanel1.SuspendLayout();
          this.SuspendLayout();
@@ -55,7 +55,7 @@ namespace ForgeOfBots.Forms.UserControls
          this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5F));
          this.tableLayoutPanel1.Controls.Add(this.lblProfit, 1, 0);
          this.tableLayoutPanel1.Controls.Add(this.lblLG, 0, 0);
-         this.tableLayoutPanel1.Controls.Add(this.btnSnip, 2, 0);
+         this.tableLayoutPanel1.Controls.Add(this.mcbSnip, 2, 0);
          this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
          this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
          this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -87,16 +87,16 @@ namespace ForgeOfBots.Forms.UserControls
          this.lblLG.Text = "PLACEHOLDER";
          this.lblLG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          // 
-         // btnSnip
+         // mcbSnip
          // 
-         this.btnSnip.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.btnSnip.Location = new System.Drawing.Point(308, 3);
-         this.btnSnip.Name = "btnSnip";
-         this.btnSnip.Size = new System.Drawing.Size(111, 31);
-         this.btnSnip.TabIndex = 4;
-         this.btnSnip.Text = "Snip";
-         this.btnSnip.UseVisualStyleBackColor = true;
-         this.btnSnip.Click += new System.EventHandler(this.BtnSnip_Click);
+         this.mcbSnip.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.mcbSnip.Location = new System.Drawing.Point(308, 3);
+         this.mcbSnip.Name = "mcbSnip";
+         this.mcbSnip.Size = new System.Drawing.Size(111, 31);
+         this.mcbSnip.TabIndex = 4;
+         this.mcbSnip.Tag = "GUI.Sniper.CheckSnip";
+         this.mcbSnip.Text = "metroCheckBox1";
+         this.mcbSnip.UseVisualStyleBackColor = true;
          // 
          // LGSnipItem
          // 
@@ -117,6 +117,6 @@ namespace ForgeOfBots.Forms.UserControls
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
       private System.Windows.Forms.Label lblProfit;
       private System.Windows.Forms.Label lblLG;
-      private System.Windows.Forms.Button btnSnip;
+      public MetroFramework.Controls.MetroCheckBox mcbSnip;
    }
 }

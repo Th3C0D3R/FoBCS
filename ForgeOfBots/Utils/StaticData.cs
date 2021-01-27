@@ -53,6 +53,8 @@ namespace ForgeOfBots.Utils
       public static int PolivateWorkerID = 1;
       public static int LGSnipWorkerID = 2;
 
+      public static string InnoCDN_Avatars = "https://foe###server###.innogamescdn.com/assets/shared/avatars/";
+
       public const string _WCS = "Win32_ComputerSystem";
       public const string _WCS_Model = "Model";
       public const string _WCS_SystemType = "SystemType";

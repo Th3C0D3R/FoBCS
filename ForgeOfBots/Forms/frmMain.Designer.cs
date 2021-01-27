@@ -75,6 +75,9 @@ namespace ForgeOfBots.Forms
          this.tsmiCollectTavern = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiVisitMopple = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiCollectIncidents = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiStartProduction = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiCollectProduction = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiCancelProduction = new System.Windows.Forms.ToolStripMenuItem();
          this.lblClanMemberCount = new System.Windows.Forms.Label();
          this.lblFriendsCount = new System.Windows.Forms.Label();
          this.lblClanMember = new System.Windows.Forms.Label();
@@ -122,6 +125,11 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
          this.pnlIncident = new System.Windows.Forms.Panel();
          this.tpSniper = new System.Windows.Forms.TabPage();
+         this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+         this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+         this.mbSnip = new MetroFramework.Controls.MetroButton();
+         this.mbSearch = new MetroFramework.Controls.MetroButton();
+         this.mpSnipItem = new MetroFramework.Controls.MetroPanel();
          this.tpSettings = new System.Windows.Forms.TabPage();
          this.mtcSettings = new MetroFramework.Controls.MetroTabControl();
          this.mtpProduction = new MetroFramework.Controls.MetroTabPage();
@@ -188,11 +196,11 @@ namespace ForgeOfBots.Forms
          this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
          this.lblLanguage = new MetroFramework.Controls.MetroLabel();
          this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
+         this.tpHelp = new System.Windows.Forms.TabPage();
+         this.mpHelpDetails = new MetroFramework.Controls.MetroPanel();
+         this.tvHelp = new System.Windows.Forms.TreeView();
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
-         this.tsmiStartProduction = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiCollectProduction = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiCancelProduction = new System.Windows.Forms.ToolStripMenuItem();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -228,6 +236,9 @@ namespace ForgeOfBots.Forms
          this.panel12.SuspendLayout();
          this.tpCity.SuspendLayout();
          this.tableLayoutPanel2.SuspendLayout();
+         this.tpSniper.SuspendLayout();
+         this.tableLayoutPanel6.SuspendLayout();
+         this.metroPanel3.SuspendLayout();
          this.tpSettings.SuspendLayout();
          this.mtcSettings.SuspendLayout();
          this.mtpProduction.SuspendLayout();
@@ -239,6 +250,7 @@ namespace ForgeOfBots.Forms
          this.mtpPremium.SuspendLayout();
          this.mtpBots.SuspendLayout();
          this.mtpMisc.SuspendLayout();
+         this.tpHelp.SuspendLayout();
          this.SuspendLayout();
          // 
          // metroPanel1
@@ -353,6 +365,7 @@ namespace ForgeOfBots.Forms
          this.imgListTab.Images.SetKeyName(7, "358-paper plane.png");
          this.imgListTab.Images.SetKeyName(8, "profits.png");
          this.imgListTab.Images.SetKeyName(9, "beer.png");
+         this.imgListTab.Images.SetKeyName(10, "help.png");
          // 
          // mpMenu
          // 
@@ -378,6 +391,7 @@ namespace ForgeOfBots.Forms
          this.tabControl1.Controls.Add(this.tpCity);
          this.tabControl1.Controls.Add(this.tpSniper);
          this.tabControl1.Controls.Add(this.tpSettings);
+         this.tabControl1.Controls.Add(this.tpHelp);
          resources.ApplyResources(this.tabControl1, "tabControl1");
          this.tabControl1.ImageList = this.imgListTab;
          this.tabControl1.Multiline = true;
@@ -578,36 +592,42 @@ namespace ForgeOfBots.Forms
          this.tsmiMoppleFriends.Name = "tsmiMoppleFriends";
          resources.ApplyResources(this.tsmiMoppleFriends, "tsmiMoppleFriends");
          this.tsmiMoppleFriends.Tag = "GUI.Menu.MoppelFriends";
+         this.tsmiMoppleFriends.Click += new System.EventHandler(this.TsmiMoppleFriends_Click);
          // 
          // tsmiMoppleClan
          // 
          this.tsmiMoppleClan.Name = "tsmiMoppleClan";
          resources.ApplyResources(this.tsmiMoppleClan, "tsmiMoppleClan");
          this.tsmiMoppleClan.Tag = "GUI.Menu.MoppelClan";
+         this.tsmiMoppleClan.Click += new System.EventHandler(this.TsmiMoppleClan_Click);
          // 
          // tsmiMoppleNeighbor
          // 
          this.tsmiMoppleNeighbor.Name = "tsmiMoppleNeighbor";
          resources.ApplyResources(this.tsmiMoppleNeighbor, "tsmiMoppleNeighbor");
          this.tsmiMoppleNeighbor.Tag = "GUI.Menu.MoppelNeighbor";
+         this.tsmiMoppleNeighbor.Click += new System.EventHandler(this.TsmiMoppleNeighbor_Click);
          // 
          // tsmiVisitTavern
          // 
          this.tsmiVisitTavern.Name = "tsmiVisitTavern";
          resources.ApplyResources(this.tsmiVisitTavern, "tsmiVisitTavern");
          this.tsmiVisitTavern.Tag = "GUI.Menu.VisitTavern";
+         this.tsmiVisitTavern.Click += new System.EventHandler(this.TsmiVisitTavern_Click);
          // 
          // tsmiCollectTavern
          // 
          this.tsmiCollectTavern.Name = "tsmiCollectTavern";
          resources.ApplyResources(this.tsmiCollectTavern, "tsmiCollectTavern");
          this.tsmiCollectTavern.Tag = "GUI.Menu.CollectTavern";
+         this.tsmiCollectTavern.Click += new System.EventHandler(this.TsmiCollectTavern_Click);
          // 
          // tsmiVisitMopple
          // 
          this.tsmiVisitMopple.Name = "tsmiVisitMopple";
          resources.ApplyResources(this.tsmiVisitMopple, "tsmiVisitMopple");
          this.tsmiVisitMopple.Tag = "GUI.Menu.MoppelTavern";
+         this.tsmiVisitMopple.Click += new System.EventHandler(this.TsmiVisitMopple_Click);
          // 
          // tsmiCollectIncidents
          // 
@@ -615,6 +635,27 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.tsmiCollectIncidents, "tsmiCollectIncidents");
          this.tsmiCollectIncidents.Tag = "GUI.Menu.CollectIncidents";
          this.tsmiCollectIncidents.Click += new System.EventHandler(this.TsmiCollectIncidentsToolStripMenuItem_Click);
+         // 
+         // tsmiStartProduction
+         // 
+         this.tsmiStartProduction.Name = "tsmiStartProduction";
+         resources.ApplyResources(this.tsmiStartProduction, "tsmiStartProduction");
+         this.tsmiStartProduction.Tag = "GUI.Menu.StartProduction";
+         this.tsmiStartProduction.Click += new System.EventHandler(this.TsmiStartProduction_Click);
+         // 
+         // tsmiCollectProduction
+         // 
+         this.tsmiCollectProduction.Name = "tsmiCollectProduction";
+         resources.ApplyResources(this.tsmiCollectProduction, "tsmiCollectProduction");
+         this.tsmiCollectProduction.Tag = "GUI.Menu.CollectProduction";
+         this.tsmiCollectProduction.Click += new System.EventHandler(this.TsmiCollectProduction_Click);
+         // 
+         // tsmiCancelProduction
+         // 
+         this.tsmiCancelProduction.Name = "tsmiCancelProduction";
+         resources.ApplyResources(this.tsmiCancelProduction, "tsmiCancelProduction");
+         this.tsmiCancelProduction.Tag = "GUI.Menu.CancelProduction";
+         this.tsmiCancelProduction.Click += new System.EventHandler(this.TsmiCancelProduction_Click);
          // 
          // lblClanMemberCount
          // 
@@ -911,10 +952,56 @@ namespace ForgeOfBots.Forms
          // 
          // tpSniper
          // 
+         this.tpSniper.Controls.Add(this.tableLayoutPanel6);
          resources.ApplyResources(this.tpSniper, "tpSniper");
          this.tpSniper.Name = "tpSniper";
          this.tpSniper.Tag = "GUI.Sniper";
          this.tpSniper.UseVisualStyleBackColor = true;
+         // 
+         // tableLayoutPanel6
+         // 
+         resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
+         this.tableLayoutPanel6.Controls.Add(this.metroPanel3, 0, 0);
+         this.tableLayoutPanel6.Controls.Add(this.mpSnipItem, 1, 0);
+         this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+         // 
+         // metroPanel3
+         // 
+         this.metroPanel3.Controls.Add(this.mbSnip);
+         this.metroPanel3.Controls.Add(this.mbSearch);
+         resources.ApplyResources(this.metroPanel3, "metroPanel3");
+         this.metroPanel3.HorizontalScrollbarBarColor = true;
+         this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
+         this.metroPanel3.HorizontalScrollbarSize = 10;
+         this.metroPanel3.Name = "metroPanel3";
+         this.metroPanel3.VerticalScrollbarBarColor = true;
+         this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
+         this.metroPanel3.VerticalScrollbarSize = 10;
+         // 
+         // mbSnip
+         // 
+         resources.ApplyResources(this.mbSnip, "mbSnip");
+         this.mbSnip.Name = "mbSnip";
+         this.mbSnip.Tag = "GUI.Sniper.Snip";
+         this.mbSnip.Click += new System.EventHandler(this.MbSnip_Click);
+         // 
+         // mbSearch
+         // 
+         resources.ApplyResources(this.mbSearch, "mbSearch");
+         this.mbSearch.Name = "mbSearch";
+         this.mbSearch.Tag = "GUI.Sniper.Search";
+         this.mbSearch.Click += new System.EventHandler(this.MbSearch_Click);
+         // 
+         // mpSnipItem
+         // 
+         resources.ApplyResources(this.mpSnipItem, "mpSnipItem");
+         this.mpSnipItem.HorizontalScrollbarBarColor = true;
+         this.mpSnipItem.HorizontalScrollbarHighlightOnWheel = false;
+         this.mpSnipItem.HorizontalScrollbarSize = 10;
+         this.mpSnipItem.Name = "mpSnipItem";
+         this.mpSnipItem.VerticalScrollbarBarColor = true;
+         this.mpSnipItem.VerticalScrollbarHighlightOnWheel = false;
+         this.mpSnipItem.VerticalScrollbarSize = 10;
          // 
          // tpSettings
          // 
@@ -1482,6 +1569,33 @@ namespace ForgeOfBots.Forms
          this.mcbLanguage.Name = "mcbLanguage";
          this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
          // 
+         // tpHelp
+         // 
+         this.tpHelp.Controls.Add(this.mpHelpDetails);
+         this.tpHelp.Controls.Add(this.tvHelp);
+         resources.ApplyResources(this.tpHelp, "tpHelp");
+         this.tpHelp.Name = "tpHelp";
+         this.tpHelp.UseVisualStyleBackColor = true;
+         // 
+         // mpHelpDetails
+         // 
+         resources.ApplyResources(this.mpHelpDetails, "mpHelpDetails");
+         this.mpHelpDetails.HorizontalScrollbarBarColor = true;
+         this.mpHelpDetails.HorizontalScrollbarHighlightOnWheel = false;
+         this.mpHelpDetails.HorizontalScrollbarSize = 10;
+         this.mpHelpDetails.Name = "mpHelpDetails";
+         this.mpHelpDetails.VerticalScrollbarBarColor = true;
+         this.mpHelpDetails.VerticalScrollbarHighlightOnWheel = false;
+         this.mpHelpDetails.VerticalScrollbarSize = 10;
+         // 
+         // tvHelp
+         // 
+         resources.ApplyResources(this.tvHelp, "tvHelp");
+         this.tvHelp.Name = "tvHelp";
+         this.tvHelp.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            ((System.Windows.Forms.TreeNode)(resources.GetObject("tvHelp.Nodes")))});
+         this.tvHelp.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvHelp_AfterSelect);
+         // 
          // bwUptime
          // 
          this.bwUptime.WorkerSupportsCancellation = true;
@@ -1491,24 +1605,6 @@ namespace ForgeOfBots.Forms
          // 
          this.bwScriptExecuterOneArg.WorkerSupportsCancellation = true;
          this.bwScriptExecuterOneArg.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwScriptExecuterOneArg_DoWork);
-         // 
-         // tsmiStartProduction
-         // 
-         this.tsmiStartProduction.Name = "tsmiStartProduction";
-         resources.ApplyResources(this.tsmiStartProduction, "tsmiStartProduction");
-         this.tsmiStartProduction.Tag = "GUI.Menu.StartProduction";
-         // 
-         // tsmiCollectProduction
-         // 
-         this.tsmiCollectProduction.Name = "tsmiCollectProduction";
-         resources.ApplyResources(this.tsmiCollectProduction, "tsmiCollectProduction");
-         this.tsmiCollectProduction.Tag = "GUI.Menu.CollectProduction";
-         // 
-         // tsmiCancelProduction
-         // 
-         this.tsmiCancelProduction.Name = "tsmiCancelProduction";
-         resources.ApplyResources(this.tsmiCancelProduction, "tsmiCancelProduction");
-         this.tsmiCancelProduction.Tag = "GUI.Menu.CancelProduction";
          // 
          // frmMain
          // 
@@ -1565,6 +1661,9 @@ namespace ForgeOfBots.Forms
          this.panel12.ResumeLayout(false);
          this.tpCity.ResumeLayout(false);
          this.tableLayoutPanel2.ResumeLayout(false);
+         this.tpSniper.ResumeLayout(false);
+         this.tableLayoutPanel6.ResumeLayout(false);
+         this.metroPanel3.ResumeLayout(false);
          this.tpSettings.ResumeLayout(false);
          this.mtcSettings.ResumeLayout(false);
          this.mtpProduction.ResumeLayout(false);
@@ -1580,6 +1679,7 @@ namespace ForgeOfBots.Forms
          this.mtpBots.ResumeLayout(false);
          this.mtpBots.PerformLayout();
          this.mtpMisc.ResumeLayout(false);
+         this.tpHelp.ResumeLayout(false);
          this.ResumeLayout(false);
 
       }
@@ -1748,5 +1848,13 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.ToolStripMenuItem tsmiStartProduction;
       private System.Windows.Forms.ToolStripMenuItem tsmiCollectProduction;
       private System.Windows.Forms.ToolStripMenuItem tsmiCancelProduction;
+      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+      private MetroFramework.Controls.MetroPanel metroPanel3;
+      private MetroFramework.Controls.MetroButton mbSearch;
+      private MetroFramework.Controls.MetroPanel mpSnipItem;
+      private MetroFramework.Controls.MetroButton mbSnip;
+      private System.Windows.Forms.TabPage tpHelp;
+      private MetroFramework.Controls.MetroPanel mpHelpDetails;
+      private System.Windows.Forms.TreeView tvHelp;
    }
 }

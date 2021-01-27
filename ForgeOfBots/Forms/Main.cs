@@ -42,7 +42,6 @@ using ForgeOfBots.Utils;
 using static ForgeOfBots.Utils.StaticData;
 using static ForgeOfBots.FoBUpdater.FoBUpdater;
 using static ForgeOfBots.Utils.Helper;
-using static ForgeOfBots.Utils.Testing.Test;
 using Microsoft.AppCenter.Analytics;
 
 namespace ForgeOfBots

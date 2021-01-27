@@ -1,4 +1,5 @@
 ﻿using ForgeOfBots.CefBrowserHandler;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
 using System;
 using System.Collections.Generic;
@@ -42,43 +43,10 @@ namespace ForgeOfBots.Forms.UserControls
                lblProfit.Text = value;
          }
       }
-      public string SnipTag
-      {
-         get
-         {
-            return btnSnip.Tag.ToString();
-         }
-         set
-         {
-            if (InvokeRequired)
-               Invoker.SetProperty(btnSnip, () => btnSnip.Tag, value);
-            else
-               btnSnip.Tag = value;
-         }
-      }
-
-      private CustomEvent _SnipLG;
-      public event CustomEvent SnipLG
-      {
-         add
-         {
-            if (_SnipLG == null || !_SnipLG.GetInvocationList().Contains(value))
-               _SnipLG += value;
-         }
-         remove
-         {
-            _SnipLG -= value;
-         }
-      }
-
+      public LGSnip LGSnip { get; set; }
       public LGSnipItem()
       {
          InitializeComponent();
-      }
-
-      private void BtnSnip_Click(object sender, EventArgs e)
-      {
-         _SnipLG?.Invoke(null, SnipTag);
       }
    }
 }
