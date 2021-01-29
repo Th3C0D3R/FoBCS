@@ -340,6 +340,7 @@
     <EmbeddedResource Include="LanguageFiles\de.json" />
     <EmbeddedResource Include="LanguageFiles\help\help_en.json" />
     <EmbeddedResource Include="LanguageFiles\help\help_de.json" />
+    <EmbeddedResource Include="LanguageFiles\help\help_fr.json" />
     <None Include="languages.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -367,14 +368,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
-    <Content Include="geckodriver.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="JSFiles\fetchMetaData.js" />
     <Content Include="JSFiles\fetchData.js" />
-    <Content Include="obfuscar.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\dashbord.png" />
     <None Include="Resources\plus.png" />
     <None Include="Resources\minus.png" />

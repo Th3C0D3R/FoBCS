@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,21 @@ namespace ForgeOfBots.Utils
          MainForm = main;
          try
          {
+            string URLLang = $"https://github.com/Th3C0D3R/FoBCS/raw/master/ForgeOfBots/LanguageFiles/{language}.json";
+            string URLLangHelp = $"https://github.com/Th3C0D3R/FoBCS/raw/master/ForgeOfBots/LanguageFiles/help_{language}.json";
+            using (var webClient = new WebClient())
+            {
+               webClient.Encoding = System.Text.Encoding.UTF8;
+               string resultStrings = webClient.DownloadString(URLLang);
+               jsonObject = JsonConvert.DeserializeObject(resultStrings);
+            
+               string resultHelp = webClient.DownloadString(URLLangHelp);
+               HelpObject = JsonConvert.DeserializeObject(resultHelp);
+            }
+         }
+         catch (WebException ex)
+         {
+            MessageBox.Show($"LANGUAGE {language} NOT FOUND IN REPOSITORY!\n\nUSING DEFAULT 'en'","LANGUAGE NOT FOUND", MessageBoxButtons.OK, MessageBoxIcon.Error);
             var assembly = Assembly.GetExecutingAssembly();
             foreach (string resourceName in assembly.GetManifestResourceNames())
             {
@@ -43,11 +59,6 @@ namespace ForgeOfBots.Utils
                   }
                }
             }
-         }
-         catch (Exception ex)
-         {
-            MessageBox.Show(ex.Message, "EXCEPTION", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Environment.Exit(1);
          }
       }
       public static string getString(string key)
