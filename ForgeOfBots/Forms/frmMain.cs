@@ -182,8 +182,9 @@ namespace ForgeOfBots.Forms
             "--disable-metrics-reporting",
             "--ssl-version-min=tl",
             "--no-sandbox",
+            "--remote-debugging-port=9222",
          "--disable-dev-shm-usage",
-         //   //"--window-position=-32000,-32000",
+         "--window-position=-32000,-32000",
             "--disable-metrics"
             );
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
