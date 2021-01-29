@@ -1,9 +1,4 @@
-﻿#if RELEASE || DEBUG
-using CefSharp.OffScreen;
-#elif DEBUGFORM
-using CefSharp.WinForms;
-#endif
-using ForgeOfBots.DataHandler;
+﻿using ForgeOfBots.DataHandler;
 using ForgeOfBots.Forms;
 using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
@@ -22,7 +17,6 @@ namespace ForgeOfBots.Utils
 {
    public static class StaticData
    {
-      public static ChromiumWebBrowser cwb = null;
       public static ResourceManager resMgr = new ResourceManager("ForgeOfBots.Properties.Resources", Assembly.GetExecutingAssembly());
       public static Dictionary<string, string> AllCookies = new Dictionary<string, string>();
       public static RequestBuilder ReqBuilder = new RequestBuilder();

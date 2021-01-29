@@ -22,18 +22,20 @@ namespace ForgeOfBots.Utils
       public static void Initialize(string language, Form main)
       {
          MainForm = main;
+         if (initialized) return;
          try
          {
-            string URLLang = $"https://github.com/Th3C0D3R/FoBCS/raw/master/ForgeOfBots/LanguageFiles/{language}.json";
-            string URLLangHelp = $"https://github.com/Th3C0D3R/FoBCS/raw/master/ForgeOfBots/LanguageFiles/help_{language}.json";
+            string URLLang = $"https://raw.githubusercontent.com/Th3C0D3R/FoBCS/master/ForgeOfBots/LanguageFiles/{language}.json";
+            string URLLangHelp = $"https://raw.githubusercontent.com/Th3C0D3R/FoBCS/master/ForgeOfBots/LanguageFiles/help/help_{language}.json";
             using (var webClient = new WebClient())
             {
-               webClient.Encoding = System.Text.Encoding.UTF8;
+               webClient.Encoding = Encoding.GetEncoding(1252);
                string resultStrings = webClient.DownloadString(URLLang);
                jsonObject = JsonConvert.DeserializeObject(resultStrings);
             
                string resultHelp = webClient.DownloadString(URLLangHelp);
                HelpObject = JsonConvert.DeserializeObject(resultHelp);
+               initialized = true;
             }
          }
          catch (WebException ex)
@@ -59,6 +61,7 @@ namespace ForgeOfBots.Utils
                   }
                }
             }
+            if (jsonObject != null && HelpObject != null) initialized = true;
          }
       }
       public static string getString(string key)

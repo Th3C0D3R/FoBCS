@@ -96,6 +96,13 @@ namespace ForgeOfBots.Forms
       }
       public void Init()
       {
+         if (!IsChromeInstalled())
+         {
+            MessageBox.Show("!! PLEASE INSTALL GOOGLE CHROME TO USE THIS BOT !!", "ERROR STARTING BOT", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Process.Start("https://www.google.com/intl/de_de/chrome/");
+            Environment.Exit(0);
+            return;
+         }
          List<string> stack = new List<string>();
          try
          {
@@ -478,19 +485,19 @@ namespace ForgeOfBots.Forms
          }
          if (ListClass.Resources.Count > 0)
          {
-            Invoker.SetProperty(lblSuppliesValue, () => lblSuppliesValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["supplies"]?.ToObject(typeof(int))).ToString("N0") + ":");
-            Invoker.SetProperty(lblMoneyValue, () => lblMoneyValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["money"]?.ToObject(typeof(int))).ToString("N0") + ":");
-            Invoker.SetProperty(lblDiaValue, () => lblDiaValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["premium"]?.ToObject(typeof(int))).ToString("N0")+":");
-            Invoker.SetProperty(lblMedsValue, () => lblMedsValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["medals"]?.ToObject(typeof(int))).ToString("N0") + ":");
-            Invoker.SetProperty(lblFPValue, () => lblFPValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["strategy_points"]?.ToObject(typeof(int))).ToString("N0") + ":");
+            Invoker.SetProperty(lblSuppliesValue, () => lblSuppliesValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["supplies"]?.ToObject(typeof(int))).ToString("N0"));
+            Invoker.SetProperty(lblMoneyValue, () => lblMoneyValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["money"]?.ToObject(typeof(int))).ToString("N0"));
+            Invoker.SetProperty(lblDiaValue, () => lblDiaValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["premium"]?.ToObject(typeof(int))).ToString("N0"));
+            Invoker.SetProperty(lblMedsValue, () => lblMedsValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["medals"]?.ToObject(typeof(int))).ToString("N0"));
+            Invoker.SetProperty(lblFPValue, () => lblFPValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["strategy_points"]?.ToObject(typeof(int))).ToString("N0"));
          }
          if (ListClass.ResourceDefinitions.Count > 0)
          {
-            Invoker.SetProperty(lblMoney, () => lblMoney.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "money")["name"].ToString());
-            Invoker.SetProperty(lblSupplies, () => lblSupplies.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "supplies")["name"].ToString());
-            Invoker.SetProperty(lblMeds, () => lblMeds.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "medals")["name"].ToString());
-            Invoker.SetProperty(lblDiamonds, () => lblDiamonds.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "premium")["name"].ToString());
-            Invoker.SetProperty(lblFP, () => lblFP.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "strategy_points")["name"].ToString());
+            Invoker.SetProperty(lblMoney, () => lblMoney.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "money")["name"].ToString() + ":");
+            Invoker.SetProperty(lblSupplies, () => lblSupplies.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "supplies")["name"].ToString() + ":");
+            Invoker.SetProperty(lblMeds, () => lblMeds.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "medals")["name"].ToString() + ":");
+            Invoker.SetProperty(lblDiamonds, () => lblDiamonds.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "premium")["name"].ToString() + ":");
+            Invoker.SetProperty(lblFP, () => lblFP.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "strategy_points")["name"].ToString() + ":");
          }
       }
       private void UpdateSocial()
@@ -675,11 +682,7 @@ namespace ForgeOfBots.Forms
          {
             Application.DoEvents();
          };
-#if DEBUG
          Close();
-#else
-         Environment.Exit(0);
-#endif
       }
       private void Pbminimize_Click(object sender, EventArgs e)
       {
@@ -720,22 +723,15 @@ namespace ForgeOfBots.Forms
             ContinueExecution();
             mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
          }
-#if DEBUG
-         var x = new Dictionary<string, string>();
+         var startEvent = new Dictionary<string, string>();
          string startUp = $"{Identifier.GetInfo(_WCS, _WCS_Model)}-{Identifier.GetInfo(_WCS, _WCS_SystemType)} ({Identifier.GetInfo(_WOS, _WOS_Caption)})";
-         x.Add("Startup", startUp);
-         Analytics.TrackEvent("Startup", x);
-#elif RELEASE
-        var startEvent = new Dictionary<string, string>();
-        string startUp = $"{Identifier.GetInfo(_WCS, _WCS_Model)}-{Identifier.GetInfo(_WCS, _WCS_SystemType)} ({Identifier.GetInfo(_WOS, _WOS_Caption)})";
-        startEvent.Add("Startup", startUp);
-        Analytics.TrackEvent("Startup", startEvent);
+         startEvent.Add("Startup", startUp);
+         Analytics.TrackEvent("Startup", startEvent);
 
-        var userPremiumEvent = new Dictionary<string, string>();
-        string userPremium = $"{UserData.Username}({UserData.LastWorld}) {UserData.SerialKey}";
-        userPremiumEvent.Add(UserData.Username, userPremium);
-        Analytics.TrackEvent("UserPremium", userPremiumEvent);
-#endif
+         var userPremiumEvent = new Dictionary<string, string>();
+         string userPremium = $"{UserData.Username}({UserData.LastWorld}) {UserData.SerialKey}";
+         userPremiumEvent.Add(UserData.Username, userPremium);
+         Analytics.TrackEvent("UserPremium", userPremiumEvent);
       }
       private void FrmMain_Shown(object sender, EventArgs e)
       {

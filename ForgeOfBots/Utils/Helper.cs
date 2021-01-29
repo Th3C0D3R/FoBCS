@@ -28,6 +28,10 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Xml.Linq;
 using ForgeOfBots.Forms;
+using Microsoft.Win32;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.IO.Compression;
 
 namespace ForgeOfBots.Utils
 {
@@ -64,27 +68,27 @@ namespace ForgeOfBots.Utils
             { }
          }
 #elif RELEASE
-            if (listbox != null)
+         if (listbox != null)
+         {
+            msgHistory.Add(message);
+            MSGHistory.Add(message);
+            try
             {
-                msgHistory.Add(message);
-                MSGHistory.Add(message);
-                try
-                {
-                    
-               if(msgHistory.Count > 0)
+
+               if (msgHistory.Count > 0)
                {
                   Invoker.CallMethode(listbox, () => listbox.Items.AddRange(msgHistory.ToArray()));
                   Invoker.SetProperty(listbox, () => listbox.TopIndex, listbox.Items.Count - 1);
                   msgHistory.Clear();
                }
-                }
-                catch
-                { }
             }
-            else
-            {
-                Console.WriteLine(message);
-            }
+            catch
+            { }
+         }
+         else
+         {
+            Console.WriteLine(message);
+         }
 #endif
       }
       public static bool CheckForInternetConnection()
@@ -442,6 +446,38 @@ namespace ForgeOfBots.Utils
                if (!ListClass.PortraitList.ContainsKey(item.Attribute("name").Value))
                   ListClass.PortraitList.Add(item.Attribute("name").Value, $"https://foe{StaticData.UserData.WorldServer}.innogamescdn.com/assets/shared/avatars/{item.Attribute("src").Value + ".jpg"}");
             }
+         }
+      }
+      public static bool IsChromeInstalled()
+      {
+         try
+         {
+            string path = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe", "", null).ToString();
+            if (path != null)
+            {
+               string Version = FileVersionInfo.GetVersionInfo(path).FileVersion;
+               Version = Version.Substring(0, Version.LastIndexOf('.'));
+               string ChromeDriverVersionURL = $"https://chromedriver.storage.googleapis.com/LATEST_RELEASE_{Version}";
+               using (var webClient = new WebClient())
+               {
+                  webClient.Encoding = Encoding.GetEncoding(1252);
+                  string resultStrings = webClient.DownloadString(ChromeDriverVersionURL);
+                  string ChromeDriverURL = $"https://chromedriver.storage.googleapis.com/{resultStrings}/chromedriver_win32.zip";
+                  File.Delete("chromedriver.zip");
+                  webClient.Headers.Add("Accept: text/html, application/xhtml+xml, */*");
+                  webClient.DownloadFile(ChromeDriverURL, "chromedriver.zip");
+                  File.Delete("chromedriver.exe");
+                  ZipFile.ExtractToDirectory("chromedriver.zip",".");
+                  File.Delete("chromedriver.zip");
+               }
+               
+               return true;
+            }
+            return false;
+         }
+         catch (Exception)
+         {
+            return false;
          }
       }
    }
