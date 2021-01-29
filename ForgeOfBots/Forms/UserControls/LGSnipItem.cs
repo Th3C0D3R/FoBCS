@@ -1,5 +1,4 @@
-﻿using ForgeOfBots.CefBrowserHandler;
-using ForgeOfBots.GameClasses.ResponseClasses;
+﻿using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
 using System;
 using System.Collections.Generic;
@@ -38,7 +37,7 @@ namespace ForgeOfBots.Forms.UserControls
          set
          {
             if (InvokeRequired)
-               Invoker.SetProperty(lblProfit, () => lblProfit.Text, value);
+               Invoker.SetProperty(lblProfit, () => lblProfit.Text, $"{value}");
             else
                lblProfit.Text = value;
          }

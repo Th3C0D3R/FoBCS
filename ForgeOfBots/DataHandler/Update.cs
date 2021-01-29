@@ -1,11 +1,4 @@
-﻿using CefSharp;
-#if RELEASE || DEBUG
-using CefSharp.OffScreen;
-#elif DEBUGFORM
-using CefSharp.WinForms;
-#endif
-using ForgeOfBots.CefBrowserHandler;
-using ForgeOfBots.GameClasses;
+﻿using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
 using Newtonsoft.Json;

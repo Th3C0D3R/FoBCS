@@ -1,7 +1,4 @@
-﻿
-using ForgeOfBots.LanguageFiles;
-
-namespace ForgeOfBots.Forms
+﻿namespace ForgeOfBots.Forms
 {
    partial class WorkerList
    {

@@ -1,6 +1,5 @@
 ﻿using ForgeOfBots.Forms;
 using ForgeOfBots.Forms.UserControls;
-using ForgeOfBots.LanguageFiles;
 using System.Drawing;
 using System.Timers;
 using static ForgeOfBots.Utils.Helper;

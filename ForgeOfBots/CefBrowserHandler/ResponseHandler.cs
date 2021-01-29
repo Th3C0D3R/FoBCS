@@ -954,5 +954,4 @@ namespace ForgeOfBots.CefBrowserHandler
    public delegate void EverythingImportantLoadedEvent(object sender);
    public delegate void StartupLoadedEvent(RequestType type);
    public delegate void ListLoadedEvent(RequestType type);
-   public delegate void CustomEvent(object sender, dynamic data = null);
 }

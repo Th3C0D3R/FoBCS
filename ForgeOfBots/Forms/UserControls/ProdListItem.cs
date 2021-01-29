@@ -1,6 +1,4 @@
-﻿using ForgeOfBots.CefBrowserHandler;
-using ForgeOfBots.GameClasses;
-using ForgeOfBots.LanguageFiles;
+﻿using ForgeOfBots.GameClasses;
 using ForgeOfBots.Utils;
 using System;
 using System.Collections.Generic;
@@ -95,9 +93,9 @@ namespace ForgeOfBots.Forms.UserControls
                Debug.WriteLine($"[{DateTime.Now}] Production done");
                ProductionState = ProductionState.Finished;
                if (lblState.InvokeRequired)
-                  Invoker.SetProperty(lblState, () => lblState.Text, strings.ProductionFinishedState);
+                  Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ProductionFinishedState"));
                else
-                  lblState.Text = strings.ProductionFinishedState;
+                  lblState.Text = i18n.getString("ProductionFinishedState");
                if (ListClass.State != 1)
                   _ProductionDone?.Invoke(null, EntityIDs);
                return;
@@ -109,9 +107,9 @@ namespace ForgeOfBots.Forms.UserControls
                Debug.WriteLine($"[{DateTime.Now}] Production idle");
                ProductionState = ProductionState.Idle;
                if (lblState.InvokeRequired)
-                  Invoker.SetProperty(lblState, () => lblState.Text, strings.ProductionIdle);
+                  Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ProductionIdle"));
                else
-                  lblState.Text = strings.ProductionIdle;
+                  lblState.Text = i18n.getString("ProductionIdle");
                if (ListClass.State != 0)
                   _ProductionIdle?.Invoke(null, EntityIDs);
                return;
@@ -139,9 +137,9 @@ namespace ForgeOfBots.Forms.UserControls
             if (lblState.InvokeRequired)
             {
                if (isFinished)
-                  Invoker.SetProperty(lblState, () => lblState.Text, strings.ReadyToCollect);
+                  Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ReadyToCollect"));
                else if (ProductionState == ProductionState.Idle)
-                  Invoker.SetProperty(lblState, () => lblState.Text, strings.ProductionIdle);
+                  Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ProductionIdle"));
                else
                {
                   string days = "";
@@ -153,9 +151,9 @@ namespace ForgeOfBots.Forms.UserControls
             else
             {
                if (isFinished || ProductionState == ProductionState.Finished)
-                  lblState.Text = strings.ReadyToCollect;
+                  lblState.Text = i18n.getString("ReadyToCollect");
                else if (ProductionState == ProductionState.Idle)
-                  lblState.Text = strings.ProductionIdle;
+                  lblState.Text = i18n.getString("ProductionIdle");
                else
                {
                   string days = "";

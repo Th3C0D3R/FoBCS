@@ -28,14 +28,13 @@ namespace ForgeOfBots.Utils
       public static RequestBuilder ReqBuilder = new RequestBuilder();
       public static CUpdate Updater;
       public static BotData BotData = new BotData();
-      public static Log LogWnd;
       public static SettingData SettingData = new SettingData();
       public static Settings UserData;
       public static Assembly PremAssembly = null;
       public static Version Version = Assembly.GetExecutingAssembly().GetName().Version;
       public static UserDataInput usi = null;
-      public static Browser Browser = null;
       public static ImageList GoodImageList = null;
+      public static ImageList Portraits = new ImageList();
       public static IJavaScriptExecutor jsExecutor;
       public static ICookieJar cookieJar;
       public static IWebDriver driver;

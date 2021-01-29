@@ -1,7 +1,6 @@
 ﻿using ForgeOfBots.DataHandler;
 using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
-using ForgeOfBots.LanguageFiles;
 using ForgeOfBots.Utils;
 using ForgeOfBots.Utils.Premium;
 using MetroFramework.Controls;
@@ -195,6 +194,7 @@ namespace ForgeOfBots.Forms
          StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
          StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
 
+         ProcessPortraits();
          GoodImageExtractor.GetGoodImages(UserData.WorldServer);
 
          if (!string.IsNullOrWhiteSpace(UserData.SerialKey))
@@ -363,20 +363,20 @@ namespace ForgeOfBots.Forms
             Enum.TryParse(ret.ToString(), out Result result);
             if (result == Result.Success)
             {
-               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({strings.Premium}) | by TH3C0D3R");
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Premium")}) | by TH3C0D3R");
                object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
                if (retList is List<UCPremium> list)
                {
-                  Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({strings.Premium}) | by TH3C0D3R");
+                  Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Premium")}) | by TH3C0D3R");
                   e.Result = true;
                }
             }
             else if (result == Result.Expired)
             {
-               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({strings.Expired}) | by TH3C0D3R");
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Expired")}) | by TH3C0D3R");
                if (!blockExpireBox)
                {
-                  DialogResult dlgRes = MessageBox.Show(Owner, $"{strings.SubscriptionExpired}", $"{strings.SubExpiredTitle}", MessageBoxButtons.YesNo);
+                  DialogResult dlgRes = MessageBox.Show(Owner, $"{i18n.getString("SubscriptionExpired")}", $"{i18n.getString("SubExpiredTitle")}", MessageBoxButtons.YesNo);
                   if (dlgRes == DialogResult.Yes)
                   {
                      Process.Start("https://th3c0d3r.selly.store/");
@@ -394,7 +394,7 @@ namespace ForgeOfBots.Forms
             else
             {
                Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R");
-               MessageBox.Show(Owner, $"{strings.LicenceNotValid}", $"{strings.FailedToActivate}");
+               MessageBox.Show(Owner, $"{i18n.getString("LicenceNotValid")}", $"{i18n.getString("FailedToActivate")}");
             }
          }
       }
@@ -478,11 +478,11 @@ namespace ForgeOfBots.Forms
          }
          if (ListClass.Resources.Count > 0)
          {
-            Invoker.SetProperty(lblSuppliesValue, () => lblSuppliesValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["supplies"]?.ToObject(typeof(int))).ToString("N0"));
-            Invoker.SetProperty(lblMoneyValue, () => lblMoneyValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["money"]?.ToObject(typeof(int))).ToString("N0"));
-            Invoker.SetProperty(lblDiaValue, () => lblDiaValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["premium"]?.ToObject(typeof(int))).ToString("N0"));
-            Invoker.SetProperty(lblMedsValue, () => lblMedsValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["medals"]?.ToObject(typeof(int))).ToString("N0"));
-            Invoker.SetProperty(lblFPValue, () => lblFPValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["strategy_points"]?.ToObject(typeof(int))).ToString("N0"));
+            Invoker.SetProperty(lblSuppliesValue, () => lblSuppliesValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["supplies"]?.ToObject(typeof(int))).ToString("N0") + ":");
+            Invoker.SetProperty(lblMoneyValue, () => lblMoneyValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["money"]?.ToObject(typeof(int))).ToString("N0") + ":");
+            Invoker.SetProperty(lblDiaValue, () => lblDiaValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["premium"]?.ToObject(typeof(int))).ToString("N0")+":");
+            Invoker.SetProperty(lblMedsValue, () => lblMedsValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["medals"]?.ToObject(typeof(int))).ToString("N0") + ":");
+            Invoker.SetProperty(lblFPValue, () => lblFPValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["strategy_points"]?.ToObject(typeof(int))).ToString("N0") + ":");
          }
          if (ListClass.ResourceDefinitions.Count > 0)
          {
@@ -499,13 +499,13 @@ namespace ForgeOfBots.Forms
          var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
          var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
          var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
-         Invoker.SetProperty(lblFriends, () => lblFriends.Text, strings.Friends);
-         Invoker.SetProperty(lblClanMember, () => lblClanMember.Text, strings.Clanmembers);
-         Invoker.SetProperty(lblNeighbor, () => lblNeighbor.Text, strings.Neighbors);
+         Invoker.SetProperty(lblFriends, () => lblFriends.Text, i18n.getString("Friends"));
+         Invoker.SetProperty(lblClanMember, () => lblClanMember.Text, i18n.getString("Clanmembers"));
+         Invoker.SetProperty(lblNeighbor, () => lblNeighbor.Text, i18n.getString("Neighbors"));
          Invoker.SetProperty(lblFriendsCount, () => lblFriendsCount.Text, $"{friendMotivate.Count}/{ListClass.FriendList.Count}");
          Invoker.SetProperty(lblClanMemberCount, () => lblClanMemberCount.Text, $"{clanMotivate.Count}/{ListClass.ClanMemberList.Count}");
          Invoker.SetProperty(lblNeighborCount, () => lblNeighborCount.Text, $"{neighborlist.Count}/{ListClass.NeighborList.Count}");
-         Invoker.SetProperty(lblInactiveFriends, () => lblInactiveFriends.Text, strings.InactiveFriends);
+         Invoker.SetProperty(lblInactiveFriends, () => lblInactiveFriends.Text, i18n.getString("InactiveFriends"));
 
          var inactiveFriends = ListClass.FriendList.FindAll(f => (f.is_active == false && f.is_self == false));
          int row = 0;
@@ -517,7 +517,7 @@ namespace ForgeOfBots.Forms
             Label lblName = new Label
             {
                Dock = DockStyle.Top,
-               TextAlign = ContentAlignment.TopCenter,
+               TextAlign = ContentAlignment.BottomCenter,
                Font = new Font("Microsoft Sans Serif", 15, FontStyle.Regular),
                Text = item.name
             };
@@ -535,7 +535,7 @@ namespace ForgeOfBots.Forms
             Button btnRemove = new Button
             {
                Tag = item.player_id,
-               Text = strings.Remove,
+               Text = i18n.getString("Remove"),
                Dock = DockStyle.Top,
                AutoSize = true,
                Font = new System.Drawing.Font("Microsoft Sans Serif", 15, FontStyle.Regular)
@@ -555,9 +555,9 @@ namespace ForgeOfBots.Forms
          {
             Invoker.SetProperty(lblTavernSilverValue, () => lblTavernSilverValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["tavern_silver"]?.ToObject(typeof(int))).ToString("N0"));
          }
-         Invoker.SetProperty(lblTavernstate, () => lblTavernstate.Text, strings.TavernState);
-         Invoker.SetProperty(lblVisitable, () => lblVisitable.Text, strings.Visitable);
-         Invoker.SetProperty(btnCollect, () => btnCollect.Text, strings.CollectTavern);
+         Invoker.SetProperty(lblTavernstate, () => lblTavernstate.Text, i18n.getString("TavernState"));
+         Invoker.SetProperty(lblVisitable, () => lblVisitable.Text, i18n.getString("Visitable"));
+         Invoker.SetProperty(btnCollect, () => btnCollect.Text, i18n.getString("CollectTavern"));
          Invoker.SetProperty(lblTavernstateValue, () => lblTavernstateValue.Text, ListClass.OwnTavern.responseData[2].ToString() + "/" + ListClass.OwnTavern.responseData[1].ToString());
          if (ListClass.ResourceDefinitions.Count > 0)
          {
@@ -566,7 +566,7 @@ namespace ForgeOfBots.Forms
 
          var visitable = ListClass.FriendTaverns.FindAll(f => (f.sittingPlayerCount < f.unlockedChairCount && f.state == null));
          Invoker.SetProperty(lblVisitableValue, () => lblVisitableValue.Text, visitable.Count.ToString());
-         Invoker.SetProperty(lblCurSitting, () => lblCurSitting.Text, strings.CurrentlySittingPlayers);
+         Invoker.SetProperty(lblCurSitting, () => lblCurSitting.Text, i18n.getString("CurrentlySittingPlayers"));
          if (ListClass.OwnTavernData.view != null)
          {
             var ownTavern = ListClass.OwnTavernData.view.visitors.ToList();
@@ -579,8 +579,11 @@ namespace ForgeOfBots.Forms
                Label lblName = new Label
                {
                   Dock = DockStyle.Top,
-                  TextAlign = ContentAlignment.TopCenter,
+                  TextAlign = ContentAlignment.BottomCenter,
                   Font = new Font("Microsoft Sans Serif", 15, FontStyle.Regular),
+                  ImageList = Portraits,
+                  ImageAlign = ContentAlignment.TopCenter,
+                  ImageKey = item.avatar,
                   Text = item.name
                };
                Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lblName));
@@ -600,7 +603,7 @@ namespace ForgeOfBots.Forms
                   Button btnSitDown = new Button
                   {
                      Tag = item.player_id,
-                     Text = strings.SitDown,
+                     Text = i18n.getString("SitDown"),
                      Dock = DockStyle.Top,
                      AutoSize = true,
                      Font = new Font("Microsoft Sans Serif", 15, FontStyle.Regular)
@@ -615,7 +618,7 @@ namespace ForgeOfBots.Forms
                      Dock = DockStyle.Top,
                      TextAlign = ContentAlignment.TopCenter,
                      Font = new Font("Microsoft Sans Serif", 15, FontStyle.Regular),
-                     Text = strings.CanNotSitDown
+                     Text = i18n.getString("CanNotSitDown")
                   };
                   Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.Controls.Add(lnlSitState));
                }
@@ -667,6 +670,11 @@ namespace ForgeOfBots.Forms
       }
       private void PbCLose_Click(object sender, EventArgs e)
       {
+         bw.CancelAsync();
+         while (!Canceled)
+         {
+            Application.DoEvents();
+         };
 #if DEBUG
          Close();
 #else
@@ -874,7 +882,7 @@ namespace ForgeOfBots.Forms
                   ProdListItem pli = new ProdListItem();
                   if (item.Value.First().state["__class__"].ToString() == "IdleState")
                   {
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {i18n.getString("ProductionIdle")}", i18n.getString("ProductionIdle"));
                      pli.ProductionState = ProductionState.Idle;
                   }
                   else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
@@ -893,7 +901,7 @@ namespace ForgeOfBots.Forms
                      var productName = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().ToObject<JProperty>().Name;
                      productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
                      var productValue = item.Value.First().state["current_product"]["product"]["resources"].ToList().First().First;
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", strings.ProductionFinishedState);
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {productName} ({(int.Parse(productValue.ToString())) * item.Value.Count})", i18n.getString("ProductionFinishedState"));
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
@@ -912,12 +920,12 @@ namespace ForgeOfBots.Forms
                   ProdListItem pli = new ProdListItem();
                   if (item.state["__class__"].ToString() == "IdleState")
                   {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.FillControl($"{item.name}", $"{i18n.getString("ProductionIdle")}", i18n.getString("ProductionIdle"));
                      pli.ProductionState = ProductionState.Idle;
                   }
                   else if (item.state["__class__"].ToString() == "ProducingState")
                   {
-                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", strings.ProducingState);
+                     pli.FillControl($"{item.name}", $"{i18n.getString("ProducingState")}", i18n.getString("ProducingState"));
                      pli.ProductionState = ProductionState.Producing;
                      string greatestDur = item.state["next_state_transition_in"].ToString();
                      string greatestEnd = item.state["next_state_transition_at"].ToString();
@@ -925,7 +933,7 @@ namespace ForgeOfBots.Forms
                   }
                   else if (item.state["__class__"].ToString() == "ProductionFinishedState")
                   {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.FillControl($"{item.name}", $"{i18n.getString("ProductionFinishedState")}", i18n.getString("ProductionFinishedState"));
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
@@ -953,7 +961,7 @@ namespace ForgeOfBots.Forms
                   ProdListItem pli = new ProdListItem();
                   if (item.Value.First().state["__class__"].ToString() == "IdleState")
                   {
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {i18n.getString("ProductionIdle")}", i18n.getString("ProductionIdle"));
                      pli.ProductionState = ProductionState.Idle;
                   }
                   else if (item.Value.First().state["__class__"].ToString() == "ProducingState")
@@ -969,7 +977,7 @@ namespace ForgeOfBots.Forms
                   }
                   else if (item.Value.First().state["__class__"].ToString() == "ProductionFinishedState")
                   {
-                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.FillControl($"{item.Value.Count}x {item.Value.First().name}", $"{item.Value.Count}x {i18n.getString("ProductionFinishedState")}", i18n.getString("ProductionFinishedState"));
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
@@ -987,12 +995,12 @@ namespace ForgeOfBots.Forms
                   ProdListItem pli = new ProdListItem();
                   if (item.state["__class__"].ToString() == "IdleState")
                   {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionIdle}", strings.ProductionIdle);
+                     pli.FillControl($"{item.name}", $"{i18n.getString("ProductionIdle")}", i18n.getString("ProductionIdle"));
                      pli.ProductionState = ProductionState.Idle;
                   }
                   else if (item.state["__class__"].ToString() == "ProducingState")
                   {
-                     pli.FillControl($"{item.name}", $"{strings.ProducingState}", "");
+                     pli.FillControl($"{item.name}", $"{i18n.getString("ProducingState")}", "");
                      pli.ProductionState = ProductionState.Producing;
                      string greatestDur = item.state["next_state_transition_in"].ToString();
                      string greatestEnd = item.state["next_state_transition_at"].ToString();
@@ -1000,7 +1008,7 @@ namespace ForgeOfBots.Forms
                   }
                   else if (item.state["__class__"].ToString() == "ProductionFinishedState")
                   {
-                     pli.FillControl($"{item.name}", $"{strings.ProductionFinishedState}", strings.ProductionFinishedState);
+                     pli.FillControl($"{item.name}", $"{i18n.getString("ProductionFinishedState")}", i18n.getString("ProductionFinishedState"));
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
@@ -1087,6 +1095,11 @@ namespace ForgeOfBots.Forms
       private void CollectProduction()
       {
          OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectProduction };
+         bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+      }
+      private void CancelProduction()
+      {
+         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CancelProduction };
          bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
       }
       private void bwScriptExecuterOneArg_DoWork(object sender, DoWorkEventArgs e)
@@ -1258,7 +1271,6 @@ namespace ForgeOfBots.Forms
                }
                break;
             case RequestType.CollectIncident:
-               testBool = Enumerable.Repeat(false, ListClass.HiddenRewards.FindAll(x => x.isVisible).ToList().Count).ToList();
                UserData.LastIncidentTime = DateTime.Now;
                foreach (HiddenReward item in ListClass.HiddenRewards)
                {
@@ -1280,7 +1292,8 @@ namespace ForgeOfBots.Forms
                            successed = true;
                         if (Reward != null)
                         {
-                           IncidentCollected(Reward.ToString());
+
+                           Log($"{i18n.getString("IncidentCollected")} - {i18n.getString("Reward")}: {Reward.ToString()}", lbOutputWindow);
                         }
                      }
                      else if (ColIncRes["requestClass"].ToString() == "RewardService")
@@ -1288,41 +1301,41 @@ namespace ForgeOfBots.Forms
                         Reward = ColIncRes["responseData"][0][0]["name"];
                         if (successed)
                         {
-                           IncidentCollected(Reward.ToString());
+
+                           Log($"{i18n.getString("IncidentCollected")} - {i18n.getString("Reward")}: {Reward.ToString()}", lbOutputWindow);
                         }
                      }
                   }
                   Thread.Sleep(333);
                }
+               script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
+               ret = (string)jsExecutor.ExecuteAsyncScript(script);
+               HiddenRewardRoot newHiddenRewards = JsonConvert.DeserializeObject<HiddenRewardRoot>(ret);
+               foreach (HiddenReward item in newHiddenRewards.responseData.hiddenRewards)
+               {
+                  DateTime endTime = UnixTimeStampToDateTime(item.expireTime);
+                  DateTime startTime = UnixTimeStampToDateTime(item.startTime);
+                  bool vis = (endTime > DateTime.Now) && (startTime < DateTime.Now);
+                  item.isVisible = vis;
+               }
+               ListClass.HiddenRewards = newHiddenRewards.responseData.hiddenRewards.ToList();
+               UpdateHiddenRewardsView();
                break;
             default:
                break;
          }
       }
-      List<bool> testBool = new List<bool>();
-      private void IncidentCollected(string reward)
+      private void TsmiStartProduction_Click(object sender, EventArgs e)
       {
-         Log($"{strings.IncidentCollected} - {strings.Reward}: {reward}", lbOutputWindow);
-         int indexlastFalse = testBool.FindIndex(b => !b);
-         if (indexlastFalse == testBool.Count - 1)
-         {
-            string script = ReqBuilder.GetRequestScript(RequestType.GetIncidents, "");
-            string ret = (string)jsExecutor.ExecuteAsyncScript(script);
-            HiddenRewardRoot newHiddenRewards = JsonConvert.DeserializeObject<HiddenRewardRoot>(ret);
-            foreach (HiddenReward item in newHiddenRewards.responseData.hiddenRewards)
-            {
-               DateTime endTime = UnixTimeStampToDateTime(item.expireTime);
-               DateTime startTime = UnixTimeStampToDateTime(item.startTime);
-               bool vis = (endTime > DateTime.Now) && (startTime < DateTime.Now);
-               item.isVisible = vis;
-            }
-            ListClass.HiddenRewards = newHiddenRewards.responseData.hiddenRewards.ToList();
-            UpdateHiddenRewardsView();
-         }
-         else
-         {
-            testBool[indexlastFalse] = true;
-         }
+         StartProduction();
+      }
+      private void TsmiCollectProduction_Click(object sender, EventArgs e)
+      {
+         CollectProduction();
+      }
+      private void TsmiCancelProduction_Click(object sender, EventArgs e)
+      {
+         CancelProduction();
       }
       #endregion
 
@@ -1507,8 +1520,16 @@ namespace ForgeOfBots.Forms
       {
          UserData.LastWorld = ((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID;
          UserData.SaveSettings();
-         Close();
-         ReloadData();
+         string script = ReqBuilder.GetRequestScript(RequestType.switchWorld, UserData.LastWorld);
+         jsExecutor.ExecuteAsyncScript(script);
+         driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
+         cookieJar = driver.Manage().Cookies;
+         jsExecutor = (IJavaScriptExecutor)driver;
+         StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
+         StaticData.BotData.CSRF = cookieJar.AllCookies.HasCookie("CSRF").Item2;
+         StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
+         StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
+         GetUIDAndForgeHX(driver.PageSource);
       }
       private void mbDeleteData_Click(object sender, EventArgs e)
       {
@@ -1525,7 +1546,7 @@ namespace ForgeOfBots.Forms
             if (result == Result.Success)
             {
 
-               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({strings.Premium}) | by TH3C0D3R";
+               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Premium")}) | by TH3C0D3R";
                UserData.SerialKey = mtbSerialKey.Text;
                UserData.SaveSettings();
                object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
@@ -1537,15 +1558,15 @@ namespace ForgeOfBots.Forms
             }
             else if (result == Result.Expired)
             {
-               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({strings.Expired}) | by TH3C0D3R");
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Expired")}) | by TH3C0D3R");
                if (!blockExpireBox)
-                  MessageBox.Show(Owner, $"{strings.SubscriptionExpired}", $"{strings.SubExpiredTitle}");
+                  MessageBox.Show(Owner, $"{i18n.getString("SubscriptionExpired")}", $"{i18n.getString("SubExpiredTitle")}");
                blockExpireBox = true;
             }
             else
             {
                mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
-               MessageBox.Show(Owner, $"{strings.LicenceNotValid}", $"{strings.FailedToActivate}");
+               MessageBox.Show(Owner, $"{i18n.getString("LicenceNotValid")}", $"{i18n.getString("FailedToActivate")}");
             }
          }
       }
@@ -1689,12 +1710,12 @@ namespace ForgeOfBots.Forms
                      break;
                }
                StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, 0, list.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", list.Count.ToString()));
+               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", list.Count.ToString()));
                foreach (Player item in list)
                {
                   counter += 1;
                   StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, counter, list.Count);
-                  StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.CountLabel.Replace("##Done##", counter.ToString()).Replace("##End##", list.Count.ToString()));
+                  StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, i18n.getString("CountLabel").Replace("##Done##", counter.ToString()).Replace("##End##", list.Count.ToString()));
                   string script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
                   string retMot = (string)jsExecutor.ExecuteAsyncScript(script);
                   string[] motResponse = retMot.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
@@ -1728,7 +1749,7 @@ namespace ForgeOfBots.Forms
                         ListClass.doneMotivate.Add(playerid, (true, rewardResources));
                      }
                      else
-                        MessageBox.Show($"{strings.UnknownAction} {motivation.responseData.action}");
+                        MessageBox.Show($"{i18n.getString("UnknownAction")} {motivation.responseData.action}");
                   }
                   int nextInt = r.Next(333, 1000);
                   Thread.Sleep(nextInt);
@@ -1751,10 +1772,10 @@ namespace ForgeOfBots.Forms
                   }
                }
                foreach (var resItem in results)
-                  Log($"[{DateTime.Now}] {strings.PolivateResult} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
+                  Log($"[{DateTime.Now}] {i18n.getString("PolivateResult")} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
                ListClass.doneMotivate.Clear();
                StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, list.Count, list.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, strings.MotivationDone);
+               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, i18n.getString("MotivationDone"));
                UserData.LastPolivateTime = DateTime.Now;
                UserData.SaveSettings();
                (bool, bool) returnValMot = StaticData.WorkerList.RemoveWorkerByID(PolivateWorkerID);
@@ -1770,12 +1791,13 @@ namespace ForgeOfBots.Forms
                   else
                      StaticData.WorkerList.Close();
                }
+               ReloadData();
                break;
             case RequestType.VisitTavern:
                ListClass.FriendTaverns = ListClass.FriendTaverns.Where((f) => f.sittingPlayerCount < f.unlockedChairCount && f.state == null).ToList();
                if (ListClass.FriendTaverns.Count == 0 || ListClass.FriendList.Count == 0) return;
                StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, 0, ListClass.FriendTaverns.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
+               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
                foreach (FriendTavernState item in ListClass.FriendTaverns)
                {
                   string script = ReqBuilder.GetRequestScript(param.RequestType, item.ownerId);
@@ -1802,10 +1824,10 @@ namespace ForgeOfBots.Forms
                      if (item.ownerId.ToString() != "" && tavernresult.responseData.ownerId == item.ownerId)
                         ListClass.doneTavern.Add(tavernresult.responseData.ownerId, (true, rewardTavern));
                   if (TavernResultSitting == null)
-                     MessageBox.Show($"{strings.UnknownAction} {JsonConvert.SerializeObject(TavernResultSitting)}");
+                     MessageBox.Show($"{i18n.getString("UnknownAction")} {JsonConvert.SerializeObject(TavernResultSitting)}");
                   int nextIntTavern = r.Next(333, 1000);
                   StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, ListClass.doneTavern.Count, ListClass.FriendTaverns.Count);
-                  StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.CountLabel.Replace("##Done##", ListClass.doneTavern.Count.ToString()).Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
+                  StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, i18n.getString("CountLabel").Replace("##Done##", ListClass.doneTavern.Count.ToString()).Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
                   Thread.Sleep(nextIntTavern);
                }
                Dictionary<string, int> resultsTavern = new Dictionary<string, int>();
@@ -1826,10 +1848,10 @@ namespace ForgeOfBots.Forms
                   }
                }
                foreach (var resItem in resultsTavern)
-                  Log($"[{DateTime.Now}] {strings.TavernResult} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
+                  Log($"[{DateTime.Now}] {i18n.getString("TavernResult")} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
                ListClass.doneTavern.Clear();
                StaticData.WorkerList.UpdateWorkerProgressBar(TavernVisitWorkerID, ListClass.doneTavern.Count, ListClass.FriendTaverns.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, strings.TavernDone);
+               StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, i18n.getString("TavernDone"));
                (bool, bool) returnVal = StaticData.WorkerList.RemoveWorkerByID(TavernVisitWorkerID);
                if (returnVal.Item2)
                {
@@ -1843,6 +1865,7 @@ namespace ForgeOfBots.Forms
                   else
                      StaticData.WorkerList.Close();
                }
+               ReloadData();
                break;
             case RequestType.GetLGs:
                string retSnip = "";
@@ -1855,7 +1878,7 @@ namespace ForgeOfBots.Forms
                ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
                StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, strings.CountLabel.Replace("##Done##", "0").Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
+               StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
                int rInt = 0;
                foreach (Player item in ListClass.SnipablePlayers)
                {
@@ -2058,9 +2081,9 @@ namespace ForgeOfBots.Forms
                {
                   LGSnipItem lsi = new LGSnipItem()
                   {
-                     LG = $"{item.player.name} {item.name}",
+                     LG = $"{item.player.name} -> {item.name} ({item.level})",
                      LGSnip = item,
-                     Profit = item.GewinnString
+                     Profit = $"{item.Invest} (+{item.GewinnString})"
                   };
                   lsi.mcbSnip.Text = i18n.getString(lsi.mcbSnip.Tag.ToString());
                   lsi.Dock = DockStyle.Top;
@@ -2093,9 +2116,9 @@ namespace ForgeOfBots.Forms
       {
          WorkerItem wi = new WorkerItem()
          {
-            Title = strings.PolivateTitle,
-            BeforeCountText = strings.Status,
-            CountText = strings.CountLabel,
+            Title = i18n.getString("PolivateTitle"),
+            BeforeCountText = i18n.getString("Status"),
+            CountText = i18n.getString("CountLabel"),
             ID = PolivateWorkerID
          };
          if (Application.OpenForms["WorkerList"] == null)
@@ -2121,9 +2144,9 @@ namespace ForgeOfBots.Forms
       {
          WorkerItem wi = new WorkerItem()
          {
-            Title = strings.VisitAllTitle,
-            BeforeCountText = strings.Status,
-            CountText = strings.CountLabel,
+            Title = i18n.getString("VisitAllTitle"),
+            BeforeCountText = i18n.getString("Status"),
+            CountText = i18n.getString("CountLabel"),
             ID = TavernVisitWorkerID
          };
          if (Application.OpenForms["WorkerList"] == null)
@@ -2168,6 +2191,16 @@ namespace ForgeOfBots.Forms
       private void TsmiCollectTavern_Click(object sender, EventArgs e)
       {
          btnCollect_Click(null, null);
+      }
+      #endregion
+
+      #region "Help"
+      private void TvHelp_AfterSelect(object sender, TreeViewEventArgs e)
+      {
+         if (e.Node.Tag != null && !string.IsNullOrWhiteSpace(e.Node.Tag.ToString()))
+         {
+            mlHelpText.Text = e.Node.Tag.ToString();
+         }
       }
       #endregion
 
@@ -2223,24 +2256,6 @@ namespace ForgeOfBots.Forms
             cp.Style |= 0x20000;
             return cp;
          }
-      }
-
-      private void TsmiStartProduction_Click(object sender, EventArgs e)
-      {
-
-      }
-      private void TsmiCollectProduction_Click(object sender, EventArgs e)
-      {
-
-      }
-      private void TsmiCancelProduction_Click(object sender, EventArgs e)
-      {
-
-      }
-
-      private void TvHelp_AfterSelect(object sender, TreeViewEventArgs e)
-      {
-
       }
    }
 }

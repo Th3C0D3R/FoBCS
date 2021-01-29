@@ -40,6 +40,7 @@ namespace ForgeOfBots.Forms
             }
          }
          i18n.TranslateForm();
+         //TopMost = true;
       }
    }
 }

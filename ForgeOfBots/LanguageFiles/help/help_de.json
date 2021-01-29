@@ -2,7 +2,8 @@
   "languageCode": "de",
   "languageName": "Deutsch",
   "Root": {
-    "Text": "Forge of Bots Hilfe",
+    "Title": "Forge of Bots Hilfe",
+    "Text": "Forge of Bots Hilfe\n\nWähle ein Unterthema\n\n für weitere Hilfe komme in den Discord: \"https://discord.gg/DJv8rNsbP7\"",
     "Children": [
       {
         "Title": "Funktionen",
@@ -11,15 +12,8 @@
       },
       {
         "Title": "Sniper",
-        "HasChildren": true,
-        "Text": "Erklärung \"Snipen\":\nMit \"Snipen\" bezeichnet man die Aktion, fremde LGs zu durchsuchen und ein Platz, der überversichert ist,\nmit weniger zu besetzen als man normal (1.9er Förderung) zahlen muss. Klingt kompliziert, ist es aber nicht.\n\nBeispiel:\nSpieler A hat min. eine 80er Arche!\n\nSpieler B hat ein LG mit insgesamt 200 eingezahlten FP von 300 FP bis zum Level (also 100 FP fehlen noch und es sind keine anderen Spieler vorhanden)\nPlatz 1 in diesem LG würde 60FP Belohnung geben (also 114FP mit 1.9er Arche)\nSpieler A kann nun NUR 50FP einzahlen um P1 zu sichern und kann somit ein Gewinn von 64FP einfahren\n\nDas ganze funktioniert natürlich nur dann wenn Spieler B aktiv ist und das LG auch levelt.\n\nDer Bot berücksichtigt automatisch das \"active\"-Flag, trotzdem kann es immer noch vorkommen\ndas der Spieler das LG dann nicht mehr weiter fördert.",
-        "Children": [
-          {
-            "Title": "TEST",
-            "HasChildren": false,
-            "Text": "TTTTTEEEEESSSSTTTTTT"
-          }
-        ]
+        "HasChildren": false,
+        "Text": "Erklärung \"Snipen\":\nMit \"Snipen\" bezeichnet man die Aktion, fremde LGs zu durchsuchen und ein Platz, der überversichert ist,\nmit weniger zu besetzen als man normal (1.9er Förderung) zahlen muss. Klingt kompliziert, ist es aber nicht.\n\nBeispiel:\nSpieler A hat min. eine 80er Arche!\n\nSpieler B hat ein LG mit insgesamt 200 eingezahlten FP von 300 FP bis zum Level (also 100 FP fehlen noch und es sind keine anderen Spieler vorhanden)\nPlatz 1 in diesem LG würde 60FP Belohnung geben (also 114FP mit 1.9er Arche)\nSpieler A kann nun NUR 50FP einzahlen um P1 zu sichern und kann somit ein Gewinn von 64FP einfahren\n\nDas ganze funktioniert natürlich nur dann wenn Spieler B aktiv ist und das LG auch levelt.\n\nDer Bot berücksichtigt automatisch das \"active\"-Flag, trotzdem kann es immer noch vorkommen\ndas der Spieler das LG dann nicht mehr weiter fördert."
       }
     ]
   }

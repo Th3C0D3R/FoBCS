@@ -21,12 +21,13 @@ using System.Diagnostics;
 using Windows.Foundation;
 using System.ComponentModel;
 using System.Drawing;
-using ForgeOfBots.LanguageFiles;
 using System.Net;
 using Microsoft.AppCenter.Crashes;
 using System.Threading.Tasks;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Xml.Linq;
+using ForgeOfBots.Forms;
 
 namespace ForgeOfBots.Utils
 {
@@ -144,7 +145,7 @@ namespace ForgeOfBots.Utils
          {
             foreach (JToken resDef in resourceDefList["responseData"].ToList())
             {
-               if (goodList.ContainsKey(era.name) && goodList[era.name].Count >= 5) break;
+               //if (goodList.ContainsKey(era.name) && goodList[era.name].Count >= 5 && ((Eras)Enum.Parse(typeof(Eras), era.era, true)) < Eras.ArcticFuture) break;
                if (resDef["era"]?.ToString() == era.era)
                {
                   foreach (JToken resource in resources["responseData"]["resources"].ToList())
@@ -372,7 +373,7 @@ namespace ForgeOfBots.Utils
          {
             if (SpaceAgeMars.Length < Level) return 0; else return SpaceAgeMars[Level];
          }
-         else if(AgeString == "SpaceAgeAsteroidBelt")
+         else if (AgeString == "SpaceAgeAsteroidBelt")
          {
             if (SpaceAgeAsteroidBelt.Length < Level) return 0; else return SpaceAgeAsteroidBelt[Level];
          }
@@ -409,6 +410,39 @@ namespace ForgeOfBots.Utils
          }
 
          return destImage;
+      }
+      public async static Task GetPortraitsXML()
+      {
+         string url = "https://foe##server##.innogamescdn.com/assets/shared/avatars/Portraits.xml";
+         string jsonURL = url.Replace("##server##", StaticData.UserData.WorldServer);
+         string JSON_FilePath = Path.Combine(StaticData.ProgramPath, Path.GetFileName(jsonURL));
+         if (!Directory.Exists(StaticData.ProgramPath)) Directory.CreateDirectory(StaticData.ProgramPath);
+         FileInfo fi = new FileInfo(JSON_FilePath);
+         Console.Write($"Downloading {Path.GetFileName(jsonURL)} [");
+         using (var client = new WebClient())
+         {
+            Uri uri = new Uri(jsonURL.Replace("'", ""));
+            client.Headers.Add("User-Agent", StaticData.UserData.CustomUserAgent);
+            client.QueryString.Add("file", JSON_FilePath);
+            if (fi.Exists) fi.Delete();
+            await client.DownloadFileTaskAsync(uri, JSON_FilePath).ConfigureAwait(false);
+         }
+      }
+      public static void ProcessPortraits()
+      {
+
+         GetPortraitsXML().Wait(1000 * 3);
+         string JSON_FilePath = Path.Combine(StaticData.ProgramPath, "Portraits.xml");
+         Console.WriteLine($"Downloading {JSON_FilePath} complete");
+         if (Path.GetExtension(JSON_FilePath) == ".xml")
+         {
+            var xml = XDocument.Load(JSON_FilePath);
+            foreach (var item in xml.Root.Elements("portrait").ToList())
+            {
+               if (!ListClass.PortraitList.ContainsKey(item.Attribute("name").Value))
+                  ListClass.PortraitList.Add(item.Attribute("name").Value, $"https://foe{StaticData.UserData.WorldServer}.innogamescdn.com/assets/shared/avatars/{item.Attribute("src").Value + ".jpg"}");
+            }
+         }
       }
    }
    public class WorldData
@@ -477,7 +511,7 @@ namespace ForgeOfBots.Utils
           TypedEventHandler<ToastNotification, ToastDismissedEventArgs> dismissFunc = null,
           TypedEventHandler<ToastNotification, ToastFailedEventArgs> failFunc = null, string iconPath = "", string APP_ID = "")
       {
-         ComponentResourceManager resources = new ComponentResourceManager(typeof(Main));
+         ComponentResourceManager resources = new ComponentResourceManager(typeof(frmMain));
          System.Drawing.Icon icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
 
          string filepath = Path.Combine(Environment.ExpandEnvironmentVariables(@"%AppData%"), "FoBots");
@@ -512,7 +546,7 @@ namespace ForgeOfBots.Utils
          {
             NLog.LogManager.Flush();
             var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
-            var properties = new Dictionary<string, string> { { "ShowNotify", strings.ShowingNotify } };
+            var properties = new Dictionary<string, string> { { "ShowNotify", i18n.getString("ShowingNotify") } };
             Crashes.TrackError(ex, properties, attachments);
          }
       }
@@ -664,4 +698,31 @@ namespace ForgeOfBots.Utils
       public T RequestType { get; set; }
       public Y argument2 { get; set; }
    }
+   public enum Eras
+   {
+      AllAge = 0,
+      NoAge = 0,
+      StoneAge = 1,
+      BronzeAge = 2,
+      IronAge = 3,
+      EarlyMiddleAge = 4,
+      HighMiddleAge = 5,
+      LateMiddleAge = 6,
+      ColonialAge = 7,
+      IndustrialAge = 8,
+      ProgressiveEra = 9,
+      ModernEra = 10,
+      PostModernEra = 11,
+      ContemporaryEra = 12,
+      TomorrowEra = 13,
+      FutureEra = 14,
+      ArcticFuture = 15,
+      OceanicFuture = 16,
+      VirtualFuture = 17,
+      SpaceAgeMars = 18,
+      SpaceAgeAsteroidBelt = 19,
+      SpaceAgeVenus = 20
+   };
+
+   public delegate void CustomEvent(object sender, dynamic data = null);
 }

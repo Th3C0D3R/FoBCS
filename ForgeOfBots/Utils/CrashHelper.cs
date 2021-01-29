@@ -1,5 +1,4 @@
-﻿using ForgeOfBots.LanguageFiles;
-using Microsoft.AppCenter.Crashes;
+﻿using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace ForgeOfBots.Utils
          };
          if (!alwaysSend)
          {
-            DialogResult dlres = MessageBox.Show(strings.TextCrashLog, strings.AskCrashLog, MessageBoxButtons.YesNoCancel);
+            DialogResult dlres = MessageBox.Show(i18n.getString("TextCrashLog"), i18n.getString("AskCrashLog"), MessageBoxButtons.YesNoCancel);
             switch (dlres)
             {
                case DialogResult.Cancel:
@@ -37,7 +36,7 @@ namespace ForgeOfBots.Utils
                   Crashes.SentErrorReport += (sender, e) =>
                   {
                      logger.Info($"Error Report send successfull");
-                     MessageBox.Show(strings.SuccessTitle, strings.SuccessText);
+                     MessageBox.Show(i18n.getString("SuccessTitle"), i18n.getString("SuccessText"));
                   };
                   StaticData.UserData.AllowSendCrashLog = UserConfirmation.DontSend;
                   break;

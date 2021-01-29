@@ -29,8 +29,11 @@ namespace ForgeOfBots.DataHandler
          int[] queryData = new int[] { };
          int[,] armyData = new int[2, 8];
          int idData = 0;
+         string world = StaticData.UserData.LastWorld;
          if (type == RequestType.QueryProduction || type == RequestType.CollectProduction || type == RequestType.getConstruction || type == RequestType.contributeForgePoints)
             queryData = (int[])data;
+         else if (type == RequestType.switchWorld)
+            world = (data == StaticData.UserData.LastWorld ? data : StaticData.UserData.LastWorld);
          else if (type == RequestType.GEAttack)
             armyData = (int[,])data;
          else if (data is int iData)
@@ -178,6 +181,11 @@ namespace ForgeOfBots.DataHandler
                _class = "GreatBuildingsService";
                _methode = "contributeForgePoints";
                break;
+            case RequestType.switchWorld:
+               _data = new JArray(world);
+               _class = "WorldService";
+               _methode = "switchWorld";
+               break;
             default:
                _data = new JArray();
                _class = "StartupService";
@@ -271,7 +279,8 @@ namespace ForgeOfBots.DataHandler
       GEAttack,
       GEServiceCollectChest,
       getConstruction,
-      contributeForgePoints
+      contributeForgePoints,
+      switchWorld
    }
 
    public enum E_Motivate

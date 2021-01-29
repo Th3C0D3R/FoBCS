@@ -100,19 +100,19 @@ namespace ForgeOfBots.Utils
          tv.Nodes.Clear();
          try
          {
-            tv.Nodes.Add(HelpObject["Root"]["Text"].ToString());
+            tv.Nodes.Add(HelpObject["Root"]["Title"].ToString());
             TreeNode root = tv.Nodes[0];
+            root.Tag = HelpObject["Root"]["Text"].ToString();
             foreach (dynamic c in HelpObject["Root"]["Children"])
             {
                TreeNode tn = new TreeNode(c["Title"].ToString());
                tn.Tag = c["Text"].ToString();
                if (c["HasChildren"].ToString().ToLower() == "true")
-                  root.Nodes.AddRange(GetChildNode(c["Children"]));
-               else
-                  root.Nodes.Add(tn);
+                  tn.Nodes.AddRange(GetChildNode(c["Children"]).ToArray());
+               root.Nodes.Add(tn);
             }
          }
-         catch (Exception)
+         catch (Exception ex)
          {
             tv.Nodes.Add("FAILED TO PARSE HELP-FILE");
          }

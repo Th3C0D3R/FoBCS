@@ -99,8 +99,11 @@ namespace ForgeOfBots.Forms
          this.lblVisitable = new System.Windows.Forms.Label();
          this.lblVisitableValue = new System.Windows.Forms.Label();
          this.tpMessageCenter = new System.Windows.Forms.TabPage();
+         this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
          this.tpChat = new System.Windows.Forms.TabPage();
+         this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
          this.tpArmy = new System.Windows.Forms.TabPage();
+         this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
          this.tpProduction = new System.Windows.Forms.TabPage();
          this.pnlGood = new System.Windows.Forms.Panel();
          this.panel14 = new System.Windows.Forms.Panel();
@@ -124,12 +127,14 @@ namespace ForgeOfBots.Forms
          this.tpCity = new System.Windows.Forms.TabPage();
          this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
          this.pnlIncident = new System.Windows.Forms.Panel();
+         this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
+         this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
          this.tpSniper = new System.Windows.Forms.TabPage();
          this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
          this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
          this.mbSnip = new MetroFramework.Controls.MetroButton();
          this.mbSearch = new MetroFramework.Controls.MetroButton();
-         this.mpSnipItem = new MetroFramework.Controls.MetroPanel();
+         this.mpSnipItem = new System.Windows.Forms.Panel();
          this.tpSettings = new System.Windows.Forms.TabPage();
          this.mtcSettings = new MetroFramework.Controls.MetroTabControl();
          this.mtpProduction = new MetroFramework.Controls.MetroTabPage();
@@ -197,10 +202,11 @@ namespace ForgeOfBots.Forms
          this.lblLanguage = new MetroFramework.Controls.MetroLabel();
          this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
          this.tpHelp = new System.Windows.Forms.TabPage();
-         this.mpHelpDetails = new MetroFramework.Controls.MetroPanel();
          this.tvHelp = new System.Windows.Forms.TreeView();
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
+         this.panel1 = new System.Windows.Forms.Panel();
+         this.mlHelpText = new System.Windows.Forms.RichTextBox();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -224,6 +230,9 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel5.SuspendLayout();
          this.panel6.SuspendLayout();
          this.tableLayoutPanel4.SuspendLayout();
+         this.tpMessageCenter.SuspendLayout();
+         this.tpChat.SuspendLayout();
+         this.tpArmy.SuspendLayout();
          this.tpProduction.SuspendLayout();
          this.pnlGood.SuspendLayout();
          this.panel14.SuspendLayout();
@@ -236,6 +245,7 @@ namespace ForgeOfBots.Forms
          this.panel12.SuspendLayout();
          this.tpCity.SuspendLayout();
          this.tableLayoutPanel2.SuspendLayout();
+         this.metroPanel4.SuspendLayout();
          this.tpSniper.SuspendLayout();
          this.tableLayoutPanel6.SuspendLayout();
          this.metroPanel3.SuspendLayout();
@@ -251,6 +261,7 @@ namespace ForgeOfBots.Forms
          this.mtpBots.SuspendLayout();
          this.mtpMisc.SuspendLayout();
          this.tpHelp.SuspendLayout();
+         this.panel1.SuspendLayout();
          this.SuspendLayout();
          // 
          // metroPanel1
@@ -438,16 +449,16 @@ namespace ForgeOfBots.Forms
          // 
          // lbOutputWindow
          // 
-         resources.ApplyResources(this.lbOutputWindow, "lbOutputWindow");
          this.lbOutputWindow.BackColor = System.Drawing.SystemColors.ControlLight;
+         resources.ApplyResources(this.lbOutputWindow, "lbOutputWindow");
          this.lbOutputWindow.FormattingEnabled = true;
          this.lbOutputWindow.Name = "lbOutputWindow";
          this.lbOutputWindow.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
          // 
          // gbStatistic
          // 
-         resources.ApplyResources(this.gbStatistic, "gbStatistic");
          this.gbStatistic.Controls.Add(this.tableLayoutPanel8);
+         resources.ApplyResources(this.gbStatistic, "gbStatistic");
          this.gbStatistic.Name = "gbStatistic";
          this.gbStatistic.TabStop = false;
          this.gbStatistic.Tag = "GUI.Dashbord.Statistic";
@@ -788,24 +799,51 @@ namespace ForgeOfBots.Forms
          // 
          // tpMessageCenter
          // 
+         this.tpMessageCenter.Controls.Add(this.metroLabel4);
          resources.ApplyResources(this.tpMessageCenter, "tpMessageCenter");
          this.tpMessageCenter.Name = "tpMessageCenter";
          this.tpMessageCenter.Tag = "GUI.MessageCenter";
          this.tpMessageCenter.UseVisualStyleBackColor = true;
          // 
+         // metroLabel4
+         // 
+         resources.ApplyResources(this.metroLabel4, "metroLabel4");
+         this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Tall;
+         this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+         this.metroLabel4.Name = "metroLabel4";
+         this.metroLabel4.Tag = "GUI.UnderConstruction";
+         // 
          // tpChat
          // 
+         this.tpChat.Controls.Add(this.metroLabel5);
          resources.ApplyResources(this.tpChat, "tpChat");
          this.tpChat.Name = "tpChat";
          this.tpChat.Tag = "GUI.Chat";
          this.tpChat.UseVisualStyleBackColor = true;
          // 
+         // metroLabel5
+         // 
+         resources.ApplyResources(this.metroLabel5, "metroLabel5");
+         this.metroLabel5.FontSize = MetroFramework.MetroLabelSize.Tall;
+         this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+         this.metroLabel5.Name = "metroLabel5";
+         this.metroLabel5.Tag = "GUI.UnderConstruction";
+         // 
          // tpArmy
          // 
+         this.tpArmy.Controls.Add(this.metroLabel6);
          resources.ApplyResources(this.tpArmy, "tpArmy");
          this.tpArmy.Name = "tpArmy";
          this.tpArmy.Tag = "GUI.Army";
          this.tpArmy.UseVisualStyleBackColor = true;
+         // 
+         // metroLabel6
+         // 
+         resources.ApplyResources(this.metroLabel6, "metroLabel6");
+         this.metroLabel6.FontSize = MetroFramework.MetroLabelSize.Tall;
+         this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+         this.metroLabel6.Name = "metroLabel6";
+         this.metroLabel6.Tag = "GUI.UnderConstruction";
          // 
          // tpProduction
          // 
@@ -843,16 +881,19 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.label6, "label6");
          this.label6.Name = "label6";
+         this.label6.Tag = "GUI.Production.State";
          // 
          // label7
          // 
          resources.ApplyResources(this.label7, "label7");
          this.label7.Name = "label7";
+         this.label7.Tag = "GUI.Production.Product";
          // 
          // label8
          // 
          resources.ApplyResources(this.label8, "label8");
          this.label8.Name = "label8";
+         this.label8.Tag = "GUI.Production.Buildings";
          // 
          // panel13
          // 
@@ -864,6 +905,7 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.label5, "label5");
          this.label5.Name = "label5";
+         this.label5.Tag = "GUI.Production.GoodProductionList";
          // 
          // pnlGoodProductionList
          // 
@@ -907,16 +949,19 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.label4, "label4");
          this.label4.Name = "label4";
+         this.label4.Tag = "GUI.Production.State";
          // 
          // label3
          // 
          resources.ApplyResources(this.label3, "label3");
          this.label3.Name = "label3";
+         this.label3.Tag = "GUI.Production.Product";
          // 
          // label1
          // 
          resources.ApplyResources(this.label1, "label1");
          this.label1.Name = "label1";
+         this.label1.Tag = "GUI.Production.Buildings";
          // 
          // panel12
          // 
@@ -928,6 +973,7 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.lblProductionList, "lblProductionList");
          this.lblProductionList.Name = "lblProductionList";
+         this.lblProductionList.Tag = "GUI.Production.ProductionList";
          // 
          // tpCity
          // 
@@ -942,6 +988,7 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
          this.tableLayoutPanel2.ContextMenuStrip = this.cmsMainMenu;
          this.tableLayoutPanel2.Controls.Add(this.pnlIncident, 0, 0);
+         this.tableLayoutPanel2.Controls.Add(this.metroPanel4, 1, 0);
          this.tableLayoutPanel2.Name = "tableLayoutPanel2";
          // 
          // pnlIncident
@@ -949,6 +996,26 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.pnlIncident, "pnlIncident");
          this.pnlIncident.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
          this.pnlIncident.Name = "pnlIncident";
+         // 
+         // metroPanel4
+         // 
+         this.metroPanel4.Controls.Add(this.metroLabel7);
+         resources.ApplyResources(this.metroPanel4, "metroPanel4");
+         this.metroPanel4.HorizontalScrollbarBarColor = true;
+         this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
+         this.metroPanel4.HorizontalScrollbarSize = 10;
+         this.metroPanel4.Name = "metroPanel4";
+         this.metroPanel4.VerticalScrollbarBarColor = true;
+         this.metroPanel4.VerticalScrollbarHighlightOnWheel = false;
+         this.metroPanel4.VerticalScrollbarSize = 10;
+         // 
+         // metroLabel7
+         // 
+         resources.ApplyResources(this.metroLabel7, "metroLabel7");
+         this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Tall;
+         this.metroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+         this.metroLabel7.Name = "metroLabel7";
+         this.metroLabel7.Tag = "GUI.UnderConstruction";
          // 
          // tpSniper
          // 
@@ -995,13 +1062,7 @@ namespace ForgeOfBots.Forms
          // mpSnipItem
          // 
          resources.ApplyResources(this.mpSnipItem, "mpSnipItem");
-         this.mpSnipItem.HorizontalScrollbarBarColor = true;
-         this.mpSnipItem.HorizontalScrollbarHighlightOnWheel = false;
-         this.mpSnipItem.HorizontalScrollbarSize = 10;
          this.mpSnipItem.Name = "mpSnipItem";
-         this.mpSnipItem.VerticalScrollbarBarColor = true;
-         this.mpSnipItem.VerticalScrollbarHighlightOnWheel = false;
-         this.mpSnipItem.VerticalScrollbarSize = 10;
          // 
          // tpSettings
          // 
@@ -1021,7 +1082,7 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 0;
+         this.mtcSettings.SelectedIndex = 1;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          this.mtcSettings.UseStyleColors = true;
          // 
@@ -1571,22 +1632,12 @@ namespace ForgeOfBots.Forms
          // 
          // tpHelp
          // 
-         this.tpHelp.Controls.Add(this.mpHelpDetails);
+         this.tpHelp.Controls.Add(this.panel1);
          this.tpHelp.Controls.Add(this.tvHelp);
          resources.ApplyResources(this.tpHelp, "tpHelp");
          this.tpHelp.Name = "tpHelp";
+         this.tpHelp.Tag = "GUI.Help";
          this.tpHelp.UseVisualStyleBackColor = true;
-         // 
-         // mpHelpDetails
-         // 
-         resources.ApplyResources(this.mpHelpDetails, "mpHelpDetails");
-         this.mpHelpDetails.HorizontalScrollbarBarColor = true;
-         this.mpHelpDetails.HorizontalScrollbarHighlightOnWheel = false;
-         this.mpHelpDetails.HorizontalScrollbarSize = 10;
-         this.mpHelpDetails.Name = "mpHelpDetails";
-         this.mpHelpDetails.VerticalScrollbarBarColor = true;
-         this.mpHelpDetails.VerticalScrollbarHighlightOnWheel = false;
-         this.mpHelpDetails.VerticalScrollbarSize = 10;
          // 
          // tvHelp
          // 
@@ -1605,6 +1656,20 @@ namespace ForgeOfBots.Forms
          // 
          this.bwScriptExecuterOneArg.WorkerSupportsCancellation = true;
          this.bwScriptExecuterOneArg.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwScriptExecuterOneArg_DoWork);
+         // 
+         // panel1
+         // 
+         this.panel1.Controls.Add(this.mlHelpText);
+         resources.ApplyResources(this.panel1, "panel1");
+         this.panel1.Name = "panel1";
+         // 
+         // mlHelpText
+         // 
+         resources.ApplyResources(this.mlHelpText, "mlHelpText");
+         this.mlHelpText.EnableAutoDragDrop = true;
+         this.mlHelpText.Name = "mlHelpText";
+         this.mlHelpText.ReadOnly = true;
+         this.mlHelpText.ShowSelectionMargin = true;
          // 
          // frmMain
          // 
@@ -1631,6 +1696,7 @@ namespace ForgeOfBots.Forms
          this.gbLog.ResumeLayout(false);
          this.gbStatistic.ResumeLayout(false);
          this.tableLayoutPanel8.ResumeLayout(false);
+         this.tableLayoutPanel8.PerformLayout();
          this.tpSocial.ResumeLayout(false);
          this.panel5.ResumeLayout(false);
          this.tableLayoutPanel3.ResumeLayout(false);
@@ -1646,6 +1712,9 @@ namespace ForgeOfBots.Forms
          this.panel6.ResumeLayout(false);
          this.tableLayoutPanel4.ResumeLayout(false);
          this.tableLayoutPanel4.PerformLayout();
+         this.tpMessageCenter.ResumeLayout(false);
+         this.tpChat.ResumeLayout(false);
+         this.tpArmy.ResumeLayout(false);
          this.tpProduction.ResumeLayout(false);
          this.tpProduction.PerformLayout();
          this.pnlGood.ResumeLayout(false);
@@ -1661,6 +1730,7 @@ namespace ForgeOfBots.Forms
          this.panel12.ResumeLayout(false);
          this.tpCity.ResumeLayout(false);
          this.tableLayoutPanel2.ResumeLayout(false);
+         this.metroPanel4.ResumeLayout(false);
          this.tpSniper.ResumeLayout(false);
          this.tableLayoutPanel6.ResumeLayout(false);
          this.metroPanel3.ResumeLayout(false);
@@ -1680,6 +1750,7 @@ namespace ForgeOfBots.Forms
          this.mtpBots.PerformLayout();
          this.mtpMisc.ResumeLayout(false);
          this.tpHelp.ResumeLayout(false);
+         this.panel1.ResumeLayout(false);
          this.ResumeLayout(false);
 
       }
@@ -1851,10 +1922,16 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
       private MetroFramework.Controls.MetroPanel metroPanel3;
       private MetroFramework.Controls.MetroButton mbSearch;
-      private MetroFramework.Controls.MetroPanel mpSnipItem;
       private MetroFramework.Controls.MetroButton mbSnip;
       private System.Windows.Forms.TabPage tpHelp;
-      private MetroFramework.Controls.MetroPanel mpHelpDetails;
       private System.Windows.Forms.TreeView tvHelp;
+      private MetroFramework.Controls.MetroLabel metroLabel4;
+      private MetroFramework.Controls.MetroLabel metroLabel5;
+      private MetroFramework.Controls.MetroLabel metroLabel6;
+      private MetroFramework.Controls.MetroPanel metroPanel4;
+      private MetroFramework.Controls.MetroLabel metroLabel7;
+      private System.Windows.Forms.Panel mpSnipItem;
+      private System.Windows.Forms.Panel panel1;
+      public System.Windows.Forms.RichTextBox mlHelpText;
    }
 }
