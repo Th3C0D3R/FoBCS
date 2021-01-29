@@ -455,6 +455,7 @@ namespace ForgeOfBots.Utils
             string path = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\chrome.exe", "", null).ToString();
             if (path != null)
             {
+               if (File.Exists("chromedriver.exe")) return true;
                string Version = FileVersionInfo.GetVersionInfo(path).FileVersion;
                Version = Version.Substring(0, Version.LastIndexOf('.'));
                string ChromeDriverVersionURL = $"https://chromedriver.storage.googleapis.com/LATEST_RELEASE_{Version}";

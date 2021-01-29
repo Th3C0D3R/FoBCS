@@ -148,7 +148,6 @@ namespace ForgeOfBots.Forms
                   Crashes.SetEnabledAsync(false).Wait();
             }
             Application.ApplicationExit += Application_ApplicationExit;
-            InitSettingsTab();
          }
          catch (Exception ex)
          {
@@ -320,20 +319,26 @@ namespace ForgeOfBots.Forms
       private void Ws_WorldDataEntered(Form that, string key, string value)
       {
          UserData.LastWorld = key;
+         UserData.AutoLogin = true;
+         UserData.SaveSettings();
          string loginJS = resMgr.GetString("preloadLoginWorld");
+         Log("[DEBUG] Doing Login", lbOutputWindow);
          loginJS = loginJS
             .Replace("###XSRF-TOKEN###", StaticData.BotData.XSRF)
-               .Replace("###USERNAME###", UserData.Username)
-               .Replace("###PASSWORD###", UserData.Password)
-               .Replace("##server##", UserData.WorldServer)
-               .Replace("##city##", "\"" + UserData.LastWorld + "\"")
-            .Replace("##t##", "false");
-         var ret = (string)jsExecutor.ExecuteAsyncScript(loginJS);
+            .Replace("###USERNAME###", UserData.Username)
+            .Replace("###PASSWORD###", UserData.Password)
+            .Replace("##server##", UserData.WorldServer)
+          .Replace("##t##", "false")
+          .Replace("##city##", "\"" + UserData.LastWorld + "\"");
+         var x = jsExecutor.ExecuteAsyncScript(loginJS);
+         var ret = (string)x;
+         driver.Navigate().GoToUrl(ret);
          that.Close();
          GetUIDAndForgeHX(driver.PageSource);
       }
       private void GetUIDAndForgeHX(string source)
       {
+         InitSettingsTab();
          var regExUserID = new Regex(@"https:\/\/(\w{1,2}\d{1,2})\.forgeofempires\.com\/game\/json\?h=(.+)'", RegexOptions.IgnoreCase);
          var regExForgeHX = new Regex(@"https:\/\/foe\w{1,4}\.innogamescdn\.com\/\/cache\/ForgeHX(.+.js)'", RegexOptions.IgnoreCase);
          var FHXMatch = regExForgeHX.Match(source);
