@@ -29,10 +29,12 @@ namespace ForgeOfBots.Utils
       public bool TavernBot { get; set; } = false;
       public bool IncidentBot { get; set; } = false;
       public bool RQBot { get; set; } = false;
+      public bool SnipBot { get; set; } = false;
       public string CustomUserAgent { get; set; } = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0";
       public bool AutoLogin { get; set; } = false;
       public bool DarkMode { get; set; } = false;
       public int MinProfit { get; set; } = 20;
+      public int IntervalSnip { get; set; } = 60;
       public bool AutoInvest { get; set; } = false;
       public SnipTarget SelectedSnipTarget { get; set; } = SnipTarget.neighbors | SnipTarget.friends;
       public UserConfirmation AllowSendCrashLog { get; set; } = UserConfirmation.Send;

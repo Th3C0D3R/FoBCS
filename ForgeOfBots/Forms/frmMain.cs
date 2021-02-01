@@ -96,8 +96,10 @@ namespace ForgeOfBots.Forms
       }
       public void Init()
       {
+         logger.Info($">>> Init()");
          if (!IsChromeInstalled())
          {
+            logger.Info($"chrome not installed");
             MessageBox.Show("!! PLEASE INSTALL GOOGLE CHROME TO USE THIS BOT !!", "ERROR STARTING BOT", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start("https://www.google.com/intl/de_de/chrome/");
             Environment.Exit(0);
@@ -138,14 +140,20 @@ namespace ForgeOfBots.Forms
             CheckForUpdate();
             if (HasLastCrash)
             {
-
-               logger.Info($"request send last crash");
-               if (UserData.AllowSendCrashLog == UserConfirmation.Send)
-                  CrashHelper.WaitForUserConfirmation(false);
-               else if (UserData.AllowSendCrashLog == UserConfirmation.AlwaysSend)
+               if (UserData != null)
+               {
+                  logger.Info($"request send last crash");
+                  if (UserData.AllowSendCrashLog == UserConfirmation.Send)
+                     CrashHelper.WaitForUserConfirmation(false);
+                  else if (UserData.AllowSendCrashLog == UserConfirmation.AlwaysSend)
+                     CrashHelper.WaitForUserConfirmation(true);
+                  else if (UserData.AllowSendCrashLog == UserConfirmation.DontSend)
+                     Crashes.SetEnabledAsync(false).Wait();
+               }
+               else
+               {
                   CrashHelper.WaitForUserConfirmation(true);
-               else if (UserData.AllowSendCrashLog == UserConfirmation.DontSend)
-                  Crashes.SetEnabledAsync(false).Wait();
+               }
             }
             Application.ApplicationExit += Application_ApplicationExit;
          }
@@ -164,11 +172,13 @@ namespace ForgeOfBots.Forms
          UserData.Password = password;
          UserData.WorldServer = server;
          UserData.SaveSettings();
+         logger.Info($"username: {username} | worldserver: {server}");
          usi.Close();
          ContinueExecution();
       }
       private void ContinueExecution()
       {
+         logger.Info($">>> ContinueExecution()");
          ChromeOptions co = new ChromeOptions()
          {
             AcceptInsecureCertificates = true
@@ -188,10 +198,14 @@ namespace ForgeOfBots.Forms
             "--disable-metrics"
             );
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
+
+         logger.Info($"creating chromeDriverService");
          var chromeDriverService = ChromeDriverService.CreateDefaultService();
          chromeDriverService.HideCommandPromptWindow = true;
+         logger.Info($"creating (Remote-)Driver");
          //driver = new RemoteWebDriver(new Uri("http://134.255.216.102:4444/"), co.ToCapabilities(),TimeSpan.FromSeconds(60));
          driver = new ChromeDriver(chromeDriverService, co);
+         logger.Info($"navigating to 'https://{UserData.WorldServer}0.forgeofempires.com/'");
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
          driver.Manage().Window.Minimize();
          cookieJar = driver.Manage().Cookies;
@@ -201,11 +215,14 @@ namespace ForgeOfBots.Forms
          StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
          StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
 
+         logger.Info($"Process Portraits");
          ProcessPortraits();
+         logger.Info($"ExtractGoodImages");
          GoodImageExtractor.GetGoodImages(UserData.WorldServer);
 
          if (!string.IsNullOrWhiteSpace(UserData.SerialKey))
          {
+            logger.Info($"Init Premium if key exists");
             BackgroundWorker bwPremium = new BackgroundWorker();
             bwPremium.DoWork += CheckPremium;
             bwPremium.RunWorkerCompleted += CheckPremiumComplete;
@@ -218,10 +235,11 @@ namespace ForgeOfBots.Forms
          string loginJS = resMgr.GetString("preloadLoginWorld");
          string loginCity = "false";
          string cityID = "";
+         logger.Info($"Login Routine: {(UserData.LastWorld == null || string.IsNullOrWhiteSpace(UserData.LastWorld) ? "login need City" : UserData.LastWorld.Split('|')[0])}");
          if (UserData.LastWorld == null || string.IsNullOrWhiteSpace(UserData.LastWorld))
             loginCity = "true";
          else
-            cityID = UserData.LastWorld;
+            cityID = UserData.LastWorld.Split('|')[0];
          if (UserData.AutoLogin)
          {
             loginJS = resMgr.GetString("preloadLoginWorld");
@@ -232,7 +250,7 @@ namespace ForgeOfBots.Forms
                .Replace("###PASSWORD###", UserData.Password)
                .Replace("##server##", UserData.WorldServer)
              .Replace("##t##", "false")
-             .Replace("##city##", "\"" + UserData.LastWorld + "\"");
+             .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
             var x = jsExecutor.ExecuteAsyncScript(loginJS);
             var ret = (string)x;
             driver.Navigate().GoToUrl(ret);
@@ -240,6 +258,7 @@ namespace ForgeOfBots.Forms
          }
          else if (loginCity == "true")
          {
+            logger.Info($"login and requesting City");
             loginJS = resMgr.GetString("preloadLoginWorld");
             loginJS = loginJS
                .Replace("###XSRF-TOKEN###", StaticData.BotData.XSRF)
@@ -247,9 +266,9 @@ namespace ForgeOfBots.Forms
                .Replace("###PASSWORD###", UserData.Password)
                .Replace("##server##", UserData.WorldServer)
                .Replace("##t##", loginCity)
-               .Replace("##city##", "\"" + UserData.LastWorld + "\"");
+               .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
             var ret = (string)jsExecutor.ExecuteAsyncScript(loginJS);
-
+            logger.Info($"CityRequestScript returned: " + ret != null ? ret.Substring(0, 30) + " (first 30 Characters)" : "null");
             WorldData wd = JsonConvert.DeserializeObject<WorldData>(ret);
             ListClass.AllWorlds = wd.worlds;
             foreach (KeyValuePair<string, int> world in wd.player_worlds)
@@ -268,19 +287,23 @@ namespace ForgeOfBots.Forms
             UserData.PlayableWorlds = ListClass.WorldList.ConvertAll(new Converter<Tuple<string, string, WorldState>, string>(WorldToPlayable));
             WorldSelection ws = new WorldSelection(ListClass.WorldList);
             ws.WorldDataEntered += Ws_WorldDataEntered;
+            logger.Info($"show WorldSelection Dialog");
             ws.ShowDialog();
          }
          else
          {
+            logger.Info($"login in directly");
             loginJS = resMgr.GetString("preloadLoginWorld");
             loginJS = loginJS
                   .Replace("###XSRF-TOKEN###", StaticData.BotData.XSRF)
                   .Replace("###USERNAME###", UserData.Username)
                   .Replace("###PASSWORD###", UserData.Password)
                   .Replace("##server##", UserData.WorldServer)
-               .Replace("##city##", "\"" + UserData.LastWorld + "\"")
+               .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"")
                .Replace("##t##", "false");
+            logger.Info($"loginscript executing... {UserData.WorldServer} | {UserData.LastWorld.Split('|')[0]}");
             var ret = (string)jsExecutor.ExecuteAsyncScript(loginJS);
+            logger.Info($"loginscript returned: {(ret.Length > 30 ? ret.Substring(0, 30) : ret)}");
             GetUIDAndForgeHX(driver.PageSource);
          }
       }
@@ -319,7 +342,8 @@ namespace ForgeOfBots.Forms
       }
       private void Ws_WorldDataEntered(Form that, string key, string value)
       {
-         UserData.LastWorld = key;
+         UserData.LastWorld = $"{key}|{value}";
+         logger.Info($"World Selected: {UserData.LastWorld.Split('|')[0]}");
          UserData.AutoLogin = true;
          UserData.SaveSettings();
          string loginJS = resMgr.GetString("preloadLoginWorld");
@@ -330,15 +354,23 @@ namespace ForgeOfBots.Forms
             .Replace("###PASSWORD###", UserData.Password)
             .Replace("##server##", UserData.WorldServer)
           .Replace("##t##", "false")
-          .Replace("##city##", "\"" + UserData.LastWorld + "\"");
+          .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
+         logger.Info($"Login executing... server: {UserData.WorldServer} | city: {UserData.LastWorld.Split('|')[0]}");
          var x = jsExecutor.ExecuteAsyncScript(loginJS);
-         var ret = (string)x;
-         driver.Navigate().GoToUrl(ret);
+         if (!(x is string))
+            logger.Info($"loginscript returned not a string (URL): {x.ToString()}");
+         else
+         {
+            logger.Info($"loginscript returned: {(string)x}");
+            var ret = (string)x;
+            driver.Navigate().GoToUrl(ret);
+            GetUIDAndForgeHX(driver.PageSource);
+         }
          that.Close();
-         GetUIDAndForgeHX(driver.PageSource);
       }
       private void GetUIDAndForgeHX(string source)
       {
+         logger.Info($">>> GetUIDAndForgeHX");
          InitSettingsTab();
          var regExUserID = new Regex(@"https:\/\/(\w{1,2}\d{1,2})\.forgeofempires\.com\/game\/json\?h=(.+)'", RegexOptions.IgnoreCase);
          var regExForgeHX = new Regex(@"https:\/\/foe\w{1,4}\.innogamescdn\.com\/\/cache\/ForgeHX(.+.js)'", RegexOptions.IgnoreCase);
@@ -348,11 +380,13 @@ namespace ForgeOfBots.Forms
          {
             StaticData.BotData.UID = UIDMatch.Groups[2].Value;
             StaticData.BotData.WID = UIDMatch.Groups[1].Value;
+            logger.Info($"UID Found: {StaticData.BotData.UID} | WID Found: {StaticData.BotData.WID}");
          }
          if (FHXMatch.Success)
          {
             ForgeHX.ForgeHXURL = FHXMatch.Value;
             ForgeHX.FileName = "ForgeHX" + FHXMatch.Groups[1].Value;
+            logger.Info($"ForgeHX-URL: {ForgeHX.ForgeHXURL}");
             ForgeHX.ForgeHXDownloaded += ForgeHX_ForgeHXDownloaded;
             ForgeHX.DownloadForge();
          }
@@ -417,6 +451,7 @@ namespace ForgeOfBots.Forms
       }
       private void LoadWorlds()
       {
+         logger.Info($">>> LoadWorlds()");
          ReqBuilder.User_Key = StaticData.BotData.UID;
          ReqBuilder.VersionSecret = StaticData.SettingData.Version_Secret;
          ReqBuilder.Version = StaticData.SettingData.Version;
@@ -435,13 +470,16 @@ namespace ForgeOfBots.Forms
       }
       public void ReloadData()
       {
+         logger.Info($">>> ReloadData()");
          Updater.UpdatePlayerLists();
          Updater.UpdateStartUp();
          Updater.UpdateOwnTavern();
+         Updater.UpdateInventory();
          UpdateGUI();
       }
       private void UpdateGUI()
       {
+         logger.Info($">>> UpdateGUI()");
          UpdateDashbord();
          UpdateSocial();
          UpdateTavern();
@@ -487,7 +525,7 @@ namespace ForgeOfBots.Forms
          }
          if (!string.IsNullOrEmpty(UserData.Username))
          {
-            Invoker.SetProperty(lblUserData, () => lblUserData.Text, $"{UserData.Username} {ListClass.WorldList.Find(w => w.Item1 == UserData.LastWorld).Item2}({UserData.LastWorld})");
+            Invoker.SetProperty(lblUserData, () => lblUserData.Text, $"{UserData.Username} {ListClass.WorldList.Find(w => w.Item1 == UserData.LastWorld.Split('|')[0]).Item2}({UserData.LastWorld.Split('|')[0]})");
          }
          if (ListClass.Resources.Count > 0)
          {
@@ -718,9 +756,11 @@ namespace ForgeOfBots.Forms
             if (!Utils.Settings.SettingsExists())
                UserData = new Utils.Settings();
             usi = new UserDataInput(ListClass.ServerList);
+            usi.TopMost = true;
             usi.UserDataEntered += Usi_UserDataEntered;
             DialogResult dlgRes = usi.ShowDialog();
             if (dlgRes == DialogResult.Cancel) Environment.Exit(0);
+            logger.Info($"userdata entered");
             mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
             return;
          }
@@ -735,7 +775,7 @@ namespace ForgeOfBots.Forms
          Analytics.TrackEvent("Startup", startEvent);
 
          var userPremiumEvent = new Dictionary<string, string>();
-         string userPremium = $"{UserData.Username}({UserData.LastWorld}) {UserData.SerialKey}";
+         string userPremium = $"{UserData.Username}({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
          userPremiumEvent.Add(UserData.Username, userPremium);
          Analytics.TrackEvent("UserPremium", userPremiumEvent);
       }
@@ -907,6 +947,7 @@ namespace ForgeOfBots.Forms
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
+                  pli.ContextMenuStrip = cmsMainMenu;
                   pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
                   pli.ProductionDone += Pli_ProductionDone;
                   pli.ProductionIdle += Pli_ProductionIdle;
@@ -939,6 +980,7 @@ namespace ForgeOfBots.Forms
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
+                  pli.ContextMenuStrip = cmsMainMenu;
                   pli.AddEntities(item.id);
                   pli.ProductionDone += Pli_ProductionDone;
                   pli.ProductionIdle += Pli_ProductionIdle;
@@ -983,6 +1025,7 @@ namespace ForgeOfBots.Forms
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
+                  pli.ContextMenuStrip = cmsMainMenu;
                   pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
                   pli.ProductionDone += Pli_ProductionDone;
                   pli.ProductionIdle += Pli_ProductionIdle;
@@ -1014,6 +1057,7 @@ namespace ForgeOfBots.Forms
                      pli.ProductionState = ProductionState.Finished;
                   }
                   pli.Dock = DockStyle.Top;
+                  pli.ContextMenuStrip = cmsMainMenu;
                   pli.AddEntities(item.id);
                   pli.ProductionDone += Pli_ProductionDone;
                   pli.ProductionIdle += Pli_ProductionIdle;
@@ -1061,8 +1105,8 @@ namespace ForgeOfBots.Forms
       }
       private void ProductionStarted()
       {
-         UpdateGUI();
          ListClass.State = 2;
+         update(ListClass.State);
       }
       private void update(int sender)
       {
@@ -1169,14 +1213,9 @@ namespace ForgeOfBots.Forms
                   ListClass.AddedToQuery.AddRange(ListClass.CollectedIDs);
                   foreach (int id in Query)
                   {
-                     if (UserData.GoodProductionOption.id < UserData.ProductionOption.id && UserData.ProductionOption.id > 4)
-                     {
-                        bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
-                        if (hasID)
-                           script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
-                        else
-                           script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                     }
+                     bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
+                     if (hasID)
+                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
                      else
                         script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
                      retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
@@ -1254,6 +1293,7 @@ namespace ForgeOfBots.Forms
                      Crashes.TrackError(ex, properties, attachments);
                   }
                }
+               ProductionStarted();
                break;
             case RequestType.CancelProduction:
                List<string> retCancel = new List<string>();
@@ -1271,6 +1311,8 @@ namespace ForgeOfBots.Forms
                   retCancel.Add((string)jsExecutor.ExecuteAsyncScript(script));
                   Thread.Sleep(100);
                }
+               UpdateProductionView();
+               UpdateGoodProductionView();
                break;
             case RequestType.CollectIncident:
                UserData.LastIncidentTime = DateTime.Now;
@@ -1359,7 +1401,6 @@ namespace ForgeOfBots.Forms
             catch (Exception)
             {
             }
-
          }
          Control.ControlCollection mrbG4h = mpGoodCycle.Controls;
          foreach (Control control in mrbG4h)
@@ -1390,9 +1431,11 @@ namespace ForgeOfBots.Forms
          mtDarkMode.Checked = UserData.DarkMode;
          nudMinProfit.Value = UserData.MinProfit;
          mcbAutoInvest.Checked = UserData.AutoInvest;
-         mcbFriends.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends) ? true : false;
-         mcbGuild.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.members) ? true : false;
-         mcbNeighbor.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors) ? true : false;
+         mtSnipBot.Checked = UserData.SnipBot;
+         nudSnipInterval.Value = UserData.IntervalSnip;
+         mcbFriends.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends);
+         mcbGuild.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.members);
+         mcbNeighbor.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors);
          if (UserData.PlayableWorlds == null || UserData.PlayableWorlds.Count == 0)
          {
             mcbCitySelection.Enabled = false;
@@ -1402,12 +1445,12 @@ namespace ForgeOfBots.Forms
          {
             foreach (string item in UserData.PlayableWorlds)
             {
-               mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item, WorldName = item.ToUpper() });
+               mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item.Split('|')[0], WorldName = item.Split('|')[1] });
             }
             mcbCitySelection.DisplayMember = "WorldName";
             mcbCitySelection.AutoCompleteSource = AutoCompleteSource.ListItems;
             mcbCitySelection.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            mcbCitySelection.SelectedIndex = UserData.PlayableWorlds.FindIndex(e => e == UserData.LastWorld);
+            mcbCitySelection.SelectedIndex = UserData.PlayableWorlds.FindIndex(e => e.Split('|')[0] == UserData.LastWorld.Split('|')[0]);
          }
          foreach (Language item in ListClass.AvailableLanguages.Languages)
          {
@@ -1422,7 +1465,7 @@ namespace ForgeOfBots.Forms
          mcbLanguage.DisplayMember = "Description";
          mcbLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
          mcbLanguage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-         mcbLanguage.SelectedIndex = (int)UserData.Language.Language;
+         mcbLanguage.SelectedIndex = UserData.Language.Language;
 
          bw.DoWork += Bw_DoWork;
          bw.WorkerSupportsCancellation = true;
@@ -1458,7 +1501,7 @@ namespace ForgeOfBots.Forms
          MetroRadioButton mrb = (MetroRadioButton)sender;
          if (!mrb.Checked) return;
          int time = int.Parse(mrb.Tag.ToString());
-         UserData.ProductionOption = GetGoodProductionOption(time);
+         UserData.GoodProductionOption = GetGoodProductionOption(time);
          UserData.SaveSettings();
       }
       private void mtView_CheckedChanged(object sender, EventArgs e)
@@ -1520,9 +1563,9 @@ namespace ForgeOfBots.Forms
       }
       private void mbSaveReload_Click(object sender, EventArgs e)
       {
-         UserData.LastWorld = ((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID;
+         UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
-         string script = ReqBuilder.GetRequestScript(RequestType.switchWorld, UserData.LastWorld);
+         string script = ReqBuilder.GetRequestScript(RequestType.switchWorld, UserData.LastWorld.Split('|')[0]);
          jsExecutor.ExecuteAsyncScript(script);
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
          cookieJar = driver.Manage().Cookies;
@@ -1621,6 +1664,16 @@ namespace ForgeOfBots.Forms
       private void McbAutoInvest_CheckedChanged(object sender, EventArgs e)
       {
          UserData.AutoInvest = mcbAutoInvest.Checked;
+         UserData.SaveSettings();
+      }
+      private void mtSnipBot_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.SnipBot = mtSnipBot.Checked;
+         UserData.SaveSettings();
+      }
+      private void nudSnipInterval_ValueChanged(object sender, EventArgs e)
+      {
+         UserData.IntervalSnip = (int)nudSnipInterval.Value;
          UserData.SaveSettings();
       }
       #endregion
@@ -2259,5 +2312,6 @@ namespace ForgeOfBots.Forms
             return cp;
          }
       }
+
    }
 }

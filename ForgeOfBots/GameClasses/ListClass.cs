@@ -85,6 +85,7 @@ namespace ForgeOfBots.GameClasses
       public static int State { get; set; } = -1;
       public static float ArcBonus { get; set; } = 190;
       public static JObject UserData { get; set; } = new JObject();
+      public static Inventory Inventory { get; set; } = null;
    }
    public enum WorldState
    {

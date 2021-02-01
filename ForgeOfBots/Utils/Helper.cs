@@ -128,7 +128,7 @@ namespace ForgeOfBots.Utils
       }
       public static string WorldToPlayable(Tuple<string, string, WorldState> world)
       {
-         return world.Item1;
+         return $"{world.Item1}|{world.Item2}";
       }
       public static bool IsOnScreen(Form form)
       {

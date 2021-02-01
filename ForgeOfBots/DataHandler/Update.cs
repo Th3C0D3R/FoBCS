@@ -124,6 +124,7 @@ namespace ForgeOfBots.DataHandler
                   break;
             }
          }
+         
       }
       public void UpdateOwnTavern()
       {
@@ -131,6 +132,12 @@ namespace ForgeOfBots.DataHandler
          string ownTavern = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
          OwnTavernDataRoot otdr = JsonConvert.DeserializeObject<OwnTavernDataRoot>(ownTavern);
          ListClass.OwnTavernData = otdr.responseData;
+      }
+      public void UpdateInventory()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.getItems, "");
+         string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         ListClass.Inventory = JsonConvert.DeserializeObject<Inventory>(ret);
       }
       public void UpdatedSortedGoodList()
       {

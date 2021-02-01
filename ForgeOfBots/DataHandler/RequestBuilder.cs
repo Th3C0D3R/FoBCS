@@ -186,6 +186,11 @@ namespace ForgeOfBots.DataHandler
                _class = "WorldService";
                _methode = "switchWorld";
                break;
+            case RequestType.getItems:
+               _data = new JArray();
+               _class = "InventoryService";
+               _methode = "getItems";
+               break;
             default:
                _data = new JArray();
                _class = "StartupService";
@@ -280,7 +285,8 @@ namespace ForgeOfBots.DataHandler
       GEServiceCollectChest,
       getConstruction,
       contributeForgePoints,
-      switchWorld
+      switchWorld,
+      getItems
    }
 
    public enum E_Motivate

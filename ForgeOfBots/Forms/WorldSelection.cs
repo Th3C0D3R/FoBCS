@@ -18,6 +18,7 @@ namespace ForgeOfBots.Forms
       public WorldSelection(List<Tuple<string, string, WorldState>> serverList)
       {
          InitializeComponent();
+         TopMost = true;
          Text += $" | FoBots v{StaticData.Version.Major}.{StaticData.Version.Minor} by TH3C0D3R";
          label2.Text += $"{StaticData.Version.Major}.{StaticData.Version.Minor}";
          foreach (var item in serverList)

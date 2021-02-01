@@ -153,15 +153,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Nevron.Nov.Barcode, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.Chart, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.Diagram, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.Grid, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.Host.WinForm, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.Presentation, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.Schedule, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.Text, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
-    <Reference Include="Nevron.Nov.WinFormControls, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -245,6 +236,7 @@
     <Compile Include="GameClasses\ResponseClasses\BonusService.cs" />
     <Compile Include="GameClasses\ResponseClasses\CityEntities.cs" />
     <Compile Include="GameClasses\ResponseClasses\GuildExpedition.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Inventory.cs" />
     <Compile Include="GameClasses\ResponseClasses\LG.cs" />
     <Compile Include="GameClasses\ResponseClasses\Metadata.cs" />
     <Compile Include="GameClasses\ResponseClasses\Polivate.cs" />
@@ -364,9 +356,6 @@
     <EmbeddedResource Include="JSFiles\preloadLoginWorld.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chromedriver.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="JSFiles\fetchMetaData.js" />
     <Content Include="JSFiles\fetchData.js" />
