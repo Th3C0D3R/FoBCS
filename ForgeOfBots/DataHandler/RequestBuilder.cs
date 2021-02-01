@@ -182,7 +182,7 @@ namespace ForgeOfBots.DataHandler
                _methode = "contributeForgePoints";
                break;
             case RequestType.switchWorld:
-               _data = new JArray(world);
+               _data = new JArray(world.Split('|')[0]);
                _class = "WorldService";
                _methode = "switchWorld";
                break;

@@ -194,7 +194,9 @@ namespace ForgeOfBots.Forms
             "--no-sandbox",
             "--remote-debugging-port=9222",
          "--disable-dev-shm-usage",
+#if Release
          "--window-position=-32000,-32000",
+#endif
             "--disable-metrics"
             );
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
@@ -459,6 +461,7 @@ namespace ForgeOfBots.Forms
          string script = ReqBuilder.GetRequestScript(RequestType.GetAllWorlds, "[]");
          var ret = (string)jsExecutor.ExecuteAsyncScript(script);
          Root<AllWorlds> ws = JsonConvert.DeserializeObject<Root<AllWorlds>>(ret);
+         ListClass.WorldList.Clear();
          foreach (AllWorlds item in ws.responseData)
          {
             if (!ListClass.WorldList.HasCityID(item.id))
@@ -543,6 +546,24 @@ namespace ForgeOfBots.Forms
             Invoker.SetProperty(lblDiamonds, () => lblDiamonds.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "premium")["name"].ToString() + ":");
             Invoker.SetProperty(lblFP, () => lblFP.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "strategy_points")["name"].ToString() + ":");
          }
+         if(ListClass.Inventory.responseData.Count() > 0)
+         {
+            Items[] FPPackItems = ListClass.Inventory.responseData.ToList().FindAll(i => i.itemAssetName.EndsWith("forgepoints")).ToArray();
+            if(FPPackItems.Count() > 0)
+            {
+               int FPinStock = 0;
+               foreach (Items fpPack in FPPackItems)
+               {
+                  if (fpPack.itemAssetName.StartsWith("small"))
+                     FPinStock += fpPack.inStock * 2;
+                  else if (fpPack.itemAssetName.StartsWith("medium"))
+                     FPinStock += fpPack.inStock * 5;
+                  else if (fpPack.itemAssetName.StartsWith("large"))
+                     FPinStock += fpPack.inStock * 10;
+               }
+               Invoker.SetProperty(lblFPStockValue, () => lblFPStockValue.Text, FPinStock.ToString("N0"));
+            }
+         }
       }
       private void UpdateSocial()
       {
@@ -609,7 +630,10 @@ namespace ForgeOfBots.Forms
          Invoker.SetProperty(lblTavernstate, () => lblTavernstate.Text, i18n.getString("TavernState"));
          Invoker.SetProperty(lblVisitable, () => lblVisitable.Text, i18n.getString("Visitable"));
          Invoker.SetProperty(btnCollect, () => btnCollect.Text, i18n.getString("CollectTavern"));
-         Invoker.SetProperty(lblTavernstateValue, () => lblTavernstateValue.Text, ListClass.OwnTavern.responseData[2].ToString() + "/" + ListClass.OwnTavern.responseData[1].ToString());
+         if (ListClass.OwnTavern.responseData != null)
+            Invoker.SetProperty(lblTavernstateValue, () => lblTavernstateValue.Text, ListClass.OwnTavern.responseData[2].ToString() + "/" + ListClass.OwnTavern.responseData[1].ToString());
+         else
+            Invoker.SetProperty(lblTavernstateValue, () => lblTavernstateValue.Text, "0/0");
          if (ListClass.ResourceDefinitions.Count > 0)
          {
             Invoker.SetProperty(lblTavernSilver, () => lblTavernSilver.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "tavern_silver")["name"].ToString());
@@ -1436,6 +1460,7 @@ namespace ForgeOfBots.Forms
          mcbFriends.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends);
          mcbGuild.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.members);
          mcbNeighbor.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors);
+         mcbCitySelection.Items.Clear();
          if (UserData.PlayableWorlds == null || UserData.PlayableWorlds.Count == 0)
          {
             mcbCitySelection.Enabled = false;
@@ -1467,6 +1492,11 @@ namespace ForgeOfBots.Forms
          mcbLanguage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
          mcbLanguage.SelectedIndex = UserData.Language.Language;
 
+         if (bw.IsBusy)
+         {
+            bw.CancelAsync();
+            while (bw.IsBusy) Application.DoEvents();
+         }
          bw.DoWork += Bw_DoWork;
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerAsync();
@@ -1565,16 +1595,44 @@ namespace ForgeOfBots.Forms
       {
          UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
+
          string script = ReqBuilder.GetRequestScript(RequestType.switchWorld, UserData.LastWorld.Split('|')[0]);
          jsExecutor.ExecuteAsyncScript(script);
-         driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
+         driver.Navigate().GoToUrl($"https://{UserData.LastWorld.Split('|')[0]}.forgeofempires.com/game/index?");
          cookieJar = driver.Manage().Cookies;
-         jsExecutor = (IJavaScriptExecutor)driver;
          StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
          StaticData.BotData.CSRF = cookieJar.AllCookies.HasCookie("CSRF").Item2;
          StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
          StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
-         GetUIDAndForgeHX(driver.PageSource);
+
+         string loginJS = resMgr.GetString("preloadLoginWorld");
+         Log("[DEBUG] Doing Login", lbOutputWindow);
+         loginJS = loginJS
+            .Replace("###XSRF-TOKEN###", StaticData.BotData.XSRF)
+            .Replace("###USERNAME###", UserData.Username)
+            .Replace("###PASSWORD###", UserData.Password)
+            .Replace("##server##", UserData.WorldServer)
+          .Replace("##t##", "false")
+          .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
+         var x = jsExecutor.ExecuteAsyncScript(loginJS);
+         if (x != null)
+         {
+            var ret = (string)x;
+            driver.Navigate().GoToUrl(ret);
+            cookieJar = driver.Manage().Cookies;
+            jsExecutor = (IJavaScriptExecutor)driver;
+            StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
+            StaticData.BotData.CSRF = cookieJar.AllCookies.HasCookie("CSRF").Item2;
+            StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
+            StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
+            ForgeHX.ForgeHXLoaded = false;
+            GetUIDAndForgeHX(driver.PageSource);
+         }
+         else
+         {
+            Process.Start(Application.ExecutablePath);
+            Environment.Exit(0);
+         }
       }
       private void mbDeleteData_Click(object sender, EventArgs e)
       {
