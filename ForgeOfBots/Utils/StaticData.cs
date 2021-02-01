@@ -43,8 +43,11 @@ namespace ForgeOfBots.Utils
       public static bool HasLastCrash = false;
       public static List<PropertyData> PCData = new List<PropertyData>();
       public static int TavernVisitWorkerID = 0;
-      public static int PolivateWorkerID = 1;
-      public static int LGSnipWorkerID = 2;
+      public static int PolivateAllWorkerID = 1;
+      public static int PolivateNeighborsWorkerID = 2;
+      public static int PolivateMemberWorkerID = 3;
+      public static int PolivateFriendsWorkerID = 4;
+      public static int LGSnipWorkerID = 99;
 
       public static string InnoCDN_Avatars = "https://foe###server###.innogamescdn.com/assets/shared/avatars/";
 

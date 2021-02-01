@@ -194,7 +194,7 @@ namespace ForgeOfBots.Forms
             "--no-sandbox",
             "--remote-debugging-port=9222",
          "--disable-dev-shm-usage",
-#if Release
+#if RELEASE
          "--window-position=-32000,-32000",
 #endif
             "--disable-metrics"
@@ -1360,7 +1360,6 @@ namespace ForgeOfBots.Forms
                            successed = true;
                         if (Reward != null)
                         {
-
                            Log($"{i18n.getString("IncidentCollected")} - {i18n.getString("Reward")}: {Reward.ToString()}", lbOutputWindow);
                         }
                      }
@@ -1802,19 +1801,23 @@ namespace ForgeOfBots.Forms
             case RequestType.Motivate:
                E_Motivate e_Motivate = (E_Motivate)Enum.Parse(typeof(E_Motivate), param.argument2.ToString());
                List<Player> list = new List<Player>();
+               int ID = PolivateAllWorkerID;
                switch (e_Motivate)
                {
                   case E_Motivate.Clan:
                      var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
                      list.AddRange(clanMotivate);
+                     ID = PolivateMemberWorkerID;
                      break;
                   case E_Motivate.Neighbor:
                      var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
                      list.AddRange(neighborlist);
+                     ID = PolivateNeighborsWorkerID;
                      break;
                   case E_Motivate.Friend:
                      var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
                      list.AddRange(friendMotivate);
+                     ID = PolivateFriendsWorkerID;
                      break;
                   case E_Motivate.All:
                      list.AddRange(ListClass.Motivateable);
@@ -1822,13 +1825,13 @@ namespace ForgeOfBots.Forms
                   default:
                      break;
                }
-               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, 0, list.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", list.Count.ToString()));
+               StaticData.WorkerList.UpdateWorkerProgressBar(ID, 0, list.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(ID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", list.Count.ToString()));
                foreach (Player item in list)
                {
                   counter += 1;
-                  StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, counter, list.Count);
-                  StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, i18n.getString("CountLabel").Replace("##Done##", counter.ToString()).Replace("##End##", list.Count.ToString()));
+                  StaticData.WorkerList.UpdateWorkerProgressBar(ID, counter, list.Count);
+                  StaticData.WorkerList.UpdateWorkerLabel(ID, i18n.getString("CountLabel").Replace("##Done##", counter.ToString()).Replace("##End##", list.Count.ToString()));
                   string script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
                   string retMot = (string)jsExecutor.ExecuteAsyncScript(script);
                   string[] motResponse = retMot.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
@@ -1887,11 +1890,11 @@ namespace ForgeOfBots.Forms
                foreach (var resItem in results)
                   Log($"[{DateTime.Now}] {i18n.getString("PolivateResult")} - {resItem.Key}: {resItem.Value}", lbOutputWindow);
                ListClass.doneMotivate.Clear();
-               StaticData.WorkerList.UpdateWorkerProgressBar(PolivateWorkerID, list.Count, list.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(PolivateWorkerID, i18n.getString("MotivationDone"));
+               StaticData.WorkerList.UpdateWorkerProgressBar(ID, list.Count, list.Count);
+               StaticData.WorkerList.UpdateWorkerLabel(ID, i18n.getString("MotivationDone"));
                UserData.LastPolivateTime = DateTime.Now;
                UserData.SaveSettings();
-               (bool, bool) returnValMot = StaticData.WorkerList.RemoveWorkerByID(PolivateWorkerID);
+               (bool, bool) returnValMot = StaticData.WorkerList.RemoveWorkerByID(ID);
                if (returnValMot.Item2)
                {
                   if (InvokeRequired)
@@ -2232,7 +2235,7 @@ namespace ForgeOfBots.Forms
             Title = i18n.getString("PolivateTitle"),
             BeforeCountText = i18n.getString("Status"),
             CountText = i18n.getString("CountLabel"),
-            ID = PolivateWorkerID
+            ID = player_type == E_Motivate.Clan ? PolivateMemberWorkerID : player_type == E_Motivate.Friend ? PolivateFriendsWorkerID : player_type == E_Motivate.Neighbor ? PolivateNeighborsWorkerID : PolivateAllWorkerID
          };
          if (Application.OpenForms["WorkerList"] == null)
          {
