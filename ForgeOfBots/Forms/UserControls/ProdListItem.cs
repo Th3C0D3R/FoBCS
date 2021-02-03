@@ -50,6 +50,7 @@ namespace ForgeOfBots.Forms.UserControls
       private readonly System.Timers.Timer timer = new System.Timers.Timer();
       public List<int> EntityIDs = new List<int>();
       public bool HasAllNeeded => (EntityIDs.Count > 0 && _duraction.TotalSeconds > 0 && _ProductionDone != null);
+      private bool EventCalled = false;
       public ProdListItem()
       {
          InitializeComponent();
@@ -97,7 +98,10 @@ namespace ForgeOfBots.Forms.UserControls
                else
                   lblState.Text = i18n.getString("ProductionFinishedState");
                if (ListClass.State != 1)
+               {
                   _ProductionDone?.Invoke(null, EntityIDs);
+                  EventCalled = true;
+               }
                return;
             }
             else if (ProductionState == ProductionState.Idle && timer.Enabled)
@@ -111,7 +115,10 @@ namespace ForgeOfBots.Forms.UserControls
                else
                   lblState.Text = i18n.getString("ProductionIdle");
                if (ListClass.State != 0)
+               {
                   _ProductionIdle?.Invoke(null, EntityIDs);
+                  EventCalled = true;
+               }
                return;
             }
             else if (!timer.Enabled)

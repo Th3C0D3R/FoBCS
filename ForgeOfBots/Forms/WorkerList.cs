@@ -32,7 +32,8 @@ namespace ForgeOfBots.Forms
       {
          bool success = WorkerItems.Remove(WorkerItems.Find(e => e.ID == id));
          if (InvokeRequired)
-            flpItems.Invoke((MethodInvoker)delegate {
+            flpItems.Invoke((MethodInvoker)delegate
+            {
                flpItems.Controls.RemoveByKey(id.ToString());
                flpItems.Invalidate();
                flpItems.Update();
@@ -54,7 +55,8 @@ namespace ForgeOfBots.Forms
          if (item.ID > -1)
          {
             if (InvokeRequired)
-               item.Invoke((MethodInvoker)delegate {
+               item.Invoke((MethodInvoker)delegate
+               {
                   item.CountText = val;
                });
             else
@@ -68,7 +70,8 @@ namespace ForgeOfBots.Forms
          {
             if (InvokeRequired)
             {
-               item.Invoke((MethodInvoker)delegate {
+               item.Invoke((MethodInvoker)delegate
+               {
                   item.ProgressValue = value;
                   item.ProgressBar.Maximum = max;
                });
@@ -77,6 +80,10 @@ namespace ForgeOfBots.Forms
             {
                item.ProgressValue = value;
                item.ProgressBar.Maximum = max;
+            }
+            if (value == max)
+            {
+               flpItems.Controls.Remove(item);
             }
          }
       }

@@ -95,4 +95,41 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
          return PlayersWithGB;
       }
    }
+
+
+
+   public class ResourcesC
+   {
+      public int medals { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class RewardC
+   {
+      public int blueprints { get; set; }
+      public int strategy_point_amount { get; set; }
+      public ResourcesC resources { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class LGContribution
+   {
+      public int entity_id { get; set; }
+      public string city_entity_id { get; set; }
+      public string name { get; set; }
+      public int level { get; set; }
+      public int current_progress { get; set; }
+      public int max_progress { get; set; }
+      public int rank { get; set; }
+      public Player player { get; set; }
+      public int forge_points { get; set; }
+      public RewardC reward { get; set; }
+      public string __class__ { get; set; }
+   }
+   public class Contribution
+   {
+      public LGContribution[] responseData { get; set; }
+      public string requestClass { get; set; }
+      public string requestMethod { get; set; }
+      public int requestId { get; set; }
+      public string __class__ { get; set; }
+   }
 }

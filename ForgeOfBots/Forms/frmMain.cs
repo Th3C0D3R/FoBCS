@@ -478,6 +478,7 @@ namespace ForgeOfBots.Forms
          Updater.UpdateStartUp();
          Updater.UpdateOwnTavern();
          Updater.UpdateInventory();
+         Updater.UpdateContribution();
          UpdateGUI();
       }
       private void UpdateGUI()
@@ -489,6 +490,7 @@ namespace ForgeOfBots.Forms
          UpdateProductionView();
          UpdateGoodProductionView();
          UpdateHiddenRewardsView();
+         UpdateSnip();
          //UpdateMessageCenter();
          //UpdateChat();
          //UpdateArmy();
@@ -1541,8 +1543,8 @@ namespace ForgeOfBots.Forms
       private void mtProduction_CheckedChanged(object sender, EventArgs e)
       {
          UserData.ProductionBot = mtProduction.Checked;
-         //UpdateBotView();
          UserData.SaveSettings();
+         update(ListClass.State);
       }
       private void mtTavern_CheckedChanged(object sender, EventArgs e)
       {
@@ -1736,6 +1738,40 @@ namespace ForgeOfBots.Forms
       #endregion
 
       #region "Snip"
+      public void UpdateSnip()
+      {
+         Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Clear());
+         if (ListClass.Contributions.Count > 0)
+         {
+            int Total = 0;
+            foreach (LGContribution item in ListClass.Contributions)
+            {
+               IncidentListItem conItem = new IncidentListItem();
+               if(item.reward != null)
+               {
+                  ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
+                  if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
+                  int reward = (int)Math.Round((double)item.reward.strategy_point_amount * ListClass.ArcBonus);
+                  int outcome = reward - item.forge_points;
+                  Total += outcome;
+                  conItem.IRarity = $"{(outcome > 0 ? "+" : "") + outcome}";
+               }
+               else
+               {
+                  conItem.IRarity = $"-{item.forge_points}";
+                  Total -= item.forge_points;
+               }
+               conItem.ILocation = $"{item.name}";
+               Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Add(conItem));
+            }
+            IncidentListItem conTotal = new IncidentListItem
+            {
+               IRarity = Total.ToString("N0"),
+               ILocation = i18n.getString("GUI.Sniper.Contributions.Total")
+            };
+            Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Add(conTotal));
+         }
+      }
       private void MbSearch_Click(object sender, EventArgs e)
       {
          WorkerItem wi = new WorkerItem()
@@ -1779,6 +1815,8 @@ namespace ForgeOfBots.Forms
                Application.DoEvents();
             }
          }
+         Updater.UpdateContribution();
+         UpdateSnip();
       }
       #endregion
 
@@ -2197,7 +2235,7 @@ namespace ForgeOfBots.Forms
                {
                   LGSnipItem lsi = new LGSnipItem()
                   {
-                     LG = $"{item.player.name} -> {item.name} ({item.level})",
+                     LG = $"{item.player.name} ({i18n.getString($"GUI.Sniper.PlayerIndentifier.{(item.player.is_friend ? "Friend" : item.player.is_guild_member ? "Member" : "Neighbor")}")}) -> {item.name} ({item.level})",
                      LGSnip = item,
                      Profit = $"{item.Invest} (+{item.GewinnString})"
                   };

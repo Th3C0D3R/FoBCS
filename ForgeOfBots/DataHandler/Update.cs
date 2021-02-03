@@ -133,6 +133,13 @@ namespace ForgeOfBots.DataHandler
          OwnTavernDataRoot otdr = JsonConvert.DeserializeObject<OwnTavernDataRoot>(ownTavern);
          ListClass.OwnTavernData = otdr.responseData;
       }
+      public void UpdateContribution()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.getContributions, "[]");
+         string contribution = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         Contribution otdr = JsonConvert.DeserializeObject<Contribution>(contribution);
+         ListClass.Contributions = otdr.responseData.ToList();
+      }
       public void UpdateInventory()
       {
          string script = ReqBuilder.GetRequestScript(RequestType.getItems, "");

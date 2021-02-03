@@ -28,27 +28,27 @@
       /// </summary>
       private void InitializeComponent()
       {
-         this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+         this.tlpItem = new System.Windows.Forms.TableLayoutPanel();
          this.lblLocation = new MetroFramework.Controls.MetroLabel();
          this.lblRarity = new MetroFramework.Controls.MetroLabel();
-         this.tableLayoutPanel1.SuspendLayout();
+         this.tlpItem.SuspendLayout();
          this.SuspendLayout();
          // 
-         // tableLayoutPanel1
+         // tlpItem
          // 
-         this.tableLayoutPanel1.ColumnCount = 2;
-         this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-         this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-         this.tableLayoutPanel1.Controls.Add(this.lblLocation, 0, 0);
-         this.tableLayoutPanel1.Controls.Add(this.lblRarity, 1, 0);
-         this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-         this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-         this.tableLayoutPanel1.RowCount = 1;
-         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-         this.tableLayoutPanel1.Size = new System.Drawing.Size(211, 26);
-         this.tableLayoutPanel1.TabIndex = 0;
+         this.tlpItem.ColumnCount = 2;
+         this.tlpItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+         this.tlpItem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+         this.tlpItem.Controls.Add(this.lblLocation, 0, 0);
+         this.tlpItem.Controls.Add(this.lblRarity, 1, 0);
+         this.tlpItem.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.tlpItem.Location = new System.Drawing.Point(0, 0);
+         this.tlpItem.Name = "tlpItem";
+         this.tlpItem.RowCount = 1;
+         this.tlpItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+         this.tlpItem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+         this.tlpItem.Size = new System.Drawing.Size(211, 26);
+         this.tlpItem.TabIndex = 0;
          // 
          // lblLocation
          // 
@@ -75,18 +75,17 @@
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.Controls.Add(this.tableLayoutPanel1);
+         this.Controls.Add(this.tlpItem);
          this.Name = "IncidentListItem";
          this.Size = new System.Drawing.Size(211, 26);
-         this.tableLayoutPanel1.ResumeLayout(false);
+         this.tlpItem.ResumeLayout(false);
          this.ResumeLayout(false);
 
       }
 
       #endregion
-
-      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-      private MetroFramework.Controls.MetroLabel lblLocation;
       private MetroFramework.Controls.MetroLabel lblRarity;
+      public MetroFramework.Controls.MetroLabel lblLocation;
+      public System.Windows.Forms.TableLayoutPanel tlpItem;
    }
 }

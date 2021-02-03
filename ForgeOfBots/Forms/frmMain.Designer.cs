@@ -134,6 +134,7 @@ namespace ForgeOfBots.Forms
          this.tpSniper = new System.Windows.Forms.TabPage();
          this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
          this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+         this.pnlContributions = new System.Windows.Forms.Panel();
          this.mbSnip = new MetroFramework.Controls.MetroButton();
          this.mbSearch = new MetroFramework.Controls.MetroButton();
          this.mpSnipItem = new System.Windows.Forms.Panel();
@@ -1063,6 +1064,7 @@ namespace ForgeOfBots.Forms
          // 
          // metroPanel3
          // 
+         this.metroPanel3.Controls.Add(this.pnlContributions);
          this.metroPanel3.Controls.Add(this.mbSnip);
          this.metroPanel3.Controls.Add(this.mbSearch);
          resources.ApplyResources(this.metroPanel3, "metroPanel3");
@@ -1073,6 +1075,11 @@ namespace ForgeOfBots.Forms
          this.metroPanel3.VerticalScrollbarBarColor = true;
          this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
          this.metroPanel3.VerticalScrollbarSize = 10;
+         // 
+         // pnlContributions
+         // 
+         resources.ApplyResources(this.pnlContributions, "pnlContributions");
+         this.pnlContributions.Name = "pnlContributions";
          // 
          // mbSnip
          // 
@@ -2002,5 +2009,6 @@ namespace ForgeOfBots.Forms
       private MetroFramework.Controls.MetroLabel metroLabel16;
       private System.Windows.Forms.Label lblFPStock;
       private System.Windows.Forms.Label lblFPStockValue;
+      private System.Windows.Forms.Panel pnlContributions;
    }
 }

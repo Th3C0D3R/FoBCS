@@ -129,7 +129,7 @@
     <value>Microsoft Sans Serif, 9pt, style=Bold</value>
   </data>
   <data name="lblRunning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>629, 4</value>
+    <value>633, 4</value>
   </data>
   <data name="lblRunning.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 32</value>
@@ -164,7 +164,7 @@
     <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
   <data name="lblUserData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 5</value>
+    <value>392, 5</value>
   </data>
   <data name="lblUserData.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 32</value>
@@ -281,7 +281,7 @@
     <value>4</value>
   </data>
   <data name="metroPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>762, 6</value>
+    <value>766, 6</value>
   </data>
   <data name="metroPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 31</value>
@@ -359,7 +359,7 @@
     <value>0, 0</value>
   </data>
   <data name="metroPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>879, 42</value>
+    <value>883, 42</value>
   </data>
   <data name="metroPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -384,7 +384,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACS
-        IwAAAk1TRnQBSQFMAgEBCwEAAXgBAQF4AQEBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        IwAAAk1TRnQBSQFMAgEBCwEAAZABAQGQAQEBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABgAMAAWADAAEBAQABCAYAATAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -551,7 +551,7 @@
     <value>3, 19</value>
   </data>
   <data name="lvGoods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>843, 263</value>
+    <value>847, 263</value>
   </data>
   <data name="lvGoods.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -572,10 +572,10 @@
     <value>Microsoft Sans Serif, 10pt, style=Bold</value>
   </data>
   <data name="gbGoods.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 185</value>
+    <value>8, 187</value>
   </data>
   <data name="gbGoods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>849, 285</value>
+    <value>853, 285</value>
   </data>
   <data name="gbGoods.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -611,7 +611,7 @@
     <value>True</value>
   </data>
   <data name="lbOutputWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 151</value>
+    <value>410, 153</value>
   </data>
   <data name="lbOutputWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -635,7 +635,7 @@
     <value>445, 6</value>
   </data>
   <data name="gbLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>412, 173</value>
+    <value>416, 175</value>
   </data>
   <data name="gbLog.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1211,7 +1211,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpDashbord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpDashbord.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1259,7 +1259,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>839, 32</value>
+    <value>833, 32</value>
   </data>
   <data name="lblInactiveFriends.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1292,7 +1292,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>843, 32</value>
+    <value>837, 32</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1331,7 +1331,7 @@
     <value>1</value>
   </data>
   <data name="tlpInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>840, 335</value>
+    <value>834, 329</value>
   </data>
   <data name="tlpInactiveFriends.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1772,7 +1772,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpSocial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpSocial.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2306,7 +2306,7 @@
     <value>4, 74</value>
   </data>
   <data name="tpTavern.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpTavern.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2333,7 +2333,7 @@
     <value>3, 3</value>
   </data>
   <data name="metroLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 470</value>
+    <value>861, 472</value>
   </data>
   <data name="metroLabel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2366,7 +2366,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpMessageCenter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpMessageCenter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2393,7 +2393,7 @@
     <value>3, 3</value>
   </data>
   <data name="metroLabel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 470</value>
+    <value>861, 472</value>
   </data>
   <data name="metroLabel5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2426,7 +2426,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpChat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpChat.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2453,7 +2453,7 @@
     <value>3, 3</value>
   </data>
   <data name="metroLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 470</value>
+    <value>861, 472</value>
   </data>
   <data name="metroLabel6.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2486,7 +2486,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpArmy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpArmy.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2522,10 +2522,10 @@
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>623, 0</value>
+    <value>626, 0</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 48</value>
+    <value>232, 48</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2558,10 +2558,10 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 0</value>
+    <value>390, 0</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 48</value>
+    <value>230, 48</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2597,7 +2597,7 @@
     <value>3, 0</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 48</value>
+    <value>381, 48</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2630,7 +2630,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 48</value>
+    <value>861, 48</value>
   </data>
   <data name="tableLayoutPanel10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2657,7 +2657,7 @@
     <value>0, 59</value>
   </data>
   <data name="panel14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 48</value>
+    <value>861, 48</value>
   </data>
   <data name="panel14.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2687,7 +2687,7 @@
     <value>0, 0</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 59</value>
+    <value>861, 59</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2717,7 +2717,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 59</value>
+    <value>861, 59</value>
   </data>
   <data name="panel13.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2744,7 +2744,7 @@
     <value>0, 107</value>
   </data>
   <data name="pnlGoodProductionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 0</value>
+    <value>861, 0</value>
   </data>
   <data name="pnlGoodProductionList.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2768,7 +2768,7 @@
     <value>3, 110</value>
   </data>
   <data name="pnlGood.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 107</value>
+    <value>861, 107</value>
   </data>
   <data name="pnlGood.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2798,7 +2798,7 @@
     <value>0, 107</value>
   </data>
   <data name="pnlProductionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 0</value>
+    <value>861, 0</value>
   </data>
   <data name="pnlProductionList.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2828,10 +2828,10 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>623, 0</value>
+    <value>626, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 48</value>
+    <value>232, 48</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2864,10 +2864,10 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>388, 0</value>
+    <value>390, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 48</value>
+    <value>230, 48</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2903,7 +2903,7 @@
     <value>3, 0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 48</value>
+    <value>381, 48</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2936,7 +2936,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 48</value>
+    <value>861, 48</value>
   </data>
   <data name="tableLayoutPanel9.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2963,7 +2963,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 48</value>
+    <value>861, 48</value>
   </data>
   <data name="panel11.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2987,7 +2987,7 @@
     <value>0, 59</value>
   </data>
   <data name="panel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 48</value>
+    <value>861, 48</value>
   </data>
   <data name="panel10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3017,7 +3017,7 @@
     <value>0, 0</value>
   </data>
   <data name="lblProductionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 59</value>
+    <value>861, 59</value>
   </data>
   <data name="lblProductionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3047,7 +3047,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 59</value>
+    <value>861, 59</value>
   </data>
   <data name="panel12.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3071,7 +3071,7 @@
     <value>3, 3</value>
   </data>
   <data name="pnlProd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 107</value>
+    <value>861, 107</value>
   </data>
   <data name="pnlProd.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3098,7 +3098,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpProduction.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3131,7 +3131,7 @@
     <value>3, 3</value>
   </data>
   <data name="pnlIncident.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 464</value>
+    <value>424, 466</value>
   </data>
   <data name="pnlIncident.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3155,7 +3155,7 @@
     <value>0, 0</value>
   </data>
   <data name="metroLabel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 464</value>
+    <value>425, 466</value>
   </data>
   <data name="metroLabel7.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3182,10 +3182,10 @@
     <value>Fill</value>
   </data>
   <data name="metroPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>431, 3</value>
+    <value>433, 3</value>
   </data>
   <data name="metroPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 464</value>
+    <value>425, 466</value>
   </data>
   <data name="metroPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3212,7 +3212,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 470</value>
+    <value>861, 472</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3242,7 +3242,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpCity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpCity.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3265,17 +3265,47 @@
   <data name="tableLayoutPanel6.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="pnlContributions.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="pnlContributions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pnlContributions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 70</value>
+  </data>
+  <data name="pnlContributions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 396</value>
+  </data>
+  <data name="pnlContributions.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;pnlContributions.Name" xml:space="preserve">
+    <value>pnlContributions</value>
+  </data>
+  <data name="&gt;&gt;pnlContributions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlContributions.Parent" xml:space="preserve">
+    <value>metroPanel3</value>
+  </data>
+  <data name="&gt;&gt;pnlContributions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="mbSnip.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+    <value>Top</value>
   </data>
   <data name="mbSnip.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mbSnip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 56</value>
+    <value>0, 35</value>
+  </data>
+  <data name="mbSnip.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 20, 3, 3</value>
   </data>
   <data name="mbSnip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 35</value>
+    <value>252, 35</value>
   </data>
   <data name="mbSnip.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3293,7 +3323,7 @@
     <value>metroPanel3</value>
   </data>
   <data name="&gt;&gt;mbSnip.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="mbSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -3302,7 +3332,7 @@
     <value>0, 0</value>
   </data>
   <data name="mbSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 35</value>
+    <value>252, 35</value>
   </data>
   <data name="mbSearch.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3320,16 +3350,16 @@
     <value>metroPanel3</value>
   </data>
   <data name="&gt;&gt;mbSearch.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="metroPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="metroPanel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="metroPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 91</value>
+    <value>252, 466</value>
   </data>
   <data name="metroPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3353,10 +3383,10 @@
     <value>Fill</value>
   </data>
   <data name="mpSnipItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 3</value>
+    <value>261, 3</value>
   </data>
   <data name="mpSnipItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>686, 464</value>
+    <value>597, 466</value>
   </data>
   <data name="mpSnipItem.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3383,7 +3413,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 470</value>
+    <value>861, 472</value>
   </data>
   <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3401,7 +3431,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel6.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="metroPanel3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="mpSnipItem" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,19,35484,Percent,80,64516" /&gt;&lt;Rows Styles="Percent,100,Absolute,470" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="metroPanel3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="mpSnipItem" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,30,Percent,70" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tpSniper.ImageKey" xml:space="preserve">
     <value>profits.png</value>
@@ -3413,7 +3443,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpSniper.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpSniper.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -4274,7 +4304,7 @@
     <value>4, 35</value>
   </data>
   <data name="mtpProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>849, 431</value>
+    <value>853, 433</value>
   </data>
   <data name="mtpProduction.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -5321,7 +5351,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>3, 3</value>
   </data>
   <data name="mtcSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 470</value>
+    <value>861, 472</value>
   </data>
   <data name="mtcSettings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -5348,7 +5378,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpSettings.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -5378,7 +5408,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>Vertical</value>
   </data>
   <data name="mlHelpText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>675, 470</value>
+    <value>679, 472</value>
   </data>
   <data name="mlHelpText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -5405,7 +5435,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>185, 3</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>675, 470</value>
+    <value>679, 472</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -5448,7 +5478,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
 </value>
   </data>
   <data name="tvHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 470</value>
+    <value>182, 472</value>
   </data>
   <data name="tvHelp.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -5475,7 +5505,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 476</value>
+    <value>867, 478</value>
   </data>
   <data name="tpHelp.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -5502,7 +5532,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>0, 0</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>871, 554</value>
+    <value>875, 556</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -5523,7 +5553,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>0, 48</value>
   </data>
   <data name="mpMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>871, 554</value>
+    <value>875, 556</value>
   </data>
   <data name="mpMenu.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -5553,7 +5583,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>878, 608</value>
+    <value>882, 610</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6110,7 +6140,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
 </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>878, 526</value>
+    <value>882, 610</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
