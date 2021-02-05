@@ -22,6 +22,11 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public bool has_great_building { get; set; }
       public string avatar { get; set; }
       public List<LGSnip> LGs { get; set; }
+
+      public override string ToString()
+      {
+         return name;
+      }
    }
    public partial class Neighbor : Player
    {

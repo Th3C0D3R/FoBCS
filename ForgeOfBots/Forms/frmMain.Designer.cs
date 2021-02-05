@@ -142,6 +142,9 @@ namespace ForgeOfBots.Forms
          this.mtcSettings = new MetroFramework.Controls.MetroTabControl();
          this.mtpProduction = new MetroFramework.Controls.MetroTabPage();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
+         this.panel2 = new System.Windows.Forms.Panel();
+         this.clbIgnore = new System.Windows.Forms.CheckedListBox();
+         this.txbPlayer = new System.Windows.Forms.TextBox();
          this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
          this.nudSnipInterval = new System.Windows.Forms.NumericUpDown();
          this.mcbAutoInvest = new MetroFramework.Controls.MetroCheckBox();
@@ -260,6 +263,7 @@ namespace ForgeOfBots.Forms
          this.mtcSettings.SuspendLayout();
          this.mtpProduction.SuspendLayout();
          this.groupBox2.SuspendLayout();
+         this.panel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.nudSnipInterval)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).BeginInit();
          this.mpGoodCycle.SuspendLayout();
@@ -1143,6 +1147,7 @@ namespace ForgeOfBots.Forms
          // groupBox2
          // 
          this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+         this.groupBox2.Controls.Add(this.panel2);
          this.groupBox2.Controls.Add(this.metroLabel15);
          this.groupBox2.Controls.Add(this.nudSnipInterval);
          this.groupBox2.Controls.Add(this.mcbAutoInvest);
@@ -1156,6 +1161,28 @@ namespace ForgeOfBots.Forms
          this.groupBox2.Name = "groupBox2";
          this.groupBox2.TabStop = false;
          this.groupBox2.Tag = "GUI.Settings.Production.AutoSnip.Options";
+         // 
+         // panel2
+         // 
+         this.panel2.Controls.Add(this.clbIgnore);
+         this.panel2.Controls.Add(this.txbPlayer);
+         resources.ApplyResources(this.panel2, "panel2");
+         this.panel2.Name = "panel2";
+         // 
+         // clbIgnore
+         // 
+         resources.ApplyResources(this.clbIgnore, "clbIgnore");
+         this.clbIgnore.FormattingEnabled = true;
+         this.clbIgnore.MultiColumn = true;
+         this.clbIgnore.Name = "clbIgnore";
+         this.clbIgnore.Sorted = true;
+         // 
+         // txbPlayer
+         // 
+         resources.ApplyResources(this.txbPlayer, "txbPlayer");
+         this.txbPlayer.Name = "txbPlayer";
+         this.txbPlayer.Tag = "GUI.Settings.Production.Ignore";
+         this.txbPlayer.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxbPlayer_KeyUp);
          // 
          // metroLabel15
          // 
@@ -1808,6 +1835,8 @@ namespace ForgeOfBots.Forms
          this.mtpProduction.ResumeLayout(false);
          this.groupBox2.ResumeLayout(false);
          this.groupBox2.PerformLayout();
+         this.panel2.ResumeLayout(false);
+         this.panel2.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.nudSnipInterval)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).EndInit();
          this.mpGoodCycle.ResumeLayout(false);
@@ -2010,5 +2039,8 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Label lblFPStock;
       private System.Windows.Forms.Label lblFPStockValue;
       private System.Windows.Forms.Panel pnlContributions;
+      private System.Windows.Forms.Panel panel2;
+      private System.Windows.Forms.CheckedListBox clbIgnore;
+      private System.Windows.Forms.TextBox txbPlayer;
    }
 }

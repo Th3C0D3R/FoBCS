@@ -1484,6 +1484,11 @@ namespace ForgeOfBots.Forms
          mcbLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
          mcbLanguage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
          mcbLanguage.SelectedIndex = UserData.Language.Language;
+         if(UserData.IgnoredPlayers.Count > 0)
+         {
+            clbIgnore.Items.AddRange(UserData.IgnoredPlayers.ToArray());
+         }
+
 
          if (bw.IsBusy)
          {
@@ -2405,5 +2410,15 @@ namespace ForgeOfBots.Forms
          }
       }
 
+      private void TxbPlayer_KeyUp(object sender, KeyEventArgs e)
+      {
+         if(e.KeyCode == System.Windows.Forms.Keys.Enter)
+         {
+            if (!string.IsNullOrWhiteSpace(txbPlayer.Text))
+            {
+#
+            }
+         }
+      }
    }
 }
