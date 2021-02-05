@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using ForgeOfBots.Forms.UserControls;
 
 namespace ForgeOfBots.GameClasses
 {
@@ -66,8 +67,8 @@ namespace ForgeOfBots.GameClasses
       public static LanguageList AvailableLanguages { get; set; } = new LanguageList();
       public static List<LGSnip> AllLGs { get; set; } = new List<LGSnip>();
       public static List<LGSnip> SnipWithProfit { get; set; } = new List<LGSnip>();
-      public static List<LGSnip> PossibleSnipLGs { get; set; } = new List<LGSnip>();
       public static List<Player> SnipablePlayers { get; set; } = new List<Player>();
+      public static List<ProdListItem> ProductionItems { get; set; } = new List<ProdListItem>();
 
       public static Dictionary<int, (bool, object)> doneMotivate { get; set; } = new Dictionary<int, (bool, object)>();
       public static Dictionary<int, (bool, object)> doneTavern { get; set; } = new Dictionary<int, (bool, object)>();
@@ -83,7 +84,6 @@ namespace ForgeOfBots.GameClasses
       /// 1 = Producing Finished -> Idle
       /// 2 = Producing
       /// </summary>
-      public static int State { get; set; } = -1;
       public static float ArcBonus { get; set; } = 190;
       public static JObject UserData { get; set; } = new JObject();
       public static Inventory Inventory { get; set; } = null;
