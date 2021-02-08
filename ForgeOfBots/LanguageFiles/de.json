@@ -75,6 +75,7 @@
     "GUI.Menu.StartProduction": "Produktionen starten",
     "GUI.Menu.CancelProduction": "Produktionen abbrechen",
     "GUI.Menu.CollectProduction": "Produktionen einsammlen",
+    "GUI.Menu.ReloadData": "Aktualisieren",
     "GUI.Sniper.BWTitle": "Snipbare LGs",
     "GUI.Sniper.BWBeforeCountText": "Status",
     "GUI.Sniper.BWTitleSnip": "Snipe ausgewählte LGs",

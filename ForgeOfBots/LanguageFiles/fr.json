@@ -72,6 +72,7 @@
     "GUI.Menu.StartProduction": "Démarrer production",
     "GUI.Menu.CancelProduction": "Arrêter production",
     "GUI.Menu.CollectProduction": "Collecter production",
+    "GUI.Menu.ReloadData": "Refresh",
     "GUI.Sniper.BWTitle": "GM Snipable",
     "GUI.Sniper.BWBeforeCountText": "Etat",
     "GUI.Sniper.BWTitleSnip": "GM sélectionné pour snip",

@@ -75,6 +75,7 @@
     "GUI.Menu.StartProduction": "Start productions",
     "GUI.Menu.CancelProduction": "Stop productions",
     "GUI.Menu.CollectProduction": "Collect productions",
+    "GUI.Menu.ReloadData": "Refresh",
     "GUI.Sniper.BWTitle": "Snipable GBs",
     "GUI.Sniper.BWBeforeCountText": "Status",
     "GUI.Sniper.BWTitleSnip": "Sniping selected GBs",

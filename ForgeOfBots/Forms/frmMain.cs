@@ -880,18 +880,21 @@ namespace ForgeOfBots.Forms
             tsmiStartProduction.Enabled = tsmiStartProduction.Visible = true;
          }
       }
-
+      private void tsmiReloadDataToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         ReloadData();
+      }
 
       #region "Incident"
       private void UpdateHiddenRewardsView()
       {
-         if (pnlIncident.InvokeRequired)
+         if (panelCity.InvokeRequired)
          {
-            Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Clear());
+            Invoker.CallMethode(panelCity, () => panelCity.Controls.Clear());
          }
          else
          {
-            pnlIncident.Controls.Clear();
+            panelCity.Controls.Clear();
          }
          if (ListClass.HiddenRewards.Count == 0) return;
          foreach (HiddenReward item in ListClass.HiddenRewards)
@@ -904,22 +907,22 @@ namespace ForgeOfBots.Forms
                IRarity = item.rarity,
                Dock = DockStyle.Top
             };
-            if (pnlIncident.InvokeRequired)
+            if (panelCity.InvokeRequired)
             {
-               Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Add(iliIncident));
+               Invoker.CallMethode(panelCity, () => panelCity.Controls.Add(iliIncident));
             }
             else
             {
-               pnlIncident.Controls.Add(iliIncident);
+               panelCity.Controls.Add(iliIncident);
             }
          }
-         if (pnlIncident.InvokeRequired)
+         if (panelCity.InvokeRequired)
          {
-            Invoker.CallMethode(pnlIncident, () => pnlIncident.Invalidate());
+            Invoker.CallMethode(panelCity, () => panelCity.Invalidate());
          }
          else
          {
-            pnlIncident.Invalidate();
+            panelCity.Invalidate();
          }
       }
       private void TsmiCollectIncidentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2411,6 +2414,5 @@ namespace ForgeOfBots.Forms
             return cp;
          }
       }
-
    }
 }
