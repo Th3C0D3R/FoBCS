@@ -1,8 +1,14 @@
 ﻿using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
+using Microsoft.AppCenter.Crashes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -11,35 +17,22 @@ namespace ForgeOfBots.Forms.UserControls
 {
    public partial class ProdListItem : UserControl
    {
-      private CustomEvent _ProductionIdle;
-      public event CustomEvent ProductionIdle
+      private CustomEvent _UpdateGUI;
+      public event CustomEvent UpdateGUIEvent
       {
          add
          {
-            if (_ProductionIdle == null || !_ProductionIdle.GetInvocationList().Contains(value))
-               _ProductionIdle += value;
+            if (_UpdateGUI == null || !_UpdateGUI.GetInvocationList().Contains(value))
+               _UpdateGUI += value;
          }
          remove
          {
-            _ProductionIdle -= value;
-         }
-      }
-      private CustomEvent _ProductionDone;
-      public event CustomEvent ProductionDone
-      {
-         add
-         {
-            if (_ProductionDone == null || !_ProductionDone.GetInvocationList().Contains(value))
-               _ProductionDone += value;
-         }
-         remove
-         {
-            _ProductionDone -= value;
+            _UpdateGUI -= value;
          }
       }
       public ProductionState ProductionState;
-      private TimeSpan _duraction;
       private DateTime _endTime;
+      private TimeSpan _duraction;
       private TimeSpan _diff
       {
          get
@@ -49,8 +42,9 @@ namespace ForgeOfBots.Forms.UserControls
       }
       private readonly System.Timers.Timer timer = new System.Timers.Timer();
       public List<int> EntityIDs = new List<int>();
-      public bool HasAllNeeded => (EntityIDs.Count > 0 && _duraction.TotalSeconds > 0 && _ProductionDone != null);
-      private bool EventCalled = false;
+      public bool isGoodBuilding { get; set; } = false;
+      public IJavaScriptExecutor jsExecutor { get; set; }
+
       public ProdListItem()
       {
          InitializeComponent();
@@ -76,13 +70,26 @@ namespace ForgeOfBots.Forms.UserControls
          {
             UpdateGUI();
          }
+         if (StaticData.UserData.ProductionBot)
+         {
+            switch (ProductionState)
+            {
+               case ProductionState.Idle:
+                  StartProduction();
+                  break;
+               case ProductionState.Finished:
+                  CollectProduction();
+                  break;
+               default:
+                  break;
+            }
+         }
          timer.Enabled = true;
          timer.Elapsed += Timer_Elapsed;
          timer.Interval = 1000;
          timer.Start();
          Debug.WriteLine($"[{DateTime.Now}] StartProdGUI");
       }
-
       private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
       {
          if (_diff.TotalSeconds <= 0 || ProductionState == ProductionState.Finished || ProductionState == ProductionState.Idle)
@@ -97,10 +104,9 @@ namespace ForgeOfBots.Forms.UserControls
                   Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ProductionFinishedState"));
                else
                   lblState.Text = i18n.getString("ProductionFinishedState");
-               if (ListClass.State != 1)
+               if (ProductionState == ProductionState.Finished)
                {
-                  _ProductionDone?.Invoke(null, EntityIDs);
-                  EventCalled = true;
+                  _UpdateGUI?.Invoke(this);
                }
                return;
             }
@@ -114,10 +120,9 @@ namespace ForgeOfBots.Forms.UserControls
                   Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ProductionIdle"));
                else
                   lblState.Text = i18n.getString("ProductionIdle");
-               if (ListClass.State != 0)
+               if (ProductionState == ProductionState.Idle)
                {
-                  _ProductionIdle?.Invoke(null, EntityIDs);
-                  EventCalled = true;
+                  _UpdateGUI?.Invoke(this);
                }
                return;
             }
@@ -126,7 +131,6 @@ namespace ForgeOfBots.Forms.UserControls
          }
          UpdateGUI();
       }
-
       public void AddTime(string dur, string end)
       {
          _duraction = TimeSpan.FromSeconds(double.Parse(dur));
@@ -172,6 +176,78 @@ namespace ForgeOfBots.Forms.UserControls
          }
          catch (Exception)
          { }
+      }
+      public void StartProduction()
+      {
+         if (EntityIDs.Count <= 0) return;
+         foreach (int id in EntityIDs)
+         {
+            string script;
+            if (isGoodBuilding)
+               script = StaticData.ReqBuilder.GetRequestScript(DataHandler.RequestType.QueryProduction, new int[] { id, StaticData.UserData.GoodProductionOption.id });
+            else
+               script = StaticData.ReqBuilder.GetRequestScript(DataHandler.RequestType.QueryProduction, new int[] { id, StaticData.UserData.ProductionOption.id });
+            string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+            try
+            {
+               JToken ColRes = JsonConvert.DeserializeObject<JToken>(ret);
+               if (ColRes["responseData"]?["updatedEntities"]?.ToList().Count > 0 && ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "ProducingState")
+               {
+                  ProductionState = ProductionState.Producing;
+                  string script2 = StaticData.ReqBuilder.GetRequestScript(DataHandler.RequestType.GetEntities, "");
+                  string ret2 = (string)jsExecutor.ExecuteAsyncScript(script2);
+                  dynamic entities = JsonConvert.DeserializeObject(ret2);
+                  StaticData.Updater.UpdateBuildings(entities["responseData"]);
+               }
+               else
+               {
+                  if (StaticData.DEBUGMODE)
+                     Helper.Log($"[{DateTime.Now}] Failed to Start Production");
+               }
+               if (StaticData.DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {EntityIDs.Count}");
+            }
+            catch (Exception ex)
+            {
+               NLog.LogManager.Flush();
+               var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+               var properties = new Dictionary<string, string> { { "CollectProduction", ret } };
+               Crashes.TrackError(ex, properties, attachments);
+            }
+            Thread.Sleep(100);
+         }
+         UpdateGUI();
+      }
+      public void CollectProduction()
+      {
+         if (EntityIDs.Count <= 0) return;
+         string script = StaticData.ReqBuilder.GetRequestScript(DataHandler.RequestType.CollectProduction, EntityIDs.ToArray());
+         string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+         try
+         {
+            JToken ColRes = JsonConvert.DeserializeObject<JToken>(ret);
+            if (ColRes["responseData"]?["updatedEntities"]?.ToList().Count > 0 && ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "IdleState")
+            {
+               ProductionState = ProductionState.Idle;
+               string script3 = StaticData.ReqBuilder.GetRequestScript(DataHandler.RequestType.GetEntities, "");
+               string ret3 = (string)jsExecutor.ExecuteAsyncScript(script3);
+               dynamic entities = JsonConvert.DeserializeObject(ret3);
+               StaticData.Updater.UpdateBuildings(entities["responseData"]);
+               UpdateGUI();
+            }
+            else
+            {
+               if (StaticData.DEBUGMODE)
+                  Helper.Log($"[{DateTime.Now}] Failed to Start Production");
+            }
+            if (StaticData.DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {EntityIDs.Count}");
+         }
+         catch (Exception ex)
+         {
+            NLog.LogManager.Flush();
+            var attachments = new ErrorAttachmentLog[] { ErrorAttachmentLog.AttachmentWithText(File.ReadAllText("log.foblog"), "log.foblog") };
+            var properties = new Dictionary<string, string> { { "CollectProduction", ret } };
+            Crashes.TrackError(ex, properties, attachments);
+         }
       }
    }
 }

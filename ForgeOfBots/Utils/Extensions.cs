@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using ForgeOfBots.Forms.UserControls;
 
 namespace ForgeOfBots.Utils
 {
@@ -26,6 +27,23 @@ namespace ForgeOfBots.Utils
    }
    public static class Extensions
    {
+      public static (bool,int[]) HasIDs(this List<ProdListItem> list, params int[] ids)
+      {
+         int[] tmp = ids;
+         bool hasID = false;
+         foreach (ProdListItem item in list)
+         {
+            foreach (int id in item.EntityIDs)
+            {
+               if (ids.Contains(id))
+               {
+                  tmp = tmp.Where(val => val != id).ToArray();
+                  hasID = true;
+               }
+            }
+         }
+         return (hasID, tmp);
+      }
       public static bool HasCityID(this List<Tuple<string, string, WorldState>> list, string ID)
       {
          foreach (Tuple<string, string, WorldState> item in list)
@@ -106,14 +124,14 @@ namespace ForgeOfBots.Utils
             return e.Types.Where(t => t != null);
          }
       }
-      public static (bool,string) HasCookie(this ReadOnlyCollection<Cookie> cookies,string key)
+      public static (bool, string) HasCookie(this ReadOnlyCollection<Cookie> cookies, string key)
       {
          foreach (Cookie cookie in cookies)
          {
             if (cookie.Name.ToLower() == key.ToLower())
-               return (true,cookie.Value);
+               return (true, cookie.Value);
          }
-         return (false,"");
+         return (false, "");
       }
    }
    /// <summary>
@@ -269,7 +287,7 @@ namespace ForgeOfBots.Utils
             }
          }
          catch (Exception)
-         {}
+         { }
          return "";
       }
    }

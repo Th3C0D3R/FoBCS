@@ -83,7 +83,8 @@ namespace ForgeOfBots.Forms
             }
             if (value == max)
             {
-               flpItems.Controls.Remove(item);
+               if (flpItems.Controls.Contains(item))
+                  flpItems.Controls.Remove(item);
             }
          }
       }

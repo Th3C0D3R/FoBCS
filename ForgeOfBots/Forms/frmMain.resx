@@ -1289,7 +1289,7 @@
     <value>3, 0</value>
   </data>
   <data name="lblInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1105, 39</value>
+    <value>829, 32</value>
   </data>
   <data name="lblInactiveFriends.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1322,7 +1322,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1111, 39</value>
+    <value>833, 32</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1361,7 +1361,7 @@
     <value>1</value>
   </data>
   <data name="tlpInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1107, 400</value>
+    <value>830, 325</value>
   </data>
   <data name="tlpInactiveFriends.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3407,7 +3407,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelCity" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="metroPanel4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,598" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pnlIncident" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="metroPanel4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,472" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tpCity.ImageIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3661,6 +3661,75 @@
   <data name="&gt;&gt;tpSniper.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="clbIgnore.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="clbIgnore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 20</value>
+  </data>
+  <data name="clbIgnore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>594, 98</value>
+  </data>
+  <data name="clbIgnore.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;clbIgnore.Name" xml:space="preserve">
+    <value>clbIgnore</value>
+  </data>
+  <data name="&gt;&gt;clbIgnore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clbIgnore.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;clbIgnore.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="txbPlayer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="txbPlayer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="txbPlayer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>594, 20</value>
+  </data>
+  <data name="txbPlayer.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txbPlayer.Name" xml:space="preserve">
+    <value>txbPlayer</value>
+  </data>
+  <data name="&gt;&gt;txbPlayer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txbPlayer.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;txbPlayer.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 12</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>594, 118</value>
+  </data>
+  <data name="panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;panel2.Name" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="metroLabel15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3686,7 +3755,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;metroLabel15.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="nudSnipInterval.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 91</value>
@@ -3713,7 +3782,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;nudSnipInterval.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="mcbAutoInvest.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3746,7 +3815,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;mcbAutoInvest.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="metroLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3773,7 +3842,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;metroLabel1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="metroLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3800,7 +3869,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;metroLabel2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="nudMinProfit.Location" type="System.Drawing.Point, System.Drawing">
     <value>167, 46</value>
@@ -3827,7 +3896,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;nudMinProfit.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="mcbGuild.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3860,7 +3929,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;mcbGuild.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="mcbFriends.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3893,7 +3962,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;mcbFriends.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="mcbNeighbor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3926,7 +3995,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;mcbNeighbor.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 246</value>
@@ -3938,7 +4007,7 @@
     <value>3, 2, 3, 2</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 181</value>
+    <value>848, 135</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -4754,7 +4823,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="mtpData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1143, 555</value>
+    <value>853, 433</value>
   </data>
   <data name="mtpData.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -4865,7 +4934,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="mtpPremium.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1143, 555</value>
+    <value>853, 433</value>
   </data>
   <data name="mtpPremium.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -5360,7 +5429,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="mtpBots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1143, 555</value>
+    <value>853, 433</value>
   </data>
   <data name="mtpBots.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -5687,7 +5756,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="mtpMisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1143, 555</value>
+    <value>853, 433</value>
   </data>
   <data name="mtpMisc.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

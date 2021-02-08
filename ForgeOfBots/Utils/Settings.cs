@@ -1,4 +1,5 @@
 ﻿using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using System;
@@ -41,6 +42,7 @@ namespace ForgeOfBots.Utils
       public int IntervalIncidentBot { get; set; } = 1;
       public DateTime LastPolivateTime { get; set; } = DateTime.MinValue;
       public DateTime LastIncidentTime { get; set; } = DateTime.MinValue;
+      public List<Player> IgnoredPlayers { get; set; } = new List<Player>();
 
       public void SaveSettings()
       {

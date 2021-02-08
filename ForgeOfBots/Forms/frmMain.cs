@@ -254,6 +254,21 @@ namespace ForgeOfBots.Forms
              .Replace("##t##", "false")
              .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
             var x = jsExecutor.ExecuteAsyncScript(loginJS);
+            int breakCounter = 0;
+            while(x is null)
+            {
+               if(breakCounter >= 6)
+               {
+                  MessageBox.Show("Failed to login...\n\nrestarting after dialog is closed","Failed to Login");
+                  UserData.SaveSettings();
+                  RunningTime.Stop();
+                  driver.Quit();
+                  Process.Start(Application.ExecutablePath);
+                  Environment.Exit(0);
+               }
+               x = jsExecutor.ExecuteAsyncScript(loginJS);
+               breakCounter += 1;
+            }
             var ret = (string)x;
             driver.Navigate().GoToUrl(ret);
             GetUIDAndForgeHX(driver.PageSource);
@@ -977,11 +992,13 @@ namespace ForgeOfBots.Forms
                   }
                   pli.Dock = DockStyle.Top;
                   pli.ContextMenuStrip = cmsMainMenu;
+                  pli.isGoodBuilding = false;
                   pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.UpdateGUIEvent += UpdateProdGUI;
+                  pli.jsExecutor = jsExecutor;
                   pli.StartProductionGUI();
                   Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
+                  ListClass.ProductionItems.Add(pli);
                }
             }
             else
@@ -1010,11 +1027,13 @@ namespace ForgeOfBots.Forms
                   }
                   pli.Dock = DockStyle.Top;
                   pli.ContextMenuStrip = cmsMainMenu;
+                  pli.isGoodBuilding = false;
                   pli.AddEntities(item.id);
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.UpdateGUIEvent += UpdateProdGUI;
+                  pli.jsExecutor = jsExecutor;
                   pli.StartProductionGUI();
                   Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
+                  ListClass.ProductionItems.Add(pli);
                }
             }
          }
@@ -1055,11 +1074,13 @@ namespace ForgeOfBots.Forms
                   }
                   pli.Dock = DockStyle.Top;
                   pli.ContextMenuStrip = cmsMainMenu;
+                  pli.isGoodBuilding = true;
                   pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.UpdateGUIEvent += UpdateProdGUI;
+                  pli.jsExecutor = jsExecutor;
                   pli.StartProductionGUI();
                   Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
+                  ListClass.ProductionItems.Add(pli);
                }
             }
             else
@@ -1087,79 +1108,52 @@ namespace ForgeOfBots.Forms
                   }
                   pli.Dock = DockStyle.Top;
                   pli.ContextMenuStrip = cmsMainMenu;
+                  pli.isGoodBuilding = true;
                   pli.AddEntities(item.id);
-                  pli.ProductionDone += Pli_ProductionDone;
-                  pli.ProductionIdle += Pli_ProductionIdle;
+                  pli.UpdateGUIEvent += UpdateProdGUI;
+                  pli.jsExecutor = jsExecutor;
                   pli.StartProductionGUI();
                   Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Controls.Add(pli));
+                  ListClass.ProductionItems.Add(pli);
                }
             }
          }
          Invoker.CallMethode(pnlGoodProductionList, () => pnlGoodProductionList.Invalidate());
       }
-      private void Pli_ProductionIdle(object sender, dynamic data)
+      private void UpdateProdGUI(object sender, dynamic data)
       {
-         ListClass.State = 0;
-         string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
-         string ret = (string)jsExecutor.ExecuteAsyncScript(script);
-         dynamic entities = JsonConvert.DeserializeObject(ret);
-         Updater.UpdateBuildings(entities["responseData"]);
-         if (DEBUGMODE) Log($"[{DateTime.Now}] Idle STATE: {ListClass.State}", lbOutputWindow);
-         update(ListClass.State);
-      }
-      private void Pli_ProductionDone(object sender, dynamic data)
-      {
-         ListClass.State = 1;
-         string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
-         string ret = (string)jsExecutor.ExecuteAsyncScript(script);
-         dynamic entities = JsonConvert.DeserializeObject(ret);
-         Updater.UpdateBuildings(entities["responseData"]);
-         if (DEBUGMODE) Log($"[{DateTime.Now}] Done STATE: {ListClass.State}", lbOutputWindow);
-         update(ListClass.State);
-      }
-      private void ProductionCollected()
-      {
-         if (!UserData.ProductionBot)
+         if(sender is ProdListItem item)
          {
-            ListClass.CollectedIDs.Clear();
             string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
             string ret = (string)jsExecutor.ExecuteAsyncScript(script);
             dynamic entities = JsonConvert.DeserializeObject(ret);
             Updater.UpdateBuildings(entities["responseData"]);
-            if (DEBUGMODE) Log($"[{DateTime.Now}] UpdateBuildings", lbOutputWindow);
-            update(ListClass.State);
-            ListClass.State = 2;
-            return;
+            if (DEBUGMODE) Log($"[{DateTime.Now}] Done STATE: {item.ProductionState}", lbOutputWindow);
+            update(item);
          }
+         
       }
-      private void ProductionStarted()
+
+      private void update(ProdListItem sender)
       {
-         ListClass.State = 2;
-         update(ListClass.State);
-      }
-      private void update(int sender)
-      {
-         UpdateProductionView();
-         UpdateGoodProductionView();
          if (!UserData.ProductionBot) return;
-         if (sender is int state)
+         if (sender is ProdListItem ProdItem)
          {
-            if (DEBUGMODE) Log($"[{DateTime.Now}] STATE: {state}", lbOutputWindow);
-            switch (state)
+            switch (ProdItem.ProductionState)
             {
-               case 0:
-                  if (DEBUGMODE) Log($"[{DateTime.Now}] Production Idle Event", lbOutputWindow);
-                  StartProduction();
-                  ListClass.State = 2;
+               case ProductionState.Idle:
+                  ProdItem.StartProduction();
                   break;
-               case 1:
-                  if (DEBUGMODE) Log($"[{DateTime.Now}] Production Done Event", lbOutputWindow);
-                  CollectProduction();
-                  ListClass.State = 0;
+               case ProductionState.Producing:
+                  break;
+               case ProductionState.Finished:
+                  ProdItem.CollectProduction();
                   break;
                default:
                   break;
             }
+            UpdateProductionView();
+            UpdateGoodProductionView();
          }
       }
       private void StartProduction()
@@ -1232,7 +1226,6 @@ namespace ForgeOfBots.Forms
                   var properties = new Dictionary<string, string> { { "CollectProduction", ret } };
                   Crashes.TrackError(ex, properties, attachments);
                }
-               ProductionCollected();
                break;
             case RequestType.QueryProduction:
                List<string> retQuery = new List<string>();
@@ -1322,7 +1315,6 @@ namespace ForgeOfBots.Forms
                      Crashes.TrackError(ex, properties, attachments);
                   }
                }
-               ProductionStarted();
                break;
             case RequestType.CancelProduction:
                List<string> retCancel = new List<string>();
@@ -1495,6 +1487,11 @@ namespace ForgeOfBots.Forms
          mcbLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
          mcbLanguage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
          mcbLanguage.SelectedIndex = UserData.Language.Language;
+         if(UserData.IgnoredPlayers.Count > 0)
+         {
+            clbIgnore.Items.AddRange(UserData.IgnoredPlayers.ToArray());
+         }
+
 
          if (bw.IsBusy)
          {
@@ -1547,7 +1544,8 @@ namespace ForgeOfBots.Forms
       {
          UserData.ProductionBot = mtProduction.Checked;
          UserData.SaveSettings();
-         update(ListClass.State);
+         UpdateGoodProductionView();
+         UpdateProductionView();
       }
       private void mtTavern_CheckedChanged(object sender, EventArgs e)
       {
@@ -2412,6 +2410,17 @@ namespace ForgeOfBots.Forms
             CreateParams cp = base.CreateParams;
             cp.Style |= 0x20000;
             return cp;
+         }
+      }
+
+      private void TxbPlayer_KeyUp(object sender, KeyEventArgs e)
+      {
+         if(e.KeyCode == System.Windows.Forms.Keys.Enter)
+         {
+            if (!string.IsNullOrWhiteSpace(txbPlayer.Text))
+            {
+
+            }
          }
       }
    }
