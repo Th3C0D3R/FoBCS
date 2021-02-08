@@ -43,6 +43,7 @@ namespace ForgeOfBots.GameClasses
          {"fi", "fi.forgeofempires.com"}
       };
       public static List<World> AllWorlds { get; set; } = new List<World>();
+      public static List<Player> AllPlayers { get; set; } = new List<Player>();
       public static List<Friend> FriendList { get; set; } = new List<Friend>();
       public static List<Neighbor> NeighborList { get; set; } = new List<Neighbor>();
       public static List<ClanMember> ClanMemberList { get; set; } = new List<ClanMember>();

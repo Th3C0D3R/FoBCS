@@ -207,9 +207,9 @@ namespace ForgeOfBots.Forms
          logger.Info($"creating (Remote-)Driver");
          //driver = new RemoteWebDriver(new Uri("http://134.255.216.102:4444/"), co.ToCapabilities(),TimeSpan.FromSeconds(60));
          driver = new ChromeDriver(chromeDriverService, co);
+         driver.Manage().Window.Minimize();
          logger.Info($"navigating to 'https://{UserData.WorldServer}0.forgeofempires.com/'");
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
-         driver.Manage().Window.Minimize();
          cookieJar = driver.Manage().Cookies;
          jsExecutor = (IJavaScriptExecutor)driver;
          StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
@@ -585,6 +585,9 @@ namespace ForgeOfBots.Forms
       private void UpdateSocial()
       {
          #region "other Players"
+         ListClass.AllPlayers.AddRange(ListClass.FriendList);
+         ListClass.AllPlayers.AddRange(ListClass.ClanMemberList);
+         ListClass.AllPlayers.AddRange(ListClass.NeighborList);
          var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
          var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
          var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
@@ -1491,7 +1494,7 @@ namespace ForgeOfBots.Forms
          {
             clbIgnore.Items.AddRange(UserData.IgnoredPlayers.ToArray());
          }
-
+         FillAutoComplete();
 
          if (bw.IsBusy)
          {
@@ -1747,7 +1750,7 @@ namespace ForgeOfBots.Forms
             int Total = 0;
             foreach (LGContribution item in ListClass.Contributions)
             {
-               IncidentListItem conItem = new IncidentListItem();
+               Label conItem = new Label();
                if(item.reward != null)
                {
                   ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
@@ -1755,20 +1758,19 @@ namespace ForgeOfBots.Forms
                   int reward = (int)Math.Round((double)item.reward.strategy_point_amount * ListClass.ArcBonus);
                   int outcome = reward - item.forge_points;
                   Total += outcome;
-                  conItem.IRarity = $"{(outcome > 0 ? "+" : "") + outcome}";
+                  conItem.Text = $"{item.name} => ({(outcome > 0 ? "+" : "") + outcome})";
                }
                else
                {
-                  conItem.IRarity = $"-{item.forge_points}";
+                  conItem.Text = $"{item.name} => (-{item.forge_points})";
                   Total -= item.forge_points;
                }
-               conItem.ILocation = $"{item.name}";
+               conItem.Dock = DockStyle.Top;
                Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Add(conItem));
             }
-            IncidentListItem conTotal = new IncidentListItem
+            Label conTotal = new Label
             {
-               IRarity = Total.ToString("N0"),
-               ILocation = i18n.getString("GUI.Sniper.Contributions.Total")
+               Text = i18n.getString("GUI.Sniper.Contributions.Total") + " => " + Total.ToString("N0")
             };
             Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Add(conTotal));
          }
@@ -1859,7 +1861,13 @@ namespace ForgeOfBots.Forms
                      ID = PolivateFriendsWorkerID;
                      break;
                   case E_Motivate.All:
-                     list.AddRange(ListClass.Motivateable);
+                     var clan = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
+                     var neighbor = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
+                     var friend = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
+                     list.AddRange(neighbor);
+                     list.AddRange(friend);
+                     list.AddRange(clan);
+                     ID = PolivateAllWorkerID;
                      break;
                   default:
                      break;
@@ -2234,9 +2242,13 @@ namespace ForgeOfBots.Forms
                Invoker.CallMethode(mpSnipItem, () => mpSnipItem.Controls.Clear());
                foreach (LGSnip item in ListClass.SnipWithProfit)
                {
+                  Player player = ListClass.AllPlayers.Find(p => p.player_id == item.player.player_id);
+                  string PlayerIdentifier = "Neighbor";
+                  if (player.is_friend) PlayerIdentifier = "Friend";
+                  if (player.is_guild_member) PlayerIdentifier = "Member";
                   LGSnipItem lsi = new LGSnipItem()
                   {
-                     LG = $"{item.player.name} ({i18n.getString($"GUI.Sniper.PlayerIndentifier.{(item.player.is_friend ? "Friend" : item.player.is_guild_member ? "Member" : "Neighbor")}")}) -> {item.name} ({item.level})",
+                     LG = $"{item.player.name} ({i18n.getString($"GUI.Sniper.PlayerIndentifier.{PlayerIdentifier}")}) -> {item.name} ({item.level})",
                      LGSnip = item,
                      Profit = $"{item.Invest} (+{item.GewinnString})"
                   };
@@ -2338,6 +2350,7 @@ namespace ForgeOfBots.Forms
       private void TsmiVisitMopple_Click(object sender, EventArgs e)
       {
          Motivate(E_Motivate.All);
+         VisitAllTavern();
       }
       private void TsmiVisitTavern_Click(object sender, EventArgs e)
       {
@@ -2413,13 +2426,21 @@ namespace ForgeOfBots.Forms
          }
       }
 
+      private void FillAutoComplete()
+      {
+         txbPlayer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+         txbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+         AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
+         acsc.AddRange(UsernameList.Get);
+         txbPlayer.AutoCompleteCustomSource = acsc;
+      }
       private void TxbPlayer_KeyUp(object sender, KeyEventArgs e)
       {
          if(e.KeyCode == System.Windows.Forms.Keys.Enter)
          {
             if (!string.IsNullOrWhiteSpace(txbPlayer.Text))
             {
-
+               Console.WriteLine(txbPlayer.Text);
             }
          }
       }

@@ -40,6 +40,7 @@
     "GUI.Settings.Production.AutoSnip.AutoInvest": "Auto. invest",
     "GUI.Settings.Production.AutoSnip.MinProfit": "Min. Profit to snip",
     "GUI.Settings.Production.AutoSnip.SnipEvery": "Snip every x minutes",
+    "GUI.Settings.Production.Ignore": "Players to ignore by Snip-Bot",
     "GUI.Settings.Misc": "Program",
     "GUI.Settings.Misc.Language": "Language",
     "GUI.Settings.Misc.CustomUA": "Custom User-Agent",

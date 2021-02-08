@@ -38,6 +38,7 @@
     "GUI.Settings.Production.AutoSnip.Target": "Cibles",
     "GUI.Settings.Production.AutoSnip.AutoInvest": "Investissement Auto",
     "GUI.Settings.Production.AutoSnip.MinProfit": "Profit minimum pour Snip",
+    "GUI.Settings.Production.Ignore": "Players to ignore by Snip-Bot",
     "GUI.Settings.Misc": "Programme",
     "GUI.Settings.Misc.Language": "Langage",
     "GUI.Settings.Misc.CustomUA": "Custom utilisateur",

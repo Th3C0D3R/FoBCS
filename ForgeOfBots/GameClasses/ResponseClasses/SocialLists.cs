@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -114,5 +115,18 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public long progress { get; set; }
       public string __class__ { get; set; }
    }
-
+   public static class UsernameList
+   {
+      public static string[] Get
+      {
+         get
+         {
+            List<string> nameList = new List<string>();
+            if (ListClass.NeighborList.Count > 0) nameList.AddRange(ListClass.NeighborList.Select(n => $"{n.name} ({n.player_id})"));
+            if (ListClass.FriendList.Count > 0) nameList.AddRange(ListClass.FriendList.Select(f => $"{f.name} ({f.player_id})"));
+            if (ListClass.ClanMemberList.Count > 0) nameList.AddRange(ListClass.ClanMemberList.Select(c => $"{c.name} ({c.player_id})"));
+            return nameList.ToArray();
+         }
+      }
+   }
 }

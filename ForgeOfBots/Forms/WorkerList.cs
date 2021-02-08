@@ -84,7 +84,13 @@ namespace ForgeOfBots.Forms
             if (value == max)
             {
                if (flpItems.Controls.Contains(item))
-                  flpItems.Controls.Remove(item);
+               {
+                  flpItems.Invoke((MethodInvoker)delegate
+                  {
+                     flpItems.Controls.Remove(item);
+                  });
+               }
+                  
             }
          }
       }
