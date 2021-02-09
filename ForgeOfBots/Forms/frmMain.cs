@@ -1762,6 +1762,9 @@ namespace ForgeOfBots.Forms
       }
       private void McbAutoInvest_CheckedChanged(object sender, EventArgs e)
       {
+         if (UserData.ShowWarning)
+            MessageBox.Show(i18n.getString("GUI.Settings.Production.AutoSnip.AutoInvest.WarningText"), i18n.getString("GUI.Settings.Production.AutoSnip.AutoInvest.WarningTitle"));
+         UserData.ShowWarning = false;
          UserData.AutoInvest = mcbAutoInvest.Checked;
          UserData.SaveSettings();
       }
@@ -1873,6 +1876,7 @@ namespace ForgeOfBots.Forms
       {
          if (!UserData.SnipBot) return;
          MbSearch_Click(null, null);
+         MbSnip_Click(true, null);
       }
       #endregion
 
@@ -1945,7 +1949,16 @@ namespace ForgeOfBots.Forms
          foreach (Control c in mpSnipItem.Controls)
          {
             LGSnipItem lsi = (LGSnipItem)c;
-            if (lsi.mcbSnip.Checked)
+            if(sender is bool)
+            {
+               string script = ReqBuilder.GetRequestScript(RequestType.contributeForgePoints, new int[] { lsi.LGSnip.entity_id, lsi.LGSnip.player.player_id.Value, lsi.LGSnip.level, lsi.LGSnip.Invest, 0 });
+               _ = (string)jsExecutor.ExecuteAsyncScript(script);
+               lsi.mcbSnip.Enabled = false;
+               lsi.mcbSnip.Checked = false;
+               lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
+               Application.DoEvents();
+            }
+            else if (lsi.mcbSnip.Checked)
             {
                string script = ReqBuilder.GetRequestScript(RequestType.contributeForgePoints, new int[] { lsi.LGSnip.entity_id, lsi.LGSnip.player.player_id.Value, lsi.LGSnip.level, lsi.LGSnip.Invest, 0 });
                _ = (string)jsExecutor.ExecuteAsyncScript(script);

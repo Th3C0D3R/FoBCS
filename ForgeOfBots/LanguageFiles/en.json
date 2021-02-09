@@ -41,6 +41,8 @@
     "GUI.Settings.Production.AutoSnip.MinProfit": "Min. Profit to snip",
     "GUI.Settings.Production.AutoSnip.SnipEvery": "Snip every x minutes",
     "GUI.Settings.Production.Ignore": "Players to ignore by Snip-Bot (Press Enter to add)",
+    "GUI.Settings.Production.AutoSnip.AutoInvest.WarningTitle": "!! ATTENTION !!",
+    "GUI.Settings.Production.AutoSnip.AutoInvest.WarningText": "THE BOT INVEST INTO EVERY GB WHICH RETURN PROFIT!\nAS LONG AS FP ARE AVAILABE!!\nORDER IS THE SAME AS THE ORDER OF PLAYERS IN THE RESPECTIVE LIST\n\nINACTIVE PLAYERS WILL BE IGNORED ADDITIONALLY",
     "GUI.Settings.Misc": "Program",
     "GUI.Settings.Misc.Language": "Language",
     "GUI.Settings.Misc.CustomUA": "Custom User-Agent",

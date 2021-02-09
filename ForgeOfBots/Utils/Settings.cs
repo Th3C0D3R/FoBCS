@@ -37,6 +37,7 @@ namespace ForgeOfBots.Utils
       public int MinProfit { get; set; } = 20;
       public int IntervalSnip { get; set; } = 60;
       public bool AutoInvest { get; set; } = false;
+      public bool ShowWarning { get; set; } = true;
       public SnipTarget SelectedSnipTarget { get; set; } = SnipTarget.neighbors | SnipTarget.friends;
       public UserConfirmation AllowSendCrashLog { get; set; } = UserConfirmation.Send;
       public int IntervalIncidentBot { get; set; } = 1;

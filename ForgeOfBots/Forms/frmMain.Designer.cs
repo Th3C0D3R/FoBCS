@@ -147,9 +147,9 @@ namespace ForgeOfBots.Forms
          this.mtpProduction = new MetroFramework.Controls.MetroTabPage();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
          this.panel2 = new System.Windows.Forms.Panel();
+         this.pnlIgnore = new System.Windows.Forms.FlowLayoutPanel();
          this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
          this.txbPlayer = new System.Windows.Forms.TextBox();
-         this.pnlIgnore = new System.Windows.Forms.FlowLayoutPanel();
          this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
          this.nudSnipInterval = new System.Windows.Forms.NumericUpDown();
          this.mcbAutoInvest = new MetroFramework.Controls.MetroCheckBox();
@@ -1209,6 +1209,13 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.panel2, "panel2");
          this.panel2.Name = "panel2";
          // 
+         // pnlIgnore
+         // 
+         this.pnlIgnore.BackColor = System.Drawing.SystemColors.Window;
+         this.pnlIgnore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+         resources.ApplyResources(this.pnlIgnore, "pnlIgnore");
+         this.pnlIgnore.Name = "pnlIgnore";
+         // 
          // tableLayoutPanel12
          // 
          resources.ApplyResources(this.tableLayoutPanel12, "tableLayoutPanel12");
@@ -1223,13 +1230,6 @@ namespace ForgeOfBots.Forms
          this.txbPlayer.Enter += new System.EventHandler(this.TxbPlayer_Enter);
          this.txbPlayer.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxbPlayer_KeyUp);
          this.txbPlayer.Leave += new System.EventHandler(this.TxbPlayer_Enter);
-         // 
-         // pnlIgnore
-         // 
-         this.pnlIgnore.BackColor = System.Drawing.SystemColors.Window;
-         this.pnlIgnore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-         resources.ApplyResources(this.pnlIgnore, "pnlIgnore");
-         this.pnlIgnore.Name = "pnlIgnore";
          // 
          // metroLabel15
          // 

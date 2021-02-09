@@ -41,6 +41,8 @@
     "GUI.Settings.Production.AutoSnip.MinProfit": "Min. Profit zum Snipen",
     "GUI.Settings.Production.AutoSnip.SnipEvery": "Snipe jede x Minuten",
     "GUI.Settings.Production.Ignore": "Spieler die ignoriert werden sollen (Enter drücken zum hinzufügen)",
+    "GUI.Settings.Production.AutoSnip.AutoInvest.WarningTitle": "!! ACHTUNG !!",
+    "GUI.Settings.Production.AutoSnip.AutoInvest.WarningText": "ES WIRD IN ALLE LGs INVESTIERT DIE BEIM DURCHSUCHEN PROFIT ABWERFEN!\nSOLANG FP VORHANDEN SIND!!\nREIHENFOLGE ENTSPRICHT DER REIHENFOLGE IN DEN JEWEILIGEN SPIELERLISTEN\n\nINAKTIVE SPIELER WERDEN NICHT BERÜCKSICHTIGT",
     "GUI.Settings.Misc": "Programm",
     "GUI.Settings.Misc.Language": "Sprache",
     "GUI.Settings.Misc.CustomUA": "benutz. User-Agent",
