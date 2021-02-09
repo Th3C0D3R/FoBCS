@@ -92,7 +92,7 @@ namespace ForgeOfBots.DataHandler
                      string cityMeta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
                      BuildingsRoot rootBuilding = JsonConvert.DeserializeObject<BuildingsRoot>("{\"buildings\":" + cityMeta + "}");
                      ListClass.AllBuildings = rootBuilding.buildings.ToList();
-                     if(ListClass.Startup.Count > 0)
+                     if (ListClass.Startup.Count > 0)
                         UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
                   }
                   if (ListClass.Eras.Count <= 0)
@@ -113,7 +113,7 @@ namespace ForgeOfBots.DataHandler
                   ress = JsonConvert.DeserializeObject(body);
                   ListClass.Startup = ress;
                   ListClass.UserData = ress["responseData"]["user_data"];
-                     UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
+                  UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
                   break;
                case "getLimitedBonuses":
                   BonusServiceRoot rootBonusService = JsonConvert.DeserializeObject<BonusServiceRoot>(body);
@@ -124,7 +124,7 @@ namespace ForgeOfBots.DataHandler
                   break;
             }
          }
-         
+
       }
       public void UpdateOwnTavern()
       {
@@ -145,6 +145,14 @@ namespace ForgeOfBots.DataHandler
          string script = ReqBuilder.GetRequestScript(RequestType.getItems, "");
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
          ListClass.Inventory = JsonConvert.DeserializeObject<Inventory>(ret);
+      }
+      public void UpdateResources()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.getPlayerResources, "");
+         string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         dynamic ress = JsonConvert.DeserializeObject(ret);
+         ListClass.Resources = ress;
+         UpdatedSortedGoodList();
       }
       public void UpdatedSortedGoodList()
       {

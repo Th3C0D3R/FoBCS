@@ -192,7 +192,7 @@ namespace ForgeOfBots.Forms
             "--disable-metrics-reporting",
             "--ssl-version-min=tl",
             "--no-sandbox",
-            "--remote-debugging-port=9222",
+            "--remote-debugging-port=1337",
          "--disable-dev-shm-usage",
 #if RELEASE
          "--window-position=-32000,-32000",
@@ -255,11 +255,11 @@ namespace ForgeOfBots.Forms
              .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
             var x = jsExecutor.ExecuteAsyncScript(loginJS);
             int breakCounter = 0;
-            while(x is null)
+            while (x is null)
             {
-               if(breakCounter >= 6)
+               if (breakCounter >= 6)
                {
-                  MessageBox.Show("Failed to login...\n\nrestarting after dialog is closed","Failed to Login");
+                  MessageBox.Show("Failed to login...\n\nrestarting after dialog is closed", "Failed to Login");
                   UserData.SaveSettings();
                   RunningTime.Stop();
                   driver.Quit();
@@ -374,12 +374,12 @@ namespace ForgeOfBots.Forms
           .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
          logger.Info($"Login executing... server: {UserData.WorldServer} | city: {UserData.LastWorld.Split('|')[0]}");
          var x = jsExecutor.ExecuteAsyncScript(loginJS);
-         if (!(x is string))
-            logger.Info($"loginscript returned not a string (URL): {x.ToString()}");
+         if (!(x is string @string))
+            logger.Info($"loginscript returned not a string (URL): {x}");
          else
          {
-            logger.Info($"loginscript returned: {(string)x}");
-            var ret = (string)x;
+            logger.Info($"loginscript returned: {@string}");
+            var ret = @string;
             driver.Navigate().GoToUrl(ret);
             GetUIDAndForgeHX(driver.PageSource);
          }
@@ -529,8 +529,10 @@ namespace ForgeOfBots.Forms
                   }
                   foreach (Good good in item.Value)
                   {
-                     ListViewItem lvi = new ListViewItem($"{good.name} ({good.value})", good.good_id);
-                     lvi.Group = group;
+                     ListViewItem lvi = new ListViewItem($"{good.name} ({good.value})", good.good_id)
+                     {
+                        Group = group
+                     };
                      Invoker.CallMethode(lvGoods, () => lvGoods.Items.Add(lvi));
                      if (group != null && group.Header != lastEra)
                      {
@@ -563,10 +565,10 @@ namespace ForgeOfBots.Forms
             Invoker.SetProperty(lblDiamonds, () => lblDiamonds.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "premium")["name"].ToString() + ":");
             Invoker.SetProperty(lblFP, () => lblFP.Text, ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == "strategy_points")["name"].ToString() + ":");
          }
-         if(ListClass.Inventory.responseData.Count() > 0)
+         if (ListClass.Inventory.responseData.Count() > 0)
          {
             Items[] FPPackItems = ListClass.Inventory.responseData.ToList().FindAll(i => i.itemAssetName.EndsWith("forgepoints")).ToArray();
-            if(FPPackItems.Count() > 0)
+            if (FPPackItems.Count() > 0)
             {
                int FPinStock = 0;
                foreach (Items fpPack in FPPackItems)
@@ -585,9 +587,11 @@ namespace ForgeOfBots.Forms
       private void UpdateSocial()
       {
          #region "other Players"
+         ListClass.AllPlayers.Clear();
          ListClass.AllPlayers.AddRange(ListClass.FriendList);
          ListClass.AllPlayers.AddRange(ListClass.ClanMemberList);
          ListClass.AllPlayers.AddRange(ListClass.NeighborList);
+         FillAutoComplete();
          var friendMotivate = ListClass.FriendList.FindAll(f => (f.next_interaction_in == 0));
          var clanMotivate = ListClass.ClanMemberList.FindAll(f => (f.next_interaction_in == 0));
          var neighborlist = ListClass.NeighborList.FindAll(f => (f.next_interaction_in == 0));
@@ -799,8 +803,10 @@ namespace ForgeOfBots.Forms
             Log("[DEBUG] empty or none userdata, creating new one!", lbOutputWindow);
             if (!Utils.Settings.SettingsExists())
                UserData = new Utils.Settings();
-            usi = new UserDataInput(ListClass.ServerList);
-            usi.TopMost = true;
+            usi = new UserDataInput(ListClass.ServerList)
+            {
+               TopMost = true
+            };
             usi.UserDataEntered += Usi_UserDataEntered;
             DialogResult dlgRes = usi.ShowDialog();
             if (dlgRes == DialogResult.Cancel) Environment.Exit(0);
@@ -838,6 +844,13 @@ namespace ForgeOfBots.Forms
       }
       private void CmsMainMenu_Opening(object sender, CancelEventArgs e)
       {
+         foreach (ToolStripItem item in cmsMainMenu.Items)
+         {
+            item.Enabled = item.Visible = false;
+         }
+
+         toolStripSeparator1.Visible = false;
+
          if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Social")
          {
             tsmiCollectTavern.Enabled = tsmiCollectTavern.Visible = false;
@@ -851,6 +864,8 @@ namespace ForgeOfBots.Forms
             tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = true;
             tsmiMoppleNeighbor.Enabled = tsmiMoppleNeighbor.Visible = true;
             tsmiVisitMopple.Enabled = tsmiVisitMopple.Visible = true;
+
+            toolStripSeparator1.Visible = true;
          }
          else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Tavern")
          {
@@ -865,6 +880,8 @@ namespace ForgeOfBots.Forms
             tsmiCollectTavern.Enabled = tsmiCollectTavern.Visible = true;
             tsmiVisitTavern.Enabled = tsmiVisitTavern.Visible = true;
             tsmiVisitMopple.Enabled = tsmiVisitMopple.Visible = true;
+
+            toolStripSeparator1.Visible = true;
          }
          else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.City")
          {
@@ -879,6 +896,8 @@ namespace ForgeOfBots.Forms
             tsmiVisitMopple.Enabled = tsmiVisitMopple.Visible = false;
 
             tsmiCollectIncidents.Enabled = tsmiCollectIncidents.Visible = true;
+
+            toolStripSeparator1.Visible = true;
          }
          else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Production")
          {
@@ -896,7 +915,10 @@ namespace ForgeOfBots.Forms
             tsmiCancelProduction.Enabled = tsmiCancelProduction.Visible = true;
             tsmiCollectProduction.Enabled = tsmiCollectProduction.Visible = true;
             tsmiStartProduction.Enabled = tsmiStartProduction.Visible = true;
+
+            toolStripSeparator1.Visible = true;
          }
+         tsmiReloadDataToolStripMenuItem.Enabled = tsmiReloadDataToolStripMenuItem.Visible = true;
       }
       private void tsmiReloadDataToolStripMenuItem_Click(object sender, EventArgs e)
       {
@@ -906,13 +928,13 @@ namespace ForgeOfBots.Forms
       #region "Incident"
       private void UpdateHiddenRewardsView()
       {
-         if (panelCity.InvokeRequired)
+         if (pnlIncident.InvokeRequired)
          {
-            Invoker.CallMethode(panelCity, () => panelCity.Controls.Clear());
+            Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Clear());
          }
          else
          {
-            panelCity.Controls.Clear();
+            pnlIncident.Controls.Clear();
          }
          if (ListClass.HiddenRewards.Count == 0) return;
          foreach (HiddenReward item in ListClass.HiddenRewards)
@@ -925,22 +947,22 @@ namespace ForgeOfBots.Forms
                IRarity = item.rarity,
                Dock = DockStyle.Top
             };
-            if (panelCity.InvokeRequired)
+            if (pnlIncident.InvokeRequired)
             {
-               Invoker.CallMethode(panelCity, () => panelCity.Controls.Add(iliIncident));
+               Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Add(iliIncident));
             }
             else
             {
-               panelCity.Controls.Add(iliIncident);
+               pnlIncident.Controls.Add(iliIncident);
             }
          }
-         if (panelCity.InvokeRequired)
+         if (pnlIncident.InvokeRequired)
          {
-            Invoker.CallMethode(panelCity, () => panelCity.Invalidate());
+            Invoker.CallMethode(pnlIncident, () => pnlIncident.Invalidate());
          }
          else
          {
-            panelCity.Invalidate();
+            pnlIncident.Invalidate();
          }
       }
       private void TsmiCollectIncidentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1125,7 +1147,7 @@ namespace ForgeOfBots.Forms
       }
       private void UpdateProdGUI(object sender, dynamic data)
       {
-         if(sender is ProdListItem item)
+         if (sender is ProdListItem item)
          {
             string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
             string ret = (string)jsExecutor.ExecuteAsyncScript(script);
@@ -1134,7 +1156,7 @@ namespace ForgeOfBots.Forms
             if (DEBUGMODE) Log($"[{DateTime.Now}] Done STATE: {item.ProductionState}", lbOutputWindow);
             update(item);
          }
-         
+
       }
 
       private void update(ProdListItem sender)
@@ -1218,9 +1240,11 @@ namespace ForgeOfBots.Forms
                            }
                         }
                      }
-                     if (DEBUGMODE) Helper.Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
+                     if (DEBUGMODE) Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
                      ListClass.CollectedIDs = CollectedIDs;
                   }
+                  Updater.UpdateResources();
+                  UpdateDashbord();
                }
                catch (Exception ex)
                {
@@ -1335,6 +1359,8 @@ namespace ForgeOfBots.Forms
                   retCancel.Add((string)jsExecutor.ExecuteAsyncScript(script));
                   Thread.Sleep(100);
                }
+               Updater.UpdateResources();
+               UpdateDashbord(); 
                UpdateProductionView();
                UpdateGoodProductionView();
                break;
@@ -1360,7 +1386,7 @@ namespace ForgeOfBots.Forms
                            successed = true;
                         if (Reward != null)
                         {
-                           Log($"{i18n.getString("IncidentCollected")} - {i18n.getString("Reward")}: {Reward.ToString()}", lbOutputWindow);
+                           Log($"{i18n.getString("IncidentCollected")} - {i18n.getString("Reward")}: {Reward.ToString()}", lbOutputWindow, lbIncidentBox);
                         }
                      }
                      else if (ColIncRes["requestClass"].ToString() == "RewardService")
@@ -1369,7 +1395,7 @@ namespace ForgeOfBots.Forms
                         if (successed)
                         {
 
-                           Log($"{i18n.getString("IncidentCollected")} - {i18n.getString("Reward")}: {Reward.ToString()}", lbOutputWindow);
+                           Log($"{i18n.getString("IncidentCollected")} - {i18n.getString("Reward")}: {Reward.ToString()}", lbOutputWindow, lbIncidentBox);
                         }
                      }
                   }
@@ -1387,6 +1413,8 @@ namespace ForgeOfBots.Forms
                }
                ListClass.HiddenRewards = newHiddenRewards.responseData.hiddenRewards.ToList();
                UpdateHiddenRewardsView();
+               Updater.UpdateResources();
+               UpdateDashbord();
                break;
             default:
                break;
@@ -1490,9 +1518,16 @@ namespace ForgeOfBots.Forms
          mcbLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
          mcbLanguage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
          mcbLanguage.SelectedIndex = UserData.Language.Language;
-         if(UserData.IgnoredPlayers.Count > 0)
+         if (UserData.IgnoredPlayers.Count > 0)
          {
-            clbIgnore.Items.AddRange(UserData.IgnoredPlayers.ToArray());
+            foreach (int item in UserData.IgnoredPlayers)
+            {
+               Player p = ListClass.AllPlayers.Find(a => a.player_id == item);
+               ucIgnorePlayer ucIP = new ucIgnorePlayer();
+               ucIP.Player = p;
+               ucIP.Remove += RemoveIgnoredPlayer;
+               pnlIgnore.Controls.Add(ucIP);
+            }
          }
          FillAutoComplete();
 
@@ -1718,6 +1753,7 @@ namespace ForgeOfBots.Forms
             }
          }
          UserData.SaveSettings();
+         FillAutoComplete();
       }
       private void nudMinProfit_ValueChanged(object sender, EventArgs e)
       {
@@ -1733,11 +1769,110 @@ namespace ForgeOfBots.Forms
       {
          UserData.SnipBot = mtSnipBot.Checked;
          UserData.SaveSettings();
+         if (UserData.SnipBot)
+         {
+            tSniper.Interval = 1000 * 60 * UserData.IntervalSnip;
+            tSniper.Start();
+            TSniper_Tick(null, null);
+         }
+         else
+         {
+            tSniper.Stop();
+         }
       }
       private void nudSnipInterval_ValueChanged(object sender, EventArgs e)
       {
          UserData.IntervalSnip = (int)nudSnipInterval.Value;
          UserData.SaveSettings();
+         if (UserData.SnipBot)
+         {
+            tSniper.Stop();
+            tSniper.Interval = 1000 * 60 * UserData.IntervalSnip;
+            tSniper.Start();
+            TSniper_Tick(null, null);
+         }
+         else
+         {
+            tSniper.Stop();
+         }
+      }
+      private void FillAutoComplete()
+      {
+         txbPlayer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+         txbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+         AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
+         acsc.AddRange(UsernameList.Get);
+         txbPlayer.AutoCompleteCustomSource = acsc;
+      }
+      private void TxbPlayer_KeyUp(object sender, KeyEventArgs e)
+      {
+         if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+         {
+            if (!string.IsNullOrWhiteSpace(txbPlayer.Text))
+            {
+               string text = txbPlayer.Text;
+               text = text.Split('(', ')')[1];
+               if (int.TryParse(text, out int playerID))
+               {
+                  Player player = ListClass.AllPlayers.Find(p => p.player_id == playerID);
+                  if (txbPlayer.Text.Split('(')[0].TrimEnd(' ').Equals(player.name.TrimEnd(' ')))
+                  {
+                     if (UserData.IgnoredPlayers.Contains(player.player_id.Value)) return;
+                     UserData.IgnoredPlayers.Add(player.player_id.Value);
+                     ucIgnorePlayer ucIP = new ucIgnorePlayer
+                     {
+                        Player = player
+                     };
+                     ucIP.Remove += RemoveIgnoredPlayer;
+                     pnlIgnore.Controls.Add(ucIP);
+                     UserData.SaveSettings();
+                     txbPlayer.Text = "";
+                  }
+                  else
+                  {
+                     Log($"{txbPlayer.Text} {i18n.getString("PlayerNotFound")}", lbOutputWindow);
+                  }
+               }
+               else
+               {
+                  Log($"{txbPlayer.Text} {i18n.getString("PlayerNotFound")}", lbOutputWindow);
+               }
+            }
+         }
+      }
+      private void RemoveIgnoredPlayer(object sender, dynamic data = null)
+      {
+         try
+         {
+            Player p = (Player)data;
+            if (p != null)
+            {
+               UserData.IgnoredPlayers.Remove(p.player_id.Value);
+               pnlIgnore.Controls.Remove(sender as ucIgnorePlayer);
+               UserData.SaveSettings();
+            }
+         }
+         catch (Exception ex)
+         {
+            Debug.WriteLine(ex.ToString());
+         }
+      }
+      private void TxbPlayer_Enter(object sender, EventArgs e)
+      {
+         if (txbPlayer.Text.Equals(i18n.getString("GUI.Settings.Production.Ignore")))
+         {
+            txbPlayer.Text = "";
+         }
+         else
+         {
+            if (string.IsNullOrWhiteSpace(txbPlayer.Text))
+               txbPlayer.Text = i18n.getString("GUI.Settings.Production.Ignore");
+         }
+      }
+      private void TSniper_Tick(object sender, EventArgs e)
+      {
+         if (!UserData.SnipBot) return;
+         MbSearch_Click(null, null);
       }
       #endregion
 
@@ -1751,21 +1886,23 @@ namespace ForgeOfBots.Forms
             foreach (LGContribution item in ListClass.Contributions)
             {
                Label conItem = new Label();
-               if(item.reward != null)
+               if (item.reward != null)
                {
                   ListClass.ArcBonus = (ListClass.ArcBonus == 0 ? 1 : ListClass.ArcBonus);
                   if (ListClass.ArcBonus >= 2) ListClass.ArcBonus = (ListClass.ArcBonus / 100) + 1;
                   int reward = (int)Math.Round((double)item.reward.strategy_point_amount * ListClass.ArcBonus);
                   int outcome = reward - item.forge_points;
                   Total += outcome;
-                  conItem.Text = $"{item.name} => ({(outcome > 0 ? "+" : "") + outcome})";
+                  conItem.Text = $"{item.player.name} ({item.name}) => ({(outcome > 0 ? "+" : "") + outcome})";
                }
                else
                {
-                  conItem.Text = $"{item.name} => (-{item.forge_points})";
+                  conItem.Text = $"{item.player.name} ({item.name}) => (-{item.forge_points})";
                   Total -= item.forge_points;
                }
                conItem.Dock = DockStyle.Top;
+               conItem.AutoSize = false;
+               conItem.TextAlign = ContentAlignment.MiddleCenter;
                Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Add(conItem));
             }
             Label conTotal = new Label
@@ -1811,7 +1948,7 @@ namespace ForgeOfBots.Forms
             if (lsi.mcbSnip.Checked)
             {
                string script = ReqBuilder.GetRequestScript(RequestType.contributeForgePoints, new int[] { lsi.LGSnip.entity_id, lsi.LGSnip.player.player_id.Value, lsi.LGSnip.level, lsi.LGSnip.Invest, 0 });
-               string ret = (string)jsExecutor.ExecuteAsyncScript(script);
+               _ = (string)jsExecutor.ExecuteAsyncScript(script);
                lsi.mcbSnip.Enabled = false;
                lsi.mcbSnip.Checked = false;
                lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
@@ -1819,6 +1956,8 @@ namespace ForgeOfBots.Forms
             }
          }
          Updater.UpdateContribution();
+         Updater.UpdateInventory();
+         UpdateDashbord();
          UpdateSnip();
       }
       #endregion
@@ -2038,6 +2177,7 @@ namespace ForgeOfBots.Forms
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends)) ListClass.SnipablePlayers.AddRange(ListClass.FriendList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors)) ListClass.SnipablePlayers.AddRange(ListClass.NeighborList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
+               ListClass.SnipablePlayers = (List<Player>)ListClass.SnipablePlayers.Where(p => UserData.IgnoredPlayers.Contains(p.player_id.Value));
                ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
                StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
@@ -2426,23 +2566,5 @@ namespace ForgeOfBots.Forms
          }
       }
 
-      private void FillAutoComplete()
-      {
-         txbPlayer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-         txbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-         AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
-         acsc.AddRange(UsernameList.Get);
-         txbPlayer.AutoCompleteCustomSource = acsc;
-      }
-      private void TxbPlayer_KeyUp(object sender, KeyEventArgs e)
-      {
-         if(e.KeyCode == System.Windows.Forms.Keys.Enter)
-         {
-            if (!string.IsNullOrWhiteSpace(txbPlayer.Text))
-            {
-               Console.WriteLine(txbPlayer.Text);
-            }
-         }
-      }
    }
 }

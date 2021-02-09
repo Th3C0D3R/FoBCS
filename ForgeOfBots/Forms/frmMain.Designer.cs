@@ -42,6 +42,19 @@ namespace ForgeOfBots.Forms
          this.mlTitle = new MetroFramework.Controls.MetroLabel();
          this.imgListTab = new System.Windows.Forms.ImageList(this.components);
          this.mpMenu = new MetroFramework.Controls.MetroPanel();
+         this.cmsMainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+         this.tsmiMoppleFriends = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiMoppleClan = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiMoppleNeighbor = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiVisitTavern = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiCollectTavern = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiVisitMopple = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiCollectIncidents = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiStartProduction = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiCollectProduction = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiCancelProduction = new System.Windows.Forms.ToolStripMenuItem();
+         this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+         this.tsmiReloadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.tabControl1 = new System.Windows.Forms.TabControl();
          this.tpDashbord = new System.Windows.Forms.TabPage();
          this.gbGoods = new System.Windows.Forms.GroupBox();
@@ -64,24 +77,11 @@ namespace ForgeOfBots.Forms
          this.lblFPStockValue = new System.Windows.Forms.Label();
          this.tpSocial = new System.Windows.Forms.TabPage();
          this.panel5 = new System.Windows.Forms.Panel();
+         this.tlpInactiveFriends = new System.Windows.Forms.TableLayoutPanel();
          this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
          this.lblInactiveFriends = new System.Windows.Forms.Label();
-         this.tlpInactiveFriends = new System.Windows.Forms.TableLayoutPanel();
          this.panel4 = new System.Windows.Forms.Panel();
          this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-         this.cmsMainMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-         this.tsmiMoppleFriends = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiMoppleClan = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiMoppleNeighbor = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiVisitTavern = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiCollectTavern = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiVisitMopple = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiCollectIncidents = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiStartProduction = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiCollectProduction = new System.Windows.Forms.ToolStripMenuItem();
-         this.tsmiCancelProduction = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-         this.tsmiReloadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.lblClanMemberCount = new System.Windows.Forms.Label();
          this.lblFriendsCount = new System.Windows.Forms.Label();
          this.lblClanMember = new System.Windows.Forms.Label();
@@ -130,10 +130,9 @@ namespace ForgeOfBots.Forms
          this.lblProductionList = new System.Windows.Forms.Label();
          this.tpCity = new System.Windows.Forms.TabPage();
          this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-         this.panelCity = new System.Windows.Forms.Panel();
-         this.pnlIncident = new System.Windows.Forms.Panel();
-         this.pnlLog = new System.Windows.Forms.Panel();
+         this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
          this.lbIncidentBox = new System.Windows.Forms.ListBox();
+         this.pnlIncident = new System.Windows.Forms.Panel();
          this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
          this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
          this.tpSniper = new System.Windows.Forms.TabPage();
@@ -148,8 +147,9 @@ namespace ForgeOfBots.Forms
          this.mtpProduction = new MetroFramework.Controls.MetroTabPage();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
          this.panel2 = new System.Windows.Forms.Panel();
-         this.clbIgnore = new System.Windows.Forms.CheckedListBox();
+         this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
          this.txbPlayer = new System.Windows.Forms.TextBox();
+         this.pnlIgnore = new System.Windows.Forms.FlowLayoutPanel();
          this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
          this.nudSnipInterval = new System.Windows.Forms.NumericUpDown();
          this.mcbAutoInvest = new MetroFramework.Controls.MetroCheckBox();
@@ -178,17 +178,6 @@ namespace ForgeOfBots.Forms
          this.mlToggleProduction = new MetroFramework.Controls.MetroLabel();
          this.mlToggleView = new MetroFramework.Controls.MetroLabel();
          this.mtView = new MetroFramework.Controls.MetroToggle();
-         this.mtpData = new MetroFramework.Controls.MetroTabPage();
-         this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
-         this.mbSaveReload = new MetroFramework.Controls.MetroButton();
-         this.lblChooseWorld = new MetroFramework.Controls.MetroLabel();
-         this.mcbCitySelection = new MetroFramework.Controls.MetroComboBox();
-         this.mbDeleteData = new MetroFramework.Controls.MetroButton();
-         this.lblDeleteData = new MetroFramework.Controls.MetroLabel();
-         this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
-         this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
-         this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
-         this.mtbSerialKey = new MetroFramework.Controls.MetroTextBox();
          this.mtpBots = new MetroFramework.Controls.MetroTabPage();
          this.mtSnipBot = new MetroFramework.Controls.MetroToggle();
          this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
@@ -216,18 +205,32 @@ namespace ForgeOfBots.Forms
          this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
          this.lblLanguage = new MetroFramework.Controls.MetroLabel();
          this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
+         this.mtpData = new MetroFramework.Controls.MetroTabPage();
+         this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+         this.mbSaveReload = new MetroFramework.Controls.MetroButton();
+         this.lblChooseWorld = new MetroFramework.Controls.MetroLabel();
+         this.mcbCitySelection = new MetroFramework.Controls.MetroComboBox();
+         this.mbDeleteData = new MetroFramework.Controls.MetroButton();
+         this.lblDeleteData = new MetroFramework.Controls.MetroLabel();
+         this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
+         this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
+         this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
+         this.mtbSerialKey = new MetroFramework.Controls.MetroTextBox();
          this.tpHelp = new System.Windows.Forms.TabPage();
          this.panel1 = new System.Windows.Forms.Panel();
          this.mlHelpText = new System.Windows.Forms.RichTextBox();
          this.tvHelp = new System.Windows.Forms.TreeView();
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
+         this.cmsIgnore = new System.Windows.Forms.ContextMenuStrip(this.components);
+         this.tSniper = new System.Windows.Forms.Timer(this.components);
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbFull)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbCLose)).BeginInit();
          this.mpMenu.SuspendLayout();
+         this.cmsMainMenu.SuspendLayout();
          this.tabControl1.SuspendLayout();
          this.tpDashbord.SuspendLayout();
          this.gbGoods.SuspendLayout();
@@ -239,7 +242,6 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel3.SuspendLayout();
          this.panel4.SuspendLayout();
          this.tableLayoutPanel1.SuspendLayout();
-         this.cmsMainMenu.SuspendLayout();
          this.tpTavern.SuspendLayout();
          this.tableLayoutPanel7.SuspendLayout();
          this.tableLayoutPanel5.SuspendLayout();
@@ -260,8 +262,7 @@ namespace ForgeOfBots.Forms
          this.panel12.SuspendLayout();
          this.tpCity.SuspendLayout();
          this.tableLayoutPanel2.SuspendLayout();
-         this.panelCity.SuspendLayout();
-         this.pnlLog.SuspendLayout();
+         this.tableLayoutPanel11.SuspendLayout();
          this.metroPanel4.SuspendLayout();
          this.tpSniper.SuspendLayout();
          this.tableLayoutPanel6.SuspendLayout();
@@ -271,14 +272,15 @@ namespace ForgeOfBots.Forms
          this.mtpProduction.SuspendLayout();
          this.groupBox2.SuspendLayout();
          this.panel2.SuspendLayout();
+         this.tableLayoutPanel12.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.nudSnipInterval)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).BeginInit();
          this.mpGoodCycle.SuspendLayout();
          this.mpProdCycle.SuspendLayout();
-         this.mtpData.SuspendLayout();
-         this.mtpPremium.SuspendLayout();
          this.mtpBots.SuspendLayout();
          this.mtpMisc.SuspendLayout();
+         this.mtpData.SuspendLayout();
+         this.mtpPremium.SuspendLayout();
          this.tpHelp.SuspendLayout();
          this.panel1.SuspendLayout();
          this.SuspendLayout();
@@ -400,6 +402,7 @@ namespace ForgeOfBots.Forms
          // mpMenu
          // 
          resources.ApplyResources(this.mpMenu, "mpMenu");
+         this.mpMenu.ContextMenuStrip = this.cmsMainMenu;
          this.mpMenu.Controls.Add(this.tabControl1);
          this.mpMenu.HorizontalScrollbarBarColor = true;
          this.mpMenu.HorizontalScrollbarHighlightOnWheel = false;
@@ -409,8 +412,111 @@ namespace ForgeOfBots.Forms
          this.mpMenu.VerticalScrollbarHighlightOnWheel = false;
          this.mpMenu.VerticalScrollbarSize = 10;
          // 
+         // cmsMainMenu
+         // 
+         this.cmsMainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+         this.cmsMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMoppleFriends,
+            this.tsmiMoppleClan,
+            this.tsmiMoppleNeighbor,
+            this.tsmiVisitTavern,
+            this.tsmiCollectTavern,
+            this.tsmiVisitMopple,
+            this.tsmiCollectIncidents,
+            this.tsmiStartProduction,
+            this.tsmiCollectProduction,
+            this.tsmiCancelProduction,
+            this.toolStripSeparator1,
+            this.tsmiReloadDataToolStripMenuItem});
+         this.cmsMainMenu.Name = "cmsMainMenu";
+         resources.ApplyResources(this.cmsMainMenu, "cmsMainMenu");
+         this.cmsMainMenu.Opening += new System.ComponentModel.CancelEventHandler(this.CmsMainMenu_Opening);
+         // 
+         // tsmiMoppleFriends
+         // 
+         this.tsmiMoppleFriends.Name = "tsmiMoppleFriends";
+         resources.ApplyResources(this.tsmiMoppleFriends, "tsmiMoppleFriends");
+         this.tsmiMoppleFriends.Tag = "GUI.Menu.MoppelFriends";
+         this.tsmiMoppleFriends.Click += new System.EventHandler(this.TsmiMoppleFriends_Click);
+         // 
+         // tsmiMoppleClan
+         // 
+         this.tsmiMoppleClan.Name = "tsmiMoppleClan";
+         resources.ApplyResources(this.tsmiMoppleClan, "tsmiMoppleClan");
+         this.tsmiMoppleClan.Tag = "GUI.Menu.MoppelClan";
+         this.tsmiMoppleClan.Click += new System.EventHandler(this.TsmiMoppleClan_Click);
+         // 
+         // tsmiMoppleNeighbor
+         // 
+         this.tsmiMoppleNeighbor.Name = "tsmiMoppleNeighbor";
+         resources.ApplyResources(this.tsmiMoppleNeighbor, "tsmiMoppleNeighbor");
+         this.tsmiMoppleNeighbor.Tag = "GUI.Menu.MoppelNeighbor";
+         this.tsmiMoppleNeighbor.Click += new System.EventHandler(this.TsmiMoppleNeighbor_Click);
+         // 
+         // tsmiVisitTavern
+         // 
+         this.tsmiVisitTavern.Name = "tsmiVisitTavern";
+         resources.ApplyResources(this.tsmiVisitTavern, "tsmiVisitTavern");
+         this.tsmiVisitTavern.Tag = "GUI.Menu.VisitTavern";
+         this.tsmiVisitTavern.Click += new System.EventHandler(this.TsmiVisitTavern_Click);
+         // 
+         // tsmiCollectTavern
+         // 
+         this.tsmiCollectTavern.Name = "tsmiCollectTavern";
+         resources.ApplyResources(this.tsmiCollectTavern, "tsmiCollectTavern");
+         this.tsmiCollectTavern.Tag = "GUI.Menu.CollectTavern";
+         this.tsmiCollectTavern.Click += new System.EventHandler(this.TsmiCollectTavern_Click);
+         // 
+         // tsmiVisitMopple
+         // 
+         this.tsmiVisitMopple.Name = "tsmiVisitMopple";
+         resources.ApplyResources(this.tsmiVisitMopple, "tsmiVisitMopple");
+         this.tsmiVisitMopple.Tag = "GUI.Menu.MoppelTavern";
+         this.tsmiVisitMopple.Click += new System.EventHandler(this.TsmiVisitMopple_Click);
+         // 
+         // tsmiCollectIncidents
+         // 
+         this.tsmiCollectIncidents.Name = "tsmiCollectIncidents";
+         resources.ApplyResources(this.tsmiCollectIncidents, "tsmiCollectIncidents");
+         this.tsmiCollectIncidents.Tag = "GUI.Menu.CollectIncidents";
+         this.tsmiCollectIncidents.Click += new System.EventHandler(this.TsmiCollectIncidentsToolStripMenuItem_Click);
+         // 
+         // tsmiStartProduction
+         // 
+         this.tsmiStartProduction.Name = "tsmiStartProduction";
+         resources.ApplyResources(this.tsmiStartProduction, "tsmiStartProduction");
+         this.tsmiStartProduction.Tag = "GUI.Menu.StartProduction";
+         this.tsmiStartProduction.Click += new System.EventHandler(this.TsmiStartProduction_Click);
+         // 
+         // tsmiCollectProduction
+         // 
+         this.tsmiCollectProduction.Name = "tsmiCollectProduction";
+         resources.ApplyResources(this.tsmiCollectProduction, "tsmiCollectProduction");
+         this.tsmiCollectProduction.Tag = "GUI.Menu.CollectProduction";
+         this.tsmiCollectProduction.Click += new System.EventHandler(this.TsmiCollectProduction_Click);
+         // 
+         // tsmiCancelProduction
+         // 
+         this.tsmiCancelProduction.Name = "tsmiCancelProduction";
+         resources.ApplyResources(this.tsmiCancelProduction, "tsmiCancelProduction");
+         this.tsmiCancelProduction.Tag = "GUI.Menu.CancelProduction";
+         this.tsmiCancelProduction.Click += new System.EventHandler(this.TsmiCancelProduction_Click);
+         // 
+         // toolStripSeparator1
+         // 
+         this.toolStripSeparator1.Name = "toolStripSeparator1";
+         resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+         // 
+         // tsmiReloadDataToolStripMenuItem
+         // 
+         this.tsmiReloadDataToolStripMenuItem.Name = "tsmiReloadDataToolStripMenuItem";
+         resources.ApplyResources(this.tsmiReloadDataToolStripMenuItem, "tsmiReloadDataToolStripMenuItem");
+         this.tsmiReloadDataToolStripMenuItem.Tag = "GUI.Menu.ReloadData";
+         this.tsmiReloadDataToolStripMenuItem.Click += new System.EventHandler(this.tsmiReloadDataToolStripMenuItem_Click);
+         // 
          // tabControl1
          // 
+         this.tabControl1.ContextMenuStrip = this.cmsMainMenu;
          this.tabControl1.Controls.Add(this.tpDashbord);
          this.tabControl1.Controls.Add(this.tpSocial);
          this.tabControl1.Controls.Add(this.tpTavern);
@@ -577,6 +683,11 @@ namespace ForgeOfBots.Forms
          this.panel5.Controls.Add(this.tableLayoutPanel3);
          this.panel5.Name = "panel5";
          // 
+         // tlpInactiveFriends
+         // 
+         resources.ApplyResources(this.tlpInactiveFriends, "tlpInactiveFriends");
+         this.tlpInactiveFriends.Name = "tlpInactiveFriends";
+         // 
          // tableLayoutPanel3
          // 
          resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
@@ -588,11 +699,6 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.lblInactiveFriends, "lblInactiveFriends");
          this.lblInactiveFriends.Name = "lblInactiveFriends";
          this.lblInactiveFriends.Tag = "GUI.Social.Inactive";
-         // 
-         // tlpInactiveFriends
-         // 
-         resources.ApplyResources(this.tlpInactiveFriends, "tlpInactiveFriends");
-         this.tlpInactiveFriends.Name = "tlpInactiveFriends";
          // 
          // panel4
          // 
@@ -612,108 +718,6 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel1.Controls.Add(this.lblNeighbor, 2, 0);
          this.tableLayoutPanel1.Controls.Add(this.lblNeighborCount, 2, 1);
          this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-         // 
-         // cmsMainMenu
-         // 
-         this.cmsMainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-         this.cmsMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMoppleFriends,
-            this.tsmiMoppleClan,
-            this.tsmiMoppleNeighbor,
-            this.tsmiVisitTavern,
-            this.tsmiCollectTavern,
-            this.tsmiVisitMopple,
-            this.tsmiCollectIncidents,
-            this.tsmiStartProduction,
-            this.tsmiCollectProduction,
-            this.tsmiCancelProduction,
-            this.toolStripSeparator1,
-            this.tsmiReloadDataToolStripMenuItem});
-         this.cmsMainMenu.Name = "cmsMainMenu";
-         resources.ApplyResources(this.cmsMainMenu, "cmsMainMenu");
-         this.cmsMainMenu.Opening += new System.ComponentModel.CancelEventHandler(this.CmsMainMenu_Opening);
-         // 
-         // tsmiMoppleFriends
-         // 
-         this.tsmiMoppleFriends.Name = "tsmiMoppleFriends";
-         resources.ApplyResources(this.tsmiMoppleFriends, "tsmiMoppleFriends");
-         this.tsmiMoppleFriends.Tag = "GUI.Menu.MoppelFriends";
-         this.tsmiMoppleFriends.Click += new System.EventHandler(this.TsmiMoppleFriends_Click);
-         // 
-         // tsmiMoppleClan
-         // 
-         this.tsmiMoppleClan.Name = "tsmiMoppleClan";
-         resources.ApplyResources(this.tsmiMoppleClan, "tsmiMoppleClan");
-         this.tsmiMoppleClan.Tag = "GUI.Menu.MoppelClan";
-         this.tsmiMoppleClan.Click += new System.EventHandler(this.TsmiMoppleClan_Click);
-         // 
-         // tsmiMoppleNeighbor
-         // 
-         this.tsmiMoppleNeighbor.Name = "tsmiMoppleNeighbor";
-         resources.ApplyResources(this.tsmiMoppleNeighbor, "tsmiMoppleNeighbor");
-         this.tsmiMoppleNeighbor.Tag = "GUI.Menu.MoppelNeighbor";
-         this.tsmiMoppleNeighbor.Click += new System.EventHandler(this.TsmiMoppleNeighbor_Click);
-         // 
-         // tsmiVisitTavern
-         // 
-         this.tsmiVisitTavern.Name = "tsmiVisitTavern";
-         resources.ApplyResources(this.tsmiVisitTavern, "tsmiVisitTavern");
-         this.tsmiVisitTavern.Tag = "GUI.Menu.VisitTavern";
-         this.tsmiVisitTavern.Click += new System.EventHandler(this.TsmiVisitTavern_Click);
-         // 
-         // tsmiCollectTavern
-         // 
-         this.tsmiCollectTavern.Name = "tsmiCollectTavern";
-         resources.ApplyResources(this.tsmiCollectTavern, "tsmiCollectTavern");
-         this.tsmiCollectTavern.Tag = "GUI.Menu.CollectTavern";
-         this.tsmiCollectTavern.Click += new System.EventHandler(this.TsmiCollectTavern_Click);
-         // 
-         // tsmiVisitMopple
-         // 
-         this.tsmiVisitMopple.Name = "tsmiVisitMopple";
-         resources.ApplyResources(this.tsmiVisitMopple, "tsmiVisitMopple");
-         this.tsmiVisitMopple.Tag = "GUI.Menu.MoppelTavern";
-         this.tsmiVisitMopple.Click += new System.EventHandler(this.TsmiVisitMopple_Click);
-         // 
-         // tsmiCollectIncidents
-         // 
-         this.tsmiCollectIncidents.Name = "tsmiCollectIncidents";
-         resources.ApplyResources(this.tsmiCollectIncidents, "tsmiCollectIncidents");
-         this.tsmiCollectIncidents.Tag = "GUI.Menu.CollectIncidents";
-         this.tsmiCollectIncidents.Click += new System.EventHandler(this.TsmiCollectIncidentsToolStripMenuItem_Click);
-         // 
-         // tsmiStartProduction
-         // 
-         this.tsmiStartProduction.Name = "tsmiStartProduction";
-         resources.ApplyResources(this.tsmiStartProduction, "tsmiStartProduction");
-         this.tsmiStartProduction.Tag = "GUI.Menu.StartProduction";
-         this.tsmiStartProduction.Click += new System.EventHandler(this.TsmiStartProduction_Click);
-         // 
-         // tsmiCollectProduction
-         // 
-         this.tsmiCollectProduction.Name = "tsmiCollectProduction";
-         resources.ApplyResources(this.tsmiCollectProduction, "tsmiCollectProduction");
-         this.tsmiCollectProduction.Tag = "GUI.Menu.CollectProduction";
-         this.tsmiCollectProduction.Click += new System.EventHandler(this.TsmiCollectProduction_Click);
-         // 
-         // tsmiCancelProduction
-         // 
-         this.tsmiCancelProduction.Name = "tsmiCancelProduction";
-         resources.ApplyResources(this.tsmiCancelProduction, "tsmiCancelProduction");
-         this.tsmiCancelProduction.Tag = "GUI.Menu.CancelProduction";
-         this.tsmiCancelProduction.Click += new System.EventHandler(this.TsmiCancelProduction_Click);
-         // 
-         // toolStripSeparator1
-         // 
-         this.toolStripSeparator1.Name = "toolStripSeparator1";
-         resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-         // 
-         // tsmiReloadDataToolStripMenuItem
-         // 
-         this.tsmiReloadDataToolStripMenuItem.Name = "tsmiReloadDataToolStripMenuItem";
-         resources.ApplyResources(this.tsmiReloadDataToolStripMenuItem, "tsmiReloadDataToolStripMenuItem");
-         this.tsmiReloadDataToolStripMenuItem.Tag = "GUI.Menu.ReloadData";
-         this.tsmiReloadDataToolStripMenuItem.Click += new System.EventHandler(this.tsmiReloadDataToolStripMenuItem_Click);
          // 
          // lblClanMemberCount
          // 
@@ -1042,28 +1046,16 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
          this.tableLayoutPanel2.ContextMenuStrip = this.cmsMainMenu;
-         this.tableLayoutPanel2.Controls.Add(this.panelCity, 0, 0);
+         this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel11, 0, 0);
          this.tableLayoutPanel2.Controls.Add(this.metroPanel4, 1, 0);
          this.tableLayoutPanel2.Name = "tableLayoutPanel2";
          // 
-         // panelCity
+         // tableLayoutPanel11
          // 
-         resources.ApplyResources(this.panelCity, "panelCity");
-         this.panelCity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-         this.panelCity.Controls.Add(this.pnlIncident);
-         this.panelCity.Controls.Add(this.pnlLog);
-         this.panelCity.Name = "panelCity";
-         // 
-         // pnlIncident
-         // 
-         resources.ApplyResources(this.pnlIncident, "pnlIncident");
-         this.pnlIncident.Name = "pnlIncident";
-         // 
-         // pnlLog
-         // 
-         this.pnlLog.Controls.Add(this.lbIncidentBox);
-         resources.ApplyResources(this.pnlLog, "pnlLog");
-         this.pnlLog.Name = "pnlLog";
+         resources.ApplyResources(this.tableLayoutPanel11, "tableLayoutPanel11");
+         this.tableLayoutPanel11.Controls.Add(this.lbIncidentBox, 0, 1);
+         this.tableLayoutPanel11.Controls.Add(this.pnlIncident, 0, 0);
+         this.tableLayoutPanel11.Name = "tableLayoutPanel11";
          // 
          // lbIncidentBox
          // 
@@ -1072,6 +1064,12 @@ namespace ForgeOfBots.Forms
          this.lbIncidentBox.FormattingEnabled = true;
          this.lbIncidentBox.Name = "lbIncidentBox";
          this.lbIncidentBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+         // 
+         // pnlIncident
+         // 
+         resources.ApplyResources(this.pnlIncident, "pnlIncident");
+         this.pnlIncident.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+         this.pnlIncident.Name = "pnlIncident";
          // 
          // metroPanel4
          // 
@@ -1157,14 +1155,14 @@ namespace ForgeOfBots.Forms
          // mtcSettings
          // 
          this.mtcSettings.Controls.Add(this.mtpProduction);
-         this.mtcSettings.Controls.Add(this.mtpData);
-         this.mtcSettings.Controls.Add(this.mtpPremium);
          this.mtcSettings.Controls.Add(this.mtpBots);
          this.mtcSettings.Controls.Add(this.mtpMisc);
+         this.mtcSettings.Controls.Add(this.mtpData);
+         this.mtcSettings.Controls.Add(this.mtpPremium);
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 4;
+         this.mtcSettings.SelectedIndex = 0;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          this.mtcSettings.UseStyleColors = true;
          // 
@@ -1206,25 +1204,32 @@ namespace ForgeOfBots.Forms
          // 
          // panel2
          // 
-         this.panel2.Controls.Add(this.clbIgnore);
-         this.panel2.Controls.Add(this.txbPlayer);
+         this.panel2.Controls.Add(this.pnlIgnore);
+         this.panel2.Controls.Add(this.tableLayoutPanel12);
          resources.ApplyResources(this.panel2, "panel2");
          this.panel2.Name = "panel2";
          // 
-         // clbIgnore
+         // tableLayoutPanel12
          // 
-         resources.ApplyResources(this.clbIgnore, "clbIgnore");
-         this.clbIgnore.FormattingEnabled = true;
-         this.clbIgnore.MultiColumn = true;
-         this.clbIgnore.Name = "clbIgnore";
-         this.clbIgnore.Sorted = true;
+         resources.ApplyResources(this.tableLayoutPanel12, "tableLayoutPanel12");
+         this.tableLayoutPanel12.Controls.Add(this.txbPlayer, 0, 0);
+         this.tableLayoutPanel12.Name = "tableLayoutPanel12";
          // 
          // txbPlayer
          // 
          resources.ApplyResources(this.txbPlayer, "txbPlayer");
          this.txbPlayer.Name = "txbPlayer";
          this.txbPlayer.Tag = "GUI.Settings.Production.Ignore";
+         this.txbPlayer.Enter += new System.EventHandler(this.TxbPlayer_Enter);
          this.txbPlayer.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxbPlayer_KeyUp);
+         this.txbPlayer.Leave += new System.EventHandler(this.TxbPlayer_Enter);
+         // 
+         // pnlIgnore
+         // 
+         this.pnlIgnore.BackColor = System.Drawing.SystemColors.Window;
+         this.pnlIgnore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+         resources.ApplyResources(this.pnlIgnore, "pnlIgnore");
+         this.pnlIgnore.Name = "pnlIgnore";
          // 
          // metroLabel15
          // 
@@ -1471,96 +1476,6 @@ namespace ForgeOfBots.Forms
          this.mtView.UseVisualStyleBackColor = false;
          this.mtView.CheckedChanged += new System.EventHandler(this.mtView_CheckedChanged);
          // 
-         // mtpData
-         // 
-         this.mtpData.Controls.Add(this.metroLabel11);
-         this.mtpData.Controls.Add(this.mbSaveReload);
-         this.mtpData.Controls.Add(this.lblChooseWorld);
-         this.mtpData.Controls.Add(this.mcbCitySelection);
-         this.mtpData.Controls.Add(this.mbDeleteData);
-         this.mtpData.Controls.Add(this.lblDeleteData);
-         this.mtpData.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpData, "mtpData");
-         this.mtpData.Name = "mtpData";
-         this.mtpData.Tag = "GUI.Settings.UserData";
-         this.mtpData.VerticalScrollbarBarColor = true;
-         // 
-         // metroLabel11
-         // 
-         this.metroLabel11.BackColor = System.Drawing.SystemColors.Control;
-         this.metroLabel11.CustomForeColor = true;
-         this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
-         this.metroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-         this.metroLabel11.ForeColor = System.Drawing.Color.Red;
-         resources.ApplyResources(this.metroLabel11, "metroLabel11");
-         this.metroLabel11.Name = "metroLabel11";
-         this.metroLabel11.Tag = "GUI.Settings.UserData.Warning";
-         // 
-         // mbSaveReload
-         // 
-         resources.ApplyResources(this.mbSaveReload, "mbSaveReload");
-         this.mbSaveReload.Name = "mbSaveReload";
-         this.mbSaveReload.Tag = "GUI.Settings.UserData.SaveReload";
-         this.mbSaveReload.Click += new System.EventHandler(this.mbSaveReload_Click);
-         // 
-         // lblChooseWorld
-         // 
-         resources.ApplyResources(this.lblChooseWorld, "lblChooseWorld");
-         this.lblChooseWorld.Name = "lblChooseWorld";
-         this.lblChooseWorld.Tag = "GUI.Settings.UserData.ChangeCity";
-         // 
-         // mcbCitySelection
-         // 
-         this.mcbCitySelection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-         this.mcbCitySelection.FormattingEnabled = true;
-         resources.ApplyResources(this.mcbCitySelection, "mcbCitySelection");
-         this.mcbCitySelection.Name = "mcbCitySelection";
-         // 
-         // mbDeleteData
-         // 
-         resources.ApplyResources(this.mbDeleteData, "mbDeleteData");
-         this.mbDeleteData.Name = "mbDeleteData";
-         this.mbDeleteData.Tag = "GUI.Settings.UserData.DeleteDataButton";
-         this.mbDeleteData.Click += new System.EventHandler(this.mbDeleteData_Click);
-         // 
-         // lblDeleteData
-         // 
-         resources.ApplyResources(this.lblDeleteData, "lblDeleteData");
-         this.lblDeleteData.Name = "lblDeleteData";
-         this.lblDeleteData.Tag = "GUI.Settings.UserData.DeleteData";
-         // 
-         // mtpPremium
-         // 
-         this.mtpPremium.Controls.Add(this.mbCheckSerial);
-         this.mtpPremium.Controls.Add(this.lblSerialKey);
-         this.mtpPremium.Controls.Add(this.mtbSerialKey);
-         this.mtpPremium.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpPremium, "mtpPremium");
-         this.mtpPremium.Name = "mtpPremium";
-         this.mtpPremium.Tag = "GUI.Settings.Premium";
-         this.mtpPremium.VerticalScrollbarBarColor = true;
-         // 
-         // mbCheckSerial
-         // 
-         resources.ApplyResources(this.mbCheckSerial, "mbCheckSerial");
-         this.mbCheckSerial.Name = "mbCheckSerial";
-         this.mbCheckSerial.Tag = "GUI.Settings.Premium.Login";
-         this.mbCheckSerial.Click += new System.EventHandler(this.mbCheckSerial_Click);
-         // 
-         // lblSerialKey
-         // 
-         resources.ApplyResources(this.lblSerialKey, "lblSerialKey");
-         this.lblSerialKey.Name = "lblSerialKey";
-         this.lblSerialKey.Tag = "GUI.Settings.Premium.SerialKey";
-         // 
-         // mtbSerialKey
-         // 
-         resources.ApplyResources(this.mtbSerialKey, "mtbSerialKey");
-         this.mtbSerialKey.Multiline = true;
-         this.mtbSerialKey.Name = "mtbSerialKey";
-         this.mtbSerialKey.PasswordChar = '*';
-         this.mtbSerialKey.PromptText = "Input SerialKey here";
-         // 
          // mtpBots
          // 
          this.mtpBots.Controls.Add(this.mtSnipBot);
@@ -1768,6 +1683,96 @@ namespace ForgeOfBots.Forms
          this.mcbLanguage.Name = "mcbLanguage";
          this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
          // 
+         // mtpData
+         // 
+         this.mtpData.Controls.Add(this.metroLabel11);
+         this.mtpData.Controls.Add(this.mbSaveReload);
+         this.mtpData.Controls.Add(this.lblChooseWorld);
+         this.mtpData.Controls.Add(this.mcbCitySelection);
+         this.mtpData.Controls.Add(this.mbDeleteData);
+         this.mtpData.Controls.Add(this.lblDeleteData);
+         this.mtpData.HorizontalScrollbarBarColor = true;
+         resources.ApplyResources(this.mtpData, "mtpData");
+         this.mtpData.Name = "mtpData";
+         this.mtpData.Tag = "GUI.Settings.UserData";
+         this.mtpData.VerticalScrollbarBarColor = true;
+         // 
+         // metroLabel11
+         // 
+         this.metroLabel11.BackColor = System.Drawing.SystemColors.Control;
+         this.metroLabel11.CustomForeColor = true;
+         this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
+         this.metroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+         this.metroLabel11.ForeColor = System.Drawing.Color.Red;
+         resources.ApplyResources(this.metroLabel11, "metroLabel11");
+         this.metroLabel11.Name = "metroLabel11";
+         this.metroLabel11.Tag = "GUI.Settings.UserData.Warning";
+         // 
+         // mbSaveReload
+         // 
+         resources.ApplyResources(this.mbSaveReload, "mbSaveReload");
+         this.mbSaveReload.Name = "mbSaveReload";
+         this.mbSaveReload.Tag = "GUI.Settings.UserData.SaveReload";
+         this.mbSaveReload.Click += new System.EventHandler(this.mbSaveReload_Click);
+         // 
+         // lblChooseWorld
+         // 
+         resources.ApplyResources(this.lblChooseWorld, "lblChooseWorld");
+         this.lblChooseWorld.Name = "lblChooseWorld";
+         this.lblChooseWorld.Tag = "GUI.Settings.UserData.ChangeCity";
+         // 
+         // mcbCitySelection
+         // 
+         this.mcbCitySelection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+         this.mcbCitySelection.FormattingEnabled = true;
+         resources.ApplyResources(this.mcbCitySelection, "mcbCitySelection");
+         this.mcbCitySelection.Name = "mcbCitySelection";
+         // 
+         // mbDeleteData
+         // 
+         resources.ApplyResources(this.mbDeleteData, "mbDeleteData");
+         this.mbDeleteData.Name = "mbDeleteData";
+         this.mbDeleteData.Tag = "GUI.Settings.UserData.DeleteDataButton";
+         this.mbDeleteData.Click += new System.EventHandler(this.mbDeleteData_Click);
+         // 
+         // lblDeleteData
+         // 
+         resources.ApplyResources(this.lblDeleteData, "lblDeleteData");
+         this.lblDeleteData.Name = "lblDeleteData";
+         this.lblDeleteData.Tag = "GUI.Settings.UserData.DeleteData";
+         // 
+         // mtpPremium
+         // 
+         this.mtpPremium.Controls.Add(this.mbCheckSerial);
+         this.mtpPremium.Controls.Add(this.lblSerialKey);
+         this.mtpPremium.Controls.Add(this.mtbSerialKey);
+         this.mtpPremium.HorizontalScrollbarBarColor = true;
+         resources.ApplyResources(this.mtpPremium, "mtpPremium");
+         this.mtpPremium.Name = "mtpPremium";
+         this.mtpPremium.Tag = "GUI.Settings.Premium";
+         this.mtpPremium.VerticalScrollbarBarColor = true;
+         // 
+         // mbCheckSerial
+         // 
+         resources.ApplyResources(this.mbCheckSerial, "mbCheckSerial");
+         this.mbCheckSerial.Name = "mbCheckSerial";
+         this.mbCheckSerial.Tag = "GUI.Settings.Premium.Login";
+         this.mbCheckSerial.Click += new System.EventHandler(this.mbCheckSerial_Click);
+         // 
+         // lblSerialKey
+         // 
+         resources.ApplyResources(this.lblSerialKey, "lblSerialKey");
+         this.lblSerialKey.Name = "lblSerialKey";
+         this.lblSerialKey.Tag = "GUI.Settings.Premium.SerialKey";
+         // 
+         // mtbSerialKey
+         // 
+         resources.ApplyResources(this.mtbSerialKey, "mtbSerialKey");
+         this.mtbSerialKey.Multiline = true;
+         this.mtbSerialKey.Name = "mtbSerialKey";
+         this.mtbSerialKey.PasswordChar = '*';
+         this.mtbSerialKey.PromptText = "Input SerialKey here";
+         // 
          // tpHelp
          // 
          this.tpHelp.Controls.Add(this.panel1);
@@ -1809,6 +1814,16 @@ namespace ForgeOfBots.Forms
          this.bwScriptExecuterOneArg.WorkerSupportsCancellation = true;
          this.bwScriptExecuterOneArg.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwScriptExecuterOneArg_DoWork);
          // 
+         // cmsIgnore
+         // 
+         this.cmsIgnore.Name = "cmsIgnore";
+         resources.ApplyResources(this.cmsIgnore, "cmsIgnore");
+         // 
+         // tSniper
+         // 
+         this.tSniper.Interval = 3600000;
+         this.tSniper.Tick += new System.EventHandler(this.TSniper_Tick);
+         // 
          // frmMain
          // 
          resources.ApplyResources(this, "$this");
@@ -1828,6 +1843,7 @@ namespace ForgeOfBots.Forms
          ((System.ComponentModel.ISupportInitialize)(this.pbFull)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbCLose)).EndInit();
          this.mpMenu.ResumeLayout(false);
+         this.cmsMainMenu.ResumeLayout(false);
          this.tabControl1.ResumeLayout(false);
          this.tpDashbord.ResumeLayout(false);
          this.gbGoods.ResumeLayout(false);
@@ -1842,7 +1858,6 @@ namespace ForgeOfBots.Forms
          this.panel4.ResumeLayout(false);
          this.tableLayoutPanel1.ResumeLayout(false);
          this.tableLayoutPanel1.PerformLayout();
-         this.cmsMainMenu.ResumeLayout(false);
          this.tpTavern.ResumeLayout(false);
          this.tableLayoutPanel7.ResumeLayout(false);
          this.tableLayoutPanel7.PerformLayout();
@@ -1868,8 +1883,7 @@ namespace ForgeOfBots.Forms
          this.panel12.ResumeLayout(false);
          this.tpCity.ResumeLayout(false);
          this.tableLayoutPanel2.ResumeLayout(false);
-         this.panelCity.ResumeLayout(false);
-         this.pnlLog.ResumeLayout(false);
+         this.tableLayoutPanel11.ResumeLayout(false);
          this.metroPanel4.ResumeLayout(false);
          this.tpSniper.ResumeLayout(false);
          this.tableLayoutPanel6.ResumeLayout(false);
@@ -1881,17 +1895,19 @@ namespace ForgeOfBots.Forms
          this.groupBox2.PerformLayout();
          this.panel2.ResumeLayout(false);
          this.panel2.PerformLayout();
+         this.tableLayoutPanel12.ResumeLayout(false);
+         this.tableLayoutPanel12.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.nudSnipInterval)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).EndInit();
          this.mpGoodCycle.ResumeLayout(false);
          this.mpGoodCycle.PerformLayout();
          this.mpProdCycle.ResumeLayout(false);
          this.mpProdCycle.PerformLayout();
-         this.mtpData.ResumeLayout(false);
-         this.mtpPremium.ResumeLayout(false);
          this.mtpBots.ResumeLayout(false);
          this.mtpBots.PerformLayout();
          this.mtpMisc.ResumeLayout(false);
+         this.mtpData.ResumeLayout(false);
+         this.mtpPremium.ResumeLayout(false);
          this.tpHelp.ResumeLayout(false);
          this.panel1.ResumeLayout(false);
          this.ResumeLayout(false);
@@ -2055,7 +2071,6 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Panel pnlGoodProductionList;
       private System.ComponentModel.BackgroundWorker bwScriptExecuterOneArg;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-      private System.Windows.Forms.Panel panelCity;
       private System.Windows.Forms.ToolStripMenuItem tsmiCollectIncidents;
       private System.Windows.Forms.ToolStripMenuItem tsmiStartProduction;
       private System.Windows.Forms.ToolStripMenuItem tsmiCollectProduction;
@@ -2085,11 +2100,14 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Panel pnlContributions;
       private System.Windows.Forms.ToolStripMenuItem tsmiReloadDataToolStripMenuItem;
       private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-      private System.Windows.Forms.Panel pnlLog;
-      private System.Windows.Forms.Panel pnlIncident;
-      private System.Windows.Forms.ListBox lbIncidentBox;
       private System.Windows.Forms.Panel panel2;
-      private System.Windows.Forms.CheckedListBox clbIgnore;
       private System.Windows.Forms.TextBox txbPlayer;
+      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+      private System.Windows.Forms.ListBox lbIncidentBox;
+      private System.Windows.Forms.Panel pnlIncident;
+      private System.Windows.Forms.ContextMenuStrip cmsIgnore;
+      private System.Windows.Forms.FlowLayoutPanel pnlIgnore;
+      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+      private System.Windows.Forms.Timer tSniper;
    }
 }

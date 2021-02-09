@@ -42,8 +42,10 @@ namespace ForgeOfBots.Utils
       public int IntervalIncidentBot { get; set; } = 1;
       public DateTime LastPolivateTime { get; set; } = DateTime.MinValue;
       public DateTime LastIncidentTime { get; set; } = DateTime.MinValue;
-      public List<Player> IgnoredPlayers { get; set; } = new List<Player>();
+      public DateTime LastSnipTime { get; set; } = DateTime.MinValue;
+      public List<int> IgnoredPlayers { get; set; } = new List<int>();
 
+      #region "Methodes no Changes needed"
       public void SaveSettings()
       {
          string json = JsonConvert.SerializeObject(this, Formatting.Indented);
@@ -104,6 +106,6 @@ namespace ForgeOfBots.Utils
             _SettingsSaved -= value;
          }
       }
-
+      #endregion
    }
 }

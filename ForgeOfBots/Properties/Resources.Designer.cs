@@ -101,15 +101,15 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die async function makeRequest() {
-        ///    await CefSharp.BindObjectAsync(&quot;jsInterface&quot;);
+        ///   Sucht eine lokalisierte Zeichenfolge, die var callback = arguments[arguments.length - 1];
+        ///async function makeRequest() {
         ///    let res = await fetch(&quot;https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##&quot;, {
         ///        &quot;credentials&quot;: &quot;include&quot;,
         ///        &quot;headers&quot;: {
         ///            &quot;accept&quot;: &quot;*/*&quot;,
         ///            &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
         ///            &quot;client-identification&quot;: &quot;version=##Version##; requiredVersion=##Version##; platform=bro; platformType=html5; platformVersion=web&quot;,
-        ///            &quot;content-type&quot;: &quot;a [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///            &quot;content-type&quot;: &quot;appl [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string fetchData {
             get {
@@ -118,8 +118,8 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die async function makeRequest() {
-        ///    await CefSharp.BindObjectAsync(&quot;jsInterface&quot;);
+        ///   Sucht eine lokalisierte Zeichenfolge, die var callback = arguments[arguments.length - 1];
+        ///async function makeRequest() {
         ///    let res = await fetch(&quot;##url##&quot;, {
         ///        &quot;headers&quot;: {
         ///            &quot;accept&quot;: &quot;*/*&quot;,
@@ -128,7 +128,7 @@ namespace ForgeOfBots.Properties {
         ///            &quot;sec-fetch-site&quot;: &quot;same-origin&quot;,
         ///            &quot;user-agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36&quot;
         ///        },
-        ///        &quot;referrer&quot;: &quot;ht [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///        &quot;referrer&quot;: &quot;https [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string fetchMetaData {
             get {
@@ -167,25 +167,41 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die if (document.readyState == &quot;complete&quot;) FoELogin();
-        ///else {
-        ///    document.addEventListener(&quot;DOMContentLoaded&quot;, () =&gt; {
-        ///        FoELogin();
-        ///    });
+        ///   Sucht eine lokalisierte Zeichenfolge, die var callback = arguments[arguments.length - 1];
+        ///if (document.readyState == &quot;complete&quot;) {
+        ///	FoELogin()
+        ///		.then((v, f, r) =&gt; {
+        ///			debugger;
+        ///			callback(v);
+        ///		});
+        ///} else {
+        ///	document.addEventListener(&quot;DOMContentLoaded&quot;, () =&gt; {
+        ///		FoELogin().then((v, f, d) =&gt; {
+        ///			debugger;
+        ///			callback(v);
+        ///		});
+        ///	});
         ///}
         ///
         ///async function FoELogin() {
-        ///    await CefSharp.BindObjectAsync(&quot;jsInterface&quot;);
-        ///    if (window.location.href.indexOf(&quot;##server##0&quot;) &lt;= 0) {
-        ///        await FoETimer(1000);
-        ///        fetch(&quot;https://##server##.forgeofempires.com/glps/login_check&quot;, {
-        ///            &quot;credentials&quot;: &quot;include&quot;,
-        ///            &quot;headers&quot;: {
-        ///                &quot;User-Agent&quot;: &quot;Mozilla/5.0 (W [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///	await FoETimer(1000);
+        ///	if (window.location.href.indexOf(&quot;##server##0&quot;) &lt;= 0) {
+        ///		await FoETimer(1000);
+        ///		var x = await fetch(&quot;https://##server##.forgeofempires.com/ [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         public static string preloadLoginWorld {
             get {
                 return ResourceManager.GetString("preloadLoginWorld", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap x_mark {
+            get {
+                object obj = ResourceManager.GetObject("x_mark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

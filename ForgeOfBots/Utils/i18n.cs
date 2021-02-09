@@ -38,7 +38,7 @@ namespace ForgeOfBots.Utils
                initialized = true;
             }
          }
-         catch (WebException ex)
+         catch (WebException)
          {
             MessageBox.Show($"LANGUAGE {language} NOT FOUND IN REPOSITORY!\n\nUSING DEFAULT 'en'","LANGUAGE NOT FOUND", MessageBoxButtons.OK, MessageBoxIcon.Error);
             var assembly = Assembly.GetExecutingAssembly();
@@ -126,7 +126,7 @@ namespace ForgeOfBots.Utils
                root.Nodes.Add(tn);
             }
          }
-         catch (Exception ex)
+         catch (Exception)
          {
             tv.Nodes.Add("FAILED TO PARSE HELP-FILE");
          }

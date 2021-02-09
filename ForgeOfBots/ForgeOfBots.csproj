@@ -205,6 +205,12 @@
     <Compile Include="Forms\UserControls\ProdListItem.Designer.cs">
       <DependentUpon>ProdListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\ucIgnorePlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\ucIgnorePlayer.Designer.cs">
+      <DependentUpon>ucIgnorePlayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\WorkerItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -271,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\LGSnipItem.resx">
       <DependentUpon>LGSnipItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\ucIgnorePlayer.resx">
+      <DependentUpon>ucIgnorePlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\WorkerItem.resx">
       <DependentUpon>WorkerItem.cs</DependentUpon>
@@ -359,6 +368,7 @@
     <Content Include="favicon.ico" />
     <Content Include="JSFiles\fetchMetaData.js" />
     <Content Include="JSFiles\fetchData.js" />
+    <None Include="Resources\x-mark.png" />
     <None Include="Resources\dashbord.png" />
     <None Include="Resources\plus.png" />
     <None Include="Resources\minus.png" />

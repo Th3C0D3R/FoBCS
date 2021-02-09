@@ -129,7 +129,7 @@
     <value>Microsoft Sans Serif, 9pt, style=Bold</value>
   </data>
   <data name="lblRunning.Location" type="System.Drawing.Point, System.Drawing">
-    <value>633, 4</value>
+    <value>634, 4</value>
   </data>
   <data name="lblRunning.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 32</value>
@@ -164,7 +164,7 @@
     <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
   <data name="lblUserData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 5</value>
+    <value>393, 5</value>
   </data>
   <data name="lblUserData.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 32</value>
@@ -230,7 +230,7 @@
     <value>4</value>
   </data>
   <data name="metroPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>766, 6</value>
+    <value>767, 6</value>
   </data>
   <data name="metroPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 31</value>
@@ -308,7 +308,7 @@
     <value>0, 0</value>
   </data>
   <data name="metroPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>883, 42</value>
+    <value>884, 42</value>
   </data>
   <data name="metroPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -323,7 +323,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;metroPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="pbminimize.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -420,7 +420,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACS
-        IwAAAk1TRnQBSQFMAgEBCwEAAagBAQGoAQEBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        IwAAAk1TRnQBSQFMAgEBCwEAAdABAQHQAQEBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABgAMAAWADAAEBAQABCAYAATAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -577,6 +577,18 @@
   <data name="mpMenu.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <metadata name="cmsMainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>423, 17</value>
+  </metadata>
+  <data name="cmsMainMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 252</value>
+  </data>
+  <data name="&gt;&gt;cmsMainMenu.Name" xml:space="preserve">
+    <value>cmsMainMenu</value>
+  </data>
+  <data name="&gt;&gt;cmsMainMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;gbGoods.Name" xml:space="preserve">
     <value>gbGoods</value>
   </data>
@@ -623,7 +635,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpDashbord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpDashbord.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -643,138 +655,6 @@
   <data name="&gt;&gt;tpDashbord.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="tlpInactiveFriends.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tlpInactiveFriends.ColumnCount" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="tlpInactiveFriends.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="tlpInactiveFriends.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 26</value>
-  </data>
-  <data name="tlpInactiveFriends.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tlpInactiveFriends.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tlpInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>854, 355</value>
-  </data>
-  <data name="tlpInactiveFriends.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tlpInactiveFriends.Name" xml:space="preserve">
-    <value>tlpInactiveFriends</value>
-  </data>
-  <data name="&gt;&gt;tlpInactiveFriends.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tlpInactiveFriends.Parent" xml:space="preserve">
-    <value>panel5</value>
-  </data>
-  <data name="&gt;&gt;tlpInactiveFriends.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tlpInactiveFriends.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Percent,33,33333,Percent,33,33333,Percent,33,33333,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblInactiveFriends.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblInactiveFriends.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lblInactiveFriends.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 15pt, style=Bold</value>
-  </data>
-  <data name="lblInactiveFriends.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblInactiveFriends.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 0</value>
-  </data>
-  <data name="lblInactiveFriends.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 0, 2, 0</value>
-  </data>
-  <data name="lblInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>850, 26</value>
-  </data>
-  <data name="lblInactiveFriends.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblInactiveFriends.Text" xml:space="preserve">
-    <value>GUI.Social.Inactive</value>
-  </data>
-  <data name="lblInactiveFriends.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;lblInactiveFriends.Name" xml:space="preserve">
-    <value>lblInactiveFriends</value>
-  </data>
-  <data name="&gt;&gt;lblInactiveFriends.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblInactiveFriends.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;lblInactiveFriends.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>854, 26</value>
-  </data>
-  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
-    <value>panel5</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblInactiveFriends" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,26" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 86</value>
-  </data>
-  <data name="panel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>856, 385</value>
-  </data>
-  <data name="panel5.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;panel5.Name" xml:space="preserve">
     <value>panel5</value>
   </data>
@@ -786,36 +666,6 @@
   </data>
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="panel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
-    <value>panel4</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblClanMemberCount" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFriendsCount" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblClanMember" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFriends" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblNeighbor" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblNeighborCount" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33,33333,Percent,33,33333,Percent,33,33333" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 5</value>
-  </data>
-  <data name="panel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 77</value>
-  </data>
-  <data name="panel4.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;panel4.Name" xml:space="preserve">
     <value>panel4</value>
@@ -839,7 +689,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpSocial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpSocial.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -923,7 +773,7 @@
     <value>4, 74</value>
   </data>
   <data name="tpTavern.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpTavern.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1049,7 +899,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpArmy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpArmy.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1068,18 +918,6 @@
   </data>
   <data name="&gt;&gt;tpArmy.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <metadata name="cmsMainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>423, 17</value>
-  </metadata>
-  <data name="cmsMainMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 252</value>
-  </data>
-  <data name="&gt;&gt;cmsMainMenu.Name" xml:space="preserve">
-    <value>cmsMainMenu</value>
-  </data>
-  <data name="&gt;&gt;cmsMainMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pnlGood.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1127,7 +965,7 @@
     <value>3, 110</value>
   </data>
   <data name="pnlGood.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 107</value>
+    <value>862, 107</value>
   </data>
   <data name="pnlGood.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1190,7 +1028,7 @@
     <value>3, 3</value>
   </data>
   <data name="pnlProd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 107</value>
+    <value>862, 107</value>
   </data>
   <data name="pnlProd.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1217,7 +1055,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpProduction.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1250,7 +1088,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelCity" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="metroPanel4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,486" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel11" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="metroPanel4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,472" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="tpCity.ImageIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1262,7 +1100,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpCity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpCity.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1307,7 +1145,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpSniper.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpSniper.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1349,7 +1187,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpSettings.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1403,7 +1241,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 478</value>
+    <value>868, 478</value>
   </data>
   <data name="tpHelp.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1430,7 +1268,7 @@
     <value>0, 0</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>875, 556</value>
+    <value>876, 556</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1451,7 +1289,7 @@
     <value>0, 48</value>
   </data>
   <data name="mpMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>875, 556</value>
+    <value>876, 556</value>
   </data>
   <data name="mpMenu.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1466,7 +1304,76 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mpMenu.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="tsmiMoppleFriends.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiMoppleFriends.Text" xml:space="preserve">
+    <value>tsmiMoppleFriends</value>
+  </data>
+  <data name="tsmiMoppleClan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiMoppleClan.Text" xml:space="preserve">
+    <value>tsmiMoppleClan</value>
+  </data>
+  <data name="tsmiMoppleNeighbor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiMoppleNeighbor.Text" xml:space="preserve">
+    <value>tsmiMoppleNeighbor</value>
+  </data>
+  <data name="tsmiVisitTavern.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiVisitTavern.Text" xml:space="preserve">
+    <value>tsmiVisitTavern</value>
+  </data>
+  <data name="tsmiCollectTavern.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiCollectTavern.Text" xml:space="preserve">
+    <value>tsmiCollectTavern</value>
+  </data>
+  <data name="tsmiVisitMopple.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiVisitMopple.Text" xml:space="preserve">
+    <value>tsmiVisitMopple</value>
+  </data>
+  <data name="tsmiCollectIncidents.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiCollectIncidents.Text" xml:space="preserve">
+    <value>tsmiCollectIncidents</value>
+  </data>
+  <data name="tsmiStartProduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiStartProduction.Text" xml:space="preserve">
+    <value>tsmiStartProduction</value>
+  </data>
+  <data name="tsmiCollectProduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiCollectProduction.Text" xml:space="preserve">
+    <value>tsmiCollectProduction</value>
+  </data>
+  <data name="tsmiCancelProduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiCancelProduction.Text" xml:space="preserve">
+    <value>tsmiCancelProduction</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 6</value>
+  </data>
+  <data name="tsmiReloadDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiReloadDataToolStripMenuItem.Text" xml:space="preserve">
+    <value>tsmiReloadData</value>
   </data>
   <data name="gbGoods.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -1490,7 +1397,7 @@
     <value>8, 187</value>
   </data>
   <data name="gbGoods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>853, 285</value>
+    <value>854, 285</value>
   </data>
   <data name="gbGoods.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1517,7 +1424,7 @@
     <value>3, 19</value>
   </data>
   <data name="lvGoods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>847, 263</value>
+    <value>848, 263</value>
   </data>
   <data name="lvGoods.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1556,7 +1463,7 @@
     <value>445, 6</value>
   </data>
   <data name="gbLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>416, 175</value>
+    <value>417, 175</value>
   </data>
   <data name="gbLog.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1589,7 +1496,7 @@
     <value>True</value>
   </data>
   <data name="lbOutputWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 153</value>
+    <value>411, 153</value>
   </data>
   <data name="lbOutputWindow.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2311,6 +2218,234 @@
   <data name="&gt;&gt;lblFPStockValue.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="panel5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.Name" xml:space="preserve">
+    <value>tlpInactiveFriends</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.Parent" xml:space="preserve">
+    <value>panel5</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpInactiveFriends.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Percent,33,33333,Percent,33,33333,Percent,33,33333,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>panel5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblInactiveFriends" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,26" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="panel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 86</value>
+  </data>
+  <data name="panel5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>857, 385</value>
+  </data>
+  <data name="panel5.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panel5.Name" xml:space="preserve">
+    <value>panel5</value>
+  </data>
+  <data name="&gt;&gt;panel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel5.Parent" xml:space="preserve">
+    <value>tpSocial</value>
+  </data>
+  <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpInactiveFriends.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tlpInactiveFriends.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tlpInactiveFriends.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tlpInactiveFriends.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 26</value>
+  </data>
+  <data name="tlpInactiveFriends.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tlpInactiveFriends.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tlpInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
+    <value>855, 355</value>
+  </data>
+  <data name="tlpInactiveFriends.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.Name" xml:space="preserve">
+    <value>tlpInactiveFriends</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.Parent" xml:space="preserve">
+    <value>panel5</value>
+  </data>
+  <data name="&gt;&gt;tlpInactiveFriends.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpInactiveFriends.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="Percent,33,33333,Percent,33,33333,Percent,33,33333,Absolute,20" /&gt;&lt;Rows Styles="AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.Name" xml:space="preserve">
+    <value>lblInactiveFriends</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>855, 26</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>panel5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblInactiveFriends" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,100,Absolute,26" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="lblInactiveFriends.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInactiveFriends.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblInactiveFriends.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 15pt, style=Bold</value>
+  </data>
+  <data name="lblInactiveFriends.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblInactiveFriends.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 0</value>
+  </data>
+  <data name="lblInactiveFriends.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblInactiveFriends.Size" type="System.Drawing.Size, System.Drawing">
+    <value>851, 26</value>
+  </data>
+  <data name="lblInactiveFriends.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblInactiveFriends.Text" xml:space="preserve">
+    <value>GUI.Social.Inactive</value>
+  </data>
+  <data name="lblInactiveFriends.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.Name" xml:space="preserve">
+    <value>lblInactiveFriends</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lblInactiveFriends.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblClanMemberCount" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFriendsCount" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblClanMember" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFriends" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblNeighbor" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblNeighborCount" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33,33333,Percent,33,33333,Percent,33,33333" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="panel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>858, 77</value>
+  </data>
+  <data name="panel4.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panel4.Name" xml:space="preserve">
+    <value>panel4</value>
+  </data>
+  <data name="&gt;&gt;panel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel4.Parent" xml:space="preserve">
+    <value>tpSocial</value>
+  </data>
+  <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -2501,7 +2636,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblNeighbor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 37</value>
+    <value>282, 37</value>
   </data>
   <data name="lblNeighbor.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2543,7 +2678,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblNeighborCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 38</value>
+    <value>282, 38</value>
   </data>
   <data name="lblNeighborCount.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2579,7 +2714,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>855, 75</value>
+    <value>856, 75</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2598,75 +2733,6 @@
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblClanMemberCount" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFriendsCount" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblClanMember" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblFriends" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblNeighbor" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblNeighborCount" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,33,33333,Percent,33,33333,Percent,33,33333" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tsmiMoppleFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiMoppleFriends.Text" xml:space="preserve">
-    <value>tsmiMoppleFriends</value>
-  </data>
-  <data name="tsmiMoppleClan.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiMoppleClan.Text" xml:space="preserve">
-    <value>tsmiMoppleClan</value>
-  </data>
-  <data name="tsmiMoppleNeighbor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiMoppleNeighbor.Text" xml:space="preserve">
-    <value>tsmiMoppleNeighbor</value>
-  </data>
-  <data name="tsmiVisitTavern.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiVisitTavern.Text" xml:space="preserve">
-    <value>tsmiVisitTavern</value>
-  </data>
-  <data name="tsmiCollectTavern.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiCollectTavern.Text" xml:space="preserve">
-    <value>tsmiCollectTavern</value>
-  </data>
-  <data name="tsmiVisitMopple.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiVisitMopple.Text" xml:space="preserve">
-    <value>tsmiVisitMopple</value>
-  </data>
-  <data name="tsmiCollectIncidents.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiCollectIncidents.Text" xml:space="preserve">
-    <value>tsmiCollectIncidents</value>
-  </data>
-  <data name="tsmiStartProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiStartProduction.Text" xml:space="preserve">
-    <value>tsmiStartProduction</value>
-  </data>
-  <data name="tsmiCollectProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiCollectProduction.Text" xml:space="preserve">
-    <value>tsmiCollectProduction</value>
-  </data>
-  <data name="tsmiCancelProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiCancelProduction.Text" xml:space="preserve">
-    <value>tsmiCancelProduction</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 6</value>
-  </data>
-  <data name="tsmiReloadDataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="tsmiReloadDataToolStripMenuItem.Text" xml:space="preserve">
-    <value>tsmiReloadData</value>
   </data>
   <data name="tlpCurrentSittingPlayer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2687,7 +2753,7 @@
     <value>1</value>
   </data>
   <data name="tlpCurrentSittingPlayer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>858, 311</value>
+    <value>859, 311</value>
   </data>
   <data name="tlpCurrentSittingPlayer.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2735,7 +2801,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>859, 38</value>
+    <value>860, 38</value>
   </data>
   <data name="tableLayoutPanel7.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2774,7 +2840,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblCurSitting.Size" type="System.Drawing.Size, System.Drawing">
-    <value>855, 38</value>
+    <value>856, 38</value>
   </data>
   <data name="lblCurSitting.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2825,7 +2891,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>860, 45</value>
+    <value>861, 45</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2975,7 +3041,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>857, 66</value>
+    <value>858, 66</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3002,7 +3068,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>859, 68</value>
+    <value>860, 68</value>
   </data>
   <data name="panel6.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3032,13 +3098,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTavernstateValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 33</value>
+    <value>288, 33</value>
   </data>
   <data name="lblTavernstateValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblTavernstateValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 33</value>
+    <value>282, 33</value>
   </data>
   <data name="lblTavernstateValue.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3080,7 +3146,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblTavernSilverValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 33</value>
+    <value>282, 33</value>
   </data>
   <data name="lblTavernSilverValue.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -3116,13 +3182,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTavernstate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 0</value>
+    <value>288, 0</value>
   </data>
   <data name="lblTavernstate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblTavernstate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 33</value>
+    <value>282, 33</value>
   </data>
   <data name="lblTavernstate.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3164,7 +3230,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblTavernSilver.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 33</value>
+    <value>282, 33</value>
   </data>
   <data name="lblTavernSilver.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3200,13 +3266,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblVisitable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 0</value>
+    <value>574, 0</value>
   </data>
   <data name="lblVisitable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblVisitable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 33</value>
+    <value>282, 33</value>
   </data>
   <data name="lblVisitable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3242,13 +3308,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblVisitableValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 33</value>
+    <value>574, 33</value>
   </data>
   <data name="lblVisitableValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblVisitableValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 33</value>
+    <value>282, 33</value>
   </data>
   <data name="lblVisitableValue.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3338,7 +3404,7 @@
     <value>3, 3</value>
   </data>
   <data name="metroLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 472</value>
+    <value>862, 472</value>
   </data>
   <data name="metroLabel6.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3383,7 +3449,7 @@
     <value>0, 59</value>
   </data>
   <data name="panel14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 48</value>
+    <value>862, 48</value>
   </data>
   <data name="panel14.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -3449,7 +3515,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 48</value>
+    <value>862, 48</value>
   </data>
   <data name="tableLayoutPanel10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3479,7 +3545,7 @@
     <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>626, 0</value>
+    <value>627, 0</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 48</value>
@@ -3518,7 +3584,7 @@
     <value>390, 0</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 48</value>
+    <value>231, 48</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3596,7 +3662,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 59</value>
+    <value>862, 59</value>
   </data>
   <data name="panel13.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3626,7 +3692,7 @@
     <value>0, 0</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 59</value>
+    <value>862, 59</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3659,7 +3725,7 @@
     <value>0, 107</value>
   </data>
   <data name="pnlGoodProductionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 0</value>
+    <value>862, 0</value>
   </data>
   <data name="pnlGoodProductionList.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3686,7 +3752,7 @@
     <value>0, 107</value>
   </data>
   <data name="pnlProductionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 0</value>
+    <value>862, 0</value>
   </data>
   <data name="pnlProductionList.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3722,7 +3788,7 @@
     <value>0, 59</value>
   </data>
   <data name="panel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 48</value>
+    <value>862, 48</value>
   </data>
   <data name="panel10.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3761,7 +3827,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 48</value>
+    <value>862, 48</value>
   </data>
   <data name="panel11.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3827,7 +3893,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 48</value>
+    <value>862, 48</value>
   </data>
   <data name="tableLayoutPanel9.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3857,7 +3923,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>626, 0</value>
+    <value>627, 0</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 48</value>
@@ -3896,7 +3962,7 @@
     <value>390, 0</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 48</value>
+    <value>231, 48</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3974,7 +4040,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 59</value>
+    <value>862, 59</value>
   </data>
   <data name="panel12.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4004,7 +4070,7 @@
     <value>0, 0</value>
   </data>
   <data name="lblProductionList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 59</value>
+    <value>862, 59</value>
   </data>
   <data name="lblProductionList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4030,8 +4096,20 @@
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="panelCity.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="tableLayoutPanel11.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.Name" xml:space="preserve">
+    <value>lbIncidentBox</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel11</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;pnlIncident.Name" xml:space="preserve">
     <value>pnlIncident</value>
@@ -4040,46 +4118,40 @@
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pnlIncident.Parent" xml:space="preserve">
-    <value>panelCity</value>
+    <value>tableLayoutPanel11</value>
   </data>
   <data name="&gt;&gt;pnlIncident.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.Name" xml:space="preserve">
-    <value>pnlLog</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.Parent" xml:space="preserve">
-    <value>panelCity</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="panelCity.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="tableLayoutPanel11.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="panelCity.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tableLayoutPanel11.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="panelCity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 466</value>
-  </data>
-  <data name="panelCity.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableLayoutPanel11.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;panelCity.Name" xml:space="preserve">
-    <value>panelCity</value>
+  <data name="tableLayoutPanel11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 466</value>
   </data>
-  <data name="&gt;&gt;panelCity.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tableLayoutPanel11.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;panelCity.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel11.Name" xml:space="preserve">
+    <value>tableLayoutPanel11</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel11.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;panelCity.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel11.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tableLayoutPanel11.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lbIncidentBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pnlIncident" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,56,46552,Percent,43,53448" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="&gt;&gt;metroLabel7.Name" xml:space="preserve">
     <value>metroLabel7</value>
@@ -4097,7 +4169,7 @@
     <value>Fill</value>
   </data>
   <data name="metroPanel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 3</value>
+    <value>434, 3</value>
   </data>
   <data name="metroPanel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>425, 466</value>
@@ -4127,7 +4199,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 472</value>
+    <value>862, 472</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -4145,22 +4217,55 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panelCity" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="metroPanel4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,486" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tableLayoutPanel11" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="metroPanel4" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,100,Absolute,472" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="lbIncidentBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lbIncidentBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 263</value>
+  </data>
+  <data name="lbIncidentBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lbIncidentBox.ScrollAlwaysVisible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lbIncidentBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 203</value>
+  </data>
+  <data name="lbIncidentBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.Name" xml:space="preserve">
+    <value>lbIncidentBox</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel11</value>
+  </data>
+  <data name="&gt;&gt;lbIncidentBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlIncident.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="pnlIncident.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+    <value>Fill</value>
   </data>
   <data name="pnlIncident.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 2</value>
+    <value>0, 0</value>
   </data>
   <data name="pnlIncident.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="pnlIncident.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 185</value>
+    <value>425, 263</value>
   </data>
   <data name="pnlIncident.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;pnlIncident.Name" xml:space="preserve">
     <value>pnlIncident</value>
@@ -4169,82 +4274,19 @@
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pnlIncident.Parent" xml:space="preserve">
-    <value>panelCity</value>
+    <value>tableLayoutPanel11</value>
   </data>
   <data name="&gt;&gt;pnlIncident.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.Name" xml:space="preserve">
-    <value>lbIncidentBox</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.Parent" xml:space="preserve">
-    <value>pnlLog</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pnlLog.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="pnlLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 187</value>
-  </data>
-  <data name="pnlLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="pnlLog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 277</value>
-  </data>
-  <data name="pnlLog.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.Name" xml:space="preserve">
-    <value>pnlLog</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.Parent" xml:space="preserve">
-    <value>panelCity</value>
-  </data>
-  <data name="&gt;&gt;pnlLog.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="lbIncidentBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lbIncidentBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="lbIncidentBox.ScrollAlwaysVisible" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lbIncidentBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 277</value>
-  </data>
-  <data name="lbIncidentBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.Name" xml:space="preserve">
-    <value>lbIncidentBox</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.Parent" xml:space="preserve">
-    <value>pnlLog</value>
-  </data>
-  <data name="&gt;&gt;lbIncidentBox.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="metroLabel7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="metroLabel7.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="metroLabel7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="metroLabel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>425, 466</value>
@@ -4307,7 +4349,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 472</value>
+    <value>862, 472</value>
   </data>
   <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4396,6 +4438,9 @@
   <data name="pnlContributions.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 70</value>
   </data>
+  <data name="pnlContributions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
   <data name="pnlContributions.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 396</value>
   </data>
@@ -4481,10 +4526,13 @@
     <value>Fill</value>
   </data>
   <data name="mpSnipItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 3</value>
+    <value>258, 0</value>
+  </data>
+  <data name="mpSnipItem.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="mpSnipItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>597, 466</value>
+    <value>604, 472</value>
   </data>
   <data name="mpSnipItem.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4513,30 +4561,6 @@
   <data name="&gt;&gt;mtpProduction.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;mtpData.Name" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="&gt;&gt;mtpData.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Name" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="&gt;&gt;mtpBots.Name" xml:space="preserve">
     <value>mtpBots</value>
   </data>
@@ -4547,7 +4571,7 @@
     <value>mtcSettings</value>
   </data>
   <data name="&gt;&gt;mtpBots.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;mtpMisc.Name" xml:space="preserve">
     <value>mtpMisc</value>
@@ -4559,6 +4583,30 @@
     <value>mtcSettings</value>
   </data>
   <data name="&gt;&gt;mtpMisc.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Name" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpData.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Name" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="mtcSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -4568,7 +4616,7 @@
     <value>3, 3</value>
   </data>
   <data name="mtcSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>861, 472</value>
+    <value>862, 472</value>
   </data>
   <data name="mtcSettings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4709,7 +4757,7 @@
     <value>4, 35</value>
   </data>
   <data name="mtpProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>853, 433</value>
+    <value>854, 433</value>
   </data>
   <data name="mtpProduction.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4859,7 +4907,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>498, 231</value>
+    <value>850, 231</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -4879,29 +4927,32 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.Name" xml:space="preserve">
-    <value>clbIgnore</value>
+  <data name="&gt;&gt;pnlIgnore.Name" xml:space="preserve">
+    <value>pnlIgnore</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;pnlIgnore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pnlIgnore.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pnlIgnore.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;txbPlayer.Name" xml:space="preserve">
-    <value>txbPlayer</value>
+  <data name="&gt;&gt;tableLayoutPanel12.Name" xml:space="preserve">
+    <value>tableLayoutPanel12</value>
   </data>
-  <data name="&gt;&gt;txbPlayer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tableLayoutPanel12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txbPlayer.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel12.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;txbPlayer.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableLayoutPanel12.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="tableLayoutPanel12.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txbPlayer" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>184, 33</value>
@@ -4910,7 +4961,7 @@
     <value>2, 2, 2, 2</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 194</value>
+    <value>649, 194</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -4927,44 +4978,68 @@
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="clbIgnore.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="tableLayoutPanel12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="clbIgnore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 20</value>
+  <data name="tableLayoutPanel12.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="clbIgnore.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="&gt;&gt;txbPlayer.Name" xml:space="preserve">
+    <value>txbPlayer</value>
   </data>
-  <data name="clbIgnore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 174</value>
+  <data name="&gt;&gt;txbPlayer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="clbIgnore.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;txbPlayer.Parent" xml:space="preserve">
+    <value>tableLayoutPanel12</value>
+  </data>
+  <data name="&gt;&gt;txbPlayer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.Name" xml:space="preserve">
-    <value>clbIgnore</value>
+  <data name="tableLayoutPanel12.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tableLayoutPanel12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.Parent" xml:space="preserve">
+  <data name="tableLayoutPanel12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel12.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>649, 20</value>
+  </data>
+  <data name="tableLayoutPanel12.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel12.Name" xml:space="preserve">
+    <value>tableLayoutPanel12</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel12.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;clbIgnore.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;tableLayoutPanel12.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel12.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txbPlayer" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="txbPlayer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="txbPlayer.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="txbPlayer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="txbPlayer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 20</value>
+    <value>324, 20</value>
   </data>
   <data name="txbPlayer.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -4976,10 +5051,37 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;txbPlayer.Parent" xml:space="preserve">
-    <value>panel2</value>
+    <value>tableLayoutPanel12</value>
   </data>
   <data name="&gt;&gt;txbPlayer.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
+  </data>
+  <data name="pnlIgnore.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="pnlIgnore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 20</value>
+  </data>
+  <data name="pnlIgnore.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="pnlIgnore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>649, 174</value>
+  </data>
+  <data name="pnlIgnore.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;pnlIgnore.Name" xml:space="preserve">
+    <value>pnlIgnore</value>
+  </data>
+  <data name="&gt;&gt;pnlIgnore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlIgnore.Parent" xml:space="preserve">
+    <value>panel2</value>
+  </data>
+  <data name="&gt;&gt;pnlIgnore.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="metroLabel15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5908,393 +6010,6 @@
   <data name="&gt;&gt;mtView.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="&gt;&gt;metroLabel11.Name" xml:space="preserve">
-    <value>metroLabel11</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Name" xml:space="preserve">
-    <value>mbSaveReload</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Name" xml:space="preserve">
-    <value>lblChooseWorld</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Name" xml:space="preserve">
-    <value>mcbCitySelection</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Name" xml:space="preserve">
-    <value>mbDeleteData</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Name" xml:space="preserve">
-    <value>lblDeleteData</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="mtpData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="mtpData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>853, 433</value>
-  </data>
-  <data name="mtpData.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="mtpData.Text" xml:space="preserve">
-    <value>GUI.Settings.UserData</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Name" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtpData.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="&gt;&gt;mtpData.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="metroLabel11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 91</value>
-  </data>
-  <data name="metroLabel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 70</value>
-  </data>
-  <data name="metroLabel11.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="metroLabel11.Text" xml:space="preserve">
-    <value>!!! DELETING USERDATA WILL RESTART THE BOT !!!
-
-TO USE PREMIUM FEATURES YOU NEED TO
-LOGIN WITH YOUR SERIALKEY AGAIN</value>
-  </data>
-  <data name="metroLabel11.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Name" xml:space="preserve">
-    <value>metroLabel11</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;metroLabel11.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="mbSaveReload.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 14</value>
-  </data>
-  <data name="mbSaveReload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 29</value>
-  </data>
-  <data name="mbSaveReload.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="mbSaveReload.Text" xml:space="preserve">
-    <value>Save &amp;&amp; Reload</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Name" xml:space="preserve">
-    <value>mbSaveReload</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mbSaveReload.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="lblChooseWorld.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 14</value>
-  </data>
-  <data name="lblChooseWorld.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 29</value>
-  </data>
-  <data name="lblChooseWorld.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="lblChooseWorld.Text" xml:space="preserve">
-    <value>Change City:</value>
-  </data>
-  <data name="lblChooseWorld.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Name" xml:space="preserve">
-    <value>lblChooseWorld</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;lblChooseWorld.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="mcbCitySelection.ItemHeight" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="mcbCitySelection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 14</value>
-  </data>
-  <data name="mcbCitySelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 29</value>
-  </data>
-  <data name="mcbCitySelection.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Name" xml:space="preserve">
-    <value>mcbCitySelection</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mcbCitySelection.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="mbDeleteData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 59</value>
-  </data>
-  <data name="mbDeleteData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 29</value>
-  </data>
-  <data name="mbDeleteData.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="mbDeleteData.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Name" xml:space="preserve">
-    <value>mbDeleteData</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;mbDeleteData.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblDeleteData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 59</value>
-  </data>
-  <data name="lblDeleteData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 29</value>
-  </data>
-  <data name="lblDeleteData.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblDeleteData.Text" xml:space="preserve">
-    <value>Delete Userdata:</value>
-  </data>
-  <data name="lblDeleteData.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Name" xml:space="preserve">
-    <value>lblDeleteData</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.Parent" xml:space="preserve">
-    <value>mtpData</value>
-  </data>
-  <data name="&gt;&gt;lblDeleteData.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Name" xml:space="preserve">
-    <value>mbCheckSerial</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Name" xml:space="preserve">
-    <value>lblSerialKey</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Name" xml:space="preserve">
-    <value>mtbSerialKey</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="mtpPremium.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="mtpPremium.Size" type="System.Drawing.Size, System.Drawing">
-    <value>853, 433</value>
-  </data>
-  <data name="mtpPremium.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="mtpPremium.Text" xml:space="preserve">
-    <value>GUI.Settings.Premium</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Name" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="&gt;&gt;mtpPremium.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="mbCheckSerial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 98</value>
-  </data>
-  <data name="mbCheckSerial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 32</value>
-  </data>
-  <data name="mbCheckSerial.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="mbCheckSerial.Text" xml:space="preserve">
-    <value>Register / Login</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Name" xml:space="preserve">
-    <value>mbCheckSerial</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;mbCheckSerial.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblSerialKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 17</value>
-  </data>
-  <data name="lblSerialKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 29</value>
-  </data>
-  <data name="lblSerialKey.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="lblSerialKey.Text" xml:space="preserve">
-    <value>Serial-Key:</value>
-  </data>
-  <data name="lblSerialKey.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Name" xml:space="preserve">
-    <value>lblSerialKey</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;lblSerialKey.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="mtbSerialKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 17</value>
-  </data>
-  <data name="mtbSerialKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 75</value>
-  </data>
-  <data name="mtbSerialKey.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="mtbSerialKey.Text" xml:space="preserve">
-    <value>SerialKey</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Name" xml:space="preserve">
-    <value>mtbSerialKey</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.Parent" xml:space="preserve">
-    <value>mtpPremium</value>
-  </data>
-  <data name="&gt;&gt;mtbSerialKey.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="&gt;&gt;mtSnipBot.Name" xml:space="preserve">
     <value>mtSnipBot</value>
   </data>
@@ -6479,7 +6194,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>4, 35</value>
   </data>
   <data name="mtpBots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>853, 433</value>
+    <value>854, 433</value>
   </data>
   <data name="mtpBots.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -6497,7 +6212,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>mtcSettings</value>
   </data>
   <data name="&gt;&gt;mtpBots.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="mtSnipBot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -7046,7 +6761,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>4, 35</value>
   </data>
   <data name="mtpMisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>853, 433</value>
+    <value>854, 433</value>
   </data>
   <data name="mtpMisc.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -7064,7 +6779,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>mtcSettings</value>
   </data>
   <data name="&gt;&gt;mtpMisc.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="metroLabel12.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 94</value>
@@ -7336,6 +7051,393 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
   <data name="&gt;&gt;mcbLanguage.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="&gt;&gt;metroLabel11.Name" xml:space="preserve">
+    <value>metroLabel11</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Name" xml:space="preserve">
+    <value>mbSaveReload</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Name" xml:space="preserve">
+    <value>lblChooseWorld</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Name" xml:space="preserve">
+    <value>mcbCitySelection</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Name" xml:space="preserve">
+    <value>mbDeleteData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Name" xml:space="preserve">
+    <value>lblDeleteData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="mtpData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>854, 433</value>
+  </data>
+  <data name="mtpData.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="mtpData.Text" xml:space="preserve">
+    <value>GUI.Settings.UserData</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Name" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpData.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpData.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="metroLabel11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>90, 91</value>
+  </data>
+  <data name="metroLabel11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 70</value>
+  </data>
+  <data name="metroLabel11.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="metroLabel11.Text" xml:space="preserve">
+    <value>!!! DELETING USERDATA WILL RESTART THE BOT !!!
+
+TO USE PREMIUM FEATURES YOU NEED TO
+LOGIN WITH YOUR SERIALKEY AGAIN</value>
+  </data>
+  <data name="metroLabel11.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Name" xml:space="preserve">
+    <value>metroLabel11</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;metroLabel11.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mbSaveReload.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 14</value>
+  </data>
+  <data name="mbSaveReload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 29</value>
+  </data>
+  <data name="mbSaveReload.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="mbSaveReload.Text" xml:space="preserve">
+    <value>Save &amp;&amp; Reload</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Name" xml:space="preserve">
+    <value>mbSaveReload</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbSaveReload.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblChooseWorld.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 14</value>
+  </data>
+  <data name="lblChooseWorld.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 29</value>
+  </data>
+  <data name="lblChooseWorld.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblChooseWorld.Text" xml:space="preserve">
+    <value>Change City:</value>
+  </data>
+  <data name="lblChooseWorld.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Name" xml:space="preserve">
+    <value>lblChooseWorld</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblChooseWorld.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mcbCitySelection.ItemHeight" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="mcbCitySelection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>187, 14</value>
+  </data>
+  <data name="mcbCitySelection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 29</value>
+  </data>
+  <data name="mcbCitySelection.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Name" xml:space="preserve">
+    <value>mcbCitySelection</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroComboBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mcbCitySelection.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="mbDeleteData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>187, 59</value>
+  </data>
+  <data name="mbDeleteData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 29</value>
+  </data>
+  <data name="mbDeleteData.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="mbDeleteData.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Name" xml:space="preserve">
+    <value>mbDeleteData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;mbDeleteData.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblDeleteData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 59</value>
+  </data>
+  <data name="lblDeleteData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 29</value>
+  </data>
+  <data name="lblDeleteData.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblDeleteData.Text" xml:space="preserve">
+    <value>Delete Userdata:</value>
+  </data>
+  <data name="lblDeleteData.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Name" xml:space="preserve">
+    <value>lblDeleteData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.Parent" xml:space="preserve">
+    <value>mtpData</value>
+  </data>
+  <data name="&gt;&gt;lblDeleteData.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Name" xml:space="preserve">
+    <value>mbCheckSerial</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Name" xml:space="preserve">
+    <value>lblSerialKey</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Name" xml:space="preserve">
+    <value>mtbSerialKey</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mtpPremium.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpPremium.Size" type="System.Drawing.Size, System.Drawing">
+    <value>854, 433</value>
+  </data>
+  <data name="mtpPremium.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="mtpPremium.Text" xml:space="preserve">
+    <value>GUI.Settings.Premium</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Name" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpPremium.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mbCheckSerial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 98</value>
+  </data>
+  <data name="mbCheckSerial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 32</value>
+  </data>
+  <data name="mbCheckSerial.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="mbCheckSerial.Text" xml:space="preserve">
+    <value>Register / Login</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Name" xml:space="preserve">
+    <value>mbCheckSerial</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroButton, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mbCheckSerial.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblSerialKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 17</value>
+  </data>
+  <data name="lblSerialKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 29</value>
+  </data>
+  <data name="lblSerialKey.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblSerialKey.Text" xml:space="preserve">
+    <value>Serial-Key:</value>
+  </data>
+  <data name="lblSerialKey.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Name" xml:space="preserve">
+    <value>lblSerialKey</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;lblSerialKey.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="mtbSerialKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>152, 17</value>
+  </data>
+  <data name="mtbSerialKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 75</value>
+  </data>
+  <data name="mtbSerialKey.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="mtbSerialKey.Text" xml:space="preserve">
+    <value>SerialKey</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Name" xml:space="preserve">
+    <value>mtbSerialKey</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.Parent" xml:space="preserve">
+    <value>mtpPremium</value>
+  </data>
+  <data name="&gt;&gt;mtbSerialKey.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="&gt;&gt;mlHelpText.Name" xml:space="preserve">
     <value>mlHelpText</value>
   </data>
@@ -7355,7 +7457,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>185, 3</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 472</value>
+    <value>680, 472</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -7382,7 +7484,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>Vertical</value>
   </data>
   <data name="mlHelpText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 472</value>
+    <value>680, 472</value>
   </data>
   <data name="mlHelpText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -7451,14 +7553,32 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
   <metadata name="bwScriptExecuterOneArg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="cmsIgnore.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>555, 17</value>
+  </metadata>
+  <data name="cmsIgnore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="&gt;&gt;cmsIgnore.Name" xml:space="preserve">
+    <value>cmsIgnore</value>
+  </data>
+  <data name="&gt;&gt;cmsIgnore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="tSniper.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>664, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>48</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>882, 610</value>
+    <value>883, 610</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -8112,6 +8232,12 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
   </data>
   <data name="&gt;&gt;bwScriptExecuterOneArg.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tSniper.Name" xml:space="preserve">
+    <value>tSniper</value>
+  </data>
+  <data name="&gt;&gt;tSniper.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>

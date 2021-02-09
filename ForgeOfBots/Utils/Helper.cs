@@ -46,41 +46,25 @@ namespace ForgeOfBots.Utils
 
       private static readonly List<string> msgHistory = new List<string>();
       public static List<string> MSGHistory = new List<string>();
-      public static void Log(string message, ListBox listbox = null)
+      public static void Log(string message, params ListBox[] listbox)
       {
          //Invoker.CallMethode(ctrl, () => ctrl.Items.Add(message));
+         if (listbox != null)
+         {
 #if DEBUG
-         Console.WriteLine(message);
-         if (listbox != null)
-         {
-            msgHistory.Add(message);
-            MSGHistory.Add(message);
-            try
-            {
-               if (msgHistory.Count > 0)
-               {
-                  Invoker.CallMethode(listbox, () => listbox.Items.AddRange(msgHistory.ToArray()));
-                  Invoker.SetProperty(listbox, () => listbox.TopIndex, listbox.Items.Count - 1);
-                  msgHistory.Clear();
-               }
-            }
-            catch
-            { }
-         }
-#elif RELEASE
-         if (listbox != null)
-         {
+            Console.WriteLine(message);
+#endif
             msgHistory.Add(message);
             MSGHistory.Add(message);
             try
             {
 
-               if (msgHistory.Count > 0)
-               {
-                  Invoker.CallMethode(listbox, () => listbox.Items.AddRange(msgHistory.ToArray()));
-                  Invoker.SetProperty(listbox, () => listbox.TopIndex, listbox.Items.Count - 1);
-                  msgHistory.Clear();
-               }
+               foreach (ListBox item in listbox)
+                {
+                   Invoker.CallMethode(item, () => item.Items.AddRange(msgHistory.ToArray()));
+                   Invoker.SetProperty(item, () => item.TopIndex, item.Items.Count - 1);
+                }
+                msgHistory.Clear();
             }
             catch
             { }
@@ -89,7 +73,6 @@ namespace ForgeOfBots.Utils
          {
             Console.WriteLine(message);
          }
-#endif
       }
       public static bool CheckForInternetConnection()
       {
