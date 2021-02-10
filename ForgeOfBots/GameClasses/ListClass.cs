@@ -76,7 +76,7 @@ namespace ForgeOfBots.GameClasses
       public static List<int> doneQuery { get; set; } = new List<int>();
       public static List<int> AddedToQuery { get; set; } = new List<int>();
       public static List<int> CollectedIDs { get; set; } = new List<int>();
-      public static List<BackgroundWorker> BackgroundWorkers { get; set; } = new List<BackgroundWorker>();
+      public static List<BackgroundWorkerEX> BackgroundWorkers { get; set; } = new List<BackgroundWorkerEX>();
       public static Dictionary<string, string> PortraitList { get; set; } = new Dictionary<string, string>();
 
       /// <summary>

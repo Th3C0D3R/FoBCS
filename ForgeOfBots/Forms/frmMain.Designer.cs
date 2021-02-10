@@ -140,6 +140,7 @@ namespace ForgeOfBots.Forms
          this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
          this.pnlContributions = new System.Windows.Forms.Panel();
          this.mbSnip = new MetroFramework.Controls.MetroButton();
+         this.mbCancel = new MetroFramework.Controls.MetroButton();
          this.mbSearch = new MetroFramework.Controls.MetroButton();
          this.mpSnipItem = new System.Windows.Forms.Panel();
          this.tpSettings = new System.Windows.Forms.TabPage();
@@ -1110,6 +1111,7 @@ namespace ForgeOfBots.Forms
          // 
          this.metroPanel3.Controls.Add(this.pnlContributions);
          this.metroPanel3.Controls.Add(this.mbSnip);
+         this.metroPanel3.Controls.Add(this.mbCancel);
          this.metroPanel3.Controls.Add(this.mbSearch);
          resources.ApplyResources(this.metroPanel3, "metroPanel3");
          this.metroPanel3.HorizontalScrollbarBarColor = true;
@@ -1131,6 +1133,13 @@ namespace ForgeOfBots.Forms
          this.mbSnip.Name = "mbSnip";
          this.mbSnip.Tag = "GUI.Sniper.Snip";
          this.mbSnip.Click += new System.EventHandler(this.MbSnip_Click);
+         // 
+         // mbCancel
+         // 
+         resources.ApplyResources(this.mbCancel, "mbCancel");
+         this.mbCancel.Name = "mbCancel";
+         this.mbCancel.Tag = "GUI.Sniper.Cancel";
+         this.mbCancel.Click += new System.EventHandler(this.MbCancel_Click);
          // 
          // mbSearch
          // 
@@ -2109,5 +2118,6 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.FlowLayoutPanel pnlIgnore;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
       private System.Windows.Forms.Timer tSniper;
+      private MetroFramework.Controls.MetroButton mbCancel;
    }
 }

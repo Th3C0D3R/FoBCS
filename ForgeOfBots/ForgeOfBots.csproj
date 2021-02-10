@@ -252,6 +252,9 @@
     <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
     <Compile Include="GameClasses\ResponseClasses\World.cs" />
     <Compile Include="Updater\Updater.cs" />
+    <Compile Include="Utils\BackgroundWorkerEX.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\ForgeHX.cs" />
     <Compile Include="Utils\GEHelper.cs" />
     <Compile Include="Utils\CrashHelper.cs" />
@@ -271,6 +274,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>

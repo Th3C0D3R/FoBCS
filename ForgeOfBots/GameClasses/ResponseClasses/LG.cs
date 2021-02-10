@@ -65,8 +65,16 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
    }
    public class LGState
    {
+      public Paused_State paused_state { get; set; }
       public int? invested_forge_points { get; set; }
       public int? forge_points_for_level_up { get; set; }
+   }
+   public class Paused_State
+   {
+      public dynamic current_product { get; set; }
+      public bool boosted { get; set; }
+      public bool is_motivated { get; set; }
+      public string __class__ { get; set; }
    }
 
    public class LGSnip : LGData

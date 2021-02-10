@@ -92,6 +92,7 @@
     "GUI.Sniper.PlayerIndentifier.Neighbor": "N",
     "GUI.Sniper.PlayerIndentifier.Member": "G",
     "GUI.Sniper.Contributions.Total": "Aktueller Gewinn:",
+    "GUI.Sniper.Cancel": "Abbrechen",
     "GUI.Production.ProductionList": "Produktionsliste",
     "GUI.Production.GoodProductionList": "Güterproduktionsliste",
     "GUI.Production.State": "Status",

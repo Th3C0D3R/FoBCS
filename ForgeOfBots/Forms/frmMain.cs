@@ -47,7 +47,7 @@ namespace ForgeOfBots.Forms
       public static extern bool ReleaseCapture();
       private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
       private bool blockExpireBox = false;
-      readonly BackgroundWorker bw = new BackgroundWorker();
+      readonly BackgroundWorkerEX bw = new BackgroundWorkerEX();
       bool Canceled = false;
 
       public frmMain() { }
@@ -225,7 +225,7 @@ namespace ForgeOfBots.Forms
          if (!string.IsNullOrWhiteSpace(UserData.SerialKey))
          {
             logger.Info($"Init Premium if key exists");
-            BackgroundWorker bwPremium = new BackgroundWorker();
+            BackgroundWorkerEX bwPremium = new BackgroundWorkerEX();
             bwPremium.DoWork += CheckPremium;
             bwPremium.RunWorkerCompleted += CheckPremiumComplete;
             bwPremium.WorkerSupportsCancellation = true;
@@ -355,7 +355,7 @@ namespace ForgeOfBots.Forms
       }
       private void workerComplete(object sender, RunWorkerCompletedEventArgs e)
       {
-         ListClass.BackgroundWorkers.Remove((BackgroundWorker)sender);
+         ListClass.BackgroundWorkers.Remove((BackgroundWorkerEX)sender);
       }
       private void Ws_WorldDataEntered(Form that, string key, string value)
       {
@@ -968,8 +968,9 @@ namespace ForgeOfBots.Forms
       private void TsmiCollectIncidentsToolStripMenuItem_Click(object sender, EventArgs e)
       {
          OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectIncident };
-         BackgroundWorker bw = new BackgroundWorker();
+         BackgroundWorkerEX bw = new BackgroundWorkerEX();
          bw.DoWork += bwScriptExecuterOneArg_DoWork;
+         bw.param = param;
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerCompleted += workerComplete;
          bw.RunWorkerAsync(param);
@@ -1244,6 +1245,8 @@ namespace ForgeOfBots.Forms
                      ListClass.CollectedIDs = CollectedIDs;
                   }
                   Updater.UpdateResources();
+                  UpdateProductionView();
+                  UpdateGoodProductionView();
                   UpdateDashbord();
                }
                catch (Exception ex)
@@ -1342,6 +1345,10 @@ namespace ForgeOfBots.Forms
                      Crashes.TrackError(ex, properties, attachments);
                   }
                }
+               Updater.UpdateResources();
+               UpdateProductionView();
+               UpdateGoodProductionView();
+               UpdateDashbord();
                break;
             case RequestType.CancelProduction:
                List<string> retCancel = new List<string>();
@@ -1360,9 +1367,9 @@ namespace ForgeOfBots.Forms
                   Thread.Sleep(100);
                }
                Updater.UpdateResources();
-               UpdateDashbord(); 
                UpdateProductionView();
                UpdateGoodProductionView();
+               UpdateDashbord();
                break;
             case RequestType.CollectIncident:
                UserData.LastIncidentTime = DateTime.Now;
@@ -1774,6 +1781,7 @@ namespace ForgeOfBots.Forms
          UserData.SaveSettings();
          if (UserData.SnipBot)
          {
+            tSniper.Stop();
             tSniper.Interval = 1000 * 60 * UserData.IntervalSnip;
             tSniper.Start();
             TSniper_Tick(null, null);
@@ -1801,11 +1809,25 @@ namespace ForgeOfBots.Forms
       }
       private void FillAutoComplete()
       {
-         txbPlayer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-         txbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
-         AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
-         acsc.AddRange(UsernameList.Get);
-         txbPlayer.AutoCompleteCustomSource = acsc;
+         if (txbPlayer.InvokeRequired)
+         {
+            txbPlayer.Invoke((MethodInvoker)delegate
+             {
+                txbPlayer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                txbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
+                acsc.AddRange(UsernameList.Get);
+                txbPlayer.AutoCompleteCustomSource = acsc;
+             });
+         }
+         else
+         {
+            txbPlayer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txbPlayer.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
+            acsc.AddRange(UsernameList.Get);
+            txbPlayer.AutoCompleteCustomSource = acsc;
+         }
       }
       private void TxbPlayer_KeyUp(object sender, KeyEventArgs e)
       {
@@ -1911,7 +1933,10 @@ namespace ForgeOfBots.Forms
             }
             Label conTotal = new Label
             {
-               Text = i18n.getString("GUI.Sniper.Contributions.Total") + " => " + Total.ToString("N0")
+               Text = i18n.getString("GUI.Sniper.Contributions.Total") + " => " + Total.ToString("N0"),
+               Dock = DockStyle.Top,
+               AutoSize = false,
+               TextAlign = ContentAlignment.MiddleCenter,
             };
             Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Add(conTotal));
          }
@@ -1937,19 +1962,24 @@ namespace ForgeOfBots.Forms
          StaticData.WorkerList.AddWorkerItem(wi);
 
          TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.GetLGs, argument2 = null };
-         BackgroundWorker bw = new BackgroundWorker();
+         BackgroundWorkerEX bw = new BackgroundWorkerEX();
          bw.DoWork += bwScriptExecuter_DoWork;
+         bw.param = param;
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerCompleted += workerComplete;
          bw.RunWorkerAsync(param);
+         mbCancel.Enabled = true;
+         mbSearch.Enabled = false;
          ListClass.BackgroundWorkers.Add(bw);
       }
       private void MbSnip_Click(object sender, EventArgs e)
       {
+         mbCancel.Enabled = false;
+         mbSearch.Enabled = false;
          foreach (Control c in mpSnipItem.Controls)
          {
             LGSnipItem lsi = (LGSnipItem)c;
-            if(sender is bool)
+            if (sender is bool)
             {
                string script = ReqBuilder.GetRequestScript(RequestType.contributeForgePoints, new int[] { lsi.LGSnip.entity_id, lsi.LGSnip.player.player_id.Value, lsi.LGSnip.level, lsi.LGSnip.Invest, 0 });
                _ = (string)jsExecutor.ExecuteAsyncScript(script);
@@ -1968,16 +1998,44 @@ namespace ForgeOfBots.Forms
                Application.DoEvents();
             }
          }
+         mbCancel.Enabled = true;
+         mbSearch.Enabled = true;
          Updater.UpdateContribution();
          Updater.UpdateInventory();
          UpdateDashbord();
          UpdateSnip();
       }
+      private void MbCancel_Click(object sender, EventArgs e)
+      {
+         if (ListClass.BackgroundWorkers.Count > 0)
+         {
+            foreach (BackgroundWorkerEX bw in ListClass.BackgroundWorkers)
+            {
+               if (bw.param == null) continue;
+               dynamic param;
+               try
+               {
+                  param = (TwoTArgs<RequestType, dynamic>)bw.param;
+               }
+               catch (Exception)
+               {
+                  param = (TwoTArgs<RequestType, E_Motivate>)bw.param;
+               }
+               if (bw.WorkerSupportsCancellation && param.RequestType == RequestType.GetLGs && bw.IsBusy)
+               {
+                  bw.CancelAsync();
+                  mbCancel.Enabled = false;
+                  mbSearch.Enabled = true;
+               }
+            }
+         }
+      }
       #endregion
 
-      #region "BackgroundWorker"
+      #region "BackgroundWorkerEX"
       private void bwScriptExecuter_DoWork(object sender, DoWorkEventArgs e)
       {
+         BackgroundWorkerEX bwEx = (BackgroundWorkerEX)sender;
          Random r = new Random();
          int counter = 0;
          dynamic param;
@@ -2190,7 +2248,8 @@ namespace ForgeOfBots.Forms
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends)) ListClass.SnipablePlayers.AddRange(ListClass.FriendList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors)) ListClass.SnipablePlayers.AddRange(ListClass.NeighborList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
-               ListClass.SnipablePlayers = (List<Player>)ListClass.SnipablePlayers.Where(p => UserData.IgnoredPlayers.Contains(p.player_id.Value));
+               if (UserData.IgnoredPlayers.Count > 0)
+                  ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => UserData.IgnoredPlayers.Contains(p.player_id.Value)).ToList();
                ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
                StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
@@ -2198,6 +2257,7 @@ namespace ForgeOfBots.Forms
                int rInt = 0;
                foreach (Player item in ListClass.SnipablePlayers)
                {
+                  if (bwEx.CancellationPending) break;
                   counter += 1;
                   StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
                   StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingPlayer")} {item.name}...");
@@ -2210,6 +2270,7 @@ namespace ForgeOfBots.Forms
                   ListClass.SnipablePlayers.Find(p => p.player_id == LGData[0].player.player_id).LGs = LGData;
                   foreach (LGSnip lg in item.LGs)
                   {
+                     if (bwEx.CancellationPending) break;
                      StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
                      StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingLG").Replace("##Player##", item.name)} {lg.name}...");
 
@@ -2237,12 +2298,15 @@ namespace ForgeOfBots.Forms
                               lg.state = new LGState()
                               {
                                  forge_points_for_level_up = (int?)resItem["responseData"][0]["state"]["forge_points_for_level_up"],
-                                 invested_forge_points = (int?)resItem["responseData"][0]["state"]["invested_forge_points"]
+                                 invested_forge_points = (int?)resItem["responseData"][0]["state"]["invested_forge_points"],
+                                 paused_state = resItem["responseData"][0]["state"]["paused_state"]
                               };
                               lg.maxLevel = (int)resItem["responseData"][0]["max_level"];
+                              if (lg.state != null && lg.state.paused_state != null) continue;
                            }
                            else if (resItem["requestMethod"] == "getConstruction")
                            {
+                              if (lg.state != null && lg.state.paused_state != null) continue;
                               SnipRoot SnipeRoot = JsonConvert.DeserializeObject<SnipRoot>(body);
                               SnipResponse SnipResponse = SnipeRoot.responseData;
                               Ranking[] Rankings = SnipResponse.rankings;
@@ -2454,8 +2518,9 @@ namespace ForgeOfBots.Forms
 
 
          TwoTArgs<RequestType, E_Motivate> param = new TwoTArgs<RequestType, E_Motivate> { RequestType = RequestType.Motivate, argument2 = player_type };
-         BackgroundWorker bw = new BackgroundWorker();
+         BackgroundWorkerEX bw = new BackgroundWorkerEX();
          bw.DoWork += bwScriptExecuter_DoWork;
+         bw.param = param;
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerAsync(param);
          ListClass.BackgroundWorkers.Add(bw);
@@ -2481,9 +2546,10 @@ namespace ForgeOfBots.Forms
          StaticData.WorkerList.AddWorkerItem(wi);
 
          TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.VisitTavern, argument2 = null };
-         BackgroundWorker bw = new BackgroundWorker();
+         BackgroundWorkerEX bw = new BackgroundWorkerEX();
          bw.DoWork += bwScriptExecuter_DoWork;
          bw.WorkerSupportsCancellation = true;
+         bw.param = param;
          bw.RunWorkerCompleted += workerComplete;
          bw.RunWorkerAsync(param);
          ListClass.BackgroundWorkers.Add(bw);
@@ -2578,6 +2644,5 @@ namespace ForgeOfBots.Forms
             return cp;
          }
       }
-
    }
 }

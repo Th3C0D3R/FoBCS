@@ -89,6 +89,7 @@
     "GUI.Sniper.PlayerIndentifier.Neighbor": "N",
     "GUI.Sniper.PlayerIndentifier.Member": "G",
     "GUI.Sniper.Contributions.Total": "Current Outcome:",
+    "GUI.Sniper.Cancel": "Cancel",
     "GUI.Production.ProductionList": "Liste de production de marchandises",
     "GUI.Production.GoodProductionList": "Liste de production de ressources",
     "GUI.Production.State": "Etat",
