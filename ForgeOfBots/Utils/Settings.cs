@@ -14,6 +14,7 @@ namespace ForgeOfBots.Utils
 {
    public class Settings
    {
+      public Version BotVersion { get; set; } = StaticData.Version;
       public string Username { get; set; } = "";
       public string Password { get; set; } = "";
       public string LastWorld { get; set; } = "";
@@ -33,6 +34,7 @@ namespace ForgeOfBots.Utils
       public bool SnipBot { get; set; } = false;
       public string CustomUserAgent { get; set; } = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0";
       public bool AutoLogin { get; set; } = false;
+      public bool HideBrowser { get; set; } = true;
       public bool DarkMode { get; set; } = false;
       public int MinProfit { get; set; } = 20;
       public int IntervalSnip { get; set; } = 60;

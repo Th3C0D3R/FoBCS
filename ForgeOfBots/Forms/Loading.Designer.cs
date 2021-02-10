@@ -244,7 +244,6 @@ namespace ForgeOfBots.Forms
 
       private System.Windows.Forms.Panel pnlLoading;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-      private System.Windows.Forms.Label lblPleaseLogin;
       private System.Windows.Forms.PictureBox pictureBox1;
       private MetroFramework.Controls.MetroPanel metroPanel1;
       private MetroFramework.Controls.MetroPanel metroPanel2;
@@ -253,5 +252,6 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.PictureBox pbCLose;
       private MetroFramework.Controls.MetroLabel mlVersion;
       private MetroFramework.Controls.MetroLabel mlTitle;
+      public System.Windows.Forms.Label lblPleaseLogin;
    }
 }

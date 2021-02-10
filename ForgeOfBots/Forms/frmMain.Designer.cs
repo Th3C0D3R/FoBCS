@@ -196,6 +196,8 @@ namespace ForgeOfBots.Forms
          this.mlTavernBot = new MetroFramework.Controls.MetroLabel();
          this.mlProdBot = new MetroFramework.Controls.MetroLabel();
          this.mtpMisc = new MetroFramework.Controls.MetroTabPage();
+         this.mlBrowserWindow = new MetroFramework.Controls.MetroLabel();
+         this.mtToggleBrowser = new MetroFramework.Controls.MetroToggle();
          this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
          this.mtDarkMode = new MetroFramework.Controls.MetroToggle();
          this.lblAutoLogin = new MetroFramework.Controls.MetroLabel();
@@ -1171,7 +1173,7 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 0;
+         this.mtcSettings.SelectedIndex = 2;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          this.mtcSettings.UseStyleColors = true;
          // 
@@ -1607,6 +1609,8 @@ namespace ForgeOfBots.Forms
          // 
          // mtpMisc
          // 
+         this.mtpMisc.Controls.Add(this.mlBrowserWindow);
+         this.mtpMisc.Controls.Add(this.mtToggleBrowser);
          this.mtpMisc.Controls.Add(this.metroLabel12);
          this.mtpMisc.Controls.Add(this.mtDarkMode);
          this.mtpMisc.Controls.Add(this.lblAutoLogin);
@@ -1622,6 +1626,19 @@ namespace ForgeOfBots.Forms
          this.mtpMisc.Name = "mtpMisc";
          this.mtpMisc.Tag = "GUI.Settings.Misc";
          this.mtpMisc.VerticalScrollbarBarColor = true;
+         // 
+         // mlBrowserWindow
+         // 
+         resources.ApplyResources(this.mlBrowserWindow, "mlBrowserWindow");
+         this.mlBrowserWindow.Name = "mlBrowserWindow";
+         this.mlBrowserWindow.Tag = "GUI.Settings.Misc.Browser";
+         // 
+         // mtToggleBrowser
+         // 
+         resources.ApplyResources(this.mtToggleBrowser, "mtToggleBrowser");
+         this.mtToggleBrowser.Name = "mtToggleBrowser";
+         this.mtToggleBrowser.UseVisualStyleBackColor = true;
+         this.mtToggleBrowser.CheckedChanged += new System.EventHandler(this.MtToggleBrowser_CheckedChanged);
          // 
          // metroLabel12
          // 
@@ -2119,5 +2136,7 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
       private System.Windows.Forms.Timer tSniper;
       private MetroFramework.Controls.MetroButton mbCancel;
+      private MetroFramework.Controls.MetroLabel mlBrowserWindow;
+      private MetroFramework.Controls.MetroToggle mtToggleBrowser;
    }
 }

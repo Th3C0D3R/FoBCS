@@ -49,6 +49,9 @@ namespace ForgeOfBots.Forms
       private bool blockExpireBox = false;
       readonly BackgroundWorkerEX bw = new BackgroundWorkerEX();
       bool Canceled = false;
+      static bool isLoading = false;
+      ThreadStart childref;
+      Thread childThread;
 
       public frmMain() { }
       public frmMain(string[] args)
@@ -115,6 +118,22 @@ namespace ForgeOfBots.Forms
                logger.Info($"settings exists");
                logger.Info($"changing language");
                UserData = Utils.Settings.ReadSettings();
+               if (UserData.BotVersion.Major < StaticData.Version.Major || UserData.BotVersion.Minor < StaticData.Version.Minor)
+               {
+                  logger.Info($"old settingsversion found");
+                  DialogResult dlgRes = MessageBox.Show(i18n.getString("GUI.MessageBox.OldSettingsVersion.Text"), i18n.getString("GUI.MessageBox.OldSettingsVersion.Title"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                  if (dlgRes == DialogResult.Yes)
+                  {
+                     bw.CancelAsync();
+                     while (!Canceled)
+                     {
+                        Application.DoEvents();
+                     };
+                     Process.Start(Application.ExecutablePath);
+                     Environment.Exit(0);
+                     return;
+                  }
+               }
                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
@@ -194,11 +213,10 @@ namespace ForgeOfBots.Forms
             "--no-sandbox",
             "--remote-debugging-port=1337",
          "--disable-dev-shm-usage",
-#if RELEASE
-         "--window-position=-32000,-32000",
-#endif
             "--disable-metrics"
             );
+         if (UserData.HideBrowser)
+            co.AddArgument("--window-position=-32000,-32000");
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
 
          logger.Info($"creating chromeDriverService");
@@ -356,6 +374,11 @@ namespace ForgeOfBots.Forms
       private void workerComplete(object sender, RunWorkerCompletedEventArgs e)
       {
          ListClass.BackgroundWorkers.Remove((BackgroundWorkerEX)sender);
+         if (((BackgroundWorkerEX)sender).param != null)
+         {
+            mbCancel.Enabled = false;
+            mbSearch.Enabled = true;
+         }
       }
       private void Ws_WorldDataEntered(Form that, string key, string value)
       {
@@ -485,6 +508,10 @@ namespace ForgeOfBots.Forms
                ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
          }
          ReloadData();
+         if (childThread.IsAlive)
+         {
+            childThread.Abort();
+         }
       }
       public void ReloadData()
       {
@@ -1486,6 +1513,7 @@ namespace ForgeOfBots.Forms
          mtbCustomUserAgent.Text = UserData.CustomUserAgent;
          mtbSerialKey.Text = UserData.SerialKey;
          mtAutoLogin.Checked = UserData.AutoLogin;
+         mtToggleBrowser.Checked = UserData.HideBrowser;
          mtDarkMode.Checked = UserData.DarkMode;
          nudMinProfit.Value = UserData.MinProfit;
          mcbAutoInvest.Checked = UserData.AutoInvest;
@@ -1640,6 +1668,11 @@ namespace ForgeOfBots.Forms
       }
       private void mbSaveReload_Click(object sender, EventArgs e)
       {
+         isLoading = true;
+         childref = new ThreadStart(ShowLoadingForm);
+         childThread = new Thread(childref);
+         childThread.Start();
+
          UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
 
@@ -1723,6 +1756,15 @@ namespace ForgeOfBots.Forms
       private void MtAutoLogin_CheckedChanged(object sender, EventArgs e)
       {
          UserData.AutoLogin = mtAutoLogin.Checked;
+         UserData.SaveSettings();
+      }
+      private void MtToggleBrowser_CheckedChanged(object sender, EventArgs e)
+      {
+         lblRestartNeeded.Visible = true;
+         lblRestartNeeded.CustomForeColor = true;
+         lblRestartNeeded.ForeColor = Color.Red;
+
+         UserData.HideBrowser = mtToggleBrowser.Checked;
          UserData.SaveSettings();
       }
       private void MtbIntervalIncident_TextChanged(object sender, EventArgs e)
@@ -2488,6 +2530,8 @@ namespace ForgeOfBots.Forms
                   else
                      StaticData.WorkerList.Close();
                }
+               mbCancel.Enabled = false;
+               mbSearch.Enabled = true;
                break;
             default:
                break;
@@ -2643,6 +2687,22 @@ namespace ForgeOfBots.Forms
             cp.Style |= 0x20000;
             return cp;
          }
+      }
+      public static void ShowLoadingForm()
+      {
+         Loading LoadingFrm = new Loading();
+         if (LoadingFrm.lblPleaseLogin.InvokeRequired)
+         {
+            LoadingFrm.lblPleaseLogin.Invoke((MethodInvoker)delegate
+            {
+               LoadingFrm.lblPleaseLogin.Text = i18n.getString("GUI.Loading.Changing");
+            });
+         }
+         else
+         {
+            LoadingFrm.lblPleaseLogin.Text = i18n.getString("GUI.Loading.Changing");
+         }
+         LoadingFrm.Show();
       }
    }
 }
