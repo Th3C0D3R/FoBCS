@@ -100,7 +100,7 @@
     "GUI.Production.State": "State",
     "GUI.Production.Product": "Product",
     "GUI.Production.Buildings": "Building",
-    "GUI.MessageBox.OldSettingsVersion.Text": "The UserData.json was created with an older Version of the Bot!\n\n If you have any problems (like crashing) please first delete this file and restart (by pressing YES)",
+    "GUI.MessageBox.OldSettingsVersion.Text": "The UserData.json was created with an older Version of the Bot!\n\n If you have any problems (like crashing) please first delete this file (File-Explorer: '%appdata%/ForgeOfBots') and restart (by pressing YES)",
     "GUI.MessageBox.OldSettingsVersion.Title": "Old UserData.json found!",
     "AskCrashLog": "Allow sending Crashlogs",
     "Attach": "Attach",
