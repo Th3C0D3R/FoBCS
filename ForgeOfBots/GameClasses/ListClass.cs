@@ -88,6 +88,42 @@ namespace ForgeOfBots.GameClasses
       public static float ArcBonus { get; set; } = 190;
       public static JObject UserData { get; set; } = new JObject();
       public static Inventory Inventory { get; set; } = null;
+
+      public static void ClearListClass()
+      {
+         Startup = new JObject();
+         Resources = new JObject();
+         ResourceDefinitions = new JObject();
+         AllBuildings.Clear();
+         AllLGs.Clear();
+         SnipWithProfit.Clear();
+         SnipablePlayers.Clear();
+         ResidentialList.Clear();
+         QuestList.Clear();
+         ProductionList.Clear();
+         ProductionItems.Clear();
+         OwnTavernData = new TavernData();
+         OwnTavern = new OwnTavernStates();
+         NeighborList.Clear();
+         FriendList.Clear();
+         ClanMemberList.Clear();
+         Motivateable.Clear();
+         HiddenRewards.Clear();
+         GoodProductionList.Clear();
+         GoodsDict.Clear();
+         FriendTaverns.Clear();
+         Eras.Clear();
+         Contributions.Clear();
+         Bonus.Clear();
+         CollectedIDs.Clear();
+         doneMotivate.Clear();
+         doneQuery.Clear();
+         doneTavern.Clear();
+         Inventory = new Inventory();
+         PortraitList.Clear();
+         AllPlayers.Clear();
+      }
+
    }
    public enum WorldState
    {

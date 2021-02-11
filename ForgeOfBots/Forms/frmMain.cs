@@ -1709,6 +1709,7 @@ namespace ForgeOfBots.Forms
             StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
             StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
             ForgeHX.ForgeHXLoaded = false;
+            ListClass.ClearListClass();
             GetUIDAndForgeHX(driver.PageSource);
          }
          else
@@ -2054,8 +2055,9 @@ namespace ForgeOfBots.Forms
       {
          if (ListClass.BackgroundWorkers.Count > 0)
          {
-            foreach (BackgroundWorkerEX bw in ListClass.BackgroundWorkers)
+            for (int i = 0; i < ListClass.BackgroundWorkers.Count; i++)
             {
+               BackgroundWorkerEX bw = ListClass.BackgroundWorkers[i];
                if (bw.param == null) continue;
                dynamic param;
                try
@@ -2071,6 +2073,20 @@ namespace ForgeOfBots.Forms
                   bw.CancelAsync();
                   mbCancel.Enabled = false;
                   mbSearch.Enabled = true;
+                  (bool, bool) returnValLG = StaticData.WorkerList.RemoveWorkerByID(LGSnipWorkerID);
+                  if (returnValLG.Item2)
+                  {
+                     if (InvokeRequired)
+                     {
+                        StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                        {
+                           StaticData.WorkerList.Close();
+                        });
+                     }
+                     else
+                        StaticData.WorkerList.Close();
+                  }
+                  ListClass.BackgroundWorkers.Remove(bw);
                }
             }
          }
@@ -2525,10 +2541,11 @@ namespace ForgeOfBots.Forms
                {
                   if (InvokeRequired)
                   {
-                     StaticData.WorkerList.Invoke((MethodInvoker)delegate
-                     {
-                        StaticData.WorkerList.Close();
-                     });
+                     if (StaticData.WorkerList.IsHandleCreated)
+                        StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                        {
+                           StaticData.WorkerList.Close();
+                        });
                   }
                   else
                      StaticData.WorkerList.Close();
@@ -2705,11 +2722,15 @@ namespace ForgeOfBots.Forms
             LoadingFrm.lblPleaseLogin.Invoke((MethodInvoker)delegate
             {
                LoadingFrm.lblPleaseLogin.Text = i18n.getString("GUI.Loading.Changing");
+               Font tmp = LoadingFrm.lblPleaseLogin.Font;
+               LoadingFrm.lblPleaseLogin.Font = new Font(tmp.FontFamily, 16);
             });
          }
          else
          {
             LoadingFrm.lblPleaseLogin.Text = i18n.getString("GUI.Loading.Changing");
+            Font tmp = LoadingFrm.lblPleaseLogin.Font;
+            LoadingFrm.lblPleaseLogin.Font = new Font(tmp.FontFamily, 16);
          }
          LoadingFrm.Show();
          for (int i = 0; i < 500; i++)

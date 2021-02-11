@@ -156,7 +156,8 @@ namespace ForgeOfBots.DataHandler
       }
       public void UpdatedSortedGoodList()
       {
-         ListClass.GoodsDict = Helper.GetGoodsEraSorted(ListClass.Eras, ListClass.Resources, ListClass.ResourceDefinitions);
+         if (ListClass.Eras != null && ListClass.ResourceDefinitions != null && ListClass.Resources != null)
+            ListClass.GoodsDict = Helper.GetGoodsEraSorted(ListClass.Eras, ListClass.Resources, ListClass.ResourceDefinitions);
       }
       public void UpdateBuildings(JToken entities)
       {

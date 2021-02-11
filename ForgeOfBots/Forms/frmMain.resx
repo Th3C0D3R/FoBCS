@@ -384,7 +384,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACS
-        IwAAAk1TRnQBSQFMAgEBCwEAAQgBAgEIAQIBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        IwAAAk1TRnQBSQFMAgEBCwEAARgBAgEYAQIBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABgAMAAWADAAEBAQABCAYAATAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4564,453 +4564,6 @@
   <data name="&gt;&gt;mtpProduction.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="mtSnipBot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mtSnipBot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 189</value>
-  </data>
-  <data name="mtSnipBot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mtSnipBot.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="mtSnipBot.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mtSnipBot.Name" xml:space="preserve">
-    <value>mtSnipBot</value>
-  </data>
-  <data name="&gt;&gt;mtSnipBot.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtSnipBot.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtSnipBot.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="metroLabel16.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 189</value>
-  </data>
-  <data name="metroLabel16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 19</value>
-  </data>
-  <data name="metroLabel16.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="metroLabel16.Text" xml:space="preserve">
-    <value>Snip Bot:</value>
-  </data>
-  <data name="metroLabel16.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel16.Name" xml:space="preserve">
-    <value>metroLabel16</value>
-  </data>
-  <data name="&gt;&gt;metroLabel16.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel16.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel16.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="metroLabel14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 125</value>
-  </data>
-  <data name="metroLabel14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 19</value>
-  </data>
-  <data name="metroLabel14.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="metroLabel14.Text" xml:space="preserve">
-    <value>hours</value>
-  </data>
-  <data name="&gt;&gt;metroLabel14.Name" xml:space="preserve">
-    <value>metroLabel14</value>
-  </data>
-  <data name="&gt;&gt;metroLabel14.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel14.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel14.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="mtbIntervalIncident.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 121</value>
-  </data>
-  <data name="mtbIntervalIncident.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 23</value>
-  </data>
-  <data name="mtbIntervalIncident.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="mtbIntervalIncident.Text" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;mtbIntervalIncident.Name" xml:space="preserve">
-    <value>mtbIntervalIncident</value>
-  </data>
-  <data name="&gt;&gt;mtbIntervalIncident.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtbIntervalIncident.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtbIntervalIncident.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="metroLabel13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 125</value>
-  </data>
-  <data name="metroLabel13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 19</value>
-  </data>
-  <data name="metroLabel13.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="metroLabel13.Text" xml:space="preserve">
-    <value>Interval:</value>
-  </data>
-  <data name="metroLabel13.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel13.Name" xml:space="preserve">
-    <value>metroLabel13</value>
-  </data>
-  <data name="&gt;&gt;metroLabel13.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel13.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel13.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="mtRQBot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mtRQBot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 158</value>
-  </data>
-  <data name="mtRQBot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mtRQBot.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="mtRQBot.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.Name" xml:space="preserve">
-    <value>mtRQBot</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtRQBot.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="metroLabel10.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 158</value>
-  </data>
-  <data name="metroLabel10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 19</value>
-  </data>
-  <data name="metroLabel10.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="metroLabel10.Text" xml:space="preserve">
-    <value>Requrring Quest Bot:</value>
-  </data>
-  <data name="metroLabel10.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.Name" xml:space="preserve">
-    <value>metroLabel10</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel10.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="mtIncident.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mtIncident.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 125</value>
-  </data>
-  <data name="mtIncident.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mtIncident.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="mtIncident.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.Name" xml:space="preserve">
-    <value>mtIncident</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtIncident.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="mtMoppel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mtMoppel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 91</value>
-  </data>
-  <data name="mtMoppel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mtMoppel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="mtMoppel.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.Name" xml:space="preserve">
-    <value>mtMoppel</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtMoppel.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="mtTavern.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mtTavern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 55</value>
-  </data>
-  <data name="mtTavern.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mtTavern.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="mtTavern.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.Name" xml:space="preserve">
-    <value>mtTavern</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtTavern.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="mtProduction.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="mtProduction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>148, 19</value>
-  </data>
-  <data name="mtProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 19</value>
-  </data>
-  <data name="mtProduction.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="mtProduction.Text" xml:space="preserve">
-    <value>Aus</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.Name" xml:space="preserve">
-    <value>mtProduction</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtProduction.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="metroLabel9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 125</value>
-  </data>
-  <data name="metroLabel9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 19</value>
-  </data>
-  <data name="metroLabel9.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="metroLabel9.Text" xml:space="preserve">
-    <value>Incident Bot:</value>
-  </data>
-  <data name="metroLabel9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.Name" xml:space="preserve">
-    <value>metroLabel9</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel9.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="metroLabel8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="metroLabel8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 91</value>
-  </data>
-  <data name="metroLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 19</value>
-  </data>
-  <data name="metroLabel8.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="metroLabel8.Text" xml:space="preserve">
-    <value>Moppel Bot:</value>
-  </data>
-  <data name="metroLabel8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.Name" xml:space="preserve">
-    <value>metroLabel8</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;metroLabel8.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="mlTavernBot.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="mlTavernBot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>69, 55</value>
-  </data>
-  <data name="mlTavernBot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 19</value>
-  </data>
-  <data name="mlTavernBot.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="mlTavernBot.Text" xml:space="preserve">
-    <value>Tavern Bot:</value>
-  </data>
-  <data name="mlTavernBot.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;mlTavernBot.Name" xml:space="preserve">
-    <value>mlTavernBot</value>
-  </data>
-  <data name="&gt;&gt;mlTavernBot.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mlTavernBot.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mlTavernBot.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="mlProdBot.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="mlProdBot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>42, 19</value>
-  </data>
-  <data name="mlProdBot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 19</value>
-  </data>
-  <data name="mlProdBot.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="mlProdBot.Text" xml:space="preserve">
-    <value>Production Bot:</value>
-  </data>
-  <data name="mlProdBot.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="&gt;&gt;mlProdBot.Name" xml:space="preserve">
-    <value>mlProdBot</value>
-  </data>
-  <data name="&gt;&gt;mlProdBot.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mlProdBot.Parent" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mlProdBot.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="mtpBots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 35</value>
-  </data>
-  <data name="mtpBots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>854, 433</value>
-  </data>
-  <data name="mtpBots.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="mtpBots.Text" xml:space="preserve">
-    <value>GUI.Settings.Bots</value>
-  </data>
-  <data name="&gt;&gt;mtpBots.Name" xml:space="preserve">
-    <value>mtpBots</value>
-  </data>
-  <data name="&gt;&gt;mtpBots.Type" xml:space="preserve">
-    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
-  </data>
-  <data name="&gt;&gt;mtpBots.Parent" xml:space="preserve">
-    <value>mtcSettings</value>
-  </data>
-  <data name="&gt;&gt;mtpBots.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="mlBrowserWindow.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 94</value>
   </data>
@@ -5357,13 +4910,463 @@
     <value>mtcSettings</value>
   </data>
   <data name="&gt;&gt;mtpMisc.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mtSnipBot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtSnipBot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 189</value>
+  </data>
+  <data name="mtSnipBot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtSnipBot.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="mtSnipBot.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtSnipBot.Name" xml:space="preserve">
+    <value>mtSnipBot</value>
+  </data>
+  <data name="&gt;&gt;mtSnipBot.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtSnipBot.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtSnipBot.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="metroLabel16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="metroLabel16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>81, 189</value>
+  </data>
+  <data name="metroLabel16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 19</value>
+  </data>
+  <data name="metroLabel16.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="metroLabel16.Text" xml:space="preserve">
+    <value>Snip Bot:</value>
+  </data>
+  <data name="metroLabel16.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel16.Name" xml:space="preserve">
+    <value>metroLabel16</value>
+  </data>
+  <data name="&gt;&gt;metroLabel16.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel16.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel16.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="metroLabel14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="metroLabel14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>363, 125</value>
+  </data>
+  <data name="metroLabel14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 19</value>
+  </data>
+  <data name="metroLabel14.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="metroLabel14.Text" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="&gt;&gt;metroLabel14.Name" xml:space="preserve">
+    <value>metroLabel14</value>
+  </data>
+  <data name="&gt;&gt;metroLabel14.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel14.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel14.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="mtbIntervalIncident.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 121</value>
+  </data>
+  <data name="mtbIntervalIncident.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 23</value>
+  </data>
+  <data name="mtbIntervalIncident.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="mtbIntervalIncident.Text" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;mtbIntervalIncident.Name" xml:space="preserve">
+    <value>mtbIntervalIncident</value>
+  </data>
+  <data name="&gt;&gt;mtbIntervalIncident.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTextBox, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtbIntervalIncident.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtbIntervalIncident.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="metroLabel13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="metroLabel13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 125</value>
+  </data>
+  <data name="metroLabel13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 19</value>
+  </data>
+  <data name="metroLabel13.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="metroLabel13.Text" xml:space="preserve">
+    <value>Interval:</value>
+  </data>
+  <data name="metroLabel13.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel13.Name" xml:space="preserve">
+    <value>metroLabel13</value>
+  </data>
+  <data name="&gt;&gt;metroLabel13.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel13.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel13.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="mtRQBot.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtRQBot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 158</value>
+  </data>
+  <data name="mtRQBot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtRQBot.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="mtRQBot.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Name" xml:space="preserve">
+    <value>mtRQBot</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtRQBot.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="metroLabel10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="metroLabel10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 158</value>
+  </data>
+  <data name="metroLabel10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 19</value>
+  </data>
+  <data name="metroLabel10.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="metroLabel10.Text" xml:space="preserve">
+    <value>Requrring Quest Bot:</value>
+  </data>
+  <data name="metroLabel10.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Name" xml:space="preserve">
+    <value>metroLabel10</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel10.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="mtIncident.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtIncident.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 125</value>
+  </data>
+  <data name="mtIncident.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtIncident.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="mtIncident.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Name" xml:space="preserve">
+    <value>mtIncident</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtIncident.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="mtMoppel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtMoppel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 91</value>
+  </data>
+  <data name="mtMoppel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtMoppel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="mtMoppel.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Name" xml:space="preserve">
+    <value>mtMoppel</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtMoppel.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="mtTavern.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtTavern.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 55</value>
+  </data>
+  <data name="mtTavern.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtTavern.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="mtTavern.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Name" xml:space="preserve">
+    <value>mtTavern</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtTavern.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="mtProduction.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mtProduction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 19</value>
+  </data>
+  <data name="mtProduction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 19</value>
+  </data>
+  <data name="mtProduction.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="mtProduction.Text" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Name" xml:space="preserve">
+    <value>mtProduction</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroToggle, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtProduction.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="metroLabel9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="metroLabel9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 125</value>
+  </data>
+  <data name="metroLabel9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 19</value>
+  </data>
+  <data name="metroLabel9.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="metroLabel9.Text" xml:space="preserve">
+    <value>Incident Bot:</value>
+  </data>
+  <data name="metroLabel9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Name" xml:space="preserve">
+    <value>metroLabel9</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel9.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="metroLabel8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="metroLabel8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 91</value>
+  </data>
+  <data name="metroLabel8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 19</value>
+  </data>
+  <data name="metroLabel8.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="metroLabel8.Text" xml:space="preserve">
+    <value>Moppel Bot:</value>
+  </data>
+  <data name="metroLabel8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Name" xml:space="preserve">
+    <value>metroLabel8</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;metroLabel8.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="mlTavernBot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mlTavernBot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>69, 55</value>
+  </data>
+  <data name="mlTavernBot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 19</value>
+  </data>
+  <data name="mlTavernBot.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="mlTavernBot.Text" xml:space="preserve">
+    <value>Tavern Bot:</value>
+  </data>
+  <data name="mlTavernBot.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;mlTavernBot.Name" xml:space="preserve">
+    <value>mlTavernBot</value>
+  </data>
+  <data name="&gt;&gt;mlTavernBot.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mlTavernBot.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mlTavernBot.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="mlProdBot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mlProdBot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>42, 19</value>
+  </data>
+  <data name="mlProdBot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 19</value>
+  </data>
+  <data name="mlProdBot.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="mlProdBot.Text" xml:space="preserve">
+    <value>Production Bot:</value>
+  </data>
+  <data name="mlProdBot.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;mlProdBot.Name" xml:space="preserve">
+    <value>mlProdBot</value>
+  </data>
+  <data name="&gt;&gt;mlProdBot.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroLabel, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mlProdBot.Parent" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mlProdBot.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="mtpBots.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="mtpBots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>854, 433</value>
+  </data>
+  <data name="mtpBots.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="mtpBots.Text" xml:space="preserve">
+    <value>GUI.Settings.Bots</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.Name" xml:space="preserve">
+    <value>mtpBots</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.Type" xml:space="preserve">
+    <value>MetroFramework.Controls.MetroTabPage, MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.Parent" xml:space="preserve">
+    <value>mtcSettings</value>
+  </data>
+  <data name="&gt;&gt;mtpBots.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="metroLabel11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="metroLabel11.Location" type="System.Drawing.Point, System.Drawing">
     <value>90, 91</value>
   </data>
   <data name="metroLabel11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 70</value>
+    <value>265, 60</value>
   </data>
   <data name="metroLabel11.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
