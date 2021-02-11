@@ -50,8 +50,7 @@ namespace ForgeOfBots.Forms
       readonly BackgroundWorkerEX bw = new BackgroundWorkerEX();
       bool Canceled = false;
       static bool isLoading = false;
-      ThreadStart childref;
-      Thread childThread;
+      Loading LoadingFrm = null;
 
       public frmMain() { }
       public frmMain(string[] args)
@@ -129,9 +128,15 @@ namespace ForgeOfBots.Forms
                      {
                         Application.DoEvents();
                      };
+                     UserData.Delete();
                      Process.Start(Application.ExecutablePath);
                      Environment.Exit(0);
                      return;
+                  }
+                  else
+                  {
+                     UserData.BotVersion = StaticData.Version;
+                     UserData.SaveSettings();
                   }
                }
                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
@@ -508,9 +513,9 @@ namespace ForgeOfBots.Forms
                ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
          }
          ReloadData();
-         if (childThread.IsAlive)
+         if (isLoading && LoadingFrm != null)
          {
-            childThread.Abort();
+            LoadingFrm.Close();
          }
       }
       public void ReloadData()
@@ -1669,9 +1674,7 @@ namespace ForgeOfBots.Forms
       private void mbSaveReload_Click(object sender, EventArgs e)
       {
          isLoading = true;
-         childref = new ThreadStart(ShowLoadingForm);
-         childThread = new Thread(childref);
-         childThread.Start();
+         ShowLoadingForm();
 
          UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
@@ -2530,8 +2533,14 @@ namespace ForgeOfBots.Forms
                   else
                      StaticData.WorkerList.Close();
                }
-               mbCancel.Enabled = false;
-               mbSearch.Enabled = true;
+               mbCancel.Invoke((MethodInvoker)delegate
+               {
+                  mbCancel.Enabled = false;
+               });
+               mbSearch.Invoke((MethodInvoker)delegate
+               {
+                  mbSearch.Enabled = true;
+               });
                break;
             default:
                break;
@@ -2688,9 +2697,9 @@ namespace ForgeOfBots.Forms
             return cp;
          }
       }
-      public static void ShowLoadingForm()
+      public void ShowLoadingForm()
       {
-         Loading LoadingFrm = new Loading();
+         LoadingFrm = new Loading(false);
          if (LoadingFrm.lblPleaseLogin.InvokeRequired)
          {
             LoadingFrm.lblPleaseLogin.Invoke((MethodInvoker)delegate
@@ -2703,6 +2712,11 @@ namespace ForgeOfBots.Forms
             LoadingFrm.lblPleaseLogin.Text = i18n.getString("GUI.Loading.Changing");
          }
          LoadingFrm.Show();
+         for (int i = 0; i < 500; i++)
+         {
+            Thread.Sleep(2);
+            Application.DoEvents();
+         }
       }
    }
 }

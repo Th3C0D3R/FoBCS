@@ -15,20 +15,20 @@ namespace ForgeOfBots.Forms
 {
    public partial class Loading : Form
    {
-      public Loading()
+      public Loading(bool translate = true)
       {
          InitializeComponent();
          mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
          if (!i18n.initialized)
          {
-            if (Utils.Settings.SettingsExists())
+            if (Settings.SettingsExists())
             {
-               Utils.Settings temp = Utils.Settings.ReadSettings();
+               Settings temp = Settings.ReadSettings();
                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(temp.Language.Code);
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(temp.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(temp.Language.Code);
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo(temp.Language.Code);
-               i18n.Initialize(temp.Language.Code,this);
+               i18n.Initialize(temp.Language.Code, this);
             }
             else
             {
@@ -36,10 +36,11 @@ namespace ForgeOfBots.Forms
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en");
                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en");
-               i18n.Initialize("en",this);
+               i18n.Initialize("en", this);
             }
          }
-         i18n.TranslateForm();
+         if (translate)
+            i18n.TranslateForm();
          //TopMost = true;
       }
    }
