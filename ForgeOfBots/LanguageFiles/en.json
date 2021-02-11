@@ -20,7 +20,7 @@
     "GUI.Dashbord.Goods": "Goods",
     "GUI.Dashbord.FPStock": "FP in Stock",
     "GUI.Loading.Wait": "Bot starting...\nplease Wait",
-    "GUI.Loading.Changing": "World changing...\nplease Wait",
+    "GUI.Loading.Changing": "World changing...\nBot may stuck sometime\nPlease wait!",
     "GUI.Social.Friends": "Friends",
     "GUI.Social.Clan": "Clan",
     "GUI.Social.Neighbor": "Neighbor",
