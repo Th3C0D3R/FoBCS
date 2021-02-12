@@ -95,6 +95,7 @@
     "GUI.Sniper.PlayerIndentifier.Member": "G",
     "GUI.Sniper.Contributions.Total": "Aktueller Gewinn:",
     "GUI.Sniper.Cancel": "Abbrechen",
+    "GUI.Sniper.SnipBotActive": "Snip-Bot aktiv!",
     "GUI.Production.ProductionList": "Produktionsliste",
     "GUI.Production.GoodProductionList": "Güterproduktionsliste",
     "GUI.Production.State": "Status",
