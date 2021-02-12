@@ -1564,7 +1564,10 @@ namespace ForgeOfBots.Forms
          {
             foreach (string item in UserData.PlayableWorlds)
             {
-               mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item.Split('|')[0], WorldName = item.Split('|')[1] });
+               if(StaticData.Version.IsVersion("2.1",true))
+               {
+                  mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item.Split('|')[0], WorldName = item.Split('|')[1] });
+               }
             }
             mcbCitySelection.DisplayMember = "WorldName";
             mcbCitySelection.AutoCompleteSource = AutoCompleteSource.ListItems;

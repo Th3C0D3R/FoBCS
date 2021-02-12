@@ -133,6 +133,18 @@ namespace ForgeOfBots.Utils
          }
          return (false, "");
       }
+      public static bool IsVersion(this System.Version version,string versionToCompare, bool orGreater = false)
+      {
+         string[] versionsplit = versionToCompare.Split('.');
+         if(version.Major.ToString() == versionsplit[0] || version.Major >= int.Parse(versionsplit[0]))
+         {
+            if(version.Minor.ToString() == versionsplit[1] || version.Minor >= int.Parse(versionsplit[1]))
+            {
+               return true;
+            }
+         }
+         return false;
+      }
    }
    /// <summary>
    /// Generates a 16 byte Unique Identification code of a computer
