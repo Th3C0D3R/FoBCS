@@ -50,6 +50,7 @@ namespace ForgeOfBots.Forms
       readonly BackgroundWorkerEX bw = new BackgroundWorkerEX();
       bool Canceled = false;
       static bool isLoading = false;
+      static bool isFirstRun = true;
       Loading LoadingFrm = null;
 
       public frmMain() { }
@@ -381,8 +382,15 @@ namespace ForgeOfBots.Forms
          ListClass.BackgroundWorkers.Remove((BackgroundWorkerEX)sender);
          if (((BackgroundWorkerEX)sender).param != null)
          {
-            mbCancel.Enabled = false;
-            mbSearch.Enabled = true;
+            mbSearch.Invoke((MethodInvoker)delegate
+            {
+               mbSearch.Enabled = false;
+               mbSearch.Text = i18n.getString("GUI.Sniper.SnipBotActive");
+            });
+            mbCancel.Invoke((MethodInvoker)delegate
+            {
+               mbCancel.Enabled = false;
+            });
          }
       }
       private void Ws_WorldDataEntered(Form that, string key, string value)
@@ -541,6 +549,25 @@ namespace ForgeOfBots.Forms
          //UpdateMessageCenter();
          //UpdateChat();
          //UpdateArmy();
+         if (isFirstRun)
+         {
+            isFirstRun = false;
+            if (UserData.SnipBot && !isFirstRun && !tSniper.Enabled)
+            {
+               System.Timers.Timer temp = new System.Timers.Timer();
+               temp.Elapsed += Temp_Elapsed;
+               temp.Interval = 1000 * 5;
+               temp.AutoReset = false;
+               temp.Start();
+
+               tSniper.Interval = 1000 * 60 * UserData.IntervalSnip;
+               tSniper.Start();
+            }
+         }
+      }
+      private void Temp_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+      {
+         TSniper_Tick(null, null);
       }
       private void UpdateDashbord()
       {
@@ -1825,25 +1852,37 @@ namespace ForgeOfBots.Forms
       {
          UserData.SnipBot = mtSnipBot.Checked;
          UserData.SaveSettings();
-         if (UserData.SnipBot)
+         if (UserData.SnipBot && !isFirstRun)
          {
-            tSniper.Stop();
+            if (tSniper.Enabled)
+               tSniper.Stop();
             tSniper.Interval = 1000 * 60 * UserData.IntervalSnip;
             tSniper.Start();
             TSniper_Tick(null, null);
          }
          else
          {
-            tSniper.Stop();
+            if (tSniper.Enabled)
+               tSniper.Stop();
+            mbCancel.Invoke((MethodInvoker)delegate
+            {
+               mbCancel.Enabled = false;
+            });
+            mbSearch.Invoke((MethodInvoker)delegate
+            {
+               mbSearch.Enabled = true;
+               mbSearch.Text = i18n.getString(mbSearch.Tag.ToString());
+            });
          }
       }
       private void nudSnipInterval_ValueChanged(object sender, EventArgs e)
       {
          UserData.IntervalSnip = (int)nudSnipInterval.Value;
          UserData.SaveSettings();
-         if (UserData.SnipBot)
+         if (UserData.SnipBot && !isFirstRun)
          {
-            tSniper.Stop();
+            if (tSniper.Enabled)
+               tSniper.Stop();
             tSniper.Interval = 1000 * 60 * UserData.IntervalSnip;
             tSniper.Start();
             TSniper_Tick(null, null);
@@ -1943,8 +1982,7 @@ namespace ForgeOfBots.Forms
       private void TSniper_Tick(object sender, EventArgs e)
       {
          if (!UserData.SnipBot) return;
-         MbSearch_Click(null, null);
-         MbSnip_Click(true, null);
+         MbSearch_Click(true, null);
       }
       #endregion
 
@@ -1986,36 +2024,60 @@ namespace ForgeOfBots.Forms
             };
             Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Add(conTotal));
          }
+         if (UserData.SnipBot)
+         {
+            mbSearch.Invoke((MethodInvoker)delegate
+            {
+               mbSearch.Enabled = false;
+               mbSearch.Text = i18n.getString("GUI.Sniper.SnipBotActive");
+            });
+         }
+         else
+         {
+            mbSearch.Invoke((MethodInvoker)delegate
+            {
+               mbSearch.Enabled = true;
+               mbSearch.Text = i18n.getString("GUI.Sniper.Search");
+            });
+         }
       }
       private void MbSearch_Click(object sender, EventArgs e)
       {
-         WorkerItem wi = new WorkerItem()
+         if(sender.GetType() != typeof(bool))
          {
-            Title = i18n.getString("GUI.Sniper.BWTitle"),
-            BeforeCountText = i18n.getString("GUI.Sniper.BWBeforeCountText"),
-            CountText = "Count",
-            ID = LGSnipWorkerID
-         };
-         if (Application.OpenForms["WorkerList"] == null)
-         {
-            StaticData.WorkerList = new WorkerList();
-            StaticData.WorkerList.Show();
-            if (!IsOnScreen(StaticData.WorkerList))
-               StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
-         }
-         else
+            WorkerItem wi = new WorkerItem()
+            {
+               Title = i18n.getString("GUI.Sniper.BWTitle"),
+               BeforeCountText = i18n.getString("GUI.Sniper.BWBeforeCountText"),
+               CountText = "Count",
+               ID = LGSnipWorkerID
+            };
+            if (Application.OpenForms["WorkerList"] == null)
+            {
+               StaticData.WorkerList = new WorkerList();
+               StaticData.WorkerList.ShowDialog();
+               if (!IsOnScreen(StaticData.WorkerList))
+                  StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
+            }
             StaticData.WorkerList.BringToFront();
-         StaticData.WorkerList.AddWorkerItem(wi);
-
-         TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.GetLGs, argument2 = null };
+            StaticData.WorkerList.AddWorkerItem(wi);
+         }
+         
+         TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.GetLGs, argument2 = sender };
          BackgroundWorkerEX bw = new BackgroundWorkerEX();
          bw.DoWork += bwScriptExecuter_DoWork;
          bw.param = param;
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerCompleted += workerComplete;
          bw.RunWorkerAsync(param);
-         mbCancel.Enabled = true;
-         mbSearch.Enabled = false;
+         mbCancel.Invoke((MethodInvoker)delegate
+         {
+            mbCancel.Enabled = true;
+         });
+         mbSearch.Invoke((MethodInvoker)delegate
+         {
+            mbSearch.Enabled = false;
+         });
          ListClass.BackgroundWorkers.Add(bw);
       }
       private void MbSnip_Click(object sender, EventArgs e)
@@ -2044,8 +2106,16 @@ namespace ForgeOfBots.Forms
                Application.DoEvents();
             }
          }
-         mbCancel.Enabled = true;
-         mbSearch.Enabled = true;
+         mbCancel.Invoke((MethodInvoker)delegate
+         {
+            mbCancel.Enabled = false;
+            mbCancel.Text = i18n.getString(mbCancel.Tag.ToString());
+         });
+         mbSearch.Invoke((MethodInvoker)delegate
+         {
+            mbSearch.Enabled = true;
+            mbSearch.Text = i18n.getString(mbSearch.Tag.ToString());
+         });
          Updater.UpdateContribution();
          Updater.UpdateInventory();
          UpdateDashbord();
@@ -2313,15 +2383,15 @@ namespace ForgeOfBots.Forms
                   ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => UserData.IgnoredPlayers.Contains(p.player_id.Value)).ToList();
                ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
-               StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
-               StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
+               if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
+               if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", ListClass.SnipablePlayers.Count.ToString()));
                int rInt = 0;
                foreach (Player item in ListClass.SnipablePlayers)
                {
                   if (bwEx.CancellationPending) break;
                   counter += 1;
-                  StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
-                  StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingPlayer")} {item.name}...");
+                  if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
+                  if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingPlayer")} {item.name}...");
                   string script = ReqBuilder.GetRequestScript(RequestType.GetLGs, item.player_id);
                   retSnip = (string)jsExecutor.ExecuteAsyncScript(script);
                   if (retSnip.Length <= 4) break;
@@ -2332,8 +2402,8 @@ namespace ForgeOfBots.Forms
                   foreach (LGSnip lg in item.LGs)
                   {
                      if (bwEx.CancellationPending) break;
-                     StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
-                     StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingLG").Replace("##Player##", item.name)} {lg.name}...");
+                     if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
+                     if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingLG").Replace("##Player##", item.name)} {lg.name}...");
 
                      int UnderScorePos = lg.city_entity_id.IndexOf("_");
                      string AgeString = lg.city_entity_id.Substring(UnderScorePos + 1);
@@ -2536,28 +2606,48 @@ namespace ForgeOfBots.Forms
                   Invoker.SetProperty(mbSnip, () => mbSnip.Enabled, true);
                }
                Invoker.CallMethode(mpSnipItem, () => mpSnipItem.Update());
-               (bool, bool) returnValLG = StaticData.WorkerList.RemoveWorkerByID(LGSnipWorkerID);
-               if (returnValLG.Item2)
+               if (param.argument2.GetType() != typeof(bool))
                {
-                  if (InvokeRequired)
+                  (bool, bool) returnValLG = StaticData.WorkerList.RemoveWorkerByID(LGSnipWorkerID);
+                  if (returnValLG.Item2)
                   {
-                     if (StaticData.WorkerList.IsHandleCreated)
-                        StaticData.WorkerList.Invoke((MethodInvoker)delegate
-                        {
-                           StaticData.WorkerList.Close();
-                        });
+                     if (InvokeRequired)
+                     {
+                        if (StaticData.WorkerList.IsHandleCreated)
+                           StaticData.WorkerList.Invoke((MethodInvoker)delegate
+                           {
+                              StaticData.WorkerList.Close();
+                           });
+                     }
+                     else
+                        StaticData.WorkerList.Close();
+                  }
+
+                  mbCancel.Invoke((MethodInvoker)delegate
+                  {
+                     mbCancel.Enabled = false;
+                  });
+                  mbSearch.Invoke((MethodInvoker)delegate
+                  {
+                     mbSearch.Enabled = true;
+                     mbSearch.Text = i18n.getString(mbSearch.Tag.ToString());
+                  });
+               }
+               else
+               {
+                  if (UserData.AutoInvest)
+                  {
+                     MbSnip_Click(UserData.AutoInvest, null);
                   }
                   else
-                     StaticData.WorkerList.Close();
+                  {
+                     mbSearch.Invoke((MethodInvoker)delegate
+                     {
+                        mbSearch.Enabled = false;
+                        mbSearch.Text = i18n.getString("GUI.Sniper.SnipBotActive");
+                     });
+                  }
                }
-               mbCancel.Invoke((MethodInvoker)delegate
-               {
-                  mbCancel.Enabled = false;
-               });
-               mbSearch.Invoke((MethodInvoker)delegate
-               {
-                  mbSearch.Enabled = true;
-               });
                break;
             default:
                break;
