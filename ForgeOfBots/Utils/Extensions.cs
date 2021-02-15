@@ -133,17 +133,34 @@ namespace ForgeOfBots.Utils
          }
          return (false, "");
       }
-      public static bool IsVersion(this System.Version version,string versionToCompare, bool orGreater = false)
+      public static bool IsVersion(this System.Version version,string versionToCompare, bool SameOrGreater = false)
       {
          string[] versionsplit = versionToCompare.Split('.');
-         if(version.Major.ToString() == versionsplit[0] || version.Major >= int.Parse(versionsplit[0]))
+         if (SameOrGreater)
          {
-            if(version.Minor.ToString() == versionsplit[1] || version.Minor >= int.Parse(versionsplit[1]))
+            if (version.Major.ToString() == versionsplit[0] || version.Major >= int.Parse(versionsplit[0]))
             {
-               return true;
+               if (version.Minor.ToString() == versionsplit[1] || version.Minor >= int.Parse(versionsplit[1]))
+               {
+                  return true;
+               }
+            }
+         }
+         else
+         {
+            if (version.Major.ToString() == versionsplit[0])
+            {
+               if (version.Minor.ToString() == versionsplit[1])
+               {
+                  return true;
+               }
             }
          }
          return false;
+      }
+      public static bool IsEmpty(this string source)
+      {
+         return string.IsNullOrWhiteSpace(source);
       }
    }
    /// <summary>

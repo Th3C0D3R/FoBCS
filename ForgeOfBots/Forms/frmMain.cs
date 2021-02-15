@@ -48,7 +48,6 @@ namespace ForgeOfBots.Forms
       private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
       private bool blockExpireBox = false;
       readonly BackgroundWorkerEX bw = new BackgroundWorkerEX();
-      bool Canceled = false;
       static bool isLoading = false;
       static bool isFirstRun = true;
       Loading LoadingFrm = null;
@@ -124,11 +123,15 @@ namespace ForgeOfBots.Forms
                   DialogResult dlgRes = MessageBox.Show(i18n.getString("GUI.MessageBox.OldSettingsVersion.Text"), i18n.getString("GUI.MessageBox.OldSettingsVersion.Title"), MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                   if (dlgRes == DialogResult.Yes)
                   {
-                     bw.CancelAsync();
-                     while (!Canceled)
+                     if (ListClass.BackgroundWorkers.Count > 0)
                      {
-                        Application.DoEvents();
-                     };
+                        foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
+                        {
+                           backgroundWorker.CancelAsync();
+                           while (backgroundWorker.IsBusy) { Application.DoEvents(); }
+                        }
+                        ListClass.BackgroundWorkers.Clear();
+                     }
                      UserData.Delete();
                      Process.Start(Application.ExecutablePath);
                      Environment.Exit(0);
@@ -382,15 +385,24 @@ namespace ForgeOfBots.Forms
          ListClass.BackgroundWorkers.Remove((BackgroundWorkerEX)sender);
          if (((BackgroundWorkerEX)sender).param != null)
          {
-            mbSearch.Invoke((MethodInvoker)delegate
+            dynamic param = ((BackgroundWorkerEX)sender).param;
+            try
             {
-               mbSearch.Enabled = false;
-               mbSearch.Text = i18n.getString("GUI.Sniper.SnipBotActive");
-            });
-            mbCancel.Invoke((MethodInvoker)delegate
-            {
-               mbCancel.Enabled = false;
-            });
+               if (param.argument2.GetType() == typeof(bool))
+               {
+                  mbSearch.Invoke((MethodInvoker)delegate
+                  {
+                     mbSearch.Enabled = false;
+                     mbSearch.Text = i18n.getString("GUI.Sniper.SnipBotActive");
+                  });
+                  mbCancel.Invoke((MethodInvoker)delegate
+                  {
+                     mbCancel.Enabled = false;
+                  });
+               }
+            }
+            catch (Exception)
+            {}
          }
       }
       private void Ws_WorldDataEntered(Form that, string key, string value)
@@ -467,6 +479,10 @@ namespace ForgeOfBots.Forms
                object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
                if (retList is List<UCPremium> list)
                {
+                  var userPremiumEvent = new Dictionary<string, string>();
+                  string userPremium = $"{UserData.Username} ({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
+                  userPremiumEvent.Add(UserData.Username, userPremium);
+                  Analytics.TrackEvent("UserHasPremium", userPremiumEvent);
                   Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Premium")}) | by TH3C0D3R");
                   e.Result = true;
                }
@@ -477,6 +493,10 @@ namespace ForgeOfBots.Forms
                if (!blockExpireBox)
                {
                   DialogResult dlgRes = MessageBox.Show(Owner, $"{i18n.getString("SubscriptionExpired")}", $"{i18n.getString("SubExpiredTitle")}", MessageBoxButtons.YesNo);
+                  var userPremiumEvent = new Dictionary<string, string>();
+                  string userPremium = $"{UserData.Username} ({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
+                  userPremiumEvent.Add(UserData.Username, userPremium);
+                  Analytics.TrackEvent("UserPremiumExpired", userPremiumEvent);
                   if (dlgRes == DialogResult.Yes)
                   {
                      Process.Start("https://th3c0d3r.selly.store/");
@@ -493,6 +513,10 @@ namespace ForgeOfBots.Forms
             }
             else
             {
+               var userPremiumEvent = new Dictionary<string, string>();
+               string userPremium = $"{UserData.Username} ({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
+               userPremiumEvent.Add(UserData.Username, userPremium);
+               Analytics.TrackEvent("UserPremiumFailed", userPremiumEvent);
                Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R");
                MessageBox.Show(Owner, $"{i18n.getString("LicenceNotValid")}", $"{i18n.getString("FailedToActivate")}");
             }
@@ -645,7 +669,7 @@ namespace ForgeOfBots.Forms
       }
       private void UpdateSocial()
       {
-         #region "other Players"
+#region "other Players"
          ListClass.AllPlayers.Clear();
          ListClass.AllPlayers.AddRange(ListClass.FriendList);
          ListClass.AllPlayers.AddRange(ListClass.ClanMemberList);
@@ -701,11 +725,11 @@ namespace ForgeOfBots.Forms
             Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
          }
 
-         #endregion
+#endregion
       }
       private void UpdateTavern()
       {
-         #region "Tavern"
+#region "Tavern"
          if (ListClass.Resources.Count > 0)
          {
             Invoker.SetProperty(lblTavernSilverValue, () => lblTavernSilverValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["tavern_silver"]?.ToObject(typeof(int))).ToString("N0"));
@@ -784,7 +808,7 @@ namespace ForgeOfBots.Forms
                Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
             }
          }
-         #endregion
+#endregion
       }
       private void RemoveFriend(object senderObj, EventArgs e)
       {
@@ -828,11 +852,15 @@ namespace ForgeOfBots.Forms
       }
       private void PbCLose_Click(object sender, EventArgs e)
       {
-         bw.CancelAsync();
-         while (!Canceled)
+         if (ListClass.BackgroundWorkers.Count > 0)
          {
-            Application.DoEvents();
-         };
+            foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
+            {
+               backgroundWorker.CancelAsync();
+               while (backgroundWorker.IsBusy) { Application.DoEvents(); }
+            }
+            ListClass.BackgroundWorkers.Clear();
+         }
          Close();
       }
       private void Pbminimize_Click(object sender, EventArgs e)
@@ -879,14 +907,10 @@ namespace ForgeOfBots.Forms
             mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
          }
          var startEvent = new Dictionary<string, string>();
-         string startUp = $"{Identifier.GetInfo(_WCS, _WCS_Model)}-{Identifier.GetInfo(_WCS, _WCS_SystemType)} ({Identifier.GetInfo(_WOS, _WOS_Caption)})";
+         string startUp = $"{Identifier.GetInfo(_WCS, _WCS_Model)}-{Identifier.GetInfo(_WCS, _WCS_SystemType)} ({Identifier.GetInfo(_WOS, _WOS_Caption)}) ({UserData.Username})";
          startEvent.Add("Startup", startUp);
          Analytics.TrackEvent("Startup", startEvent);
-
-         var userPremiumEvent = new Dictionary<string, string>();
-         string userPremium = $"{UserData.Username}({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
-         userPremiumEvent.Add(UserData.Username, userPremium);
-         Analytics.TrackEvent("UserPremium", userPremiumEvent);
+         TelegramNotify.Init();
       }
       private void FrmMain_Shown(object sender, EventArgs e)
       {
@@ -908,6 +932,12 @@ namespace ForgeOfBots.Forms
             item.Enabled = item.Visible = false;
          }
 
+         tsmiTestFunctions.Visible = true;
+         tsmiTestFunctions.Enabled = true;
+#if RELEASE
+            tsmiTestFunctions.Visible = false;
+            tsmiTestFunctions.Enabled = false;
+#endif
          toolStripSeparator1.Visible = false;
 
          if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Social")
@@ -979,12 +1009,12 @@ namespace ForgeOfBots.Forms
          }
          tsmiReloadDataToolStripMenuItem.Enabled = tsmiReloadDataToolStripMenuItem.Visible = true;
       }
-      private void tsmiReloadDataToolStripMenuItem_Click(object sender, EventArgs e)
+      private void TsmiReloadDataToolStripMenuItem_Click(object sender, EventArgs e)
       {
          ReloadData();
       }
 
-      #region "Incident"
+#region "Incident"
       private void UpdateHiddenRewardsView()
       {
          if (pnlIncident.InvokeRequired)
@@ -1035,9 +1065,9 @@ namespace ForgeOfBots.Forms
          bw.RunWorkerAsync(param);
          ListClass.BackgroundWorkers.Add(bw);
       }
-      #endregion
+#endregion
 
-      #region "Production"
+#region "Production"
       private void UpdateProductionView()
       {
          Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Clear());
@@ -1498,9 +1528,9 @@ namespace ForgeOfBots.Forms
       {
          CancelProduction();
       }
-      #endregion
+#endregion
 
-      #region "Settings"
+#region "Settings"
       private void InitSettingsTab()
       {
          Control.ControlCollection mrb5s = mpProdCycle.Controls;
@@ -1547,6 +1577,7 @@ namespace ForgeOfBots.Forms
          mtAutoLogin.Checked = UserData.AutoLogin;
          mtToggleBrowser.Checked = UserData.HideBrowser;
          mtDarkMode.Checked = UserData.DarkMode;
+         //mtbTelegramUsername.Text = UserData.TelegramName;
          nudMinProfit.Value = UserData.MinProfit;
          mcbAutoInvest.Checked = UserData.AutoInvest;
          mtSnipBot.Checked = UserData.SnipBot;
@@ -1562,12 +1593,26 @@ namespace ForgeOfBots.Forms
          }
          else
          {
-            foreach (string item in UserData.PlayableWorlds)
+            for (int i = 0; i < UserData.PlayableWorlds.Count; i++)
             {
-               if(StaticData.Version.IsVersion("2.1",true))
-               {
+               string item = UserData.PlayableWorlds[i];
+               if (StaticData.Version.IsVersion("2.1", true))
                   mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item.Split('|')[0], WorldName = item.Split('|')[1] });
+               else
+               {
+                  if (item.Split('|').Length > 1)
+                     mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item.Split('|')[0], WorldName = item.Split('|')[1] });
+                  else
+                  {
+                     World itemWorld = ListClass.AllWorlds.Find(w => w.id == item);
+                     if (itemWorld.id == item)
+                     {
+                        UserData.PlayableWorlds[i] = $"{item}|{itemWorld.name}";
+                        mcbCitySelection.Items.Add(new PlayAbleWorldItem() { WorldID = item, WorldName = itemWorld.name });
+                     }
+                  }
                }
+               UserData.SaveSettings();
             }
             mcbCitySelection.DisplayMember = "WorldName";
             mcbCitySelection.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -1625,7 +1670,6 @@ namespace ForgeOfBots.Forms
                Thread.Sleep(150);
             }
          }
-         Canceled = true;
       }
       private void mrb5_CheckedChanged(object sender, EventArgs e)
       {
@@ -1687,6 +1731,7 @@ namespace ForgeOfBots.Forms
       private void mtbSave_Click(object sender, EventArgs e)
       {
          UserData.CustomUserAgent = mtbCustomUserAgent.Text;
+         //UserData.TelegramName = mtbTelegramUsername.Text;
          UserData.Language = (LanguageItem)mcbLanguage.SelectedItem;
          UserData.SaveSettings();
       }
@@ -1703,6 +1748,17 @@ namespace ForgeOfBots.Forms
       }
       private void mbSaveReload_Click(object sender, EventArgs e)
       {
+
+         if(ListClass.BackgroundWorkers.Count > 0)
+         {
+            foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
+            {
+               backgroundWorker.CancelAsync();
+               while (backgroundWorker.IsBusy) { Application.DoEvents(); }
+            }
+            ListClass.BackgroundWorkers.Clear();
+         }
+
          isLoading = true;
          ShowLoadingForm();
 
@@ -1717,6 +1773,23 @@ namespace ForgeOfBots.Forms
          StaticData.BotData.CSRF = cookieJar.AllCookies.HasCookie("CSRF").Item2;
          StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
          StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
+
+         logger.Info($"Process Portraits");
+         ProcessPortraits();
+         logger.Info($"ExtractGoodImages");
+         GoodImageExtractor.GetGoodImages(UserData.WorldServer);
+
+         if (!string.IsNullOrWhiteSpace(UserData.SerialKey))
+         {
+            logger.Info($"Init Premium if key exists");
+            BackgroundWorkerEX bwPremium = new BackgroundWorkerEX();
+            bwPremium.DoWork += CheckPremium;
+            bwPremium.RunWorkerCompleted += CheckPremiumComplete;
+            bwPremium.WorkerSupportsCancellation = true;
+            bwPremium.RunWorkerCompleted += workerComplete;
+            bwPremium.RunWorkerAsync();
+            ListClass.BackgroundWorkers.Add(bwPremium);
+         }
 
          string loginJS = resMgr.GetString("preloadLoginWorld");
          Log("[DEBUG] Doing Login", lbOutputWindow);
@@ -1987,9 +2060,9 @@ namespace ForgeOfBots.Forms
          if (!UserData.SnipBot) return;
          MbSearch_Click(true, null);
       }
-      #endregion
+#endregion
 
-      #region "Snip"
+#region "Snip"
       public void UpdateSnip()
       {
          Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Clear());
@@ -2046,7 +2119,7 @@ namespace ForgeOfBots.Forms
       }
       private void MbSearch_Click(object sender, EventArgs e)
       {
-         if(sender.GetType() != typeof(bool))
+         if (sender.GetType() != typeof(bool))
          {
             WorkerItem wi = new WorkerItem()
             {
@@ -2058,14 +2131,14 @@ namespace ForgeOfBots.Forms
             if (Application.OpenForms["WorkerList"] == null)
             {
                StaticData.WorkerList = new WorkerList();
-               StaticData.WorkerList.ShowDialog();
+               StaticData.WorkerList.Show();
                if (!IsOnScreen(StaticData.WorkerList))
                   StaticData.WorkerList.DesktopLocation = new Point(Location.X, Location.Y);
             }
             StaticData.WorkerList.BringToFront();
             StaticData.WorkerList.AddWorkerItem(wi);
          }
-         
+
          TwoTArgs<RequestType, object> param = new TwoTArgs<RequestType, object> { RequestType = RequestType.GetLGs, argument2 = sender };
          BackgroundWorkerEX bw = new BackgroundWorkerEX();
          bw.DoWork += bwScriptExecuter_DoWork;
@@ -2103,12 +2176,16 @@ namespace ForgeOfBots.Forms
             {
                string script = ReqBuilder.GetRequestScript(RequestType.contributeForgePoints, new int[] { lsi.LGSnip.entity_id, lsi.LGSnip.player.player_id.Value, lsi.LGSnip.level, lsi.LGSnip.Invest, 0 });
                _ = (string)jsExecutor.ExecuteAsyncScript(script);
+               Log($"[{DateTime.Now}] [{i18n.getString("GUI.Log.Snip")}] {lsi.LGSnip.player.name} {lsi.LGSnip.name}: {lsi.LGSnip.Invest}(+{lsi.Profit})", lbOutputWindow);
                lsi.mcbSnip.Enabled = false;
                lsi.mcbSnip.Checked = false;
                lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
                Application.DoEvents();
             }
          }
+         if(UserData.SnipBot)
+            UserData.LastSnipTime = DateTime.Now;
+         UserData.SaveSettings();
          mbCancel.Invoke((MethodInvoker)delegate
          {
             mbCancel.Enabled = false;
@@ -2164,9 +2241,9 @@ namespace ForgeOfBots.Forms
             }
          }
       }
-      #endregion
+#endregion
 
-      #region "BackgroundWorkerEX"
+#region "BackgroundWorkerEX"
       private void bwScriptExecuter_DoWork(object sender, DoWorkEventArgs e)
       {
          BackgroundWorkerEX bwEx = (BackgroundWorkerEX)sender;
@@ -2656,9 +2733,9 @@ namespace ForgeOfBots.Forms
                break;
          }
       }
-      #endregion
+#endregion
 
-      #region "Polivate/Tavern"
+#region "Polivate/Tavern"
       public void Motivate(E_Motivate player_type)
       {
          WorkerItem wi = new WorkerItem()
@@ -2742,9 +2819,9 @@ namespace ForgeOfBots.Forms
       {
          btnCollect_Click(null, null);
       }
-      #endregion
+#endregion
 
-      #region "Help"
+#region "Help"
       private void TvHelp_AfterSelect(object sender, TreeViewEventArgs e)
       {
          if (e.Node.Tag != null && !string.IsNullOrWhiteSpace(e.Node.Tag.ToString()))
@@ -2752,7 +2829,7 @@ namespace ForgeOfBots.Forms
             mlHelpText.Text = e.Node.Tag.ToString();
          }
       }
-      #endregion
+#endregion
 
       protected override void WndProc(ref Message m)
       {
@@ -2831,6 +2908,15 @@ namespace ForgeOfBots.Forms
             Thread.Sleep(2);
             Application.DoEvents();
          }
+      }
+
+
+
+
+
+      private void TsmiTestFunctions_Click(object sender, EventArgs e)
+      {
+         TelegramNotify.Send("TEST");
       }
    }
 }

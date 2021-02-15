@@ -20,6 +20,7 @@ namespace ForgeOfBots.Utils
       public string LastWorld { get; set; } = "";
       public List<string> PlayableWorlds { get; set; } = new List<string>();
       public string WorldServer { get; set; } = "";
+      public long ChatID { get; set; } = -1;
       public LanguageItem Language { get; set; } = new LanguageItem() { Code = "en", Description = "English", Language = 0 };
       public string SerialKey { get; set; } = "";
       public ProductionOption ProductionOption { get; set; } = Extensions.GetProductionOption();

@@ -165,6 +165,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telegram.Bot, Version=15.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Telegram.Bot\release\netstandard1.1\Telegram.Bot.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataHandler\RequestBuilder.cs" />
@@ -347,6 +351,7 @@
     <EmbeddedResource Include="LanguageFiles\help\help_de.json" />
     <EmbeddedResource Include="LanguageFiles\help\help_fr.json" />
     <None Include="languages.json" />
+    <None Include="nuget.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

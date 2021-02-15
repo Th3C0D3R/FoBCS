@@ -65,7 +65,7 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
    }
    public class LGState
    {
-      public Paused_State paused_state { get; set; }
+      public dynamic paused_state { get; set; }
       public int? invested_forge_points { get; set; }
       public int? forge_points_for_level_up { get; set; }
    }
