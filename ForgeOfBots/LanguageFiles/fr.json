@@ -2,6 +2,7 @@
   "languageCode": "fr",
   "languageName": "Français",
   "items": {
+    "GUI.Telegram.Snip": "##Invest## invested at ##GB## (##Player## ##Social##) -> ##Profit## FP profit",
     "GUI.Header.Running": "En cour d'execution:",
     "GUI.Dashbord": "Tableau de bord",
     "GUI.Social": "Social",
@@ -55,6 +56,7 @@
     "GUI.Settings.Misc.Save": "Sauvegarde",
     "GUI.Settings.Bots": "Bots",
     "GUI.Settings.Bots.ProdBot": "Bot de production",
+    "GUI.Settings.Bots.ProdBot.Notify": "Telegram-Notification",
     "GUI.Settings.Bots.TavernBot": "Bot de taverne",
     "GUI.Settings.Bots.MoppelBot": "Bot de polissage",
     "GUI.Settings.Bots.IncidentBot": "Bot d'incident",
@@ -62,6 +64,7 @@
     "GUI.Settings.Bots.IntervalHours": "heure(s)",
     "GUI.Settings.Bots.RQBot": "Bot de quêtes récurentes",
     "GUI.Settings.Bots.SnipBot": "Auto-Sniper",
+    "GUI.Settings.Bots.SnipBot.Notify": "Telegram-Notification",
     "GUI.Settings.UserData": "Données d'utilisateur",
     "GUI.Settings.UserData.ChangeCity": "Changement de cité",
     "GUI.Settings.UserData.DeleteData": "Supprimer données",
