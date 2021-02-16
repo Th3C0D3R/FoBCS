@@ -24,7 +24,7 @@ namespace ForgeOfBots.Utils
          Me = Bot.GetMeAsync().Result;
          Console.WriteLine(
            $"Hello Debugger! I am user {Me.Id} and my name is {Me.FirstName}."
-         ); 
+         );
          Bot.StartReceiving();
          Bot.OnMessage += Bot_OnMessageReceive;
       }
@@ -35,24 +35,24 @@ namespace ForgeOfBots.Utils
          if (StaticData.UserData.TelegramUserName != e.Message.Chat.Username) return;
          string sCommand = e.Message.Text.TrimStart('/');
          sCommand = sCommand.Substring(0, sCommand.IndexOf(" "));
-         if (!Enum.TryParse(sCommand, out ECommands command)){
-            _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), i18n.getString("GUI.Telegram.CommandNotFound",new KeyValuePair<string, string>("##command##",sCommand))).Result;
+         if (!Enum.TryParse(sCommand, out ECommands command))
+         {
+            _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), i18n.getString("GUI.Telegram.CommandNotFound", new KeyValuePair<string, string>("##command##", sCommand))).Result;
          }
          else
          {
+            foreach (string item in tmpMessages)
+               _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), item).Result;
+            tmpMessages.Clear();
             switch (command)
             {
                case ECommands.start:
-                  if(StaticData.UserData.ChatID == -1)
+                  if (StaticData.UserData.ChatID == -1)
                   {
                      StaticData.UserData.ChatID = e.Message.Chat.Id;
                      StaticData.UserData.SaveSettings();
                   }
                   _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), "👍").Result;
-                  foreach (string item in tmpMessages)
-                  {
-                     _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), item).Result;
-                  }
                   break;
                case ECommands.restart:
                   break;
@@ -80,6 +80,7 @@ namespace ForgeOfBots.Utils
       {
          if (StaticData.UserData.ChatID == -1)
          {
+            tmpMessages.Add(msg);
             MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramChatText"), i18n.getString("GUI.MessageBox.NoTelegramChatTitle"));
          }
          else
