@@ -3,7 +3,10 @@
   "languageName": "Deutsch",
   "items": {
     "GUI.Telegram.Snip": "##GB## (##Player## ##Social##) wurde mit ##Invest## belegt -> ##Profit## FP Gewinn",
+    "GUI.Telegram.ProdFinished": "Produktionen fertiggestellt",
+    "GUI.Telegram.ProdStarted": "und gestartet",
     "GUI.Telegram.Crash": "Dein Bot ist abgestürzt! Zeitpunkt: ##TimeStamp## ",
+    "GUI.Telegram.CommandNotFound": "Der Befehl '##command##' ist nicht vorhanden!",
     "GUI.Header.Running": "Laufzeit:",
     "GUI.Dashbord": "Dashbord",
     "GUI.Social": "Sozial",
