@@ -75,7 +75,6 @@ namespace ForgeOfBots.GameClasses
       public static Dictionary<int, (bool, object)> doneTavern { get; set; } = new Dictionary<int, (bool, object)>();
       public static List<int> doneQuery { get; set; } = new List<int>();
       public static List<int> AddedToQuery { get; set; } = new List<int>();
-      public static List<int> CollectedIDs { get; set; } = new List<int>();
       public static List<BackgroundWorkerEX> BackgroundWorkers { get; set; } = new List<BackgroundWorkerEX>();
       public static Dictionary<string, string> PortraitList { get; set; } = new Dictionary<string, string>();
 
@@ -115,7 +114,6 @@ namespace ForgeOfBots.GameClasses
          Eras.Clear();
          Contributions.Clear();
          Bonus.Clear();
-         CollectedIDs.Clear();
          doneMotivate.Clear();
          doneQuery.Clear();
          doneTavern.Clear();

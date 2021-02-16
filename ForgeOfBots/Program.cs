@@ -77,7 +77,7 @@ namespace ForgeOfBots
             StaticData.HasLastCrash = CrashHelper.HasCrashedLastSession();
          }
          StaticData.RunningTime.Start();
-         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
+         Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
 
          LoadingFrm = new Loading();
          LoadingFrm.Show();

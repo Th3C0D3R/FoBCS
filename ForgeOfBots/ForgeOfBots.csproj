@@ -255,6 +255,7 @@
     <Compile Include="GameClasses\ResponseClasses\Resource.cs" />
     <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
     <Compile Include="GameClasses\ResponseClasses\World.cs" />
+    <Compile Include="GameClasses\Telegram\ECommands.cs" />
     <Compile Include="Updater\Updater.cs" />
     <Compile Include="Utils\BackgroundWorkerEX.cs">
       <SubType>Component</SubType>

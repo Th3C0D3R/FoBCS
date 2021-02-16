@@ -162,6 +162,10 @@ namespace ForgeOfBots.Utils
       {
          return string.IsNullOrWhiteSpace(source);
       }
+      public static string GetName<T>(this T @enum)
+      {
+         return Enum.GetName(typeof(T), @enum);
+      }
    }
    /// <summary>
    /// Generates a 16 byte Unique Identification code of a computer

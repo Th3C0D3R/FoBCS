@@ -20,6 +20,7 @@ namespace ForgeOfBots.Utils
       public string LastWorld { get; set; } = "";
       public List<string> PlayableWorlds { get; set; } = new List<string>();
       public string WorldServer { get; set; } = "";
+      public string TelegramUserName { get; set; } = "";
       public long ChatID { get; set; } = -1;
       public LanguageItem Language { get; set; } = new LanguageItem() { Code = "en", Description = "English", Language = 0 };
       public string SerialKey { get; set; } = "";
@@ -28,11 +29,13 @@ namespace ForgeOfBots.Utils
       public bool GroupedView { get; set; } = true;
       public bool ShowBigRoads { get; set; } = true;
       public bool ProductionBot { get; set; } = false;
+      public bool ProductionBotNotification { get; set; } = false;
       public bool MoppelBot { get; set; } = false;
       public bool TavernBot { get; set; } = false;
       public bool IncidentBot { get; set; } = false;
       public bool RQBot { get; set; } = false;
       public bool SnipBot { get; set; } = false;
+      public bool SnipBotNotification { get; set; } = false;
       public string CustomUserAgent { get; set; } = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0";
       public bool AutoLogin { get; set; } = false;
       public bool HideBrowser { get; set; } = true;

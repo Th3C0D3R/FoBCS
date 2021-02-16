@@ -23,11 +23,17 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public string city_name { get; set; }
       public bool has_great_building { get; set; }
       public string avatar { get; set; }
+      public bool incoming { get; set; } = false;
+      public bool isInvitedFriend { get; set; } = false;
       public List<LGSnip> LGs { get; set; }
 
       public override string ToString()
       {
          return name;
+      }
+      public string GetIdentifier()
+      {
+         return is_friend ? i18n.getString("GUI.Sniper.PlayerIndentifier.Friend") : is_guild_member ? i18n.getString("GUI.Sniper.PlayerIndentifier.Member") : i18n.getString("GUI.Sniper.PlayerIndentifier.Neighbor");
       }
    }
    public partial class Neighbor : Player
@@ -45,13 +51,11 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
    public partial class Friend : Player
    {
       public int id { get; set; }
-      public bool incoming { get; set; }
       public bool accepted { get; set; }
       public bool registered { get; set; }
       public bool rewarded { get; set; }
       public int rank { get; set; }
       public bool isInvitedToClan { get; set; }
-      public bool isInvitedFriend { get; set; }
       public int clan_id { get; set; }
       public Clan clan { get; set; }
       public bool canSabotage { get; set; }

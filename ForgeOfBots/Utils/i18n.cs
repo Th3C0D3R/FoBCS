@@ -70,11 +70,16 @@ namespace ForgeOfBots.Utils
             if (jsonObject != null && HelpObject != null) initialized = true;
          }
       }
-      public static string getString(string key)
+      public static string getString(string key, params KeyValuePair<string,string>[] param)
       {
          try
          {
-            return jsonObject["items"][key].ToString();
+            string s = jsonObject["items"][key].ToString();
+            foreach (KeyValuePair<string,string> item in param)
+            {
+               s = s.Replace(item.Key, item.Value);
+            }
+            return s;
          }
          catch (Exception)
          {
@@ -125,8 +130,10 @@ namespace ForgeOfBots.Utils
             root.Tag = HelpObject["Root"]["Text"].ToString();
             foreach (dynamic c in HelpObject["Root"]["Children"])
             {
-               TreeNode tn = new TreeNode(c["Title"].ToString());
-               tn.Tag = c["Text"].ToString();
+               TreeNode tn = new TreeNode(c["Title"].ToString())
+               {
+                  Tag = c["Text"].ToString()
+               };
                if (c["HasChildren"].ToString().ToLower() == "true")
                   tn.Nodes.AddRange(GetChildNode(c["Children"]).ToArray());
                root.Nodes.Add(tn);
@@ -142,8 +149,10 @@ namespace ForgeOfBots.Utils
          List<TreeNode> treeNodeChildren = new List<TreeNode>();
          foreach (var item in c)
          {
-            TreeNode tn = new TreeNode(item["Title"].ToString());
-            tn.Tag = item["Text"].ToString();
+            TreeNode tn = new TreeNode(item["Title"].ToString())
+            {
+               Tag = item["Text"].ToString()
+            };
             if (item["HasChildren"].ToString().ToLower() == "true")
                treeNodeChildren.AddRange(GetChildNode(item["Children"]));
             else

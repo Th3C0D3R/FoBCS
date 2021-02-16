@@ -63,7 +63,7 @@ namespace ForgeOfBots.Forms
                      DEBUGMODE = true;
          }
          logger.Info($"Debugmode {(DEBUGMODE ? "activated" : "deactivated")}");
-
+         Application.ThreadException += Application_ThreadException;
          FirewallHelper.OpenFirewallPort(4444, "WebDrive");
          MainInstance = this;
          if (!i18n.initialized)
@@ -92,6 +92,15 @@ namespace ForgeOfBots.Forms
          }
          Init();
       }
+
+      private void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+      {
+         TelegramNotify.Send(i18n.getString("GUI.Telegram.Crash", new List<KeyValuePair<string, string>>()
+               {
+                   new KeyValuePair<string, string>("##TimeStamp##",$"{DateTime.Now}")
+               }.ToArray()));
+      }
+
       private void Loading_FormClosed(object sender, FormClosedEventArgs e)
       {
          Environment.Exit(0);
@@ -402,7 +411,7 @@ namespace ForgeOfBots.Forms
                }
             }
             catch (Exception)
-            {}
+            { }
          }
       }
       private void Ws_WorldDataEntered(Form that, string key, string value)
@@ -669,7 +678,7 @@ namespace ForgeOfBots.Forms
       }
       private void UpdateSocial()
       {
-#region "other Players"
+         #region "other Players"
          ListClass.AllPlayers.Clear();
          ListClass.AllPlayers.AddRange(ListClass.FriendList);
          ListClass.AllPlayers.AddRange(ListClass.ClanMemberList);
@@ -725,11 +734,11 @@ namespace ForgeOfBots.Forms
             Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
          }
 
-#endregion
+         #endregion
       }
       private void UpdateTavern()
       {
-#region "Tavern"
+         #region "Tavern"
          if (ListClass.Resources.Count > 0)
          {
             Invoker.SetProperty(lblTavernSilverValue, () => lblTavernSilverValue.Text, ((int)ListClass.Resources["responseData"].First?.First?["tavern_silver"]?.ToObject(typeof(int))).ToString("N0"));
@@ -808,7 +817,7 @@ namespace ForgeOfBots.Forms
                Invoker.CallMethode(tlpCurrentSittingPlayer, () => tlpCurrentSittingPlayer.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
             }
          }
-#endregion
+         #endregion
       }
       private void RemoveFriend(object senderObj, EventArgs e)
       {
@@ -1014,7 +1023,7 @@ namespace ForgeOfBots.Forms
          ReloadData();
       }
 
-#region "Incident"
+      #region "Incident"
       private void UpdateHiddenRewardsView()
       {
          if (pnlIncident.InvokeRequired)
@@ -1065,9 +1074,9 @@ namespace ForgeOfBots.Forms
          bw.RunWorkerAsync(param);
          ListClass.BackgroundWorkers.Add(bw);
       }
-#endregion
+      #endregion
 
-#region "Production"
+      #region "Production"
       private void UpdateProductionView()
       {
          Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Clear());
@@ -1304,10 +1313,8 @@ namespace ForgeOfBots.Forms
                   if (ColRes["responseData"]?["updatedEntities"]?.ToList().Count > 0
                      && ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "IdleState")
                   {
-                     List<int> CollectedIDs = new List<int>();
                      foreach (var item in ColRes["responseData"]?["updatedEntities"].ToList())
                      {
-                        CollectedIDs.Add(int.Parse(item["id"].ToString()));
                         int exIndex = ListClass.ProductionList.FindIndex(x => x.id == int.Parse(item["id"].ToString()));
                         if (exIndex >= 0)
                         {
@@ -1330,13 +1337,7 @@ namespace ForgeOfBots.Forms
                            }
                         }
                      }
-                     if (DEBUGMODE) Log($"[{DateTime.Now}] CollectedIDs Count = {CollectedIDs.Count}");
-                     ListClass.CollectedIDs = CollectedIDs;
                   }
-                  Updater.UpdateResources();
-                  UpdateProductionView();
-                  UpdateGoodProductionView();
-                  UpdateDashbord();
                }
                catch (Exception ex)
                {
@@ -1345,42 +1346,30 @@ namespace ForgeOfBots.Forms
                   var properties = new Dictionary<string, string> { { "CollectProduction", ret } };
                   Crashes.TrackError(ex, properties, attachments);
                }
+               Updater.UpdateResources();
+               UpdateProductionView();
+               UpdateGoodProductionView();
+               UpdateDashbord();
+               if (UserData.ProductionBotNotification)
+                  TelegramNotify.Send($"{i18n.getString("GUI.Telegram.ProdFinished")}{(UserData.ProductionBot ? $" {i18n.getString("GUI.Telegram.ProdStarted")}" : "")}");
                break;
             case RequestType.QueryProduction:
                List<string> retQuery = new List<string>();
-               if (ListClass.CollectedIDs.Count > 0)
+               ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+               ListClass.AddedToQuery.AddRange(ids);
+               foreach (int id in ids)
                {
-                  int[] Query = ListClass.CollectedIDs.ToArray();
-                  ListClass.AddedToQuery.AddRange(ListClass.CollectedIDs);
-                  foreach (int id in Query)
-                  {
-                     bool hasID = ListClass.GoodProductionList.Find(ex => ex.id == id) == null;
-                     if (hasID)
-                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
-                     else
-                        script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                     retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
-                     Thread.Sleep(100);
-                  }
+                  script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
+                  retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
+                  Thread.Sleep(100);
                }
-               else
+               ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
+               ListClass.AddedToQuery.AddRange(ids);
+               foreach (int id in ids)
                {
-                  ids = ListClass.GoodProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
-                  ListClass.AddedToQuery.AddRange(ids);
-                  foreach (int id in ids)
-                  {
-                     script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.GoodProductionOption.id });
-                     retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
-                     Thread.Sleep(100);
-                  }
-                  ids = ListClass.ProductionList.Where((x) => { return x.state["__class__"].ToString().ToLower() == "idlestate"; }).ToList().Select(y => y.id).ToArray();
-                  ListClass.AddedToQuery.AddRange(ids);
-                  foreach (int id in ids)
-                  {
-                     script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
-                     retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
-                     Thread.Sleep(100);
-                  }
+                  script = ReqBuilder.GetRequestScript(param.t1, new int[] { id, UserData.ProductionOption.id });
+                  retQuery.Add((string)jsExecutor.ExecuteAsyncScript(script));
+                  Thread.Sleep(100);
                }
                foreach (string item in retQuery)
                {
@@ -1528,9 +1517,9 @@ namespace ForgeOfBots.Forms
       {
          CancelProduction();
       }
-#endregion
+      #endregion
 
-#region "Settings"
+      #region "Settings"
       private void InitSettingsTab()
       {
          Control.ControlCollection mrb5s = mpProdCycle.Controls;
@@ -1577,11 +1566,13 @@ namespace ForgeOfBots.Forms
          mtAutoLogin.Checked = UserData.AutoLogin;
          mtToggleBrowser.Checked = UserData.HideBrowser;
          mtDarkMode.Checked = UserData.DarkMode;
-         //mtbTelegramUsername.Text = UserData.TelegramName;
+         mtbTelegramUsername.Text = UserData.TelegramUserName;
          nudMinProfit.Value = UserData.MinProfit;
          mcbAutoInvest.Checked = UserData.AutoInvest;
          mtSnipBot.Checked = UserData.SnipBot;
          nudSnipInterval.Value = UserData.IntervalSnip;
+         mcbNotifySnip.Checked = UserData.SnipBotNotification;
+         mcbNotifyProd.Checked = UserData.ProductionBotNotification;
          mcbFriends.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends);
          mcbGuild.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.members);
          mcbNeighbor.Checked = UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors);
@@ -1638,8 +1629,10 @@ namespace ForgeOfBots.Forms
             foreach (int item in UserData.IgnoredPlayers)
             {
                Player p = ListClass.AllPlayers.Find(a => a.player_id == item);
-               ucIgnorePlayer ucIP = new ucIgnorePlayer();
-               ucIP.Player = p;
+               ucIgnorePlayer ucIP = new ucIgnorePlayer
+               {
+                  Player = p
+               };
                ucIP.Remove += RemoveIgnoredPlayer;
                pnlIgnore.Controls.Add(ucIP);
             }
@@ -1731,7 +1724,7 @@ namespace ForgeOfBots.Forms
       private void mtbSave_Click(object sender, EventArgs e)
       {
          UserData.CustomUserAgent = mtbCustomUserAgent.Text;
-         //UserData.TelegramName = mtbTelegramUsername.Text;
+         UserData.TelegramUserName = mtbTelegramUsername.Text;
          UserData.Language = (LanguageItem)mcbLanguage.SelectedItem;
          UserData.SaveSettings();
       }
@@ -1749,7 +1742,7 @@ namespace ForgeOfBots.Forms
       private void mbSaveReload_Click(object sender, EventArgs e)
       {
 
-         if(ListClass.BackgroundWorkers.Count > 0)
+         if (ListClass.BackgroundWorkers.Count > 0)
          {
             foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
             {
@@ -1819,6 +1812,24 @@ namespace ForgeOfBots.Forms
          {
             Process.Start(Application.ExecutablePath);
             Environment.Exit(0);
+         }
+      }
+      private void McbNotifyProd_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.ProductionBotNotification = mcbNotifyProd.Checked;
+         UserData.SaveSettings();
+         if (UserData.TelegramUserName.IsEmpty() && mcbNotifyProd.Checked)
+         {
+            MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramNameText"), i18n.getString("GUI.MessageBox.NoTelegramNameTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+         }
+      }
+      private void McbNotifySnip_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.SnipBotNotification = mcbNotifySnip.Checked;
+         UserData.SaveSettings();
+         if (UserData.TelegramUserName.IsEmpty() && mcbNotifySnip.Checked)
+         {
+            MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramNameText"), i18n.getString("GUI.MessageBox.NoTelegramNameTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
          }
       }
       private void mbDeleteData_Click(object sender, EventArgs e)
@@ -2060,9 +2071,9 @@ namespace ForgeOfBots.Forms
          if (!UserData.SnipBot) return;
          MbSearch_Click(true, null);
       }
-#endregion
+      #endregion
 
-#region "Snip"
+      #region "Snip"
       public void UpdateSnip()
       {
          Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Clear());
@@ -2170,6 +2181,15 @@ namespace ForgeOfBots.Forms
                lsi.mcbSnip.Enabled = false;
                lsi.mcbSnip.Checked = false;
                lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
+               if (UserData.SnipBotNotification)
+                  TelegramNotify.Send(i18n.getString("GUI.Telegram.Snip", new List<KeyValuePair<string, string>>()
+               {
+                   new KeyValuePair<string, string>("##GB##",$"{lsi.LGSnip.name}"),
+                   new KeyValuePair<string, string>("##Invest##",$"{lsi.LGSnip.Invest}"),
+                   new KeyValuePair<string, string>("##Profit##",$"{lsi.Profit}"),
+                   new KeyValuePair<string, string>("##Player##",$"{lsi.LGSnip.player.name}"),
+                   new KeyValuePair<string, string>("##Social##",$"{lsi.LGSnip.player.GetIdentifier()}"),
+               }.ToArray()));
                Application.DoEvents();
             }
             else if (lsi.mcbSnip.Checked)
@@ -2180,10 +2200,19 @@ namespace ForgeOfBots.Forms
                lsi.mcbSnip.Enabled = false;
                lsi.mcbSnip.Checked = false;
                lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
+               if (UserData.SnipBotNotification)
+                  TelegramNotify.Send(i18n.getString("GUI.Telegram.Snip", new List<KeyValuePair<string, string>>()
+               {
+                   new KeyValuePair<string, string>("##GB##",$"{lsi.LGSnip.name}"),
+                   new KeyValuePair<string, string>("##Invest##",$"{lsi.LGSnip.Invest}"),
+                   new KeyValuePair<string, string>("##Profit##",$"{lsi.Profit}"),
+                   new KeyValuePair<string, string>("##Player##",$"{lsi.LGSnip.player.name}"),
+                   new KeyValuePair<string, string>("##Social##",$"{lsi.LGSnip.player.GetIdentifier()}"),
+               }.ToArray()));
                Application.DoEvents();
             }
          }
-         if(UserData.SnipBot)
+         if (UserData.SnipBot)
             UserData.LastSnipTime = DateTime.Now;
          UserData.SaveSettings();
          mbCancel.Invoke((MethodInvoker)delegate
@@ -2241,9 +2270,9 @@ namespace ForgeOfBots.Forms
             }
          }
       }
-#endregion
+      #endregion
 
-#region "BackgroundWorkerEX"
+      #region "BackgroundWorkerEX"
       private void bwScriptExecuter_DoWork(object sender, DoWorkEventArgs e)
       {
          BackgroundWorkerEX bwEx = (BackgroundWorkerEX)sender;
@@ -2461,6 +2490,7 @@ namespace ForgeOfBots.Forms
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
                if (UserData.IgnoredPlayers.Count > 0)
                   ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => UserData.IgnoredPlayers.Contains(p.player_id.Value)).ToList();
+               ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => p.incoming == false && p.isInvitedFriend == false).ToList();
                ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
                if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, 0, ListClass.SnipablePlayers.Count);
@@ -2733,9 +2763,9 @@ namespace ForgeOfBots.Forms
                break;
          }
       }
-#endregion
+      #endregion
 
-#region "Polivate/Tavern"
+      #region "Polivate/Tavern"
       public void Motivate(E_Motivate player_type)
       {
          WorkerItem wi = new WorkerItem()
@@ -2819,9 +2849,9 @@ namespace ForgeOfBots.Forms
       {
          btnCollect_Click(null, null);
       }
-#endregion
+      #endregion
 
-#region "Help"
+      #region "Help"
       private void TvHelp_AfterSelect(object sender, TreeViewEventArgs e)
       {
          if (e.Node.Tag != null && !string.IsNullOrWhiteSpace(e.Node.Tag.ToString()))
@@ -2829,7 +2859,7 @@ namespace ForgeOfBots.Forms
             mlHelpText.Text = e.Node.Tag.ToString();
          }
       }
-#endregion
+      #endregion
 
       protected override void WndProc(ref Message m)
       {

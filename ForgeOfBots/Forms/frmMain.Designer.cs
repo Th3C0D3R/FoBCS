@@ -203,6 +203,7 @@ namespace ForgeOfBots.Forms
          this.mbDeleteData = new MetroFramework.Controls.MetroButton();
          this.lblDeleteData = new MetroFramework.Controls.MetroLabel();
          this.mtpBots = new MetroFramework.Controls.MetroTabPage();
+         this.mcbNotifyProd = new MetroFramework.Controls.MetroCheckBox();
          this.mtSnipBot = new MetroFramework.Controls.MetroToggle();
          this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
          this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
@@ -229,6 +230,7 @@ namespace ForgeOfBots.Forms
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
          this.tSniper = new System.Windows.Forms.Timer(this.components);
+         this.mcbNotifySnip = new MetroFramework.Controls.MetroCheckBox();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -1175,14 +1177,14 @@ namespace ForgeOfBots.Forms
          // mtcSettings
          // 
          this.mtcSettings.Controls.Add(this.mtpProduction);
+         this.mtcSettings.Controls.Add(this.mtpBots);
          this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpData);
-         this.mtcSettings.Controls.Add(this.mtpBots);
          this.mtcSettings.Controls.Add(this.mtpPremium);
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 1;
+         this.mtcSettings.SelectedIndex = 3;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          this.mtcSettings.UseStyleColors = true;
          // 
@@ -1671,6 +1673,8 @@ namespace ForgeOfBots.Forms
          // 
          // mtpBots
          // 
+         this.mtpBots.Controls.Add(this.mcbNotifySnip);
+         this.mtpBots.Controls.Add(this.mcbNotifyProd);
          this.mtpBots.Controls.Add(this.mtSnipBot);
          this.mtpBots.Controls.Add(this.metroLabel16);
          this.mtpBots.Controls.Add(this.metroLabel14);
@@ -1691,6 +1695,18 @@ namespace ForgeOfBots.Forms
          this.mtpBots.Name = "mtpBots";
          this.mtpBots.Tag = "GUI.Settings.Bots";
          this.mtpBots.VerticalScrollbarBarColor = true;
+         // 
+         // mcbNotifyProd
+         // 
+         resources.ApplyResources(this.mcbNotifyProd, "mcbNotifyProd");
+         this.mcbNotifyProd.BackColor = System.Drawing.SystemColors.Control;
+         this.mcbNotifyProd.Checked = true;
+         this.mcbNotifyProd.CheckState = System.Windows.Forms.CheckState.Checked;
+         this.mcbNotifyProd.CustomBackground = true;
+         this.mcbNotifyProd.Name = "mcbNotifyProd";
+         this.mcbNotifyProd.Tag = "GUI.Settings.Bots.ProdBot.Notify";
+         this.mcbNotifyProd.UseVisualStyleBackColor = false;
+         this.mcbNotifyProd.CheckedChanged += new System.EventHandler(this.McbNotifyProd_CheckedChanged);
          // 
          // mtSnipBot
          // 
@@ -1866,6 +1882,18 @@ namespace ForgeOfBots.Forms
          // 
          this.tSniper.Interval = 3600000;
          this.tSniper.Tick += new System.EventHandler(this.TSniper_Tick);
+         // 
+         // mcbNotifySnip
+         // 
+         resources.ApplyResources(this.mcbNotifySnip, "mcbNotifySnip");
+         this.mcbNotifySnip.BackColor = System.Drawing.SystemColors.Control;
+         this.mcbNotifySnip.Checked = true;
+         this.mcbNotifySnip.CheckState = System.Windows.Forms.CheckState.Checked;
+         this.mcbNotifySnip.CustomBackground = true;
+         this.mcbNotifySnip.Name = "mcbNotifySnip";
+         this.mcbNotifySnip.Tag = "GUI.Settings.Bots.SnipBot.Notify";
+         this.mcbNotifySnip.UseVisualStyleBackColor = false;
+         this.mcbNotifySnip.CheckedChanged += new System.EventHandler(this.McbNotifySnip_CheckedChanged);
          // 
          // frmMain
          // 
@@ -2158,5 +2186,7 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.ToolStripMenuItem tsmiTestFunctions;
       private MetroFramework.Controls.MetroTextBox mtbTelegramUsername;
       private MetroFramework.Controls.MetroLabel metroLabel17;
+      private MetroFramework.Controls.MetroCheckBox mcbNotifyProd;
+      private MetroFramework.Controls.MetroCheckBox mcbNotifySnip;
    }
 }
