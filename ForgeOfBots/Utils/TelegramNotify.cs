@@ -13,37 +13,34 @@ namespace ForgeOfBots.Utils
 {
    public static class TelegramNotify
    {
-      private static readonly string APIKEY = "1538712047:AAFCO2llk01V-_2A602D6oXnTRePl52nklE";
-      private static TelegramBotClient Bot = null;
-      private static User Me = null;
-      private static List<string> tmpMessages = new List<string>();
       public static void Init()
       {
-         if (Bot != null && Me != null) return;
-         Bot = new TelegramBotClient(APIKEY);
-         Me = Bot.GetMeAsync().Result;
-         Console.WriteLine(
-           $"Hello Debugger! I am user {Me.Id} and my name is {Me.FirstName}."
-         );
-         Bot.StartReceiving();
-         Bot.OnMessage += Bot_OnMessageReceive;
+         //if (Bot != null && Me != null) return;
+         //Bot = new TelegramBotClient(APIKEY);
+         //Me = Bot.GetMeAsync().Result;
+         //Console.WriteLine(
+         //  $"Hello Debugger! I am user {Me.Id} and my name is {Me.FirstName}."
+         //);
+         //Bot.StartReceiving();
+         //Bot.OnMessage += Bot_OnMessageReceive;
       }
 
       private static void Bot_OnMessageReceive(object sender, Telegram.Bot.Args.MessageEventArgs e)
       {
+         return;
          if (StaticData.UserData.TelegramUserName.IsEmpty()) return;
          if (StaticData.UserData.TelegramUserName != e.Message.Chat.Username) return;
          string sCommand = e.Message.Text.TrimStart('/');
          sCommand = sCommand.Substring(0, sCommand.IndexOf(" "));
          if (!Enum.TryParse(sCommand, out ECommands command))
          {
-            _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), i18n.getString("GUI.Telegram.CommandNotFound", new KeyValuePair<string, string>("##command##", sCommand))).Result;
+            //_ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), i18n.getString("GUI.Telegram.CommandNotFound", new KeyValuePair<string, string>("##command##", sCommand))).Result;
          }
          else
          {
-            foreach (string item in tmpMessages)
-               _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), item).Result;
-            tmpMessages.Clear();
+            //foreach (string item in tmpMessages)
+              // _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), item).Result;
+            //tmpMessages.Clear();
             switch (command)
             {
                case ECommands.start:
@@ -52,7 +49,7 @@ namespace ForgeOfBots.Utils
                      StaticData.UserData.ChatID = e.Message.Chat.Id;
                      StaticData.UserData.SaveSettings();
                   }
-                  _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), "👍").Result;
+                  //_ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), "👍").Result;
                   break;
                case ECommands.restart:
                   break;
@@ -78,24 +75,25 @@ namespace ForgeOfBots.Utils
 
       public static void Send(string msg)
       {
+         return;
          if (StaticData.UserData.ChatID == -1)
          {
-            tmpMessages.Add(msg);
-            MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramChatText"), i18n.getString("GUI.MessageBox.NoTelegramChatTitle"));
+            //tmpMessages.Add(msg);
+           // MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramChatText"), i18n.getString("GUI.MessageBox.NoTelegramChatTitle"));
          }
          else
          {
             try
             {
-               _ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), msg).Result;
+               //_ = Bot.SendTextMessageAsync(new ChatId(StaticData.UserData.ChatID), msg).Result;
             }
             catch (AggregateException ex)
             {
-               tmpMessages.Add(msg);
+               //tmpMessages.Add(msg);
                string message = ex.InnerExceptions[0].Message.ToLower();
                if (message.Contains("chat") && message.Contains("not") && message.Contains("found"))
                {
-                  MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramChatText"), i18n.getString("GUI.MessageBox.NoTelegramChatTitle"));
+                  //MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramChatText"), i18n.getString("GUI.MessageBox.NoTelegramChatTitle"));
                }
             }
          }
