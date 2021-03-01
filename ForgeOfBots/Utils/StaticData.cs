@@ -40,6 +40,7 @@ namespace ForgeOfBots.Utils
       public static object MainInstance = null;
       public static GuildExpedition GEX = null;
       public static WorkerList WorkerList = null;
+      public static WSWorker wsWorker = null;
       public static bool HasLastCrash = false;
       public static List<PropertyData> PCData = new List<PropertyData>();
       public static int TavernVisitWorkerID = 0;

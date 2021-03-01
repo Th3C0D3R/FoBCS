@@ -162,6 +162,46 @@ namespace ForgeOfBots.Utils
          }
          return goodList;
       }
+      public static Dictionary<string, List<Unit>> GetUnitSorted(List<ResearchEra> eraList, List<UnitType> unitTypes, Army responseData)
+      {
+         if (unitTypes.Count <= 0 || responseData == null) return new Dictionary<string, List<Unit>>();
+         Dictionary<string, List<Unit>> armyList = new Dictionary<string, List<Unit>>();
+         foreach (ResearchEra era in eraList)
+         {
+            foreach (var unittype in unitTypes)
+            {
+               if(unittype.minEra == era.era)
+               {
+                  foreach (var army in responseData.units)
+                  {
+                     Unit unit = new Unit();
+                     unit.unit = army;
+                     int count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached;
+                     unit.name = unittype.name;
+                     unit.count = count;
+                     if(unittype.unitTypeId == army.unitTypeId)
+                     {
+                        if (armyList.ContainsKey(era.name))
+                        {
+                           armyList[era.name].Add(unit);
+                           break;
+                        }
+                        else
+                        {
+                           List<Unit> unitlist = new List<Unit>
+                        {
+                           unit
+                        };
+                           armyList.Add(era.name, unitlist);
+                           break;
+                        }
+                     }
+                  }
+               }
+            }
+         }
+         return armyList;
+      }
       public static List<KeyValuePair<string, List<EntityEx>>> GetGroupedList(List<EntityEx> buildings)
       {
          List<KeyValuePair<string, List<EntityEx>>> newBuildingList = new List<KeyValuePair<string, List<EntityEx>>>();
@@ -244,6 +284,8 @@ namespace ForgeOfBots.Utils
          }
          return null;
       }
+
+
       public static async Task setTimeout(Action action, int timeoutInMilliseconds)
       {
          await Task.Delay(timeoutInMilliseconds);

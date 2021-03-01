@@ -58,10 +58,13 @@ namespace ForgeOfBots.GameClasses
       public static List<BonusService> Bonus { get; set; } = new List<BonusService>();
       public static List<Building> AllBuildings { get; set; } = new List<Building>();
       public static List<ResearchEra> Eras { get; set; } = new List<ResearchEra>();
+      public static List<UnitType> UnitTypes { get; set; } = new List<UnitType>();
+      public static ArmyRoot Army { get; set; } = new ArmyRoot();
       public static List<EntityEx> ResidentialList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> ProductionList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> GoodProductionList { get; set; } = new List<EntityEx>();
       public static Dictionary<string, List<Good>> GoodsDict { get; set; } = new Dictionary<string, List<Good>>();
+      public static Dictionary<string, List<Unit>> UnitList { get; set; } = new Dictionary<string, List<Unit>>();
       public static List<Player> Motivateable { get; set; } = new List<Player>();
       public static TavernData OwnTavernData { get; set; } = new TavernData();
       public static List<LGContribution> Contributions { get; set; } = new List<LGContribution>();

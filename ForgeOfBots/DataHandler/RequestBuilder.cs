@@ -20,7 +20,7 @@ namespace ForgeOfBots.DataHandler
       public string VersionSecret { get; set; }
       public string Version { get; set; }
       private static int requestID => _requestId++;
-      public int RequestID { get { return requestID; } private set { } }
+      public static int RequestID { get { return requestID; } private set { } }
       private static readonly ResourceManager resMgr = StaticData.resMgr;
       public string WorldID { get; set; }
 
@@ -201,6 +201,17 @@ namespace ForgeOfBots.DataHandler
                _class = "ResourceService";
                _methode = "getPlayerResources";
                break;
+            case RequestType.getArmyInfo:
+               var armyJData = new JObject
+               {
+                  ["__class__"] = "ArmyContext",
+                  ["content"] = "main"
+               };
+               ////[{"__class__":"ServerRequest","requestData":[{"__class__":"ArmyContext","content":"main"}],"requestClass":"ArmyUnitManagementService","requestMethod":"getArmyInfo","requestId":38}]
+               _data = new JArray(armyJData);
+               _class = "ArmyUnitManagementService";
+               _methode = "getArmyInfo";
+               break;
             default:
                _data = new JArray();
                _class = "StartupService";
@@ -298,9 +309,10 @@ namespace ForgeOfBots.DataHandler
       switchWorld,
       getItems,
       getContributions,
-      getPlayerResources
+      getPlayerResources,
+      getArmyInfo
    }
-
+   
    public enum E_Motivate
    {
       Clan,
@@ -308,11 +320,11 @@ namespace ForgeOfBots.DataHandler
       Friend,
       All
    }
-
    public enum MetaRequestType
    {
       city_entities,
       research_eras,
+      unit_types
    }
 
 }

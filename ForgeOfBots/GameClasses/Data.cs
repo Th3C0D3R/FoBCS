@@ -21,6 +21,8 @@ namespace ForgeOfBots.GameClasses
       public string UID { get; set; }
       public string WID { get; set; }
       public string ForgeHX { get; set; }
+      public string WSecret { get; set; }
+      public string WSUrl { get; set; }
    }
 
    public static class DataCenter

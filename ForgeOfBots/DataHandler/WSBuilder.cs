@@ -11,44 +11,39 @@ namespace ForgeOfBots.DataHandler
    //{"requestId":13,"requestClass":"SocketAuthenticationService","requestMethod":"authWithToken","requestData":["xxx"]}
    public static class WSBuilder
    {
-      private static int _requestId = 5;
-      private static int requestID => _requestId++;
-      public static int RequestID { get { return requestID; } private set { } }
-
-      public static string GetWSRequestString(WSRequestClass wsClass,WSRequestMethode wsMethode)
+      public static string GetWSRequestString(WSRequestClass wsClass,WSRequestMethode wsMethode, dynamic data)
       {
-         string _methode;
-         string _class;
-         string onlyOne = "true";
-         bool doHack = false;
-         JToken _data;
-         switch (type)
+         string _methode = "";
+         string _class = "";
+         JToken _data = new JArray();
+         string ping = "";
+         switch (wsClass)
          {
-            case RequestType.Startup:
-               _data = new JArray();
-               _class = "StartupService";
-               _methode = "getData";
-               RequestID = 1;
-               onlyOne = "false";
+            case WSRequestClass.SocketAuthenticationService:
+               _data = new JArray(data);
+               _class = wsClass.ToString();
+               _methode = wsMethode.ToString();
                break;
             default:
-               _data = new JArray();
-               _class = "StartupService";
-               _methode = "getData";
+               ping = "PING";
                break;
          }
-         var j = new JObject
+         if(ping == "")
          {
-            ["__class__"] = "ServerRequest",
-            ["requestData"] = _data,
-            ["requestClass"] = _class,
-            ["requestMethod"] = _methode,
-            ["requestId"] = RequestID
-         };
-
-         string jsonString = "[" + JsonConvert.SerializeObject(j) + "]";
-         
-         return jsonString;
+            var j = new JObject
+            {
+               ["requestData"] = _data,
+               ["requestClass"] = _class,
+               ["requestMethod"] = _methode,
+               ["requestId"] = RequestBuilder.RequestID
+            };
+            string jsonString = "[" + JsonConvert.SerializeObject(j) + "]";
+            return jsonString;
+         }
+         else
+         {
+            return ping;
+         }
       }
    }
 

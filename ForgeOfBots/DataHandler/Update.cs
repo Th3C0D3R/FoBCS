@@ -104,6 +104,15 @@ namespace ForgeOfBots.DataHandler
                      ListClass.Eras = rootResearch.reserach.ToList();
                      UpdatedSortedGoodList();
                   }
+                  if (ListClass.UnitTypes.Count <= 0)
+                  {
+                     string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "unit_types"); }).url;
+                     script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.unit_types);
+                     string unit_types_Meta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+                     UnitTypesRoot rootUnitType = JsonConvert.DeserializeObject<UnitTypesRoot>("{\"unit_types\":" + unit_types_Meta + "}");
+                     ListClass.UnitTypes = rootUnitType.unit_types.ToList();
+                     UpdateSortedArmyList();
+                  }
                   break;
                case "getUpdates":
                   QuestServiceRoot rootQuest = JsonConvert.DeserializeObject<QuestServiceRoot>(body);
@@ -153,6 +162,19 @@ namespace ForgeOfBots.DataHandler
          dynamic ress = JsonConvert.DeserializeObject(ret);
          ListClass.Resources = ress;
          UpdatedSortedGoodList();
+      }
+      public void UpdateArmy()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.getArmyInfo, "");
+         string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         ArmyRoot ress = JsonConvert.DeserializeObject<ArmyRoot>(ret);
+         ListClass.Army = ress;
+         UpdateSortedArmyList();
+      }
+      public void UpdateSortedArmyList()
+      {
+         if (ListClass.UnitTypes.Count <= 0 || ListClass.Army.responseData == null) return;
+         ListClass.UnitList = Helper.GetUnitSorted(ListClass.Eras, ListClass.UnitTypes, ListClass.Army.responseData);
       }
       public void UpdatedSortedGoodList()
       {

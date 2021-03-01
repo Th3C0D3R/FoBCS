@@ -235,8 +235,7 @@ namespace ForgeOfBots.Forms
          if (UserData.HideBrowser)
             co.AddArgument("--window-position=-32000,-32000");
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
-         co.SetLoggingPreference(LogType.Browser, LogLevel.All);
-
+         co.SetLoggingPreference("performance", LogLevel.All);
          logger.Info($"creating chromeDriverService");
          var chromeDriverService = ChromeDriverService.CreateDefaultService();
          chromeDriverService.HideCommandPromptWindow = true;
@@ -447,14 +446,23 @@ namespace ForgeOfBots.Forms
          logger.Info($">>> GetUIDAndForgeHX");
          InitSettingsTab();
          var regExUserID = new Regex(@"https:\/\/(\w{1,2}\d{1,2})\.forgeofempires\.com\/game\/json\?h=(.+)'", RegexOptions.IgnoreCase);
+         var regExWSSecret = new Regex(@"'socket_token': '(.+)',", RegexOptions.IgnoreCase);
          var regExForgeHX = new Regex(@"https:\/\/foe\w{1,4}\.innogamescdn\.com\/\/cache\/ForgeHX(.+.js)'", RegexOptions.IgnoreCase);
          var FHXMatch = regExForgeHX.Match(source);
          var UIDMatch = regExUserID.Match(source);
+         var WSSecretMatch = regExWSSecret.Match(source);
          if (UIDMatch.Success)
          {
             StaticData.BotData.UID = UIDMatch.Groups[2].Value;
             StaticData.BotData.WID = UIDMatch.Groups[1].Value;
             logger.Info($"UID Found: {StaticData.BotData.UID} | WID Found: {StaticData.BotData.WID}");
+         }
+         if (WSSecretMatch.Success)
+         {
+            string wsurl = "wss://" + StaticData.BotData.WID + ".forgeofempires.com/socket/";
+            StaticData.BotData.WSecret = WSSecretMatch.Groups[1].Value;
+            StaticData.BotData.WSUrl = wsurl;
+            logger.Info($"WSSecret found: {StaticData.BotData.WSecret}");
          }
          if (FHXMatch.Success)
          {
@@ -553,7 +561,8 @@ namespace ForgeOfBots.Forms
             else
                ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
          }
-         
+         wsWorker = new WSWorker(StaticData.BotData.WSUrl);
+         ListClass.BackgroundWorkers.Add(wsWorker.worker);
          ReloadData();
          if (isLoading && LoadingFrm != null)
          {
@@ -580,9 +589,9 @@ namespace ForgeOfBots.Forms
          UpdateGoodProductionView();
          UpdateHiddenRewardsView();
          UpdateSnip();
+         UpdateArmy();
          //UpdateMessageCenter();
          //UpdateChat();
-         //UpdateArmy();
          if (isFirstRun)
          {
             isFirstRun = false;
@@ -2862,6 +2871,13 @@ namespace ForgeOfBots.Forms
       }
       #endregion
 
+      #region "Army"
+      public void UpdateArmy()
+      {
+         ListViewGroup group = null;
+      }
+      #endregion
+
       protected override void WndProc(ref Message m)
       {
          const int RESIZE_HANDLE_SIZE = 10;
@@ -2947,7 +2963,7 @@ namespace ForgeOfBots.Forms
 
       private void TsmiTestFunctions_Click(object sender, EventArgs e)
       {
-         TelegramNotify.Send("TEST");
+         Updater.UpdateArmy();
       }
    }
 }
