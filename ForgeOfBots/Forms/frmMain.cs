@@ -225,7 +225,6 @@ namespace ForgeOfBots.Forms
             "--disable-extensions",
             "--disable-breakpad",
             "--disable-hang-monitor",
-            "--disable-logging",
             "--disable-metrics-reporting",
             "--ssl-version-min=tl",
             "--no-sandbox",
@@ -236,6 +235,7 @@ namespace ForgeOfBots.Forms
          if (UserData.HideBrowser)
             co.AddArgument("--window-position=-32000,-32000");
          co.AddArgument($"user-agent={UserData.CustomUserAgent}");
+         co.SetLoggingPreference(LogType.Browser, LogLevel.All);
 
          logger.Info($"creating chromeDriverService");
          var chromeDriverService = ChromeDriverService.CreateDefaultService();
@@ -553,6 +553,7 @@ namespace ForgeOfBots.Forms
             else
                ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
          }
+         
          ReloadData();
          if (isLoading && LoadingFrm != null)
          {

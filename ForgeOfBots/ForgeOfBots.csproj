@@ -173,6 +173,7 @@
   <ItemGroup>
     <Compile Include="DataHandler\RequestBuilder.cs" />
     <Compile Include="DataHandler\Update.cs" />
+    <Compile Include="DataHandler\WSBuilder.cs" />
     <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
