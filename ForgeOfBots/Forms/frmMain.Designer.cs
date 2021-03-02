@@ -78,7 +78,10 @@ namespace ForgeOfBots.Forms
          this.lblFPStockValue = new System.Windows.Forms.Label();
          this.tpSocial = new System.Windows.Forms.TabPage();
          this.panel5 = new System.Windows.Forms.Panel();
-         this.tlpInactiveFriends = new System.Windows.Forms.TableLayoutPanel();
+         this.tlpPlayerLists = new System.Windows.Forms.TableLayoutPanel();
+         this.lvMember = new System.Windows.Forms.ListView();
+         this.lvFriends = new System.Windows.Forms.ListView();
+         this.lvNeighbor = new System.Windows.Forms.ListView();
          this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
          this.lblInactiveFriends = new System.Windows.Forms.Label();
          this.panel4 = new System.Windows.Forms.Panel();
@@ -104,11 +107,16 @@ namespace ForgeOfBots.Forms
          this.lblVisitable = new System.Windows.Forms.Label();
          this.lblVisitableValue = new System.Windows.Forms.Label();
          this.tpMessageCenter = new System.Windows.Forms.TabPage();
-         this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+         this.lvMessages = new System.Windows.Forms.ListView();
          this.tpChat = new System.Windows.Forms.TabPage();
-         this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+         this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+         this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+         this.lvWSMessages = new System.Windows.Forms.ListBox();
          this.tpArmy = new System.Windows.Forms.TabPage();
+         this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
          this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+         this.panel3 = new System.Windows.Forms.Panel();
+         this.lvArmy = new System.Windows.Forms.ListView();
          this.tpProduction = new System.Windows.Forms.TabPage();
          this.pnlGood = new System.Windows.Forms.Panel();
          this.panel14 = new System.Windows.Forms.Panel();
@@ -180,13 +188,6 @@ namespace ForgeOfBots.Forms
          this.mlToggleProduction = new MetroFramework.Controls.MetroLabel();
          this.mlToggleView = new MetroFramework.Controls.MetroLabel();
          this.mtView = new MetroFramework.Controls.MetroToggle();
-         this.mtpData = new MetroFramework.Controls.MetroTabPage();
-         this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
-         this.mbSaveReload = new MetroFramework.Controls.MetroButton();
-         this.lblChooseWorld = new MetroFramework.Controls.MetroLabel();
-         this.mcbCitySelection = new MetroFramework.Controls.MetroComboBox();
-         this.mbDeleteData = new MetroFramework.Controls.MetroButton();
-         this.lblDeleteData = new MetroFramework.Controls.MetroLabel();
          this.mtpBots = new MetroFramework.Controls.MetroTabPage();
          this.mcbNotifySnip = new MetroFramework.Controls.MetroCheckBox();
          this.mcbNotifyProd = new MetroFramework.Controls.MetroCheckBox();
@@ -220,6 +221,13 @@ namespace ForgeOfBots.Forms
          this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
          this.lblLanguage = new MetroFramework.Controls.MetroLabel();
          this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
+         this.mtpData = new MetroFramework.Controls.MetroTabPage();
+         this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
+         this.mbSaveReload = new MetroFramework.Controls.MetroButton();
+         this.lblChooseWorld = new MetroFramework.Controls.MetroLabel();
+         this.mcbCitySelection = new MetroFramework.Controls.MetroComboBox();
+         this.mbDeleteData = new MetroFramework.Controls.MetroButton();
+         this.lblDeleteData = new MetroFramework.Controls.MetroLabel();
          this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
          this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
          this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
@@ -231,9 +239,6 @@ namespace ForgeOfBots.Forms
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
          this.tSniper = new System.Windows.Forms.Timer(this.components);
-         this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-         this.panel3 = new System.Windows.Forms.Panel();
-         this.lvArmy = new System.Windows.Forms.ListView();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -249,6 +254,7 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel8.SuspendLayout();
          this.tpSocial.SuspendLayout();
          this.panel5.SuspendLayout();
+         this.tlpPlayerLists.SuspendLayout();
          this.tableLayoutPanel3.SuspendLayout();
          this.panel4.SuspendLayout();
          this.tableLayoutPanel1.SuspendLayout();
@@ -259,7 +265,10 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel4.SuspendLayout();
          this.tpMessageCenter.SuspendLayout();
          this.tpChat.SuspendLayout();
+         this.tableLayoutPanel14.SuspendLayout();
          this.tpArmy.SuspendLayout();
+         this.tableLayoutPanel13.SuspendLayout();
+         this.panel3.SuspendLayout();
          this.tpProduction.SuspendLayout();
          this.pnlGood.SuspendLayout();
          this.panel14.SuspendLayout();
@@ -287,14 +296,12 @@ namespace ForgeOfBots.Forms
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).BeginInit();
          this.mpGoodCycle.SuspendLayout();
          this.mpProdCycle.SuspendLayout();
-         this.mtpData.SuspendLayout();
          this.mtpBots.SuspendLayout();
          this.mtpMisc.SuspendLayout();
+         this.mtpData.SuspendLayout();
          this.mtpPremium.SuspendLayout();
          this.tpHelp.SuspendLayout();
          this.panel1.SuspendLayout();
-         this.tableLayoutPanel13.SuspendLayout();
-         this.panel3.SuspendLayout();
          this.SuspendLayout();
          // 
          // metroPanel1
@@ -698,14 +705,56 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.panel5, "panel5");
          this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-         this.panel5.Controls.Add(this.tlpInactiveFriends);
+         this.panel5.Controls.Add(this.tlpPlayerLists);
          this.panel5.Controls.Add(this.tableLayoutPanel3);
          this.panel5.Name = "panel5";
          // 
-         // tlpInactiveFriends
+         // tlpPlayerLists
          // 
-         resources.ApplyResources(this.tlpInactiveFriends, "tlpInactiveFriends");
-         this.tlpInactiveFriends.Name = "tlpInactiveFriends";
+         resources.ApplyResources(this.tlpPlayerLists, "tlpPlayerLists");
+         this.tlpPlayerLists.Controls.Add(this.lvMember, 1, 0);
+         this.tlpPlayerLists.Controls.Add(this.lvFriends, 0, 0);
+         this.tlpPlayerLists.Controls.Add(this.lvNeighbor, 2, 0);
+         this.tlpPlayerLists.Name = "tlpPlayerLists";
+         // 
+         // lvMember
+         // 
+         this.lvMember.CheckBoxes = true;
+         resources.ApplyResources(this.lvMember, "lvMember");
+         this.lvMember.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+         this.lvMember.HideSelection = false;
+         this.lvMember.Name = "lvMember";
+         this.lvMember.ShowGroups = false;
+         this.lvMember.Sorting = System.Windows.Forms.SortOrder.Ascending;
+         this.lvMember.UseCompatibleStateImageBehavior = false;
+         this.lvMember.View = System.Windows.Forms.View.List;
+         this.lvMember.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.LvFriends_ItemChecked);
+         // 
+         // lvFriends
+         // 
+         this.lvFriends.CheckBoxes = true;
+         resources.ApplyResources(this.lvFriends, "lvFriends");
+         this.lvFriends.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+         this.lvFriends.HideSelection = false;
+         this.lvFriends.Name = "lvFriends";
+         this.lvFriends.ShowGroups = false;
+         this.lvFriends.Sorting = System.Windows.Forms.SortOrder.Ascending;
+         this.lvFriends.UseCompatibleStateImageBehavior = false;
+         this.lvFriends.View = System.Windows.Forms.View.List;
+         this.lvFriends.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.LvFriends_ItemChecked);
+         // 
+         // lvNeighbor
+         // 
+         this.lvNeighbor.CheckBoxes = true;
+         resources.ApplyResources(this.lvNeighbor, "lvNeighbor");
+         this.lvNeighbor.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+         this.lvNeighbor.HideSelection = false;
+         this.lvNeighbor.Name = "lvNeighbor";
+         this.lvNeighbor.ShowGroups = false;
+         this.lvNeighbor.Sorting = System.Windows.Forms.SortOrder.Ascending;
+         this.lvNeighbor.UseCompatibleStateImageBehavior = false;
+         this.lvNeighbor.View = System.Windows.Forms.View.List;
+         this.lvNeighbor.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.LvFriends_ItemChecked);
          // 
          // tableLayoutPanel3
          // 
@@ -717,7 +766,7 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.lblInactiveFriends, "lblInactiveFriends");
          this.lblInactiveFriends.Name = "lblInactiveFriends";
-         this.lblInactiveFriends.Tag = "GUI.Social.Inactive";
+         this.lblInactiveFriends.Tag = "PlayerLists";
          // 
          // panel4
          // 
@@ -869,11 +918,36 @@ namespace ForgeOfBots.Forms
          // 
          // tpMessageCenter
          // 
-         this.tpMessageCenter.Controls.Add(this.metroLabel4);
+         this.tpMessageCenter.Controls.Add(this.lvMessages);
          resources.ApplyResources(this.tpMessageCenter, "tpMessageCenter");
          this.tpMessageCenter.Name = "tpMessageCenter";
          this.tpMessageCenter.Tag = "GUI.MessageCenter";
          this.tpMessageCenter.UseVisualStyleBackColor = true;
+         // 
+         // lvMessages
+         // 
+         this.lvMessages.Activation = System.Windows.Forms.ItemActivation.TwoClick;
+         resources.ApplyResources(this.lvMessages, "lvMessages");
+         this.lvMessages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+         this.lvMessages.HideSelection = false;
+         this.lvMessages.Name = "lvMessages";
+         this.lvMessages.UseCompatibleStateImageBehavior = false;
+         this.lvMessages.View = System.Windows.Forms.View.SmallIcon;
+         // 
+         // tpChat
+         // 
+         this.tpChat.Controls.Add(this.tableLayoutPanel14);
+         resources.ApplyResources(this.tpChat, "tpChat");
+         this.tpChat.Name = "tpChat";
+         this.tpChat.Tag = "GUI.Chat";
+         this.tpChat.UseVisualStyleBackColor = true;
+         // 
+         // tableLayoutPanel14
+         // 
+         resources.ApplyResources(this.tableLayoutPanel14, "tableLayoutPanel14");
+         this.tableLayoutPanel14.Controls.Add(this.metroLabel4, 0, 1);
+         this.tableLayoutPanel14.Controls.Add(this.lvWSMessages, 0, 0);
+         this.tableLayoutPanel14.Name = "tableLayoutPanel14";
          // 
          // metroLabel4
          // 
@@ -883,21 +957,11 @@ namespace ForgeOfBots.Forms
          this.metroLabel4.Name = "metroLabel4";
          this.metroLabel4.Tag = "GUI.UnderConstruction";
          // 
-         // tpChat
+         // lvWSMessages
          // 
-         this.tpChat.Controls.Add(this.metroLabel5);
-         resources.ApplyResources(this.tpChat, "tpChat");
-         this.tpChat.Name = "tpChat";
-         this.tpChat.Tag = "GUI.Chat";
-         this.tpChat.UseVisualStyleBackColor = true;
-         // 
-         // metroLabel5
-         // 
-         resources.ApplyResources(this.metroLabel5, "metroLabel5");
-         this.metroLabel5.FontSize = MetroFramework.MetroLabelSize.Tall;
-         this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-         this.metroLabel5.Name = "metroLabel5";
-         this.metroLabel5.Tag = "GUI.UnderConstruction";
+         resources.ApplyResources(this.lvWSMessages, "lvWSMessages");
+         this.lvWSMessages.FormattingEnabled = true;
+         this.lvWSMessages.Name = "lvWSMessages";
          // 
          // tpArmy
          // 
@@ -907,6 +971,13 @@ namespace ForgeOfBots.Forms
          this.tpArmy.Tag = "GUI.Army";
          this.tpArmy.UseVisualStyleBackColor = true;
          // 
+         // tableLayoutPanel13
+         // 
+         resources.ApplyResources(this.tableLayoutPanel13, "tableLayoutPanel13");
+         this.tableLayoutPanel13.Controls.Add(this.metroLabel6, 0, 0);
+         this.tableLayoutPanel13.Controls.Add(this.panel3, 1, 0);
+         this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+         // 
          // metroLabel6
          // 
          this.metroLabel6.BackColor = System.Drawing.Color.Transparent;
@@ -915,6 +986,23 @@ namespace ForgeOfBots.Forms
          this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Bold;
          this.metroLabel6.Name = "metroLabel6";
          this.metroLabel6.Tag = "GUI.UnderConstruction";
+         // 
+         // panel3
+         // 
+         this.panel3.Controls.Add(this.lvArmy);
+         resources.ApplyResources(this.panel3, "panel3");
+         this.panel3.Name = "panel3";
+         // 
+         // lvArmy
+         // 
+         this.lvArmy.BackColor = System.Drawing.Color.White;
+         this.lvArmy.BorderStyle = System.Windows.Forms.BorderStyle.None;
+         resources.ApplyResources(this.lvArmy, "lvArmy");
+         this.lvArmy.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+         this.lvArmy.HideSelection = false;
+         this.lvArmy.MultiSelect = false;
+         this.lvArmy.Name = "lvArmy";
+         this.lvArmy.UseCompatibleStateImageBehavior = false;
          // 
          // tpProduction
          // 
@@ -1183,9 +1271,9 @@ namespace ForgeOfBots.Forms
          // mtcSettings
          // 
          this.mtcSettings.Controls.Add(this.mtpProduction);
-         this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpData);
          this.mtcSettings.Controls.Add(this.mtpBots);
+         this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpPremium);
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
@@ -1504,64 +1592,6 @@ namespace ForgeOfBots.Forms
          this.mtView.UseVisualStyleBackColor = false;
          this.mtView.CheckedChanged += new System.EventHandler(this.mtView_CheckedChanged);
          // 
-         // mtpData
-         // 
-         this.mtpData.Controls.Add(this.metroLabel11);
-         this.mtpData.Controls.Add(this.mbSaveReload);
-         this.mtpData.Controls.Add(this.lblChooseWorld);
-         this.mtpData.Controls.Add(this.mcbCitySelection);
-         this.mtpData.Controls.Add(this.mbDeleteData);
-         this.mtpData.Controls.Add(this.lblDeleteData);
-         this.mtpData.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpData, "mtpData");
-         this.mtpData.Name = "mtpData";
-         this.mtpData.Tag = "GUI.Settings.UserData";
-         this.mtpData.VerticalScrollbarBarColor = true;
-         // 
-         // metroLabel11
-         // 
-         resources.ApplyResources(this.metroLabel11, "metroLabel11");
-         this.metroLabel11.BackColor = System.Drawing.SystemColors.Control;
-         this.metroLabel11.CustomForeColor = true;
-         this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
-         this.metroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-         this.metroLabel11.ForeColor = System.Drawing.Color.Red;
-         this.metroLabel11.Name = "metroLabel11";
-         this.metroLabel11.Tag = "GUI.Settings.UserData.Warning";
-         // 
-         // mbSaveReload
-         // 
-         resources.ApplyResources(this.mbSaveReload, "mbSaveReload");
-         this.mbSaveReload.Name = "mbSaveReload";
-         this.mbSaveReload.Tag = "GUI.Settings.UserData.SaveReload";
-         this.mbSaveReload.Click += new System.EventHandler(this.mbSaveReload_Click);
-         // 
-         // lblChooseWorld
-         // 
-         resources.ApplyResources(this.lblChooseWorld, "lblChooseWorld");
-         this.lblChooseWorld.Name = "lblChooseWorld";
-         this.lblChooseWorld.Tag = "GUI.Settings.UserData.ChangeCity";
-         // 
-         // mcbCitySelection
-         // 
-         this.mcbCitySelection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-         this.mcbCitySelection.FormattingEnabled = true;
-         resources.ApplyResources(this.mcbCitySelection, "mcbCitySelection");
-         this.mcbCitySelection.Name = "mcbCitySelection";
-         // 
-         // mbDeleteData
-         // 
-         resources.ApplyResources(this.mbDeleteData, "mbDeleteData");
-         this.mbDeleteData.Name = "mbDeleteData";
-         this.mbDeleteData.Tag = "GUI.Settings.UserData.DeleteDataButton";
-         this.mbDeleteData.Click += new System.EventHandler(this.mbDeleteData_Click);
-         // 
-         // lblDeleteData
-         // 
-         resources.ApplyResources(this.lblDeleteData, "lblDeleteData");
-         this.lblDeleteData.Name = "lblDeleteData";
-         this.lblDeleteData.Tag = "GUI.Settings.UserData.DeleteData";
-         // 
          // mtpBots
          // 
          this.mtpBots.Controls.Add(this.mcbNotifySnip);
@@ -1823,6 +1853,64 @@ namespace ForgeOfBots.Forms
          this.mcbLanguage.Name = "mcbLanguage";
          this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
          // 
+         // mtpData
+         // 
+         this.mtpData.Controls.Add(this.metroLabel11);
+         this.mtpData.Controls.Add(this.mbSaveReload);
+         this.mtpData.Controls.Add(this.lblChooseWorld);
+         this.mtpData.Controls.Add(this.mcbCitySelection);
+         this.mtpData.Controls.Add(this.mbDeleteData);
+         this.mtpData.Controls.Add(this.lblDeleteData);
+         this.mtpData.HorizontalScrollbarBarColor = true;
+         resources.ApplyResources(this.mtpData, "mtpData");
+         this.mtpData.Name = "mtpData";
+         this.mtpData.Tag = "GUI.Settings.UserData";
+         this.mtpData.VerticalScrollbarBarColor = true;
+         // 
+         // metroLabel11
+         // 
+         resources.ApplyResources(this.metroLabel11, "metroLabel11");
+         this.metroLabel11.BackColor = System.Drawing.SystemColors.Control;
+         this.metroLabel11.CustomForeColor = true;
+         this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
+         this.metroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+         this.metroLabel11.ForeColor = System.Drawing.Color.Red;
+         this.metroLabel11.Name = "metroLabel11";
+         this.metroLabel11.Tag = "GUI.Settings.UserData.Warning";
+         // 
+         // mbSaveReload
+         // 
+         resources.ApplyResources(this.mbSaveReload, "mbSaveReload");
+         this.mbSaveReload.Name = "mbSaveReload";
+         this.mbSaveReload.Tag = "GUI.Settings.UserData.SaveReload";
+         this.mbSaveReload.Click += new System.EventHandler(this.mbSaveReload_Click);
+         // 
+         // lblChooseWorld
+         // 
+         resources.ApplyResources(this.lblChooseWorld, "lblChooseWorld");
+         this.lblChooseWorld.Name = "lblChooseWorld";
+         this.lblChooseWorld.Tag = "GUI.Settings.UserData.ChangeCity";
+         // 
+         // mcbCitySelection
+         // 
+         this.mcbCitySelection.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+         this.mcbCitySelection.FormattingEnabled = true;
+         resources.ApplyResources(this.mcbCitySelection, "mcbCitySelection");
+         this.mcbCitySelection.Name = "mcbCitySelection";
+         // 
+         // mbDeleteData
+         // 
+         resources.ApplyResources(this.mbDeleteData, "mbDeleteData");
+         this.mbDeleteData.Name = "mbDeleteData";
+         this.mbDeleteData.Tag = "GUI.Settings.UserData.DeleteDataButton";
+         this.mbDeleteData.Click += new System.EventHandler(this.mbDeleteData_Click);
+         // 
+         // lblDeleteData
+         // 
+         resources.ApplyResources(this.lblDeleteData, "lblDeleteData");
+         this.lblDeleteData.Name = "lblDeleteData";
+         this.lblDeleteData.Tag = "GUI.Settings.UserData.DeleteData";
+         // 
          // mtpPremium
          // 
          this.mtpPremium.Controls.Add(this.mbCheckSerial);
@@ -1901,31 +1989,6 @@ namespace ForgeOfBots.Forms
          this.tSniper.Interval = 3600000;
          this.tSniper.Tick += new System.EventHandler(this.TSniper_Tick);
          // 
-         // tableLayoutPanel13
-         // 
-         resources.ApplyResources(this.tableLayoutPanel13, "tableLayoutPanel13");
-         this.tableLayoutPanel13.Controls.Add(this.metroLabel6, 0, 0);
-         this.tableLayoutPanel13.Controls.Add(this.panel3, 1, 0);
-         this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-         // 
-         // panel3
-         // 
-         this.panel3.Controls.Add(this.lvArmy);
-         resources.ApplyResources(this.panel3, "panel3");
-         this.panel3.Name = "panel3";
-         // 
-         // lvArmy
-         // 
-         this.lvArmy.BackColor = System.Drawing.SystemColors.Control;
-         this.lvArmy.BorderStyle = System.Windows.Forms.BorderStyle.None;
-         resources.ApplyResources(this.lvArmy, "lvArmy");
-         this.lvArmy.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-         this.lvArmy.HideSelection = false;
-         this.lvArmy.MultiSelect = false;
-         this.lvArmy.Name = "lvArmy";
-         this.lvArmy.UseCompatibleStateImageBehavior = false;
-         this.lvArmy.View = System.Windows.Forms.View.List;
-         // 
          // frmMain
          // 
          resources.ApplyResources(this, "$this");
@@ -1955,6 +2018,7 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel8.PerformLayout();
          this.tpSocial.ResumeLayout(false);
          this.panel5.ResumeLayout(false);
+         this.tlpPlayerLists.ResumeLayout(false);
          this.tableLayoutPanel3.ResumeLayout(false);
          this.tableLayoutPanel3.PerformLayout();
          this.panel4.ResumeLayout(false);
@@ -1969,7 +2033,10 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel4.PerformLayout();
          this.tpMessageCenter.ResumeLayout(false);
          this.tpChat.ResumeLayout(false);
+         this.tableLayoutPanel14.ResumeLayout(false);
          this.tpArmy.ResumeLayout(false);
+         this.tableLayoutPanel13.ResumeLayout(false);
+         this.panel3.ResumeLayout(false);
          this.tpProduction.ResumeLayout(false);
          this.tpProduction.PerformLayout();
          this.pnlGood.ResumeLayout(false);
@@ -2005,16 +2072,14 @@ namespace ForgeOfBots.Forms
          this.mpGoodCycle.PerformLayout();
          this.mpProdCycle.ResumeLayout(false);
          this.mpProdCycle.PerformLayout();
-         this.mtpData.ResumeLayout(false);
-         this.mtpData.PerformLayout();
          this.mtpBots.ResumeLayout(false);
          this.mtpBots.PerformLayout();
          this.mtpMisc.ResumeLayout(false);
+         this.mtpData.ResumeLayout(false);
+         this.mtpData.PerformLayout();
          this.mtpPremium.ResumeLayout(false);
          this.tpHelp.ResumeLayout(false);
          this.panel1.ResumeLayout(false);
-         this.tableLayoutPanel13.ResumeLayout(false);
-         this.panel3.ResumeLayout(false);
          this.ResumeLayout(false);
 
       }
@@ -2070,7 +2135,7 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Panel panel5;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
       private System.Windows.Forms.Label lblInactiveFriends;
-      private System.Windows.Forms.TableLayoutPanel tlpInactiveFriends;
+      private System.Windows.Forms.TableLayoutPanel tlpPlayerLists;
       private System.Windows.Forms.TabPage tpTavern;
       private System.Windows.Forms.Panel panel6;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -2186,8 +2251,6 @@ namespace ForgeOfBots.Forms
       private MetroFramework.Controls.MetroButton mbSnip;
       private System.Windows.Forms.TabPage tpHelp;
       private System.Windows.Forms.TreeView tvHelp;
-      private MetroFramework.Controls.MetroLabel metroLabel4;
-      private MetroFramework.Controls.MetroLabel metroLabel5;
       private MetroFramework.Controls.MetroLabel metroLabel6;
       private MetroFramework.Controls.MetroPanel metroPanel4;
       private MetroFramework.Controls.MetroLabel metroLabel7;
@@ -2224,5 +2287,12 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
       private System.Windows.Forms.Panel panel3;
       private System.Windows.Forms.ListView lvArmy;
+      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
+      private MetroFramework.Controls.MetroLabel metroLabel4;
+      public System.Windows.Forms.ListBox lvWSMessages;
+      private System.Windows.Forms.ListView lvMessages;
+      private System.Windows.Forms.ListView lvMember;
+      private System.Windows.Forms.ListView lvFriends;
+      private System.Windows.Forms.ListView lvNeighbor;
    }
 }

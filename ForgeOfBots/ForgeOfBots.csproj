@@ -251,6 +251,7 @@
     <Compile Include="GameClasses\ResponseClasses\GuildExpedition.cs" />
     <Compile Include="GameClasses\ResponseClasses\Inventory.cs" />
     <Compile Include="GameClasses\ResponseClasses\LG.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Messages.cs" />
     <Compile Include="GameClasses\ResponseClasses\Metadata.cs" />
     <Compile Include="GameClasses\ResponseClasses\Polivate.cs" />
     <Compile Include="GameClasses\ResponseClasses\QuestService.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="GameClasses\ResponseClasses\Resource.cs" />
     <Compile Include="GameClasses\ResponseClasses\Rewards.cs" />
     <Compile Include="GameClasses\ResponseClasses\Unit_Types.cs" />
+    <Compile Include="GameClasses\ResponseClasses\WebSocketResponse.cs" />
     <Compile Include="GameClasses\ResponseClasses\World.cs" />
     <Compile Include="GameClasses\Telegram\ECommands.cs" />
     <Compile Include="Updater\Updater.cs" />
@@ -267,7 +269,7 @@
     <Compile Include="Utils\ForgeHX.cs" />
     <Compile Include="Utils\GEHelper.cs" />
     <Compile Include="Utils\CrashHelper.cs" />
-    <Compile Include="Utils\GoodImageExtractor.cs" />
+    <Compile Include="Utils\ImageExtractor.cs" />
     <Compile Include="Utils\i18n.cs" />
     <Compile Include="Utils\StaticData.cs" />
     <Compile Include="Utils\TelegramNotify.cs" />

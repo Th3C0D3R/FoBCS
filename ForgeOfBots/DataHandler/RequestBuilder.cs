@@ -30,8 +30,11 @@ namespace ForgeOfBots.DataHandler
          int[,] armyData = new int[2, 8];
          int idData = 0;
          string world = StaticData.UserData.LastWorld;
+         string messageCategory = "";
          if (type == RequestType.QueryProduction || type == RequestType.CollectProduction || type == RequestType.getConstruction || type == RequestType.contributeForgePoints)
             queryData = (int[])data;
+         else if (type == RequestType.getOverviewForCategory)
+            messageCategory = $"{data}";
          else if (type == RequestType.switchWorld)
             world = (data == StaticData.UserData.LastWorld ? data : StaticData.UserData.LastWorld);
          else if (type == RequestType.GEAttack)
@@ -201,13 +204,17 @@ namespace ForgeOfBots.DataHandler
                _class = "ResourceService";
                _methode = "getPlayerResources";
                break;
+            case RequestType.getOverviewForCategory:
+               _data = new JArray(messageCategory,99,true,"none");
+               _class = "ConversationService";
+               _methode = "getOverviewForCategory";
+               break;
             case RequestType.getArmyInfo:
                var armyJData = new JObject
                {
                   ["__class__"] = "ArmyContext",
                   ["content"] = "main"
                };
-               ////[{"__class__":"ServerRequest","requestData":[{"__class__":"ArmyContext","content":"main"}],"requestClass":"ArmyUnitManagementService","requestMethod":"getArmyInfo","requestId":38}]
                _data = new JArray(armyJData);
                _class = "ArmyUnitManagementService";
                _methode = "getArmyInfo";
@@ -310,9 +317,14 @@ namespace ForgeOfBots.DataHandler
       getItems,
       getContributions,
       getPlayerResources,
-      getArmyInfo
+      getArmyInfo,
+      getOverviewForCategory
    }
-   
+   public enum MessageType
+   {
+      social,
+      guild
+   }
    public enum E_Motivate
    {
       Clan,

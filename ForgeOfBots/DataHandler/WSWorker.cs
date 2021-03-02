@@ -1,14 +1,12 @@
-﻿using ForgeOfBots.Utils;
+﻿using ForgeOfBots.Forms;
+using ForgeOfBots.GameClasses.ResponseClasses;
+using ForgeOfBots.Utils;
+using Convert = Newtonsoft.Json.JsonConvert;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using Newtonsoft.Json.Linq;
 
 namespace ForgeOfBots.DataHandler
 {
@@ -16,6 +14,7 @@ namespace ForgeOfBots.DataHandler
    {
       private IWebDriver driver = StaticData.driver;
       public BackgroundWorkerEX worker = null;
+      public frmMain Main = null;
       private readonly object _locker = new object();
 
       public WSWorker(string wsurl)
@@ -39,14 +38,25 @@ namespace ForgeOfBots.DataHandler
                {
                   foreach (var wsdata in driver.Manage().Logs.GetLog("performance"))
                   {
-                     dynamic wsJson = JsonConvert.DeserializeObject(wsdata.Message);
+                     dynamic wsJson = Convert.DeserializeObject(wsdata.Message);
                      try
                      {
                         if (wsJson["message"]["method"] == "Network.webSocketFrameReceived")
                         {
                            JToken payloadData = wsJson["message"]["params"]["response"]["payloadData"];
-                           if(payloadData.ToString().Contains("requestData") && payloadData.ToString().Contains("requestClass") && payloadData.ToString().Contains("requestMethod"))
+                           if (payloadData.ToString().Contains("responseData") && payloadData.ToString().Contains("requestClass") && payloadData.ToString().Contains("requestMethod"))
                            {
+                              var token = payloadData;
+                              WSResponse response = Convert.DeserializeObject<WSResponse>(token.ToString());
+                              if (Main != null)
+                              {
+                                 try
+                                 {
+                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Get: {response.requestClass} {response.requestMethod}"));
+                                 }
+                                 catch (Exception)
+                                 {}
+                              }
                               //OtherPlayerService_newEvent trade_accepted
                               //OtherPlayerService_newEvent great_building_contribution
                               //GuildBattlegroundService_getProvinces
@@ -54,7 +64,6 @@ namespace ForgeOfBots.DataHandler
                               //ConversationService_getNewMessage
                               //ItemAuctionService_updateBid
                               //GuildExpeditionService_receiveContributionNotification
-
                            }
                         }
                         if (wsJson["message"]["method"] == "Network.webSocketFrameSent")
@@ -62,7 +71,17 @@ namespace ForgeOfBots.DataHandler
                            JToken payloadData = wsJson["message"]["params"]["response"]["payloadData"];
                            if (payloadData.ToString().Contains("requestId") && payloadData.ToString().Contains("requestClass") && payloadData.ToString().Contains("requestMethod"))
                            {
-
+                              var token = payloadData;
+                              WSRequest request = Convert.DeserializeObject<WSRequest>(token.ToString());
+                              if (Main != null)
+                              {
+                                 try
+                                 {
+                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Sent: {request.requestClass} {request.requestMethod}"));
+                                 }
+                                 catch (Exception)
+                                 { }
+                              }
                            }
                         }
                      }

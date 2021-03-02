@@ -67,6 +67,7 @@ namespace ForgeOfBots.GameClasses
       public static Dictionary<string, List<Unit>> UnitList { get; set; } = new Dictionary<string, List<Unit>>();
       public static List<Player> Motivateable { get; set; } = new List<Player>();
       public static TavernData OwnTavernData { get; set; } = new TavernData();
+      public static MessageRoot MessageCenter { get; set; } = new MessageRoot();
       public static List<LGContribution> Contributions { get; set; } = new List<LGContribution>();
       public static LanguageList AvailableLanguages { get; set; } = new LanguageList();
       public static List<LGSnip> AllLGs { get; set; } = new List<LGSnip>();

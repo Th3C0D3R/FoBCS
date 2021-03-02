@@ -28,6 +28,7 @@ namespace ForgeOfBots.Utils
       public static Version Version = Assembly.GetExecutingAssembly().GetName().Version;
       public static UserDataInput usi = null;
       public static ImageList GoodImageList = null;
+      public static ImageList UnitImageLise = null;
       public static ImageList Portraits = new ImageList();
       public static IJavaScriptExecutor jsExecutor;
       public static ICookieJar cookieJar;

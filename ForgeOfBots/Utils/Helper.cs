@@ -132,7 +132,6 @@ namespace ForgeOfBots.Utils
          {
             foreach (JToken resDef in resourceDefList["responseData"].ToList())
             {
-               //if (goodList.ContainsKey(era.name) && goodList[era.name].Count >= 5 && ((Eras)Enum.Parse(typeof(Eras), era.era, true)) < Eras.ArcticFuture) break;
                if (resDef["era"]?.ToString() == era.era)
                {
                   foreach (JToken resource in resources["responseData"]["resources"].ToList())

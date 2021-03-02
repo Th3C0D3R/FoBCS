@@ -26,6 +26,7 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public bool incoming { get; set; } = false;
       public bool isInvitedFriend { get; set; } = false;
       public List<LGSnip> LGs { get; set; }
+      public Clan clan { get; set; }
 
       public override string ToString()
       {
@@ -42,7 +43,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public bool is_online { get; set; }
       public bool isInvitedToClan { get; set; }
       public int clan_id { get; set; }
-      public Clan clan { get; set; }
       public bool canSabotage { get; set; }
       public Topachievement[] topAchievements { get; set; }
       public string __class__ { get; set; }
@@ -57,7 +57,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int rank { get; set; }
       public bool isInvitedToClan { get; set; }
       public int clan_id { get; set; }
-      public Clan clan { get; set; }
       public bool canSabotage { get; set; }
       public string __class__ { get; set; }
       public Topachievement[] topAchievements { get; set; }
@@ -68,7 +67,6 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public int rank { get; set; }
       public bool is_online { get; set; }
       public int clan_id { get; set; }
-      public Clan clan { get; set; }
       public int won_battles { get; set; }
       public bool canSabotage { get; set; }
       public Topachievement[] topAchievements { get; set; }

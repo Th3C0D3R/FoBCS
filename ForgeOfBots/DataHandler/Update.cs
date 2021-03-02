@@ -171,6 +171,14 @@ namespace ForgeOfBots.DataHandler
          ListClass.Army = ress;
          UpdateSortedArmyList();
       }
+      public void UpdateMessages(string type)
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.getOverviewForCategory, type);
+         string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         MessageRoot ress = JsonConvert.DeserializeObject<MessageRoot>(ret);
+         ListClass.MessageCenter = ress;
+         
+      }
       public void UpdateSortedArmyList()
       {
          if (ListClass.UnitTypes.Count <= 0 || ListClass.Army.responseData == null) return;

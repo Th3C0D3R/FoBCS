@@ -254,8 +254,10 @@ namespace ForgeOfBots.Forms
 
          logger.Info($"Process Portraits");
          ProcessPortraits();
-         logger.Info($"ExtractGoodImages");
-         GoodImageExtractor.GetGoodImages(UserData.WorldServer);
+         logger.Info($"ExtractImages");
+         ImageExtractor ie = new ImageExtractor();
+         ie.GetGoodImages(UserData.WorldServer);
+         ie.GetUnitImages(UserData.WorldServer, new Utils.Size(50, 50));
 
          if (!string.IsNullOrWhiteSpace(UserData.SerialKey))
          {
@@ -561,8 +563,13 @@ namespace ForgeOfBots.Forms
             else
                ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
          }
-         wsWorker = new WSWorker(StaticData.BotData.WSUrl);
+#if DEBUG
+         wsWorker = new WSWorker(StaticData.BotData.WSUrl)
+         {
+            Main = this
+         };
          ListClass.BackgroundWorkers.Add(wsWorker.worker);
+#endif
          ReloadData();
          if (isLoading && LoadingFrm != null)
          {
@@ -703,45 +710,37 @@ namespace ForgeOfBots.Forms
          Invoker.SetProperty(lblFriendsCount, () => lblFriendsCount.Text, $"{friendMotivate.Count}/{ListClass.FriendList.Count}");
          Invoker.SetProperty(lblClanMemberCount, () => lblClanMemberCount.Text, $"{clanMotivate.Count}/{ListClass.ClanMemberList.Count}");
          Invoker.SetProperty(lblNeighborCount, () => lblNeighborCount.Text, $"{neighborlist.Count}/{ListClass.NeighborList.Count}");
-         Invoker.SetProperty(lblInactiveFriends, () => lblInactiveFriends.Text, i18n.getString("InactiveFriends"));
+         Invoker.SetProperty(lblInactiveFriends, () => lblInactiveFriends.Text, i18n.getString("PlayerLists"));
 
-         var inactiveFriends = ListClass.FriendList.FindAll(f => (f.is_active == false && f.is_self == false));
-         int row = 0;
-         Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Clear());
-         Invoker.SetProperty(tlpInactiveFriends, () => tlpInactiveFriends.RowCount, inactiveFriends.Count);
-         foreach (var item in inactiveFriends)
+         Invoker.CallMethode(lvFriends, () => lvFriends.Items.Clear());
+         foreach (var friend in ListClass.FriendList)
          {
-            int col = 0;
-            Label lblName = new Label
+            ListViewItem lvi = new ListViewItem()
             {
-               Dock = DockStyle.Top,
-               TextAlign = ContentAlignment.BottomCenter,
-               Font = new Font("Microsoft Sans Serif", 15, FontStyle.Regular),
-               Text = item.name
+               Text = $"{friend.name} {(friend.clan != null ? "(" + friend.clan.name + ") " : "")}{(friend.is_active == false && friend.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
+               Tag = friend
             };
-            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Add(lblName));
-            col += 1;
-            Label lblScore = new Label
+            Invoker.CallMethode(lvFriends, () => lvFriends.Items.Add(lvi));
+         }
+         Invoker.CallMethode(lvMember, () => lvMember.Items.Clear());
+         foreach (var member in ListClass.ClanMemberList)
+         {
+            ListViewItem lvi = new ListViewItem()
             {
-               Dock = DockStyle.Top,
-               TextAlign = ContentAlignment.TopCenter,
-               Font = new Font("Microsoft Sans Serif", 15, FontStyle.Regular),
-               Text = item.score.ToString("N0")
+               Text = $"{member.name} {(member.is_active == false && member.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
+               Tag = member
             };
-            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Add(lblScore));
-            col += 1;
-            Button btnRemove = new Button
+            Invoker.CallMethode(lvMember, () => lvMember.Items.Add(lvi));
+         }
+         Invoker.CallMethode(lvNeighbor, () => lvNeighbor.Items.Clear());
+         foreach (var neighbor in ListClass.NeighborList)
+         {
+            ListViewItem lvi = new ListViewItem()
             {
-               Tag = item.player_id,
-               Text = i18n.getString("Remove"),
-               Dock = DockStyle.Top,
-               AutoSize = true,
-               Font = new System.Drawing.Font("Microsoft Sans Serif", 15, FontStyle.Regular)
+               Text = $"{neighbor.name} {(neighbor.clan != null ? "(" + neighbor.clan.name + ") " : "")} {(neighbor.is_active == false && neighbor.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
+               Tag = neighbor
             };
-            btnRemove.Click += RemoveFriend;
-            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.Controls.Add(btnRemove));
-            row += 1;
-            Invoker.CallMethode(tlpInactiveFriends, () => tlpInactiveFriends.RowStyles.Add(new RowStyle(SizeType.AutoSize)));
+            Invoker.CallMethode(lvNeighbor, () => lvNeighbor.Items.Add(lvi));
          }
 
          #endregion
@@ -1779,8 +1778,10 @@ namespace ForgeOfBots.Forms
 
          logger.Info($"Process Portraits");
          ProcessPortraits();
-         logger.Info($"ExtractGoodImages");
-         GoodImageExtractor.GetGoodImages(UserData.WorldServer);
+         logger.Info($"ExtractImages");
+         ImageExtractor ie = new ImageExtractor();
+         ie.GetGoodImages(UserData.WorldServer);
+         ie.GetUnitImages(UserData.WorldServer, new Utils.Size(50, 50));
 
          if (!string.IsNullOrWhiteSpace(UserData.SerialKey))
          {
@@ -1826,6 +1827,7 @@ namespace ForgeOfBots.Forms
       }
       private void McbNotifyProd_CheckedChanged(object sender, EventArgs e)
       {
+         return;
          UserData.ProductionBotNotification = mcbNotifyProd.Checked;
          UserData.SaveSettings();
          if (UserData.TelegramUserName.IsEmpty() && mcbNotifyProd.Checked)
@@ -1835,6 +1837,7 @@ namespace ForgeOfBots.Forms
       }
       private void McbNotifySnip_CheckedChanged(object sender, EventArgs e)
       {
+         return;
          UserData.SnipBotNotification = mcbNotifySnip.Checked;
          UserData.SaveSettings();
          if (UserData.TelegramUserName.IsEmpty() && mcbNotifySnip.Checked)
@@ -2499,7 +2502,7 @@ namespace ForgeOfBots.Forms
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors)) ListClass.SnipablePlayers.AddRange(ListClass.NeighborList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
                if (UserData.IgnoredPlayers.Count > 0)
-                  ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => UserData.IgnoredPlayers.Contains(p.player_id.Value)).ToList();
+                  ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => !UserData.IgnoredPlayers.Contains(p.player_id.Value)).ToList();
                ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => p.incoming == false && p.isInvitedFriend == false).ToList();
                ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
@@ -2874,7 +2877,97 @@ namespace ForgeOfBots.Forms
       #region "Army"
       public void UpdateArmy()
       {
-         ListViewGroup group = null;
+         if (GoodImageList != null)
+         {
+            try
+            {
+               Updater.UpdateArmy();
+               Invoker.CallMethode(lvArmy, () => lvArmy.Items.Clear());
+               Invoker.SetProperty(lvArmy, () => lvArmy.LargeImageList, UnitImageLise);
+               ListViewGroup group = null;
+               string lastEra = "";
+               foreach (KeyValuePair<string, List<Unit>> item in ListClass.UnitList)
+               {
+                  if (lastEra != item.Key)
+                  {
+                     group = new ListViewGroup(item.Key, HorizontalAlignment.Left);
+                  }
+                  foreach (Unit unit in item.Value)
+                  {
+                     ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit.unitTypeId}")
+                     {
+                        Group = group
+                     };
+                     Invoker.CallMethode(lvArmy, () => lvArmy.Items.Add(lvi));
+                     if (group != null && group.Header != lastEra)
+                     {
+                        Invoker.CallMethode(lvArmy, () => lvArmy.Groups.Add(group));
+                        lastEra = item.Key;
+                     }
+                  }
+               }
+            }
+            catch (Exception)
+            { }
+         }
+      }
+      #endregion
+
+      #region "Social"
+      private void LvFriends_ItemChecked(object sender, ItemCheckedEventArgs e)
+      {
+         Player p = (Player)e.Item.Tag;
+         if (e.Item.Checked)
+         {
+            if (UserData.IgnoredPlayers.Contains(p.player_id.Value)) return;
+            UserData.IgnoredPlayers.Add(p.player_id.Value);
+            UserData.SaveSettings();
+            UpdateSocial();
+         }
+         else
+         {
+            if (!UserData.IgnoredPlayers.Contains(p.player_id.Value)) return;
+            UserData.IgnoredPlayers.Remove(p.player_id.Value);
+            UserData.SaveSettings();
+            UpdateSocial();
+         }
+      }
+      #endregion
+
+      #region "Messages"
+      public void UpdateMessages()
+      {
+         try
+         {
+            Updater.UpdateMessages("social");
+            Updater.UpdateMessages("guild");
+            Invoker.CallMethode(lvMessages, () => lvMessages.Items.Clear());
+            Invoker.SetProperty(lvMessages, () => lvMessages.LargeImageList, UnitImageLise);
+            ListViewGroup group = null;
+            string lastEra = "";
+            foreach (KeyValuePair<string, List<Unit>> item in ListClass.UnitList)
+            {
+               if (lastEra != item.Key)
+               {
+                  group = new ListViewGroup(item.Key, HorizontalAlignment.Left);
+               }
+               foreach (Unit unit in item.Value)
+               {
+                  ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit.unitTypeId}")
+                  {
+                     Group = group
+                  };
+                  Invoker.CallMethode(lvArmy, () => lvArmy.Items.Add(lvi));
+                  if (group != null && group.Header != lastEra)
+                  {
+                     Invoker.CallMethode(lvArmy, () => lvArmy.Groups.Add(group));
+                     lastEra = item.Key;
+                  }
+               }
+            }
+         }
+         catch (Exception)
+         { }
       }
       #endregion
 
@@ -2963,7 +3056,7 @@ namespace ForgeOfBots.Forms
 
       private void TsmiTestFunctions_Click(object sender, EventArgs e)
       {
-         Updater.UpdateArmy();
+         Updater.UpdateMessages("social");
       }
    }
 }
