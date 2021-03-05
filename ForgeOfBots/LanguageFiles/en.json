@@ -12,6 +12,7 @@
     "GUI.Social": "Social",
     "GUI.MessageCenter": "Messages",
     "GUI.Chat": "Chat",
+    "GUI.Battle": "Battle",
     "GUI.Army": "Army",
     "GUI.Production": "Production",
     "GUI.City": "City",
