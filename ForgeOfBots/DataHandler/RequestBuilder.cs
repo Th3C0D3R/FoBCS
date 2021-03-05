@@ -27,22 +27,23 @@ namespace ForgeOfBots.DataHandler
       public string GetRequestScript(RequestType type, dynamic data)
       {
          int[] queryData = new int[] { };
-         int[,] armyData = new int[2, 8];
          int idData = 0;
          string world = StaticData.UserData.LastWorld;
          string messageCategory = "";
+         int[] attackData = new int[] { };
          if (type == RequestType.QueryProduction || type == RequestType.CollectProduction || type == RequestType.getConstruction || type == RequestType.contributeForgePoints)
             queryData = (int[])data;
          else if (type == RequestType.getOverviewForCategory)
             messageCategory = $"{data}";
          else if (type == RequestType.switchWorld)
             world = (data == StaticData.UserData.LastWorld ? data : StaticData.UserData.LastWorld);
-         else if (type == RequestType.GEAttack)
-            armyData = (int[,])data;
+         else if (type == RequestType.GEXstartAttak)
+            idData = int.Parse(data);
          else if (data is int iData)
             idData = iData;
          else if (data != "" && data != "[]")
             idData = int.Parse(data);
+
          string RequestScript = resMgr.GetString("fetchData");
          string _methode;
          string _class;
@@ -157,26 +158,81 @@ namespace ForgeOfBots.DataHandler
                _class = "WorldService";
                _methode = "getWorlds";
                break;
-            case RequestType.GEServiceOverview:
+            case RequestType.GEXgetOverview:
                _data = new JArray();
                _class = "GuildExpeditionService";
                _methode = "getOverview";
                break;
-            case RequestType.GEServiceEncounter:
+            case RequestType.GEXgetEncounter:
                _data = new JArray(idData);
                _class = "GuildExpeditionService";
                _methode = "getEncounter";
                break;
-            case RequestType.GEServiceCollectChest:
+            case RequestType.GEXopenChest:
                _data = new JArray(idData);
                _class = "GuildExpeditionService";
                _methode = "openChest";
                break;
-            case RequestType.GEAttack:
+            case RequestType.GEXstartAttak:
+               var gexstart = new JObject
+               {
+                  ["__class__"] = "GuildExpeditionBattleType",
+                  ["attackerPlayerId"] = 0,
+                  ["defenderPlayerId"] = 0,
+                  ["era"] = null,
+                  ["type"] = "guild_expedition",
+                  ["currentWaveId"] = 0,
+                  ["totalWaves"] = 0,
+                  ["encounterId"] = idData,
+                  ["armyId"] = 0
+               };
+               _data = new JArray(gexstart, true);
+               _class = "BattlefieldService";
+               _methode = "startByBattleType";
+               break;
+            case RequestType.GBGgetBattleground:
                _data = new JArray();
-               doHack = true;
-               _class = "ArmyUnitManagementService";
-               _methode = "updatePools";
+               _class = "GuildBattlegroundService";
+               _methode = "getBattleground";
+               break;
+            case RequestType.GBGgetState:
+               _data = new JArray();
+               _class = "GuildBattlegroundStateService";
+               _methode = "getState";
+               break;
+            case RequestType.GBGgetArmyInfo:
+               var gbgarmyinfo = new JObject
+               {
+                  ["__class__"] = "BattlegroundBattleType",
+                  ["attackerPlayerId"] = 0,
+                  ["defenderPlayerId"] = 0,
+                  ["era"] = null,
+                  ["type"] = "battleground",
+                  ["currentWaveId"] = 0,
+                  ["totalWaves"] = 0,
+                  ["provinceId"] = idData,
+                  ["battlesWon"] = 0
+               };
+               _data = new JArray(gbgarmyinfo);
+               _class = "BattlefieldService";
+               _methode = "getArmyPreview";
+               break;
+            case RequestType.GBGstartAttack:
+               var gbgstart = new JObject
+               {
+                  ["__class__"] = "BattlegroundBattleType",
+                  ["attackerPlayerId"] = 0,
+                  ["defenderPlayerId"] = 0,
+                  ["era"] = null,
+                  ["type"] = "battleground",
+                  ["currentWaveId"] = 0,
+                  ["totalWaves"] = 0,
+                  ["provinceId"] = idData,
+                  ["battlesWon"] = 0
+               };
+               _data = new JArray(gbgstart,true);
+               _class = "BattlefieldService";
+               _methode = "startByBattleType";
                break;
             case RequestType.contributeForgePoints:
                _data = new JArray(queryData); //LG-ID, Player-ID, Current Level, ForgePoints to contribute, some bool mostly false
@@ -205,7 +261,7 @@ namespace ForgeOfBots.DataHandler
                _methode = "getPlayerResources";
                break;
             case RequestType.getOverviewForCategory:
-               _data = new JArray(messageCategory,99,true,"none");
+               _data = new JArray(messageCategory, 99, true, "none");
                _class = "ConversationService";
                _methode = "getOverviewForCategory";
                break;
@@ -237,22 +293,10 @@ namespace ForgeOfBots.DataHandler
          string jsonString = "[" + JsonConvert.SerializeObject(j) + "]";
          if (doHack)
          {
-            if (type == RequestType.GEAttack)
-            {
-               if (armyData.Length != 2) return "";
-               string before = "[[{\"__class__\": \"ArmyPool\",\"units\": [";
-               string myTroops = string.Join(",", armyData.GetTroopRow(0));
-               string after = "],\"type\":\"attacking\"},{\"__class__\":\"ArmyPool\",\"units\":[";
-               string enemyTroops = string.Join(",", armyData.GetTroopRow(1));
-               string end = "],\"type\":\"defending\"},{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}],{\"__class__\":\"ArmyContext\",\"content\":\"main\"}]";
-               string startJson = jsonString.Substring(0, jsonString.IndexOf("\"requestData\":[") + ("\"requestData\":[").Length - 1);
-               string endJson = jsonString.Substring(jsonString.IndexOf(",\"requestClass\""));
-               jsonString = $"{startJson}{before}{myTroops}{after}{enemyTroops}{end}{endJson}";
-            }
-            else if (type == RequestType.CollectProduction)
+            if (type == RequestType.CollectProduction)
                jsonString = jsonString.Replace("\"requestData\":[", "\"requestData\":[[").Replace("],\"requestClass\"", "]],\"requestClass\"");
             else if (type == RequestType.contributeForgePoints)
-               jsonString = jsonString.Replace(",0]",",false]");
+               jsonString = jsonString.Replace(",0]", ",false]");
          }
          //Console.WriteLine(jsonString);
          RequestScript = RequestScript
@@ -306,11 +350,7 @@ namespace ForgeOfBots.DataHandler
       RemovePlayer,
       GetAllWorlds,
       GetIncidents,
-      GEServiceOverview,
-      GEServiceEncounter,
       OwnArmy,
-      GEAttack,
-      GEServiceCollectChest,
       getConstruction,
       contributeForgePoints,
       switchWorld,
@@ -318,7 +358,15 @@ namespace ForgeOfBots.DataHandler
       getContributions,
       getPlayerResources,
       getArmyInfo,
-      getOverviewForCategory
+      getOverviewForCategory,
+      GEXgetOverview,
+      GEXgetEncounter,
+      GEXstartAttak,
+      GEXopenChest,
+      GBGgetBattleground,
+      GBGgetState,
+      GBGgetArmyInfo,
+      GBGstartAttack
    }
    public enum MessageType
    {
@@ -338,5 +386,4 @@ namespace ForgeOfBots.DataHandler
       research_eras,
       unit_types
    }
-
 }

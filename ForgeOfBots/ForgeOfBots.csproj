@@ -68,7 +68,7 @@
     <OutputPath>..\..\FoBOutput\FoBClient\</OutputPath>
     <DefineConstants>TRACE;DEBUG;DEBUGFORM,DEBUG</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -78,7 +78,7 @@
     <DefineConstants>TRACE;DEBUGFORM</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -87,7 +87,7 @@
     <OutputPath>..\..\FoBOutput\Release\Client\</OutputPath>
     <DefineConstants>RELEASE</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
     <Optimize>true</Optimize>
@@ -100,7 +100,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -110,7 +110,7 @@
     <OutputPath>..\..\FoBOutput\FoBClient\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -120,7 +120,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -130,7 +130,7 @@
     <OutputPath>bin\x64\DebugServer\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -140,7 +140,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -171,6 +171,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataHandler\GBGHandler.cs" />
     <Compile Include="DataHandler\RequestBuilder.cs" />
     <Compile Include="DataHandler\Update.cs" />
     <Compile Include="DataHandler\WSBuilder.cs" />
@@ -243,6 +244,18 @@
     </Compile>
     <Compile Include="GameClasses\Building.cs" />
     <Compile Include="GameClasses\Data.cs" />
+    <Compile Include="GameClasses\GBG\GetArmyInfoGBG.cs" />
+    <Compile Include="GameClasses\GBG\GetGBG.cs" />
+    <Compile Include="GameClasses\GBG\GetPlayerParticipantGBG.cs" />
+    <Compile Include="GameClasses\GBG\GetStateGBG.cs" />
+    <Compile Include="GameClasses\GBG\StartFightGBG.cs" />
+    <Compile Include="GameClasses\GEX\GetChestsGEX.cs" />
+    <Compile Include="GameClasses\GEX\GetEncounterGEX.cs" />
+    <Compile Include="GameClasses\GEX\GetGEX.cs" />
+    <Compile Include="GameClasses\GEX\GetGuildRewardGEX.cs" />
+    <Compile Include="GameClasses\GEX\GetStateGEX.cs" />
+    <Compile Include="GameClasses\GEX\OpenChestGEX.cs" />
+    <Compile Include="GameClasses\GEX\StartFightGEX.cs" />
     <Compile Include="GameClasses\Language.cs" />
     <Compile Include="GameClasses\ListClass.cs" />
     <Compile Include="GameClasses\ResponseClasses\Army.cs" />
@@ -267,7 +280,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utils\ForgeHX.cs" />
-    <Compile Include="Utils\GEHelper.cs" />
+    <Compile Include="DataHandler\GEXHelper.cs" />
     <Compile Include="Utils\CrashHelper.cs" />
     <Compile Include="Utils\ImageExtractor.cs" />
     <Compile Include="Utils\i18n.cs" />

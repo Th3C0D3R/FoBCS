@@ -228,7 +228,6 @@ namespace ForgeOfBots.Forms
             "--disable-metrics-reporting",
             "--ssl-version-min=tl",
             "--no-sandbox",
-            "--remote-debugging-port=1337",
          "--disable-dev-shm-usage",
             "--disable-metrics"
             );
@@ -241,10 +240,19 @@ namespace ForgeOfBots.Forms
          chromeDriverService.HideCommandPromptWindow = true;
          logger.Info($"creating (Remote-)Driver");
          //driver = new RemoteWebDriver(new Uri("http://134.255.216.102:4444/"), co.ToCapabilities(),TimeSpan.FromSeconds(60));
-         driver = new ChromeDriver(chromeDriverService, co);
-         driver.Manage().Window.Minimize();
+         try
+         {
+            driver = new ChromeDriver(chromeDriverService, co);
+            logger.Info($"driver created");
+            driver.Manage().Window.Minimize();
+         }
+         catch (Exception ex)
+         {
+            MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+         }
          logger.Info($"navigating to 'https://{UserData.WorldServer}0.forgeofempires.com/'");
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
+         logger.Info($"navigated");
          cookieJar = driver.Manage().Cookies;
          jsExecutor = (IJavaScriptExecutor)driver;
          StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
