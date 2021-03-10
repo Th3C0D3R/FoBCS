@@ -31,6 +31,7 @@ using static ForgeOfBots.Utils.StaticData;
 using AllWorlds = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
 using CUpdate = ForgeOfBots.DataHandler.Update;
 using WebClient = System.Net.WebClient;
+using GEXWaves = ForgeOfBots.GameClasses.GEX.GetEncounter.Armywave;
 using ForgeOfBots.Forms.UserControls;
 using Newtonsoft.Json.Linq;
 using System.Collections;
@@ -50,11 +51,13 @@ namespace ForgeOfBots.Forms
       readonly BackgroundWorkerEX bw = new BackgroundWorkerEX();
       static bool isLoading = false;
       static bool isFirstRun = true;
+      private object _lock = new object();
       Loading LoadingFrm = null;
 
       public frmMain() { }
       public frmMain(string[] args)
       {
+         logger.Info($">>> frmMain");
          if (args != null)
          {
             if (args.Length > 0)
@@ -91,14 +94,16 @@ namespace ForgeOfBots.Forms
             }
          }
          Init();
+         logger.Info($"<<< frmMain");
       }
 
       private void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
       {
-         TelegramNotify.Send(i18n.getString("GUI.Telegram.Crash", new List<KeyValuePair<string, string>>()
-               {
-                   new KeyValuePair<string, string>("##TimeStamp##",$"{DateTime.Now}")
-               }.ToArray()));
+         logger.Info(e.Exception, $"CRASHED");
+         //TelegramNotify.Send(i18n.getString("GUI.Telegram.Crash", new List<KeyValuePair<string, string>>()
+         //      {
+         //          new KeyValuePair<string, string>("##TimeStamp##",$"{DateTime.Now}")
+         //      }.ToArray()));
       }
 
       private void Loading_FormClosed(object sender, FormClosedEventArgs e)
@@ -201,9 +206,11 @@ namespace ForgeOfBots.Forms
             var properties = new Dictionary<string, string> { { "Main", ex.Message } };
             Crashes.TrackError(ex, properties, attachments);
          }
+         logger.Info($"<<< Init()");
       }
       private void Usi_UserDataEntered(string username, string password, string server)
       {
+         logger.Info($">>> Usi_UserDataEntered");
          Log("[DEBUG] Userdata loaded", lbOutputWindow);
          UserData.Username = username;
          UserData.Password = password;
@@ -212,10 +219,11 @@ namespace ForgeOfBots.Forms
          logger.Info($"username: {username} | worldserver: {server}");
          usi.Close();
          ContinueExecution();
+         logger.Info($"<<< Usi_UserDataEntered");
       }
       private void ContinueExecution()
       {
-         logger.Info($">>> ContinueExecution()");
+         logger.Info($">>> ContinueExecution");
          ChromeOptions co = new ChromeOptions()
          {
             AcceptInsecureCertificates = true
@@ -368,9 +376,12 @@ namespace ForgeOfBots.Forms
             logger.Info($"loginscript returned: {(ret.Length > 30 ? ret.Substring(0, 30) : ret)}");
             GetUIDAndForgeHX(driver.PageSource);
          }
+
+         logger.Info($"<<< ContinueExecution");
       }
       private void CheckLanguages()
       {
+         logger.Info($">>> CheckLanguages");
          if (!CheckForInternetConnection()) return;
          string contents = "";
          using (var wc = new WebClient())
@@ -390,16 +401,20 @@ namespace ForgeOfBots.Forms
             var properties = new Dictionary<string, string> { { "CheckLanguages", ex.Message } };
             Crashes.TrackError(ex, properties, attachments);
          }
+         logger.Info($"<<< CheckLanguages");
       }
       private void Application_ApplicationExit(object sender, EventArgs e)
       {
+         logger.Info($">>> Application_ApplicationExit");
          //TelegramNotify.Send($"Session ended {UserData.Username} { RunningTime.Elapsed:h'h 'm'm 's's'}");
          UserData.SaveSettings();
          RunningTime.Stop();
          driver.Quit();
+         logger.Info($"<<< Application_ApplicationExit");
       }
       private void workerComplete(object sender, RunWorkerCompletedEventArgs e)
       {
+         logger.Info($">>> workerComplete");
          ListClass.BackgroundWorkers.Remove((BackgroundWorkerEX)sender);
          if (((BackgroundWorkerEX)sender).param != null)
          {
@@ -422,9 +437,11 @@ namespace ForgeOfBots.Forms
             catch (Exception)
             { }
          }
+         logger.Info($"<<< workerComplete");
       }
       private void Ws_WorldDataEntered(Form that, string key, string value)
       {
+         logger.Info($">>> Ws_WorldDataEntered");
          UserData.LastWorld = $"{key}|{value}";
          logger.Info($"World Selected: {UserData.LastWorld.Split('|')[0]}");
          UserData.AutoLogin = true;
@@ -450,6 +467,7 @@ namespace ForgeOfBots.Forms
             GetUIDAndForgeHX(driver.PageSource);
          }
          that.Close();
+         logger.Info($"<<< Ws_WorldDataEntered");
       }
       private void GetUIDAndForgeHX(string source)
       {
@@ -482,9 +500,11 @@ namespace ForgeOfBots.Forms
             ForgeHX.ForgeHXDownloaded += ForgeHX_ForgeHXDownloaded;
             ForgeHX.DownloadForge();
          }
+         logger.Info($"<<< GetUIDAndForgeHX");
       }
       private void CheckPremiumComplete(object sender, RunWorkerCompletedEventArgs e)
       {
+         logger.Info($">>> CheckPremiumComplete");
          if (e.Result is bool)
          {
             bool.TryParse(e.Result.ToString(), out bool clearControls);
@@ -493,9 +513,11 @@ namespace ForgeOfBots.Forms
                //Invoker.CallMethode(tlpPremium, () => tlpPremium.Controls.Clear());
             }
          }
+         logger.Info($"<<< CheckPremiumComplete");
       }
       private void CheckPremium(object sender, DoWorkEventArgs e)
       {
+         logger.Info($">>> CheckPremium");
          object ret = TcpConnection.SendAuthData(UserData.SerialKey, FingerPrint.Value(), false);
          if (ret is Result)
          {
@@ -548,14 +570,17 @@ namespace ForgeOfBots.Forms
                MessageBox.Show(Owner, $"{i18n.getString("LicenceNotValid")}", $"{i18n.getString("FailedToActivate")}");
             }
          }
+         logger.Info($"<<< CheckPremium");
       }
       private void ForgeHX_ForgeHXDownloaded(object sender, EventArgs e)
       {
+         logger.Info($">>> ForgeHX_ForgeHXDownloaded");
          LoadWorlds();
+         logger.Info($"<<< ForgeHX_ForgeHXDownloaded");
       }
       private void LoadWorlds()
       {
-         logger.Info($">>> LoadWorlds()");
+         logger.Info($">>> LoadWorlds");
          ReqBuilder.User_Key = StaticData.BotData.UID;
          ReqBuilder.VersionSecret = StaticData.SettingData.Version_Secret;
          ReqBuilder.Version = StaticData.SettingData.Version;
@@ -583,20 +608,26 @@ namespace ForgeOfBots.Forms
          {
             LoadingFrm.Close();
          }
+         logger.Info($"<<< LoadWorlds");
       }
       public void ReloadData()
       {
-         logger.Info($">>> ReloadData()");
-         Updater.UpdatePlayerLists();
-         Updater.UpdateStartUp();
-         Updater.UpdateOwnTavern();
-         Updater.UpdateInventory();
-         Updater.UpdateContribution();
+         lock (_lock)
+         {
+            logger.Info($">>> ReloadData");
+            Updater.UpdatePlayerLists();
+            Updater.UpdateStartUp();
+            Updater.UpdateOwnTavern();
+            Updater.UpdateInventory();
+            Updater.UpdateContribution();
+            Updater.UpdateBoost();
+            logger.Info($"<<< ReloadData");
+         }
          UpdateGUI();
       }
       private void UpdateGUI()
       {
-         logger.Info($">>> UpdateGUI()");
+         logger.Info($">>> UpdateGUI");
          UpdateDashbord();
          UpdateSocial();
          UpdateTavern();
@@ -605,6 +636,8 @@ namespace ForgeOfBots.Forms
          UpdateHiddenRewardsView();
          UpdateSnip();
          UpdateArmy();
+         UpdateBoost();
+         UpdateBattle();
          //UpdateMessageCenter();
          //UpdateChat();
          if (isFirstRun)
@@ -622,6 +655,7 @@ namespace ForgeOfBots.Forms
                tSniper.Start();
             }
          }
+         logger.Info($"<<< UpdateGUI");
       }
       private void Temp_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
       {
@@ -629,6 +663,7 @@ namespace ForgeOfBots.Forms
       }
       private void UpdateDashbord()
       {
+         logger.Info($">>> UpdateDashbord");
          if (GoodImageList != null)
          {
             try
@@ -700,9 +735,11 @@ namespace ForgeOfBots.Forms
                Invoker.SetProperty(lblFPStockValue, () => lblFPStockValue.Text, FPinStock.ToString("N0"));
             }
          }
+         logger.Info($"<<< UpdateDashbord");
       }
       private void UpdateSocial()
       {
+         logger.Info($">>> UpdateSocial");
          #region "other Players"
          ListClass.AllPlayers.Clear();
          ListClass.AllPlayers.AddRange(ListClass.FriendList);
@@ -750,11 +787,12 @@ namespace ForgeOfBots.Forms
             };
             Invoker.CallMethode(lvNeighbor, () => lvNeighbor.Items.Add(lvi));
          }
-
+         logger.Info($"<<< UpdateSocial");
          #endregion
       }
       private void UpdateTavern()
       {
+         logger.Info($">>> UpdateSocial");
          #region "Tavern"
          if (ListClass.Resources.Count > 0)
          {
@@ -835,9 +873,11 @@ namespace ForgeOfBots.Forms
             }
          }
          #endregion
+         logger.Info($"<<< UpdateSocial");
       }
       private void RemoveFriend(object senderObj, EventArgs e)
       {
+         logger.Info($">>> RemoveFriend");
          Button sender = ((Button)senderObj);
          if (sender.Tag != null)
          {
@@ -847,6 +887,7 @@ namespace ForgeOfBots.Forms
             Updater.UpdateFirends();
             UpdateSocial();
          }
+         logger.Info($"<<< RemoveFriend");
       }
       private void SitAtTavern(object senderObj, EventArgs e)
       {
@@ -861,12 +902,14 @@ namespace ForgeOfBots.Forms
       }
       private void btnCollect_Click(object sender, EventArgs e)
       {
+         logger.Info($">>> btnCollect_Click");
          string script = ReqBuilder.GetRequestScript(RequestType.CollectTavern, "");
          var msg = (string)jsExecutor.ExecuteAsyncScript(script);
          if (msg == "{}") return;
          CollectResult cr = JsonConvert.DeserializeObject<CollectResult>(msg);
          if (cr.responseData.__class__.ToLower() == "success")
             ReloadData();
+         logger.Info($"<<< btnCollect_Click");
       }
       private void MetroPanel1_MouseDown(object sender, MouseEventArgs e)
       {
@@ -878,6 +921,7 @@ namespace ForgeOfBots.Forms
       }
       private void PbCLose_Click(object sender, EventArgs e)
       {
+         logger.Info($">>> PbCLose_Click");
          if (ListClass.BackgroundWorkers.Count > 0)
          {
             foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
@@ -887,6 +931,7 @@ namespace ForgeOfBots.Forms
             }
             ListClass.BackgroundWorkers.Clear();
          }
+         logger.Info($"<<< PbCLose_Click");
          Close();
       }
       private void Pbminimize_Click(object sender, EventArgs e)
@@ -899,6 +944,7 @@ namespace ForgeOfBots.Forms
       }
       private void FrmMain_Load(object sender, EventArgs e)
       {
+         logger.Info($">>> FrmMain_Load");
          RunningTime.Start();
          bwUptime.RunWorkerAsync();
          logger.Info($"Starting Bot");
@@ -937,6 +983,7 @@ namespace ForgeOfBots.Forms
          startEvent.Add("Startup", startUp);
          Analytics.TrackEvent("Startup", startEvent);
          TelegramNotify.Init();
+         logger.Info($"<<< FrmMain_Load");
       }
       private void FrmMain_Shown(object sender, EventArgs e)
       {
@@ -1043,6 +1090,7 @@ namespace ForgeOfBots.Forms
       #region "Incident"
       private void UpdateHiddenRewardsView()
       {
+         logger.Info($">>> UpdateHiddenRewardsView");
          if (pnlIncident.InvokeRequired)
          {
             Invoker.CallMethode(pnlIncident, () => pnlIncident.Controls.Clear());
@@ -1079,6 +1127,7 @@ namespace ForgeOfBots.Forms
          {
             pnlIncident.Invalidate();
          }
+         logger.Info($"<<< UpdateHiddenRewardsView");
       }
       private void TsmiCollectIncidentsToolStripMenuItem_Click(object sender, EventArgs e)
       {
@@ -2097,6 +2146,7 @@ namespace ForgeOfBots.Forms
       #region "Snip"
       public void UpdateSnip()
       {
+         logger.Info($">>> UpdateSnip");
          Invoker.CallMethode(pnlContributions, () => pnlContributions.Controls.Clear());
          if (ListClass.Contributions.Count > 0)
          {
@@ -2148,6 +2198,7 @@ namespace ForgeOfBots.Forms
                mbSearch.Text = i18n.getString("GUI.Sniper.Search");
             });
          }
+         logger.Info($"<<< UpdateSnip");
       }
       private void MbSearch_Click(object sender, EventArgs e)
       {
@@ -2885,7 +2936,8 @@ namespace ForgeOfBots.Forms
       #region "Army"
       public void UpdateArmy()
       {
-         if (GoodImageList != null)
+         logger.Info($">>> UpdateArmy");
+         if (UnitImageLise != null)
          {
             try
             {
@@ -2918,6 +2970,7 @@ namespace ForgeOfBots.Forms
             catch (Exception)
             { }
          }
+         logger.Info($"<<< UpdateArmy");
       }
       #endregion
 
@@ -2978,6 +3031,79 @@ namespace ForgeOfBots.Forms
          { }
       }
       #endregion
+
+      #region "Battle"
+      public void UpdateBoost()
+      {
+         Invoker.SetProperty(lblAttackBoost, () => lblAttackBoost.Text, $"{AttackBoost} {lblAttackBoost.Tag}");
+         Invoker.SetProperty(lblDefensBoost, () => lblDefensBoost.Text, $"{DefenseBoost} {lblDefensBoost.Tag}");
+      }
+      public void UpdateBattle()
+      {
+         UpdateGBG();
+         UpdateGEX();
+      }
+      public void UpdateGEX()
+      {
+         Invoker.CallMethode(pnlGEX, () => pnlGEX.Controls.Clear());
+         GEXHelper.UpdateGEX();
+         GEXWaves[] waves = GEXHelper.Armywaves;
+         ucBattle gexbattle = new ucBattle();
+         gexbattle.imgList = UnitImageLise;  
+         gexbattle.Dock = DockStyle.Top;
+         gexbattle.lvOwnArmy.SmallImageList = gexbattle.imgList;
+         gexbattle.lvOwnArmy.View = System.Windows.Forms.View.SmallIcon;
+         gexbattle.lvWave.SmallImageList = gexbattle.imgList;
+         gexbattle.lvWave.View = System.Windows.Forms.View.SmallIcon;
+         gexbattle.FillControl($"{i18n.getString("GUI.Battle.GEX.Stage")}");
+         if (waves == null)
+         {
+            gexbattle.FillChest(GEXHelper.GetChestID);
+            gexbattle.Fight += GEX_CollectChest;
+         }
+         else
+         {
+            int currentwave = 1;
+            foreach (GEXWaves wave in waves)
+            {
+               foreach (var unit in wave.units)
+               {
+                  string unitname = ListClass.UnitTypes.Find(ut => ut.unitTypeId == unit.unitTypeId).name;
+                  ListViewItem lvi = new ListViewItem($"{unitname}", $"armyuniticons_50x50_{unit.unitTypeId}"); //
+                  if (currentwave == 1)
+                     gexbattle.FillWave1(lvi);
+                  else if (currentwave == 2)
+                     gexbattle.FillWave2(lvi);
+               }
+               currentwave = 2;
+            }
+            gexbattle.Fight += GEX_Fight;
+         }
+         if (pnlGEX.InvokeRequired)
+         {
+            Invoker.CallMethode(pnlGEX, () => pnlGEX.Controls.Add(gexbattle));
+         }
+         else
+         {
+            pnlGEX.Controls.Add(gexbattle);
+         }
+      }
+
+      private void GEX_Fight(object sender, dynamic data = null)
+      {
+         int ID = (int)data;
+      }
+
+      private void GEX_CollectChest(object sender, dynamic data = null)
+      {
+         int ID = (int)data;
+         var ret = GEXHelper.OpenChest(ID);
+      }
+      public void UpdateGBG()
+      {
+      }
+      #endregion
+
 
       protected override void WndProc(ref Message m)
       {
@@ -3064,7 +3190,9 @@ namespace ForgeOfBots.Forms
 
       private void TsmiTestFunctions_Click(object sender, EventArgs e)
       {
-         Updater.UpdateMessages("social");
+         double[][] data = BattleAI.CalcIdentifier();
+         File.WriteAllText("training.data", JsonConvert.SerializeObject(data));
+         //Updater.UpdateMessages("social");
       }
    }
 }

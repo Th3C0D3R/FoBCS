@@ -51,7 +51,7 @@ namespace ForgeOfBots.GameClasses.GEX.GetChests
       public int amount { get; set; }
       public string __class__ { get; set; }
       public int totalAmount { get; set; }
-      public Unit? unit { get; set; }
+      public Unit unit { get; set; } = null;
    }
    public class Unit
    {

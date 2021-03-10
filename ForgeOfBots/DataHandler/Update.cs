@@ -26,19 +26,19 @@ namespace ForgeOfBots.DataHandler
 
          script = ReqBuilder.GetRequestScript(RequestType.GetFriends, "");
          ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-         Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(ret);
+         Root<Friend> friends =  JsonConvert.DeserializeObject<Root<Friend>>(ret);
          ListClass.FriendList = friends.responseData.FindAll(f => f.is_self == false);
 
          script = ReqBuilder.GetRequestScript(RequestType.GetNeighbor, "");
          ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-         Root<Neighbor> neighbor = JsonConvert.DeserializeObject<Root<Neighbor>>(ret);
+         Root<Neighbor> neighbor =  JsonConvert.DeserializeObject<Root<Neighbor>>(ret);
          ListClass.NeighborList = neighbor.responseData.FindAll(n => n.is_self == false && n.is_friend == false);
       }
       public void UpdateFirends()
       {
          string script = ReqBuilder.GetRequestScript(RequestType.GetFriends, "");
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-         Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(ret);
+         Root<Friend> friends =  JsonConvert.DeserializeObject<Root<Friend>>(ret);
          ListClass.FriendList = friends.responseData.FindAll(f => f.is_self == false);
       }
       public void UpdateStartUp()
@@ -54,14 +54,14 @@ namespace ForgeOfBots.DataHandler
             switch (methode)
             {
                case "getSittingPlayersCount":
-                  ListClass.OwnTavern = JsonConvert.DeserializeObject<OwnTavernStates>(body);
+                  ListClass.OwnTavern =  JsonConvert.DeserializeObject<OwnTavernStates>(body);
                   break;
                case "getOtherTavernStates":
-                  FriendsTavernRoot rootTavern = JsonConvert.DeserializeObject<FriendsTavernRoot>(body);
+                  FriendsTavernRoot rootTavern =  JsonConvert.DeserializeObject<FriendsTavernRoot>(body);
                   ListClass.FriendTaverns = rootTavern.responseData.ToList();
                   break;
                case "getOverview":
-                  HiddenRewardRoot rootHiddenReward = JsonConvert.DeserializeObject<HiddenRewardRoot>(body);
+                  HiddenRewardRoot rootHiddenReward =  JsonConvert.DeserializeObject<HiddenRewardRoot>(body);
                   foreach (HiddenReward item in rootHiddenReward.responseData.hiddenRewards)
                   {
                      DateTime endTime = Helper.UnixTimeStampToDateTime(item.expireTime);
@@ -72,17 +72,17 @@ namespace ForgeOfBots.DataHandler
                   ListClass.HiddenRewards = rootHiddenReward.responseData.hiddenRewards.ToList();
                   break;
                case "getResourceDefinitions":
-                  ress = JsonConvert.DeserializeObject(body);
+                  ress =  JsonConvert.DeserializeObject(body);
                   ListClass.ResourceDefinitions = ress;
                   UpdatedSortedGoodList();
                   break;
                case "getPlayerResources":
-                  ress = JsonConvert.DeserializeObject(body);
+                  ress =  JsonConvert.DeserializeObject(body);
                   ListClass.Resources = ress;
                   UpdatedSortedGoodList();
                   break;
                case "getMetadata":
-                  MetadataRoot rootMetadata = JsonConvert.DeserializeObject<MetadataRoot>(body);
+                  MetadataRoot rootMetadata =  JsonConvert.DeserializeObject<MetadataRoot>(body);
                   ListClass.MetaDataList = rootMetadata.responseData.ToList();
                   if (StaticData.jsExecutor == null) break;
                   if (ListClass.AllBuildings.Count <= 0)
@@ -90,7 +90,7 @@ namespace ForgeOfBots.DataHandler
                      string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "city_entities"); }).url;
                      script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.city_entities);
                      string cityMeta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-                     BuildingsRoot rootBuilding = JsonConvert.DeserializeObject<BuildingsRoot>("{\"buildings\":" + cityMeta + "}");
+                     BuildingsRoot rootBuilding =  JsonConvert.DeserializeObject<BuildingsRoot>("{\"buildings\":" + cityMeta + "}");
                      ListClass.AllBuildings = rootBuilding.buildings.ToList();
                      if (ListClass.Startup.Count > 0)
                         UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
@@ -100,7 +100,7 @@ namespace ForgeOfBots.DataHandler
                      string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "research_eras"); }).url;
                      script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.research_eras);
                      string researchMeta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-                     ResearchEraRoot rootResearch = JsonConvert.DeserializeObject<ResearchEraRoot>("{\"reserach\":" + researchMeta + "}");
+                     ResearchEraRoot rootResearch =  JsonConvert.DeserializeObject<ResearchEraRoot>("{\"reserach\":" + researchMeta + "}");
                      ListClass.Eras = rootResearch.reserach.ToList();
                      UpdatedSortedGoodList();
                   }
@@ -109,23 +109,23 @@ namespace ForgeOfBots.DataHandler
                      string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "unit_types"); }).url;
                      script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.unit_types);
                      string unit_types_Meta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-                     UnitTypesRoot rootUnitType = JsonConvert.DeserializeObject<UnitTypesRoot>("{\"unit_types\":" + unit_types_Meta + "}");
+                     UnitTypesRoot rootUnitType =  JsonConvert.DeserializeObject<UnitTypesRoot>("{\"unit_types\":" + unit_types_Meta + "}");
                      ListClass.UnitTypes = rootUnitType.unit_types.ToList();
                      UpdateSortedArmyList();
                   }
                   break;
                case "getUpdates":
-                  QuestServiceRoot rootQuest = JsonConvert.DeserializeObject<QuestServiceRoot>(body);
+                  QuestServiceRoot rootQuest =  JsonConvert.DeserializeObject<QuestServiceRoot>(body);
                   ListClass.QuestList = rootQuest.responseData.ToList();
                   break;
                case "getData":
-                  ress = JsonConvert.DeserializeObject(body);
+                  ress =  JsonConvert.DeserializeObject(body);
                   ListClass.Startup = ress;
                   ListClass.UserData = ress["responseData"]["user_data"];
                   UpdateBuildings(ListClass.Startup["responseData"]["city_map"]["entities"]);
                   break;
                case "getLimitedBonuses":
-                  BonusServiceRoot rootBonusService = JsonConvert.DeserializeObject<BonusServiceRoot>(body);
+                  BonusServiceRoot rootBonusService =  JsonConvert.DeserializeObject<BonusServiceRoot>(body);
                   ListClass.Bonus = rootBonusService.responseData.ToList();
                   ListClass.ArcBonus = ListClass.Bonus.Sum(e => { if (e.type == "contribution_boost") return e.value; else return 0; });
                   break;
@@ -139,29 +139,46 @@ namespace ForgeOfBots.DataHandler
       {
          string script = ReqBuilder.GetRequestScript(RequestType.GetOwnTavern, "[]");
          string ownTavern = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-         OwnTavernDataRoot otdr = JsonConvert.DeserializeObject<OwnTavernDataRoot>(ownTavern);
+         OwnTavernDataRoot otdr =  JsonConvert.DeserializeObject<OwnTavernDataRoot>(ownTavern);
          ListClass.OwnTavernData = otdr.responseData;
       }
       public void UpdateContribution()
       {
          string script = ReqBuilder.GetRequestScript(RequestType.getContributions, "[]");
          string contribution = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-         Contribution otdr = JsonConvert.DeserializeObject<Contribution>(contribution);
+         Contribution otdr =  JsonConvert.DeserializeObject<Contribution>(contribution);
          ListClass.Contributions = otdr.responseData.ToList();
       }
       public void UpdateInventory()
       {
          string script = ReqBuilder.GetRequestScript(RequestType.getItems, "");
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-         ListClass.Inventory = JsonConvert.DeserializeObject<Inventory>(ret);
+         ListClass.Inventory =  JsonConvert.DeserializeObject<Inventory>(ret);
       }
       public void UpdateResources()
       {
          string script = ReqBuilder.GetRequestScript(RequestType.getPlayerResources, "");
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-         dynamic ress = JsonConvert.DeserializeObject(ret);
+         dynamic ress =  JsonConvert.DeserializeObject(ret);
          ListClass.Resources = ress;
          UpdatedSortedGoodList();
+      }
+      public void UpdateBoost()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.GetBoostOverview, "");
+         string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         BoostRoot b = JsonConvert.DeserializeObject<BoostRoot>(ret);
+         ListClass.BoostList = b.responseData.ToList();
+         try
+         {
+            StaticData.AttackBoost = ListClass.BoostList.Find(d => d.id == "attackingUnits").entries.ToList().Sum(e => e.boostValue * e.amount);
+            StaticData.DefenseBoost = ListClass.BoostList.Find(d => d.id == "defendingUnits").entries.ToList().Sum(e => e.boostValue * e.amount);
+         }
+         catch (Exception)
+         {
+            StaticData.AttackBoost = 0;
+            StaticData.DefenseBoost = 0;
+         }
       }
       public void UpdateArmy()
       {
@@ -170,6 +187,10 @@ namespace ForgeOfBots.DataHandler
          ArmyRoot ress = JsonConvert.DeserializeObject<ArmyRoot>(ret);
          ListClass.Army = ress;
          UpdateSortedArmyList();
+      }
+      public void UpdateBattle()
+      {
+
       }
       public void UpdateMessages(string type)
       {

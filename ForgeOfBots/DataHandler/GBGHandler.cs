@@ -1,22 +1,30 @@
-﻿using ForgeOfBots.Utils;
+﻿using ArmyData = ForgeOfBots.GameClasses.GBG.ArmyInfo.Data;
+using Battleground = ForgeOfBots.GameClasses.GBG.Get.Data;
+using StartFight = ForgeOfBots.GameClasses.GBG.StartFight.Data;
+using State = ForgeOfBots.GameClasses.GBG.State.Data;
+using ForgeOfBots.Utils;
+using Newtonsoft.Json;
+using System;
 using ForgeOfBots.GameClasses.GBG.ArmyInfo;
 using ForgeOfBots.GameClasses.GBG.Get;
 using ForgeOfBots.GameClasses.GBG.State;
 using ForgeOfBots.GameClasses.GBG.StartFight;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ForgeOfBots.DataHandler
 {
    public static class GBGHandler
    {
-      public static RequestBuilder ReqBuilder = StaticData.ReqBuilder;
+      private static readonly RequestBuilder ReqBuilder = StaticData.ReqBuilder;
 
-      public static GameClasses.GBG.ArmyInfo.Data[] GetArmyInfo(int provinceID)
+      public static Battleground CurrentBattleground { get; private set; } = null;
+      public static State CurrentState { get; private set; } = null;
+
+      public static void UpdateGBG()
+      {
+         CurrentBattleground = GetBattleground();
+         CurrentState = GetState();
+      }
+      public static ArmyData[] GetArmyInfo(int provinceID)
       {
          try
          {
@@ -30,7 +38,7 @@ namespace ForgeOfBots.DataHandler
             return null;
          }
       }
-      public static GameClasses.GBG.Get.Data GetBattleground()
+      public static Battleground GetBattleground()
       {
          try
          {
@@ -44,7 +52,7 @@ namespace ForgeOfBots.DataHandler
             return null;
          }
       }
-      public static GameClasses.GBG.State.Data GetState()
+      public static State GetState()
       {
          try
          {
@@ -58,7 +66,7 @@ namespace ForgeOfBots.DataHandler
             return null;
          }
       }
-      public static GameClasses.GBG.StartFight.Data StartFight(int provinceID)
+      public static StartFight StartFight(int provinceID)
       {
          try
          {

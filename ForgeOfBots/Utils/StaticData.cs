@@ -1,7 +1,6 @@
 ﻿using ForgeOfBots.DataHandler;
 using ForgeOfBots.Forms;
 using ForgeOfBots.GameClasses;
-using ForgeOfBots.GameClasses.ResponseClasses;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -22,6 +21,7 @@ namespace ForgeOfBots.Utils
       public static RequestBuilder ReqBuilder = new RequestBuilder();
       public static CUpdate Updater;
       public static BotData BotData = new BotData();
+      public static BattleAI.BattleAI BattleAI = new BattleAI.BattleAI();
       public static SettingData SettingData = new SettingData();
       public static Settings UserData;
       public static Assembly PremAssembly = null;
@@ -33,17 +33,25 @@ namespace ForgeOfBots.Utils
       public static IJavaScriptExecutor jsExecutor;
       public static ICookieJar cookieJar;
       public static IWebDriver driver;
-      public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-      public static string ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
       public static Stopwatch RunningTime = new Stopwatch();
-      public static bool DEBUGMODE = false;
-      public static string ForgeHX_FilePath = "";
-      public static object MainInstance = null;
-      public static GuildExpedition GEX = null;
       public static WorkerList WorkerList = null;
       public static WSWorker wsWorker = null;
-      public static bool HasLastCrash = false;
       public static List<PropertyData> PCData = new List<PropertyData>();
+      public static int AttackBoost = 0;
+      public static int DefenseBoost = 0;
+
+      public static object MainInstance = null;
+
+      public static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+      public static string ProgramPath = Path.Combine(AppDataPath, Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().ManifestModule.Name));
+      public static string InnoCDN_Avatars = "https://foe###server###.innogamescdn.com/assets/shared/avatars/";
+      public const string _WCS = "Win32_ComputerSystem";
+      public const string _WCS_Model = "Model";
+      public const string _WCS_SystemType = "SystemType";
+      public const string _WOS = "Win32_OperatingSystem";
+      public const string _WOS_Caption = "Caption";
+      public static string ForgeHX_FilePath = "";
+
       public static int TavernVisitWorkerID = 0;
       public static int PolivateAllWorkerID = 1;
       public static int PolivateNeighborsWorkerID = 2;
@@ -51,13 +59,7 @@ namespace ForgeOfBots.Utils
       public static int PolivateFriendsWorkerID = 4;
       public static int LGSnipWorkerID = 99;
 
-      public static string InnoCDN_Avatars = "https://foe###server###.innogamescdn.com/assets/shared/avatars/";
-
-      public const string _WCS = "Win32_ComputerSystem";
-      public const string _WCS_Model = "Model";
-      public const string _WCS_SystemType = "SystemType";
-
-      public const string _WOS = "Win32_OperatingSystem";
-      public const string _WOS_Caption = "Caption";
+      public static bool HasLastCrash = false;
+      public static bool DEBUGMODE = false;
    }
 }

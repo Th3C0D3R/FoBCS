@@ -13,6 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>false</Deterministic>
     <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -68,7 +68,7 @@
     <OutputPath>..\..\FoBOutput\FoBClient\</OutputPath>
     <DefineConstants>TRACE;DEBUG;DEBUGFORM,DEBUG</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -78,7 +78,7 @@
     <DefineConstants>TRACE;DEBUGFORM</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -87,7 +87,7 @@
     <OutputPath>..\..\FoBOutput\Release\Client\</OutputPath>
     <DefineConstants>RELEASE</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
     <Optimize>true</Optimize>
@@ -100,7 +100,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -110,7 +110,7 @@
     <OutputPath>..\..\FoBOutput\FoBClient\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -120,7 +120,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -130,7 +130,7 @@
     <OutputPath>bin\x64\DebugServer\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
@@ -140,7 +140,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
@@ -212,6 +212,12 @@
     <Compile Include="Forms\UserControls\ProdListItem.Designer.cs">
       <DependentUpon>ProdListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\ucBattle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\ucBattle.Designer.cs">
+      <DependentUpon>ucBattle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\ucIgnorePlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -260,8 +266,8 @@
     <Compile Include="GameClasses\ListClass.cs" />
     <Compile Include="GameClasses\ResponseClasses\Army.cs" />
     <Compile Include="GameClasses\ResponseClasses\BonusService.cs" />
+    <Compile Include="GameClasses\ResponseClasses\Boost.cs" />
     <Compile Include="GameClasses\ResponseClasses\CityEntities.cs" />
-    <Compile Include="GameClasses\ResponseClasses\GuildExpedition.cs" />
     <Compile Include="GameClasses\ResponseClasses\Inventory.cs" />
     <Compile Include="GameClasses\ResponseClasses\LG.cs" />
     <Compile Include="GameClasses\ResponseClasses\Messages.cs" />
@@ -279,6 +285,8 @@
     <Compile Include="Utils\BackgroundWorkerEX.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Utils\BattleAI\BattleAI.cs" />
+    <Compile Include="Utils\BattleAI\TrainingData.cs" />
     <Compile Include="Utils\ForgeHX.cs" />
     <Compile Include="DataHandler\GEXHelper.cs" />
     <Compile Include="Utils\CrashHelper.cs" />
@@ -305,6 +313,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\LGSnipItem.resx">
       <DependentUpon>LGSnipItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\ucBattle.resx">
+      <DependentUpon>ucBattle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\ucIgnorePlayer.resx">
       <DependentUpon>ucIgnorePlayer.cs</DependentUpon>

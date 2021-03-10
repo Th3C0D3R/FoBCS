@@ -122,6 +122,11 @@ namespace ForgeOfBots.DataHandler
                _class = "CityProductionService";
                _methode = "pickupProduction";
                break;
+            case RequestType.GetBoostOverview:
+               _data = new JArray();
+               _class = "BoostService";
+               _methode = "getOverview";
+               break;
             case RequestType.QueryProduction:
                _data = new JArray(queryData[0], queryData[1]);
                _class = "CityProductionService";
@@ -348,6 +353,7 @@ namespace ForgeOfBots.DataHandler
       CollectTavern,
       GetOwnTavern,
       RemovePlayer,
+      GetBoostOverview,
       GetAllWorlds,
       GetIncidents,
       OwnArmy,

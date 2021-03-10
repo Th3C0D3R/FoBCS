@@ -1,71 +1,121 @@
-﻿using ForgeOfBots.GameClasses.GEX.OpenChest;
+﻿using GEXOverview = ForgeOfBots.GameClasses.GEX.Get.Data;
+using StartFight = ForgeOfBots.GameClasses.GEX.StartFight.Data;
+using OpenChest = ForgeOfBots.GameClasses.GEX.OpenChest.Data;
 using ForgeOfBots.GameClasses.GEX.Get;
 using ForgeOfBots.GameClasses.GEX.GetEncounter;
+using ForgeOfBots.GameClasses.GEX.OpenChest;
 using ForgeOfBots.GameClasses.GEX.StartFight;
 using ForgeOfBots.Utils;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ForgeOfBots.DataHandler
 {
    public static class GEXHelper
    {
-      public static RequestBuilder ReqBuilder = StaticData.ReqBuilder;
+      private static readonly RequestBuilder ReqBuilder = StaticData.ReqBuilder;
+      public static GEXOverview GEXOverview { get; private set; } = null;
 
-      public static GameClasses.GEX.OpenChest.Data OpenChest(int id)
+      public static int GetCurrentState
+      {
+         get
+         {
+            if (GEXOverview == null) return -1;
+            if (GEXOverview.state.Equals("inactive")) return -1;
+            if (GEXOverview.progress.currentEntityId >= 127) return -1;
+            if (GEXOverview.progress.isMapCompleted) return -1;
+            return GEXOverview.progress.currentEntityId;
+         }
+      }
+      public static bool IsCurrentStateChest
+      {
+         get
+         {
+            if (GEXOverview == null) return false;
+            if (GEXOverview.chests.ToList().Any(c => c.id == GetCurrentState))
+               return true;
+            return false;
+         }
+      }
+      public static Armywave[] Armywaves
+      {
+         get
+         {
+            if (!IsCurrentStateChest)
+            {
+               return GetEncounter(GetCurrentState);
+            }
+            else
+            {
+               return null;
+            }
+         }
+      }
+      public static int GetChestID
+      {
+         get
+         {
+            if (GEXOverview == null) return -1;
+            if (GEXOverview.chests.ToList().Any(c => c.id == GetCurrentState))
+               return GetCurrentState;
+            return -1;
+         }
+      }
+      public static void UpdateGEX()
+      {
+         GEXOverview = GetOverview();
+      }
+      public static OpenChest OpenChest(int id)
       {
          try
          {
             string script = ReqBuilder.GetRequestScript(RequestType.GEXopenChest, id);
             string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-            OpenChestGEX openChestResponse = JsonConvert.DeserializeObject<OpenChestGEX>(ret);
-            return openChestResponse.openChestResponses[0].responseData;
+            OpenChestResponse openChestResponse = JsonConvert.DeserializeObject<OpenChestResponse>(ret);
+            return openChestResponse.responseData;
          }
          catch (Exception)
          {
             return null;
          }
       }
-      public static GameClasses.GEX.Get.Data GetOverview()
+      public static GEXOverview GetOverview()
       {
          try
          {
             string script = ReqBuilder.GetRequestScript(RequestType.GEXgetOverview, "");
             string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-            GetGEX getGEXresponse = JsonConvert.DeserializeObject<GetGEX>(ret);
-            return getGEXresponse.getresponse[0].responseData;
+            GetResponse getGEXresponse = JsonConvert.DeserializeObject<GetResponse>(ret);
+            return getGEXresponse.responseData;
          }
          catch (Exception)
          {
             return null;
          }
       }
-      public static GameClasses.GEX.GetEncounter.Armywave[] GetEncounter(int id)
+      public static Armywave[] GetEncounter(int id)
       {
          try
          {
             string script = ReqBuilder.GetRequestScript(RequestType.GEXgetEncounter, id);
             string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-            GetEncounterGEX getEncounterGEXresponse = JsonConvert.DeserializeObject<GetEncounterGEX>(ret);
-            return getEncounterGEXresponse.getencounterresponse[0].responseData.armyWaves;
+            GetEncounterResponse getEncounterGEXresponse = JsonConvert.DeserializeObject<GetEncounterResponse>(ret);
+            return getEncounterGEXresponse.responseData.armyWaves;
          }
          catch (Exception)
          {
             return null;
          }
       }
-      public static GameClasses.GEX.StartFight.Data StartFight(int stateID)
+      public static StartFight StartFight(int stateID)
       {
          try
          {
             string script = ReqBuilder.GetRequestScript(RequestType.GEXstartAttak, stateID);
             string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
-            StartFightGEX startFightGEXresponse = JsonConvert.DeserializeObject<StartFightGEX>(ret);
-            return startFightGEXresponse.startfightresponse[0].responseData;
+            StartFightResponse startFightGEXresponse = JsonConvert.DeserializeObject<StartFightResponse>(ret);
+            return startFightGEXresponse.responseData;
          }
          catch (Exception)
          {

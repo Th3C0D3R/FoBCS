@@ -1,37 +1,34 @@
-﻿using ForgeOfBots.GameClasses;
+﻿using ForgeOfBots.Forms;
+using ForgeOfBots.GameClasses;
 using ForgeOfBots.GameClasses.ResponseClasses;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
+using MS.WindowsAPICodePack.Internal;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Windows.Forms;
-
-using System.Runtime.InteropServices;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
-using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
-using MS.WindowsAPICodePack.Internal;
-using Windows.Foundation.Collections;
-using System.Diagnostics;
-using Windows.Foundation;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
-using System.Net;
-using Microsoft.AppCenter.Crashes;
-using System.Threading.Tasks;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Xml.Linq;
-using ForgeOfBots.Forms;
-using Microsoft.Win32;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
+using Windows.Data.Xml.Dom;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Notifications;
 
 namespace ForgeOfBots.Utils
 {
@@ -60,11 +57,11 @@ namespace ForgeOfBots.Utils
             {
 
                foreach (ListBox item in listbox)
-                {
-                   Invoker.CallMethode(item, () => item.Items.AddRange(msgHistory.ToArray()));
-                   Invoker.SetProperty(item, () => item.TopIndex, item.Items.Count - 1);
-                }
-                msgHistory.Clear();
+               {
+                  Invoker.CallMethode(item, () => item.Items.AddRange(msgHistory.ToArray()));
+                  Invoker.SetProperty(item, () => item.TopIndex, item.Items.Count - 1);
+               }
+               msgHistory.Clear();
             }
             catch
             { }
@@ -169,16 +166,17 @@ namespace ForgeOfBots.Utils
          {
             foreach (var unittype in unitTypes)
             {
-               if(unittype.minEra == era.era)
+               if (unittype.minEra == era.era)
                {
                   foreach (var army in responseData.units)
                   {
-                     Unit unit = new Unit();
-                     unit.unit = army;
-                     int count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached;
-                     unit.name = unittype.name;
-                     unit.count = count;
-                     if(unittype.unitTypeId == army.unitTypeId)
+                     Unit unit = new Unit
+                     {
+                        unit = army,
+                        name = unittype.name,
+                        count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached
+                     };
+                     if (unittype.unitTypeId == army.unitTypeId)
                      {
                         if (armyList.ContainsKey(era.name))
                         {
@@ -492,10 +490,10 @@ namespace ForgeOfBots.Utils
                   webClient.Headers.Add("Accept: text/html, application/xhtml+xml, */*");
                   webClient.DownloadFile(ChromeDriverURL, "chromedriver.zip");
                   File.Delete("chromedriver.exe");
-                  ZipFile.ExtractToDirectory("chromedriver.zip",".");
+                  ZipFile.ExtractToDirectory("chromedriver.zip", ".");
                   File.Delete("chromedriver.zip");
                }
-               
+
                return true;
             }
             return false;

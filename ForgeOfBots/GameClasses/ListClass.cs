@@ -74,7 +74,7 @@ namespace ForgeOfBots.GameClasses
       public static List<LGSnip> SnipWithProfit { get; set; } = new List<LGSnip>();
       public static List<Player> SnipablePlayers { get; set; } = new List<Player>();
       public static List<ProdListItem> ProductionItems { get; set; } = new List<ProdListItem>();
-
+      public static List<Boost> BoostList { get; set; } = new List<Boost>();
       public static Dictionary<int, (bool, object)> doneMotivate { get; set; } = new Dictionary<int, (bool, object)>();
       public static Dictionary<int, (bool, object)> doneTavern { get; set; } = new Dictionary<int, (bool, object)>();
       public static List<int> doneQuery { get; set; } = new List<int>();
