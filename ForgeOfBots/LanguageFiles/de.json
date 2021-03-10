@@ -9,6 +9,8 @@
     "GUI.Battle.UC.Wave2": "Welle 2:",
     "GUI.Battle.OwnArmySuggestion": "Armee-Vorschlag:",
     "GUI.Battle.GEX.Stage": "Begegnung:",
+    "GUI.Battle.GEX.ChestOpen": "Öffnen",
+    "GUI.Battle.GEX.Chest": "TRUHE",
     "GUI.Army.AttackBoost": "Angriffbonus:",
     "GUI.Army.DefenseBoost": "Verteidigungsbonus:",
     "GUI.Telegram.Snip": "##GB## (##Player## ##Social##) wurde mit ##Invest## belegt -> ##Profit## FP Gewinn",

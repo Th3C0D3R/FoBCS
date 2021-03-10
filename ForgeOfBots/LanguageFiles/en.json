@@ -9,6 +9,8 @@
     "GUI.Battle.UC.Wave2": "Wave 2:",
     "GUI.Battle.OwnArmySuggestion": "Army Suggestion:",
     "GUI.Battle.GEX.Stage": "Encounter:",
+    "GUI.Battle.GEX.ChestOpen": "Open",
+    "GUI.Battle.GEX.Chest": "CHEST",
     "GUI.Army.AttackBoost": "Attack-Boost:",
     "GUI.Army.DefenseBoost": "Defense-Boost:",
     "GUI.Telegram.Snip": "##Invest## invested at ##GB## (##Player## ##Social##) -> ##Profit## FP profit",
