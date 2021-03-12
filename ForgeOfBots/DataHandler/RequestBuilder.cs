@@ -30,13 +30,15 @@ namespace ForgeOfBots.DataHandler
          int idData = 0;
          string world = StaticData.UserData.LastWorld;
          string messageCategory = "";
-         int[] attackData = new int[] { };
+         int[,] armyData = new int[2, 8];
          if (type == RequestType.QueryProduction || type == RequestType.CollectProduction || type == RequestType.getConstruction || type == RequestType.contributeForgePoints)
             queryData = (int[])data;
          else if (type == RequestType.getOverviewForCategory)
             messageCategory = $"{data}";
          else if (type == RequestType.switchWorld)
             world = (data == StaticData.UserData.LastWorld ? data : StaticData.UserData.LastWorld);
+         else if (type == RequestType.updatePools)
+            armyData = (int[,])data;
          else if (type == RequestType.GEXstartAttak)
             idData = int.Parse(data);
          else if (data is int iData)
@@ -239,6 +241,12 @@ namespace ForgeOfBots.DataHandler
                _class = "BattlefieldService";
                _methode = "startByBattleType";
                break;
+            case RequestType.updatePools:
+               _data = new JArray();
+               doHack = true;
+               _class = "ArmyUnitManagementService";
+               _methode = "updatePools";
+               break;
             case RequestType.contributeForgePoints:
                _data = new JArray(queryData); //LG-ID, Player-ID, Current Level, ForgePoints to contribute, some bool mostly false
                doHack = true;
@@ -298,7 +306,19 @@ namespace ForgeOfBots.DataHandler
          string jsonString = "[" + JsonConvert.SerializeObject(j) + "]";
          if (doHack)
          {
-            if (type == RequestType.CollectProduction)
+            if (type == RequestType.updatePools)
+            {
+               if (armyData.Length != 2) return "";
+               string before = "[[{\"__class__\": \"ArmyPool\",\"units\": [";
+               string attack = string.Join(",", armyData.GetTroopRow(0));
+               string after = "],\"type\":\"attacking\"},{\"__class__\":\"ArmyPool\",\"units\":[";
+               string defending = string.Join(",", armyData.GetTroopRow(1));
+               string end = "],\"type\":\"defending\"},{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}],{\"__class__\":\"ArmyContext\",\"content\":\"main\"}]";
+               string startJson = jsonString.Substring(0, jsonString.IndexOf("\"requestData\":[") + ("\"requestData\":[").Length - 1);
+               string endJson = jsonString.Substring(jsonString.IndexOf(",\"requestClass\""));
+               jsonString = $"{startJson}{before}{attack}{after}{defending}{end}{endJson}";
+            }
+            else if (type == RequestType.CollectProduction)
                jsonString = jsonString.Replace("\"requestData\":[", "\"requestData\":[[").Replace("],\"requestClass\"", "]],\"requestClass\"");
             else if (type == RequestType.contributeForgePoints)
                jsonString = jsonString.Replace(",0]", ",false]");
@@ -361,6 +381,7 @@ namespace ForgeOfBots.DataHandler
       contributeForgePoints,
       switchWorld,
       getItems,
+      updatePools,
       getContributions,
       getPlayerResources,
       getArmyInfo,

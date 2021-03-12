@@ -31,24 +31,16 @@ namespace ForgeOfBots.Forms.UserControls
       {
          this.components = new System.ComponentModel.Container();
          this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-         this.btnFight = new System.Windows.Forms.Button();
-         this.pnlWave1 = new System.Windows.Forms.Panel();
-         this.lblWave = new System.Windows.Forms.Label();
-         this.lvWave = new System.Windows.Forms.ListView();
-         this.imgList = new System.Windows.Forms.ImageList(this.components);
-         this.pnlContent = new System.Windows.Forms.Panel();
-         this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-         this.lblStageType = new System.Windows.Forms.Label();
-         this.lblProgress = new System.Windows.Forms.Label();
-         this.lblChest = new System.Windows.Forms.Label();
-         this.pnlOwnArmy = new System.Windows.Forms.Panel();
-         this.label1 = new System.Windows.Forms.Label();
-         this.lvOwnArmy = new System.Windows.Forms.ListView();
+         this.btnArmySubmit = new System.Windows.Forms.Button();
+         this.panel1 = new System.Windows.Forms.Panel();
+         this.lvArmy = new System.Windows.Forms.ListView();
+         this.cmsArmySelection = new System.Windows.Forms.ContextMenuStrip(this.components);
+         this.tsmiSelect = new System.Windows.Forms.ToolStripMenuItem();
+         this.lvSelectedArmy = new System.Windows.Forms.ListBox();
+         this.lblSelectedArmy = new System.Windows.Forms.Label();
          this.tableLayoutPanel1.SuspendLayout();
-         this.pnlWave1.SuspendLayout();
-         this.pnlContent.SuspendLayout();
-         this.tableLayoutPanel2.SuspendLayout();
-         this.pnlOwnArmy.SuspendLayout();
+         this.panel1.SuspendLayout();
+         this.cmsArmySelection.SuspendLayout();
          this.SuspendLayout();
          // 
          // tableLayoutPanel1
@@ -56,175 +48,101 @@ namespace ForgeOfBots.Forms.UserControls
          this.tableLayoutPanel1.ColumnCount = 2;
          this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.13718F));
          this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.86282F));
-         this.tableLayoutPanel1.Controls.Add(this.btnFight, 1, 1);
-         this.tableLayoutPanel1.Controls.Add(this.pnlWave1, 0, 1);
-         this.tableLayoutPanel1.Controls.Add(this.pnlContent, 0, 0);
-         this.tableLayoutPanel1.Controls.Add(this.pnlOwnArmy, 0, 3);
+         this.tableLayoutPanel1.Controls.Add(this.btnArmySubmit, 1, 3);
+         this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+         this.tableLayoutPanel1.Controls.Add(this.lvSelectedArmy, 1, 1);
+         this.tableLayoutPanel1.Controls.Add(this.lblSelectedArmy, 1, 0);
          this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
          this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
          this.tableLayoutPanel1.Name = "tableLayoutPanel1";
          this.tableLayoutPanel1.RowCount = 4;
-         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18F));
-         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27F));
-         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27F));
-         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28F));
+         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.69388F));
+         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.79592F));
+         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.59184F));
+         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.5102F));
+         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+         this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
          this.tableLayoutPanel1.Size = new System.Drawing.Size(430, 245);
          this.tableLayoutPanel1.TabIndex = 0;
          // 
-         // btnFight
+         // btnArmySubmit
          // 
-         this.btnFight.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.btnFight.Location = new System.Drawing.Point(331, 44);
-         this.btnFight.Margin = new System.Windows.Forms.Padding(0);
-         this.btnFight.Name = "btnFight";
-         this.btnFight.Size = new System.Drawing.Size(99, 66);
-         this.btnFight.TabIndex = 0;
-         this.btnFight.Tag = "GUI.Battle.Fight";
-         this.btnFight.Text = "GUI.Battle.Fight";
-         this.btnFight.UseVisualStyleBackColor = true;
-         this.btnFight.Click += new System.EventHandler(this.BtnFight_Click);
+         this.btnArmySubmit.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.btnArmySubmit.Location = new System.Drawing.Point(331, 206);
+         this.btnArmySubmit.Margin = new System.Windows.Forms.Padding(0);
+         this.btnArmySubmit.Name = "btnArmySubmit";
+         this.btnArmySubmit.Size = new System.Drawing.Size(99, 39);
+         this.btnArmySubmit.TabIndex = 0;
+         this.btnArmySubmit.Tag = "GUI.Army.Submit";
+         this.btnArmySubmit.Text = "GUI.Army.Submit";
+         this.btnArmySubmit.UseVisualStyleBackColor = true;
+         this.btnArmySubmit.Click += new System.EventHandler(this.BtnArmySubmit_Click);
          // 
-         // pnlWave1
+         // panel1
          // 
-         this.pnlWave1.Controls.Add(this.lblWave);
-         this.pnlWave1.Controls.Add(this.lvWave);
-         this.pnlWave1.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.pnlWave1.Location = new System.Drawing.Point(0, 44);
-         this.pnlWave1.Margin = new System.Windows.Forms.Padding(0);
-         this.pnlWave1.Name = "pnlWave1";
-         this.tableLayoutPanel1.SetRowSpan(this.pnlWave1, 2);
-         this.pnlWave1.Size = new System.Drawing.Size(331, 132);
-         this.pnlWave1.TabIndex = 3;
-         this.pnlWave1.Visible = false;
+         this.panel1.Controls.Add(this.lvArmy);
+         this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.panel1.Location = new System.Drawing.Point(0, 0);
+         this.panel1.Margin = new System.Windows.Forms.Padding(0);
+         this.panel1.Name = "panel1";
+         this.tableLayoutPanel1.SetRowSpan(this.panel1, 4);
+         this.panel1.Size = new System.Drawing.Size(331, 245);
+         this.panel1.TabIndex = 1;
          // 
-         // lblWave
+         // lvArmy
          // 
-         this.lblWave.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.lblWave.Location = new System.Drawing.Point(0, 0);
-         this.lblWave.Margin = new System.Windows.Forms.Padding(3);
-         this.lblWave.Name = "lblWave";
-         this.lblWave.Size = new System.Drawing.Size(75, 132);
-         this.lblWave.TabIndex = 2;
-         this.lblWave.Tag = "GUI.Battle.UC.Wave";
-         this.lblWave.Text = "lblWave1";
-         this.lblWave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.lvArmy.ContextMenuStrip = this.cmsArmySelection;
+         this.lvArmy.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.lvArmy.HideSelection = false;
+         this.lvArmy.Location = new System.Drawing.Point(0, 0);
+         this.lvArmy.Margin = new System.Windows.Forms.Padding(0);
+         this.lvArmy.Name = "lvArmy";
+         this.lvArmy.Size = new System.Drawing.Size(331, 245);
+         this.lvArmy.TabIndex = 0;
+         this.lvArmy.Tag = "";
+         this.lvArmy.UseCompatibleStateImageBehavior = false;
+         this.lvArmy.View = System.Windows.Forms.View.SmallIcon;
          // 
-         // lvWave
+         // cmsArmySelection
          // 
-         this.lvWave.AutoArrange = false;
-         this.lvWave.Dock = System.Windows.Forms.DockStyle.Right;
-         this.lvWave.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-         this.lvWave.HideSelection = false;
-         this.lvWave.Location = new System.Drawing.Point(75, 0);
-         this.lvWave.Margin = new System.Windows.Forms.Padding(0);
-         this.lvWave.MultiSelect = false;
-         this.lvWave.Name = "lvWave";
-         this.lvWave.Size = new System.Drawing.Size(256, 132);
-         this.lvWave.SmallImageList = this.imgList;
-         this.lvWave.TabIndex = 1;
-         this.lvWave.UseCompatibleStateImageBehavior = false;
-         this.lvWave.View = System.Windows.Forms.View.SmallIcon;
+         this.cmsArmySelection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSelect});
+         this.cmsArmySelection.Name = "cmsArmySelection";
+         this.cmsArmySelection.Size = new System.Drawing.Size(174, 26);
+         this.cmsArmySelection.Opening += new System.ComponentModel.CancelEventHandler(this.CmsArmySelection_Opening);
          // 
-         // imgList
+         // tsmiSelect
          // 
-         this.imgList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-         this.imgList.ImageSize = new System.Drawing.Size(16, 16);
-         this.imgList.TransparentColor = System.Drawing.Color.Transparent;
+         this.tsmiSelect.Name = "tsmiSelect";
+         this.tsmiSelect.Size = new System.Drawing.Size(173, 22);
+         this.tsmiSelect.Tag = "GUI.Army.DeSelect";
+         this.tsmiSelect.Text = "GUI.Army.DeSelect";
+         this.tsmiSelect.Click += new System.EventHandler(this.TsmiSelect_Click);
          // 
-         // pnlContent
+         // lvSelectedArmy
          // 
-         this.pnlContent.Controls.Add(this.tableLayoutPanel2);
-         this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.pnlContent.Location = new System.Drawing.Point(0, 0);
-         this.pnlContent.Margin = new System.Windows.Forms.Padding(0);
-         this.pnlContent.Name = "pnlContent";
-         this.pnlContent.Size = new System.Drawing.Size(331, 44);
-         this.pnlContent.TabIndex = 5;
+         this.lvSelectedArmy.ContextMenuStrip = this.cmsArmySelection;
+         this.lvSelectedArmy.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.lvSelectedArmy.FormattingEnabled = true;
+         this.lvSelectedArmy.Location = new System.Drawing.Point(331, 36);
+         this.lvSelectedArmy.Margin = new System.Windows.Forms.Padding(0);
+         this.lvSelectedArmy.Name = "lvSelectedArmy";
+         this.tableLayoutPanel1.SetRowSpan(this.lvSelectedArmy, 2);
+         this.lvSelectedArmy.Size = new System.Drawing.Size(99, 170);
+         this.lvSelectedArmy.TabIndex = 2;
+         this.lvSelectedArmy.Tag = "";
          // 
-         // tableLayoutPanel2
+         // lblSelectedArmy
          // 
-         this.tableLayoutPanel2.ColumnCount = 3;
-         this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.14804F));
-         this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.61934F));
-         this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.90155F));
-         this.tableLayoutPanel2.Controls.Add(this.lblStageType, 0, 0);
-         this.tableLayoutPanel2.Controls.Add(this.lblProgress, 1, 0);
-         this.tableLayoutPanel2.Controls.Add(this.lblChest, 2, 0);
-         this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-         this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-         this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-         this.tableLayoutPanel2.RowCount = 2;
-         this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-         this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-         this.tableLayoutPanel2.Size = new System.Drawing.Size(331, 44);
-         this.tableLayoutPanel2.TabIndex = 0;
-         // 
-         // lblStageType
-         // 
-         this.lblStageType.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.lblStageType.Location = new System.Drawing.Point(3, 0);
-         this.lblStageType.Name = "lblStageType";
-         this.lblStageType.Size = new System.Drawing.Size(64, 22);
-         this.lblStageType.TabIndex = 0;
-         this.lblStageType.Tag = "";
-         this.lblStageType.Text = "Stage";
-         this.lblStageType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-         // 
-         // lblProgress
-         // 
-         this.lblProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.lblProgress.Location = new System.Drawing.Point(73, 0);
-         this.lblProgress.Name = "lblProgress";
-         this.lblProgress.Size = new System.Drawing.Size(145, 22);
-         this.lblProgress.TabIndex = 1;
-         this.lblProgress.Text = "label2";
-         this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-         // 
-         // lblChest
-         // 
-         this.lblChest.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.lblChest.Location = new System.Drawing.Point(224, 0);
-         this.lblChest.Name = "lblChest";
-         this.lblChest.Size = new System.Drawing.Size(104, 22);
-         this.lblChest.TabIndex = 2;
-         this.lblChest.Text = "label2";
-         this.lblChest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-         // 
-         // pnlOwnArmy
-         // 
-         this.pnlOwnArmy.Controls.Add(this.label1);
-         this.pnlOwnArmy.Controls.Add(this.lvOwnArmy);
-         this.pnlOwnArmy.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.pnlOwnArmy.Location = new System.Drawing.Point(0, 176);
-         this.pnlOwnArmy.Margin = new System.Windows.Forms.Padding(0);
-         this.pnlOwnArmy.Name = "pnlOwnArmy";
-         this.pnlOwnArmy.Size = new System.Drawing.Size(331, 69);
-         this.pnlOwnArmy.TabIndex = 7;
-         // 
-         // label1
-         // 
-         this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.label1.Location = new System.Drawing.Point(0, 0);
-         this.label1.Name = "label1";
-         this.label1.Size = new System.Drawing.Size(75, 69);
-         this.label1.TabIndex = 0;
-         this.label1.Tag = "GUI.Battle.OwnArmySuggestion";
-         this.label1.Text = "lblOwnArmy";
-         this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-         // 
-         // lvOwnArmy
-         // 
-         this.lvOwnArmy.Dock = System.Windows.Forms.DockStyle.Right;
-         this.lvOwnArmy.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-         this.lvOwnArmy.HideSelection = false;
-         this.lvOwnArmy.Location = new System.Drawing.Point(75, 0);
-         this.lvOwnArmy.Margin = new System.Windows.Forms.Padding(0);
-         this.lvOwnArmy.Name = "lvOwnArmy";
-         this.lvOwnArmy.Size = new System.Drawing.Size(256, 69);
-         this.lvOwnArmy.TabIndex = 1;
-         this.lvOwnArmy.UseCompatibleStateImageBehavior = false;
-         this.lvOwnArmy.View = System.Windows.Forms.View.SmallIcon;
+         this.lblSelectedArmy.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.lblSelectedArmy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+         this.lblSelectedArmy.Location = new System.Drawing.Point(334, 0);
+         this.lblSelectedArmy.Name = "lblSelectedArmy";
+         this.lblSelectedArmy.Size = new System.Drawing.Size(93, 36);
+         this.lblSelectedArmy.TabIndex = 3;
+         this.lblSelectedArmy.Tag = "GUI.Army.SelectedArmy";
+         this.lblSelectedArmy.Text = "GUI.Army.SelectedArmy";
+         this.lblSelectedArmy.TextAlign = System.Drawing.ContentAlignment.TopCenter;
          // 
          // ucBattle
          // 
@@ -236,10 +154,8 @@ namespace ForgeOfBots.Forms.UserControls
          this.Name = "ucBattle";
          this.Size = new System.Drawing.Size(430, 245);
          this.tableLayoutPanel1.ResumeLayout(false);
-         this.pnlWave1.ResumeLayout(false);
-         this.pnlContent.ResumeLayout(false);
-         this.tableLayoutPanel2.ResumeLayout(false);
-         this.pnlOwnArmy.ResumeLayout(false);
+         this.panel1.ResumeLayout(false);
+         this.cmsArmySelection.ResumeLayout(false);
          this.ResumeLayout(false);
 
       }
@@ -247,18 +163,12 @@ namespace ForgeOfBots.Forms.UserControls
       #endregion
 
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-      private System.Windows.Forms.Button btnFight;
-      private System.Windows.Forms.Panel pnlWave1;
-      private System.Windows.Forms.Label lblWave;
-      private System.Windows.Forms.Panel pnlContent;
-      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-      private System.Windows.Forms.Label lblStageType;
-      private System.Windows.Forms.Label lblProgress;
-      private System.Windows.Forms.Panel pnlOwnArmy;
-      private System.Windows.Forms.Label label1;
-      private System.Windows.Forms.Label lblChest;
-      public System.Windows.Forms.ListView lvWave;
-      public System.Windows.Forms.ListView lvOwnArmy;
-      public System.Windows.Forms.ImageList imgList;
+      private System.Windows.Forms.Button btnArmySubmit;
+      private System.Windows.Forms.Panel panel1;
+      private System.Windows.Forms.Label lblSelectedArmy;
+      private System.Windows.Forms.ContextMenuStrip cmsArmySelection;
+      private System.Windows.Forms.ToolStripMenuItem tsmiSelect;
+      public System.Windows.Forms.ListBox lvSelectedArmy;
+      public System.Windows.Forms.ListView lvArmy;
    }
 }

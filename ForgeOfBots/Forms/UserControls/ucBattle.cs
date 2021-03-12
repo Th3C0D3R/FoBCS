@@ -9,122 +9,92 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ForgeOfBots.GameClasses.ResponseClasses;
 
 namespace ForgeOfBots.Forms.UserControls
 {
    public partial class ucBattle : UserControl
    {
-      private CustomEvent _Fight;
-      public event CustomEvent Fight
+      private CustomEvent _SubmitArmy;
+      public event CustomEvent SubmitArmy
       {
          add
          {
-            if (_Fight == null || !_Fight.GetInvocationList().ToList().Contains(value))
-               _Fight += value;
+            if (_SubmitArmy == null || !_SubmitArmy.GetInvocationList().ToList().Contains(value))
+               _SubmitArmy += value;
          }
          remove
          {
-            _Fight -= value;
+            _SubmitArmy -= value;
          }
       }
-
-      public int ID { get; set; } = -1;
-      public ImageList UnitImageList
-      {
-         get
-         {
-            return imgList;
-         }
-         set
-         {
-            imgList = value;
-         }
-      }
-
+      public List<string> SelectedArmyTypes = new List<string>();
+      public ImageList imgList { get; set; } = null;
+      public Dictionary<string, List<Unit>> UnitList { get; set; } = new Dictionary<string, List<Unit>>();
       public ucBattle()
       {
          InitializeComponent();
-         ToggleWave1(false);
-         ToggleOwn(false);
-         lblWave.Text = i18n.getString("GUI.Battle.UC.Wave");
-         lblChest.Visible = false;
       }
-      public void FillControl(string type)
+      public void FillArmyList(Dictionary<string, List<Unit>> unitlist)
       {
-         Invoker.SetProperty(lblProgress, () => lblProgress.Text, $"{((GEXHelper.GetCurrentState % 2) == 1 ? (GEXHelper.GetCurrentState + 1) / 2 : GEXHelper.GetCurrentState / 2)}");
-         Invoker.SetProperty(lblStageType, () => lblStageType.Text, type);
+         if (imgList == null) return;
+         if (unitlist.Count <= 0) return;
+         UnitList = unitlist;
       }
-
-      public void FillWave1(ListViewItem lvi)
+      public void FillSelectedArmy(List<string> selectredArmy)
       {
-         ListViewGroup group = new ListViewGroup(i18n.getString("GUI.Battle.UC.Wave1"), HorizontalAlignment.Left);
-         if (lvWave.Groups.Count == 0)
-         {
-            group.Name = "wave1";
-            lvi.Group = group;
-         }
-         else
-         {
-            lvi.Group = lvWave.Groups["wave1"];
-         }
-         lvWave.Items.Add(lvi);
-         if(lvWave.Groups.Count == 0)
-            lvWave.Groups.Add(group);
-         ToggleWave1(true);
-      }
-      public void FillWave2(ListViewItem lvi)
-      {
-         ListViewGroup group = new ListViewGroup(i18n.getString("GUI.Battle.UC.Wave2"), HorizontalAlignment.Left);
-         if (lvWave.Groups.Count == 1)
-         {
-            group.Name = "wave2";
-            lvi.Group = group;
-         }
-         else
-         {
-            lvi.Group = lvWave.Groups["wave2"];
-         }
-         lvWave.Items.Add(lvi);
-         if (lvWave.Groups.Count == 1)
-            lvWave.Groups.Add(group);
-         ToggleWave1(true);
-      }
-      public void FillSuggestion(ListViewItem lvi)
-      {
-         lvOwnArmy.Items.Add(lvi);
-         ToggleOwn(true);
-      }
-      public void FillChest(int getChestID)
-      {
-         ID = getChestID;
-         lblChest.Text = i18n.getString("GUI.Battle.GEX.Chest");
-         btnFight.Text = i18n.getString("GUI.Battle.GEX.ChestOpen");
+         if (imgList == null) return;
+         if (UnitList.Count <= 0) return;
+         SelectedArmyTypes = selectredArmy;
       }
 
-      public void ToggleWave1(bool visible)
+      private void BtnArmySubmit_Click(object sender, EventArgs e)
       {
-         Invoker.SetProperty(pnlWave1, () => pnlWave1.Visible, visible);
-      }
-      public void ToggleOwn(bool visible)
-      {
-         Invoker.SetProperty(pnlOwnArmy, () => pnlOwnArmy.Visible, visible);
-      }
-      public void ToggleChest(bool visible)
-      {
-         if (visible)
+         SelectedArmyTypes.Clear();
+         foreach (var item in lvSelectedArmy.Items)
          {
-            ToggleWave1(false);
-            ToggleOwn(false);
-            Invoker.SetProperty(lblChest, () => lblChest.Visible, visible);
+            Unit unit = (Unit)item;
+            SelectedArmyTypes.Add(unit.unit.unitTypeId);
+         }
+         _SubmitArmy?.Invoke(null, SelectedArmyTypes);
+      }
+
+      private void CmsArmySelection_Opening(object sender, CancelEventArgs e)
+      {
+         ContextMenuStrip cms = (ContextMenuStrip)sender;
+         if (cms.SourceControl.Name == lvSelectedArmy.Name)
+         {
+            cmsArmySelection.Items[0].Text = i18n.getString("GUI.Army.Deselect");
+            cmsArmySelection.Items[0].Tag = "deselect";
+         }
+         else if (cms.SourceControl.Name == lvArmy.Name)
+         {
+            cmsArmySelection.Items[0].Text = i18n.getString("GUI.Army.Select");
+            cmsArmySelection.Items[0].Tag = "select";
          }
       }
 
-
-      private void BtnFight_Click(object sender, EventArgs e)
+      private void TsmiSelect_Click(object sender, EventArgs e)
       {
-         if (ID > -1)
-            _Fight?.Invoke(null, ID);
-         btnFight.Text = i18n.getString(btnFight.Tag.ToString());
+         ToolStripItem tsi = (ToolStripItem)sender;
+         if (tsi.Tag.ToString() == "deselect")
+         {
+            if (lvSelectedArmy.SelectedItems.Count > 0)
+            {
+               lvSelectedArmy.Items.RemoveAt(lvSelectedArmy.SelectedIndex);
+            }
+         }
+         else if (tsi.Tag.ToString() == "select")
+         {
+            if (lvSelectedArmy.Items.Count < 8)
+            {
+               if (lvArmy.SelectedItems.Count > 0)
+               {
+                  Unit unit = (Unit)lvArmy.SelectedItems[0].Tag;
+                  lvSelectedArmy.Items.Add(unit);
+               }
+            }
+         }
       }
    }
 }

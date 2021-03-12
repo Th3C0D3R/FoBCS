@@ -51,6 +51,7 @@ namespace ForgeOfBots.Utils
       public DateTime LastIncidentTime { get; set; } = DateTime.MinValue;
       public DateTime LastSnipTime { get; set; } = DateTime.MinValue;
       public List<int> IgnoredPlayers { get; set; } = new List<int>();
+      public List<string> ArmySelection { get; set; } = new List<string>();
 
       #region "Methodes no Changes needed"
       public void SaveSettings()

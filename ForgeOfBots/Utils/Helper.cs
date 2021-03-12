@@ -174,7 +174,8 @@ namespace ForgeOfBots.Utils
                      {
                         unit = army,
                         name = unittype.name,
-                        count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached
+                        count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached,
+                        ids = responseData.units.ToList().FindAll(e=> e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
                      };
                      if (unittype.unitTypeId == army.unitTypeId)
                      {

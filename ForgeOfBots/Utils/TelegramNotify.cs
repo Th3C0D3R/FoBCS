@@ -27,7 +27,6 @@ namespace ForgeOfBots.Utils
 
       private static void Bot_OnMessageReceive(object sender, Telegram.Bot.Args.MessageEventArgs e)
       {
-         return;
          if (StaticData.UserData.TelegramUserName.IsEmpty()) return;
          if (StaticData.UserData.TelegramUserName != e.Message.Chat.Username) return;
          string sCommand = e.Message.Text.TrimStart('/');
@@ -75,7 +74,6 @@ namespace ForgeOfBots.Utils
 
       public static void Send(string msg)
       {
-         return;
          if (StaticData.UserData.ChatID == -1)
          {
             //tmpMessages.Add(msg);

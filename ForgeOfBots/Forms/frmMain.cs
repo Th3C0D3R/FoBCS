@@ -1416,8 +1416,8 @@ namespace ForgeOfBots.Forms
                UpdateProductionView();
                UpdateGoodProductionView();
                UpdateDashbord();
-               if (UserData.ProductionBotNotification)
-                  TelegramNotify.Send($"{i18n.getString("GUI.Telegram.ProdFinished")}{(UserData.ProductionBot ? $" {i18n.getString("GUI.Telegram.ProdStarted")}" : "")}");
+               //if (UserData.ProductionBotNotification)
+                  //TelegramNotify.Send($"{i18n.getString("GUI.Telegram.ProdFinished")}{(UserData.ProductionBot ? $" {i18n.getString("GUI.Telegram.ProdStarted")}" : "")}");
                break;
             case RequestType.QueryProduction:
                List<string> retQuery = new List<string>();
@@ -1884,23 +1884,23 @@ namespace ForgeOfBots.Forms
       }
       private void McbNotifyProd_CheckedChanged(object sender, EventArgs e)
       {
-         return;
-         UserData.ProductionBotNotification = mcbNotifyProd.Checked;
-         UserData.SaveSettings();
-         if (UserData.TelegramUserName.IsEmpty() && mcbNotifyProd.Checked)
-         {
-            MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramNameText"), i18n.getString("GUI.MessageBox.NoTelegramNameTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-         }
+         //return;
+         //UserData.ProductionBotNotification = mcbNotifyProd.Checked;
+         //UserData.SaveSettings();
+         //if (UserData.TelegramUserName.IsEmpty() && mcbNotifyProd.Checked)
+         //{
+         //   MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramNameText"), i18n.getString("GUI.MessageBox.NoTelegramNameTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+         //}
       }
       private void McbNotifySnip_CheckedChanged(object sender, EventArgs e)
       {
-         return;
-         UserData.SnipBotNotification = mcbNotifySnip.Checked;
-         UserData.SaveSettings();
-         if (UserData.TelegramUserName.IsEmpty() && mcbNotifySnip.Checked)
-         {
-            MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramNameText"), i18n.getString("GUI.MessageBox.NoTelegramNameTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
-         }
+         //return;
+         //UserData.SnipBotNotification = mcbNotifySnip.Checked;
+         //UserData.SaveSettings();
+         //if (UserData.TelegramUserName.IsEmpty() && mcbNotifySnip.Checked)
+         //{
+         //   MessageBox.Show(i18n.getString("GUI.MessageBox.NoTelegramNameText"), i18n.getString("GUI.MessageBox.NoTelegramNameTitle"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+         //}
       }
       private void mbDeleteData_Click(object sender, EventArgs e)
       {
@@ -2253,15 +2253,15 @@ namespace ForgeOfBots.Forms
                lsi.mcbSnip.Enabled = false;
                lsi.mcbSnip.Checked = false;
                lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
-               if (UserData.SnipBotNotification)
-                  TelegramNotify.Send(i18n.getString("GUI.Telegram.Snip", new List<KeyValuePair<string, string>>()
-               {
-                   new KeyValuePair<string, string>("##GB##",$"{lsi.LGSnip.name}"),
-                   new KeyValuePair<string, string>("##Invest##",$"{lsi.LGSnip.Invest}"),
-                   new KeyValuePair<string, string>("##Profit##",$"{lsi.Profit}"),
-                   new KeyValuePair<string, string>("##Player##",$"{lsi.LGSnip.player.name}"),
-                   new KeyValuePair<string, string>("##Social##",$"{lsi.LGSnip.player.GetIdentifier()}"),
-               }.ToArray()));
+               //if (UserData.SnipBotNotification)
+               //   TelegramNotify.Send(i18n.getString("GUI.Telegram.Snip", new List<KeyValuePair<string, string>>()
+               //{
+               //    new KeyValuePair<string, string>("##GB##",$"{lsi.LGSnip.name}"),
+               //    new KeyValuePair<string, string>("##Invest##",$"{lsi.LGSnip.Invest}"),
+               //    new KeyValuePair<string, string>("##Profit##",$"{lsi.Profit}"),
+               //    new KeyValuePair<string, string>("##Player##",$"{lsi.LGSnip.player.name}"),
+               //    new KeyValuePair<string, string>("##Social##",$"{lsi.LGSnip.player.GetIdentifier()}"),
+               //}.ToArray()));
                Application.DoEvents();
             }
             else if (lsi.mcbSnip.Checked)
@@ -2272,15 +2272,15 @@ namespace ForgeOfBots.Forms
                lsi.mcbSnip.Enabled = false;
                lsi.mcbSnip.Checked = false;
                lsi.mcbSnip.Text = i18n.getString("GUI.Sniper.SnipDone");
-               if (UserData.SnipBotNotification)
-                  TelegramNotify.Send(i18n.getString("GUI.Telegram.Snip", new List<KeyValuePair<string, string>>()
-               {
-                   new KeyValuePair<string, string>("##GB##",$"{lsi.LGSnip.name}"),
-                   new KeyValuePair<string, string>("##Invest##",$"{lsi.LGSnip.Invest}"),
-                   new KeyValuePair<string, string>("##Profit##",$"{lsi.Profit}"),
-                   new KeyValuePair<string, string>("##Player##",$"{lsi.LGSnip.player.name}"),
-                   new KeyValuePair<string, string>("##Social##",$"{lsi.LGSnip.player.GetIdentifier()}"),
-               }.ToArray()));
+               //if (UserData.SnipBotNotification)
+               //   TelegramNotify.Send(i18n.getString("GUI.Telegram.Snip", new List<KeyValuePair<string, string>>()
+               //{
+               //    new KeyValuePair<string, string>("##GB##",$"{lsi.LGSnip.name}"),
+               //    new KeyValuePair<string, string>("##Invest##",$"{lsi.LGSnip.Invest}"),
+               //    new KeyValuePair<string, string>("##Profit##",$"{lsi.Profit}"),
+               //    new KeyValuePair<string, string>("##Player##",$"{lsi.LGSnip.player.name}"),
+               //    new KeyValuePair<string, string>("##Social##",$"{lsi.LGSnip.player.GetIdentifier()}"),
+               //}.ToArray()));
                Application.DoEvents();
             }
          }
@@ -3045,60 +3045,91 @@ namespace ForgeOfBots.Forms
       }
       public void UpdateGEX()
       {
-         Invoker.CallMethode(pnlGEX, () => pnlGEX.Controls.Clear());
+         Invoker.CallMethode(lvWave, () => lvWave.Items.Clear());
          GEXHelper.UpdateGEX();
          GEXWaves[] waves = GEXHelper.Armywaves;
-         ucBattle gexbattle = new ucBattle();
-         gexbattle.imgList = UnitImageLise;  
-         gexbattle.Dock = DockStyle.Top;
-         gexbattle.lvOwnArmy.SmallImageList = gexbattle.imgList;
-         gexbattle.lvOwnArmy.View = System.Windows.Forms.View.SmallIcon;
-         gexbattle.lvWave.SmallImageList = gexbattle.imgList;
-         gexbattle.lvWave.View = System.Windows.Forms.View.SmallIcon;
-         gexbattle.FillControl($"{i18n.getString("GUI.Battle.GEX.Stage")}");
+         Invoker.SetProperty(lvWave, () => lvWave.SmallImageList, UnitImageLise);
+         Invoker.SetProperty(lvWave, () => lvWave.View, System.Windows.Forms.View.SmallIcon);
+         Invoker.SetProperty(lvWave, () => lvWave.Visible, true);
+         Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {GEXHelper.GetCurrentState} {(GEXHelper.IsCurrentStateChest ? i18n.getString("GUI.Battle.GEX.Chest") : "")}");
          if (waves == null)
          {
-            gexbattle.FillChest(GEXHelper.GetChestID);
-            gexbattle.Fight += GEX_CollectChest;
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.ChestOpen"));
+            Invoker.SetProperty(lvWave, () => lvWave.Visible, false);
          }
          else
          {
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.Fight"));
             int currentwave = 1;
             foreach (GEXWaves wave in waves)
             {
                foreach (var unit in wave.units)
                {
                   string unitname = ListClass.UnitTypes.Find(ut => ut.unitTypeId == unit.unitTypeId).name;
-                  ListViewItem lvi = new ListViewItem($"{unitname}", $"armyuniticons_50x50_{unit.unitTypeId}"); //
+                  ListViewItem lvi = new ListViewItem($"{unitname}", $"armyuniticons_50x50_{unit.unitTypeId}");
                   if (currentwave == 1)
-                     gexbattle.FillWave1(lvi);
+                  {
+                     ListViewGroup group = new ListViewGroup(i18n.getString("GUI.Battle.UC.Wave1"), HorizontalAlignment.Left);
+                     if (lvWave.Groups.Count == 0)
+                     {
+                        group.Name = "wave1";
+                        lvi.Group = group;
+                     }
+                     else
+                     {
+                        lvi.Group = lvWave.Groups["wave1"];
+                     }
+                     Invoker.CallMethode(lvWave, () => lvWave.Items.Add(lvi));
+                     if (lvWave.Groups.Count == 0)
+                        Invoker.CallMethode(lvWave, () => lvWave.Groups.Add(group));
+                  }
                   else if (currentwave == 2)
-                     gexbattle.FillWave2(lvi);
+                  {
+                     ListViewGroup group = new ListViewGroup(i18n.getString("GUI.Battle.UC.Wave2"), HorizontalAlignment.Left);
+                     if (lvWave.Groups.Count == 1)
+                     {
+                        group.Name = "wave2";
+                        lvi.Group = group;
+                     }
+                     else
+                     {
+                        lvi.Group = lvWave.Groups["wave2"];
+                     }
+                     Invoker.CallMethode(lvWave, () => lvWave.Items.Add(lvi));
+                     if (lvWave.Groups.Count == 1)
+                        Invoker.CallMethode(lvWave, () => lvWave.Groups.Add(group));
+                  }
                }
                currentwave = 2;
             }
-            gexbattle.Fight += GEX_Fight;
          }
-         if (pnlGEX.InvokeRequired)
+      }
+
+      private void BtnDoGEXAction_Click(object sender, EventArgs e)
+      {
+         if (GEXHelper.IsCurrentStateChest)
          {
-            Invoker.CallMethode(pnlGEX, () => pnlGEX.Controls.Add(gexbattle));
+            var ret = GEXHelper.OpenChest(GEXHelper.GetCurrentState);
          }
          else
          {
-            pnlGEX.Controls.Add(gexbattle);
+            frmArmySelection frmAS = new frmArmySelection();
+            frmAS.ArmySelection.imgList = UnitImageLise;
+            frmAS.ArmySelection.FillArmyList(ListClass.UnitList);
+            frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection);
+            frmAS.ArmySelection.SubmitArmy += ArmySelection_SubmitArmy;
+            frmAS.ShowDialog();
          }
       }
 
-      private void GEX_Fight(object sender, dynamic data = null)
+      private void ArmySelection_SubmitArmy(object sender, dynamic data = null)
       {
-         int ID = (int)data;
+         List<string> list = (List<string>)data;
+         UserData.ArmySelection = list;
+         Updater.UpdateAttackPool();
+         var ret = GEXHelper.StartFight(GEXHelper.GetCurrentState);
       }
 
-      private void GEX_CollectChest(object sender, dynamic data = null)
-      {
-         int ID = (int)data;
-         var ret = GEXHelper.OpenChest(ID);
-      }
       public void UpdateGBG()
       {
       }

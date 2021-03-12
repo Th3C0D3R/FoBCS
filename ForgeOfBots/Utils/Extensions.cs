@@ -166,6 +166,12 @@ namespace ForgeOfBots.Utils
       {
          return Enum.GetName(typeof(T), @enum);
       }
+      public static IEnumerable<T> GetTroopRow<T>(this T[,] array, int rowIndex)
+      {
+         int columnsCount = array.GetLength(1);
+         for (int colIndex = 0; colIndex < columnsCount; colIndex++)
+            yield return array[rowIndex, colIndex];
+      }
    }
    /// <summary>
    /// Generates a 16 byte Unique Identification code of a computer
