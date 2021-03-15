@@ -64,7 +64,8 @@ namespace ForgeOfBots.GameClasses
       public static List<EntityEx> ProductionList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> GoodProductionList { get; set; } = new List<EntityEx>();
       public static Dictionary<string, List<Good>> GoodsDict { get; set; } = new Dictionary<string, List<Good>>();
-      public static Dictionary<string, List<Unit>> UnitList { get; set; } = new Dictionary<string, List<Unit>>();
+      public static Dictionary<string, List<Unit>> UnitListEraSorted { get; set; } = new Dictionary<string, List<Unit>>();
+      public static List<Unit> UnitList { get; set; } = new List<Unit>();
       public static List<Player> Motivateable { get; set; } = new List<Player>();
       public static TavernData OwnTavernData { get; set; } = new TavernData();
       public static MessageRoot MessageCenter { get; set; } = new MessageRoot();

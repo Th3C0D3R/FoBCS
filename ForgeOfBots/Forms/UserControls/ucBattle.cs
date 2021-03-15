@@ -30,12 +30,12 @@ namespace ForgeOfBots.Forms.UserControls
       }
       public List<string> SelectedArmyTypes = new List<string>();
       public ImageList imgList { get; set; } = null;
-      public Dictionary<string, List<Unit>> UnitList { get; set; } = new Dictionary<string, List<Unit>>();
+      public List<Unit> UnitList { get; set; } = new List<Unit>();
       public ucBattle()
       {
          InitializeComponent();
       }
-      public void FillArmyList(Dictionary<string, List<Unit>> unitlist)
+      public void FillArmyList(List<Unit> unitlist)
       {
          if (imgList == null) return;
          if (unitlist.Count <= 0) return;

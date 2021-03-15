@@ -158,7 +158,7 @@ namespace ForgeOfBots.Utils
          }
          return goodList;
       }
-      public static Dictionary<string, List<Unit>> GetUnitSorted(List<ResearchEra> eraList, List<UnitType> unitTypes, Army responseData)
+      public static Dictionary<string, List<Unit>> GetUnitEraSorted(List<ResearchEra> eraList, List<UnitType> unitTypes, Army responseData)
       {
          if (unitTypes.Count <= 0 || responseData == null) return new Dictionary<string, List<Unit>>();
          Dictionary<string, List<Unit>> armyList = new Dictionary<string, List<Unit>>();
@@ -175,7 +175,7 @@ namespace ForgeOfBots.Utils
                         unit = army,
                         name = unittype.name,
                         count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached,
-                        ids = responseData.units.ToList().FindAll(e=> e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
+                        ids = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
                      };
                      if (unittype.unitTypeId == army.unitTypeId)
                      {
@@ -199,6 +199,30 @@ namespace ForgeOfBots.Utils
             }
          }
          return armyList;
+      }
+      public static List<Unit> GetUnitSorted(List<UnitType> unitTypes, Army responseData)
+      {
+         if (responseData == null) return new List<Unit>();
+         var tmpList = new List<Unit>();
+         foreach (var unittype in unitTypes)
+         {
+            foreach (var army in responseData.units)
+            {
+               Unit unit = new Unit
+               {
+                  unit = army,
+                  name = unittype.name,
+                  count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached,
+                  ids = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
+               };
+               if (unittype.unitTypeId == army.unitTypeId)
+               {
+                  tmpList.Add(unit);
+                  break;
+               }
+            }
+         }
+         return tmpList;
       }
       public static List<KeyValuePair<string, List<EntityEx>>> GetGroupedList(List<EntityEx> buildings)
       {
@@ -311,6 +335,8 @@ namespace ForgeOfBots.Utils
          Expired,
          Failed
       }
+
+
       public static int GetP1(string AgeString, int Level)
       {
          int[] BronzeAge = { 5, 10, 10, 15, 25, 30, 35, 40, 45, 55, 60, 65, 75, 80, 85, 95, 100, 110, 115, 125, 130, 140, 145, 155, 160, 170, 180, 185, 195, 200, 210, 220, 225, 235, 245, 250, 260, 270, 275, 285, 295, 300, 310, 320, 330, 340, 345, 355, 365, 375, 380, 390, 400, 410, 420, 430, 440, 445, 455, 465, 475, 485, 495, 505, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 690, 700, 710, 720, 730, 740, 750, 760, 770, 780, 790, 800, 810, 820, 830, 840, 850, 860, 870, 880, 890, 905, 915, 925, 935, 945, 955, 965, 975, 985, 995, 1010, 1020, 1030, 1040, 1050, 1060, 1070, 1085, 1095, 1105, 1115, 1125, 1135, 1150, 1160, 1170, 1180, 1190, 1200, 1215, 1225, 1235, 1245, 1255, 1270, 1280, 1290, 1300, 1310, 1325, 1335, 1345, 1355, 1370, 1380, 1390, 1400, 1415, 1425, 1435, 1445, 1460, 1470, 1480 };

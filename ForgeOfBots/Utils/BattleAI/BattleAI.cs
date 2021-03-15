@@ -82,8 +82,8 @@ namespace ForgeOfBots.Utils.BattleAI
          }
          id += type.range;
          id += type.movementPoints;
-         id += (type.baseArmor * StaticData.DefenseBoost) + type.baseArmor;
-         id += (type.baseDamage * StaticData.AttackBoost) + type.baseDamage;
+         id += (type.baseArmor * StaticData.AttackBoost[1]) + type.baseArmor;
+         id += (type.baseDamage * StaticData.AttackBoost[0]) + type.baseDamage;
          var tau = type.attackBonus.units;
          id += (tau.fast + tau.heavy_melee + tau.light_melee + tau.long_ranged + tau.short_ranged);
          var tat = type.attackBonus.terrains;

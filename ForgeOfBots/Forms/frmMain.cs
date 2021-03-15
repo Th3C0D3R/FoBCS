@@ -77,6 +77,7 @@ namespace ForgeOfBots.Forms
                logger.Info($"settings exists");
                logger.Info($"changing language");
                UserData = Utils.Settings.ReadSettings();
+               if (UserData == null) return;
                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(UserData.Language.Code);
@@ -131,6 +132,7 @@ namespace ForgeOfBots.Forms
                logger.Info($"settings exists");
                logger.Info($"changing language");
                UserData = Utils.Settings.ReadSettings();
+               if (UserData == null) return;
                if (UserData.BotVersion.Major < StaticData.Version.Major || UserData.BotVersion.Minor < StaticData.Version.Minor)
                {
                   logger.Info($"old settingsversion found");
@@ -472,7 +474,6 @@ namespace ForgeOfBots.Forms
       private void GetUIDAndForgeHX(string source)
       {
          logger.Info($">>> GetUIDAndForgeHX");
-         InitSettingsTab();
          var regExUserID = new Regex(@"https:\/\/(\w{1,2}\d{1,2})\.forgeofempires\.com\/game\/json\?h=(.+)'", RegexOptions.IgnoreCase);
          var regExWSSecret = new Regex(@"'socket_token': '(.+)',", RegexOptions.IgnoreCase);
          var regExForgeHX = new Regex(@"https:\/\/foe\w{1,4}\.innogamescdn\.com\/\/cache\/ForgeHX(.+.js)'", RegexOptions.IgnoreCase);
@@ -604,6 +605,7 @@ namespace ForgeOfBots.Forms
          ListClass.BackgroundWorkers.Add(wsWorker.worker);
 #endif
          ReloadData();
+         InitSettingsTab();
          if (isLoading && LoadingFrm != null)
          {
             LoadingFrm.Close();
@@ -757,36 +759,11 @@ namespace ForgeOfBots.Forms
          Invoker.SetProperty(lblNeighborCount, () => lblNeighborCount.Text, $"{neighborlist.Count}/{ListClass.NeighborList.Count}");
          Invoker.SetProperty(lblInactiveFriends, () => lblInactiveFriends.Text, i18n.getString("PlayerLists"));
 
-         Invoker.CallMethode(lvFriends, () => lvFriends.Items.Clear());
-         foreach (var friend in ListClass.FriendList)
-         {
-            ListViewItem lvi = new ListViewItem()
-            {
-               Text = $"{friend.name} {(friend.clan != null ? "(" + friend.clan.name + ") " : "")}{(friend.is_active == false && friend.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
-               Tag = friend
-            };
-            Invoker.CallMethode(lvFriends, () => lvFriends.Items.Add(lvi));
-         }
-         Invoker.CallMethode(lvMember, () => lvMember.Items.Clear());
-         foreach (var member in ListClass.ClanMemberList)
-         {
-            ListViewItem lvi = new ListViewItem()
-            {
-               Text = $"{member.name} {(member.is_active == false && member.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
-               Tag = member
-            };
-            Invoker.CallMethode(lvMember, () => lvMember.Items.Add(lvi));
-         }
-         Invoker.CallMethode(lvNeighbor, () => lvNeighbor.Items.Clear());
-         foreach (var neighbor in ListClass.NeighborList)
-         {
-            ListViewItem lvi = new ListViewItem()
-            {
-               Text = $"{neighbor.name} {(neighbor.clan != null ? "(" + neighbor.clan.name + ") " : "")} {(neighbor.is_active == false && neighbor.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
-               Tag = neighbor
-            };
-            Invoker.CallMethode(lvNeighbor, () => lvNeighbor.Items.Add(lvi));
-         }
+         if (!UserData.IgnoredPlayers.ContainsKey(UserData.LastWorld.Split('|')[0]))
+            UserData.IgnoredPlayers.Add(UserData.LastWorld.Split('|')[0], new List<int>());
+
+         UpdatePlayerLists();
+
          logger.Info($"<<< UpdateSocial");
          #endregion
       }
@@ -1690,19 +1667,7 @@ namespace ForgeOfBots.Forms
          mcbLanguage.AutoCompleteSource = AutoCompleteSource.ListItems;
          mcbLanguage.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
          mcbLanguage.SelectedIndex = UserData.Language.Language;
-         if (UserData.IgnoredPlayers.Count > 0)
-         {
-            foreach (int item in UserData.IgnoredPlayers)
-            {
-               Player p = ListClass.AllPlayers.Find(a => a.player_id == item);
-               ucIgnorePlayer ucIP = new ucIgnorePlayer
-               {
-                  Player = p
-               };
-               ucIP.Remove += RemoveIgnoredPlayer;
-               pnlIgnore.Controls.Add(ucIP);
-            }
-         }
+         FillIgnorePlayer();
          FillAutoComplete();
 
          if (bw.IsBusy)
@@ -1714,6 +1679,26 @@ namespace ForgeOfBots.Forms
          bw.WorkerSupportsCancellation = true;
          bw.RunWorkerAsync();
          ListClass.BackgroundWorkers.Add(bw);
+      }
+      private void FillIgnorePlayer()
+      {
+         pnlIgnore.Controls.Clear();
+         if (UserData.IgnoredPlayers.Count > 0)
+         {
+            if (ListClass.AllPlayers.Count > 0)
+            {
+               foreach (int item in UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]])
+               {
+                  Player p = ListClass.AllPlayers.Find(a => a.player_id == item);
+                  ucIgnorePlayer ucIP = new ucIgnorePlayer
+                  {
+                     Player = p
+                  };
+                  ucIP.Remove += RemoveIgnoredPlayer;
+                  pnlIgnore.Controls.Add(ucIP);
+               }
+            }
+         }
       }
       private void Bw_DoWork(object sender, DoWorkEventArgs e)
       {
@@ -2084,8 +2069,8 @@ namespace ForgeOfBots.Forms
                   Player player = ListClass.AllPlayers.Find(p => p.player_id == playerID);
                   if (txbPlayer.Text.Split('(')[0].TrimEnd(' ').Equals(player.name.TrimEnd(' ')))
                   {
-                     if (UserData.IgnoredPlayers.Contains(player.player_id.Value)) return;
-                     UserData.IgnoredPlayers.Add(player.player_id.Value);
+                     if (UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Contains(player.player_id.Value)) return;
+                     UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Add(player.player_id.Value);
                      ucIgnorePlayer ucIP = new ucIgnorePlayer
                      {
                         Player = player
@@ -2093,6 +2078,7 @@ namespace ForgeOfBots.Forms
                      ucIP.Remove += RemoveIgnoredPlayer;
                      pnlIgnore.Controls.Add(ucIP);
                      UserData.SaveSettings();
+                     UpdatePlayerLists();
                      txbPlayer.Text = "";
                   }
                   else
@@ -2114,9 +2100,10 @@ namespace ForgeOfBots.Forms
             Player p = (Player)data;
             if (p != null)
             {
-               UserData.IgnoredPlayers.Remove(p.player_id.Value);
+               UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Remove(p.player_id.Value);
                pnlIgnore.Controls.Remove(sender as ucIgnorePlayer);
                UserData.SaveSettings();
+               UpdatePlayerLists();
             }
          }
          catch (Exception ex)
@@ -2560,8 +2547,8 @@ namespace ForgeOfBots.Forms
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends)) ListClass.SnipablePlayers.AddRange(ListClass.FriendList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors)) ListClass.SnipablePlayers.AddRange(ListClass.NeighborList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
-               if (UserData.IgnoredPlayers.Count > 0)
-                  ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => !UserData.IgnoredPlayers.Contains(p.player_id.Value)).ToList();
+               if (UserData.IgnoredPlayers.Values.Any(ip => ip.Count > 0))
+                  ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => !UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Contains(p.player_id.Value)).ToList();
                ListClass.SnipablePlayers = ListClass.SnipablePlayers.Where(p => p.incoming == false && p.isInvitedFriend == false).ToList();
                ListClass.SnipablePlayers = LG.HasGB(ListClass.SnipablePlayers);
                if (ListClass.SnipablePlayers.Count == 0) return;
@@ -2946,7 +2933,7 @@ namespace ForgeOfBots.Forms
                Invoker.SetProperty(lvArmy, () => lvArmy.LargeImageList, UnitImageLise);
                ListViewGroup group = null;
                string lastEra = "";
-               foreach (KeyValuePair<string, List<Unit>> item in ListClass.UnitList)
+               foreach (KeyValuePair<string, List<Unit>> item in ListClass.UnitListEraSorted)
                {
                   if (lastEra != item.Key)
                   {
@@ -2980,17 +2967,53 @@ namespace ForgeOfBots.Forms
          Player p = (Player)e.Item.Tag;
          if (e.Item.Checked)
          {
-            if (UserData.IgnoredPlayers.Contains(p.player_id.Value)) return;
-            UserData.IgnoredPlayers.Add(p.player_id.Value);
+            if (UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Contains(p.player_id.Value)) return;
+            UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Add(p.player_id.Value);
             UserData.SaveSettings();
-            UpdateSocial();
+            FillIgnorePlayer();
          }
          else
          {
-            if (!UserData.IgnoredPlayers.Contains(p.player_id.Value)) return;
-            UserData.IgnoredPlayers.Remove(p.player_id.Value);
+            if (!UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Contains(p.player_id.Value)) return;
+            UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Remove(p.player_id.Value);
             UserData.SaveSettings();
-            UpdateSocial();
+            FillIgnorePlayer();
+         }
+      }
+      private void UpdatePlayerLists()
+      {
+         Invoker.CallMethode(lvFriends, () => lvFriends.Items.Clear());
+         foreach (var friend in ListClass.FriendList)
+         {
+            ListViewItem lvi = new ListViewItem()
+            {
+               Text = $"{friend.name} {(friend.clan != null ? "(" + friend.clan.name + ") " : "")}{(friend.is_active == false && friend.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
+               Tag = friend,
+               Checked = UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Contains(friend.player_id.Value)
+            };
+            Invoker.CallMethode(lvFriends, () => lvFriends.Items.Add(lvi));
+         }
+         Invoker.CallMethode(lvMember, () => lvMember.Items.Clear());
+         foreach (var member in ListClass.ClanMemberList)
+         {
+            ListViewItem lvi = new ListViewItem()
+            {
+               Text = $"{member.name} {(member.is_active == false && member.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
+               Tag = member,
+               Checked = UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Contains(member.player_id.Value)
+            };
+            Invoker.CallMethode(lvMember, () => lvMember.Items.Add(lvi));
+         }
+         Invoker.CallMethode(lvNeighbor, () => lvNeighbor.Items.Clear());
+         foreach (var neighbor in ListClass.NeighborList)
+         {
+            ListViewItem lvi = new ListViewItem()
+            {
+               Text = $"{neighbor.name} {(neighbor.clan != null ? "(" + neighbor.clan.name + ") " : "")} {(neighbor.is_active == false && neighbor.is_self == false ? "(" + i18n.getString("GUI.Social.Inactive").ToLower() + ")" : "")}",
+               Tag = neighbor,
+               Checked = UserData.IgnoredPlayers[UserData.LastWorld.Split('|')[0]].Contains(neighbor.player_id.Value)
+            };
+            Invoker.CallMethode(lvNeighbor, () => lvNeighbor.Items.Add(lvi));
          }
       }
       #endregion
@@ -3006,7 +3029,7 @@ namespace ForgeOfBots.Forms
             Invoker.SetProperty(lvMessages, () => lvMessages.LargeImageList, UnitImageLise);
             ListViewGroup group = null;
             string lastEra = "";
-            foreach (KeyValuePair<string, List<Unit>> item in ListClass.UnitList)
+            foreach (KeyValuePair<string, List<Unit>> item in ListClass.UnitListEraSorted)
             {
                if (lastEra != item.Key)
                {
@@ -3035,8 +3058,8 @@ namespace ForgeOfBots.Forms
       #region "Battle"
       public void UpdateBoost()
       {
-         Invoker.SetProperty(lblAttackBoost, () => lblAttackBoost.Text, $"{AttackBoost} {lblAttackBoost.Tag}");
-         Invoker.SetProperty(lblDefensBoost, () => lblDefensBoost.Text, $"{DefenseBoost} {lblDefensBoost.Tag}");
+         Invoker.SetProperty(lblAttackBoost, () => lblAttackBoost.Text, $"{AttackBoost[0]}{lblAttackBoost.Tag} / {AttackBoost[1]}{lblAttackBoost.Tag}");
+         Invoker.SetProperty(lblDefensBoost, () => lblDefensBoost.Text, $"{DefenseBoost[0]}{lblDefensBoost.Tag} / {DefenseBoost[1]}{lblDefensBoost.Tag}");
       }
       public void UpdateBattle()
       {
@@ -3047,6 +3070,14 @@ namespace ForgeOfBots.Forms
       {
          Invoker.CallMethode(lvWave, () => lvWave.Items.Clear());
          GEXHelper.UpdateGEX();
+         if (GEXHelper.GEXOverview.state.Equals("inactive"))
+         {
+            Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {i18n.getString("GUI.Battle.GEX.NoGEX")}");
+            Invoker.SetProperty(lvWave, () => lvWave.Visible, false);
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Enabled, false);
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.NoGEX"));
+            return;
+         }
          GEXWaves[] waves = GEXHelper.Armywaves;
          Invoker.SetProperty(lvWave, () => lvWave.SmallImageList, UnitImageLise);
          Invoker.SetProperty(lvWave, () => lvWave.View, System.Windows.Forms.View.SmallIcon);

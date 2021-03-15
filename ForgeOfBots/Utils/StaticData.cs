@@ -37,8 +37,8 @@ namespace ForgeOfBots.Utils
       public static WorkerList WorkerList = null;
       public static WSWorker wsWorker = null;
       public static List<PropertyData> PCData = new List<PropertyData>();
-      public static int AttackBoost = 0;
-      public static int DefenseBoost = 0;
+      public static int[] AttackBoost = new int[] { 0, 0 };
+      public static int[] DefenseBoost = new int[] { 0, 0 };
       public static int[,] ArmyData = new int[2, 8];
 
       public static object MainInstance = null;

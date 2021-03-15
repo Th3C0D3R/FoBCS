@@ -24,6 +24,7 @@ namespace ForgeOfBots.Forms
             if (Settings.SettingsExists())
             {
                Settings temp = Settings.ReadSettings();
+               if (temp == null) return;
                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(temp.Language.Code);
                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(temp.Language.Code);
                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo(temp.Language.Code);

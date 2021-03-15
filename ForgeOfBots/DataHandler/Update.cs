@@ -172,13 +172,15 @@ namespace ForgeOfBots.DataHandler
          ListClass.BoostList = b.responseData.ToList();
          try
          {
-            StaticData.AttackBoost = ListClass.BoostList.Find(d => d.id == "attackingUnits").entries.ToList().Sum(e => e.boostValue * e.amount);
-            StaticData.DefenseBoost = ListClass.BoostList.Find(d => d.id == "defendingUnits").entries.ToList().Sum(e => e.boostValue * e.amount);
+            StaticData.AttackBoost[0] = ListClass.BoostList.Find(d => d.id == "attackingUnits").entries.ToList().Where(eu => eu.boostType.Equals("att_boost_attacker") || eu.boostType.Equals("att_def_boost_attacker")).Sum(e => e.boostValue * e.amount);
+            StaticData.AttackBoost[1] = ListClass.BoostList.Find(d => d.id == "attackingUnits").entries.ToList().Where(eu => eu.boostType.Equals("def_boost_attacker") || eu.boostType.Equals("att_def_boost_attacker")).Sum(e => e.boostValue * e.amount);
+            StaticData.DefenseBoost[0] = ListClass.BoostList.Find(d => d.id == "defendingUnits").entries.ToList().Where(eu => eu.boostType.Equals("att_boost_defender") || eu.boostType.Equals("att_def_boost_defender")).Sum(e => e.boostValue * e.amount);
+            StaticData.DefenseBoost[1] = ListClass.BoostList.Find(d => d.id == "defendingUnits").entries.ToList().Where(eu => eu.boostType.Equals("def_boost_defender") || eu.boostType.Equals("att_def_boost_defender")).Sum(e => e.boostValue * e.amount);
          }
          catch (Exception)
          {
-            StaticData.AttackBoost = 0;
-            StaticData.DefenseBoost = 0;
+            StaticData.AttackBoost = new int[] { 0, 0 };
+            StaticData.DefenseBoost = new int[] { 0, 0 };
          }
       }
       public void UpdateArmy()
@@ -200,23 +202,19 @@ namespace ForgeOfBots.DataHandler
          for (int i = 0; i < StaticData.UserData.ArmySelection.Count; i++)
          {
             string item = StaticData.UserData.ArmySelection[i];
-            foreach (var unitsList in ListClass.UnitList.Values)
+            Unit unit = null;
+            unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= 10);
+            if (unit == null) continue;
+            if (unit.unit == null) continue;
+            if (unit.unit.unitTypeId == item)
             {
-               Unit unit = unitsList.Find(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= 10 && !addedIDs.Contains(u.unit.unitId));
-               if (unit == null) continue;
-               if (unit.unit == null) continue;
-               if (unit.unit.unitTypeId == item)
+               int id = unit.ids.First();
+               while (addedIDs.Contains(id)) id = unit.ids.SkipWhile(x => !x.Equals(id)).Skip(1).First();
+               if (i < 8)
                {
-                  List<int> exceptedList = unit.ids.Except(addedIDs).ToList();
-                  if (i < 8)
-                  {
-                     if (exceptedList.Count > 0)
-                     {
-                        addedIDs.Add(exceptedList.First());
-                        army[0, i] = unit.unit.unitId;
-                     }
-                     break;
-                  }
+                  addedIDs.Add(id);
+                  army[0, i] = id;
+                  break;
                }
             }
          }
@@ -234,7 +232,8 @@ namespace ForgeOfBots.DataHandler
       public void UpdateSortedArmyList()
       {
          if (ListClass.UnitTypes.Count <= 0 || ListClass.Army.responseData == null) return;
-         ListClass.UnitList = Helper.GetUnitSorted(ListClass.Eras, ListClass.UnitTypes, ListClass.Army.responseData);
+         ListClass.UnitListEraSorted = Helper.GetUnitEraSorted(ListClass.Eras, ListClass.UnitTypes, ListClass.Army.responseData);
+         ListClass.UnitList = Helper.GetUnitSorted(ListClass.UnitTypes, ListClass.Army.responseData);
       }
       public void UpdatedSortedGoodList()
       {

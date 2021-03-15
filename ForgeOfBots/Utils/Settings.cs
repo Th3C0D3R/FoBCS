@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ForgeOfBots.Utils
 {
@@ -50,7 +51,7 @@ namespace ForgeOfBots.Utils
       public DateTime LastPolivateTime { get; set; } = DateTime.MinValue;
       public DateTime LastIncidentTime { get; set; } = DateTime.MinValue;
       public DateTime LastSnipTime { get; set; } = DateTime.MinValue;
-      public List<int> IgnoredPlayers { get; set; } = new List<int>();
+      public Dictionary<string,List<int>> IgnoredPlayers { get; set; } = new Dictionary<string, List<int>>();
       public List<string> ArmySelection { get; set; } = new List<string>();
 
       #region "Methodes no Changes needed"
@@ -66,9 +67,18 @@ namespace ForgeOfBots.Utils
       {
          string DataPath = Path.Combine(StaticData.ProgramPath, "userdata.json");
          string json = File.ReadAllText(DataPath);
-         Settings s = JsonConvert.DeserializeObject<Settings>(json);
-         _SettingsLoaded?.Invoke(null, new OneTArgs<Settings> { t1 = s });
-         return s;
+         Settings s = null;
+         try
+         {
+            s = JsonConvert.DeserializeObject<Settings>(json);
+            _SettingsLoaded?.Invoke(null, new OneTArgs<Settings> { t1 = s });
+            return s;
+         }
+         catch (Exception)
+         {
+            MessageBox.Show(i18n.getString("GUI.MessageBox.SettingsLoadedFailed.Text"),i18n.getString("GUI.MessageBox.SettingsLoadedFailed.Title"));
+            return null;
+         }
       }
       public static bool SettingsExists()
       {
