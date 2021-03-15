@@ -597,6 +597,8 @@ namespace ForgeOfBots.Forms
             else
                ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
          }
+         UserData.PlayableWorlds = ListClass.WorldList.ConvertAll(new Converter<Tuple<string, string, WorldState>, string>(WorldToPlayable));
+         UserData.SaveSettings();
 #if DEBUG
          wsWorker = new WSWorker(StaticData.BotData.WSUrl)
          {
