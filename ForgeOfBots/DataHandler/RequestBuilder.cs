@@ -308,11 +308,15 @@ namespace ForgeOfBots.DataHandler
          {
             if (type == RequestType.updatePools)
             {
-               if (armyData.Length != 2) return "";
+               if (armyData.Length != 16) return "";
                string before = "[[{\"__class__\": \"ArmyPool\",\"units\": [";
                string attack = string.Join(",", armyData.GetTroopRow(0));
                string after = "],\"type\":\"attacking\"},{\"__class__\":\"ArmyPool\",\"units\":[";
-               string defending = string.Join(",", armyData.GetTroopRow(1));
+               string defending = "";
+               if(!armyData.GetTroopRow(1).All(r => r == 0))
+               {
+                  defending = string.Join(",", armyData.GetTroopRow(1));
+               }
                string end = "],\"type\":\"defending\"},{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}],{\"__class__\":\"ArmyContext\",\"content\":\"main\"}]";
                string startJson = jsonString.Substring(0, jsonString.IndexOf("\"requestData\":[") + ("\"requestData\":[").Length - 1);
                string endJson = jsonString.Substring(jsonString.IndexOf(",\"requestClass\""));

@@ -7,6 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace ForgeOfBots.DataHandler
 {
@@ -47,12 +48,12 @@ namespace ForgeOfBots.DataHandler
                            if (payloadData.ToString().Contains("responseData") && payloadData.ToString().Contains("requestClass") && payloadData.ToString().Contains("requestMethod"))
                            {
                               var token = payloadData;
-                              WSResponse response = Convert.DeserializeObject<WSResponse>(token.ToString());
+                              WSResponse response = Convert.DeserializeObject<List<WSResponse>>(token.ToString())[0];
                               if (Main != null)
                               {
                                  try
                                  {
-                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Get: {response.requestClass} {response.requestMethod}"));
+                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Get: {response.requestClass} {response.requestMethod}: {response.responseData}"));
                                  }
                                  catch (Exception)
                                  {}
@@ -77,7 +78,7 @@ namespace ForgeOfBots.DataHandler
                               {
                                  try
                                  {
-                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Sent: {request.requestClass} {request.requestMethod}"));
+                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Sent: {request.requestClass} {request.requestMethod}: {request.requestData}"));
                                  }
                                  catch (Exception)
                                  { }

@@ -125,7 +125,7 @@ namespace ForgeOfBots.Utils
       {
          if (resources.Count <= 0 || resourceDefList.Count <= 0 || eraList.Count <= 0) return new Dictionary<string, List<Good>>();
          Dictionary<string, List<Good>> goodList = new Dictionary<string, List<Good>>();
-         foreach (ResearchEra era in eraList)
+         foreach (ResearchEra era in eraList.Where(re=>!re.era.Equals("NoAge")))
          {
             foreach (JToken resDef in resourceDefList["responseData"].ToList())
             {

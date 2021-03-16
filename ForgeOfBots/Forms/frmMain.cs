@@ -356,7 +356,7 @@ namespace ForgeOfBots.Forms
                }
                ListClass.WorldList.Add(new Tuple<string, string, WorldState>(world.Key, worldname, WorldState.active));
             }
-            UserData.PlayableWorlds = ListClass.WorldList.ConvertAll(new Converter<Tuple<string, string, WorldState>, string>(WorldToPlayable));
+            UserData.PlayableWorlds = ListClass.WorldList.Where(wl => wl.Item3 == WorldState.active || wl.Item3 == WorldState.current).ToList().ConvertAll(new Converter<Tuple<string, string, WorldState>, string>(WorldToPlayable));
             WorldSelection ws = new WorldSelection(ListClass.WorldList);
             ws.WorldDataEntered += Ws_WorldDataEntered;
             logger.Info($"show WorldSelection Dialog");
@@ -597,7 +597,7 @@ namespace ForgeOfBots.Forms
             else
                ListClass.WorldList = ListClass.WorldList.ChangeTuple(item.id, item.name, (WorldState)Enum.Parse(typeof(WorldState), item.status));
          }
-         UserData.PlayableWorlds = ListClass.WorldList.ConvertAll(new Converter<Tuple<string, string, WorldState>, string>(WorldToPlayable));
+         UserData.PlayableWorlds = ListClass.WorldList.Where(wl => wl.Item3 == WorldState.active || wl.Item3 == WorldState.current).ToList().ConvertAll(new Converter<Tuple<string, string, WorldState>, string>(WorldToPlayable));
          UserData.SaveSettings();
 #if DEBUG
          wsWorker = new WSWorker(StaticData.BotData.WSUrl)
@@ -1811,9 +1811,7 @@ namespace ForgeOfBots.Forms
          UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
 
-         string script = ReqBuilder.GetRequestScript(RequestType.switchWorld, UserData.LastWorld.Split('|')[0]);
-         jsExecutor.ExecuteAsyncScript(script);
-         driver.Navigate().GoToUrl($"https://{UserData.LastWorld.Split('|')[0]}.forgeofempires.com/game/index?");
+         driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com");
          cookieJar = driver.Manage().Cookies;
          StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
          StaticData.BotData.CSRF = cookieJar.AllCookies.HasCookie("CSRF").Item2;
@@ -2925,7 +2923,9 @@ namespace ForgeOfBots.Forms
       #region "Army"
       public void UpdateArmy()
       {
-         logger.Info($">>> UpdateArmy");
+         logger.Info($">>> UpdateArmy"); 
+         if (!UserData.ArmySelection.ContainsKey(UserData.LastWorld.Split('|')[0]))
+            UserData.ArmySelection.Add(UserData.LastWorld.Split('|')[0], new List<string>());
          if (UnitImageLise != null)
          {
             try
@@ -3149,7 +3149,7 @@ namespace ForgeOfBots.Forms
             frmArmySelection frmAS = new frmArmySelection();
             frmAS.ArmySelection.imgList = UnitImageLise;
             frmAS.ArmySelection.FillArmyList(ListClass.UnitList);
-            frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection);
+            frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
             frmAS.ArmySelection.SubmitArmy += ArmySelection_SubmitArmy;
             frmAS.ShowDialog();
          }
@@ -3158,7 +3158,7 @@ namespace ForgeOfBots.Forms
       private void ArmySelection_SubmitArmy(object sender, dynamic data = null)
       {
          List<string> list = (List<string>)data;
-         UserData.ArmySelection = list;
+         UserData.ArmySelection[UserData.LastWorld.Split('|')[0]] = list;
          Updater.UpdateAttackPool();
          var ret = GEXHelper.StartFight(GEXHelper.GetCurrentState);
       }

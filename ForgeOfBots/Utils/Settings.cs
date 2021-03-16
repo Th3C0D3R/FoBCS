@@ -52,7 +52,7 @@ namespace ForgeOfBots.Utils
       public DateTime LastIncidentTime { get; set; } = DateTime.MinValue;
       public DateTime LastSnipTime { get; set; } = DateTime.MinValue;
       public Dictionary<string,List<int>> IgnoredPlayers { get; set; } = new Dictionary<string, List<int>>();
-      public List<string> ArmySelection { get; set; } = new List<string>();
+      public Dictionary<string, List<string>> ArmySelection { get; set; } = new Dictionary<string, List<string>>();
 
       #region "Methodes no Changes needed"
       public void SaveSettings()

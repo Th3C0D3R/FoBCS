@@ -103,6 +103,11 @@ namespace ForgeOfBots.DataHandler
                      string researchMeta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
                      ResearchEraRoot rootResearch = JsonConvert.DeserializeObject<ResearchEraRoot>("{\"reserach\":" + researchMeta + "}");
                      ListClass.Eras = rootResearch.reserach.ToList();
+                     ResearchEra noage = new ResearchEra();
+                     noage.era = "NoAge";
+                     noage.name = "Kein Zeitalter";
+                     noage.__class__ = "ResearchEra";
+                     ListClass.Eras.Insert(0,noage);
                      UpdatedSortedGoodList();
                   }
                   if (ListClass.UnitTypes.Count <= 0)
@@ -198,26 +203,33 @@ namespace ForgeOfBots.DataHandler
       public void UpdateAttackPool()
       {
          int[,] army = new int[2, 8];
-         List<int> addedIDs = new List<int>();
-         for (int i = 0; i < StaticData.UserData.ArmySelection.Count; i++)
-         {
-            string item = StaticData.UserData.ArmySelection[i];
-            Unit unit = null;
-            unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= 10);
-            if (unit == null) continue;
-            if (unit.unit == null) continue;
-            if (unit.unit.unitTypeId == item)
-            {
-               int id = unit.ids.First();
-               while (addedIDs.Contains(id)) id = unit.ids.SkipWhile(x => !x.Equals(id)).Skip(1).First();
-               if (i < 8)
-               {
-                  addedIDs.Add(id);
-                  army[0, i] = id;
-                  break;
-               }
-            }
-         }
+         army[0, 0] = 38972; 
+         army[0, 1] = 36924; 
+         army[0, 2] = 34876; 
+         army[0, 3] = 32828; 
+         army[0, 4] = 30780; 
+         army[0, 5] = 28732; 
+         army[0, 6] = 26684; 
+         army[0, 7] = 22588;
+         //List<int> addedIDs = new List<int>();
+         //for (int i = 0; i < StaticData.UserData.ArmySelection[UserData.LastWorld.Split('|')[0]].Count; i++)
+         //{
+         //   string item = StaticData.UserData.ArmySelection[i];
+         //   Unit unit = null;
+         //   unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= 10);
+         //   if (unit == null) continue;
+         //   if (unit.unit == null) continue;
+         //   if (unit.unit.unitTypeId == item)
+         //   {
+         //      int id = unit.ids.First();
+         //      while (addedIDs.Contains(id)) id = unit.ids.SkipWhile(x => !x.Equals(id)).Skip(1).First();
+         //      if (i < 8)
+         //      {
+         //         addedIDs.Add(id);
+         //         army[0, i] = id;
+         //      }
+         //   }
+         //}
          string script = ReqBuilder.GetRequestScript(RequestType.updatePools, army);
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
       }
