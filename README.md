@@ -53,17 +53,14 @@ All donations are going to keep up the server for the Bot.
 | ------ |
 | [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=G2D7BK2E7WJZY) 
 
-![overview](https://github.com/Th3C0D3R/FoBCS/blob/master/Overview.png)![other players](https://github.com/Th3C0D3R/FoBCS/blob/master/OtherPlayers.png)
-![tavern](https://github.com/Th3C0D3R/FoBCS/blob/master/Tavern.png)![bots](https://github.com/Th3C0D3R/FoBCS/blob/master/Bots.png)![production](https://github.com/Th3C0D3R/FoBCS/blob/master/Production.png)![manually](https://github.com/Th3C0D3R/FoBCS/blob/master/Manually.png)
-
 License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjM1Mzc1MTA5LC04NTIzMjE4NzcsLTEyNT
-Y5MzAzMCwxNTY4NDgyMzIzLC0yMDY3NzY3OTc3LC0xMTc4MTAw
-NzA1LC0xODI5ODY0NDUwLC01NTc2MTc0NjQsLTUwMzM2NTIzNC
-wtODQxNTkzNjQ4LDIxMzg4NzAzNDUsMzUyOTIxNjMyLDExOTM5
-ODkxNjAsOTIwMTY4Mjg2LDc2OTYwMjY0OCwtNzI4NDAwNTZdfQ
-==
+eyJoaXN0b3J5IjpbLTg1NTcxMTYzOSwtODUyMzIxODc3LC0xMj
+U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
+MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
+QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
+OTg5MTYwLDkyMDE2ODI4Niw3Njk2MDI2NDgsLTcyODQwMDU2XX
+0=
 -->
