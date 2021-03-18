@@ -39,7 +39,7 @@ To download the Bot use the following methodes:
 To contribute a translation do the following:
 1. Clone the latest version of the repository
 2. Check if you language is already added
-3. If not, **duplicate** this file: [strings.en.resx](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/strings.en.resx) and rename the duplicates to the coressponding language code, eg: ***strings.fr.resx***  and edit the strings (Visual Sutdio recomended)
+3. If not, **duplicate** this file: [en.json](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/LanguageFiles/en.json) and rename the duplicates to the coressponding language code, eg: ***fr.json***  and edit the strings (Visual Sutdio recomended)
 4. Add the language inside this file [languages.json](https://github.com/Th3C0D3R/FoBCS/blob/master/ForgeOfBots/languages.json) and use the next number for the *index*-field. For the *language*-field use the name of your language (for example: *German* is *Deutsch*, *English* is *English*,*French* is *Français*)
 5. Create a Pull-Request as soon as your done and wait for response
 6. The new Language will be added to the Bot dynamically and does not need a new version update
@@ -60,10 +60,10 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5NzQyMDk0NSwtODUyMzIxODc3LC0xMj
-U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
-MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
-QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
-OTg5MTYwLDkyMDE2ODI4Niw3Njk2MDI2NDgsLTcyODQwMDU2XX
-0=
+eyJoaXN0b3J5IjpbMjM1Mzc1MTA5LC04NTIzMjE4NzcsLTEyNT
+Y5MzAzMCwxNTY4NDgyMzIzLC0yMDY3NzY3OTc3LC0xMTc4MTAw
+NzA1LC0xODI5ODY0NDUwLC01NTc2MTc0NjQsLTUwMzM2NTIzNC
+wtODQxNTkzNjQ4LDIxMzg4NzAzNDUsMzUyOTIxNjMyLDExOTM5
+ODkxNjAsOTIwMTY4Mjg2LDc2OTYwMjY0OCwtNzI4NDAwNTZdfQ
+==
 -->
