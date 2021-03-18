@@ -14,7 +14,9 @@ For implemented Premium Features you can get a Serial Key from here: [TH3C0D3R-S
 Current Features:
 ### - Own Player Actions:
 1. Dashbord (shows Goods, Resources and Log)
-2. 
+2. Social (Polivate & Ignore each player)
+3. Tavern (Collect and Visit each possible player)
+4. 
 ### - Bots:
 1. **[FREE] Production Bot** (Start &amp; Collects Productions)
 2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
@@ -52,10 +54,10 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NzA2OTI3MzgsLTg1MjMyMTg3NywtMT
-I1NjkzMDMwLDE1Njg0ODIzMjMsLTIwNjc3Njc5NzcsLTExNzgx
-MDA3MDUsLTE4Mjk4NjQ0NTAsLTU1NzYxNzQ2NCwtNTAzMzY1Mj
-M0LC04NDE1OTM2NDgsMjEzODg3MDM0NSwzNTI5MjE2MzIsMTE5
-Mzk4OTE2MCw5MjAxNjgyODYsNzY5NjAyNjQ4LC03Mjg0MDA1Nl
-19
+eyJoaXN0b3J5IjpbMTA4NzI1NjgwMSwtODUyMzIxODc3LC0xMj
+U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
+MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
+QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
+OTg5MTYwLDkyMDE2ODI4Niw3Njk2MDI2NDgsLTcyODQwMDU2XX
+0=
 -->
