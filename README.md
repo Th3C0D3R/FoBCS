@@ -18,7 +18,9 @@ Current Features:
 3. Tavern (Collect and Visit each possible player)
 4. Army (show current army boost & available Units)
 5. Battle (able to battle guild expedition & open chests)
-6. Productions (show current production and good production list)
+6. Productions (show/collect/start current production and good production list)
+7. City (show and collect incidents from city or guild expedition)
+8. Sniper (sn
 ### - Bots:
 1. **[FREE] Production Bot** (Start &amp; Collects Productions)
 2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
@@ -56,10 +58,10 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5NTA2ODUxMSwtODUyMzIxODc3LC0xMj
-U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
-MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
-QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
-OTg5MTYwLDkyMDE2ODI4Niw3Njk2MDI2NDgsLTcyODQwMDU2XX
-0=
+eyJoaXN0b3J5IjpbMTYwMzEyMjQ1LC04NTIzMjE4NzcsLTEyNT
+Y5MzAzMCwxNTY4NDgyMzIzLC0yMDY3NzY3OTc3LC0xMTc4MTAw
+NzA1LC0xODI5ODY0NDUwLC01NTc2MTc0NjQsLTUwMzM2NTIzNC
+wtODQxNTkzNjQ4LDIxMzg4NzAzNDUsMzUyOTIxNjMyLDExOTM5
+ODkxNjAsOTIwMTY4Mjg2LDc2OTYwMjY0OCwtNzI4NDAwNTZdfQ
+==
 -->
