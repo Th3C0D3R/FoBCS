@@ -11,15 +11,10 @@ I made this Bot after working on a JavaScript Version (Electron App) which had i
 
 For implemented Premium Features you can get a Serial Key from here: [TH3C0D3R-Shop](https://th3c0d3r.selly.store/)
 
-About the currently Features:
+Current Features:
 ### - Own Player Actions:
-1. Collect Tavern
-2. Collect Incidents
-3. Start/Collect/Stop Productions
-### - Other Player Actions:
-1. Sit at Tavern
-2. Aid Friends
-3. Remove Inactive Friends
+1. Dashbord (shows Goods, Resources and Log)
+2. 
 ### - Bots:
 1. **[FREE] Production Bot** (Start &amp; Collects Productions)
 2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
@@ -57,9 +52,10 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1MjMyMTg3NywtMTI1NjkzMDMwLDE1Nj
-g0ODIzMjMsLTIwNjc3Njc5NzcsLTExNzgxMDA3MDUsLTE4Mjk4
-NjQ0NTAsLTU1NzYxNzQ2NCwtNTAzMzY1MjM0LC04NDE1OTM2ND
-gsMjEzODg3MDM0NSwzNTI5MjE2MzIsMTE5Mzk4OTE2MCw5MjAx
-NjgyODYsNzY5NjAyNjQ4LC03Mjg0MDA1Nl19
+eyJoaXN0b3J5IjpbLTE3NzA2OTI3MzgsLTg1MjMyMTg3NywtMT
+I1NjkzMDMwLDE1Njg0ODIzMjMsLTIwNjc3Njc5NzcsLTExNzgx
+MDA3MDUsLTE4Mjk4NjQ0NTAsLTU1NzYxNzQ2NCwtNTAzMzY1Mj
+M0LC04NDE1OTM2NDgsMjEzODg3MDM0NSwzNTI5MjE2MzIsMTE5
+Mzk4OTE2MCw5MjAxNjgyODYsNzY5NjAyNjQ4LC03Mjg0MDA1Nl
+19
 -->
