@@ -16,7 +16,9 @@ Current Features:
 1. Dashbord (shows Goods, Resources and Log)
 2. Social (Polivate & Ignore each player)
 3. Tavern (Collect and Visit each possible player)
-4. Army (show current B
+4. Army (show current army boost & available Units)
+5. Battle (able to battle guild expedition & open chests)
+6. Productions (show current production and good production list)
 ### - Bots:
 1. **[FREE] Production Bot** (Start &amp; Collects Productions)
 2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
@@ -54,7 +56,7 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4ODY1NjM4OCwtODUyMzIxODc3LC0xMj
+eyJoaXN0b3J5IjpbMTk5NTA2ODUxMSwtODUyMzIxODc3LC0xMj
 U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
 MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
 QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
