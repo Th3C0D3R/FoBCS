@@ -11,6 +11,7 @@
     "GUI.Battle.OwnArmySuggestion": "Army Suggestion:",
     "GUI.Battle.GEX.Stage": "Encounter:",
     "GUI.Battle.GEX.NoGEX": "No active GEX!",
+    "GUI.Battle.GEX.NoOpenDiff": "Next difficulty is not unlocked!",
     "GUI.Battle.GEX.ChestOpen": "Open",
     "GUI.Battle.GEX.Chest": "CHEST",
     "GUI.Battle.GEX.Tries": "Attempts:",

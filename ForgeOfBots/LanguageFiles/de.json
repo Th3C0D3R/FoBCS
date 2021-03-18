@@ -11,6 +11,7 @@
     "GUI.Battle.OwnArmySuggestion": "Armee-Vorschlag:",
     "GUI.Battle.GEX.Stage": "Begegnung:",
     "GUI.Battle.GEX.NoGEX": "Keine aktive GEX!",
+    "GUI.Battle.GEX.NoOpenDiff": "Nächste Stufe ist nicht frei!",
     "GUI.Battle.GEX.ChestOpen": "Öffnen",
     "GUI.Battle.GEX.Chest": "TRUHE",
     "GUI.Battle.GEX.Tries": "Versuche:",
