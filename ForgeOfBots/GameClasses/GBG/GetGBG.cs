@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ForgeOfBots.DataHandler;
+using ForgeOfBots.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,12 +53,29 @@ namespace ForgeOfBots.GameClasses.GBG.Get
    {
       public int victoryPoints { get; set; }
       public int ownerId { get; set; }
-      public int lockedUntil { get; set; }
-      public bool isSpawnSpot { get; set; }
+      public int lockedUntil { get; set; } = 0;
+      public bool isSpawnSpot { get; set; } = false;
       public Conquestprogress[] conquestProgress { get; set; }
-      public int totalBuildingSlots { get; set; }
+      public int totalBuildingSlots { get; set; } = 0;
       public string __class__ { get; set; }
-      public int id { get; set; }
+      public int? id { get; set; } = null;
+      public string name { get; set; } = "";
+      public int[] connections { get; set; } = null;
+      public int SiegeCount { get; set; } = 0;
+   }
+
+   public class ProvinceEX : Province
+   {
+      public int OwnGuildID = 0;
+      public Conquestprogress OwnProgress = null;
+      public override string ToString()
+      {
+         string siegename = i18n.getString($"GUI.GBG.SiegeName{(SiegeCount == 1 ? "One" : "More")}");
+         string progress = "";
+         if (OwnProgress != null)
+            progress = $"({ OwnProgress.progress}/{ OwnProgress.maxProgress})";
+         return $"{name.Substring(0, 5).Replace(" ", "")} {progress} ({SiegeCount} {siegename})";
+      }
    }
 
    public class Conquestprogress

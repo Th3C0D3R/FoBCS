@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
 using ForgeOfBots.Forms.UserControls;
+using ForgeOfBots.GameClasses.GBG.Map;
 
 namespace ForgeOfBots.GameClasses
 {
@@ -60,9 +61,12 @@ namespace ForgeOfBots.GameClasses
       public static List<ResearchEra> Eras { get; set; } = new List<ResearchEra>();
       public static List<UnitType> UnitTypes { get; set; } = new List<UnitType>();
       public static ArmyRoot Army { get; set; } = new ArmyRoot();
+      public static GBGMap MetaMap { get; set; } = null;
+      public static List<GBG.Get.Province> ProvincesGBG { get; set; } = new List<GBG.Get.Province>();
       public static List<EntityEx> ResidentialList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> ProductionList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> GoodProductionList { get; set; } = new List<EntityEx>();
+      public static List<EntityEx> FinishedProductions { get; set; } = new List<EntityEx>();
       public static Dictionary<string, List<Good>> GoodsDict { get; set; } = new Dictionary<string, List<Good>>();
       public static Dictionary<string, List<Unit>> UnitListEraSorted { get; set; } = new Dictionary<string, List<Unit>>();
       public static List<Unit> UnitList { get; set; } = new List<Unit>();

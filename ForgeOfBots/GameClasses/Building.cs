@@ -13,6 +13,17 @@ using ForgeOfBots.Utils;
 
 namespace ForgeOfBots.GameClasses.ResponseClasses
 {
+   public class EntityProd
+   {
+      public EntityEx entity = null;
+      public string Name = "";
+      public string Value = "";
+
+      public override string ToString()
+      {
+         return $"{Name} ({Value})";
+      }
+   }
    public class EntityEx
    {
       public int id { get; set; }

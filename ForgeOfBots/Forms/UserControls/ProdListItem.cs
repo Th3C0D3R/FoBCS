@@ -194,10 +194,7 @@ namespace ForgeOfBots.Forms.UserControls
                if (ColRes["responseData"]?["updatedEntities"]?.ToList().Count > 0 && ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "ProducingState")
                {
                   ProductionState = ProductionState.Producing;
-                  string script2 = StaticData.ReqBuilder.GetRequestScript(DataHandler.RequestType.GetEntities, "");
-                  string ret2 = (string)jsExecutor.ExecuteAsyncScript(script2);
-                  dynamic entities = JsonConvert.DeserializeObject(ret2);
-                  StaticData.Updater.UpdateBuildings(entities["responseData"]);
+                  StaticData.Updater.UpdateEntities();
                }
                else
                {
@@ -228,10 +225,7 @@ namespace ForgeOfBots.Forms.UserControls
             if (ColRes["responseData"]?["updatedEntities"]?.ToList().Count > 0 && ColRes["responseData"]?["updatedEntities"]?[0]?["state"]?["__class__"]?.ToString() == "IdleState")
             {
                ProductionState = ProductionState.Idle;
-               string script3 = StaticData.ReqBuilder.GetRequestScript(DataHandler.RequestType.GetEntities, "");
-               string ret3 = (string)jsExecutor.ExecuteAsyncScript(script3);
-               dynamic entities = JsonConvert.DeserializeObject(ret3);
-               StaticData.Updater.UpdateBuildings(entities["responseData"]);
+               StaticData.Updater.UpdateEntities();
                UpdateGUI();
             }
             else

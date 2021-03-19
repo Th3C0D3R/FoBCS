@@ -9,6 +9,11 @@ using ForgeOfBots.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
+using ForgeOfBots.GameClasses.GEX.GetBuyContext;
+using Data = ForgeOfBots.GameClasses.GEX.GetBuyContext.Data;
+using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
+using ForgeOfBots.GameClasses.GEX.GetDifficulties;
 
 namespace ForgeOfBots.DataHandler
 {
@@ -24,9 +29,10 @@ namespace ForgeOfBots.DataHandler
             if (GEXOverview == null) return -1;
             if (GEXOverview.state.Equals("inactive")) return -1;
             if (GEXOverview.progress.currentEntityId >= 127) return -1;
-            if (GEXOverview.progress.isMapCompleted) return -1;
+            if (GEXOverview.progress.isMapCompleted && GEXOverview.progress.difficulty == 3) return -1;
             return GEXOverview.progress.currentEntityId;
          }
+         private set { }
       }
       public static bool IsCurrentStateChest
       {
@@ -65,6 +71,17 @@ namespace ForgeOfBots.DataHandler
       public static void UpdateGEX()
       {
          GEXOverview = GetOverview();
+         if(GEXOverview.progress.difficulty < 3 && GEXOverview.progress.isMapCompleted)
+         {
+            if (NextDiffOpen(GEXOverview.progress.difficulty))
+            {
+
+            }
+            else
+            {
+               GetCurrentState = -1;
+            }
+         }
       }
       public static OpenChest OpenChest(int id)
       {
@@ -121,6 +138,76 @@ namespace ForgeOfBots.DataHandler
          {
             return null;
          }
+      }
+      public static bool ChangeDiff(int newDiff)
+      {
+         try
+         {
+            string script = ReqBuilder.GetRequestScript(RequestType.changeDifficulty, newDiff);
+            string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+            GetResponse getGEXresponse = JsonConvert.DeserializeObject<GetResponse>(ret);
+            GEXOverview = getGEXresponse.responseData;
+            return getGEXresponse.responseData.progress.difficulty == newDiff && !getGEXresponse.responseData.progress.isMapCompleted;
+         }
+         catch (Exception)
+         {
+            return false;
+         }
+      }
+      public static bool NextDiffOpen(int currDiff)
+      {
+         try
+         {
+            if (currDiff == 3) return false;
+            string script = ReqBuilder.GetRequestScript(RequestType.getDifficulties, "");
+            string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+            GetDifficulties response = JsonConvert.DeserializeObject<GetDifficulties>(ret);
+            if(response.responseData.Length-1 < currDiff)
+            {
+               if (response.responseData[currDiff].unlocked) return true;
+               else return false;
+            }
+            return false;
+         }
+         catch (Exception)
+         {
+            return false;
+         }
+      }
+      public static bool NeedChangeDiff()
+      {
+         if(GEXOverview.progress.isMapCompleted && GEXOverview.progress.difficulty < 3)
+            return true;
+         
+         return false;
+      }
+      public static bool BuyNextAttempt()
+      {
+         string script = ReqBuilder.GetRequestScript(RequestType.getContexts, "guildExpedition");
+         var ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         GetBuyContext buyContext = JsonConvert.DeserializeObject<GetBuyContext>(ret);
+         Data d = buyContext.responseData[0];
+         int currentCost = 0;
+         if (d.context == "guildExpedition")
+         {
+            currentCost = d.offers[0].costs.resources.medals;
+         }
+         ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
+         if (CanBuyNextAttempt(ListClass.GoodsDict[noAge.name].Find(g=>g.good_id == "medals").value, currentCost))
+         {
+            script = ReqBuilder.GetRequestScript(RequestType.buyOffer, "guild_expedition_attempt1medals0");
+            ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+            if (ret.Contains("ResourceShopService"))
+            {
+               return true;
+            }
+         }
+         return false;
+      }
+      public static bool CanBuyNextAttempt(int medal,int currentCost)
+      {
+         if (medal < Math.Floor(currentCost * 1.2)) return false;
+         return true;
       }
    }
 }

@@ -1,16 +1,11 @@
 ﻿using ForgeOfBots.Forms.UserControls;
+using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ForgeOfBots.GameClasses.ResponseClasses;
-using ForgeOfBots.GameClasses;
 
 namespace ForgeOfBots.Forms
 {
@@ -42,31 +37,34 @@ namespace ForgeOfBots.Forms
             Invoker.CallMethode(ArmySelection.lvSelectedArmy, () => ArmySelection.lvSelectedArmy.Items.Clear());
             Invoker.CallMethode(ArmySelection.lvArmy, () => ArmySelection.lvArmy.Items.Clear());
             Invoker.SetProperty(ArmySelection.lvArmy, () => ArmySelection.lvArmy.SmallImageList, ArmySelection.imgList);
-            foreach (Unit item in ArmySelection.UnitList)
+            foreach (KeyValuePair<string, List<Unit>> item in ArmySelection.UnitList)
             {
-               string era = ListClass.Eras.Find(re => re.era == (ListClass.UnitTypes.Find(ut => ut.unitTypeId == item.unit.unitTypeId).minEra)).era;
-               if (lastEra != era)
+               if (lastEra != item.Key)
                {
-                  group = new ListViewGroup(era, HorizontalAlignment.Left);
+                  group = new ListViewGroup(item.Key, HorizontalAlignment.Left);
                }
-               ListViewItem lvi = new ListViewItem($"{item.name} ({item.count})", $"armyuniticons_50x50_{item.unit.unitTypeId}")
+               foreach (Unit unit in item.Value)
                {
-                  Group = group,
-                  Tag = item
-               };
-               Invoker.CallMethode(ArmySelection.lvArmy, () => ArmySelection.lvArmy.Items.Add(lvi));
-               if (group != null && group.Header != lastEra)
-               {
-                  Invoker.CallMethode(ArmySelection.lvArmy, () => ArmySelection.lvArmy.Groups.Add(group));
-                  lastEra = era;
+                  ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit.unitTypeId}")
+                  {
+                     Group = group,
+                     Tag = unit
+                  };
+                  Invoker.CallMethode(ArmySelection.lvArmy, () => ArmySelection.lvArmy.Items.Add(lvi));
+                  if (group != null && group.Header != lastEra)
+                  {
+                     Invoker.CallMethode(ArmySelection.lvArmy, () => ArmySelection.lvArmy.Groups.Add(group));
+                     lastEra = item.Key;
+                  }
                }
+               
             }
-
+            List<int> addedIDs = new List<int>();
             foreach (var unitType in ArmySelection.SelectedArmyTypes)
             {
                Invoker.CallMethode(ArmySelection.lvSelectedArmy, () =>
                {
-                  Unit unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == unitType && u.unit.currentHitpoints >= 10);
+                  Unit unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == unitType);
                   ArmySelection.lvSelectedArmy.Items.Add(unit);
                });
             }
@@ -76,28 +74,30 @@ namespace ForgeOfBots.Forms
             ArmySelection.lvSelectedArmy.Items.Clear();
             ArmySelection.lvArmy.Items.Clear();
             ArmySelection.lvArmy.SmallImageList = ArmySelection.imgList;
-            foreach (Unit item in ArmySelection.UnitList)
+            foreach (KeyValuePair<string, List<Unit>> item in ArmySelection.UnitList)
             {
-               string era = ListClass.Eras.Find(re => re.era == (ListClass.UnitTypes.Find(ut => ut.unitTypeId == item.unit.unitTypeId).minEra)).era;
-               if (lastEra != era)
+               if (lastEra != item.Key)
                {
-                  group = new ListViewGroup(era, HorizontalAlignment.Left);
+                  group = new ListViewGroup(item.Key, HorizontalAlignment.Left);
                }
-               ListViewItem lvi = new ListViewItem($"{item.name} ({item.count})", $"armyuniticons_50x50_{item.unit.unitTypeId}")
+               foreach (Unit unit in item.Value)
                {
-                  Group = group,
-                  Tag = item
-               };
-               ArmySelection.lvArmy.Items.Add(lvi);
-               if (group != null && group.Header != lastEra)
-               {
-                  ArmySelection.lvArmy.Groups.Add(group);
-                  lastEra = era;
+                  ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit.unitTypeId}")
+                  {
+                     Group = group,
+                     Tag = unit
+                  };
+                  ArmySelection.lvArmy.Items.Add(lvi);
+                  if (group != null && group.Header != lastEra)
+                  {
+                     ArmySelection.lvArmy.Groups.Add(group);
+                     lastEra = item.Key;
+                  }
                }
             }
             foreach (var unitType in ArmySelection.SelectedArmyTypes)
             {
-               Unit unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == unitType && u.unit.currentHitpoints >= 10);
+               Unit unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == unitType);
                ArmySelection.lvSelectedArmy.Items.Add(unit);
             }
          }

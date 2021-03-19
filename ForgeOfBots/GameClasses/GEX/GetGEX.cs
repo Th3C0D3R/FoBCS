@@ -109,4 +109,5 @@ namespace ForgeOfBots.GameClasses.GEX.Get
       public string __class__ { get; set; }
       public int value { get; set; }
    }
+
 }

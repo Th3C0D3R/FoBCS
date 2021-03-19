@@ -1,4 +1,5 @@
 ﻿using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.GBG.Map;
 using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
 using Newtonsoft.Json;
@@ -89,7 +90,7 @@ namespace ForgeOfBots.DataHandler
                   if (ListClass.AllBuildings.Count <= 0)
                   {
                      string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "city_entities"); }).url;
-                     script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.city_entities);
+                     script = ReqBuilder.GetMetaDataRequestScript(url);
                      string cityMeta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
                      BuildingsRoot rootBuilding = JsonConvert.DeserializeObject<BuildingsRoot>("{\"buildings\":" + cityMeta + "}");
                      ListClass.AllBuildings = rootBuilding.buildings.ToList();
@@ -99,7 +100,7 @@ namespace ForgeOfBots.DataHandler
                   if (ListClass.Eras.Count <= 0)
                   {
                      string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "research_eras"); }).url;
-                     script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.research_eras);
+                     script = ReqBuilder.GetMetaDataRequestScript(url);
                      string researchMeta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
                      ResearchEraRoot rootResearch = JsonConvert.DeserializeObject<ResearchEraRoot>("{\"reserach\":" + researchMeta + "}");
                      ListClass.Eras = rootResearch.reserach.ToList();
@@ -107,17 +108,25 @@ namespace ForgeOfBots.DataHandler
                      noage.era = "NoAge";
                      noage.name = "Kein Zeitalter";
                      noage.__class__ = "ResearchEra";
-                     ListClass.Eras.Insert(0,noage);
+                     ListClass.Eras.Insert(0, noage);
                      UpdatedSortedGoodList();
                   }
                   if (ListClass.UnitTypes.Count <= 0)
                   {
                      string url = ListClass.MetaDataList.Find((m) => { return (m.identifier == "unit_types"); }).url;
-                     script = ReqBuilder.GetMetaDataRequestScript(url, MetaRequestType.unit_types);
+                     script = ReqBuilder.GetMetaDataRequestScript(url);
                      string unit_types_Meta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
                      UnitTypesRoot rootUnitType = JsonConvert.DeserializeObject<UnitTypesRoot>("{\"unit_types\":" + unit_types_Meta + "}");
                      ListClass.UnitTypes = rootUnitType.unit_types.ToList();
                      UpdateSortedArmyList();
+                  }
+                  if (ListClass.MetaMap == null)
+                  {
+                     string url = ListClass.MetaDataList.Find(m => m.identifier == "guild_battleground_maps").url;
+                     script = ReqBuilder.GetMetaDataRequestScript(url);
+                     string gbg_map_meta = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+                     GBGMapRoot map = JsonConvert.DeserializeObject<GBGMapRoot>("{\"map\":" + gbg_map_meta + "}");
+                     ListClass.MetaMap = map.map[0];
                   }
                   break;
                case "getUpdates":
@@ -147,6 +156,13 @@ namespace ForgeOfBots.DataHandler
          string ownTavern = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
          OwnTavernDataRoot otdr = JsonConvert.DeserializeObject<OwnTavernDataRoot>(ownTavern);
          ListClass.OwnTavernData = otdr.responseData;
+      }
+      public void UpdateEntities(bool onlyFinished = false)
+      {
+         string script = StaticData.ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
+         string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         dynamic entities = JsonConvert.DeserializeObject(ret);
+         UpdateBuildings(entities["responseData"], onlyFinished);
       }
       public void UpdateContribution()
       {
@@ -203,33 +219,37 @@ namespace ForgeOfBots.DataHandler
       public void UpdateAttackPool()
       {
          int[,] army = new int[2, 8];
-         army[0, 0] = 38972; 
-         army[0, 1] = 36924; 
-         army[0, 2] = 34876; 
-         army[0, 3] = 32828; 
-         army[0, 4] = 30780; 
-         army[0, 5] = 28732; 
-         army[0, 6] = 26684; 
-         army[0, 7] = 22588;
-         //List<int> addedIDs = new List<int>();
-         //for (int i = 0; i < StaticData.UserData.ArmySelection[UserData.LastWorld.Split('|')[0]].Count; i++)
-         //{
-         //   string item = StaticData.UserData.ArmySelection[i];
-         //   Unit unit = null;
-         //   unit = ListClass.UnitList.Find(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= 10);
-         //   if (unit == null) continue;
-         //   if (unit.unit == null) continue;
-         //   if (unit.unit.unitTypeId == item)
-         //   {
-         //      int id = unit.ids.First();
-         //      while (addedIDs.Contains(id)) id = unit.ids.SkipWhile(x => !x.Equals(id)).Skip(1).First();
-         //      if (i < 8)
-         //      {
-         //         addedIDs.Add(id);
-         //         army[0, i] = id;
-         //      }
-         //   }
-         //}
+         //army[0, 0] = 12348; 
+         //army[0, 1] = 14396; 
+         //army[0, 2] = 16444; 
+         //army[0, 3] = 18492; 
+         //army[0, 4] = 20540; 
+         //army[0, 5] = 22588; 
+         //army[0, 6] = 10300; 
+         //army[0, 7] = 8252;
+         //12348,14396,16444,18492,20540,22588,10300,8252
+         List<int> addedIds = new List<int>();
+         for (int i = 0; i < StaticData.UserData.ArmySelection[StaticData.UserData.LastWorld.Split('|')[0]].Count; i++)
+         {
+            int healthThreshold = 10;
+            string item = StaticData.UserData.ArmySelection[StaticData.UserData.LastWorld.Split('|')[0]][i];
+            var units = ListClass.UnitList.FindAll(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= healthThreshold);
+            if (units.Count >= 1)
+            {
+               army[0, i] = units.Where(u => !addedIds.Contains(u.unit.unitId)).First().unit.unitId;
+               addedIds.Add(army[0, i]);
+            }
+            else
+            {
+               while (units.Count == 0)
+               {
+                  healthThreshold -= 1;
+                  units = ListClass.UnitList.FindAll(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= healthThreshold);
+               }
+               army[0, i] = units.Where(u => !addedIds.Contains(u.unit.unitId)).First().unit.unitId;
+               addedIds.Add(army[0, i]);
+            }
+         }
          string script = ReqBuilder.GetRequestScript(RequestType.updatePools, army);
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
       }
@@ -252,12 +272,16 @@ namespace ForgeOfBots.DataHandler
          if (ListClass.Eras != null && ListClass.ResourceDefinitions != null && ListClass.Resources != null)
             ListClass.GoodsDict = Helper.GetGoodsEraSorted(ListClass.Eras, ListClass.Resources, ListClass.ResourceDefinitions);
       }
-      public void UpdateBuildings(JToken entities)
+      public void UpdateBuildings(JToken entities, bool onlyFinished = false)
       {
          if (ListClass.Startup.Count <= 0 || ListClass.AllBuildings.Count <= 0) return;
-         ListClass.ProductionList.Clear();
-         ListClass.ResidentialList.Clear();
-         ListClass.GoodProductionList.Clear();
+         if (!onlyFinished)
+         {
+            ListClass.ProductionList.Clear();
+            ListClass.ResidentialList.Clear();
+            ListClass.GoodProductionList.Clear();
+         }
+         ListClass.FinishedProductions.Clear();
          foreach (JToken cityEntity in entities.ToList())
          {
             foreach (Building metaEntity in ListClass.AllBuildings)
@@ -269,6 +293,9 @@ namespace ForgeOfBots.DataHandler
                   if (metaEntity.available_products != null)
                      entity.available_products = metaEntity.available_products.ToList();
                   entity.type = metaEntity.type;
+                  if (entity.state["__class__"].ToString().ToLower() == "ProductionFinishedState".ToLower())
+                     ListClass.FinishedProductions.Add(entity);
+                  if (onlyFinished) continue;
                   if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && /*entity.hasSupplyProdAt(StaticData.UserData.ProductionOption)|| */GameClassHelper.hasOnlySupplyProduction(entity.available_products) && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
                      ListClass.ProductionList.Add(entity);
                   else if (entity.type == "residential" && entity.connected >= 1 && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())

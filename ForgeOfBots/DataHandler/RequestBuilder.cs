@@ -23,11 +23,11 @@ namespace ForgeOfBots.DataHandler
       public static int RequestID { get { return requestID; } private set { } }
       private static readonly ResourceManager resMgr = StaticData.resMgr;
       public string WorldID { get; set; }
-
       public string GetRequestScript(RequestType type, dynamic data)
       {
          int[] queryData = new int[] { };
          int idData = 0;
+         string sData = "";
          string world = StaticData.UserData.LastWorld;
          string messageCategory = "";
          int[,] armyData = new int[2, 8];
@@ -40,9 +40,11 @@ namespace ForgeOfBots.DataHandler
          else if (type == RequestType.updatePools)
             armyData = (int[,])data;
          else if (type == RequestType.GEXstartAttak)
-            idData = int.Parse(data);
+            idData = (int)data;
          else if (data is int iData)
             idData = iData;
+         else if (data is string sdata)
+            sData = sdata;
          else if (data != "" && data != "[]")
             idData = int.Parse(data);
 
@@ -288,6 +290,31 @@ namespace ForgeOfBots.DataHandler
                _class = "ArmyUnitManagementService";
                _methode = "getArmyInfo";
                break;
+            case RequestType.buyOffer:
+               _data = new JArray(sData);
+               _class = "ResourceShopService";
+               _methode = "buyOffer";
+               break;
+            case RequestType.getContexts:
+               _data = new JArray(new JArray(sData));
+               _class = "ResourceShopService";
+               _methode = "getContexts";
+               break;
+            case RequestType.getDifficulties:
+               _data = new JArray();
+               _class = "GuildExpeditionService";
+               _methode = "getDifficulties";
+               break;
+            case RequestType.changeDifficulty:
+               _data = new JArray(idData);
+               _class = "GuildExpeditionService";
+               _methode = "changeDifficulty";
+               break;
+            case RequestType.getBuildings:
+               _data = new JArray(idData);
+               _class = "GuildBattlegroundBuildingService";
+               _methode = "getBuildings";
+               break;
             default:
                _data = new JArray();
                _class = "StartupService";
@@ -309,18 +336,10 @@ namespace ForgeOfBots.DataHandler
             if (type == RequestType.updatePools)
             {
                if (armyData.Length != 16) return "";
-               string before = "[[{\"__class__\": \"ArmyPool\",\"units\": [";
-               string attack = string.Join(",", armyData.GetTroopRow(0));
-               string after = "],\"type\":\"attacking\"},{\"__class__\":\"ArmyPool\",\"units\":[";
-               string defending = "";
-               if(!armyData.GetTroopRow(1).All(r => r == 0))
-               {
-                  defending = string.Join(",", armyData.GetTroopRow(1));
-               }
-               string end = "],\"type\":\"defending\"},{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}],{\"__class__\":\"ArmyContext\",\"content\":\"main\"}]";
-               string startJson = jsonString.Substring(0, jsonString.IndexOf("\"requestData\":[") + ("\"requestData\":[").Length - 1);
-               string endJson = jsonString.Substring(jsonString.IndexOf(",\"requestClass\""));
-               jsonString = $"{startJson}{before}{attack}{after}{defending}{end}{endJson}";
+               string start = "[{\"__class__\":\"ServerRequest\",\"requestData\":[[{\"__class__\":\"ArmyPool\",\"units\":[";
+               string ids = string.Join(",", armyData.GetTroopRow(0)).Replace("0,","");
+               string end = $"],\"type\":\"attacking\"}},{{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"defending\"}},{{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}}],{{\"__class__\":\"ArmyContext\",\"content\":\"main\"}}],\"requestClass\":\"ArmyUnitManagementService\",\"requestMethod\":\"updatePools\",\"requestId\":{RequestID}}}]";
+               jsonString = $"{start}{ids}{end}";
             }
             else if (type == RequestType.CollectProduction)
                jsonString = jsonString.Replace("\"requestData\":[", "\"requestData\":[[").Replace("],\"requestClass\"", "]],\"requestClass\"");
@@ -345,18 +364,15 @@ namespace ForgeOfBots.DataHandler
             RequestScript = RequestScript.Replace("##IdData##", "");
          return RequestScript;
       }
-
-      public string GetMetaDataRequestScript(string url, MetaRequestType type)
+      public string GetMetaDataRequestScript(string url)
       {
          string RequestScript = resMgr.GetString("fetchMetaData");
          //Console.WriteLine(jsonString);
          RequestScript = RequestScript
             .Replace("##WorldID##", WorldID)
-            .Replace("##url##", url)
-            .Replace("##resType##", type.ToString());
+            .Replace("##url##", url);
          return RequestScript;
       }
-
    }
 
    public enum RequestType
@@ -372,6 +388,7 @@ namespace ForgeOfBots.DataHandler
       GetLGs,
       LogService,
       CollectProduction,
+      CollectOtherProductions,
       QueryProduction,
       CancelProduction,
       CollectTavern,
@@ -397,7 +414,12 @@ namespace ForgeOfBots.DataHandler
       GBGgetBattleground,
       GBGgetState,
       GBGgetArmyInfo,
-      GBGstartAttack
+      GBGstartAttack,
+      buyOffer,
+      getContexts,
+      getDifficulties,
+      changeDifficulty,
+      getBuildings
    }
    public enum MessageType
    {
@@ -415,6 +437,7 @@ namespace ForgeOfBots.DataHandler
    {
       city_entities,
       research_eras,
-      unit_types
+      unit_types,
+      gbgMap
    }
 }

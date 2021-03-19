@@ -125,7 +125,7 @@ namespace ForgeOfBots.Utils
       {
          if (resources.Count <= 0 || resourceDefList.Count <= 0 || eraList.Count <= 0) return new Dictionary<string, List<Good>>();
          Dictionary<string, List<Good>> goodList = new Dictionary<string, List<Good>>();
-         foreach (ResearchEra era in eraList.Where(re=>!re.era.Equals("NoAge")))
+         foreach (ResearchEra era in eraList)
          {
             foreach (JToken resDef in resourceDefList["responseData"].ToList())
             {
@@ -218,7 +218,6 @@ namespace ForgeOfBots.Utils
                if (unittype.unitTypeId == army.unitTypeId)
                {
                   tmpList.Add(unit);
-                  break;
                }
             }
          }
@@ -306,7 +305,14 @@ namespace ForgeOfBots.Utils
          }
          return null;
       }
-
+      public static void DisableControl(Control ctl)
+      {
+         try
+         {
+            ctl.Enabled = false;
+         }
+         catch (Exception){ }
+      }
 
       public static async Task setTimeout(Action action, int timeoutInMilliseconds)
       {

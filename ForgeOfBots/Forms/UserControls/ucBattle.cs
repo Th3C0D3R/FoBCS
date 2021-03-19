@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ForgeOfBots.GameClasses.ResponseClasses;
+using Settings = ForgeOfBots.Utils.Settings;
+using System.Globalization;
+using System.Threading;
 
 namespace ForgeOfBots.Forms.UserControls
 {
@@ -30,12 +33,14 @@ namespace ForgeOfBots.Forms.UserControls
       }
       public List<string> SelectedArmyTypes = new List<string>();
       public ImageList imgList { get; set; } = null;
-      public List<Unit> UnitList { get; set; } = new List<Unit>();
+      public Dictionary<string, List<Unit>> UnitList { get; set; } = new Dictionary<string, List<Unit>>();
       public ucBattle()
       {
          InitializeComponent();
+         lblSelectedArmy.Text = $"{i18n.getString(lblSelectedArmy.Tag.ToString())}";
+         btnArmySubmit.Text = $"{i18n.getString(btnArmySubmit.Tag.ToString())}";
       }
-      public void FillArmyList(List<Unit> unitlist)
+      public void FillArmyList(Dictionary<string, List<Unit>> unitlist)
       {
          if (imgList == null) return;
          if (unitlist.Count <= 0) return;

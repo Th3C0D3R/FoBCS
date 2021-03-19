@@ -32,9 +32,13 @@ using AllWorlds = ForgeOfBots.GameClasses.ResponseClasses.WorldSelection;
 using CUpdate = ForgeOfBots.DataHandler.Update;
 using WebClient = System.Net.WebClient;
 using GEXWaves = ForgeOfBots.GameClasses.GEX.GetEncounter.Armywave;
+using GBGWaves = ForgeOfBots.GameClasses.GBG.ArmyInfo.Data;
+using GBGProvince = ForgeOfBots.GameClasses.GBG.Get.Province;
 using ForgeOfBots.Forms.UserControls;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using static System.Windows.Forms.CheckedListBox;
+using ForgeOfBots.GameClasses.GBG.Get;
 
 namespace ForgeOfBots.Forms
 {
@@ -578,6 +582,10 @@ namespace ForgeOfBots.Forms
          logger.Info($">>> ForgeHX_ForgeHXDownloaded");
          LoadWorlds();
          logger.Info($"<<< ForgeHX_ForgeHXDownloaded");
+         if (isLoading && LoadingFrm != null)
+         {
+            LoadingFrm.Close();
+         }
       }
       private void LoadWorlds()
       {
@@ -608,10 +616,6 @@ namespace ForgeOfBots.Forms
 #endif
          ReloadData();
          InitSettingsTab();
-         if (isLoading && LoadingFrm != null)
-         {
-            LoadingFrm.Close();
-         }
          logger.Info($"<<< LoadWorlds");
       }
       public void ReloadData()
@@ -676,7 +680,8 @@ namespace ForgeOfBots.Forms
                Invoker.SetProperty(lvGoods, () => lvGoods.LargeImageList, GoodImageList);
                string lastEra = "";
                ListViewGroup group = null;
-               foreach (KeyValuePair<string, List<Good>> item in ListClass.GoodsDict)
+               ResearchEra noAge = ListClass.Eras.Find(e => e.era == "NoAge");
+               foreach (KeyValuePair<string, List<Good>> item in ListClass.GoodsDict.Where(kvGood => kvGood.Key != noAge.name))
                {
                   if (item.Value.TrueForAll((b) => b.value == 0)) continue;
                   if (lastEra != item.Key)
@@ -1207,6 +1212,11 @@ namespace ForgeOfBots.Forms
             }
          }
          Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Invalidate());
+
+         if (ListClass.FinishedProductions.Count < 0)
+         {
+            Invoker.SetProperty(lblSumFinProdValue, () => lblSumFinProdValue.Text, ListClass.FinishedProductions.Count.ToString());
+         }
       }
       private void UpdateGoodProductionView()
       {
@@ -1293,10 +1303,7 @@ namespace ForgeOfBots.Forms
       {
          if (sender is ProdListItem item)
          {
-            string script = ReqBuilder.GetRequestScript(RequestType.GetEntities, "");
-            string ret = (string)jsExecutor.ExecuteAsyncScript(script);
-            dynamic entities = JsonConvert.DeserializeObject(ret);
-            Updater.UpdateBuildings(entities["responseData"]);
+            Updater.UpdateEntities();
             if (DEBUGMODE) Log($"[{DateTime.Now}] Done STATE: {item.ProductionState}", lbOutputWindow);
             update(item);
          }
@@ -1396,7 +1403,7 @@ namespace ForgeOfBots.Forms
                UpdateGoodProductionView();
                UpdateDashbord();
                //if (UserData.ProductionBotNotification)
-                  //TelegramNotify.Send($"{i18n.getString("GUI.Telegram.ProdFinished")}{(UserData.ProductionBot ? $" {i18n.getString("GUI.Telegram.ProdStarted")}" : "")}");
+               //TelegramNotify.Send($"{i18n.getString("GUI.Telegram.ProdFinished")}{(UserData.ProductionBot ? $" {i18n.getString("GUI.Telegram.ProdStarted")}" : "")}");
                break;
             case RequestType.QueryProduction:
                List<string> retQuery = new List<string>();
@@ -1496,6 +1503,7 @@ namespace ForgeOfBots.Forms
                break;
             case RequestType.CollectIncident:
                UserData.LastIncidentTime = DateTime.Now;
+               UserData.SaveSettings();
                foreach (HiddenReward item in ListClass.HiddenRewards)
                {
                   if (!item.isVisible) continue;
@@ -1546,10 +1554,91 @@ namespace ForgeOfBots.Forms
                Updater.UpdateResources();
                UpdateDashbord();
                break;
+            case RequestType.CollectOtherProductions:
+               Updater.UpdateEntities(true);
+               ids = ListClass.FinishedProductions.Where((x) => { return x.state["__class__"].ToString().ToLower() != "idlestate" && x.state["__class__"].ToString().ToLower() != "producingstate"; }).ToList().Select(y => y.id).ToArray();
+               script = ReqBuilder.GetRequestScript(RequestType.CollectProduction, ids);
+               _ = (string)jsExecutor.ExecuteAsyncScript(script);
+               Updater.UpdateEntities();
+               UpdateProductionView();
+               UpdateGoodProductionView();
+               break;
             default:
                break;
          }
       }
+      private void BtnShowList_Click(object sender, EventArgs e)
+      {
+         if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
+         FinProdForm fpf = new FinProdForm();
+
+         var items = ListClass.FinishedProductions.Select(ex =>
+         {
+            var productName = "";
+            var productValue = "";
+            var exprods = "";
+            if (ex.state["current_product"]["product"] == null)
+            {
+               if (ex.state["current_product"]["goods"] == null)
+               {
+                  MessageBox.Show("!!!! PLEASE REPORT THE TEXT INSIDE YOU CLIPBOARD TO THE DEV (GITHUB/DISCORD) !!!!", "PLEASE REPORT!!");
+                  Clipboard.SetText(ex.state.ToString());
+               }
+               else
+               {
+                  foreach (var i in ex.state["current_product"]["goods"].ToList())
+                  {
+                     productName = i["good_id"].ToString();
+                     productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                     productValue = i["value"].ToString();
+                     exprods += $" {productValue} {productName},";
+                  }
+                  exprods = exprods.TrimEnd(',');
+               }
+            }
+            else
+            {
+               foreach (var i in ex.state["current_product"]["product"]["resources"].ToList())
+               {
+                  productName = i.ToObject<JProperty>().Name;
+                  productName = ListClass.ResourceDefinitions["responseData"].First(x => x["id"].ToString() == productName)["name"].ToString();
+                  productValue = i.First.ToString();
+                  exprods += $" {productValue} {productName},";
+               }
+               exprods = exprods.TrimEnd(',');
+            }
+            return new EntityProd() { entity = ex, Name = ex.name, Value = exprods };
+         }).ToList();
+         items = items.OrderBy(o => o.Name).ToList();
+         fpf.AddItem(items.ToArray());
+         fpf.CollectAll += CollectAll;
+         fpf.CollectSelected += CollectSelected;
+         fpf.Show();
+      }
+
+      private void CollectSelected(object sender, dynamic data = null)
+      {
+         List<EntityProd> entities = new List<EntityProd>();
+         foreach (var item in (CheckedItemCollection)data)
+         {
+            entities.Add((EntityProd)item);
+         }
+         TwoTArgs<RequestType, List<EntityProd>> param = new TwoTArgs<RequestType, List<EntityProd>> { RequestType = RequestType.CollectOtherProductions, argument2 = entities };
+         bwScriptExecuter_DoWork(this, new DoWorkEventArgs(param));
+         if (ListClass.FinishedProductions.Count > 0)
+         {
+            Invoker.SetProperty(lblSumFinProdValue, () => lblSumFinProdValue.Text, ListClass.FinishedProductions.Count.ToString());
+         }
+         if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
+      }
+
+      private void CollectAll(object sender, dynamic data = null)
+      {
+         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectOtherProductions };
+         bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+         if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
+      }
+
       private void TsmiStartProduction_Click(object sender, EventArgs e)
       {
          StartProduction();
@@ -1561,6 +1650,10 @@ namespace ForgeOfBots.Forms
       private void TsmiCancelProduction_Click(object sender, EventArgs e)
       {
          CancelProduction();
+      }
+      private void TsmiCollectOtherProductionToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+
       }
       #endregion
 
@@ -1615,6 +1708,7 @@ namespace ForgeOfBots.Forms
          nudMinProfit.Value = UserData.MinProfit;
          mcbAutoInvest.Checked = UserData.AutoInvest;
          mtSnipBot.Checked = UserData.SnipBot;
+         mtBuyAttempts.Checked = UserData.BuyGEXAttempts;
          nudSnipInterval.Value = UserData.IntervalSnip;
          mcbNotifySnip.Checked = UserData.SnipBotNotification;
          mcbNotifyProd.Checked = UserData.ProductionBotNotification;
@@ -1955,6 +2049,11 @@ namespace ForgeOfBots.Forms
       private void mcbFriends_CheckedChanged(object sender, EventArgs e)
       {
          SnipTargetChanged((MetroCheckBox)sender, e);
+      }
+      private void MtBuyAttempts_CheckedChanged(object sender, EventArgs e)
+      {
+         UserData.BuyGEXAttempts = mtBuyAttempts.Checked;
+         UserData.SaveSettings();
       }
       private void mcbGuild_CheckedChanged(object sender, EventArgs e)
       {
@@ -2334,20 +2433,33 @@ namespace ForgeOfBots.Forms
       #region "BackgroundWorkerEX"
       private void bwScriptExecuter_DoWork(object sender, DoWorkEventArgs e)
       {
-         BackgroundWorkerEX bwEx = (BackgroundWorkerEX)sender;
          Random r = new Random();
          int counter = 0;
          dynamic param;
          try
          {
-            param = (TwoTArgs<RequestType, dynamic>)e.Argument;
+            param = (TwoTArgs<RequestType, List<EntityProd>>)e.Argument;
          }
          catch (Exception)
          {
-            param = (TwoTArgs<RequestType, E_Motivate>)e.Argument;
+            try
+            {
+               param = (TwoTArgs<RequestType, dynamic>)e.Argument;
+            }
+            catch (Exception)
+            {
+               param = (TwoTArgs<RequestType, E_Motivate>)e.Argument;
+            }
          }
          switch (param.RequestType)
          {
+            case RequestType.CollectOtherProductions:
+               List<EntityProd> prodList = (List<EntityProd>)param.argument2;
+               var ids = prodList.ToList().Select(y => y.entity.id).ToArray();
+               var script = ReqBuilder.GetRequestScript(RequestType.CollectProduction, ids);
+               _ = (string)jsExecutor.ExecuteAsyncScript(script);
+               Updater.UpdateEntities();
+               break;
             case RequestType.Motivate:
                E_Motivate e_Motivate = (E_Motivate)Enum.Parse(typeof(E_Motivate), param.argument2.ToString());
                List<Player> list = new List<Player>();
@@ -2388,7 +2500,7 @@ namespace ForgeOfBots.Forms
                   counter += 1;
                   StaticData.WorkerList.UpdateWorkerProgressBar(ID, counter, list.Count);
                   StaticData.WorkerList.UpdateWorkerLabel(ID, i18n.getString("CountLabel").Replace("##Done##", counter.ToString()).Replace("##End##", list.Count.ToString()));
-                  string script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
+                  script = ReqBuilder.GetRequestScript(param.RequestType, item.player_id);
                   string retMot = (string)jsExecutor.ExecuteAsyncScript(script);
                   string[] motResponse = retMot.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
                   Polivate motivation = null;
@@ -2472,7 +2584,7 @@ namespace ForgeOfBots.Forms
                StaticData.WorkerList.UpdateWorkerLabel(TavernVisitWorkerID, i18n.getString("CountLabel").Replace("##Done##", "0").Replace("##End##", ListClass.FriendTaverns.Count.ToString()));
                foreach (FriendTavernState item in ListClass.FriendTaverns)
                {
-                  string script = ReqBuilder.GetRequestScript(param.RequestType, item.ownerId);
+                  script = ReqBuilder.GetRequestScript(param.RequestType, item.ownerId);
                   string retTavern = (string)jsExecutor.ExecuteAsyncScript(script);
 
                   string[] TavResponse = retTavern.Split(new[] { "##@##" }, StringSplitOptions.RemoveEmptyEntries);
@@ -2540,6 +2652,7 @@ namespace ForgeOfBots.Forms
                ReloadData();
                break;
             case RequestType.GetLGs:
+               BackgroundWorkerEX bwEx = (BackgroundWorkerEX)sender;
                string retSnip = "";
                ListClass.SnipWithProfit = new List<LGSnip>();
                ListClass.SnipablePlayers = new List<Player>();
@@ -2561,7 +2674,7 @@ namespace ForgeOfBots.Forms
                   counter += 1;
                   if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerProgressBar(LGSnipWorkerID, counter, ListClass.SnipablePlayers.Count);
                   if (param.argument2.GetType() != typeof(bool)) StaticData.WorkerList.UpdateWorkerLabel(LGSnipWorkerID, $"{i18n.getString("GUI.Sniper.SearchingPlayer")} {item.name}...");
-                  string script = ReqBuilder.GetRequestScript(RequestType.GetLGs, item.player_id);
+                  script = ReqBuilder.GetRequestScript(RequestType.GetLGs, item.player_id);
                   retSnip = (string)jsExecutor.ExecuteAsyncScript(script);
                   if (retSnip.Length <= 4) break;
                   LGRootObject lgs = JsonConvert.DeserializeObject<LGRootObject>(retSnip);
@@ -2923,7 +3036,7 @@ namespace ForgeOfBots.Forms
       #region "Army"
       public void UpdateArmy()
       {
-         logger.Info($">>> UpdateArmy"); 
+         logger.Info($">>> UpdateArmy");
          if (!UserData.ArmySelection.ContainsKey(UserData.LastWorld.Split('|')[0]))
             UserData.ArmySelection.Add(UserData.LastWorld.Split('|')[0], new List<string>());
          if (UnitImageLise != null)
@@ -3071,6 +3184,7 @@ namespace ForgeOfBots.Forms
       public void UpdateGEX()
       {
          Invoker.CallMethode(lvWave, () => lvWave.Items.Clear());
+         UpdateArmy();
          GEXHelper.UpdateGEX();
          if (GEXHelper.GEXOverview.state.Equals("inactive"))
          {
@@ -3080,11 +3194,30 @@ namespace ForgeOfBots.Forms
             Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.NoGEX"));
             return;
          }
+         if (GEXHelper.NeedChangeDiff() && GEXHelper.NextDiffOpen(GEXHelper.GEXOverview.progress.difficulty))
+         {
+            GEXHelper.ChangeDiff(GEXHelper.GEXOverview.progress.difficulty + 1);
+         }
+         else if (GEXHelper.NeedChangeDiff() && !GEXHelper.NextDiffOpen(GEXHelper.GEXOverview.progress.difficulty))
+         {
+            Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {i18n.getString("GUI.Battle.GEX.NoOpenDiff")}");
+            Invoker.SetProperty(lvWave, () => lvWave.Visible, false);
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Enabled, false);
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.NoOpenDiff"));
+            return;
+         }
+         ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
          GEXWaves[] waves = GEXHelper.Armywaves;
          Invoker.SetProperty(lvWave, () => lvWave.SmallImageList, UnitImageLise);
          Invoker.SetProperty(lvWave, () => lvWave.View, System.Windows.Forms.View.SmallIcon);
          Invoker.SetProperty(lvWave, () => lvWave.Visible, true);
-         Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {GEXHelper.GetCurrentState} {(GEXHelper.IsCurrentStateChest ? i18n.getString("GUI.Battle.GEX.Chest") : "")}");
+         int GexTries = ListClass.GoodsDict[noAge.name].Find(g => g.good_id == "guild_expedition_attempt").value;
+         string GEXTriesText = "";
+         if (!GEXHelper.IsCurrentStateChest)
+         {
+            GEXTriesText = $"{i18n.getString("GUI.Battle.GEX.Tries")} {GexTries}";
+         }
+         Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {GEXHelper.GetCurrentState} {(GEXHelper.IsCurrentStateChest ? i18n.getString("GUI.Battle.GEX.Chest") : "")} {GEXTriesText}");
          if (waves == null)
          {
             Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.ChestOpen"));
@@ -3137,34 +3270,254 @@ namespace ForgeOfBots.Forms
             }
          }
       }
-
+      frmArmySelection frmAS = null;
       private void BtnDoGEXAction_Click(object sender, EventArgs e)
       {
          if (GEXHelper.IsCurrentStateChest)
          {
             var ret = GEXHelper.OpenChest(GEXHelper.GetCurrentState);
+            lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {ret.name}";
          }
          else
          {
-            frmArmySelection frmAS = new frmArmySelection();
-            frmAS.ArmySelection.imgList = UnitImageLise;
-            frmAS.ArmySelection.FillArmyList(ListClass.UnitList);
-            frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
-            frmAS.ArmySelection.SubmitArmy += ArmySelection_SubmitArmy;
-            frmAS.ShowDialog();
+            ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
+            if (ListClass.GoodsDict[noAge.name].Find(g => g.good_id == "guild_expedition_attempt").value == 0)
+            {
+               if (UserData.BuyGEXAttempts)
+               {
+                  if (GEXHelper.BuyNextAttempt())
+                  {
+                     Updater.UpdateResources();
+                     Updater.UpdateInventory();
+                     frmAS = new frmArmySelection();
+                     frmAS.Name = "frmAS";
+                     frmAS.ArmySelection.imgList = UnitImageLise;
+                     frmAS.ArmySelection.FillArmyList(ListClass.UnitListEraSorted);
+                     frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
+                     frmAS.ArmySelection.SubmitArmy += ArmySelection_SubmitArmy;
+                     frmAS.ShowDialog();
+                  }
+               }
+            }
+            else
+            {
+               frmAS = new frmArmySelection();
+               frmAS.Name = "frmAS";
+               frmAS.ArmySelection.imgList = UnitImageLise;
+               frmAS.ArmySelection.FillArmyList(ListClass.UnitListEraSorted);
+               frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
+               frmAS.ArmySelection.SubmitArmy += ArmySelection_SubmitArmy;
+               frmAS.ShowDialog();
+            }
          }
+         Updater.UpdateResources();
+         Updater.UpdateInventory();
+         UpdateDashbord();
+         UpdateGEX();
       }
-
       private void ArmySelection_SubmitArmy(object sender, dynamic data = null)
       {
          List<string> list = (List<string>)data;
          UserData.ArmySelection[UserData.LastWorld.Split('|')[0]] = list;
          Updater.UpdateAttackPool();
+         if (frmAS != null)
+         {
+            if (Application.OpenForms["frmAS"] != null) Application.OpenForms["frmAS"].Close();
+         }
          var ret = GEXHelper.StartFight(GEXHelper.GetCurrentState);
+         if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+         {
+            ret = GEXHelper.StartFight(GEXHelper.GetCurrentState);
+            if (ret.battleType.currentWaveId == 1 && ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+            {
+               lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}";
+            }
+         }
+         else if (ret.state.winnerBit == 1)
+         {
+            lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}";
+         }
+         else
+         {
+            lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}";
+         }
       }
-
       public void UpdateGBG()
       {
+         Invoker.CallMethode(lvGBGWave, () => lvGBGWave.Items.Clear());
+         UpdateArmy();
+         GBGHelper.UpdateGBG();
+         ListClass.ProvincesGBG = GBGHelper.GetProvinces();
+         if (!GBGHelper.IsParticipating)
+         {
+            Invoker.SetProperty(tlpBattle, () => tlpBattle.Enabled, false);
+            Invoker.SetProperty(lvGBGWave, () => lvGBGWave.Visible, false);
+            Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, false);
+            Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Text, i18n.getString("GUI.Battle.GBG.NoGBG"));
+            return;
+         }
+         Invoker.SetProperty(lvGBGWave, () => lvGBGWave.SmallImageList, UnitImageLise);
+         Invoker.SetProperty(lvGBGWave, () => lvGBGWave.View, System.Windows.Forms.View.SmallIcon);
+         Invoker.SetProperty(lvGBGWave, () => lvGBGWave.Visible, true);
+
+         Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, true);
+         Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Text, i18n.getString("GUI.Battle.GBG.DoFight"));
+
+         int currentAttr = GBGHelper.CurrentBattleground.currentPlayerParticipant.attrition.level;
+         Invoker.SetProperty(lblCurrentAttrition, () => lblCurrentAttrition.Text, $"{currentAttr}");
+
+         int bonusNego = GBGHelper.CurrentBattleground.currentPlayerParticipant.attrition.negotiationMultiplier;
+         int bonusFight = GBGHelper.CurrentBattleground.currentPlayerParticipant.attrition.defendingArmyBonus;
+         Invoker.SetProperty(lblCurrentMultiplier, () => lblCurrentMultiplier.Text, $"x{bonusNego} / +{bonusFight}%");
+
+         for (int i = 0; i < ListClass.ProvincesGBG.Count; i++)
+         {
+            var item = ListClass.ProvincesGBG[i];
+            if (!GBGHelper.CanFightProvince(item.id.Value)) continue;
+            item = GBGHelper.GetSiegeCount(item);
+            ProvinceEX provinceEX = JsonConvert.DeserializeObject<ProvinceEX>(JsonConvert.SerializeObject(item));
+            provinceEX.OwnGuildID = GBGHelper.CurrentBattleground.currentParticipantId;
+            provinceEX.OwnProgress = item.conquestProgress.ToList().Find(cp => cp.participantId == provinceEX.OwnGuildID);
+            Invoker.CallMethode(cbSector, () => { cbSector.Items.Add(provinceEX); });
+         }
+         Invoker.SetProperty(cbSector, () => cbSector.SelectedIndex, 0);
+
+         Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Attrition")));
+         Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Fights")));
+         Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Progress")));
+         Invoker.SetProperty(cbType, () => cbType.SelectedIndex, 0);
+         CbManualFighting_CheckedChanged(null, null);
+      }
+      private void CbManualFighting_CheckedChanged(object sender, EventArgs e)
+      {
+         if (cbAutoFight.Checked)
+         {
+            nudCount.Enabled = true;
+            cbType.Enabled = true;
+            nudDelay.Enabled = true;
+         }
+         else
+         {
+            nudCount.Enabled = false;
+            cbType.Enabled = false;
+            nudDelay.Enabled = false;
+         }
+      }
+      private void CbSector_SelectedIndexChanged(object sender, EventArgs e)
+      {
+         GBGProvince selProv = (GBGProvince)cbSector.SelectedItem;
+         if (!GBGHelper.CanFightProvince(selProv.id.Value))
+         {
+            Invoker.SetProperty(nudCount, () => nudCount.Enabled, false);
+            Invoker.SetProperty(cbType, () => cbType.Enabled, false);
+            Invoker.SetProperty(nudDelay, () => nudDelay.Enabled, false);
+            Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, false);
+            return;
+         }
+         GBGWaves[] waves = GBGHelper.GetArmyInfo(selProv.id.Value);
+         if (waves == null)
+         {
+            Invoker.SetProperty(nudCount, () => nudCount.Enabled, false);
+            Invoker.SetProperty(cbType, () => cbType.Enabled, false);
+            Invoker.SetProperty(nudDelay, () => nudDelay.Enabled, false);
+            Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, false);
+            return;
+         }
+         if (cbAutoFight.Checked)
+         {
+            Invoker.SetProperty(nudCount, () => nudCount.Enabled, true);
+            Invoker.SetProperty(cbType, () => cbType.Enabled, true);
+            Invoker.SetProperty(nudDelay, () => nudDelay.Enabled, true);
+         }
+         Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, true);
+         Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Text, i18n.getString("GUI.Battle.GBG.DoFight"));
+         int currentwave = 1;
+         Invoker.CallMethode(lvGBGWave, () => lvGBGWave.Items.Clear());
+         foreach (var wave in waves)
+         {
+            foreach (var unit in wave.units)
+            {
+               string unitname = ListClass.UnitTypes.Find(ut => ut.unitTypeId == unit.unitTypeId).name;
+               ListViewItem lvi = new ListViewItem($"{unitname}", $"armyuniticons_50x50_{unit.unitTypeId}");
+               if (currentwave == 1)
+               {
+                  ListViewGroup group = new ListViewGroup(i18n.getString("GUI.Battle.UC.Wave1"), HorizontalAlignment.Left);
+                  if (lvGBGWave.Groups.Count == 0)
+                  {
+                     group.Name = "wave1";
+                     lvi.Group = group;
+                  }
+                  else
+                  {
+                     lvi.Group = lvGBGWave.Groups["wave1"];
+                  }
+                  Invoker.CallMethode(lvGBGWave, () => lvGBGWave.Items.Add(lvi));
+                  if (lvGBGWave.Groups.Count == 0)
+                     Invoker.CallMethode(lvGBGWave, () => lvGBGWave.Groups.Add(group));
+               }
+               else if (currentwave == 2)
+               {
+                  ListViewGroup group = new ListViewGroup(i18n.getString("GUI.Battle.UC.Wave2"), HorizontalAlignment.Left);
+                  if (lvGBGWave.Groups.Count == 1)
+                  {
+                     group.Name = "wave2";
+                     lvi.Group = group;
+                  }
+                  else
+                  {
+                     lvi.Group = lvGBGWave.Groups["wave2"];
+                  }
+                  Invoker.CallMethode(lvGBGWave, () => lvGBGWave.Items.Add(lvi));
+                  if (lvGBGWave.Groups.Count == 1)
+                     Invoker.CallMethode(lvGBGWave, () => lvGBGWave.Groups.Add(group));
+               }
+            }
+            currentwave = 2;
+         }
+      }
+      private void BtnReloadGBG_Click(object sender, EventArgs e)
+      {
+         UpdateGBG();
+      }
+      private void BtnFightGBG_Click(object sender, EventArgs e)
+      {
+         frmAS = new frmArmySelection();
+         frmAS.Name = "frmAS";
+         frmAS.ArmySelection.imgList = UnitImageLise;
+         frmAS.ArmySelection.FillArmyList(ListClass.UnitListEraSorted);
+         frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
+         frmAS.ArmySelection.SubmitArmy += SubmitGBGArmy;
+         frmAS.ShowDialog();
+         UpdateGBG();
+      }
+
+      private void SubmitGBGArmy(object sender, dynamic data = null)
+      {
+         List<string> list = (List<string>)data;
+         UserData.ArmySelection[UserData.LastWorld.Split('|')[0]] = list;
+         Updater.UpdateAttackPool();
+         if (frmAS != null)
+         {
+            if (Application.OpenForms["frmAS"] != null) Application.OpenForms["frmAS"].Close();
+         }
+         ProvinceEX prov = (ProvinceEX)cbSector.SelectedItem;
+         var ret = GBGHelper.StartFight(prov.id.Value);
+         if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+         {
+            ret = GBGHelper.StartFight(prov.id.Value);
+            if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+            {
+               lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}";
+            }
+         }
+         else if (ret.state.winnerBit == 1)
+         {
+            lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}";
+         }
+         else
+         {
+            lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}";
+         }
       }
       #endregion
 
@@ -3258,5 +3611,6 @@ namespace ForgeOfBots.Forms
          File.WriteAllText("training.data", JsonConvert.SerializeObject(data));
          //Updater.UpdateMessages("social");
       }
+
    }
 }

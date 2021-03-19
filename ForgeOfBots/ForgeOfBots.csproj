@@ -171,7 +171,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataHandler\GBGHandler.cs" />
+    <Compile Include="DataHandler\GBGHelper.cs" />
     <Compile Include="DataHandler\RequestBuilder.cs" />
     <Compile Include="DataHandler\Update.cs" />
     <Compile Include="DataHandler\WSBuilder.cs" />
@@ -181,6 +181,12 @@
     </Compile>
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FinProdForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FinProdForm.Designer.cs">
+      <DependentUpon>FinProdForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmArmySelection.cs">
       <SubType>Form</SubType>
@@ -256,12 +262,16 @@
     </Compile>
     <Compile Include="GameClasses\Building.cs" />
     <Compile Include="GameClasses\Data.cs" />
+    <Compile Include="GameClasses\GBG\BuildingGBG.cs" />
     <Compile Include="GameClasses\GBG\GetArmyInfoGBG.cs" />
     <Compile Include="GameClasses\GBG\GetGBG.cs" />
     <Compile Include="GameClasses\GBG\GetPlayerParticipantGBG.cs" />
     <Compile Include="GameClasses\GBG\GetStateGBG.cs" />
+    <Compile Include="GameClasses\GBG\MapGBG.cs" />
     <Compile Include="GameClasses\GBG\StartFightGBG.cs" />
+    <Compile Include="GameClasses\GEX\GetBuyContext.cs" />
     <Compile Include="GameClasses\GEX\GetChestsGEX.cs" />
+    <Compile Include="GameClasses\GEX\GetDifficulties.cs" />
     <Compile Include="GameClasses\GEX\GetEncounterGEX.cs" />
     <Compile Include="GameClasses\GEX\GetGEX.cs" />
     <Compile Include="GameClasses\GEX\GetGuildRewardGEX.cs" />
@@ -309,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FinProdForm.resx">
+      <DependentUpon>FinProdForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmArmySelection.resx">
       <DependentUpon>frmArmySelection.cs</DependentUpon>
@@ -418,6 +431,7 @@
     <Content Include="favicon.ico" />
     <Content Include="JSFiles\fetchMetaData.js" />
     <Content Include="JSFiles\fetchData.js" />
+    <None Include="Resources\refresh.png" />
     <None Include="Resources\x-mark.png" />
     <None Include="Resources\dashbord.png" />
     <None Include="Resources\plus.png" />

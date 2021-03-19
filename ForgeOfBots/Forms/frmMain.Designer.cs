@@ -51,6 +51,7 @@ namespace ForgeOfBots.Forms
          this.tsmiVisitMopple = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiCollectIncidents = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiStartProduction = new System.Windows.Forms.ToolStripMenuItem();
+         this.tsmiCollectOtherProductionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiCollectProduction = new System.Windows.Forms.ToolStripMenuItem();
          this.tsmiCancelProduction = new System.Windows.Forms.ToolStripMenuItem();
          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -123,9 +124,26 @@ namespace ForgeOfBots.Forms
          this.lblDefensBoost = new System.Windows.Forms.Label();
          this.tpBattle = new System.Windows.Forms.TabPage();
          this.tlpBattle = new System.Windows.Forms.TableLayoutPanel();
-         this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+         this.tlpGBG = new System.Windows.Forms.TableLayoutPanel();
          this.pnlGVG = new System.Windows.Forms.Panel();
-         this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+         this.tableLayoutPanel19 = new System.Windows.Forms.TableLayoutPanel();
+         this.nudDelay = new System.Windows.Forms.NumericUpDown();
+         this.lvGBGWave = new System.Windows.Forms.ListView();
+         this.btnFightGBG = new System.Windows.Forms.Button();
+         this.label11 = new System.Windows.Forms.Label();
+         this.label13 = new System.Windows.Forms.Label();
+         this.label14 = new System.Windows.Forms.Label();
+         this.label15 = new System.Windows.Forms.Label();
+         this.label16 = new System.Windows.Forms.Label();
+         this.label17 = new System.Windows.Forms.Label();
+         this.cbSector = new System.Windows.Forms.ComboBox();
+         this.cbAutoFight = new System.Windows.Forms.CheckBox();
+         this.tableLayoutPanel20 = new System.Windows.Forms.TableLayoutPanel();
+         this.cbType = new System.Windows.Forms.ComboBox();
+         this.nudCount = new System.Windows.Forms.NumericUpDown();
+         this.lblCurrentAttrition = new System.Windows.Forms.Label();
+         this.lblCurrentMultiplier = new System.Windows.Forms.Label();
+         this.btnReloadGBG = new System.Windows.Forms.Button();
          this.label2 = new System.Windows.Forms.Label();
          this.tableLayoutPanel16 = new System.Windows.Forms.TableLayoutPanel();
          this.label9 = new System.Windows.Forms.Label();
@@ -133,6 +151,8 @@ namespace ForgeOfBots.Forms
          this.lblStage = new System.Windows.Forms.Label();
          this.lvWave = new System.Windows.Forms.ListView();
          this.btnDoGEXAction = new System.Windows.Forms.Button();
+         this.panel8 = new System.Windows.Forms.Panel();
+         this.lblResult = new System.Windows.Forms.Label();
          this.tpProduction = new System.Windows.Forms.TabPage();
          this.pnlGood = new System.Windows.Forms.Panel();
          this.panel14 = new System.Windows.Forms.Panel();
@@ -153,6 +173,12 @@ namespace ForgeOfBots.Forms
          this.label1 = new System.Windows.Forms.Label();
          this.panel12 = new System.Windows.Forms.Panel();
          this.lblProductionList = new System.Windows.Forms.Label();
+         this.panel9 = new System.Windows.Forms.Panel();
+         this.tableLayoutPanel18 = new System.Windows.Forms.TableLayoutPanel();
+         this.lblSumFinProd = new System.Windows.Forms.Label();
+         this.lblSumFinProdValue = new System.Windows.Forms.Label();
+         this.btnShowList = new System.Windows.Forms.Button();
+         this.lblShowList = new System.Windows.Forms.Label();
          this.tpCity = new System.Windows.Forms.TabPage();
          this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
          this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
@@ -171,6 +197,8 @@ namespace ForgeOfBots.Forms
          this.tpSettings = new System.Windows.Forms.TabPage();
          this.mtcSettings = new MetroFramework.Controls.MetroTabControl();
          this.mtpProduction = new MetroFramework.Controls.MetroTabPage();
+         this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+         this.mtBuyAttempts = new MetroFramework.Controls.MetroToggle();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
          this.panel2 = new System.Windows.Forms.Panel();
          this.pnlIgnore = new System.Windows.Forms.FlowLayoutPanel();
@@ -204,6 +232,21 @@ namespace ForgeOfBots.Forms
          this.mlToggleProduction = new MetroFramework.Controls.MetroLabel();
          this.mlToggleView = new MetroFramework.Controls.MetroLabel();
          this.mtView = new MetroFramework.Controls.MetroToggle();
+         this.mtpMisc = new MetroFramework.Controls.MetroTabPage();
+         this.mtbTelegramUsername = new MetroFramework.Controls.MetroTextBox();
+         this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
+         this.mlBrowserWindow = new MetroFramework.Controls.MetroLabel();
+         this.mtToggleBrowser = new MetroFramework.Controls.MetroToggle();
+         this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+         this.mtDarkMode = new MetroFramework.Controls.MetroToggle();
+         this.lblAutoLogin = new MetroFramework.Controls.MetroLabel();
+         this.mtAutoLogin = new MetroFramework.Controls.MetroToggle();
+         this.lblRestartNeeded = new MetroFramework.Controls.MetroLabel();
+         this.mtbSave = new MetroFramework.Controls.MetroButton();
+         this.mtbCustomUserAgent = new MetroFramework.Controls.MetroTextBox();
+         this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
+         this.lblLanguage = new MetroFramework.Controls.MetroLabel();
+         this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
          this.mtpData = new MetroFramework.Controls.MetroTabPage();
          this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
          this.mbSaveReload = new MetroFramework.Controls.MetroButton();
@@ -229,21 +272,6 @@ namespace ForgeOfBots.Forms
          this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
          this.mlTavernBot = new MetroFramework.Controls.MetroLabel();
          this.mlProdBot = new MetroFramework.Controls.MetroLabel();
-         this.mtpMisc = new MetroFramework.Controls.MetroTabPage();
-         this.mtbTelegramUsername = new MetroFramework.Controls.MetroTextBox();
-         this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
-         this.mlBrowserWindow = new MetroFramework.Controls.MetroLabel();
-         this.mtToggleBrowser = new MetroFramework.Controls.MetroToggle();
-         this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
-         this.mtDarkMode = new MetroFramework.Controls.MetroToggle();
-         this.lblAutoLogin = new MetroFramework.Controls.MetroLabel();
-         this.mtAutoLogin = new MetroFramework.Controls.MetroToggle();
-         this.lblRestartNeeded = new MetroFramework.Controls.MetroLabel();
-         this.mtbSave = new MetroFramework.Controls.MetroButton();
-         this.mtbCustomUserAgent = new MetroFramework.Controls.MetroTextBox();
-         this.lblCustomUserAgent = new MetroFramework.Controls.MetroLabel();
-         this.lblLanguage = new MetroFramework.Controls.MetroLabel();
-         this.mcbLanguage = new MetroFramework.Controls.MetroComboBox();
          this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
          this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
          this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
@@ -288,10 +316,15 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel17.SuspendLayout();
          this.tpBattle.SuspendLayout();
          this.tlpBattle.SuspendLayout();
-         this.tableLayoutPanel14.SuspendLayout();
+         this.tlpGBG.SuspendLayout();
          this.pnlGVG.SuspendLayout();
+         this.tableLayoutPanel19.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.nudDelay)).BeginInit();
+         this.tableLayoutPanel20.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.nudCount)).BeginInit();
          this.tableLayoutPanel16.SuspendLayout();
          this.pnlGEX.SuspendLayout();
+         this.panel8.SuspendLayout();
          this.tpProduction.SuspendLayout();
          this.pnlGood.SuspendLayout();
          this.panel14.SuspendLayout();
@@ -302,6 +335,8 @@ namespace ForgeOfBots.Forms
          this.panel11.SuspendLayout();
          this.tableLayoutPanel9.SuspendLayout();
          this.panel12.SuspendLayout();
+         this.panel9.SuspendLayout();
+         this.tableLayoutPanel18.SuspendLayout();
          this.tpCity.SuspendLayout();
          this.tableLayoutPanel2.SuspendLayout();
          this.tableLayoutPanel11.SuspendLayout();
@@ -319,9 +354,9 @@ namespace ForgeOfBots.Forms
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).BeginInit();
          this.mpGoodCycle.SuspendLayout();
          this.mpProdCycle.SuspendLayout();
+         this.mtpMisc.SuspendLayout();
          this.mtpData.SuspendLayout();
          this.mtpBots.SuspendLayout();
-         this.mtpMisc.SuspendLayout();
          this.mtpPremium.SuspendLayout();
          this.tpHelp.SuspendLayout();
          this.panel1.SuspendLayout();
@@ -467,6 +502,7 @@ namespace ForgeOfBots.Forms
             this.tsmiVisitMopple,
             this.tsmiCollectIncidents,
             this.tsmiStartProduction,
+            this.tsmiCollectOtherProductionToolStripMenuItem,
             this.tsmiCollectProduction,
             this.tsmiCancelProduction,
             this.toolStripSeparator1,
@@ -531,6 +567,12 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.tsmiStartProduction, "tsmiStartProduction");
          this.tsmiStartProduction.Tag = "GUI.Menu.StartProduction";
          this.tsmiStartProduction.Click += new System.EventHandler(this.TsmiStartProduction_Click);
+         // 
+         // tsmiCollectOtherProductionToolStripMenuItem
+         // 
+         this.tsmiCollectOtherProductionToolStripMenuItem.Name = "tsmiCollectOtherProductionToolStripMenuItem";
+         resources.ApplyResources(this.tsmiCollectOtherProductionToolStripMenuItem, "tsmiCollectOtherProductionToolStripMenuItem");
+         this.tsmiCollectOtherProductionToolStripMenuItem.Click += new System.EventHandler(this.TsmiCollectOtherProductionToolStripMenuItem_Click);
          // 
          // tsmiCollectProduction
          // 
@@ -1064,31 +1106,157 @@ namespace ForgeOfBots.Forms
          // tlpBattle
          // 
          resources.ApplyResources(this.tlpBattle, "tlpBattle");
-         this.tlpBattle.Controls.Add(this.tableLayoutPanel14, 0, 0);
+         this.tlpBattle.Controls.Add(this.tlpGBG, 0, 0);
          this.tlpBattle.Controls.Add(this.tableLayoutPanel16, 1, 0);
+         this.tlpBattle.Controls.Add(this.panel8, 0, 1);
          this.tlpBattle.Name = "tlpBattle";
          // 
-         // tableLayoutPanel14
+         // tlpGBG
          // 
-         resources.ApplyResources(this.tableLayoutPanel14, "tableLayoutPanel14");
-         this.tableLayoutPanel14.Controls.Add(this.pnlGVG, 0, 1);
-         this.tableLayoutPanel14.Controls.Add(this.label2, 0, 0);
-         this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+         resources.ApplyResources(this.tlpGBG, "tlpGBG");
+         this.tlpGBG.Controls.Add(this.pnlGVG, 0, 1);
+         this.tlpGBG.Controls.Add(this.label2, 0, 0);
+         this.tlpGBG.Name = "tlpGBG";
          // 
          // pnlGVG
          // 
-         this.pnlGVG.Controls.Add(this.metroLabel4);
+         this.pnlGVG.Controls.Add(this.tableLayoutPanel19);
          resources.ApplyResources(this.pnlGVG, "pnlGVG");
          this.pnlGVG.Name = "pnlGVG";
          // 
-         // metroLabel4
+         // tableLayoutPanel19
          // 
-         this.metroLabel4.BackColor = System.Drawing.Color.Transparent;
-         resources.ApplyResources(this.metroLabel4, "metroLabel4");
-         this.metroLabel4.FontSize = MetroFramework.MetroLabelSize.Tall;
-         this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-         this.metroLabel4.Name = "metroLabel4";
-         this.metroLabel4.Tag = "GUI.UnderConstruction";
+         resources.ApplyResources(this.tableLayoutPanel19, "tableLayoutPanel19");
+         this.tableLayoutPanel19.Controls.Add(this.nudDelay, 1, 3);
+         this.tableLayoutPanel19.Controls.Add(this.lvGBGWave, 0, 6);
+         this.tableLayoutPanel19.Controls.Add(this.btnFightGBG, 1, 7);
+         this.tableLayoutPanel19.Controls.Add(this.label11, 0, 0);
+         this.tableLayoutPanel19.Controls.Add(this.label13, 0, 1);
+         this.tableLayoutPanel19.Controls.Add(this.label14, 0, 2);
+         this.tableLayoutPanel19.Controls.Add(this.label15, 0, 3);
+         this.tableLayoutPanel19.Controls.Add(this.label16, 0, 4);
+         this.tableLayoutPanel19.Controls.Add(this.label17, 0, 5);
+         this.tableLayoutPanel19.Controls.Add(this.cbSector, 1, 0);
+         this.tableLayoutPanel19.Controls.Add(this.cbAutoFight, 1, 1);
+         this.tableLayoutPanel19.Controls.Add(this.tableLayoutPanel20, 1, 2);
+         this.tableLayoutPanel19.Controls.Add(this.lblCurrentAttrition, 1, 4);
+         this.tableLayoutPanel19.Controls.Add(this.lblCurrentMultiplier, 1, 5);
+         this.tableLayoutPanel19.Controls.Add(this.btnReloadGBG, 0, 7);
+         this.tableLayoutPanel19.Name = "tableLayoutPanel19";
+         // 
+         // nudDelay
+         // 
+         resources.ApplyResources(this.nudDelay, "nudDelay");
+         this.nudDelay.Name = "nudDelay";
+         // 
+         // lvGBGWave
+         // 
+         this.lvGBGWave.AutoArrange = false;
+         this.tableLayoutPanel19.SetColumnSpan(this.lvGBGWave, 2);
+         resources.ApplyResources(this.lvGBGWave, "lvGBGWave");
+         this.lvGBGWave.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+         this.lvGBGWave.HideSelection = false;
+         this.lvGBGWave.MultiSelect = false;
+         this.lvGBGWave.Name = "lvGBGWave";
+         this.lvGBGWave.UseCompatibleStateImageBehavior = false;
+         this.lvGBGWave.View = System.Windows.Forms.View.SmallIcon;
+         // 
+         // btnFightGBG
+         // 
+         resources.ApplyResources(this.btnFightGBG, "btnFightGBG");
+         this.btnFightGBG.Name = "btnFightGBG";
+         this.btnFightGBG.Tag = "GUI.Battle.GBG.DoFight";
+         this.btnFightGBG.UseVisualStyleBackColor = true;
+         this.btnFightGBG.Click += new System.EventHandler(this.BtnFightGBG_Click);
+         // 
+         // label11
+         // 
+         resources.ApplyResources(this.label11, "label11");
+         this.label11.Name = "label11";
+         this.label11.Tag = "GUI.Battle.GBG.Sector";
+         // 
+         // label13
+         // 
+         resources.ApplyResources(this.label13, "label13");
+         this.label13.Name = "label13";
+         this.label13.Tag = "GUI.Battle.GBG.ManuelFight";
+         // 
+         // label14
+         // 
+         resources.ApplyResources(this.label14, "label14");
+         this.label14.Name = "label14";
+         this.label14.Tag = "GUI.Battle.GBG.AutoFightTill";
+         // 
+         // label15
+         // 
+         resources.ApplyResources(this.label15, "label15");
+         this.label15.Name = "label15";
+         this.label15.Tag = "GUI.Battle.GBG.FightDelay";
+         // 
+         // label16
+         // 
+         resources.ApplyResources(this.label16, "label16");
+         this.label16.Name = "label16";
+         this.label16.Tag = "GUI.Battle.GBG.CurrentAttrition";
+         // 
+         // label17
+         // 
+         resources.ApplyResources(this.label17, "label17");
+         this.label17.Name = "label17";
+         this.label17.Tag = "GUI.Battle.GBG.Multiplier";
+         // 
+         // cbSector
+         // 
+         resources.ApplyResources(this.cbSector, "cbSector");
+         this.cbSector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+         this.cbSector.FormattingEnabled = true;
+         this.cbSector.Name = "cbSector";
+         this.cbSector.SelectedIndexChanged += new System.EventHandler(this.CbSector_SelectedIndexChanged);
+         // 
+         // cbAutoFight
+         // 
+         resources.ApplyResources(this.cbAutoFight, "cbAutoFight");
+         this.cbAutoFight.Name = "cbAutoFight";
+         this.cbAutoFight.Tag = "GUI.Battle.GBG.Fight";
+         this.cbAutoFight.UseVisualStyleBackColor = true;
+         this.cbAutoFight.CheckedChanged += new System.EventHandler(this.CbManualFighting_CheckedChanged);
+         // 
+         // tableLayoutPanel20
+         // 
+         resources.ApplyResources(this.tableLayoutPanel20, "tableLayoutPanel20");
+         this.tableLayoutPanel20.Controls.Add(this.cbType, 1, 0);
+         this.tableLayoutPanel20.Controls.Add(this.nudCount, 0, 0);
+         this.tableLayoutPanel20.Name = "tableLayoutPanel20";
+         // 
+         // cbType
+         // 
+         resources.ApplyResources(this.cbType, "cbType");
+         this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+         this.cbType.FormattingEnabled = true;
+         this.cbType.Name = "cbType";
+         // 
+         // nudCount
+         // 
+         resources.ApplyResources(this.nudCount, "nudCount");
+         this.nudCount.Name = "nudCount";
+         // 
+         // lblCurrentAttrition
+         // 
+         resources.ApplyResources(this.lblCurrentAttrition, "lblCurrentAttrition");
+         this.lblCurrentAttrition.Name = "lblCurrentAttrition";
+         // 
+         // lblCurrentMultiplier
+         // 
+         resources.ApplyResources(this.lblCurrentMultiplier, "lblCurrentMultiplier");
+         this.lblCurrentMultiplier.Name = "lblCurrentMultiplier";
+         this.lblCurrentMultiplier.Tag = "";
+         // 
+         // btnReloadGBG
+         // 
+         resources.ApplyResources(this.btnReloadGBG, "btnReloadGBG");
+         this.btnReloadGBG.Image = global::ForgeOfBots.Properties.Resources.refresh;
+         this.btnReloadGBG.Name = "btnReloadGBG";
+         this.btnReloadGBG.UseVisualStyleBackColor = true;
          // 
          // label2
          // 
@@ -1140,11 +1308,25 @@ namespace ForgeOfBots.Forms
          this.btnDoGEXAction.UseVisualStyleBackColor = true;
          this.btnDoGEXAction.Click += new System.EventHandler(this.BtnDoGEXAction_Click);
          // 
+         // panel8
+         // 
+         this.tlpBattle.SetColumnSpan(this.panel8, 2);
+         this.panel8.Controls.Add(this.lblResult);
+         resources.ApplyResources(this.panel8, "panel8");
+         this.panel8.Name = "panel8";
+         // 
+         // lblResult
+         // 
+         resources.ApplyResources(this.lblResult, "lblResult");
+         this.lblResult.Name = "lblResult";
+         this.lblResult.Tag = "GUI.Battle.Result";
+         // 
          // tpProduction
          // 
          this.tpProduction.ContextMenuStrip = this.cmsMainMenu;
          this.tpProduction.Controls.Add(this.pnlGood);
          this.tpProduction.Controls.Add(this.pnlProd);
+         this.tpProduction.Controls.Add(this.panel9);
          resources.ApplyResources(this.tpProduction, "tpProduction");
          this.tpProduction.Name = "tpProduction";
          this.tpProduction.Tag = "GUI.Production";
@@ -1277,6 +1459,45 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.lblProductionList, "lblProductionList");
          this.lblProductionList.Name = "lblProductionList";
          this.lblProductionList.Tag = "GUI.Production.ProductionList";
+         // 
+         // panel9
+         // 
+         this.panel9.Controls.Add(this.tableLayoutPanel18);
+         resources.ApplyResources(this.panel9, "panel9");
+         this.panel9.Name = "panel9";
+         // 
+         // tableLayoutPanel18
+         // 
+         resources.ApplyResources(this.tableLayoutPanel18, "tableLayoutPanel18");
+         this.tableLayoutPanel18.Controls.Add(this.lblSumFinProd, 0, 0);
+         this.tableLayoutPanel18.Controls.Add(this.lblSumFinProdValue, 1, 0);
+         this.tableLayoutPanel18.Controls.Add(this.btnShowList, 2, 0);
+         this.tableLayoutPanel18.Controls.Add(this.lblShowList, 3, 0);
+         this.tableLayoutPanel18.Name = "tableLayoutPanel18";
+         // 
+         // lblSumFinProd
+         // 
+         resources.ApplyResources(this.lblSumFinProd, "lblSumFinProd");
+         this.lblSumFinProd.Name = "lblSumFinProd";
+         this.lblSumFinProd.Tag = "GUI.Production.SumFinishedProductions";
+         // 
+         // lblSumFinProdValue
+         // 
+         resources.ApplyResources(this.lblSumFinProdValue, "lblSumFinProdValue");
+         this.lblSumFinProdValue.Name = "lblSumFinProdValue";
+         // 
+         // btnShowList
+         // 
+         resources.ApplyResources(this.btnShowList, "btnShowList");
+         this.btnShowList.Name = "btnShowList";
+         this.btnShowList.UseVisualStyleBackColor = true;
+         this.btnShowList.Click += new System.EventHandler(this.BtnShowList_Click);
+         // 
+         // lblShowList
+         // 
+         resources.ApplyResources(this.lblShowList, "lblShowList");
+         this.lblShowList.Name = "lblShowList";
+         this.lblShowList.Tag = "GUI.Production.ShowList";
          // 
          // tpCity
          // 
@@ -1414,12 +1635,14 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
          this.mtcSettings.Name = "mtcSettings";
-         this.mtcSettings.SelectedIndex = 2;
+         this.mtcSettings.SelectedIndex = 0;
          this.mtcSettings.Style = MetroFramework.MetroColorStyle.Red;
          this.mtcSettings.UseStyleColors = true;
          // 
          // mtpProduction
          // 
+         this.mtpProduction.Controls.Add(this.metroLabel5);
+         this.mtpProduction.Controls.Add(this.mtBuyAttempts);
          this.mtpProduction.Controls.Add(this.groupBox2);
          this.mtpProduction.Controls.Add(this.metroLabel3);
          this.mtpProduction.Controls.Add(this.mtBigRoads);
@@ -1435,6 +1658,19 @@ namespace ForgeOfBots.Forms
          this.mtpProduction.Name = "mtpProduction";
          this.mtpProduction.Tag = "GUI.Settings.Production";
          this.mtpProduction.VerticalScrollbarBarColor = true;
+         // 
+         // metroLabel5
+         // 
+         resources.ApplyResources(this.metroLabel5, "metroLabel5");
+         this.metroLabel5.Name = "metroLabel5";
+         this.metroLabel5.Tag = "GUI.Settings.Production.BuyGEXAttempts";
+         // 
+         // mtBuyAttempts
+         // 
+         resources.ApplyResources(this.mtBuyAttempts, "mtBuyAttempts");
+         this.mtBuyAttempts.Name = "mtBuyAttempts";
+         this.mtBuyAttempts.UseVisualStyleBackColor = true;
+         this.mtBuyAttempts.CheckedChanged += new System.EventHandler(this.MtBuyAttempts_CheckedChanged);
          // 
          // groupBox2
          // 
@@ -1728,6 +1964,121 @@ namespace ForgeOfBots.Forms
          this.mtView.UseVisualStyleBackColor = false;
          this.mtView.CheckedChanged += new System.EventHandler(this.mtView_CheckedChanged);
          // 
+         // mtpMisc
+         // 
+         this.mtpMisc.Controls.Add(this.mtbTelegramUsername);
+         this.mtpMisc.Controls.Add(this.metroLabel17);
+         this.mtpMisc.Controls.Add(this.mlBrowserWindow);
+         this.mtpMisc.Controls.Add(this.mtToggleBrowser);
+         this.mtpMisc.Controls.Add(this.metroLabel12);
+         this.mtpMisc.Controls.Add(this.mtDarkMode);
+         this.mtpMisc.Controls.Add(this.lblAutoLogin);
+         this.mtpMisc.Controls.Add(this.mtAutoLogin);
+         this.mtpMisc.Controls.Add(this.lblRestartNeeded);
+         this.mtpMisc.Controls.Add(this.mtbSave);
+         this.mtpMisc.Controls.Add(this.mtbCustomUserAgent);
+         this.mtpMisc.Controls.Add(this.lblCustomUserAgent);
+         this.mtpMisc.Controls.Add(this.lblLanguage);
+         this.mtpMisc.Controls.Add(this.mcbLanguage);
+         this.mtpMisc.HorizontalScrollbarBarColor = true;
+         resources.ApplyResources(this.mtpMisc, "mtpMisc");
+         this.mtpMisc.Name = "mtpMisc";
+         this.mtpMisc.Tag = "GUI.Settings.Misc";
+         this.mtpMisc.VerticalScrollbarBarColor = true;
+         // 
+         // mtbTelegramUsername
+         // 
+         resources.ApplyResources(this.mtbTelegramUsername, "mtbTelegramUsername");
+         this.mtbTelegramUsername.Name = "mtbTelegramUsername";
+         // 
+         // metroLabel17
+         // 
+         resources.ApplyResources(this.metroLabel17, "metroLabel17");
+         this.metroLabel17.Name = "metroLabel17";
+         this.metroLabel17.Tag = "GUI.Settings.Misc.TelegramName";
+         // 
+         // mlBrowserWindow
+         // 
+         resources.ApplyResources(this.mlBrowserWindow, "mlBrowserWindow");
+         this.mlBrowserWindow.Name = "mlBrowserWindow";
+         this.mlBrowserWindow.Tag = "GUI.Settings.Misc.Browser";
+         // 
+         // mtToggleBrowser
+         // 
+         resources.ApplyResources(this.mtToggleBrowser, "mtToggleBrowser");
+         this.mtToggleBrowser.Name = "mtToggleBrowser";
+         this.mtToggleBrowser.UseVisualStyleBackColor = true;
+         this.mtToggleBrowser.CheckedChanged += new System.EventHandler(this.MtToggleBrowser_CheckedChanged);
+         // 
+         // metroLabel12
+         // 
+         resources.ApplyResources(this.metroLabel12, "metroLabel12");
+         this.metroLabel12.Name = "metroLabel12";
+         this.metroLabel12.Tag = "GUI.Settings.Misc.DarkMode";
+         // 
+         // mtDarkMode
+         // 
+         resources.ApplyResources(this.mtDarkMode, "mtDarkMode");
+         this.mtDarkMode.Name = "mtDarkMode";
+         this.mtDarkMode.UseVisualStyleBackColor = true;
+         // 
+         // lblAutoLogin
+         // 
+         resources.ApplyResources(this.lblAutoLogin, "lblAutoLogin");
+         this.lblAutoLogin.Name = "lblAutoLogin";
+         this.lblAutoLogin.Tag = "GUI.Settings.Misc.AutoLogin";
+         // 
+         // mtAutoLogin
+         // 
+         resources.ApplyResources(this.mtAutoLogin, "mtAutoLogin");
+         this.mtAutoLogin.Name = "mtAutoLogin";
+         this.mtAutoLogin.UseVisualStyleBackColor = true;
+         this.mtAutoLogin.CheckedChanged += new System.EventHandler(this.MtAutoLogin_CheckedChanged);
+         // 
+         // lblRestartNeeded
+         // 
+         this.lblRestartNeeded.CustomForeColor = true;
+         this.lblRestartNeeded.FontSize = MetroFramework.MetroLabelSize.Small;
+         this.lblRestartNeeded.ForeColor = System.Drawing.Color.Red;
+         resources.ApplyResources(this.lblRestartNeeded, "lblRestartNeeded");
+         this.lblRestartNeeded.Name = "lblRestartNeeded";
+         this.lblRestartNeeded.Tag = "GUI.Settings.Misc.RestartNeeded";
+         this.lblRestartNeeded.UseStyleColors = true;
+         // 
+         // mtbSave
+         // 
+         resources.ApplyResources(this.mtbSave, "mtbSave");
+         this.mtbSave.Name = "mtbSave";
+         this.mtbSave.Tag = "GUI.Settings.Misc.Save";
+         this.mtbSave.Click += new System.EventHandler(this.mtbSave_Click);
+         // 
+         // mtbCustomUserAgent
+         // 
+         resources.ApplyResources(this.mtbCustomUserAgent, "mtbCustomUserAgent");
+         this.mtbCustomUserAgent.Name = "mtbCustomUserAgent";
+         // 
+         // lblCustomUserAgent
+         // 
+         resources.ApplyResources(this.lblCustomUserAgent, "lblCustomUserAgent");
+         this.lblCustomUserAgent.Name = "lblCustomUserAgent";
+         this.lblCustomUserAgent.Tag = "GUI.Settings.Misc.CustomUA";
+         // 
+         // lblLanguage
+         // 
+         this.lblLanguage.BackColor = System.Drawing.Color.Black;
+         this.lblLanguage.ForeColor = System.Drawing.Color.White;
+         resources.ApplyResources(this.lblLanguage, "lblLanguage");
+         this.lblLanguage.Name = "lblLanguage";
+         this.lblLanguage.Tag = "GUI.Settings.Misc.Language";
+         // 
+         // mcbLanguage
+         // 
+         this.mcbLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+         this.mcbLanguage.FormattingEnabled = true;
+         resources.ApplyResources(this.mcbLanguage, "mcbLanguage");
+         this.mcbLanguage.Name = "mcbLanguage";
+         this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
+         // 
          // mtpData
          // 
          this.mtpData.Controls.Add(this.metroLabel11);
@@ -1932,121 +2283,6 @@ namespace ForgeOfBots.Forms
          this.mlProdBot.Name = "mlProdBot";
          this.mlProdBot.Tag = "GUI.Settings.Bots.ProdBot";
          // 
-         // mtpMisc
-         // 
-         this.mtpMisc.Controls.Add(this.mtbTelegramUsername);
-         this.mtpMisc.Controls.Add(this.metroLabel17);
-         this.mtpMisc.Controls.Add(this.mlBrowserWindow);
-         this.mtpMisc.Controls.Add(this.mtToggleBrowser);
-         this.mtpMisc.Controls.Add(this.metroLabel12);
-         this.mtpMisc.Controls.Add(this.mtDarkMode);
-         this.mtpMisc.Controls.Add(this.lblAutoLogin);
-         this.mtpMisc.Controls.Add(this.mtAutoLogin);
-         this.mtpMisc.Controls.Add(this.lblRestartNeeded);
-         this.mtpMisc.Controls.Add(this.mtbSave);
-         this.mtpMisc.Controls.Add(this.mtbCustomUserAgent);
-         this.mtpMisc.Controls.Add(this.lblCustomUserAgent);
-         this.mtpMisc.Controls.Add(this.lblLanguage);
-         this.mtpMisc.Controls.Add(this.mcbLanguage);
-         this.mtpMisc.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpMisc, "mtpMisc");
-         this.mtpMisc.Name = "mtpMisc";
-         this.mtpMisc.Tag = "GUI.Settings.Misc";
-         this.mtpMisc.VerticalScrollbarBarColor = true;
-         // 
-         // mtbTelegramUsername
-         // 
-         resources.ApplyResources(this.mtbTelegramUsername, "mtbTelegramUsername");
-         this.mtbTelegramUsername.Name = "mtbTelegramUsername";
-         // 
-         // metroLabel17
-         // 
-         resources.ApplyResources(this.metroLabel17, "metroLabel17");
-         this.metroLabel17.Name = "metroLabel17";
-         this.metroLabel17.Tag = "GUI.Settings.Misc.TelegramName";
-         // 
-         // mlBrowserWindow
-         // 
-         resources.ApplyResources(this.mlBrowserWindow, "mlBrowserWindow");
-         this.mlBrowserWindow.Name = "mlBrowserWindow";
-         this.mlBrowserWindow.Tag = "GUI.Settings.Misc.Browser";
-         // 
-         // mtToggleBrowser
-         // 
-         resources.ApplyResources(this.mtToggleBrowser, "mtToggleBrowser");
-         this.mtToggleBrowser.Name = "mtToggleBrowser";
-         this.mtToggleBrowser.UseVisualStyleBackColor = true;
-         this.mtToggleBrowser.CheckedChanged += new System.EventHandler(this.MtToggleBrowser_CheckedChanged);
-         // 
-         // metroLabel12
-         // 
-         resources.ApplyResources(this.metroLabel12, "metroLabel12");
-         this.metroLabel12.Name = "metroLabel12";
-         this.metroLabel12.Tag = "GUI.Settings.Misc.DarkMode";
-         // 
-         // mtDarkMode
-         // 
-         resources.ApplyResources(this.mtDarkMode, "mtDarkMode");
-         this.mtDarkMode.Name = "mtDarkMode";
-         this.mtDarkMode.UseVisualStyleBackColor = true;
-         // 
-         // lblAutoLogin
-         // 
-         resources.ApplyResources(this.lblAutoLogin, "lblAutoLogin");
-         this.lblAutoLogin.Name = "lblAutoLogin";
-         this.lblAutoLogin.Tag = "GUI.Settings.Misc.AutoLogin";
-         // 
-         // mtAutoLogin
-         // 
-         resources.ApplyResources(this.mtAutoLogin, "mtAutoLogin");
-         this.mtAutoLogin.Name = "mtAutoLogin";
-         this.mtAutoLogin.UseVisualStyleBackColor = true;
-         this.mtAutoLogin.CheckedChanged += new System.EventHandler(this.MtAutoLogin_CheckedChanged);
-         // 
-         // lblRestartNeeded
-         // 
-         this.lblRestartNeeded.CustomForeColor = true;
-         this.lblRestartNeeded.FontSize = MetroFramework.MetroLabelSize.Small;
-         this.lblRestartNeeded.ForeColor = System.Drawing.Color.Red;
-         resources.ApplyResources(this.lblRestartNeeded, "lblRestartNeeded");
-         this.lblRestartNeeded.Name = "lblRestartNeeded";
-         this.lblRestartNeeded.Tag = "GUI.Settings.Misc.RestartNeeded";
-         this.lblRestartNeeded.UseStyleColors = true;
-         // 
-         // mtbSave
-         // 
-         resources.ApplyResources(this.mtbSave, "mtbSave");
-         this.mtbSave.Name = "mtbSave";
-         this.mtbSave.Tag = "GUI.Settings.Misc.Save";
-         this.mtbSave.Click += new System.EventHandler(this.mtbSave_Click);
-         // 
-         // mtbCustomUserAgent
-         // 
-         resources.ApplyResources(this.mtbCustomUserAgent, "mtbCustomUserAgent");
-         this.mtbCustomUserAgent.Name = "mtbCustomUserAgent";
-         // 
-         // lblCustomUserAgent
-         // 
-         resources.ApplyResources(this.lblCustomUserAgent, "lblCustomUserAgent");
-         this.lblCustomUserAgent.Name = "lblCustomUserAgent";
-         this.lblCustomUserAgent.Tag = "GUI.Settings.Misc.CustomUA";
-         // 
-         // lblLanguage
-         // 
-         this.lblLanguage.BackColor = System.Drawing.Color.Black;
-         this.lblLanguage.ForeColor = System.Drawing.Color.White;
-         resources.ApplyResources(this.lblLanguage, "lblLanguage");
-         this.lblLanguage.Name = "lblLanguage";
-         this.lblLanguage.Tag = "GUI.Settings.Misc.Language";
-         // 
-         // mcbLanguage
-         // 
-         this.mcbLanguage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-         this.mcbLanguage.FormattingEnabled = true;
-         resources.ApplyResources(this.mcbLanguage, "mcbLanguage");
-         this.mcbLanguage.Name = "mcbLanguage";
-         this.mcbLanguage.SelectedIndexChanged += new System.EventHandler(this.mcbLanguage_SelectedIndexChanged);
-         // 
          // mtpPremium
          // 
          this.mtpPremium.Controls.Add(this.mbCheckSerial);
@@ -2176,12 +2412,17 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel17.ResumeLayout(false);
          this.tpBattle.ResumeLayout(false);
          this.tlpBattle.ResumeLayout(false);
-         this.tableLayoutPanel14.ResumeLayout(false);
-         this.tableLayoutPanel14.PerformLayout();
+         this.tlpGBG.ResumeLayout(false);
+         this.tlpGBG.PerformLayout();
          this.pnlGVG.ResumeLayout(false);
+         this.tableLayoutPanel19.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.nudDelay)).EndInit();
+         this.tableLayoutPanel20.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.nudCount)).EndInit();
          this.tableLayoutPanel16.ResumeLayout(false);
          this.tableLayoutPanel16.PerformLayout();
          this.pnlGEX.ResumeLayout(false);
+         this.panel8.ResumeLayout(false);
          this.tpProduction.ResumeLayout(false);
          this.tpProduction.PerformLayout();
          this.pnlGood.ResumeLayout(false);
@@ -2195,6 +2436,8 @@ namespace ForgeOfBots.Forms
          this.panel11.ResumeLayout(false);
          this.tableLayoutPanel9.ResumeLayout(false);
          this.panel12.ResumeLayout(false);
+         this.panel9.ResumeLayout(false);
+         this.tableLayoutPanel18.ResumeLayout(false);
          this.tpCity.ResumeLayout(false);
          this.tableLayoutPanel2.ResumeLayout(false);
          this.tableLayoutPanel11.ResumeLayout(false);
@@ -2217,11 +2460,11 @@ namespace ForgeOfBots.Forms
          this.mpGoodCycle.PerformLayout();
          this.mpProdCycle.ResumeLayout(false);
          this.mpProdCycle.PerformLayout();
+         this.mtpMisc.ResumeLayout(false);
          this.mtpData.ResumeLayout(false);
          this.mtpData.PerformLayout();
          this.mtpBots.ResumeLayout(false);
          this.mtpBots.PerformLayout();
-         this.mtpMisc.ResumeLayout(false);
          this.mtpPremium.ResumeLayout(false);
          this.tpHelp.ResumeLayout(false);
          this.panel1.ResumeLayout(false);
@@ -2439,7 +2682,7 @@ namespace ForgeOfBots.Forms
       public System.Windows.Forms.ListBox lvWSMessages;
       private System.Windows.Forms.TabPage tpBattle;
       private System.Windows.Forms.TableLayoutPanel tlpBattle;
-      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
+      private System.Windows.Forms.TableLayoutPanel tlpGBG;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel16;
       private System.Windows.Forms.Label label2;
       private System.Windows.Forms.Label label9;
@@ -2454,6 +2697,34 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Button btnDoGEXAction;
       private System.Windows.Forms.Label lblStage;
       public System.Windows.Forms.ListView lvWave;
-      private MetroFramework.Controls.MetroLabel metroLabel4;
+      private System.Windows.Forms.Panel panel8;
+      private System.Windows.Forms.Label lblResult;
+      private MetroFramework.Controls.MetroLabel metroLabel5;
+      private MetroFramework.Controls.MetroToggle mtBuyAttempts;
+      private System.Windows.Forms.ToolStripMenuItem tsmiCollectOtherProductionToolStripMenuItem;
+      private System.Windows.Forms.Panel panel9;
+      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel18;
+      private System.Windows.Forms.Label lblSumFinProd;
+      private System.Windows.Forms.Label lblSumFinProdValue;
+      private System.Windows.Forms.Button btnShowList;
+      private System.Windows.Forms.Label lblShowList;
+      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel19;
+      public System.Windows.Forms.ListView lvGBGWave;
+      private System.Windows.Forms.Button btnFightGBG;
+      private System.Windows.Forms.Label label11;
+      private System.Windows.Forms.Label label13;
+      private System.Windows.Forms.Label label14;
+      private System.Windows.Forms.Label label15;
+      private System.Windows.Forms.Label label16;
+      private System.Windows.Forms.Label label17;
+      private System.Windows.Forms.ComboBox cbSector;
+      private System.Windows.Forms.CheckBox cbAutoFight;
+      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel20;
+      private System.Windows.Forms.ComboBox cbType;
+      private System.Windows.Forms.NumericUpDown nudCount;
+      private System.Windows.Forms.NumericUpDown nudDelay;
+      private System.Windows.Forms.Label lblCurrentAttrition;
+      private System.Windows.Forms.Label lblCurrentMultiplier;
+      private System.Windows.Forms.Button btnReloadGBG;
    }
 }
