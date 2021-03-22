@@ -3509,6 +3509,10 @@ namespace ForgeOfBots.Forms
             {
                lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}";
             }
+            else
+            {
+               lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}";
+            }
          }
          else if (ret.state.winnerBit == 1)
          {

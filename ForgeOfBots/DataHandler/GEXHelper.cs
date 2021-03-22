@@ -99,16 +99,25 @@ namespace ForgeOfBots.DataHandler
       }
       public static GEXOverview GetOverview()
       {
+         var ret = "";
          try
          {
             string script = ReqBuilder.GetRequestScript(RequestType.GEXgetOverview, "");
-            string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+            ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
             GetResponse getGEXresponse = JsonConvert.DeserializeObject<GetResponse>(ret);
             return getGEXresponse.responseData;
          }
          catch (Exception)
          {
-            return null;
+            try
+            {
+               GetGEX getGEXresponse = JsonConvert.DeserializeObject<GetGEX>(ret);
+               return getGEXresponse.getresponse[0].responseData;
+            }
+            catch (Exception)
+            {
+               return null;
+            }
          }
       }
       public static Armywave[] GetEncounter(int id)

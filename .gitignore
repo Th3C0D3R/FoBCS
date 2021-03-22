@@ -247,3 +247,4 @@ paket-files/
 *.sln.iml
 
 /.git/
+UCPremiumLibrary/UCPremiumLibrary.csproj
