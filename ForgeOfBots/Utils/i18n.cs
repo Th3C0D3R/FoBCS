@@ -30,7 +30,7 @@ namespace ForgeOfBots.Utils
             using (var webClient = new WebClient())
             {
                int codePage = 1252;
-               if(language == "fr")
+               if (language == "fr")
                {
                   codePage = 28591;
                }
@@ -46,7 +46,7 @@ namespace ForgeOfBots.Utils
          }
          catch (WebException)
          {
-            MessageBox.Show($"LANGUAGE {language} NOT FOUND IN REPOSITORY!\n\nUSING DEFAULT 'en'","LANGUAGE NOT FOUND", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"LANGUAGE {language} NOT FOUND IN REPOSITORY!\n\nUSING DEFAULT 'en'", "LANGUAGE NOT FOUND", MessageBoxButtons.OK, MessageBoxIcon.Error);
             var assembly = Assembly.GetExecutingAssembly();
             foreach (string resourceName in assembly.GetManifestResourceNames())
             {
@@ -70,12 +70,12 @@ namespace ForgeOfBots.Utils
             if (jsonObject != null && HelpObject != null) initialized = true;
          }
       }
-      public static string getString(string key, params KeyValuePair<string,string>[] param)
+      public static string getString(string key, params KeyValuePair<string, string>[] param)
       {
          try
          {
             string s = jsonObject["items"][key].ToString();
-            foreach (KeyValuePair<string,string> item in param)
+            foreach (KeyValuePair<string, string> item in param)
             {
                s = s.Replace(item.Key, item.Value);
             }

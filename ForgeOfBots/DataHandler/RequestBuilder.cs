@@ -48,7 +48,7 @@ namespace ForgeOfBots.DataHandler
          else if (data != "" && data != "[]")
             idData = int.Parse(data);
 
-         string RequestScript = resMgr.GetString("fetchData");
+         string RequestScript = resMgr.GetString("fetchData_");
          string _methode;
          string _class;
          string onlyOne = "true";

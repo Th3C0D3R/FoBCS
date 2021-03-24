@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ForgeOfBots.DataHandler
 {
@@ -148,7 +149,6 @@ namespace ForgeOfBots.DataHandler
                   break;
             }
          }
-
       }
       public void UpdateOwnTavern()
       {
@@ -206,9 +206,13 @@ namespace ForgeOfBots.DataHandler
       }
       public void UpdateArmy()
       {
+         DebugWatch.Start("UpdateArmy Script");
          string script = ReqBuilder.GetRequestScript(RequestType.getArmyInfo, "");
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         DebugWatch.Stop();
+         DebugWatch.Start("UpdateArmy Deserialize");
          ArmyRoot ress = JsonConvert.DeserializeObject<ArmyRoot>(ret);
+         DebugWatch.Stop();
          ListClass.Army = ress;
          UpdateSortedArmyList();
       }
@@ -216,42 +220,43 @@ namespace ForgeOfBots.DataHandler
       {
 
       }
-      public void UpdateAttackPool()
+      public bool UpdateAttackPool()
       {
          int[,] army = new int[2, 8];
-         //army[0, 0] = 12348; 
-         //army[0, 1] = 14396; 
-         //army[0, 2] = 16444; 
-         //army[0, 3] = 18492; 
-         //army[0, 4] = 20540; 
-         //army[0, 5] = 22588; 
-         //army[0, 6] = 10300; 
-         //army[0, 7] = 8252;
-         //12348,14396,16444,18492,20540,22588,10300,8252
          List<int> addedIds = new List<int>();
+         var tmp = ListClass.UnitList;
          for (int i = 0; i < StaticData.UserData.ArmySelection[StaticData.UserData.LastWorld.Split('|')[0]].Count; i++)
          {
             int healthThreshold = 10;
             string item = StaticData.UserData.ArmySelection[StaticData.UserData.LastWorld.Split('|')[0]][i];
-            var units = ListClass.UnitList.FindAll(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= healthThreshold);
+            var units = (from ut in tmp
+                    from u in ut.unit
+                    where u.unitTypeId == item && u.currentHitpoints >= healthThreshold
+                    select u).ToList();
             if (units.Count >= 1)
             {
-               army[0, i] = units.Where(u => !addedIds.Contains(u.unit.unitId)).First().unit.unitId;
+               GameUnit un = units.Where(u => !addedIds.Contains(u.unitId)).ToList().First();
+               army[0, i] = un.unitId;
                addedIds.Add(army[0, i]);
             }
             else
             {
-               while (units.Count == 0)
+               while (units.Where(u => !addedIds.Contains(u.unitId)).ToList().Count == 0 && healthThreshold > 0)
                {
                   healthThreshold -= 1;
-                  units = ListClass.UnitList.FindAll(u => u.unit.unitTypeId == item && u.unit.currentHitpoints >= healthThreshold);
+                  units = (from ut in tmp
+                           from u in ut.unit
+                           where u.unitTypeId == item && u.currentHitpoints >= healthThreshold
+                           select u).ToList();
                }
-               army[0, i] = units.Where(u => !addedIds.Contains(u.unit.unitId)).First().unit.unitId;
+               army[0, i] = units.Where(u => !addedIds.Contains(u.unitId)).First().unitId;
                addedIds.Add(army[0, i]);
             }
          }
+         if (army.GetTroopRow(0).Count() < 8) return false;
          string script = ReqBuilder.GetRequestScript(RequestType.updatePools, army);
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+         return ret == "";
       }
       public void UpdateMessages(string type)
       {
@@ -264,8 +269,10 @@ namespace ForgeOfBots.DataHandler
       public void UpdateSortedArmyList()
       {
          if (ListClass.UnitTypes.Count <= 0 || ListClass.Army.responseData == null) return;
-         ListClass.UnitListEraSorted = Helper.GetUnitEraSorted(ListClass.Eras, ListClass.UnitTypes, ListClass.Army.responseData);
-         ListClass.UnitList = Helper.GetUnitSorted(ListClass.UnitTypes, ListClass.Army.responseData);
+         var task1 = Task.Factory.StartNew(() => ListClass.UnitListEraSorted = Helper.GetUnitEraSorted(ListClass.Eras, ListClass.UnitTypes, ListClass.Army.responseData));
+         var task2 = Task.Factory.StartNew(() => ListClass.UnitList = Helper.GetUnitSorted(ListClass.UnitTypes, ListClass.Army.responseData));
+         task1.Wait();
+         task2.Wait();
       }
       public void UpdatedSortedGoodList()
       {
@@ -282,9 +289,9 @@ namespace ForgeOfBots.DataHandler
             ListClass.GoodProductionList.Clear();
          }
          ListClass.FinishedProductions.Clear();
-         foreach (JToken cityEntity in entities.ToList())
+         Parallel.ForEach(entities.ToList(), cityEntity =>
          {
-            foreach (Building metaEntity in ListClass.AllBuildings)
+            Parallel.ForEach(ListClass.AllBuildings, metaEntity =>
             {
                if (cityEntity["cityentity_id"]?.ToString() == metaEntity.id)
                {
@@ -295,7 +302,7 @@ namespace ForgeOfBots.DataHandler
                   entity.type = metaEntity.type;
                   if (entity.state["__class__"].ToString().ToLower() == "ProductionFinishedState".ToLower())
                      ListClass.FinishedProductions.Add(entity);
-                  if (onlyFinished) continue;
+                  if (onlyFinished) return;
                   if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && /*entity.hasSupplyProdAt(StaticData.UserData.ProductionOption)|| */GameClassHelper.hasOnlySupplyProduction(entity.available_products) && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
                      ListClass.ProductionList.Add(entity);
                   else if (entity.type == "residential" && entity.connected >= 1 && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
@@ -303,8 +310,31 @@ namespace ForgeOfBots.DataHandler
                   else if (entity.type == "goods" && entity.connected >= 1 && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
                      ListClass.GoodProductionList.Add(entity);
                }
-            }
-         }
+            });
+         });
+         //foreach (JToken cityEntity in entities.ToList())
+         //{
+         //   foreach (Building metaEntity in ListClass.AllBuildings)
+         //   {
+         //      if (cityEntity["cityentity_id"]?.ToString() == metaEntity.id)
+         //      {
+         //         EntityEx entity = GameClassHelper.CopyFrom(cityEntity);
+         //         entity.name = metaEntity.name;
+         //         if (metaEntity.available_products != null)
+         //            entity.available_products = metaEntity.available_products.ToList();
+         //         entity.type = metaEntity.type;
+         //         if (entity.state["__class__"].ToString().ToLower() == "ProductionFinishedState".ToLower())
+         //            ListClass.FinishedProductions.Add(entity);
+         //         if (onlyFinished) continue;
+         //         if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && /*entity.hasSupplyProdAt(StaticData.UserData.ProductionOption)|| */GameClassHelper.hasOnlySupplyProduction(entity.available_products) && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
+         //            ListClass.ProductionList.Add(entity);
+         //         else if (entity.type == "residential" && entity.connected >= 1 && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
+         //            ListClass.ResidentialList.Add(entity);
+         //         else if (entity.type == "goods" && entity.connected >= 1 && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
+         //            ListClass.GoodProductionList.Add(entity);
+         //      }
+         //   }
+         //}
       }
    }
 }

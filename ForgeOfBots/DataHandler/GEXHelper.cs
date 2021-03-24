@@ -71,11 +71,12 @@ namespace ForgeOfBots.DataHandler
       public static void UpdateGEX()
       {
          GEXOverview = GetOverview();
-         if(GEXOverview.progress.difficulty < 3 && GEXOverview.progress.isMapCompleted)
+         if (GEXOverview.state == "inactive") return;
+         if (GEXOverview.progress.difficulty < 3 && GEXOverview.progress.isMapCompleted)
          {
             if (NextDiffOpen(GEXOverview.progress.difficulty))
             {
-
+               ChangeDiff(GEXOverview.progress.difficulty + 1);
             }
             else
             {
@@ -171,9 +172,9 @@ namespace ForgeOfBots.DataHandler
             string script = ReqBuilder.GetRequestScript(RequestType.getDifficulties, "");
             string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
             GetDifficulties response = JsonConvert.DeserializeObject<GetDifficulties>(ret);
-            if(response.responseData.Length-1 < currDiff)
+            if (response.responseData.Length - 1 > currDiff+1)
             {
-               if (response.responseData[currDiff].unlocked) return true;
+               if (response.responseData[currDiff+1].unlocked && response.responseData[currDiff+1].playable) return true;
                else return false;
             }
             return false;
@@ -185,9 +186,9 @@ namespace ForgeOfBots.DataHandler
       }
       public static bool NeedChangeDiff()
       {
-         if(GEXOverview.progress.isMapCompleted && GEXOverview.progress.difficulty < 3)
+         if (GEXOverview.progress.isMapCompleted && GEXOverview.progress.difficulty < 3)
             return true;
-         
+
          return false;
       }
       public static bool BuyNextAttempt()
@@ -202,7 +203,7 @@ namespace ForgeOfBots.DataHandler
             currentCost = d.offers[0].costs.resources.medals;
          }
          ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
-         if (CanBuyNextAttempt(ListClass.GoodsDict[noAge.name].Find(g=>g.good_id == "medals").value, currentCost))
+         if (CanBuyNextAttempt(ListClass.GoodsDict[noAge.name].Find(g => g.good_id == "medals").value, currentCost))
          {
             script = ReqBuilder.GetRequestScript(RequestType.buyOffer, "guild_expedition_attempt1medals0");
             ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
@@ -213,7 +214,7 @@ namespace ForgeOfBots.DataHandler
          }
          return false;
       }
-      public static bool CanBuyNextAttempt(int medal,int currentCost)
+      public static bool CanBuyNextAttempt(int medal, int currentCost)
       {
          if (medal < Math.Floor(currentCost * 1.2)) return false;
          return true;

@@ -48,15 +48,17 @@ namespace ForgeOfBots.DataHandler
                            if (payloadData.ToString().Contains("responseData") && payloadData.ToString().Contains("requestClass") && payloadData.ToString().Contains("requestMethod"))
                            {
                               var token = payloadData;
-                              WSResponse response = Convert.DeserializeObject<List<WSResponse>>(token.ToString())[0];
+                              dynamic response = Convert.DeserializeObject(token.ToString());
                               if (Main != null)
                               {
                                  try
                                  {
-                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Get: {response.requestClass} {response.requestMethod}: {response.responseData}"));
+                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Get: {response["requestClass"]} {response["requestMethod"]}: {response["responseData"]}"));
                                  }
                                  catch (Exception)
-                                 {}
+                                 {
+                                    Invoker.CallMethode(Main.lvWSMessages, () => Main.lvWSMessages.Items.Add($"Get: {response[0]["requestClass"]} {response[0]["requestMethod"]}: {response[0]["responseData"]}"));
+                                 }
                               }
                               //OtherPlayerService_newEvent trade_accepted
                               //OtherPlayerService_newEvent great_building_contribution
@@ -93,7 +95,7 @@ namespace ForgeOfBots.DataHandler
                   }
                }
             }
-            Thread.Sleep(100);
+            Thread.Sleep(500);
          }
       }
    }

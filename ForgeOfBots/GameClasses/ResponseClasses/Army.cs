@@ -10,7 +10,7 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
    {
       public string name { get; set; } = "";
       public int count { get; set; } = 0;
-      public GameUnit unit { get; set; } = null;
+      public List<GameUnit> unit { get; set; } = null;
       public List<int> ids { get; set; } = new List<int>();
 
       public override string ToString()

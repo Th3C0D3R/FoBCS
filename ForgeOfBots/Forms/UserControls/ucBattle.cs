@@ -42,14 +42,11 @@ namespace ForgeOfBots.Forms.UserControls
       }
       public void FillArmyList(Dictionary<string, List<Unit>> unitlist)
       {
-         if (imgList == null) return;
          if (unitlist.Count <= 0) return;
          UnitList = unitlist;
       }
       public void FillSelectedArmy(List<string> selectredArmy)
       {
-         if (imgList == null) return;
-         if (UnitList.Count <= 0) return;
          SelectedArmyTypes = selectredArmy;
       }
 
@@ -59,7 +56,7 @@ namespace ForgeOfBots.Forms.UserControls
          foreach (var item in lvSelectedArmy.Items)
          {
             Unit unit = (Unit)item;
-            SelectedArmyTypes.Add(unit.unit.unitTypeId);
+            SelectedArmyTypes.Add(unit.unit[0].unitTypeId);
          }
          _SubmitArmy?.Invoke(null, SelectedArmyTypes);
       }
@@ -100,6 +97,11 @@ namespace ForgeOfBots.Forms.UserControls
                }
             }
          }
+      }
+
+      private void LvSelectedArmy_MouseDown(object sender, MouseEventArgs e)
+      {
+         lvSelectedArmy.SelectedIndex = lvSelectedArmy.IndexFromPoint(e.X, e.Y);
       }
    }
 }

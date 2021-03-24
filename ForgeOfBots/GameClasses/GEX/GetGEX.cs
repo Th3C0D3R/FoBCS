@@ -22,7 +22,7 @@ namespace ForgeOfBots.GameClasses.GEX.Get
    {
       public Progress progress { get; set; }
       public Chest[] chests { get; set; }
-      public Upcomingreward upcomingReward { get; set; }
+      public dynamic upcomingReward { get; set; }
       public int expeditionPoints { get; set; }
       public string state { get; set; }
       public int nextStateTime { get; set; }
@@ -30,7 +30,7 @@ namespace ForgeOfBots.GameClasses.GEX.Get
       public bool isPlayerParticipating { get; set; }
       public bool isGuildParticipating { get; set; }
       public object[] missedContributions { get; set; }
-      public Championship championship { get; set; }
+      public dynamic championship { get; set; }
       public string __class__ { get; set; }
    }
    public class Progress
@@ -70,44 +70,8 @@ namespace ForgeOfBots.GameClasses.GEX.Get
    public class Possible_Rewards
    {
       public int drop_chance { get; set; }
-      public Reward reward { get; set; }
+      public dynamic reward { get; set; }
       public string __class__ { get; set; }
-   }
-   public class Reward
-   {
-      public string id { get; set; }
-      public string name { get; set; }
-      public string description { get; set; }
-      public string iconAssetName { get; set; }
-      public bool isHighlighted { get; set; }
-      public string[] flags { get; set; }
-      public string type { get; set; }
-      public string subType { get; set; }
-      public int amount { get; set; }
-      public string __class__ { get; set; }
-      public int totalAmount { get; set; }
-      public Unit unit { get; set; }
-      public object[] blueprints { get; set; }
-   }
-   public class Unit
-   {
-      public Ability[] abilities { get; set; }
-      public object[] bonuses { get; set; }
-      public string unitTypeId { get; set; }
-      public bool is_defending { get; set; }
-      public bool isArenaDefending { get; set; }
-      public bool is_attacking { get; set; }
-      public bool healing_disabled { get; set; }
-      public string __class__ { get; set; }
-   }
-   public class Ability
-   {
-      public string type { get; set; }
-      public string name { get; set; }
-      public string description { get; set; }
-      public string icon { get; set; }
-      public string __class__ { get; set; }
-      public int value { get; set; }
    }
 
 }

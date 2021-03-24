@@ -172,6 +172,16 @@ namespace ForgeOfBots.Utils
          for (int colIndex = 0; colIndex < columnsCount; colIndex++)
             yield return array[rowIndex, colIndex];
       }
+      public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> source, int N)
+      {
+         return source.Skip(Math.Max(0, source.Count() - N));
+      }
+      public static IEnumerable<T> TakeSome<T>(this IEnumerable<T> source, int first, int last)
+      {
+         var s = source.Take(first).ToList();
+         s.AddRange(source.Skip(Math.Max(0, source.Count() - last)));
+         return s;
+      }
    }
    /// <summary>
    /// Generates a 16 byte Unique Identification code of a computer

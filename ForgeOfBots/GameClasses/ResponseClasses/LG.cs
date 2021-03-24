@@ -100,6 +100,16 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
                }
             }
          }
+         //for (int i = 0; i < playerlist.Length; i++)
+         //{
+         //   foreach (Player item in playerlist[i])
+         //   {
+         //      if (item.has_great_building && item.is_active && !item.is_self)
+         //      {
+         //         PlayersWithGB.Add(item);
+         //      }
+         //   }
+         //}
          return PlayersWithGB;
       }
    }

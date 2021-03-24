@@ -57,6 +57,8 @@ namespace ForgeOfBots.Forms
       static bool isFirstRun = true;
       private object _lock = new object();
       Loading LoadingFrm = null;
+      private int CBSectorIndex = 0;
+      private int FightCounter = 0;
 
       public frmMain() { }
       public frmMain(string[] args)
@@ -69,6 +71,9 @@ namespace ForgeOfBots.Forms
                   if (args[0].Substring(1).ToLower().Equals("debug"))
                      DEBUGMODE = true;
          }
+#if DEBUG
+         DEBUGMODE = true;
+#endif
          logger.Info($"Debugmode {(DEBUGMODE ? "activated" : "deactivated")}");
          Application.ThreadException += Application_ThreadException;
          FirewallHelper.OpenFirewallPort(4444, "WebDrive");
@@ -1068,7 +1073,9 @@ namespace ForgeOfBots.Forms
       }
       private void TsmiReloadDataToolStripMenuItem_Click(object sender, EventArgs e)
       {
+         tsmiReloadDataToolStripMenuItem.Enabled = false;
          ReloadData();
+         tsmiReloadDataToolStripMenuItem.Enabled = true;
       }
 
       #region "Incident"
@@ -1213,7 +1220,7 @@ namespace ForgeOfBots.Forms
          }
          Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Invalidate());
 
-         if (ListClass.FinishedProductions.Count < 0)
+         if (ListClass.FinishedProductions.Count > 0)
          {
             Invoker.SetProperty(lblSumFinProdValue, () => lblSumFinProdValue.Text, ListClass.FinishedProductions.Count.ToString());
          }
@@ -3045,10 +3052,12 @@ namespace ForgeOfBots.Forms
             {
                Updater.UpdateArmy();
                Invoker.CallMethode(lvArmy, () => lvArmy.Items.Clear());
+               Invoker.CallMethode(lvArmy, () => lvArmy.Groups.Clear());
                Invoker.SetProperty(lvArmy, () => lvArmy.LargeImageList, UnitImageLise);
                ListViewGroup group = null;
                string lastEra = "";
-               foreach (KeyValuePair<string, List<Unit>> item in ListClass.UnitListEraSorted)
+               var list = ListClass.UnitListEraSorted.TakeSome(1, 3);
+               foreach (KeyValuePair<string, List<Unit>> item in list)
                {
                   if (lastEra != item.Key)
                   {
@@ -3056,7 +3065,7 @@ namespace ForgeOfBots.Forms
                   }
                   foreach (Unit unit in item.Value)
                   {
-                     ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit.unitTypeId}")
+                     ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit[0].unitTypeId}")
                      {
                         Group = group
                      };
@@ -3072,7 +3081,53 @@ namespace ForgeOfBots.Forms
             catch (Exception)
             { }
          }
+         FillArmyPool();
          logger.Info($"<<< UpdateArmy");
+      }
+      public void FillArmyPool()
+      {
+         DebugWatch.Start("Fill");
+         ListViewGroup group = null;
+         string lastEra = "";
+         var list = ListClass.UnitListEraSorted.Take(1).ToList();
+         list.AddRange(ListClass.UnitListEraSorted.Skip(Math.Max(0, ListClass.UnitListEraSorted.Count() - 3)));
+         Invoker.CallMethode(ucCurrentPool.lvArmy, () => ucCurrentPool.lvArmy.Items.Clear());
+         Invoker.CallMethode(ucCurrentPool.lvSelectedArmy, () => ucCurrentPool.lvSelectedArmy.Items.Clear());
+         ucCurrentPool.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
+         foreach (KeyValuePair<string, List<Unit>> item in list)
+         {
+            if (lastEra != item.Key)
+            {
+               group = new ListViewGroup(item.Key, HorizontalAlignment.Left);
+            }
+            foreach (Unit unit in item.Value)
+            {
+               ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit[0].unitTypeId}")
+               {
+                  Group = group,
+                  Tag = unit
+               };
+               Invoker.CallMethode(ucCurrentPool.lvArmy, () => ucCurrentPool.lvArmy.Items.Add(lvi));
+               if (group != null && group.Header != lastEra)
+               {
+                  Invoker.CallMethode(ucCurrentPool.lvArmy, () => ucCurrentPool.lvArmy.Groups.Add(group));
+                  lastEra = item.Key;
+               }
+            }
+         }
+         foreach (var unitType in ucCurrentPool.SelectedArmyTypes)
+         {
+            Unit unit = ListClass.UnitList.Find(u => u.unit[0].unitTypeId == unitType);
+            Invoker.CallMethode(ucCurrentPool.lvSelectedArmy, () => ucCurrentPool.lvSelectedArmy.Items.Add(unit));
+         }
+         DebugWatch.Stop();
+      }
+      private void UcCurrentPool_SubmitArmy(object sender, object data)
+      {
+         List<string> list = (List<string>)data;
+         UserData.ArmySelection[UserData.LastWorld.Split('|')[0]] = list;
+         Updater.UpdateAttackPool();
+         UpdateArmy();
       }
       #endregion
 
@@ -3152,7 +3207,7 @@ namespace ForgeOfBots.Forms
                }
                foreach (Unit unit in item.Value)
                {
-                  ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit.unitTypeId}")
+                  ListViewItem lvi = new ListViewItem($"{unit.name} ({unit.count})", $"armyuniticons_50x50_{unit.unit[0].unitTypeId}")
                   {
                      Group = group
                   };
@@ -3179,6 +3234,7 @@ namespace ForgeOfBots.Forms
       public void UpdateBattle()
       {
          UpdateGBG();
+         CbManualFighting_CheckedChanged(null, null);
          UpdateGEX();
       }
       public void UpdateGEX()
@@ -3298,6 +3354,7 @@ namespace ForgeOfBots.Forms
                      frmAS.ShowDialog();
                   }
                }
+               else { return; }
             }
             else
             {
@@ -3310,10 +3367,18 @@ namespace ForgeOfBots.Forms
                frmAS.ShowDialog();
             }
          }
+         DebugWatch.Start("Update Resource");
          Updater.UpdateResources();
+         DebugWatch.Stop();
+         DebugWatch.Start("Update Inventory");
          Updater.UpdateInventory();
+         DebugWatch.Stop();
+         DebugWatch.Start("Update Dashbord");
          UpdateDashbord();
+         DebugWatch.Stop();
+         DebugWatch.Start("Update GEX");
          UpdateGEX();
+         DebugWatch.Stop();
       }
       private void ArmySelection_SubmitArmy(object sender, dynamic data = null)
       {
@@ -3342,12 +3407,19 @@ namespace ForgeOfBots.Forms
             lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}";
          }
       }
-      public void UpdateGBG()
+      public void UpdateGBG(bool updateOnly = false, int ProvID = -1)
       {
          Invoker.CallMethode(lvGBGWave, () => lvGBGWave.Items.Clear());
-         UpdateArmy();
+         DebugWatch.Start("Update Army");
+         Updater.UpdateArmy();
+         DebugWatch.Stop();
+         DebugWatch.Start("Update GBG");
          GBGHelper.UpdateGBG();
+         DebugWatch.Stop();
+         DebugWatch.Start("Get Provinces");
          ListClass.ProvincesGBG = GBGHelper.GetProvinces();
+         DebugWatch.Stop();
+
          if (!GBGHelper.IsParticipating)
          {
             Invoker.SetProperty(tlpBattle, () => tlpBattle.Enabled, false);
@@ -3370,23 +3442,62 @@ namespace ForgeOfBots.Forms
          int bonusFight = GBGHelper.CurrentBattleground.currentPlayerParticipant.attrition.defendingArmyBonus;
          Invoker.SetProperty(lblCurrentMultiplier, () => lblCurrentMultiplier.Text, $"x{bonusNego} / +{bonusFight}%");
 
-         for (int i = 0; i < ListClass.ProvincesGBG.Count; i++)
+         if (!updateOnly)
          {
-            var item = ListClass.ProvincesGBG[i];
-            if (!GBGHelper.CanFightProvince(item.id.Value)) continue;
-            item = GBGHelper.GetSiegeCount(item);
-            ProvinceEX provinceEX = JsonConvert.DeserializeObject<ProvinceEX>(JsonConvert.SerializeObject(item));
-            provinceEX.OwnGuildID = GBGHelper.CurrentBattleground.currentParticipantId;
-            provinceEX.OwnProgress = item.conquestProgress.ToList().Find(cp => cp.participantId == provinceEX.OwnGuildID);
-            Invoker.CallMethode(cbSector, () => { cbSector.Items.Add(provinceEX); });
+            DebugWatch.Start("For-Loop Sector List");
+            Invoker.CallMethode(cbSector, () => cbSector.Items.Clear());
+            for (int i = 0; i < ListClass.ProvincesGBG.Count; i++)
+            {
+               var item = ListClass.ProvincesGBG[i];
+               if (!GBGHelper.CanFightProvince(item.id.Value)) continue;
+               item = GBGHelper.GetSiegeCount(item);
+               ProvinceEX provinceEX = new ProvinceEX()
+               {
+                  connections = item.connections,
+                  OwnGuildID = GBGHelper.CurrentBattleground.currentParticipantId,
+                  OwnProgress = item.conquestProgress.ToList().Find(cp => cp.participantId == GBGHelper.CurrentBattleground.currentParticipantId),
+                  conquestProgress = item.conquestProgress,
+                  id = item.id,
+                  isSpawnSpot = item.isSpawnSpot,
+                  lockedUntil = item.lockedUntil,
+                  name = item.name,
+                  ownerId = item.ownerId,
+                  SiegeCount = item.SiegeCount,
+                  totalBuildingSlots = item.totalBuildingSlots,
+                  victoryPoints = item.victoryPoints,
+                  __class__ = item.__class__
+               };
+               Invoker.CallMethode(cbSector, () => { cbSector.Items.Add(provinceEX); });
+            }
+            DebugWatch.Stop();
          }
-         Invoker.SetProperty(cbSector, () => cbSector.SelectedIndex, 0);
+         else
+         {
+            var pEX = ListClass.ProvincesGBG.Find(pgbg => pgbg.id == ProvID);
+            int index = -1;
+            var items = cbSector.Items;
+            foreach (ProvinceEX item in items)
+            {
+               index+=1;
+               if (item.id.Value != ProvID) continue;
+               ProvinceEX newItem = item;
+               newItem.conquestProgress = ListClass.ProvincesGBG.Find(pgbg => pgbg.id == ProvID).conquestProgress;
+               newItem.OwnProgress = pEX.conquestProgress.ToList().Find(cp => cp.participantId == GBGHelper.CurrentBattleground.currentParticipantId);
+               Invoker.CallMethode(cbSector, () => cbSector.Items.RemoveAt(index));
+               Invoker.CallMethode(cbSector, () => cbSector.Items.Insert(index, newItem));
+               break;
+            }
+         }
+         Invoker.CallMethode(cbSector, () => cbSector.Update());
+         Invoker.SetProperty(cbSector, () => cbSector.SelectedIndex, CBSectorIndex);
 
-         Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Attrition")));
-         Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Fights")));
-         Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Progress")));
-         Invoker.SetProperty(cbType, () => cbType.SelectedIndex, 0);
-         CbManualFighting_CheckedChanged(null, null);
+         if (cbType.Items.Count < 3)
+         {
+            Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Attrition")));
+            Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Fights")));
+            Invoker.CallMethode(cbType, () => cbType.Items.Add(i18n.getString("GUI.GBG.Progress")));
+            Invoker.SetProperty(cbType, () => cbType.SelectedIndex, 0);
+         }
       }
       private void CbManualFighting_CheckedChanged(object sender, EventArgs e)
       {
@@ -3398,6 +3509,7 @@ namespace ForgeOfBots.Forms
          }
          else
          {
+            FightCounter = 0;
             nudCount.Enabled = false;
             cbType.Enabled = false;
             nudDelay.Enabled = false;
@@ -3405,6 +3517,7 @@ namespace ForgeOfBots.Forms
       }
       private void CbSector_SelectedIndexChanged(object sender, EventArgs e)
       {
+         CBSectorIndex = cbSector.SelectedIndex;
          GBGProvince selProv = (GBGProvince)cbSector.SelectedItem;
          if (!GBGHelper.CanFightProvince(selProv.id.Value))
          {
@@ -3481,25 +3594,162 @@ namespace ForgeOfBots.Forms
       }
       private void BtnFightGBG_Click(object sender, EventArgs e)
       {
-         frmAS = new frmArmySelection();
-         frmAS.Name = "frmAS";
-         frmAS.ArmySelection.imgList = UnitImageLise;
-         frmAS.ArmySelection.FillArmyList(ListClass.UnitListEraSorted);
-         frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
-         frmAS.ArmySelection.SubmitArmy += SubmitGBGArmy;
-         frmAS.ShowDialog();
-         UpdateGBG();
+         if (!cbAutoFight.Checked && UserData.ArmySelection.Count > 0)
+         {
+            frmAS = new frmArmySelection();
+            frmAS.Name = "frmAS";
+            frmAS.ArmySelection.imgList = UnitImageLise;
+            frmAS.ArmySelection.FillArmyList(ListClass.UnitListEraSorted);
+            frmAS.ArmySelection.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
+            frmAS.ArmySelection.SubmitArmy += SubmitGBGArmy;
+            frmAS.ShowDialog();
+            ProvinceEX prov = (ProvinceEX)cbSector.SelectedItem;
+            UpdateGBG();
+         }
+         else
+         {
+            int value = (int)nudCount.Value;
+            if (cbType.SelectedIndex == 0) //Attrition
+            {
+               Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, false);
+               BackgroundWorkerEX ex = new BackgroundWorkerEX();
+               ex.DoWork += Attrition;
+               ex.RunWorkerAsync(value);
+            }
+            else if (cbType.SelectedIndex == 1) //Fights
+            {
+               Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, false);
+               BackgroundWorkerEX ex = new BackgroundWorkerEX();
+               ex.DoWork += Fight;
+               ex.RunWorkerAsync(value);
+            }
+            else if (cbType.SelectedIndex == 2) //Progress
+            {
+               Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, false);
+               BackgroundWorkerEX ex = new BackgroundWorkerEX();
+               ex.DoWork += Progress;
+               ex.RunWorkerAsync(value);
+            }
+         }
       }
 
+      private void Fight(object sender, DoWorkEventArgs e)
+      {
+         while (FightCounter < (int)e.Argument)
+         {
+            UpdateArmy();
+            if (!Updater.UpdateAttackPool()) break;
+            var prov = (ProvinceEX)cbSector.Invoke(new Func<ProvinceEX>(() => (ProvinceEX)cbSector.SelectedItem));
+            var ret = GBGHelper.StartFight(prov.id.Value);
+            if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+            {
+               ret = GBGHelper.StartFight(prov.id.Value);
+               if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+               {
+                  Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
+               }
+               else
+               {
+                  Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
+                  break;
+               }
+            }
+            else if (ret.state.winnerBit == 1)
+            {
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
+            }
+            else
+            {
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
+               break;
+            }
+            UpdateGBG(true, prov.id.Value);
+            FightCounter += 1;
+            Thread.Sleep((int)nudDelay.Value);
+         }
+         FightCounter = 0;
+         Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, true);
+      }
+      private void Attrition(object sender, DoWorkEventArgs e)
+      {
+         while (GBGHelper.CurrentBattleground.currentPlayerParticipant.attrition.level < (int)e.Argument)
+         {
+            UpdateArmy();
+            if (!Updater.UpdateAttackPool()) break;
+            var prov = (ProvinceEX)cbSector.Invoke(new Func<ProvinceEX>(() => (ProvinceEX)cbSector.SelectedItem));
+            var ret = GBGHelper.StartFight(prov.id.Value);
+            if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+            {
+               ret = GBGHelper.StartFight(prov.id.Value);
+               if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+               {
+                  Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
+               }
+               else
+               {
+                  Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
+                  break;
+               }
+            }
+            else if (ret.state.winnerBit == 1)
+            {
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
+            }
+            else
+            {
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
+               break;
+            }
+            UpdateGBG(true, prov.id.Value);
+            Thread.Sleep((int)nudDelay.Value);
+         }
+         Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, true);
+      }
+      private void Progress(object sender, DoWorkEventArgs e)
+      {
+         var prov = (ProvinceEX)cbSector.Invoke(new Func<ProvinceEX>(() => (ProvinceEX)cbSector.SelectedItem));
+         while (prov.OwnProgress.progress < (int)e.Argument && prov.OwnProgress.progress < (prov.OwnProgress.maxProgress - 10))
+         {
+            UpdateArmy();
+            if (!Updater.UpdateAttackPool()) break;
+            prov = (ProvinceEX)cbSector.Invoke(new Func<ProvinceEX>(() => (ProvinceEX)cbSector.SelectedItem));
+            var ret = GBGHelper.StartFight(prov.id.Value);
+            if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+            {
+               ret = GBGHelper.StartFight(prov.id.Value);
+               if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
+               {
+                  Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
+               }
+               else
+               {
+                  Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
+                  break;
+               }
+            }
+            else if (ret.state.winnerBit == 1)
+            {
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
+            }
+            else
+            {
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
+               break;
+            }
+            UpdateGBG(true, prov.id.Value);
+            Thread.Sleep((int)nudDelay.Value);
+         }
+         Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, true);
+      }
+      
       private void SubmitGBGArmy(object sender, dynamic data = null)
       {
          List<string> list = (List<string>)data;
          UserData.ArmySelection[UserData.LastWorld.Split('|')[0]] = list;
          Updater.UpdateAttackPool();
          if (frmAS != null)
-         {
             if (Application.OpenForms["frmAS"] != null) Application.OpenForms["frmAS"].Close();
-         }
+
          ProvinceEX prov = (ProvinceEX)cbSector.SelectedItem;
          var ret = GBGHelper.StartFight(prov.id.Value);
          if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
@@ -3507,20 +3757,32 @@ namespace ForgeOfBots.Forms
             ret = GBGHelper.StartFight(prov.id.Value);
             if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
             {
-               lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}";
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
             }
             else
             {
-               lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}";
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
             }
          }
          else if (ret.state.winnerBit == 1)
          {
-            lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}";
+            Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Won")}");
          }
          else
          {
-            lblResult.Text = $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}";
+            Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString(lblResult.Tag.ToString())} {i18n.getString("GUI.GEX.Battle.Lost")}");
+         }
+      }
+      private void CbType_SelectedIndexChanged(object sender, EventArgs e)
+      {
+         if (cbType.SelectedIndex == 0)
+         {
+            Invoker.SetProperty(nudCount, () => nudCount.Value, GBGHelper.CurrentBattleground.currentPlayerParticipant.attrition.level);
+         }
+         else if (cbType.SelectedIndex == 2)
+         {
+            var prov = (ProvinceEX)cbSector.Invoke(new Func<ProvinceEX>(() => (ProvinceEX)cbSector.SelectedItem));
+            Invoker.SetProperty(nudCount, () => nudCount.Value, prov.OwnProgress.maxProgress);
          }
       }
       #endregion

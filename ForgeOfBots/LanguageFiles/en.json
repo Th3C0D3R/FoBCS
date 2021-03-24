@@ -22,7 +22,7 @@
     "GUI.Battle.GBG.ManuelFight": "Fightmode:",
     "GUI.Battle.GBG.Fight": "Auto-Fight",
     "GUI.Battle.GBG.AutoFightTill": "Fight till:",
-    "GUI.Battle.GBG.FightDelay": "Delay between fights:",
+    "GUI.Battle.GBG.FightDelay": "Delay between fights (ms):",
     "GUI.Battle.GBG.CurrentAttrition": "Current Attrition:",
     "GUI.Battle.GBG.Multiplier": "Current Attrition-Bonus:",
     "GUI.Battle.GBG.DoFight": "Fight",

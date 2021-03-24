@@ -13,6 +13,9 @@ using ForgeOfBots.GameClasses.GBG.BuildingsGBG;
 using ForgeOfBots.GameClasses;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace ForgeOfBots.DataHandler
 {
@@ -97,7 +100,8 @@ namespace ForgeOfBots.DataHandler
       {
          try
          {
-            if (ListClass.ProvincesGBG.Find(p => p.id == provinceID).totalBuildingSlots == 0) return null;
+            var prov = ListClass.ProvincesGBG.Find(p => p.id == provinceID);
+            if (prov.totalBuildingSlots == 0 || prov.ownerId != CurrentBattleground.currentParticipantId) return null;
             string script = ReqBuilder.GetRequestScript(RequestType.getBuildings, provinceID);
             string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
             GBGBuilding GBGBuildingresponse = JsonConvert.DeserializeObject<GBGBuilding>(ret);
@@ -114,21 +118,21 @@ namespace ForgeOfBots.DataHandler
       }
       public static Province GetSiegeCount(Province item)
       {
-            int siegeCount = 0;
-            if (item.connections != null)
+         int siegeCount = 0;
+         if (item.connections != null)
+         {
+            foreach (var conID in item.connections)
             {
-               foreach (var conID in item.connections)
+               var buildingsForProvince = GetBuilding(conID);
+               if (buildingsForProvince == null) continue;
+               foreach (var bitem in buildingsForProvince.placedBuildings)
                {
-                  var buildingsForProvince = GetBuilding(conID);
-                  if (buildingsForProvince == null) continue;
-                  foreach (var bitem in buildingsForProvince.placedBuildings)
-                  {
-                     if (IsBuildingFinished(bitem) && bitem.id == "siege_camp")
-                        siegeCount += 1;
-                  }
+                  if (IsBuildingFinished(bitem) && bitem.id == "siege_camp")
+                     siegeCount += 1;
                }
             }
-            item.SiegeCount = siegeCount;
+         }
+         item.SiegeCount = siegeCount;
          return item;
       }
       public static List<Province> GetProvinces()
@@ -138,17 +142,17 @@ namespace ForgeOfBots.DataHandler
             List<Province> tmp = CurrentBattleground.map.provinces.ToList();
             foreach (var item in ListClass.MetaMap.provinces)
             {
-               if (item.id != null)
-               {
-                  tmp.Find(p => p.id == item.id).name = item.name;
-                  tmp.Find(p => p.id == item.id).connections = item.connections;
-               }
-               else if (!item.name.IsEmpty() && item.id == null)
-               {
-                  tmp.Find(p => p.id == null).name = item.name;
-                  tmp.Find(p => p.id == null).id = 0;
-                  tmp.Find(p => p.id == 0).connections = item.connections;
-               }
+                if (item.id != null)
+                {
+                   tmp.Find(p => p.id == item.id).name = item.name;
+                   tmp.Find(p => p.id == item.id).connections = item.connections;
+                }
+                else if (!item.name.IsEmpty() && item.id == null)
+                {
+                   tmp.Find(p => p.id == null).name = item.name;
+                   tmp.Find(p => p.id == null).id = 0;
+                   tmp.Find(p => p.id == 0).connections = item.connections;
+                }
             }
             return tmp;
          }
@@ -160,6 +164,8 @@ namespace ForgeOfBots.DataHandler
          DateTime dtLocked = Helper.UnixTimeStampToDateTime(Target.lockedUntil);
          if (dtLocked > DateTime.Now) return false;
          if (Target.ownerId == CurrentBattleground.currentParticipantId) return false;
+         if (Target.isSpawnSpot) return false;
+
          List<Province> OwnedByGuild = ListClass.ProvincesGBG.FindAll(p => p.ownerId == CurrentBattleground.currentParticipantId).ToList();
          List<int> connectedIds = OwnedByGuild.SelectMany(obg => obg.connections).ToList();
          return connectedIds.Contains(id);

@@ -46,8 +46,8 @@ namespace ForgeOfBots.Forms.UserControls
          // tableLayoutPanel1
          // 
          this.tableLayoutPanel1.ColumnCount = 2;
-         this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.13718F));
-         this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.86282F));
+         this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.67442F));
+         this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.32558F));
          this.tableLayoutPanel1.Controls.Add(this.btnArmySubmit, 1, 3);
          this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
          this.tableLayoutPanel1.Controls.Add(this.lvSelectedArmy, 1, 1);
@@ -68,10 +68,10 @@ namespace ForgeOfBots.Forms.UserControls
          // btnArmySubmit
          // 
          this.btnArmySubmit.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.btnArmySubmit.Location = new System.Drawing.Point(331, 206);
+         this.btnArmySubmit.Location = new System.Drawing.Point(290, 206);
          this.btnArmySubmit.Margin = new System.Windows.Forms.Padding(0);
          this.btnArmySubmit.Name = "btnArmySubmit";
-         this.btnArmySubmit.Size = new System.Drawing.Size(99, 39);
+         this.btnArmySubmit.Size = new System.Drawing.Size(140, 39);
          this.btnArmySubmit.TabIndex = 0;
          this.btnArmySubmit.Tag = "GUI.Army.Submit";
          this.btnArmySubmit.Text = "GUI.Army.Submit";
@@ -86,7 +86,7 @@ namespace ForgeOfBots.Forms.UserControls
          this.panel1.Margin = new System.Windows.Forms.Padding(0);
          this.panel1.Name = "panel1";
          this.tableLayoutPanel1.SetRowSpan(this.panel1, 4);
-         this.panel1.Size = new System.Drawing.Size(331, 245);
+         this.panel1.Size = new System.Drawing.Size(290, 245);
          this.panel1.TabIndex = 1;
          // 
          // lvArmy
@@ -97,7 +97,7 @@ namespace ForgeOfBots.Forms.UserControls
          this.lvArmy.Location = new System.Drawing.Point(0, 0);
          this.lvArmy.Margin = new System.Windows.Forms.Padding(0);
          this.lvArmy.Name = "lvArmy";
-         this.lvArmy.Size = new System.Drawing.Size(331, 245);
+         this.lvArmy.Size = new System.Drawing.Size(290, 245);
          this.lvArmy.TabIndex = 0;
          this.lvArmy.Tag = "";
          this.lvArmy.UseCompatibleStateImageBehavior = false;
@@ -124,21 +124,22 @@ namespace ForgeOfBots.Forms.UserControls
          this.lvSelectedArmy.ContextMenuStrip = this.cmsArmySelection;
          this.lvSelectedArmy.Dock = System.Windows.Forms.DockStyle.Fill;
          this.lvSelectedArmy.FormattingEnabled = true;
-         this.lvSelectedArmy.Location = new System.Drawing.Point(331, 36);
+         this.lvSelectedArmy.Location = new System.Drawing.Point(290, 36);
          this.lvSelectedArmy.Margin = new System.Windows.Forms.Padding(0);
          this.lvSelectedArmy.Name = "lvSelectedArmy";
          this.tableLayoutPanel1.SetRowSpan(this.lvSelectedArmy, 2);
-         this.lvSelectedArmy.Size = new System.Drawing.Size(99, 170);
+         this.lvSelectedArmy.Size = new System.Drawing.Size(140, 170);
          this.lvSelectedArmy.TabIndex = 2;
          this.lvSelectedArmy.Tag = "";
+         this.lvSelectedArmy.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LvSelectedArmy_MouseDown);
          // 
          // lblSelectedArmy
          // 
          this.lblSelectedArmy.Dock = System.Windows.Forms.DockStyle.Fill;
          this.lblSelectedArmy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-         this.lblSelectedArmy.Location = new System.Drawing.Point(334, 0);
+         this.lblSelectedArmy.Location = new System.Drawing.Point(293, 0);
          this.lblSelectedArmy.Name = "lblSelectedArmy";
-         this.lblSelectedArmy.Size = new System.Drawing.Size(93, 36);
+         this.lblSelectedArmy.Size = new System.Drawing.Size(134, 36);
          this.lblSelectedArmy.TabIndex = 3;
          this.lblSelectedArmy.Tag = "GUI.Army.SelectedArmy";
          this.lblSelectedArmy.Text = "GUI.Army.SelectedArmy";

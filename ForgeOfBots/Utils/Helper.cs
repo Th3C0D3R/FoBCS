@@ -162,40 +162,38 @@ namespace ForgeOfBots.Utils
       {
          if (unitTypes.Count <= 0 || responseData == null) return new Dictionary<string, List<Unit>>();
          Dictionary<string, List<Unit>> armyList = new Dictionary<string, List<Unit>>();
-         foreach (ResearchEra era in eraList)
+
+         var unitlist = (from era in eraList
+                         from unittype in unitTypes
+                         from army in responseData.units
+                         where unittype.minEra == era.era && unittype.unitTypeId == army.unitTypeId
+                         select new
+                         {
+                            unitera = era,
+                            unit = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).ToList(),
+                            name = unittype.name,
+                            count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached,
+                            ids = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
+                         }).ToList();
+
+         foreach (var item in unitlist.ToList())
          {
-            foreach (var unittype in unitTypes)
+            Unit unit = new Unit
             {
-               if (unittype.minEra == era.era)
-               {
-                  foreach (var army in responseData.units)
-                  {
-                     Unit unit = new Unit
-                     {
-                        unit = army,
-                        name = unittype.name,
-                        count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached,
-                        ids = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
-                     };
-                     if (unittype.unitTypeId == army.unitTypeId)
-                     {
-                        if (armyList.ContainsKey(era.name))
-                        {
-                           armyList[era.name].Add(unit);
-                           break;
-                        }
-                        else
-                        {
-                           List<Unit> unitlist = new List<Unit>
-                        {
-                           unit
-                        };
-                           armyList.Add(era.name, unitlist);
-                           break;
-                        }
-                     }
-                  }
-               }
+               unit = item.unit,
+               name = item.name,
+               count = item.count,
+               ids = item.ids
+            };
+            if (armyList.ContainsKey(item.unitera.name))
+            {
+               if (armyList[item.unitera.name].FindAll(f => f.unit[0].unitTypeId == unit.unit[0].unitTypeId).Count > 0) continue;
+               armyList[item.unitera.name].Add(unit);
+            }
+            else
+            {
+               List<Unit> ulist = new List<Unit>() { unit };
+               armyList.Add(item.unitera.name, ulist);
             }
          }
          return armyList;
@@ -204,23 +202,31 @@ namespace ForgeOfBots.Utils
       {
          if (responseData == null) return new List<Unit>();
          var tmpList = new List<Unit>();
-         foreach (var unittype in unitTypes)
+
+         var x = (from unittype in unitTypes
+                  from army in responseData.units
+                  where unittype.unitTypeId == army.unitTypeId
+                  select new Unit
+                  {
+                     unit = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).ToList(),
+                     name = unittype.name,
+                     count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached,
+                     ids = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
+                  }).ToList();
+
+         foreach (var item in x.ToList())
          {
-            foreach (var army in responseData.units)
+            Unit unit = new Unit
             {
-               Unit unit = new Unit
-               {
-                  unit = army,
-                  name = unittype.name,
-                  count = responseData.counts.ToList().Find(c => c.unitTypeId == army.unitTypeId).unattached,
-                  ids = responseData.units.ToList().FindAll(e => e.unitTypeId == army.unitTypeId).Select(e => e.unitId).ToList()
-               };
-               if (unittype.unitTypeId == army.unitTypeId)
-               {
-                  tmpList.Add(unit);
-               }
-            }
+               unit = item.unit,
+               name = item.name,
+               count = item.count,
+               ids = item.ids
+            };
+            if (tmpList.FindAll(f => f.unit[0].unitTypeId == unit.unit[0].unitTypeId).Count > 0) continue;
+            tmpList.Add(unit);
          }
+
          return tmpList;
       }
       public static List<KeyValuePair<string, List<EntityEx>>> GetGroupedList(List<EntityEx> buildings)
@@ -311,7 +317,7 @@ namespace ForgeOfBots.Utils
          {
             ctl.Enabled = false;
          }
-         catch (Exception){ }
+         catch (Exception) { }
       }
 
       public static async Task setTimeout(Action action, int timeoutInMilliseconds)
@@ -342,6 +348,13 @@ namespace ForgeOfBots.Utils
          Failed
       }
 
+      public static void StartStopwatch()
+      {
+         if (StaticData.DEBUGMODE)
+         {
+
+         }
+      }
 
       public static int GetP1(string AgeString, int Level)
       {
@@ -773,6 +786,29 @@ namespace ForgeOfBots.Utils
             {
                throw new Exception("Failed with HRESULT: " + hresult.ToString("X"));
             }
+         }
+      }
+   }
+   public static class DebugWatch
+   {
+      private static Stopwatch sw = new Stopwatch();
+      private static bool IsDebug = StaticData.DEBUGMODE;
+      private static string Name = "";
+      public static void Start(string name)
+      {
+         if (IsDebug && !sw.IsRunning)
+         {
+            Name = name;
+            sw.Reset();
+            sw.Start();
+         }
+      }
+      public static void Stop()
+      {
+         if (IsDebug && sw.IsRunning)
+         {
+            sw.Stop();
+            Debug.WriteLine($"{Name}: {sw.Elapsed.Minutes}:{sw.Elapsed.Seconds}:{sw.Elapsed.Milliseconds}");
          }
       }
    }

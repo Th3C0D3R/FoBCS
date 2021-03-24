@@ -3,6 +3,7 @@ using ForgeOfBots.GameClasses.ResponseClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ForgeOfBots.Utils.BattleAI
@@ -25,7 +26,7 @@ namespace ForgeOfBots.Utils.BattleAI
 
          var t = new List<double[]>();
          //var training = new double[td.Fights.Count][]{ };
-         foreach (var fight in td.Fights)
+         Parallel.ForEach(td.Fights, fight =>
          {
             List<double> army = new List<double>();
             foreach (var own in fight.Item1)
@@ -52,30 +53,61 @@ namespace ForgeOfBots.Utils.BattleAI
 
             army.Add(fight.Item3 ? 1d : 0d);
             t.Add(army.ToArray());
-         }
+         });
+
+         //foreach (var fight in td.Fights)
+         //{
+         //   List<double> army = new List<double>();
+         //   foreach (var own in fight.Item1)
+         //      army.Add(GetID(own));
+         //   if (fight.Item1.Count < 8)
+         //   {
+         //      int d = 8 - fight.Item1.Count;
+         //      for (int i = 0; i < d; i++)
+         //      {
+         //         army.Add(0d);
+         //      }
+         //   }
+         //   foreach (var enemy in fight.Item2)
+         //      army.Add(GetID(enemy));
+         //   if (fight.Item2.Count < 16)
+         //   {
+         //      int d = 16 - fight.Item2.Count;
+         //      for (int i = 0; i < d; i++)
+         //      {
+         //         army.Add(0d);
+         //      }
+         //   }
+
+         //   army.Add(fight.Item3 ? 1d : 0d);
+         //   t.Add(army.ToArray());
+         //}
          return t.ToArray();
       }
       private int GetID(Unit unit)
       {
          int id = 0;
-         id += unit.unit.currentHitpoints;
-         foreach (var item in unit.unit.unitTypeId.ToCharArray().ToList())
+         id += unit.unit.Sum(u=>u.currentHitpoints);
+         foreach (var item in unit.unit.Select(u=>u.unitTypeId.ToCharArray()))
          {
-            id += item;
+            id += item.Sum(i=>i);
          }
-         foreach (var item in unit.unit.bonuses)
+         foreach (var item in unit.unit.Select(u=>u.bonuses))
          {
-            id += item.value;
+            id += item.Sum(i => i.value);
          }
-         foreach (var item in unit.unit.abilities)
+         foreach (var item in unit.unit.Select(u=>u.abilities))
          {
-            if (item.value == null) continue;
-            if (int.TryParse(item.value.ToString(), out int val))
+            id+=item.Sum(i =>
             {
-               id += val;
-            }
+               if (i.value == null) 
+                  return  0;
+               if (int.TryParse(i.value.ToString(), out int val))
+                  return val;
+              return 0;
+            });
          }
-         UnitType type = ListClass.UnitTypes.Find(ut => ut.unitTypeId == unit.unit.unitTypeId);
+         UnitType type = ListClass.UnitTypes.Find(ut => ut.unitTypeId == unit.unit[0].unitTypeId);
          foreach (var item in type.unitClass.ToCharArray().ToList())
          {
             id += item;
@@ -99,7 +131,7 @@ namespace ForgeOfBots.Utils.BattleAI
          if (OwnUnits.Count <= 0 || EnemyUnits.Count <= 0 || ListClass.UnitTypes.Count <= 0) return false;
          foreach (Unit enemy in EnemyUnits)
          {
-            UnitType type = ListClass.UnitTypes.Find(ut => ut.unitTypeId == enemy.unit.unitTypeId);
+            //UnitType type = ListClass.UnitTypes.Find(ut => ut.unitTypeId == enemy.unit.unitTypeId);
          }
          return true;
       }

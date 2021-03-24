@@ -26,7 +26,7 @@ namespace ForgeOfBots.Utils
       private bool ImageLoaded = false;
       private bool JSONLoaded = false;
       private object _lock = new object();
-      private Size CropSize = new Size(32,32);
+      private Size CropSize = new Size(32, 32);
       private ImageExtractorKey key = ImageExtractorKey.Goods;
 
       public void GetGoodImages(string server)
@@ -109,7 +109,7 @@ namespace ForgeOfBots.Utils
                else
                {
                   ImageLoaded = true;
-                  if(key == ImageExtractorKey.Goods)
+                  if (key == ImageExtractorKey.Goods)
                   {
                      GoodImageList = SplitGoodImage(JSONFilePath, ImageFilePath);
                      GoodImageList.ImageSize = new System.Drawing.Size(CropSize.w, CropSize.h);

@@ -13,12 +13,12 @@ namespace ForgeOfBots.Utils.BattleAI
    public class Testdata
    {
 
-      public List<Tuple<List<Unit>, List<Unit>,bool>> Fights = new List<Tuple<List<Unit>, List<Unit>,bool>>();
+      public List<Tuple<List<Unit>, List<Unit>, bool>> Fights = new List<Tuple<List<Unit>, List<Unit>, bool>>();
       public Testdata(string file)
       {
          string jsonString = File.ReadAllText(file);
          TFRoot root = JsonConvert.DeserializeObject<TFRoot>($"{{\"root\":{jsonString}}}");
-         foreach (var item in root.root)
+         Parallel.ForEach(root.root, item =>
          {
             List<Unit> OwnUnits = new List<Unit>();
             List<Unit> EnemyUnits = new List<Unit>();
@@ -27,8 +27,8 @@ namespace ForgeOfBots.Utils.BattleAI
                Unit u = new Unit();
                string s = JsonConvert.SerializeObject(enemy);
                GameUnit gu = JsonConvert.DeserializeObject<GameUnit>(s);
-               u.unit = gu;
-               u.unit.currentHitpoints = enemy.startHitpoints;
+               u.unit.Add(gu);
+               u.unit[0].currentHitpoints = enemy.startHitpoints;
                EnemyUnits.Add(u);
             }
             foreach (var own in item.own)
@@ -36,12 +36,36 @@ namespace ForgeOfBots.Utils.BattleAI
                Unit u = new Unit();
                string s = JsonConvert.SerializeObject(own);
                GameUnit gu = JsonConvert.DeserializeObject<GameUnit>(s);
-               u.unit = gu;
-               u.unit.currentHitpoints = own.startHitpoints;
+               u.unit.Add(gu);
+               u.unit[0].currentHitpoints = own.startHitpoints;
                OwnUnits.Add(u);
             }
-            Fights.Add(new Tuple<List<Unit>, List<Unit>, bool>(OwnUnits, EnemyUnits,item.won));
-         }
+            Fights.Add(new Tuple<List<Unit>, List<Unit>, bool>(OwnUnits, EnemyUnits, item.won));
+         });
+         //foreach (var item in root.root)
+         //{
+         //   List<Unit> OwnUnits = new List<Unit>();
+         //   List<Unit> EnemyUnits = new List<Unit>();
+         //   foreach (var enemy in item.enemy)
+         //   {
+         //      Unit u = new Unit();
+         //      string s = JsonConvert.SerializeObject(enemy);
+         //      GameUnit gu = JsonConvert.DeserializeObject<GameUnit>(s);
+         //      u.unit = gu;
+         //      u.unit.currentHitpoints = enemy.startHitpoints;
+         //      EnemyUnits.Add(u);
+         //   }
+         //   foreach (var own in item.own)
+         //   {
+         //      Unit u = new Unit();
+         //      string s = JsonConvert.SerializeObject(own);
+         //      GameUnit gu = JsonConvert.DeserializeObject<GameUnit>(s);
+         //      u.unit = gu;
+         //      u.unit.currentHitpoints = own.startHitpoints;
+         //      OwnUnits.Add(u);
+         //   }
+         //   Fights.Add(new Tuple<List<Unit>, List<Unit>, bool>(OwnUnits, EnemyUnits, item.won));
+         //}
       }
    }
 

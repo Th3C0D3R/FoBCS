@@ -101,19 +101,36 @@ namespace ForgeOfBots.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die var callback = arguments[arguments.length - 1];
+        ///   Sucht eine lokalisierte Zeichenfolge, die var fobcallback = arguments[arguments.length - 1];
         ///async function makeRequest() {
-        ///    let res = await fetch(&quot;https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##&quot;, {
+        ///    try {
+        ///        let res = await fetch(&quot;https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##&quot;, {
+        ///            &quot;credentials&quot;: &quot;include&quot;,
+        ///            &quot;headers&quot;: {
+        ///                &quot;accept&quot;: &quot;*/*&quot;,
+        ///                &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
+        ///                &quot;client-identification&quot;: &quot;version=##Version##; requiredVersion=##Version##; platform=bro; platformType=html5; platformVersion=we [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        public static string fetchData {
+            get {
+                return ResourceManager.GetString("fetchData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die var fobcallback = arguments[arguments.length - 1];
+        ///const request = async () =&gt; {
+        ///    const res = await fetch(&quot;https://##WorldID##.forgeofempires.com/game/json?h=##UserKey##&quot;, {
         ///        &quot;credentials&quot;: &quot;include&quot;,
         ///        &quot;headers&quot;: {
         ///            &quot;accept&quot;: &quot;*/*&quot;,
         ///            &quot;accept-language&quot;: &quot;en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7&quot;,
         ///            &quot;client-identification&quot;: &quot;version=##Version##; requiredVersion=##Version##; platform=bro; platformType=html5; platformVersion=web&quot;,
-        ///            &quot;content-type&quot;: &quot;appl [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///            &quot;content-type&quot;: &quot; [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
-        public static string fetchData {
+        public static string fetchData_ {
             get {
-                return ResourceManager.GetString("fetchData", resourceCulture);
+                return ResourceManager.GetString("fetchData_", resourceCulture);
             }
         }
         

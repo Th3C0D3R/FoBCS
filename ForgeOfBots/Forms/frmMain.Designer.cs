@@ -115,7 +115,6 @@ namespace ForgeOfBots.Forms
          this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
          this.panel3 = new System.Windows.Forms.Panel();
          this.lvArmy = new System.Windows.Forms.ListView();
-         this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
          this.panel7 = new System.Windows.Forms.Panel();
          this.tableLayoutPanel17 = new System.Windows.Forms.TableLayoutPanel();
          this.label10 = new System.Windows.Forms.Label();
@@ -283,6 +282,7 @@ namespace ForgeOfBots.Forms
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
          this.tSniper = new System.Windows.Forms.Timer(this.components);
+         this.ucCurrentPool = new ForgeOfBots.Forms.UserControls.ucBattle();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -1025,8 +1025,8 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.tableLayoutPanel13, "tableLayoutPanel13");
          this.tableLayoutPanel13.Controls.Add(this.panel3, 1, 0);
-         this.tableLayoutPanel13.Controls.Add(this.metroLabel6, 0, 1);
          this.tableLayoutPanel13.Controls.Add(this.panel7, 0, 0);
+         this.tableLayoutPanel13.Controls.Add(this.ucCurrentPool, 0, 1);
          this.tableLayoutPanel13.Name = "tableLayoutPanel13";
          // 
          // panel3
@@ -1046,15 +1046,6 @@ namespace ForgeOfBots.Forms
          this.lvArmy.MultiSelect = false;
          this.lvArmy.Name = "lvArmy";
          this.lvArmy.UseCompatibleStateImageBehavior = false;
-         // 
-         // metroLabel6
-         // 
-         this.metroLabel6.BackColor = System.Drawing.Color.Transparent;
-         resources.ApplyResources(this.metroLabel6, "metroLabel6");
-         this.metroLabel6.FontSize = MetroFramework.MetroLabelSize.Tall;
-         this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-         this.metroLabel6.Name = "metroLabel6";
-         this.metroLabel6.Tag = "GUI.UnderConstruction";
          // 
          // panel7
          // 
@@ -1147,7 +1138,17 @@ namespace ForgeOfBots.Forms
          // nudDelay
          // 
          resources.ApplyResources(this.nudDelay, "nudDelay");
+         this.nudDelay.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
          this.nudDelay.Name = "nudDelay";
+         this.nudDelay.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
          // 
          // lvGBGWave
          // 
@@ -1234,10 +1235,16 @@ namespace ForgeOfBots.Forms
          this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
          this.cbType.FormattingEnabled = true;
          this.cbType.Name = "cbType";
+         this.cbType.SelectedIndexChanged += new System.EventHandler(this.CbType_SelectedIndexChanged);
          // 
          // nudCount
          // 
          resources.ApplyResources(this.nudCount, "nudCount");
+         this.nudCount.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
          this.nudCount.Name = "nudCount";
          // 
          // lblCurrentAttrition
@@ -1257,6 +1264,7 @@ namespace ForgeOfBots.Forms
          this.btnReloadGBG.Image = global::ForgeOfBots.Properties.Resources.refresh;
          this.btnReloadGBG.Name = "btnReloadGBG";
          this.btnReloadGBG.UseVisualStyleBackColor = true;
+         this.btnReloadGBG.Click += new System.EventHandler(this.BtnReloadGBG_Click);
          // 
          // label2
          // 
@@ -2361,6 +2369,15 @@ namespace ForgeOfBots.Forms
          this.tSniper.Interval = 3600000;
          this.tSniper.Tick += new System.EventHandler(this.TSniper_Tick);
          // 
+         // ucCurrentPool
+         // 
+         this.ucCurrentPool.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+         resources.ApplyResources(this.ucCurrentPool, "ucCurrentPool");
+         this.ucCurrentPool.imgList = null;
+         this.ucCurrentPool.Name = "ucCurrentPool";
+         this.ucCurrentPool.UnitList = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<ForgeOfBots.GameClasses.ResponseClasses.Unit>>)(resources.GetObject("ucCurrentPool.UnitList")));
+         this.ucCurrentPool.SubmitArmy += new ForgeOfBots.Utils.CustomEvent(this.UcCurrentPool_SubmitArmy);
+         // 
          // frmMain
          // 
          resources.ApplyResources(this, "$this");
@@ -2638,7 +2655,6 @@ namespace ForgeOfBots.Forms
       private MetroFramework.Controls.MetroButton mbSnip;
       private System.Windows.Forms.TabPage tpHelp;
       private System.Windows.Forms.TreeView tvHelp;
-      private MetroFramework.Controls.MetroLabel metroLabel6;
       private MetroFramework.Controls.MetroPanel metroPanel4;
       private MetroFramework.Controls.MetroLabel metroLabel7;
       private System.Windows.Forms.Panel mpSnipItem;
@@ -2726,5 +2742,6 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Label lblCurrentAttrition;
       private System.Windows.Forms.Label lblCurrentMultiplier;
       private System.Windows.Forms.Button btnReloadGBG;
+      private UserControls.ucBattle ucCurrentPool;
    }
 }

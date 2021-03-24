@@ -2,13 +2,11 @@ var callback = arguments[arguments.length - 1];
 if (document.readyState == "complete") {
 	FoELogin()
 		.then((v, f, r) => {
-			debugger;
 			callback(v);
 		});
 } else {
 	document.addEventListener("DOMContentLoaded", () => {
 		FoELogin().then((v, f, d) => {
-			debugger;
 			callback(v);
 		});
 	});
@@ -79,7 +77,6 @@ async function FoELogin() {
 				"mode": "cors"
 			});
 			var j = await res2.json();
-			debugger;
 			return Promise.resolve(j['login_url']);
 		}
 	}

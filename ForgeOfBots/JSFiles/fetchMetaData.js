@@ -1,4 +1,4 @@
-﻿var callback = arguments[arguments.length - 1];
+﻿var fobcallback2 = arguments[arguments.length - 1];
 async function makeRequest() {
     let res = await fetch("##url##", {
         "headers": {
@@ -18,14 +18,14 @@ async function makeRequest() {
         try {
             var json = JSON.parse(body);
             if (json[0]["__class__"] === "Error" || json[0]["__class__"] === "Redirect")
-                callback("SESSION-EXPIRED");
-            callback(body);
+                fobcallback2("SESSION-EXPIRED");
+            fobcallback2(body);
         } catch (error) {
-            callback("[]");
+            fobcallback2("[]");
         }
     }
     else
-        callback("");
+        fobcallback2("");
         
 }
 makeRequest();
