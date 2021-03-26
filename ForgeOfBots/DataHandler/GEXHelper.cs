@@ -193,7 +193,8 @@ namespace ForgeOfBots.DataHandler
       }
       public static bool BuyNextAttempt()
       {
-         if (GEXOverview.state.Equals("inactive") || GetCurrentState == -1) return false;
+         ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
+         if (GEXOverview.state.Equals("inactive") || GetCurrentState == -1 || ListClass.GoodsDict[noAge.name].Find(g => g.good_id == "guild_expedition_attempt").value >= 8) return false;
          string script = ReqBuilder.GetRequestScript(RequestType.getContexts, "guildExpedition");
          var ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
          GetBuyContext buyContext = JsonConvert.DeserializeObject<GetBuyContext>(ret);
@@ -203,7 +204,6 @@ namespace ForgeOfBots.DataHandler
          {
             currentCost = d.offers[0].costs.resources.medals;
          }
-         ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
          if (CanBuyNextAttempt(ListClass.GoodsDict[noAge.name].Find(g => g.good_id == "medals").value, currentCost))
          {
             script = ReqBuilder.GetRequestScript(RequestType.buyOffer, "guild_expedition_attempt1medals0");

@@ -5,6 +5,7 @@ using Microsoft.AppCenter.Crashes;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using MS.WindowsAPICodePack.Internal;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -226,7 +227,6 @@ namespace ForgeOfBots.Utils
             if (tmpList.FindAll(f => f.unit[0].unitTypeId == unit.unit[0].unitTypeId).Count > 0) continue;
             tmpList.Add(unit);
          }
-
          return tmpList;
       }
       public static List<KeyValuePair<string, List<EntityEx>>> GetGroupedList(List<EntityEx> buildings)
@@ -818,31 +818,7 @@ namespace ForgeOfBots.Utils
       public T RequestType { get; set; }
       public Y argument2 { get; set; }
    }
-   public enum Eras
-   {
-      AllAge = 0,
-      NoAge = 0,
-      StoneAge = 1,
-      BronzeAge = 2,
-      IronAge = 3,
-      EarlyMiddleAge = 4,
-      HighMiddleAge = 5,
-      LateMiddleAge = 6,
-      ColonialAge = 7,
-      IndustrialAge = 8,
-      ProgressiveEra = 9,
-      ModernEra = 10,
-      PostModernEra = 11,
-      ContemporaryEra = 12,
-      TomorrowEra = 13,
-      FutureEra = 14,
-      ArcticFuture = 15,
-      OceanicFuture = 16,
-      VirtualFuture = 17,
-      SpaceAgeMars = 18,
-      SpaceAgeAsteroidBelt = 19,
-      SpaceAgeVenus = 20
-   };
+
 
    public delegate void CustomEvent(object sender, dynamic data = null);
 }

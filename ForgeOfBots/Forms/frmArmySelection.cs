@@ -33,8 +33,7 @@ namespace ForgeOfBots.Forms
          DebugWatch.Start("Fill");
          ListViewGroup group = null;
          string lastEra = "";
-         var list = ArmySelection.UnitList.Take(1).ToList();
-         list.AddRange(ArmySelection.UnitList.Skip(Math.Max(0, ArmySelection.UnitList.Count() - 3)));
+         var list = ArmySelection.UnitList.TakeSome(1, 3);
          Invoker.CallMethode(ArmySelection.lvArmy, () => ArmySelection.lvArmy.Items.Clear());
          Invoker.CallMethode(ArmySelection.lvSelectedArmy, () => ArmySelection.lvSelectedArmy.Items.Clear());
          foreach (KeyValuePair<string, List<Unit>> item in list)

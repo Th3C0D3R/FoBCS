@@ -1012,8 +1012,8 @@ namespace ForgeOfBots.Forms
          tsmiTestFunctions.Visible = true;
          tsmiTestFunctions.Enabled = true;
 #if RELEASE
-            tsmiTestFunctions.Visible = false;
-            tsmiTestFunctions.Enabled = false;
+         tsmiTestFunctions.Visible = false;
+         tsmiTestFunctions.Enabled = false;
 #endif
          toolStripSeparator1.Visible = false;
 
@@ -1910,7 +1910,8 @@ namespace ForgeOfBots.Forms
       }
       private void mbSaveReload_Click(object sender, EventArgs e)
       {
-
+         logger.Info($">>> PbCLose_Click");
+         if (MessageBox.Show(i18n.getString("GUI.Loading.Changing"), "", MessageBoxButtons.YesNo) == DialogResult.No) return;
          if (ListClass.BackgroundWorkers.Count > 0)
          {
             foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
@@ -1920,68 +1921,11 @@ namespace ForgeOfBots.Forms
             }
             ListClass.BackgroundWorkers.Clear();
          }
-
-         isLoading = true;
-         ShowLoadingForm();
-
          UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
-
-         driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com");
-         cookieJar = driver.Manage().Cookies;
-         StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
-         StaticData.BotData.CSRF = cookieJar.AllCookies.HasCookie("CSRF").Item2;
-         StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
-         StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
-
-         logger.Info($"Process Portraits");
-         ProcessPortraits();
-         logger.Info($"ExtractImages");
-         ImageExtractor ie = new ImageExtractor();
-         ie.GetGoodImages(UserData.WorldServer);
-         ie.GetUnitImages(UserData.WorldServer, new Utils.Size(50, 50));
-
-         if (!string.IsNullOrWhiteSpace(UserData.SerialKey))
-         {
-            logger.Info($"Init Premium if key exists");
-            BackgroundWorkerEX bwPremium = new BackgroundWorkerEX();
-            bwPremium.DoWork += CheckPremium;
-            bwPremium.RunWorkerCompleted += CheckPremiumComplete;
-            bwPremium.WorkerSupportsCancellation = true;
-            bwPremium.RunWorkerCompleted += workerComplete;
-            bwPremium.RunWorkerAsync();
-            ListClass.BackgroundWorkers.Add(bwPremium);
-         }
-
-         string loginJS = resMgr.GetString("preloadLoginWorld");
-         Log("[DEBUG] Doing Login", lbOutputWindow);
-         loginJS = loginJS
-            .Replace("###XSRF-TOKEN###", StaticData.BotData.XSRF)
-            .Replace("###USERNAME###", UserData.Username)
-            .Replace("###PASSWORD###", UserData.Password)
-            .Replace("##server##", UserData.WorldServer)
-          .Replace("##t##", "false")
-          .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
-         var x = jsExecutor.ExecuteAsyncScript(loginJS);
-         if (x != null)
-         {
-            var ret = (string)x;
-            driver.Navigate().GoToUrl(ret);
-            cookieJar = driver.Manage().Cookies;
-            jsExecutor = (IJavaScriptExecutor)driver;
-            StaticData.BotData.CID = cookieJar.AllCookies.HasCookie("CID").Item2;
-            StaticData.BotData.CSRF = cookieJar.AllCookies.HasCookie("CSRF").Item2;
-            StaticData.BotData.SID = cookieJar.AllCookies.HasCookie("SID").Item2;
-            StaticData.BotData.XSRF = cookieJar.AllCookies.HasCookie("XSRF-TOKEN").Item2;
-            ForgeHX.ForgeHXLoaded = false;
-            ListClass.ClearListClass();
-            GetUIDAndForgeHX(driver.PageSource);
-         }
-         else
-         {
-            Process.Start(Application.ExecutablePath);
-            Environment.Exit(0);
-         }
+         logger.Info($"<<< PbCLose_Click");
+         Application.Restart();
+         Environment.Exit(0);
       }
       private void McbNotifyProd_CheckedChanged(object sender, EventArgs e)
       {
@@ -3104,8 +3048,7 @@ namespace ForgeOfBots.Forms
          DebugWatch.Start("Fill");
          ListViewGroup group = null;
          string lastEra = "";
-         var list = ListClass.UnitListEraSorted.Take(1).ToList();
-         list.AddRange(ListClass.UnitListEraSorted.Skip(Math.Max(0, ListClass.UnitListEraSorted.Count() - 3)));
+         var list = ListClass.UnitListEraSorted.TakeSome(1, 3);
          Invoker.CallMethode(ucCurrentPool.lvArmy, () => ucCurrentPool.lvArmy.Items.Clear());
          Invoker.CallMethode(ucCurrentPool.lvSelectedArmy, () => ucCurrentPool.lvSelectedArmy.Items.Clear());
          ucCurrentPool.FillSelectedArmy(UserData.ArmySelection[UserData.LastWorld.Split('|')[0]]);
@@ -3493,7 +3436,7 @@ namespace ForgeOfBots.Forms
             var items = cbSector.Items;
             foreach (ProvinceEX item in items)
             {
-               index+=1;
+               index += 1;
                if (item.id.Value != ProvID) continue;
                ProvinceEX newItem = item;
                newItem.conquestProgress = ListClass.ProvincesGBG.Find(pgbg => pgbg.id == ProvID).conquestProgress;

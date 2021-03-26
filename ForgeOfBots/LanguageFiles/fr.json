@@ -63,7 +63,7 @@
     "GUI.Dashbord.Goods": "Ressources",
     "GUI.Dashbord.FPStock": "FP in Stock",
     "GUI.Loading.Wait": "Démarrage du Bot...\nAttendez!",
-    "GUI.Loading.Changing": "Changement de monde...\nBot may stuck sometime\nAttendez!",
+    "GUI.Loading.Changing": "Bot is restarting for World-Changing!\n\n[YES] to continue\n[NO] zo abort",
     "GUI.Social.Friends": "Amis",
     "GUI.Social.Clan": "Clan",
     "GUI.Social.Neighbor": "Voisin",

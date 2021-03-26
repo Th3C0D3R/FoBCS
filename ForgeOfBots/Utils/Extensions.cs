@@ -27,7 +27,7 @@ namespace ForgeOfBots.Utils
    }
    public static class Extensions
    {
-      public static (bool,int[]) HasIDs(this List<ProdListItem> list, params int[] ids)
+      public static (bool, int[]) HasIDs(this List<ProdListItem> list, params int[] ids)
       {
          int[] tmp = ids;
          bool hasID = false;
@@ -133,7 +133,7 @@ namespace ForgeOfBots.Utils
          }
          return (false, "");
       }
-      public static bool IsVersion(this System.Version version,string versionToCompare, bool SameOrGreater = false)
+      public static bool IsVersion(this System.Version version, string versionToCompare, bool SameOrGreater = false)
       {
          string[] versionsplit = versionToCompare.Split('.');
          if (SameOrGreater)
@@ -178,9 +178,13 @@ namespace ForgeOfBots.Utils
       }
       public static IEnumerable<T> TakeSome<T>(this IEnumerable<T> source, int first, int last)
       {
-         var s = source.Take(first).ToList();
-         s.AddRange(source.Skip(Math.Max(0, source.Count() - last)));
-         return s;
+         if (source.ToList().Count > last)
+         {
+            var s = source.Take(first).ToList();
+            s.AddRange(source.Skip(Math.Max(0, source.Count() - last)));
+            return s;
+         }
+         return source;
       }
    }
    /// <summary>

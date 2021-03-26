@@ -107,7 +107,7 @@ namespace ForgeOfBots.DataHandler
                      ListClass.Eras = rootResearch.reserach.ToList();
                      ResearchEra noage = new ResearchEra();
                      noage.era = "NoAge";
-                     noage.name = "Kein Zeitalter";
+                     noage.name = "---";
                      noage.__class__ = "ResearchEra";
                      ListClass.Eras.Insert(0, noage);
                      UpdatedSortedGoodList();
@@ -269,10 +269,8 @@ namespace ForgeOfBots.DataHandler
       public void UpdateSortedArmyList()
       {
          if (ListClass.UnitTypes.Count <= 0 || ListClass.Army.responseData == null) return;
-         var task1 = Task.Factory.StartNew(() => ListClass.UnitListEraSorted = Helper.GetUnitEraSorted(ListClass.Eras, ListClass.UnitTypes, ListClass.Army.responseData));
-         var task2 = Task.Factory.StartNew(() => ListClass.UnitList = Helper.GetUnitSorted(ListClass.UnitTypes, ListClass.Army.responseData));
-         task1.Wait();
-         task2.Wait();
+         ListClass.UnitListEraSorted = Helper.GetUnitEraSorted(ListClass.Eras, ListClass.UnitTypes, ListClass.Army.responseData);
+         ListClass.UnitList = Helper.GetUnitSorted(ListClass.UnitTypes, ListClass.Army.responseData);
       }
       public void UpdatedSortedGoodList()
       {
