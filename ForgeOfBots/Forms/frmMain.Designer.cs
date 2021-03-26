@@ -112,7 +112,7 @@ namespace ForgeOfBots.Forms
          this.lvMessages = new System.Windows.Forms.ListView();
          this.lvWSMessages = new System.Windows.Forms.ListBox();
          this.tpArmy = new System.Windows.Forms.TabPage();
-         this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+         this.tlpArmy = new System.Windows.Forms.TableLayoutPanel();
          this.panel3 = new System.Windows.Forms.Panel();
          this.lvArmy = new System.Windows.Forms.ListView();
          this.panel7 = new System.Windows.Forms.Panel();
@@ -282,7 +282,7 @@ namespace ForgeOfBots.Forms
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
          this.tSniper = new System.Windows.Forms.Timer(this.components);
-         this.ucCurrentPool = new ForgeOfBots.Forms.UserControls.ucBattle();
+         this.btnBuyAttempt = new System.Windows.Forms.Button();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -310,7 +310,7 @@ namespace ForgeOfBots.Forms
          this.tpMessageCenter.SuspendLayout();
          this.tableLayoutPanel15.SuspendLayout();
          this.tpArmy.SuspendLayout();
-         this.tableLayoutPanel13.SuspendLayout();
+         this.tlpArmy.SuspendLayout();
          this.panel3.SuspendLayout();
          this.panel7.SuspendLayout();
          this.tableLayoutPanel17.SuspendLayout();
@@ -1015,26 +1015,25 @@ namespace ForgeOfBots.Forms
          // 
          // tpArmy
          // 
-         this.tpArmy.Controls.Add(this.tableLayoutPanel13);
+         this.tpArmy.Controls.Add(this.tlpArmy);
          resources.ApplyResources(this.tpArmy, "tpArmy");
          this.tpArmy.Name = "tpArmy";
          this.tpArmy.Tag = "GUI.Army";
          this.tpArmy.UseVisualStyleBackColor = true;
          // 
-         // tableLayoutPanel13
+         // tlpArmy
          // 
-         resources.ApplyResources(this.tableLayoutPanel13, "tableLayoutPanel13");
-         this.tableLayoutPanel13.Controls.Add(this.panel3, 1, 0);
-         this.tableLayoutPanel13.Controls.Add(this.panel7, 0, 0);
-         this.tableLayoutPanel13.Controls.Add(this.ucCurrentPool, 0, 1);
-         this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+         resources.ApplyResources(this.tlpArmy, "tlpArmy");
+         this.tlpArmy.Controls.Add(this.panel3, 1, 0);
+         this.tlpArmy.Controls.Add(this.panel7, 0, 0);
+         this.tlpArmy.Name = "tlpArmy";
          // 
          // panel3
          // 
          this.panel3.Controls.Add(this.lvArmy);
          resources.ApplyResources(this.panel3, "panel3");
          this.panel3.Name = "panel3";
-         this.tableLayoutPanel13.SetRowSpan(this.panel3, 2);
+         this.tlpArmy.SetRowSpan(this.panel3, 2);
          // 
          // lvArmy
          // 
@@ -1319,6 +1318,7 @@ namespace ForgeOfBots.Forms
          // panel8
          // 
          this.tlpBattle.SetColumnSpan(this.panel8, 2);
+         this.panel8.Controls.Add(this.btnBuyAttempt);
          this.panel8.Controls.Add(this.lblResult);
          resources.ApplyResources(this.panel8, "panel8");
          this.panel8.Name = "panel8";
@@ -2369,14 +2369,12 @@ namespace ForgeOfBots.Forms
          this.tSniper.Interval = 3600000;
          this.tSniper.Tick += new System.EventHandler(this.TSniper_Tick);
          // 
-         // ucCurrentPool
+         // btnBuyAttempt
          // 
-         this.ucCurrentPool.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-         resources.ApplyResources(this.ucCurrentPool, "ucCurrentPool");
-         this.ucCurrentPool.imgList = null;
-         this.ucCurrentPool.Name = "ucCurrentPool";
-         this.ucCurrentPool.UnitList = ((System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<ForgeOfBots.GameClasses.ResponseClasses.Unit>>)(resources.GetObject("ucCurrentPool.UnitList")));
-         this.ucCurrentPool.SubmitArmy += new ForgeOfBots.Utils.CustomEvent(this.UcCurrentPool_SubmitArmy);
+         resources.ApplyResources(this.btnBuyAttempt, "btnBuyAttempt");
+         this.btnBuyAttempt.Name = "btnBuyAttempt";
+         this.btnBuyAttempt.UseVisualStyleBackColor = true;
+         this.btnBuyAttempt.Click += new System.EventHandler(this.BtnBuyAttempt_Click);
          // 
          // frmMain
          // 
@@ -2423,7 +2421,7 @@ namespace ForgeOfBots.Forms
          this.tpMessageCenter.ResumeLayout(false);
          this.tableLayoutPanel15.ResumeLayout(false);
          this.tpArmy.ResumeLayout(false);
-         this.tableLayoutPanel13.ResumeLayout(false);
+         this.tlpArmy.ResumeLayout(false);
          this.panel3.ResumeLayout(false);
          this.panel7.ResumeLayout(false);
          this.tableLayoutPanel17.ResumeLayout(false);
@@ -2687,7 +2685,7 @@ namespace ForgeOfBots.Forms
       private MetroFramework.Controls.MetroLabel metroLabel17;
       private MetroFramework.Controls.MetroCheckBox mcbNotifyProd;
       private MetroFramework.Controls.MetroCheckBox mcbNotifySnip;
-      private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+      private System.Windows.Forms.TableLayoutPanel tlpArmy;
       private System.Windows.Forms.Panel panel3;
       private System.Windows.Forms.ListView lvArmy;
       private System.Windows.Forms.ListView lvMessages;
@@ -2742,6 +2740,6 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Label lblCurrentAttrition;
       private System.Windows.Forms.Label lblCurrentMultiplier;
       private System.Windows.Forms.Button btnReloadGBG;
-      private UserControls.ucBattle ucCurrentPool;
+      private System.Windows.Forms.Button btnBuyAttempt;
    }
 }

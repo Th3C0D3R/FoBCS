@@ -15,6 +15,7 @@
     "GUI.Battle.GEX.ChestOpen": "Open",
     "GUI.Battle.GEX.Chest": "CHEST",
     "GUI.Battle.GEX.Tries": "Attempts:",
+    "GUI.Battle.GEX.BuyAttempt": "Buy GEX Attempt",
     "GUI.Battle.Result": "Result:",
     "GUI.GEX.Battle.Won": "WON!",
     "GUI.GEX.Battle.Lost": "LOST!",

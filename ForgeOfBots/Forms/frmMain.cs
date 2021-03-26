@@ -59,6 +59,7 @@ namespace ForgeOfBots.Forms
       Loading LoadingFrm = null;
       private int CBSectorIndex = 0;
       private int FightCounter = 0;
+      ucBattle ucCurrentPool = null;
 
       public frmMain() { }
       public frmMain(string[] args)
@@ -187,6 +188,7 @@ namespace ForgeOfBots.Forms
             logger.Info($"check available languages");
             Task.Factory.StartNew(CheckLanguages).Wait();
             InitializeComponent();
+            FillArmyControl();
             i18n.TranslateForm();
             i18n.TranslateCMS(cmsMainMenu);
             logger.Info($"check for updates");
@@ -219,6 +221,19 @@ namespace ForgeOfBots.Forms
          }
          logger.Info($"<<< Init()");
       }
+
+      private void FillArmyControl()
+      {
+         if (tlpArmy.Controls.Contains(ucCurrentPool)) return;
+         ucCurrentPool = new ucBattle();
+         ucCurrentPool.Dock = DockStyle.Fill;
+         ucCurrentPool.BorderStyle = BorderStyle.FixedSingle;
+         ucCurrentPool.SubmitArmy += new CustomEvent(UcCurrentPool_SubmitArmy);
+         ucCurrentPool.Name = "ucCurrentPool";
+         ucCurrentPool.imgList = null;
+         tlpArmy.Controls.Add(ucCurrentPool, 0, 1);
+      }
+
       private void Usi_UserDataEntered(string username, string password, string server)
       {
          logger.Info($">>> Usi_UserDataEntered");
@@ -3741,7 +3756,7 @@ namespace ForgeOfBots.Forms
          }
          Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, true);
       }
-      
+
       private void SubmitGBGArmy(object sender, dynamic data = null)
       {
          List<string> list = (List<string>)data;
@@ -3783,6 +3798,22 @@ namespace ForgeOfBots.Forms
          {
             var prov = (ProvinceEX)cbSector.Invoke(new Func<ProvinceEX>(() => (ProvinceEX)cbSector.SelectedItem));
             Invoker.SetProperty(nudCount, () => nudCount.Value, prov.OwnProgress.maxProgress);
+         }
+      }
+      private void BtnBuyAttempt_Click(object sender, EventArgs e)
+      {
+         if (GEXHelper.BuyNextAttempt())
+         {
+            Updater.UpdateResources();
+            Updater.UpdateInventory();
+            ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
+            int GexTries = ListClass.GoodsDict[noAge.name].Find(g => g.good_id == "guild_expedition_attempt").value;
+            string GEXTriesText = "";
+            if (!GEXHelper.IsCurrentStateChest)
+            {
+               GEXTriesText = $"{i18n.getString("GUI.Battle.GEX.Tries")} {GexTries}";
+            }
+            Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {GEXHelper.GetCurrentState} {(GEXHelper.IsCurrentStateChest ? i18n.getString("GUI.Battle.GEX.Chest") : "")} {GEXTriesText}");
          }
       }
       #endregion

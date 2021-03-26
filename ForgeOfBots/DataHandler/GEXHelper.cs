@@ -193,6 +193,7 @@ namespace ForgeOfBots.DataHandler
       }
       public static bool BuyNextAttempt()
       {
+         if (GEXOverview.state.Equals("inactive") || GetCurrentState == -1) return false;
          string script = ReqBuilder.GetRequestScript(RequestType.getContexts, "guildExpedition");
          var ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
          GetBuyContext buyContext = JsonConvert.DeserializeObject<GetBuyContext>(ret);
