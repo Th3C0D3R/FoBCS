@@ -43,6 +43,8 @@ To contribute a translation do the following:
 5. Create a Pull-Request as soon as your done and wait for response
 6. The new Language will be added to the Bot dynamically and does not need a new version update
 
+## Images
+https://imgur.com/a/OQQj2cB
 
 ## Donation
 Don't want to buy premium but want to support me?
@@ -56,10 +58,10 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5NDEwMzc0MCwtODUyMzIxODc3LC0xMj
-U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
-MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
-QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
-OTg5MTYwLDkyMDE2ODI4Niw3Njk2MDI2NDgsLTcyODQwMDU2XX
-0=
+eyJoaXN0b3J5IjpbMTY1MjQxNTY3MSwxNzk0MTAzNzQwLC04NT
+IzMjE4NzcsLTEyNTY5MzAzMCwxNTY4NDgyMzIzLC0yMDY3NzY3
+OTc3LC0xMTc4MTAwNzA1LC0xODI5ODY0NDUwLC01NTc2MTc0Nj
+QsLTUwMzM2NTIzNCwtODQxNTkzNjQ4LDIxMzg4NzAzNDUsMzUy
+OTIxNjMyLDExOTM5ODkxNjAsOTIwMTY4Mjg2LDc2OTYwMjY0OC
+wtNzI4NDAwNTZdfQ==
 -->
