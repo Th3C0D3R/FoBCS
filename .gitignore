@@ -248,3 +248,9 @@ paket-files/
 
 /.git/
 UCPremiumLibrary/UCPremiumLibrary.csproj
+/ForgeOfBots/LanguageFiles/Newtonsoft.Json.dll
+/ForgeOfBots/LanguageFiles/JSONSplitter.runtimeconfig.json
+/ForgeOfBots/LanguageFiles/JSONSplitter.runtimeconfig.dev.json
+/ForgeOfBots/LanguageFiles/JSONSplitter.exe
+/ForgeOfBots/LanguageFiles/JSONSplitter.dll
+/ForgeOfBots/LanguageFiles/JSONSplitter.deps.json

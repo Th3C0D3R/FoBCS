@@ -74,7 +74,14 @@ namespace ForgeOfBots.Utils
       {
          try
          {
-            string s = jsonObject["items"][key].ToString();
+            var Keys = key.Split('.');
+            dynamic currentObject = jsonObject["items"];
+            for (int i = 0; i < Keys.Length; i++)
+            {
+               if (currentObject[Keys[i]] != null)
+                  currentObject = currentObject[Keys[i]];
+            }
+            string s = currentObject.ToString();
             foreach (KeyValuePair<string, string> item in param)
             {
                s = s.Replace(item.Key, item.Value);

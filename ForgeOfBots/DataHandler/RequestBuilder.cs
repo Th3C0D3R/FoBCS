@@ -299,6 +299,7 @@ namespace ForgeOfBots.DataHandler
                _data = new JArray(new JArray(sData));
                _class = "ResourceShopService";
                _methode = "getContexts";
+               doHack = true;
                break;
             case RequestType.getDifficulties:
                _data = new JArray();
@@ -345,6 +346,8 @@ namespace ForgeOfBots.DataHandler
                jsonString = jsonString.Replace("\"requestData\":[", "\"requestData\":[[").Replace("],\"requestClass\"", "]],\"requestClass\"");
             else if (type == RequestType.contributeForgePoints)
                jsonString = jsonString.Replace(",0]", ",false]");
+            else if(type == RequestType.getContexts)
+               jsonString = jsonString.Replace("[\"guildExpedition\"]", "[[\"guildExpedition\"]]");
          }
          //Console.WriteLine(jsonString);
          RequestScript = RequestScript

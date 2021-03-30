@@ -18,7 +18,8 @@ namespace ForgeOfBots.GameClasses.ResponseClasses
       public EntityEx entity = null;
       public string Name = "";
       public string Value = "";
-
+      public int Priority = 999;
+      public Helper.Priority Type = Helper.Priority.NoMatter;
       public override string ToString()
       {
          return $"{Name} ({Value})";

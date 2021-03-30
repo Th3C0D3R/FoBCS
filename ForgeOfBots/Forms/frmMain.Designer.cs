@@ -151,6 +151,7 @@ namespace ForgeOfBots.Forms
          this.lvWave = new System.Windows.Forms.ListView();
          this.btnDoGEXAction = new System.Windows.Forms.Button();
          this.panel8 = new System.Windows.Forms.Panel();
+         this.btnBuyAttempt = new System.Windows.Forms.Button();
          this.lblResult = new System.Windows.Forms.Label();
          this.tpProduction = new System.Windows.Forms.TabPage();
          this.pnlGood = new System.Windows.Forms.Panel();
@@ -196,6 +197,8 @@ namespace ForgeOfBots.Forms
          this.tpSettings = new System.Windows.Forms.TabPage();
          this.mtcSettings = new MetroFramework.Controls.MetroTabControl();
          this.mtpProduction = new MetroFramework.Controls.MetroTabPage();
+         this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+         this.mcbBlueGalaxiePrio = new MetroFramework.Controls.MetroComboBox();
          this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
          this.mtBuyAttempts = new MetroFramework.Controls.MetroToggle();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -231,6 +234,24 @@ namespace ForgeOfBots.Forms
          this.mlToggleProduction = new MetroFramework.Controls.MetroLabel();
          this.mlToggleView = new MetroFramework.Controls.MetroLabel();
          this.mtView = new MetroFramework.Controls.MetroToggle();
+         this.mtpBots = new MetroFramework.Controls.MetroTabPage();
+         this.mcbNotifySnip = new MetroFramework.Controls.MetroCheckBox();
+         this.mcbNotifyProd = new MetroFramework.Controls.MetroCheckBox();
+         this.mtSnipBot = new MetroFramework.Controls.MetroToggle();
+         this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
+         this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
+         this.mtbIntervalIncident = new MetroFramework.Controls.MetroTextBox();
+         this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
+         this.mtRQBot = new MetroFramework.Controls.MetroToggle();
+         this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
+         this.mtIncident = new MetroFramework.Controls.MetroToggle();
+         this.mtMoppel = new MetroFramework.Controls.MetroToggle();
+         this.mtTavern = new MetroFramework.Controls.MetroToggle();
+         this.mtProduction = new MetroFramework.Controls.MetroToggle();
+         this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+         this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
+         this.mlTavernBot = new MetroFramework.Controls.MetroLabel();
+         this.mlProdBot = new MetroFramework.Controls.MetroLabel();
          this.mtpMisc = new MetroFramework.Controls.MetroTabPage();
          this.mtbTelegramUsername = new MetroFramework.Controls.MetroTextBox();
          this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
@@ -253,24 +274,6 @@ namespace ForgeOfBots.Forms
          this.mcbCitySelection = new MetroFramework.Controls.MetroComboBox();
          this.mbDeleteData = new MetroFramework.Controls.MetroButton();
          this.lblDeleteData = new MetroFramework.Controls.MetroLabel();
-         this.mtpBots = new MetroFramework.Controls.MetroTabPage();
-         this.mcbNotifySnip = new MetroFramework.Controls.MetroCheckBox();
-         this.mcbNotifyProd = new MetroFramework.Controls.MetroCheckBox();
-         this.mtSnipBot = new MetroFramework.Controls.MetroToggle();
-         this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
-         this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
-         this.mtbIntervalIncident = new MetroFramework.Controls.MetroTextBox();
-         this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
-         this.mtRQBot = new MetroFramework.Controls.MetroToggle();
-         this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
-         this.mtIncident = new MetroFramework.Controls.MetroToggle();
-         this.mtMoppel = new MetroFramework.Controls.MetroToggle();
-         this.mtTavern = new MetroFramework.Controls.MetroToggle();
-         this.mtProduction = new MetroFramework.Controls.MetroToggle();
-         this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
-         this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-         this.mlTavernBot = new MetroFramework.Controls.MetroLabel();
-         this.mlProdBot = new MetroFramework.Controls.MetroLabel();
          this.mtpPremium = new MetroFramework.Controls.MetroTabPage();
          this.mbCheckSerial = new MetroFramework.Controls.MetroButton();
          this.lblSerialKey = new MetroFramework.Controls.MetroLabel();
@@ -282,7 +285,6 @@ namespace ForgeOfBots.Forms
          this.bwUptime = new System.ComponentModel.BackgroundWorker();
          this.bwScriptExecuterOneArg = new System.ComponentModel.BackgroundWorker();
          this.tSniper = new System.Windows.Forms.Timer(this.components);
-         this.btnBuyAttempt = new System.Windows.Forms.Button();
          this.metroPanel1.SuspendLayout();
          this.metroPanel2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pbminimize)).BeginInit();
@@ -354,9 +356,9 @@ namespace ForgeOfBots.Forms
          ((System.ComponentModel.ISupportInitialize)(this.nudMinProfit)).BeginInit();
          this.mpGoodCycle.SuspendLayout();
          this.mpProdCycle.SuspendLayout();
+         this.mtpBots.SuspendLayout();
          this.mtpMisc.SuspendLayout();
          this.mtpData.SuspendLayout();
-         this.mtpBots.SuspendLayout();
          this.mtpPremium.SuspendLayout();
          this.tpHelp.SuspendLayout();
          this.panel1.SuspendLayout();
@@ -635,7 +637,7 @@ namespace ForgeOfBots.Forms
          this.tpDashbord.Controls.Add(this.gbStatistic);
          resources.ApplyResources(this.tpDashbord, "tpDashbord");
          this.tpDashbord.Name = "tpDashbord";
-         this.tpDashbord.Tag = "GUI.Dashbord";
+         this.tpDashbord.Tag = "GUI.Dashbord.Header";
          // 
          // gbGoods
          // 
@@ -764,7 +766,7 @@ namespace ForgeOfBots.Forms
          this.tpSocial.Controls.Add(this.panel4);
          resources.ApplyResources(this.tpSocial, "tpSocial");
          this.tpSocial.Name = "tpSocial";
-         this.tpSocial.Tag = "GUI.Social";
+         this.tpSocial.Tag = "GUI.Social.Header";
          this.tpSocial.UseVisualStyleBackColor = true;
          // 
          // panel5
@@ -894,7 +896,7 @@ namespace ForgeOfBots.Forms
          this.tpTavern.Controls.Add(this.panel6);
          resources.ApplyResources(this.tpTavern, "tpTavern");
          this.tpTavern.Name = "tpTavern";
-         this.tpTavern.Tag = "GUI.Tavern";
+         this.tpTavern.Tag = "GUI.Tavern.Header";
          this.tpTavern.UseVisualStyleBackColor = true;
          // 
          // tlpCurrentSittingPlayer
@@ -987,7 +989,7 @@ namespace ForgeOfBots.Forms
          this.tpMessageCenter.Controls.Add(this.tableLayoutPanel15);
          resources.ApplyResources(this.tpMessageCenter, "tpMessageCenter");
          this.tpMessageCenter.Name = "tpMessageCenter";
-         this.tpMessageCenter.Tag = "GUI.MessageCenter";
+         this.tpMessageCenter.Tag = "GUI.MessageCenter.Header";
          this.tpMessageCenter.UseVisualStyleBackColor = true;
          // 
          // tableLayoutPanel15
@@ -1018,7 +1020,7 @@ namespace ForgeOfBots.Forms
          this.tpArmy.Controls.Add(this.tlpArmy);
          resources.ApplyResources(this.tpArmy, "tpArmy");
          this.tpArmy.Name = "tpArmy";
-         this.tpArmy.Tag = "GUI.Army";
+         this.tpArmy.Tag = "GUI.Army.Header";
          this.tpArmy.UseVisualStyleBackColor = true;
          // 
          // tlpArmy
@@ -1090,7 +1092,7 @@ namespace ForgeOfBots.Forms
          this.tpBattle.Controls.Add(this.tlpBattle);
          resources.ApplyResources(this.tpBattle, "tpBattle");
          this.tpBattle.Name = "tpBattle";
-         this.tpBattle.Tag = "GUI.Battle";
+         this.tpBattle.Tag = "GUI.Battle.Header.Title";
          this.tpBattle.UseVisualStyleBackColor = true;
          // 
          // tlpBattle
@@ -1269,7 +1271,7 @@ namespace ForgeOfBots.Forms
          // 
          resources.ApplyResources(this.label2, "label2");
          this.label2.Name = "label2";
-         this.label2.Tag = "GUI.Battle.Header.GVG";
+         this.label2.Tag = "GUI.Battle.Header.GBG";
          // 
          // tableLayoutPanel16
          // 
@@ -1323,6 +1325,14 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.panel8, "panel8");
          this.panel8.Name = "panel8";
          // 
+         // btnBuyAttempt
+         // 
+         resources.ApplyResources(this.btnBuyAttempt, "btnBuyAttempt");
+         this.btnBuyAttempt.Name = "btnBuyAttempt";
+         this.btnBuyAttempt.Tag = "GUI.Battle.GEX.BuyAttempt";
+         this.btnBuyAttempt.UseVisualStyleBackColor = true;
+         this.btnBuyAttempt.Click += new System.EventHandler(this.BtnBuyAttempt_Click);
+         // 
          // lblResult
          // 
          resources.ApplyResources(this.lblResult, "lblResult");
@@ -1337,7 +1347,7 @@ namespace ForgeOfBots.Forms
          this.tpProduction.Controls.Add(this.panel9);
          resources.ApplyResources(this.tpProduction, "tpProduction");
          this.tpProduction.Name = "tpProduction";
-         this.tpProduction.Tag = "GUI.Production";
+         this.tpProduction.Tag = "GUI.Production.Header";
          this.tpProduction.UseVisualStyleBackColor = true;
          // 
          // pnlGood
@@ -1512,7 +1522,7 @@ namespace ForgeOfBots.Forms
          this.tpCity.Controls.Add(this.tableLayoutPanel2);
          resources.ApplyResources(this.tpCity, "tpCity");
          this.tpCity.Name = "tpCity";
-         this.tpCity.Tag = "GUI.City";
+         this.tpCity.Tag = "GUI.City.Header";
          this.tpCity.UseVisualStyleBackColor = true;
          // 
          // tableLayoutPanel2
@@ -1562,14 +1572,14 @@ namespace ForgeOfBots.Forms
          this.metroLabel7.FontSize = MetroFramework.MetroLabelSize.Tall;
          this.metroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Bold;
          this.metroLabel7.Name = "metroLabel7";
-         this.metroLabel7.Tag = "GUI.UnderConstruction";
+         this.metroLabel7.Tag = "GUI.UnderConstruction.Header";
          // 
          // tpSniper
          // 
          this.tpSniper.Controls.Add(this.tableLayoutPanel6);
          resources.ApplyResources(this.tpSniper, "tpSniper");
          this.tpSniper.Name = "tpSniper";
-         this.tpSniper.Tag = "GUI.Sniper";
+         this.tpSniper.Tag = "GUI.Sniper.Header";
          this.tpSniper.UseVisualStyleBackColor = true;
          // 
          // tableLayoutPanel6
@@ -1630,15 +1640,15 @@ namespace ForgeOfBots.Forms
          this.tpSettings.Controls.Add(this.mtcSettings);
          resources.ApplyResources(this.tpSettings, "tpSettings");
          this.tpSettings.Name = "tpSettings";
-         this.tpSettings.Tag = "GUI.Settings";
+         this.tpSettings.Tag = "GUI.Settings.Header";
          this.tpSettings.UseVisualStyleBackColor = true;
          // 
          // mtcSettings
          // 
          this.mtcSettings.Controls.Add(this.mtpProduction);
+         this.mtcSettings.Controls.Add(this.mtpBots);
          this.mtcSettings.Controls.Add(this.mtpMisc);
          this.mtcSettings.Controls.Add(this.mtpData);
-         this.mtcSettings.Controls.Add(this.mtpBots);
          this.mtcSettings.Controls.Add(this.mtpPremium);
          resources.ApplyResources(this.mtcSettings, "mtcSettings");
          this.mtcSettings.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
@@ -1649,6 +1659,8 @@ namespace ForgeOfBots.Forms
          // 
          // mtpProduction
          // 
+         this.mtpProduction.Controls.Add(this.metroLabel4);
+         this.mtpProduction.Controls.Add(this.mcbBlueGalaxiePrio);
          this.mtpProduction.Controls.Add(this.metroLabel5);
          this.mtpProduction.Controls.Add(this.mtBuyAttempts);
          this.mtpProduction.Controls.Add(this.groupBox2);
@@ -1664,8 +1676,21 @@ namespace ForgeOfBots.Forms
          this.mtpProduction.HorizontalScrollbarBarColor = true;
          resources.ApplyResources(this.mtpProduction, "mtpProduction");
          this.mtpProduction.Name = "mtpProduction";
-         this.mtpProduction.Tag = "GUI.Settings.Production";
+         this.mtpProduction.Tag = "GUI.Settings.Production.Header";
          this.mtpProduction.VerticalScrollbarBarColor = true;
+         // 
+         // metroLabel4
+         // 
+         resources.ApplyResources(this.metroLabel4, "metroLabel4");
+         this.metroLabel4.Name = "metroLabel4";
+         this.metroLabel4.Tag = "GUI.Settings.Production.BGPrioList";
+         // 
+         // mcbBlueGalaxiePrio
+         // 
+         this.mcbBlueGalaxiePrio.FormattingEnabled = true;
+         resources.ApplyResources(this.mcbBlueGalaxiePrio, "mcbBlueGalaxiePrio");
+         this.mcbBlueGalaxiePrio.Name = "mcbBlueGalaxiePrio";
+         this.mcbBlueGalaxiePrio.SelectedIndexChanged += new System.EventHandler(this.McbBlueGalaxiePrio_SelectedIndexChanged);
          // 
          // metroLabel5
          // 
@@ -1748,7 +1773,7 @@ namespace ForgeOfBots.Forms
          resources.ApplyResources(this.mcbAutoInvest, "mcbAutoInvest");
          this.mcbAutoInvest.CustomBackground = true;
          this.mcbAutoInvest.Name = "mcbAutoInvest";
-         this.mcbAutoInvest.Tag = "GUI.Settings.Production.AutoSnip.AutoInvest";
+         this.mcbAutoInvest.Tag = "GUI.Settings.Production.AutoSnip.AutoInvest.Header";
          this.mcbAutoInvest.UseVisualStyleBackColor = true;
          this.mcbAutoInvest.CheckedChanged += new System.EventHandler(this.McbAutoInvest_CheckedChanged);
          // 
@@ -1972,6 +1997,152 @@ namespace ForgeOfBots.Forms
          this.mtView.UseVisualStyleBackColor = false;
          this.mtView.CheckedChanged += new System.EventHandler(this.mtView_CheckedChanged);
          // 
+         // mtpBots
+         // 
+         this.mtpBots.Controls.Add(this.mcbNotifySnip);
+         this.mtpBots.Controls.Add(this.mcbNotifyProd);
+         this.mtpBots.Controls.Add(this.mtSnipBot);
+         this.mtpBots.Controls.Add(this.metroLabel16);
+         this.mtpBots.Controls.Add(this.metroLabel14);
+         this.mtpBots.Controls.Add(this.mtbIntervalIncident);
+         this.mtpBots.Controls.Add(this.metroLabel13);
+         this.mtpBots.Controls.Add(this.mtRQBot);
+         this.mtpBots.Controls.Add(this.metroLabel10);
+         this.mtpBots.Controls.Add(this.mtIncident);
+         this.mtpBots.Controls.Add(this.mtMoppel);
+         this.mtpBots.Controls.Add(this.mtTavern);
+         this.mtpBots.Controls.Add(this.mtProduction);
+         this.mtpBots.Controls.Add(this.metroLabel9);
+         this.mtpBots.Controls.Add(this.metroLabel8);
+         this.mtpBots.Controls.Add(this.mlTavernBot);
+         this.mtpBots.Controls.Add(this.mlProdBot);
+         this.mtpBots.HorizontalScrollbarBarColor = true;
+         resources.ApplyResources(this.mtpBots, "mtpBots");
+         this.mtpBots.Name = "mtpBots";
+         this.mtpBots.Tag = "GUI.Settings.Bots.Header";
+         this.mtpBots.VerticalScrollbarBarColor = true;
+         // 
+         // mcbNotifySnip
+         // 
+         resources.ApplyResources(this.mcbNotifySnip, "mcbNotifySnip");
+         this.mcbNotifySnip.BackColor = System.Drawing.SystemColors.Control;
+         this.mcbNotifySnip.Checked = true;
+         this.mcbNotifySnip.CheckState = System.Windows.Forms.CheckState.Checked;
+         this.mcbNotifySnip.CustomBackground = true;
+         this.mcbNotifySnip.Name = "mcbNotifySnip";
+         this.mcbNotifySnip.Tag = "GUI.Settings.Bots.SnipBot.Notify";
+         this.mcbNotifySnip.UseVisualStyleBackColor = false;
+         this.mcbNotifySnip.CheckedChanged += new System.EventHandler(this.McbNotifySnip_CheckedChanged);
+         // 
+         // mcbNotifyProd
+         // 
+         resources.ApplyResources(this.mcbNotifyProd, "mcbNotifyProd");
+         this.mcbNotifyProd.BackColor = System.Drawing.SystemColors.Control;
+         this.mcbNotifyProd.Checked = true;
+         this.mcbNotifyProd.CheckState = System.Windows.Forms.CheckState.Checked;
+         this.mcbNotifyProd.CustomBackground = true;
+         this.mcbNotifyProd.Name = "mcbNotifyProd";
+         this.mcbNotifyProd.Tag = "GUI.Settings.Bots.ProdBot.Notify";
+         this.mcbNotifyProd.UseVisualStyleBackColor = false;
+         this.mcbNotifyProd.CheckedChanged += new System.EventHandler(this.McbNotifyProd_CheckedChanged);
+         // 
+         // mtSnipBot
+         // 
+         resources.ApplyResources(this.mtSnipBot, "mtSnipBot");
+         this.mtSnipBot.Name = "mtSnipBot";
+         this.mtSnipBot.UseVisualStyleBackColor = true;
+         this.mtSnipBot.CheckedChanged += new System.EventHandler(this.mtSnipBot_CheckedChanged);
+         // 
+         // metroLabel16
+         // 
+         resources.ApplyResources(this.metroLabel16, "metroLabel16");
+         this.metroLabel16.Name = "metroLabel16";
+         this.metroLabel16.Tag = "GUI.Settings.Bots.SnipBot.Header";
+         // 
+         // metroLabel14
+         // 
+         resources.ApplyResources(this.metroLabel14, "metroLabel14");
+         this.metroLabel14.Name = "metroLabel14";
+         this.metroLabel14.Tag = "GUI.Settings.Bots.IntervalHours";
+         // 
+         // mtbIntervalIncident
+         // 
+         resources.ApplyResources(this.mtbIntervalIncident, "mtbIntervalIncident");
+         this.mtbIntervalIncident.Name = "mtbIntervalIncident";
+         this.mtbIntervalIncident.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+         this.mtbIntervalIncident.TextChanged += new System.EventHandler(this.MtbIntervalIncident_TextChanged);
+         // 
+         // metroLabel13
+         // 
+         resources.ApplyResources(this.metroLabel13, "metroLabel13");
+         this.metroLabel13.Name = "metroLabel13";
+         this.metroLabel13.Tag = "GUI.Settings.Bots.Interval";
+         // 
+         // mtRQBot
+         // 
+         resources.ApplyResources(this.mtRQBot, "mtRQBot");
+         this.mtRQBot.Name = "mtRQBot";
+         this.mtRQBot.UseVisualStyleBackColor = true;
+         this.mtRQBot.CheckedChanged += new System.EventHandler(this.mtRQBot_CheckedChanged);
+         // 
+         // metroLabel10
+         // 
+         resources.ApplyResources(this.metroLabel10, "metroLabel10");
+         this.metroLabel10.Name = "metroLabel10";
+         this.metroLabel10.Tag = "GUI.Settings.Bots.RQBot";
+         // 
+         // mtIncident
+         // 
+         resources.ApplyResources(this.mtIncident, "mtIncident");
+         this.mtIncident.Name = "mtIncident";
+         this.mtIncident.UseVisualStyleBackColor = true;
+         this.mtIncident.CheckedChanged += new System.EventHandler(this.mtIncident_CheckedChanged);
+         // 
+         // mtMoppel
+         // 
+         resources.ApplyResources(this.mtMoppel, "mtMoppel");
+         this.mtMoppel.Name = "mtMoppel";
+         this.mtMoppel.UseVisualStyleBackColor = true;
+         this.mtMoppel.CheckedChanged += new System.EventHandler(this.mtMoppel_CheckedChanged);
+         // 
+         // mtTavern
+         // 
+         resources.ApplyResources(this.mtTavern, "mtTavern");
+         this.mtTavern.Name = "mtTavern";
+         this.mtTavern.UseVisualStyleBackColor = true;
+         this.mtTavern.CheckedChanged += new System.EventHandler(this.mtTavern_CheckedChanged);
+         // 
+         // mtProduction
+         // 
+         resources.ApplyResources(this.mtProduction, "mtProduction");
+         this.mtProduction.Name = "mtProduction";
+         this.mtProduction.UseVisualStyleBackColor = true;
+         this.mtProduction.CheckedChanged += new System.EventHandler(this.mtProduction_CheckedChanged);
+         // 
+         // metroLabel9
+         // 
+         resources.ApplyResources(this.metroLabel9, "metroLabel9");
+         this.metroLabel9.Name = "metroLabel9";
+         this.metroLabel9.Tag = "GUI.Settings.Bots.IncidentBot";
+         // 
+         // metroLabel8
+         // 
+         resources.ApplyResources(this.metroLabel8, "metroLabel8");
+         this.metroLabel8.Name = "metroLabel8";
+         this.metroLabel8.Tag = "GUI.Settings.Bots.MoppelBot";
+         // 
+         // mlTavernBot
+         // 
+         resources.ApplyResources(this.mlTavernBot, "mlTavernBot");
+         this.mlTavernBot.Name = "mlTavernBot";
+         this.mlTavernBot.Tag = "GUI.Settings.Bots.TavernBot";
+         // 
+         // mlProdBot
+         // 
+         resources.ApplyResources(this.mlProdBot, "mlProdBot");
+         this.mlProdBot.Name = "mlProdBot";
+         this.mlProdBot.Tag = "GUI.Settings.Bots.ProdBot.Header";
+         // 
          // mtpMisc
          // 
          this.mtpMisc.Controls.Add(this.mtbTelegramUsername);
@@ -1991,7 +2162,7 @@ namespace ForgeOfBots.Forms
          this.mtpMisc.HorizontalScrollbarBarColor = true;
          resources.ApplyResources(this.mtpMisc, "mtpMisc");
          this.mtpMisc.Name = "mtpMisc";
-         this.mtpMisc.Tag = "GUI.Settings.Misc";
+         this.mtpMisc.Tag = "GUI.Settings.Misc.Header";
          this.mtpMisc.VerticalScrollbarBarColor = true;
          // 
          // mtbTelegramUsername
@@ -2098,7 +2269,7 @@ namespace ForgeOfBots.Forms
          this.mtpData.HorizontalScrollbarBarColor = true;
          resources.ApplyResources(this.mtpData, "mtpData");
          this.mtpData.Name = "mtpData";
-         this.mtpData.Tag = "GUI.Settings.UserData";
+         this.mtpData.Tag = "GUI.Settings.UserData.Header";
          this.mtpData.VerticalScrollbarBarColor = true;
          // 
          // metroLabel11
@@ -2145,152 +2316,6 @@ namespace ForgeOfBots.Forms
          this.lblDeleteData.Name = "lblDeleteData";
          this.lblDeleteData.Tag = "GUI.Settings.UserData.DeleteData";
          // 
-         // mtpBots
-         // 
-         this.mtpBots.Controls.Add(this.mcbNotifySnip);
-         this.mtpBots.Controls.Add(this.mcbNotifyProd);
-         this.mtpBots.Controls.Add(this.mtSnipBot);
-         this.mtpBots.Controls.Add(this.metroLabel16);
-         this.mtpBots.Controls.Add(this.metroLabel14);
-         this.mtpBots.Controls.Add(this.mtbIntervalIncident);
-         this.mtpBots.Controls.Add(this.metroLabel13);
-         this.mtpBots.Controls.Add(this.mtRQBot);
-         this.mtpBots.Controls.Add(this.metroLabel10);
-         this.mtpBots.Controls.Add(this.mtIncident);
-         this.mtpBots.Controls.Add(this.mtMoppel);
-         this.mtpBots.Controls.Add(this.mtTavern);
-         this.mtpBots.Controls.Add(this.mtProduction);
-         this.mtpBots.Controls.Add(this.metroLabel9);
-         this.mtpBots.Controls.Add(this.metroLabel8);
-         this.mtpBots.Controls.Add(this.mlTavernBot);
-         this.mtpBots.Controls.Add(this.mlProdBot);
-         this.mtpBots.HorizontalScrollbarBarColor = true;
-         resources.ApplyResources(this.mtpBots, "mtpBots");
-         this.mtpBots.Name = "mtpBots";
-         this.mtpBots.Tag = "GUI.Settings.Bots";
-         this.mtpBots.VerticalScrollbarBarColor = true;
-         // 
-         // mcbNotifySnip
-         // 
-         resources.ApplyResources(this.mcbNotifySnip, "mcbNotifySnip");
-         this.mcbNotifySnip.BackColor = System.Drawing.SystemColors.Control;
-         this.mcbNotifySnip.Checked = true;
-         this.mcbNotifySnip.CheckState = System.Windows.Forms.CheckState.Checked;
-         this.mcbNotifySnip.CustomBackground = true;
-         this.mcbNotifySnip.Name = "mcbNotifySnip";
-         this.mcbNotifySnip.Tag = "GUI.Settings.Bots.SnipBot.Notify";
-         this.mcbNotifySnip.UseVisualStyleBackColor = false;
-         this.mcbNotifySnip.CheckedChanged += new System.EventHandler(this.McbNotifySnip_CheckedChanged);
-         // 
-         // mcbNotifyProd
-         // 
-         resources.ApplyResources(this.mcbNotifyProd, "mcbNotifyProd");
-         this.mcbNotifyProd.BackColor = System.Drawing.SystemColors.Control;
-         this.mcbNotifyProd.Checked = true;
-         this.mcbNotifyProd.CheckState = System.Windows.Forms.CheckState.Checked;
-         this.mcbNotifyProd.CustomBackground = true;
-         this.mcbNotifyProd.Name = "mcbNotifyProd";
-         this.mcbNotifyProd.Tag = "GUI.Settings.Bots.ProdBot.Notify";
-         this.mcbNotifyProd.UseVisualStyleBackColor = false;
-         this.mcbNotifyProd.CheckedChanged += new System.EventHandler(this.McbNotifyProd_CheckedChanged);
-         // 
-         // mtSnipBot
-         // 
-         resources.ApplyResources(this.mtSnipBot, "mtSnipBot");
-         this.mtSnipBot.Name = "mtSnipBot";
-         this.mtSnipBot.UseVisualStyleBackColor = true;
-         this.mtSnipBot.CheckedChanged += new System.EventHandler(this.mtSnipBot_CheckedChanged);
-         // 
-         // metroLabel16
-         // 
-         resources.ApplyResources(this.metroLabel16, "metroLabel16");
-         this.metroLabel16.Name = "metroLabel16";
-         this.metroLabel16.Tag = "GUI.Settings.Bots.SnipBot";
-         // 
-         // metroLabel14
-         // 
-         resources.ApplyResources(this.metroLabel14, "metroLabel14");
-         this.metroLabel14.Name = "metroLabel14";
-         this.metroLabel14.Tag = "GUI.Settings.Bots.IntervalHours";
-         // 
-         // mtbIntervalIncident
-         // 
-         resources.ApplyResources(this.mtbIntervalIncident, "mtbIntervalIncident");
-         this.mtbIntervalIncident.Name = "mtbIntervalIncident";
-         this.mtbIntervalIncident.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-         this.mtbIntervalIncident.TextChanged += new System.EventHandler(this.MtbIntervalIncident_TextChanged);
-         // 
-         // metroLabel13
-         // 
-         resources.ApplyResources(this.metroLabel13, "metroLabel13");
-         this.metroLabel13.Name = "metroLabel13";
-         this.metroLabel13.Tag = "GUI.Settings.Bots.Interval";
-         // 
-         // mtRQBot
-         // 
-         resources.ApplyResources(this.mtRQBot, "mtRQBot");
-         this.mtRQBot.Name = "mtRQBot";
-         this.mtRQBot.UseVisualStyleBackColor = true;
-         this.mtRQBot.CheckedChanged += new System.EventHandler(this.mtRQBot_CheckedChanged);
-         // 
-         // metroLabel10
-         // 
-         resources.ApplyResources(this.metroLabel10, "metroLabel10");
-         this.metroLabel10.Name = "metroLabel10";
-         this.metroLabel10.Tag = "GUI.Settings.Bots.RQBot";
-         // 
-         // mtIncident
-         // 
-         resources.ApplyResources(this.mtIncident, "mtIncident");
-         this.mtIncident.Name = "mtIncident";
-         this.mtIncident.UseVisualStyleBackColor = true;
-         this.mtIncident.CheckedChanged += new System.EventHandler(this.mtIncident_CheckedChanged);
-         // 
-         // mtMoppel
-         // 
-         resources.ApplyResources(this.mtMoppel, "mtMoppel");
-         this.mtMoppel.Name = "mtMoppel";
-         this.mtMoppel.UseVisualStyleBackColor = true;
-         this.mtMoppel.CheckedChanged += new System.EventHandler(this.mtMoppel_CheckedChanged);
-         // 
-         // mtTavern
-         // 
-         resources.ApplyResources(this.mtTavern, "mtTavern");
-         this.mtTavern.Name = "mtTavern";
-         this.mtTavern.UseVisualStyleBackColor = true;
-         this.mtTavern.CheckedChanged += new System.EventHandler(this.mtTavern_CheckedChanged);
-         // 
-         // mtProduction
-         // 
-         resources.ApplyResources(this.mtProduction, "mtProduction");
-         this.mtProduction.Name = "mtProduction";
-         this.mtProduction.UseVisualStyleBackColor = true;
-         this.mtProduction.CheckedChanged += new System.EventHandler(this.mtProduction_CheckedChanged);
-         // 
-         // metroLabel9
-         // 
-         resources.ApplyResources(this.metroLabel9, "metroLabel9");
-         this.metroLabel9.Name = "metroLabel9";
-         this.metroLabel9.Tag = "GUI.Settings.Bots.IncidentBot";
-         // 
-         // metroLabel8
-         // 
-         resources.ApplyResources(this.metroLabel8, "metroLabel8");
-         this.metroLabel8.Name = "metroLabel8";
-         this.metroLabel8.Tag = "GUI.Settings.Bots.MoppelBot";
-         // 
-         // mlTavernBot
-         // 
-         resources.ApplyResources(this.mlTavernBot, "mlTavernBot");
-         this.mlTavernBot.Name = "mlTavernBot";
-         this.mlTavernBot.Tag = "GUI.Settings.Bots.TavernBot";
-         // 
-         // mlProdBot
-         // 
-         resources.ApplyResources(this.mlProdBot, "mlProdBot");
-         this.mlProdBot.Name = "mlProdBot";
-         this.mlProdBot.Tag = "GUI.Settings.Bots.ProdBot";
-         // 
          // mtpPremium
          // 
          this.mtpPremium.Controls.Add(this.mbCheckSerial);
@@ -2299,7 +2324,7 @@ namespace ForgeOfBots.Forms
          this.mtpPremium.HorizontalScrollbarBarColor = true;
          resources.ApplyResources(this.mtpPremium, "mtpPremium");
          this.mtpPremium.Name = "mtpPremium";
-         this.mtpPremium.Tag = "GUI.Settings.Premium";
+         this.mtpPremium.Tag = "GUI.Settings.Premium.Header";
          this.mtpPremium.VerticalScrollbarBarColor = true;
          // 
          // mbCheckSerial
@@ -2329,7 +2354,7 @@ namespace ForgeOfBots.Forms
          this.tpHelp.Controls.Add(this.tvHelp);
          resources.ApplyResources(this.tpHelp, "tpHelp");
          this.tpHelp.Name = "tpHelp";
-         this.tpHelp.Tag = "GUI.Help";
+         this.tpHelp.Tag = "GUI.Help.Header";
          this.tpHelp.UseVisualStyleBackColor = true;
          // 
          // panel1
@@ -2368,13 +2393,6 @@ namespace ForgeOfBots.Forms
          // 
          this.tSniper.Interval = 3600000;
          this.tSniper.Tick += new System.EventHandler(this.TSniper_Tick);
-         // 
-         // btnBuyAttempt
-         // 
-         resources.ApplyResources(this.btnBuyAttempt, "btnBuyAttempt");
-         this.btnBuyAttempt.Name = "btnBuyAttempt";
-         this.btnBuyAttempt.UseVisualStyleBackColor = true;
-         this.btnBuyAttempt.Click += new System.EventHandler(this.BtnBuyAttempt_Click);
          // 
          // frmMain
          // 
@@ -2475,11 +2493,11 @@ namespace ForgeOfBots.Forms
          this.mpGoodCycle.PerformLayout();
          this.mpProdCycle.ResumeLayout(false);
          this.mpProdCycle.PerformLayout();
+         this.mtpBots.ResumeLayout(false);
+         this.mtpBots.PerformLayout();
          this.mtpMisc.ResumeLayout(false);
          this.mtpData.ResumeLayout(false);
          this.mtpData.PerformLayout();
-         this.mtpBots.ResumeLayout(false);
-         this.mtpBots.PerformLayout();
          this.mtpPremium.ResumeLayout(false);
          this.tpHelp.ResumeLayout(false);
          this.panel1.ResumeLayout(false);
@@ -2741,5 +2759,7 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Label lblCurrentMultiplier;
       private System.Windows.Forms.Button btnReloadGBG;
       private System.Windows.Forms.Button btnBuyAttempt;
+      private MetroFramework.Controls.MetroLabel metroLabel4;
+      private MetroFramework.Controls.MetroComboBox mcbBlueGalaxiePrio;
    }
 }

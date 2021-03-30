@@ -287,6 +287,7 @@ namespace ForgeOfBots.DataHandler
             ListClass.GoodProductionList.Clear();
          }
          ListClass.FinishedProductions.Clear();
+         ListClass.EveryProduction.Clear();
          Parallel.ForEach(entities.ToList(), cityEntity =>
          {
             Parallel.ForEach(ListClass.AllBuildings, metaEntity =>
@@ -300,6 +301,7 @@ namespace ForgeOfBots.DataHandler
                   entity.type = metaEntity.type;
                   if (entity.state["__class__"].ToString().ToLower() == "ProductionFinishedState".ToLower())
                      ListClass.FinishedProductions.Add(entity);
+                  ListClass.EveryProduction.Add(entity);
                   if (onlyFinished) return;
                   if (entity.type == "production" && metaEntity.available_products != null && entity.connected >= 1 && /*entity.hasSupplyProdAt(StaticData.UserData.ProductionOption)|| */GameClassHelper.hasOnlySupplyProduction(entity.available_products) && entity.state["__class__"].ToString().ToLower() != "ConstructionState".ToLower())
                      ListClass.ProductionList.Add(entity);

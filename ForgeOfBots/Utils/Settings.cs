@@ -48,6 +48,7 @@ namespace ForgeOfBots.Utils
       public bool BuyGEXAttempts { get; set; } = false;
       public SnipTarget SelectedSnipTarget { get; set; } = SnipTarget.neighbors | SnipTarget.friends;
       public UserConfirmation AllowSendCrashLog { get; set; } = UserConfirmation.Send;
+      public Helper.Priority BGPriority { get; set; } = Helper.Priority.ForgePoints;
       public int IntervalIncidentBot { get; set; } = 1;
       public DateTime LastPolivateTime { get; set; } = DateTime.MinValue;
       public DateTime LastIncidentTime { get; set; } = DateTime.MinValue;

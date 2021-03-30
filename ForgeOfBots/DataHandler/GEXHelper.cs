@@ -204,7 +204,7 @@ namespace ForgeOfBots.DataHandler
          {
             currentCost = d.offers[0].costs.resources.medals;
          }
-         if (CanBuyNextAttempt(ListClass.GoodsDict[noAge.name].Find(g => g.good_id == "medals").value, currentCost))
+         if (CanBuyNextAttempt((int)ListClass.Resources["responseData"].First?.First?["medals"]?.ToObject(typeof(int)), currentCost))
          {
             script = ReqBuilder.GetRequestScript(RequestType.buyOffer, "guild_expedition_attempt1medals0");
             ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);

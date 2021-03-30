@@ -27,6 +27,8 @@ namespace ForgeOfBots.Utils
          }
       }
 
+      private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
       public static string ForgeHXURL { get; set; }
       public static string FileName { get; set; }
       public static bool ForgeHXLoaded { get; set; } = false;
@@ -85,8 +87,9 @@ namespace ForgeOfBots.Utils
                _ForgeHXLoaded?.Invoke(null, null);
             }
          }
-         catch (Exception)
+         catch (Exception ex)
          {
+            logger.Info($"EXCEPTION: {ex.StackTrace}");
             fi.Delete();
             ForgeHXLoaded = false;
             DownloadForge();

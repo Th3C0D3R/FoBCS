@@ -67,6 +67,7 @@ namespace ForgeOfBots.GameClasses
       public static List<EntityEx> ProductionList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> GoodProductionList { get; set; } = new List<EntityEx>();
       public static List<EntityEx> FinishedProductions { get; set; } = new List<EntityEx>();
+      public static List<EntityEx> EveryProduction { get; set; } = new List<EntityEx>();
       public static Dictionary<string, List<Good>> GoodsDict { get; set; } = new Dictionary<string, List<Good>>();
       public static Dictionary<string, List<Unit>> UnitListEraSorted { get; set; } = new Dictionary<string, List<Unit>>();
       public static List<Unit> UnitList { get; set; } = new List<Unit>();

@@ -262,6 +262,27 @@ namespace ForgeOfBots.Utils
          }
          return newBuildingList;
       }
+      public static List<EntityProd> GetPrioSrtedList(this List<EntityProd> list, Priority prio)
+      {
+         switch (prio)
+         {
+            case Priority.NoMatter:
+               break;
+            case Priority.ForgePoints:
+               break;
+            case Priority.Goods:
+               break;
+            case Priority.Diamonds:
+               break;
+            case Priority.Money:
+               break;
+            case Priority.Supplies:
+               break;
+            default:
+               goto case Priority.ForgePoints;
+         }
+         return list;
+      }
       public static IEnumerable<string> GetDescriptions(Type type)
       {
          var descs = new List<string>();
@@ -346,6 +367,15 @@ namespace ForgeOfBots.Utils
          Success,
          Expired,
          Failed
+      }
+      public enum Priority
+      {
+         NoMatter,
+         ForgePoints,
+         Goods,
+         Diamonds,
+         Money,
+         Supplies
       }
 
       public static int GetP1(string AgeString, int Level)

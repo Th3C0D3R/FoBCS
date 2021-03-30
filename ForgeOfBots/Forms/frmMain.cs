@@ -1017,7 +1017,7 @@ namespace ForgeOfBots.Forms
 #endif
          toolStripSeparator1.Visible = false;
 
-         if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Social")
+         if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Social.Header")
          {
             tsmiCollectTavern.Enabled = tsmiCollectTavern.Visible = false;
             tsmiCollectIncidents.Enabled = tsmiCollectIncidents.Visible = false;
@@ -1033,7 +1033,7 @@ namespace ForgeOfBots.Forms
 
             toolStripSeparator1.Visible = true;
          }
-         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Tavern")
+         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Tavern.Header")
          {
             tsmiMoppleClan.Enabled = tsmiMoppleClan.Visible = false;
             tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = false;
@@ -1049,7 +1049,7 @@ namespace ForgeOfBots.Forms
 
             toolStripSeparator1.Visible = true;
          }
-         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.City")
+         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.City.Header")
          {
             tsmiMoppleClan.Enabled = tsmiMoppleClan.Visible = false;
             tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = false;
@@ -1065,7 +1065,7 @@ namespace ForgeOfBots.Forms
 
             toolStripSeparator1.Visible = true;
          }
-         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Production")
+         else if (tabControl1.SelectedTab.Tag.ToString() == "GUI.Production.Header")
          {
             tsmiMoppleClan.Enabled = tsmiMoppleClan.Visible = false;
             tsmiMoppleFriends.Enabled = tsmiMoppleFriends.Visible = false;
@@ -1589,6 +1589,7 @@ namespace ForgeOfBots.Forms
                break;
          }
       }
+      
       private void BtnShowList_Click(object sender, EventArgs e)
       {
          if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
@@ -1599,6 +1600,8 @@ namespace ForgeOfBots.Forms
             var productName = "";
             var productValue = "";
             var exprods = "";
+            int prio = 999;
+            Priority type = Priority.NoMatter;
             if (ex.state["current_product"]["product"] == null)
             {
                if (ex.state["current_product"]["goods"] == null)
@@ -1629,15 +1632,22 @@ namespace ForgeOfBots.Forms
                }
                exprods = exprods.TrimEnd(',');
             }
-            return new EntityProd() { entity = ex, Name = ex.name, Value = exprods };
+            switch (ex.cityentity_id)
+            {
+               case "X_OceanicFuture_Landmark3":
+                  prio = 1;
+                  break;
+               default:
+                  break;
+            }
+            return new EntityProd() { entity = ex, Name = ex.name, Value = exprods, Priority = prio ,Type = type};
          }).ToList();
-         items = items.OrderBy(o => o.Name).ToList();
+         items = items.OrderBy(o => o.Priority).ToList();
          fpf.AddItem(items.ToArray());
          fpf.CollectAll += CollectAll;
          fpf.CollectSelected += CollectSelected;
          fpf.Show();
       }
-
       private void CollectSelected(object sender, dynamic data = null)
       {
          List<EntityProd> entities = new List<EntityProd>();
@@ -1645,6 +1655,7 @@ namespace ForgeOfBots.Forms
          {
             entities.Add((EntityProd)item);
          }
+         entities = entities.OrderBy(o => o.Priority).ToList();
          TwoTArgs<RequestType, List<EntityProd>> param = new TwoTArgs<RequestType, List<EntityProd>> { RequestType = RequestType.CollectOtherProductions, argument2 = entities };
          bwScriptExecuter_DoWork(this, new DoWorkEventArgs(param));
          if (ListClass.FinishedProductions.Count > 0)
@@ -1653,11 +1664,16 @@ namespace ForgeOfBots.Forms
          }
          if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
       }
-
       private void CollectAll(object sender, dynamic data = null)
       {
-         OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectOtherProductions };
-         bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+         List<EntityProd> entities = new List<EntityProd>();
+         foreach (var item in (ObjectCollection)data)
+         {
+            entities.Add((EntityProd)item);
+         }
+         entities = entities.OrderBy(o => o.Priority).ToList();
+         TwoTArgs<RequestType, List<EntityProd>> param = new TwoTArgs<RequestType, List<EntityProd>> { RequestType = RequestType.CollectOtherProductions, argument2 = entities };
+         bwScriptExecuter_DoWork(this, new DoWorkEventArgs(param));
          if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
       }
 
@@ -1729,6 +1745,7 @@ namespace ForgeOfBots.Forms
          mtbTelegramUsername.Text = UserData.TelegramUserName;
          nudMinProfit.Value = UserData.MinProfit;
          mcbAutoInvest.Checked = UserData.AutoInvest;
+         mcbBlueGalaxiePrio.SelectedItem = UserData.BGPriority;
          mtSnipBot.Checked = UserData.SnipBot;
          mtBuyAttempts.Checked = UserData.BuyGEXAttempts;
          nudSnipInterval.Value = UserData.IntervalSnip;
@@ -1816,6 +1833,14 @@ namespace ForgeOfBots.Forms
                   pnlIgnore.Controls.Add(ucIP);
                }
             }
+         }
+      }
+      private void FillPriorityList()
+      {
+         var enumList = Enum.GetNames(typeof(Priority));
+         foreach (var item in enumList)
+         {
+            Invoker.CallMethode(mcbBlueGalaxiePrio, () => mcbBlueGalaxiePrio.Items.Add(i18n.getString($"GUI.Settings.Production.{item}")));
          }
       }
       private void Bw_DoWork(object sender, DoWorkEventArgs e)
@@ -1910,7 +1935,6 @@ namespace ForgeOfBots.Forms
       }
       private void mbSaveReload_Click(object sender, EventArgs e)
       {
-         logger.Info($">>> PbCLose_Click");
          if (MessageBox.Show(i18n.getString("GUI.Loading.Changing"), "", MessageBoxButtons.YesNo) == DialogResult.No) return;
          if (ListClass.BackgroundWorkers.Count > 0)
          {
@@ -1923,7 +1947,6 @@ namespace ForgeOfBots.Forms
          }
          UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
-         logger.Info($"<<< PbCLose_Click");
          Application.Restart();
          Environment.Exit(0);
       }
@@ -2054,6 +2077,10 @@ namespace ForgeOfBots.Forms
          UserData.ShowWarning = false;
          UserData.AutoInvest = mcbAutoInvest.Checked;
          UserData.SaveSettings();
+      }
+      private void McbBlueGalaxiePrio_SelectedIndexChanged(object sender, EventArgs e)
+      {
+         UserData.BGPriority = (Priority)mcbBlueGalaxiePrio.SelectedItem;
       }
       private void mtSnipBot_CheckedChanged(object sender, EventArgs e)
       {
@@ -3220,6 +3247,8 @@ namespace ForgeOfBots.Forms
             Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.NoOpenDiff"));
             return;
          }
+         Invoker.SetProperty(lvWave, () => lvWave.Visible, true);
+         Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Enabled, true);
          ResearchEra noAge = ListClass.Eras.Find(re => re.era == "NoAge");
          GEXWaves[] waves = GEXHelper.Armywaves;
          Invoker.SetProperty(lvWave, () => lvWave.SmallImageList, UnitImageLise);
@@ -3374,18 +3403,23 @@ namespace ForgeOfBots.Forms
          DebugWatch.Start("Update GBG");
          GBGHelper.UpdateGBG();
          DebugWatch.Stop();
-         DebugWatch.Start("Get Provinces");
-         ListClass.ProvincesGBG = GBGHelper.GetProvinces();
-         DebugWatch.Stop();
 
          if (!GBGHelper.IsParticipating)
          {
-            Invoker.SetProperty(tlpBattle, () => tlpBattle.Enabled, false);
             Invoker.SetProperty(lvGBGWave, () => lvGBGWave.Visible, false);
             Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Enabled, false);
             Invoker.SetProperty(btnFightGBG, () => btnFightGBG.Text, i18n.getString("GUI.Battle.GBG.NoGBG"));
+            Invoker.SetProperty(cbSector, () => cbSector.Enabled, false);
+            Invoker.SetProperty(cbAutoFight, () => cbAutoFight.Enabled, false);
+            Invoker.SetProperty(nudCount, () => nudCount.Enabled, false);
+            Invoker.SetProperty(cbType, () => cbType.Enabled, false);
+            Invoker.SetProperty(nudDelay, () => nudDelay.Enabled, false);
+            Invoker.SetProperty(btnReloadGBG, () => btnReloadGBG.Enabled, false);
             return;
          }
+         DebugWatch.Start("Get Provinces");
+         ListClass.ProvincesGBG = GBGHelper.GetProvinces();
+         DebugWatch.Stop();
          Invoker.SetProperty(lvGBGWave, () => lvGBGWave.SmallImageList, UnitImageLise);
          Invoker.SetProperty(lvGBGWave, () => lvGBGWave.View, System.Windows.Forms.View.SmallIcon);
          Invoker.SetProperty(lvGBGWave, () => lvGBGWave.Visible, true);

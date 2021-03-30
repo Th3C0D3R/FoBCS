@@ -46,6 +46,7 @@ namespace ForgeOfBots.Forms
          InitializeComponent();
          btnCollectAll.Text = i18n.getString("GUI.FinProd.CollectAll");
          btnCollectSelected.Text = i18n.getString("GUI.FinProd.CollectSelected");
+         Text = i18n.getString("GUI.Production.ListFinProd");
       }
       public void ClearList()
       {
@@ -72,7 +73,7 @@ namespace ForgeOfBots.Forms
       }
       private void BtnCollectSelected_Click(object sender, EventArgs e)
       {
-         _CollectSelected?.Invoke(null, lvFinProds.CheckedItems);
+         _CollectSelected?.Invoke(null, lvFinProds.Items);
       }
    }
 }
