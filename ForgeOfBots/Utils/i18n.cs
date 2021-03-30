@@ -29,13 +29,18 @@ namespace ForgeOfBots.Utils
             string URLLangHelp = $"https://raw.githubusercontent.com/Th3C0D3R/FoBCS/master/ForgeOfBots/LanguageFiles/help/help_{language}.json";
             using (var webClient = new WebClient())
             {
-               int codePage = 1252;
+               int codePage = Encoding.Default.CodePage;
                if (language == "fr")
                {
                   codePage = 28591;
                }
                webClient.Encoding = Encoding.GetEncoding(codePage);
                string resultStrings = webClient.DownloadString(URLLang);
+               if(language == "de")
+               {
+                  byte[] bytes = Encoding.GetEncoding(0).GetBytes(resultStrings);
+                  resultStrings = Encoding.UTF8.GetString(bytes);
+               }
                jsonObject = JsonConvert.DeserializeObject(resultStrings);
 
                webClient.Encoding = Encoding.GetEncoding(codePage);
