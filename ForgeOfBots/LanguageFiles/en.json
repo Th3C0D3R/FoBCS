@@ -1,311 +1,315 @@
 {
-    "languageCode": "en",
-    "languageName": "English",
-    "items": {
-        "GUI": {
-            "Battle": {
-                "Header": "Battle",
-                "Fight": "Fight",
-                "UC": {
-                    "Wave": "Waves:",
-                    "Wave1": "Wave 1:",
-                    "Wave2": "Wave 2:"
-                },
-                "OwnArmySuggestion": "Army Suggestion:",
-                "GEX": {
-                    "Stage": "Encounter:",
-                    "NoGEX": "No active GEX!",
-                    "NoOpenDiff": "Next difficulty is not unlocked!",
-                    "ChestOpen": "Open",
-                    "Chest": "CHEST",
-                    "Tries": "Attempts:",
-                    "BuyAttempt": "Buy GEX Attempt"
-                },
-                "Result": "Result:",
-                "GBG": {
-                    "Sector": "Sector:",
-                    "ManuelFight": "Fightmode:",
-                    "Fight": "Auto-Fight",
-                    "AutoFightTill": "Fight till:",
-                    "FightDelay": "Delay between fights (ms):",
-                    "CurrentAttrition": "Current Attrition:",
-                    "Multiplier": "Current Attrition-Bonus:",
-                    "DoFight": "Fight",
-                    "NoGBG": "No active GBG!"
-                }
-            },
-            "GEX": {
-                "Battle": {
-                    "Won": "WON!",
-                    "Lost": "LOST!"
-                }
-            },
-            "GBG": {
-                "SiegeNameOne": "Siege Camp",
-                "SiegeNameMore": "Siege Camps",
-                "Attrition": "Attrition",
-                "Fights": "Fights",
-                "Progress": "Progress"
-            },
-            "Army": {
-                "Submit": "Submit",
-                "AttackBoost": "Attack-Boost:",
-                "DefenseBoost": "Defense-Boost:",
-                "SelectedArmy": "Selected Army:",
-                "Deselect": "Remove",
-                "Select": "Add",
-                "Header": "Army"
-            },
-            "Telegram": {
-                "Snip": "##Invest## invested at ##GB## (##Player## ##Social##) -> ##Profit## FP profit",
-                "ProdFinished": "Production finished",
-                "ProdStarted": "and started",
-                "Crash": "Your Bot has crashed! Timestamp: ##TimeStamp## ",
-                "CommandNotFound": "Unknown command '##command##'"
-            },
-            "Header": {
-                "Running": "Running since:"
-            },
-            "Dashbord": {
-                "Header": "Dashbord",
-                "Statistic": "Statistics",
-                "Log": "FoB Log",
-                "Goods": "Goods",
-                "FPStock": "FP in Stock"
-            },
-            "Social": {
-                "Header": "Social",
-                "Friends": "Friends",
-                "Clan": "Clan",
-                "Neighbor": "Neighbor",
-                "Inactive": "Inactive"
-            },
-            "MessageCenter": {
-                "Header": "Messages"
-            },
-            "Chat": {
-                "Header": "Chat"
-            },
-            "Production": {
-                "Header": "Production",
-                "ProductionList": "Production List",
-                "GoodProductionList": "Good Production List",
-                "State": "State",
-                "Product": "Product",
-                "Buildings": "Building",
-                "SumFinishedProductions": "Sum of all finished productions",
-                "ShowList": "(Show list of finished productions)",
-                "ListFinProd": "Finished productions"
-            },
-            "City": {
-                "Header": "City"
-            },
-            "Settings": {
-                "Header": "Settings",
-                "Production": {
-                    "Header": "Functions",
-                    "BuyGEXAttempts": "Buy GEX-Attempt automaticaly:",
-                    "ToggleView": "Toggle View:",
-                    "ToggleViewExplained": "Enabled = Grouped",
-                    "ToggleTwoLane": "Show 2x2-Street-Incident:",
-                    "ToggleProduction": "Toggle Production Cycle:",
-                    "ToggleGood": "Toggle Good-Production Cycle:",
-                    "AutoSnip": {
-                        "Options": "Auto-Sniping Options",
-                        "Target": "Target",
-                        "AutoInvest": {
-                            "Header": "Auto. invest",
-                            "WarningTitle": "!! ATTENTION !!",
-                            "WarningText": "THE BOT INVEST INTO EVERY GB WHICH RETURN PROFIT!\nAS LONG AS FP ARE AVAILABE!!\nORDER IS THE SAME AS THE ORDER OF PLAYERS IN THE RESPECTIVE LIST\n\nINACTIVE PLAYERS WILL BE IGNORED ADDITIONALLY"
-                        },
-                        "MinProfit": "Min. Profit to snip",
-                        "SnipEvery": "Snip every x minutes"
-                    },
-                    "Ignore": "Players to ignore by Snip-Bot (Press Enter to add)",
-                    "NoMatter": "doesn't matter",
-                    "ForgePoints": "Forge-Points",
-                    "Goods": "Goods",
-                    "Diamonds": "Diamonds",
-                    "Money": "Money",
-                    "Supplies": "Supplies"
-                },
-                "Misc": {
-                    "Header": "Program",
-                    "Language": "Language",
-                    "CustomUA": "Custom User-Agent",
-                    "AutoLogin": "Auto-Login",
-                    "DarkMode": "Dark Mode",
-                    "Browser": "Hide Browser",
-                    "RestartNeeded": "Restart needed",
-                    "TelegramName": "Telegram Username",
-                    "Save": "Save"
-                },
-                "Bots": {
-                    "Header": "Bots",
-                    "ProdBot": {
-                        "Header": "Production-Bot",
-                        "Notify": "Telegram-Notification"
-                    },
-                    "TavernBot": "Tavern-Bot",
-                    "MoppelBot": "Polivate Bot",
-                    "IncidentBot": "Incident Bot",
-                    "Interval": "Interval",
-                    "IntervalHours": "hour(s)",
-                    "RQBot": "Requrring Quest Bot",
-                    "SnipBot": {
-                        "Header": "Sniping Bot",
-                        "Notify": "Telegram-Notification"
-                    }
-                },
-                "UserData": {
-                    "Header": "Userdata",
-                    "ChangeCity": "Change City",
-                    "DeleteData": "Delete Data",
-                    "SaveReload": "Save && Reload",
-                    "DeleteDataButton": "DELETE",
-                    "Warning": "!!! DELETING USERDATA WILL RESTART THE BOT !!!\n\nTO USE PREMIUM FEATURES YOU NEED TO\nLOGIN WITH YOUR SERIALKEY AGAIN"
-                },
-                "Premium": {
-                    "Header": "Premium",
-                    "SerialKey": "Serial-Key",
-                    "Login": "Login"
-                }
-            },
-            "Sniper": {
-                "Header": "Sniper",
-                "BWTitle": "Snipable GBs",
-                "BWBeforeCountText": "Status",
-                "BWTitleSnip": "Sniping selected GBs",
-                "SnipDone": "Done",
-                "Search": "Search",
-                "Snip": "Snip FP",
-                "CheckSnip": "select",
-                "SearchingPlayer": "Searching Player",
-                "SearchingLG": "Searching ##Player##'s",
-                "PlayerIndentifier": {
-                    "Friend": "F",
-                    "Neighbor": "N",
-                    "Member": "G"
-                },
-                "Contributions": {
-                    "Total": "Current Outcome:"
-                },
-                "Cancel": "Cancel",
-                "SnipBotActive": "Snip-Bot active!"
-            },
-            "Tavern": {
-                "Header": "Tavern",
-                "Silver": "Tavernsilver",
-                "Own": "Tavernstate",
-                "Visitable": "Visitable",
-                "Collect": "Collect",
-                "Sitting": "Sitting Players"
-            },
-            "Help": {
-                "Header": "Help"
-            },
-            "UnderConstruction": "Our Minios working on new Features!",
-            "Loading": {
-                "Wait": "Bot starting...\nplease Wait",
-                "Changing": "Bot is restarting for World-Changing!\n\n[YES] to continue\n[NO] zo abort"
-            },
-            "Menu": {
-                "MoppelFriends": "Polivate Freinds",
-                "MoppelClan": "Polivate Clan",
-                "MoppelNeighbor": "Polivate Neighbor",
-                "VisitTavern": "Visit Tavern",
-                "CollectTavern": "Collect Tavern",
-                "MoppelTavern": "Polivate && Visit (ALL)",
-                "CollectIncidents": "Collect Incidents",
-                "StartProduction": "Start productions",
-                "CancelProduction": "Stop productions",
-                "CollectOtherProduction": "Collect all finished productions",
-                "CollectProduction": "Collect productions",
-                "ReloadData": "Refresh"
-            },
-            "FinProd": {
-                "CollectSelected": "Collect selected",
-                "CollectAll": "Collect all"
-            },
-            "MessageBox": {
-                "OldSettingsVersion": {
-                    "Text": "The UserData.json was created with an older Version of the Bot!\n\n If you have any problems (like crashing) please first delete this file (File-Explorer: '%appdata%/ForgeOfBots') and restart (by pressing YES)",
-                    "Title": "Old UserData.json found!"
-                },
-                "SettingsLoadedFailed": {
-                    "Text": "The UserData.json is incompatible with the current Bot-Version!\n\n Please first delete this file (File-Explorer: '%appdata%/ForgeOfBots') and restart (by pressing YES)",
-                    "Title": "Incompatible UserData.json found!"
-                },
-                "NoTelegramChatText": "There is no active Chat with the Bot\nSo no message could be send!\n\nPlease follow the link to start a chat:\nhttps://t.me/ForgeOfBot (Telegram-Client required)",
-                "NoTelegramChatTitle": "No active chat",
-                "NoTelegramNameText": "No receiver was saved in the Settings!\nPlease save one in the Settings Tab under \"Misc\"->\"Telegram Username\"! (without \"@\")",
-                "NoTelegramNameTitle": "No saved receiver"
-            },
-            "Log": {
-                "Snip": "Snip-Bot"
-            }
+  "languageCode": "en",
+  "languageName": "English",
+  "items": {
+    "GUI": {
+      "Battle": {
+        "Header": {
+          "Title": "Fight",
+          "GBG": "Guild-Battleground",
+          "GEX": "Guild-Expedition"
         },
-        "AskCrashLog": "Allow sending Crashlogs",
-        "Attach": "Attach",
-        "AttachMain": "Attach to Main",
-        "CanNotSitDown": "Can't sit down",
-        "Clanmembers": "Clanmembers",
-        "PlayerNotFound": "not found!",
-        "CollectingError": "ERROR WHILE COLLECTING PRODUCTION",
-        "CollectingTavernError": "Something went wrong collecting tavern",
-        "CollectTavern": "Collect Tavern",
-        "CountLabel": "##Done##/##End## done",
-        "CriticalError": "CRITICAL ERROR: ",
-        "CurrentlySittingPlayers": "Currently Sitting Players: ",
-        "Detach": "Detach",
-        "DetachMain": "Detach from Main",
-        "Downloading": "Downloading ",
-        "Expired": "EXPIRED",
-        "FailedToActivate": "FAILED TO ACTIVATE",
+        "Fight": "Fight",
+        "UC": {
+          "Wave": "Waves:",
+          "Wave1": "Wave 1:",
+          "Wave2": "Wave 2:"
+        },
+        "OwnArmySuggestion": "Army Suggestion:",
+        "GEX": {
+          "Stage": "Encounter:",
+          "NoGEX": "No active GEX!",
+          "NoOpenDiff": "Next difficulty is not unlocked!",
+          "ChestOpen": "Open",
+          "Chest": "CHEST",
+          "Tries": "Attempts:",
+          "BuyAttempt": "Buy GEX Attempt"
+        },
+        "Result": "Result:",
+        "GBG": {
+          "Sector": "Sector:",
+          "ManuelFight": "Fightmode:",
+          "Fight": "Auto-Fight",
+          "AutoFightTill": "Fight till:",
+          "FightDelay": "Delay between fights (ms):",
+          "CurrentAttrition": "Current Attrition:",
+          "Multiplier": "Current Attrition-Bonus:",
+          "DoFight": "Fight",
+          "NoGBG": "No active GBG!"
+        }
+      },
+      "GEX": {
+        "Battle": {
+          "Won": "WON!",
+          "Lost": "LOST!"
+        }
+      },
+      "GBG": {
+        "SiegeNameOne": "Siege Camp",
+        "SiegeNameMore": "Siege Camps",
+        "Attrition": "Attrition",
+        "Fights": "Fights",
+        "Progress": "Progress"
+      },
+      "Army": {
+        "Submit": "Submit",
+        "AttackBoost": "Attack-Boost:",
+        "DefenseBoost": "Defense-Boost:",
+        "SelectedArmy": "Selected Army:",
+        "Deselect": "Remove",
+        "Select": "Add",
+        "Header": "Army"
+      },
+      "Telegram": {
+        "Snip": "##Invest## invested at ##GB## (##Player## ##Social##) -> ##Profit## FP profit",
+        "ProdFinished": "Production finished",
+        "ProdStarted": "and started",
+        "Crash": "Your Bot has crashed! Timestamp: ##TimeStamp## ",
+        "CommandNotFound": "Unknown command '##command##'"
+      },
+      "Header": {
+        "Running": "Running since:"
+      },
+      "Dashbord": {
+        "Header": "Dashbord",
+        "Statistic": "Statistics",
+        "Log": "FoB Log",
+        "Goods": "Goods",
+        "FPStock": "FP in Stock"
+      },
+      "Social": {
+        "Header": "Social",
         "Friends": "Friends",
-        "PlayerLists": "Player Lists",
-        "IncidentBot": "Incident Bot",
-        "IncidentCollected": "Incident collected",
-        "LicenceNotValid": "There was a problem using this Serial-Key with your Device!!\n\nEither you activated the Serial-Key on a other Device\nor the Serial-Key is not valid!",
-        "LoggingIn": "Logging in...",
-        "Login": "Login",
-        "Logout": "Logout",
-        "Motivating": "Motivating",
-        "MotivationDone": "Motivation DONE",
-        "Neighbors": "Neighbors",
-        "PleaseLoginNow": "Please Login now...",
-        "PleaseWaitAgain": "Please wait (again)!",
-        "PleaseWaitShutdown": "Please wait...",
-        "PleaseWaitShutdown2": "Shutingdown Bot",
-        "PolivateBot": "Polivate Bot",
-        "PolivateResult": "Polivate-Result",
-        "PolivateTitle": "Motivate/Polish",
-        "Premium": "PREMIUM",
-        "ProducingState": "Producing",
-        "ProductionBot": "Production Bot",
-        "ProductionFinishedState": "Production finished!",
-        "ProductionIdle": "Nothing",
-        "ReadyToCollect": "READY TO COLLECT",
-        "Remove": "Remove",
-        "ResponseNotValid": "Response from server was not valid",
-        "Reward": "Reward",
-        "RQBot": "Recurring-Quest Bot",
-        "ShowingNotify": "Showing Notification",
-        "SitDown": "Sit down",
-        "SittingAtTavern": "Sitting at Tavern",
-        "StartingError": "ERROR WHILE STARTING NEW PRODUCTION",
-        "Status": "Current Status:",
-        "SubExpiredTitle": "SUBSCRIPTION EXPIRED",
-        "SubscriptionExpired": "Your Subscription is expired.\n\nPlease purchase a new Subscribtion and acitvate it\nPress 'Yes' to open the Store\n\nelse you are continue using the Free-Version\nPress 'No' for the Free Version",
-        "SuccessText": "The Crash Report successfull transmitted.\n\nThank you for your help!",
-        "SuccessTitle": "Successful transmitted",
-        "TavernBot": "Tavern Bot",
-        "TavernDone": "Tavern Visit DONE",
-        "TavernResult": "Tavern-Result",
-        "TavernState": "Tavernstate",
-        "TextCrashLog": "Please allow sending crashlogs to help the team fixing the problems\n\n'Yes' allow for ever\n'No' allow only this time\n'Cancel' allow never",
-        "UnknownAction": "UNKNOWN ACTION:",
+        "Clan": "Clan",
+        "Neighbor": "Neighbor",
+        "Inactive": "Inactive"
+      },
+      "MessageCenter": {
+        "Header": "Messages"
+      },
+      "Chat": {
+        "Header": "Chat"
+      },
+      "Production": {
+        "Header": "Production",
+        "ProductionList": "Production List",
+        "GoodProductionList": "Good Production List",
+        "State": "State",
+        "Product": "Product",
+        "Buildings": "Building",
+        "SumFinishedProductions": "Sum of all finished productions",
+        "ShowList": "(Show list of finished productions)",
+        "ListFinProd": "Finished productions"
+      },
+      "City": {
+        "Header": "City"
+      },
+      "Settings": {
+        "Header": "Settings",
+        "Production": {
+          "Header": "Functions",
+          "BuyGEXAttempts": "Buy GEX-Attempt automaticaly:",
+          "ToggleView": "Toggle View:",
+          "ToggleViewExplained": "Enabled = Grouped",
+          "ToggleTwoLane": "Show 2x2-Street-Incident:",
+          "ToggleProduction": "Toggle Production Cycle:",
+          "ToggleGood": "Toggle Good-Production Cycle:",
+          "AutoSnip": {
+            "Options": "Auto-Sniping Options",
+            "Target": "Target",
+            "AutoInvest": {
+              "Header": "Auto. invest",
+              "WarningTitle": "!! ATTENTION !!",
+              "WarningText": "THE BOT INVEST INTO EVERY GB WHICH RETURN PROFIT!\nAS LONG AS FP ARE AVAILABE!!\nORDER IS THE SAME AS THE ORDER OF PLAYERS IN THE RESPECTIVE LIST\n\nINACTIVE PLAYERS WILL BE IGNORED ADDITIONALLY"
+            },
+            "MinProfit": "Min. Profit to snip",
+            "SnipEvery": "Snip every x minutes"
+          },
+          "Ignore": "Players to ignore by Snip-Bot (Press Enter to add)",
+          "NoMatter": "doesn't matter",
+          "ForgePoints": "Forge-Points",
+          "Goods": "Goods",
+          "Diamonds": "Diamonds",
+          "Money": "Money",
+          "Supplies": "Supplies"
+        },
+        "Misc": {
+          "Header": "Program",
+          "Language": "Language",
+          "CustomUA": "Custom User-Agent",
+          "AutoLogin": "Auto-Login",
+          "DarkMode": "Dark Mode",
+          "Browser": "Hide Browser",
+          "RestartNeeded": "Restart needed",
+          "TelegramName": "Telegram Username",
+          "Save": "Save"
+        },
+        "Bots": {
+          "Header": "Bots",
+          "ProdBot": {
+            "Header": "Production-Bot",
+            "Notify": "Telegram-Notification"
+          },
+          "TavernBot": "Tavern-Bot",
+          "MoppelBot": "Polivate Bot",
+          "IncidentBot": "Incident Bot",
+          "Interval": "Interval",
+          "IntervalHours": "hour(s)",
+          "RQBot": "Requrring Quest Bot",
+          "SnipBot": {
+            "Header": "Sniping Bot",
+            "Notify": "Telegram-Notification"
+          }
+        },
+        "UserData": {
+          "Header": "Userdata",
+          "ChangeCity": "Change City",
+          "DeleteData": "Delete Data",
+          "SaveReload": "Save && Reload",
+          "DeleteDataButton": "DELETE",
+          "Warning": "!!! DELETING USERDATA WILL RESTART THE BOT !!!\n\nTO USE PREMIUM FEATURES YOU NEED TO\nLOGIN WITH YOUR SERIALKEY AGAIN"
+        },
+        "Premium": {
+          "Header": "Premium",
+          "SerialKey": "Serial-Key",
+          "Login": "Login"
+        }
+      },
+      "Sniper": {
+        "Header": "Sniper",
+        "BWTitle": "Snipable GBs",
+        "BWBeforeCountText": "Status",
+        "BWTitleSnip": "Sniping selected GBs",
+        "SnipDone": "Done",
+        "Search": "Search",
+        "Snip": "Snip FP",
+        "CheckSnip": "select",
+        "SearchingPlayer": "Searching Player",
+        "SearchingLG": "Searching ##Player##'s",
+        "PlayerIndentifier": {
+          "Friend": "F",
+          "Neighbor": "N",
+          "Member": "G"
+        },
+        "Contributions": {
+          "Total": "Current Outcome:"
+        },
+        "Cancel": "Cancel",
+        "SnipBotActive": "Snip-Bot active!"
+      },
+      "Tavern": {
+        "Header": "Tavern",
+        "Silver": "Tavernsilver",
+        "Own": "Tavernstate",
         "Visitable": "Visitable",
-        "VisitAllTitle": "Visiting all Taverns"
-    }
+        "Collect": "Collect",
+        "Sitting": "Sitting Players"
+      },
+      "Help": {
+        "Header": "Help"
+      },
+      "UnderConstruction": "Our Minios working on new Features!",
+      "Loading": {
+        "Wait": "Bot starting...\nplease Wait",
+        "Changing": "Bot is restarting for World-Changing!\n\n[YES] to continue\n[NO] zo abort"
+      },
+      "Menu": {
+        "MoppelFriends": "Polivate Freinds",
+        "MoppelClan": "Polivate Clan",
+        "MoppelNeighbor": "Polivate Neighbor",
+        "VisitTavern": "Visit Tavern",
+        "CollectTavern": "Collect Tavern",
+        "MoppelTavern": "Polivate && Visit (ALL)",
+        "CollectIncidents": "Collect Incidents",
+        "StartProduction": "Start productions",
+        "CancelProduction": "Stop productions",
+        "CollectOtherProduction": "Collect all finished productions",
+        "CollectProduction": "Collect productions",
+        "ReloadData": "Refresh"
+      },
+      "FinProd": {
+        "CollectSelected": "Collect selected",
+        "CollectAll": "Collect all"
+      },
+      "MessageBox": {
+        "OldSettingsVersion": {
+          "Text": "The UserData.json was created with an older Version of the Bot!\n\n If you have any problems (like crashing) please first delete this file (File-Explorer: '%appdata%/ForgeOfBots') and restart (by pressing YES)",
+          "Title": "Old UserData.json found!"
+        },
+        "SettingsLoadedFailed": {
+          "Text": "The UserData.json is incompatible with the current Bot-Version!\n\n Please first delete this file (File-Explorer: '%appdata%/ForgeOfBots') and restart (by pressing YES)",
+          "Title": "Incompatible UserData.json found!"
+        },
+        "NoTelegramChatText": "There is no active Chat with the Bot\nSo no message could be send!\n\nPlease follow the link to start a chat:\nhttps://t.me/ForgeOfBot (Telegram-Client required)",
+        "NoTelegramChatTitle": "No active chat",
+        "NoTelegramNameText": "No receiver was saved in the Settings!\nPlease save one in the Settings Tab under \"Misc\"->\"Telegram Username\"! (without \"@\")",
+        "NoTelegramNameTitle": "No saved receiver"
+      },
+      "Log": {
+        "Snip": "Snip-Bot"
+      }
+    },
+    "AskCrashLog": "Allow sending Crashlogs",
+    "Attach": "Attach",
+    "AttachMain": "Attach to Main",
+    "CanNotSitDown": "Can't sit down",
+    "Clanmembers": "Clanmembers",
+    "PlayerNotFound": "not found!",
+    "CollectingError": "ERROR WHILE COLLECTING PRODUCTION",
+    "CollectingTavernError": "Something went wrong collecting tavern",
+    "CollectTavern": "Collect Tavern",
+    "CountLabel": "##Done##/##End## done",
+    "CriticalError": "CRITICAL ERROR: ",
+    "CurrentlySittingPlayers": "Currently Sitting Players: ",
+    "Detach": "Detach",
+    "DetachMain": "Detach from Main",
+    "Downloading": "Downloading ",
+    "Expired": "EXPIRED",
+    "FailedToActivate": "FAILED TO ACTIVATE",
+    "Friends": "Friends",
+    "PlayerLists": "Player Lists",
+    "IncidentBot": "Incident Bot",
+    "IncidentCollected": "Incident collected",
+    "LicenceNotValid": "There was a problem using this Serial-Key with your Device!!\n\nEither you activated the Serial-Key on a other Device\nor the Serial-Key is not valid!",
+    "LoggingIn": "Logging in...",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Motivating": "Motivating",
+    "MotivationDone": "Motivation DONE",
+    "Neighbors": "Neighbors",
+    "PleaseLoginNow": "Please Login now...",
+    "PleaseWaitAgain": "Please wait (again)!",
+    "PleaseWaitShutdown": "Please wait...",
+    "PleaseWaitShutdown2": "Shutingdown Bot",
+    "PolivateBot": "Polivate Bot",
+    "PolivateResult": "Polivate-Result",
+    "PolivateTitle": "Motivate/Polish",
+    "Premium": "PREMIUM",
+    "ProducingState": "Producing",
+    "ProductionBot": "Production Bot",
+    "ProductionFinishedState": "Production finished!",
+    "ProductionIdle": "Nothing",
+    "ReadyToCollect": "READY TO COLLECT",
+    "Remove": "Remove",
+    "ResponseNotValid": "Response from server was not valid",
+    "Reward": "Reward",
+    "RQBot": "Recurring-Quest Bot",
+    "ShowingNotify": "Showing Notification",
+    "SitDown": "Sit down",
+    "SittingAtTavern": "Sitting at Tavern",
+    "StartingError": "ERROR WHILE STARTING NEW PRODUCTION",
+    "Status": "Current Status:",
+    "SubExpiredTitle": "SUBSCRIPTION EXPIRED",
+    "SubscriptionExpired": "Your Subscription is expired.\n\nPlease purchase a new Subscribtion and acitvate it\nPress 'Yes' to open the Store\n\nelse you are continue using the Free-Version\nPress 'No' for the Free Version",
+    "SuccessText": "The Crash Report successfull transmitted.\n\nThank you for your help!",
+    "SuccessTitle": "Successful transmitted",
+    "TavernBot": "Tavern Bot",
+    "TavernDone": "Tavern Visit DONE",
+    "TavernResult": "Tavern-Result",
+    "TavernState": "Tavernstate",
+    "TextCrashLog": "Please allow sending crashlogs to help the team fixing the problems\n\n'Yes' allow for ever\n'No' allow only this time\n'Cancel' allow never",
+    "UnknownAction": "UNKNOWN ACTION:",
+    "Visitable": "Visitable",
+    "VisitAllTitle": "Visiting all Taverns"
+  }
 }
