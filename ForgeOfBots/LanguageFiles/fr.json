@@ -208,7 +208,9 @@
       "Help": {
         "Header": "Aide"
       },
-      "UnderConstruction": "Nos Minions travaillent sur de nouvelles fonctions",
+      "UnderConstruction": {
+        "Header": "Our Minios working on new Features!"
+      },
       "Loading": {
         "Wait": "Démarrage du Bot...\nAttendez!",
         "Changing": "Bot is restarting for World-Changing!\n\n[YES] to continue\n[NO] zo abort"
