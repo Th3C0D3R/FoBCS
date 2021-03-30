@@ -115,13 +115,23 @@
             "Options": "Auto-Sniping Optionen",
             "Target": "Ziele",
             "AutoInvest": {
+              "Header": "Auto. investieren",
               "WarningTitle": "!! ACHTUNG !!",
               "WarningText": "ES WIRD IN ALLE LGs INVESTIERT DIE BEIM DURCHSUCHEN PROFIT ABWERFEN!\nSOLANG FP VORHANDEN SIND!!\nREIHENFOLGE ENTSPRICHT DER REIHENFOLGE IN DEN JEWEILIGEN SPIELERLISTEN\n\nINAKTIVE SPIELER WERDEN NICHT BER�CKSICHTIGT"
             },
             "MinProfit": "Min. Profit zum Snipen",
             "SnipEvery": "Snipe jede x Minuten"
           },
-          "Ignore": "Spieler die ignoriert werden sollen (Enter drücken zum hinzufügen)"
+          "Ignore": "Spieler die ignoriert werden sollen (Enter drücken zum hinzufügen)",
+          "BGPrioList": "Priorität Blaue Galaxie:",
+          "PriorityList": {
+            "NoMatter": "Egal",
+            "ForgePoints": "Forge-Punkte",
+            "Goods": "Güter",
+            "Diamonds": "Diamanten",
+            "Money": "Münzen",
+            "Supplies": "Vorräte"
+          }
         },
         "Misc": {
           "Header": "Programm",
@@ -137,6 +147,7 @@
         "Bots": {
           "Header": "Bots",
           "ProdBot": {
+            "Header": "Produktions-Bot",
             "Notify": "Telegram-Benachrichtigungen"
           },
           "TavernBot": "Tavernen-Bot",
@@ -146,6 +157,7 @@
           "IntervalHours": "Stunde(n)",
           "RQBot": "Schleifenquest Bot",
           "SnipBot": {
+            "Header": "Auto-Sniper",
             "Notify": "Telegram-Benachrichtigungen"
           }
         },
