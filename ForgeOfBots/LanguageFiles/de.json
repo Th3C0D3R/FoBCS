@@ -5,7 +5,7 @@
         "GUI": {
             "Battle": {
                 "Header": "Kampf",
-                "Fight": "K�mpfen",
+                "Fight": "Kämpfen",
                 "UC": {
                     "Wave": "Wellen:",
                     "Wave1": "Welle 1:",
@@ -15,8 +15,8 @@
                 "GEX": {
                     "Stage": "Begegnung:",
                     "NoGEX": "Keine aktive GEX!",
-                    "NoOpenDiff": "N�chste Stufe ist nicht frei!",
-                    "ChestOpen": "�ffnen",
+                    "NoOpenDiff": "Nächste Stufe ist nicht frei!",
+                    "ChestOpen": "Öffnen",
                     "Chest": "TRUHE",
                     "Tries": "Versuche:",
                     "BuyAttempt": "GEX-Versuch kaufen"
@@ -26,11 +26,11 @@
                     "Sector": "Sektor:",
                     "ManuelFight": "Kampfmodus:",
                     "Fight": "Auto-Kampf",
-                    "AutoFightTill": "K�mpfe bis:",
-                    "FightDelay": "Kampfverz�gerung (ms):",
-                    "CurrentAttrition": "Aktuell Zerm�rbung:",
+                    "AutoFightTill": "Kämpfe bis:",
+                    "FightDelay": "Kampfverzögerung (ms):",
+                    "CurrentAttrition": "Aktuell Zermürbung:",
                     "Multiplier": "Aktueller Z-Bonus:",
-                    "DoFight": "K�mpfen",
+                    "DoFight": "Kämpfen",
                     "NoGBG": "Keine aktive GG!"
                 }
             },
@@ -42,25 +42,25 @@
             },
             "GBG": {
                 "SiegeNameOne": "Belagerungsturm",
-                "SiegeNameMore": "Belagerungst�rme",
-                "Attrition": "Zerm�rbung",
-                "Fights": "K�mpfe",
+                "SiegeNameMore": "Belagerungstürme",
+                "Attrition": "Zermürbung",
+                "Fights": "Kämpfe",
                 "Progress": "Fortschritt"
             },
             "Army": {
-                "Submit": "�bernehmen",
+                "Submit": "übernehmen",
                 "AttackBoost": "Angriffbonus:",
                 "DefenseBoost": "Verteidigungsbonus:",
-                "SelectedArmy": "Ausgew�hlte Armee:",
+                "SelectedArmy": "Ausgewählte Armee:",
                 "Deselect": "Entfernen",
-                "Select": "Hinzuf�gen",
+                "Select": "Hinzufügen",
                 "Header": "Armee"
             },
             "Telegram": {
                 "Snip": "##GB## (##Player## ##Social##) wurde mit ##Invest## belegt -> ##Profit## FP Gewinn",
                 "ProdFinished": "Produktionen fertiggestellt",
                 "ProdStarted": "und gestartet",
-                "Crash": "Dein Bot ist abgest�rzt! Zeitpunkt: ##TimeStamp## ",
+                "Crash": "Dein Bot ist abgestürzt! Zeitpunkt: ##TimeStamp## ",
                 "CommandNotFound": "Der Befehl '##command##' ist nicht vorhanden!"
             },
             "Header": {
@@ -70,7 +70,7 @@
                 "Header": "Dashbord",
                 "Statistic": "Statistik",
                 "Log": "FoB Log",
-                "Goods": "G�ter",
+                "Goods": "Güter",
                 "FPStock": "FP im Lager"
             },
             "Social": {
@@ -86,10 +86,10 @@
             "Production": {
                 "Header": "Produktion",
                 "ProductionList": "Produktionsliste",
-                "GoodProductionList": "G�terproduktionsliste",
+                "GoodProductionList": "Güterproduktionsliste",
                 "State": "Status",
                 "Product": "Produkt",
-                "Buildings": "Geb�ude",
+                "Buildings": "Gebäude",
                 "SumFinishedProductions": "Summe aller fertigen Produktionen:",
                 "ShowList": "(Zeigt eine Liste aller Produktionen)",
                 "ListFinProd": "Fertige Produktionen"
@@ -102,11 +102,11 @@
                 "Production": {
                     "Header": "Funktionen",
                     "BuyGEXAttempts": "GEX-Versuch automatisch kaufen:",
-                    "ToggleView": "Ansicht �ndern",
+                    "ToggleView": "Ansicht ändern",
                     "ToggleViewExplained": "Aktiviert = Gruppiert",
-                    "ToggleTwoLane": "2x2-Stra�en-Ereignisse anzeigen",
-                    "ToggleProduction": "Produktionszyklus �ndern",
-                    "ToggleGood": "G�ter-Produktionszyklus �ndern",
+                    "ToggleTwoLane": "2x2-Straßen-Ereignisse anzeigen",
+                    "ToggleProduction": "Produktionszyklus ändern",
+                    "ToggleGood": "Güter-Produktionszyklus ändern",
                     "AutoSnip": {
                         "Options": "Auto-Sniping Optionen",
                         "Target": "Ziele",
@@ -117,7 +117,7 @@
                         "MinProfit": "Min. Profit zum Snipen",
                         "SnipEvery": "Snipe jede x Minuten"
                     },
-                    "Ignore": "Spieler die ignoriert werden sollen (Enter dr�cken zum hinzuf�gen)"
+                    "Ignore": "Spieler die ignoriert werden sollen (Enter drücken zum hinzufügen)"
                 },
                 "Misc": {
                     "Header": "Programm",
@@ -126,7 +126,7 @@
                     "AutoLogin": "Auto-Login",
                     "DarkMode": "Dunkel Modus",
                     "Browser": "Browser verstecken",
-                    "RestartNeeded": "Neustart n�tig",
+                    "RestartNeeded": "Neustart nötig",
                     "TelegramName": "Telegram Username",
                     "Save": "Speichern"
                 },
@@ -147,15 +147,15 @@
                 },
                 "UserData": {
                     "Header": "Benutzerdaten",
-                    "ChangeCity": "Welt �ndern",
-                    "DeleteData": "Daten l�schen",
+                    "ChangeCity": "Welt ändern",
+                    "DeleteData": "Daten löschen",
                     "SaveReload": "Speichern && neuladen",
-                    "DeleteDataButton": "L�SCHEN",
-                    "Warning": "!!! L�SCHEN DER DATEN STARTET DEN BOT NEU !!!\n\nUM PREMIUM FUNKTIONEN NUTZEN ZU K�NNEN\nMUSST DU DICH MIT DEINEM SERIALKEY NEU EINLOGGEN"
+                    "DeleteDataButton": "LÖSCHEN",
+                    "Warning": "!!! LÖSCHEN DER DATEN STARTET DEN BOT NEU !!!\n\nUM PREMIUM FUNKTIONEN NUTZEN ZU KÖNNEN\nMUSST DU DICH MIT DEINEM SERIALKEY NEU EINLOGGEN"
                 },
                 "Premium": {
                     "Header": "Premium",
-                    "SerialKey": "Lizenzschl�ssel",
+                    "SerialKey": "Lizenzschlüssel",
                     "Login": "Login"
                 }
             },
@@ -163,11 +163,11 @@
                 "Header": "Sniper",
                 "BWTitle": "Snipbare LGs",
                 "BWBeforeCountText": "Status",
-                "BWTitleSnip": "Snipe ausgew�hlte LGs",
+                "BWTitleSnip": "Snipe ausgewählte LGs",
                 "SnipDone": "Erledigt",
                 "Search": "Durchsuchen",
                 "Snip": "Snipe LG",
-                "CheckSnip": "ausw�hlen",
+                "CheckSnip": "auswählen",
                 "SearchingPlayer": "Durchsuche Spieler",
                 "SearchingLG": "Durchsuche ##Player##'s",
                 "PlayerIndentifier": {
@@ -197,7 +197,7 @@
             },
             "Loading": {
                 "Wait": "Bot startet...\nbitte warten",
-                "Changing": "Der Bot wird f�r den Weltwechsel neugestartet!\n\n[JA] zum fortfahren\n[NEIN] zum abbrechen"
+                "Changing": "Der Bot wird für den Weltwechsel neugestartet!\n\n[JA] zum fortfahren\n[NEIN] zum abbrechen"
             },
             "Menu": {
                 "MoppelFriends": "Freunden helfen",
@@ -219,16 +219,16 @@
             },
             "MessageBox": {
                 "OldSettingsVersion": {
-                    "Text": "Die UserData.json wurde mir einer �lteren Bot-Version erstellt!\n\n Sollte es Probleme geben, l�sche bitte die aktuelle Datei (Windows-Explorer: '%appdata%/ForgeOfBots') und starte de Bot neu (durch dr�cken auf JA)",
+                    "Text": "Die UserData.json wurde mir einer älteren Bot-Version erstellt!\n\n Sollte es Probleme geben, lösche bitte die aktuelle Datei (Windows-Explorer: '%appdata%/ForgeOfBots') und starte de Bot neu (durch drücken auf JA)",
                     "Title": "Alte UserData.json gefunden!"
                 },
                 "SettingsLoadedFailed": {
-                    "Text": "Die UserData.json ist mit der aktuellen Bot-Version inkompatible!\n\n L�sche bitte die aktuelle Datei (Windows-Explorer: '%appdata%/ForgeOfBots') und starte de Bot neu (durch dr�cken auf JA)",
+                    "Text": "Die UserData.json ist mit der aktuellen Bot-Version inkompatible!\n\n Lösche bitte die aktuelle Datei (Windows-Explorer: '%appdata%/ForgeOfBots') und starte de Bot neu (durch drücken auf JA)",
                     "Title": "Inkompatible UserData.json gefunden!"
                 },
                 "NoTelegramChatText": "Du hast noch kein Telegram-Chat mit dem Bot\nDeswegen kann keine Nachricht geschickt werden!\n\nBitte klicke auf folgenden Link um ein Chat zu starten:\nhttps://t.me/ForgeOfBot (Telegram-Client erforderlich)",
                 "NoTelegramChatTitle": "Kein offener Chat",
-                "NoTelegramNameText": "In den Einstellungen wurde kein Empf�nger eingetragen!\nBitte trage in den Einstellungen unter \"Programm\"->\"Telegram Username\" dein Telegram-Username ein (ohne \"@\") und dr�cke auf Speichern!",
+                "NoTelegramNameText": "In den Einstellungen wurde kein Empfänger eingetragen!\nBitte trage in den Einstellungen unter \"Programm\"->\"Telegram Username\" dein Telegram-Username ein (ohne \"@\") und drücke auf Speichern!",
                 "NoTelegramNameTitle": "Kein hinterlegten Empf�nger"
             },
             "Log": {
@@ -247,8 +247,8 @@
         "CountLabel": "##Done##/##End## erledigt",
         "CriticalError": "KRITISCHER FEHLER",
         "CurrentlySittingPlayers": "Sitzende Spieler",
-        "Detach": "Gel�st",
-        "DetachMain": "L�sen",
+        "Detach": "Gelöst",
+        "DetachMain": "Lösen",
         "Downloading": "Wird heruntergeladen:",
         "Expired": "ABGELAUFEN",
         "FailedToActivate": "FEHLER BEIM AKTIVIEREN",
@@ -256,7 +256,7 @@
         "PlayerLists": "Spieler-Listen",
         "IncidentBot": "Ereignis Bot",
         "IncidentCollected": "Ereignisse eingesammelt",
-        "LicenceNotValid": "Fehler beim Login mit dem Lizenzschl�ssel und diesem Ger�t!!\n\nEntweder wurde die Lizenz auf einem anderen Ger�t aktiviert\noder die Lizenz ist nicht g�ltig!",
+        "LicenceNotValid": "Fehler beim Login mit dem Lizenzschlüssel und diesem Gerät!!\n\nEntweder wurde die Lizenz auf einem anderen Gerät aktiviert\noder die Lizenz ist nicht gültig!",
         "LoggingIn": "Es wird eingeloggt",
         "Login": "Login",
         "Logout": "Logout",
@@ -276,8 +276,8 @@
         "ProductionFinishedState": "Produktion fertig",
         "ProductionIdle": "Leerlauf",
         "ReadyToCollect": "FERTIG ZUM EINSAMMELN",
-        "Remove": "L�schen",
-        "ResponseNotValid": "Antwort vom Server nicht g�ltig",
+        "Remove": "Löschen",
+        "ResponseNotValid": "Antwort vom Server nicht gültig",
         "Reward": "Belohnung",
         "RQBot": "Wiederkehrende-Quest Bot",
         "ShowingNotify": "Zeige Benachrichtigung",
@@ -287,13 +287,13 @@
         "Status": "Aktueller Status:",
         "SubExpiredTitle": "LIZENZ ABGELAUFEN",
         "SubscriptionExpired": "Deine Lizenz ist abgelaufen.\n\nBitte kauf eine neue Lizenz und aktiviere diese\nMit 'Ja' kommst du zum Shop\n\nansonsten wird die kostenlose Version weiter genutzt\nMit 'Nein' gehts mit der kostenlosen Version weiter",
-        "SuccessText": "Der Crash-Report wurde erfolgreich �bertragen\n\nVielen Dank f�r deine Hilfe",
-        "SuccessTitle": "Erfolgreich �bertragen",
+        "SuccessText": "Der Crash-Report wurde erfolgreich übertragen\n\nVielen Dank für deine Hilfe",
+        "SuccessTitle": "Erfolgreich übertragen",
         "TavernBot": "Tavernen Bot",
         "TavernDone": "Tavernebesuche erledigt",
         "TavernResult": "Belohnung Tavernenbesuch",
         "TavernState": "Tavernenstatus",
-        "TextCrashLog": "Bitte erlaube das Senden von Crashlogs um den aktuellen und alle zuk�nftige Fehler und Probleme direkt an die Entwicklung weiterzugeben.\n\n\"JA\" f�r immer erlauben\\n\"NEIN\" nur dieses Mal erlauben\\n\"Abbrechen\" niemals erlauben\"",
+        "TextCrashLog": "Bitte erlaube das Senden von Crashlogs um den aktuellen und alle zukünftige Fehler und Probleme direkt an die Entwicklung weiterzugeben.\n\n\"JA\" für immer erlauben\\n\"NEIN\" nur dieses Mal erlauben\\n\"Abbrechen\" niemals erlauben\"",
         "UnknownAction": "UNBEKANNTE AKTION",
         "Visitable": "Besuchbar",
         "VisitAllTitle": "Besuche alle Tavernen"
