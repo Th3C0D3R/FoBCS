@@ -21,9 +21,9 @@ Current Features:
 7. City (show and collect incidents from city or guild expedition)
 8. Sniper (search for snipable GBs and snip them)
 9. Settings (customize some settings and handle data/premium stuff)
-10. Shows Help for each item and function (Work-in-Progress) 
+10. Shows Help for each item and function (***Work-in-Progress***) 
 ### - Bots:
-1. **[FREE] Production Bot** (Start &amp; Collects Productions)
+1. **[FREE] Production Bot** (Start & Collects Productions)
 2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
 3. **[PREMIUM] Polivate Bot** - motivate/polish all Players after 24h
 4. **[PREMIUM] RQ-Bot** - NOT IMPLEMENTED NOW (Will do selected Recurring Quests automatically after given time)
@@ -56,7 +56,7 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMwMzc4NjM3MywtODUyMzIxODc3LC0xMj
+eyJoaXN0b3J5IjpbMTc5NDEwMzc0MCwtODUyMzIxODc3LC0xMj
 U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
 MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
 QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
