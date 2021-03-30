@@ -6,8 +6,7 @@
 ![Discord](https://img.shields.io/discord/743455118338293810?style=flat-square) [Invite](https://discord.gg/DJv8rNsbP7)
 [![Gitter](https://badges.gitter.im/ForgeOfBots/community.svg)](https://gitter.im/ForgeOfBots/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-This Bot was made by me and is one, if not the only one, which is currently public available and working.
-I made this Bot after working on a JavaScript Version (Electron App) which had it's difficulties while and after. Know, after a Year of development, lots of trial and error and 0 banned Accounts, I will publish this Bot for free
+## The only always-up-to-date & opensource Bot for ForgeOfEmipres!
 
 For implemented Premium Features you can get a Serial Key from here: [TH3C0D3R-Shop](https://th3c0d3r.selly.store/)
 
@@ -16,15 +15,15 @@ Current Features:
 1. Dashbord (shows Goods, Resources and Log)
 2. Social (Polivate & Ignore each player)
 3. Tavern (Collect and Visit each possible player)
-4. Army (show current army boost & available Units)
-5. Battle (able to battle guild expedition & open chests)
-6. Productions (show/collect/start current production and good production list)
+4. Army (show current army boost, available Units & current army selection)
+5. Battle (Fight GBG and GEX with open Chest & Buy GEX Attempts)
+6. Productions (show/collect/start current production and good production list & show all other finished production)
 7. City (show and collect incidents from city or guild expedition)
 8. Sniper (search for snipable GBs and snip them)
 9. Settings (customize some settings and handle data/premium stuff)
-10. Shows Help for each item and function (Work-in-Progress) 
+10. Shows Help for each item and function (***Work-in-Progress***) 
 ### - Bots:
-1. **[FREE] Production Bot** (Start &amp; Collects Productions)
+1. **[FREE] Production Bot** (Start & Collects Productions)
 2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
 3. **[PREMIUM] Polivate Bot** - motivate/polish all Players after 24h
 4. **[PREMIUM] RQ-Bot** - NOT IMPLEMENTED NOW (Will do selected Recurring Quests automatically after given time)
@@ -44,6 +43,8 @@ To contribute a translation do the following:
 5. Create a Pull-Request as soon as your done and wait for response
 6. The new Language will be added to the Bot dynamically and does not need a new version update
 
+## Images
+https://imgur.com/a/OQQj2cB
 
 ## Donation
 Don't want to buy premium but want to support me?
@@ -57,10 +58,10 @@ License
 -------
 Copyright 2020 - Th3C0D3R
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1NTcxMTYzOSwtODUyMzIxODc3LC0xMj
-U2OTMwMzAsMTU2ODQ4MjMyMywtMjA2Nzc2Nzk3NywtMTE3ODEw
-MDcwNSwtMTgyOTg2NDQ1MCwtNTU3NjE3NDY0LC01MDMzNjUyMz
-QsLTg0MTU5MzY0OCwyMTM4ODcwMzQ1LDM1MjkyMTYzMiwxMTkz
-OTg5MTYwLDkyMDE2ODI4Niw3Njk2MDI2NDgsLTcyODQwMDU2XX
-0=
+eyJoaXN0b3J5IjpbMTY1MjQxNTY3MSwxNzk0MTAzNzQwLC04NT
+IzMjE4NzcsLTEyNTY5MzAzMCwxNTY4NDgyMzIzLC0yMDY3NzY3
+OTc3LC0xMTc4MTAwNzA1LC0xODI5ODY0NDUwLC01NTc2MTc0Nj
+QsLTUwMzM2NTIzNCwtODQxNTkzNjQ4LDIxMzg4NzAzNDUsMzUy
+OTIxNjMyLDExOTM5ODkxNjAsOTIwMTY4Mjg2LDc2OTYwMjY0OC
+wtNzI4NDAwNTZdfQ==
 -->
