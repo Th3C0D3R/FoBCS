@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ForgeOfBots.Forms;
 using Newtonsoft.Json;
 using static ForgeOfBots.Utils.StaticData;
 
@@ -28,6 +29,7 @@ namespace ForgeOfBots.Utils
       private object _lock = new object();
       private Size CropSize = new Size(32, 32);
       private ImageExtractorKey key = ImageExtractorKey.Goods;
+      private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
 
       public void GetGoodImages(string server)
       {
@@ -98,8 +100,8 @@ namespace ForgeOfBots.Utils
       {
          lock (_lock)
          {
-            if (e == null) Console.Write("FOUND LOCAL FILE");
-            Console.WriteLine("]");
+            if (e == null) logger.Info($"LOCAL FILE FOUND");
+            else logger.Info($"]");
             string FileName = ((WebClient)sender).QueryString["file"];
             Console.WriteLine($"Downloading {FileName} complete");
             if (Path.GetExtension(FileName) == ".png")

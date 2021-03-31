@@ -25,7 +25,7 @@ namespace ForgeOfBots.Utils
       public static SettingData SettingData = new SettingData();
       public static Settings UserData;
       public static Assembly PremAssembly = null;
-      public static Version Version = Assembly.GetExecutingAssembly().GetName().Version;
+      public static Version Version { get; set; } = Assembly.GetExecutingAssembly().GetName().Version;
       public static UserDataInput usi = null;
       public static ImageList GoodImageList = null;
       public static ImageList UnitImageLise = null;

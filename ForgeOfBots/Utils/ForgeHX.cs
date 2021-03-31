@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForgeOfBots.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -27,7 +28,9 @@ namespace ForgeOfBots.Utils
          }
       }
 
+      private static bool Complete = false;
       private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+      public static DownloadFile DownloadFile = null;
 
       public static string ForgeHXURL { get; set; }
       public static string FileName { get; set; }
@@ -61,9 +64,12 @@ namespace ForgeOfBots.Utils
 
       private static void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
       {
-         if (sender == null && e == null) Console.Write("FOUND LOCAL FILE");
-         Console.WriteLine("]");
-         Console.WriteLine($"Downloading {FileName} complete");
+         Complete = true;
+         if (DownloadFile != null)
+            DownloadFile.Close();
+         if (sender == null && e == null) logger.Info($"LOCAL FILE FOUND");
+         else logger.Info($"]"); 
+         logger.Info($"Downloading {FileName} complete");
          string ForgeHX_FilePath = Path.Combine(ProgramPath, FileName);
          FileInfo fi = new FileInfo(ForgeHX_FilePath);
          var content = File.ReadAllText(ForgeHX_FilePath);
@@ -98,8 +104,23 @@ namespace ForgeOfBots.Utils
 
       private static void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
       {
-         if ((e.ProgressPercentage % 2) == 0)
-            Console.Write("#");
+         if(DownloadFile == null)
+         {
+            DownloadFile = new DownloadFile(FileName, e.TotalBytesToReceive);
+            DownloadFile.FormClosing += DownloadFile_FormClosing;
+            DownloadFile.TopMost = true;
+            DownloadFile.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            DownloadFile.Show();
+         }
+         else
+         {
+            DownloadFile.UpdateProgressbar(e);
+         }
+      }
+
+      private static void DownloadFile_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+      {
+         e.Cancel = !Complete;
       }
    }
 }

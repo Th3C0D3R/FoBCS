@@ -10,8 +10,8 @@ namespace ForgeOfBots.Forms
       public UserDataInput(Dictionary<string, string> serverList)
       {
          InitializeComponent();
-         Text += $" | FoBots v{StaticData.Version.Major}.{StaticData.Version.Minor} by TH3C0D3R";
-         label2.Text = $"{label2.Tag}{StaticData.Version.Major}.{StaticData.Version.Minor}";
+         Text += $" | FoBots v{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} by TH3C0D3R";
+         label2.Text = $"{label2.Tag}{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build}";
          cbServer.Items.Clear();
          foreach (var item in serverList)
          {

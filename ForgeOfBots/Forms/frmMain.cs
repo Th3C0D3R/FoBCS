@@ -50,10 +50,27 @@ namespace ForgeOfBots.Forms
       public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
       [DllImport("user32.dll")]
       public static extern bool ReleaseCapture();
+
+      private EventHandler _FormLoaded;
+      public event EventHandler FormLoaded
+      {
+         add
+         {
+            if (_FormLoaded == null || !_FormLoaded.GetInvocationList().ToList().Contains(value))
+               _FormLoaded += value;
+         }
+         remove
+         {
+            _FormLoaded -= value;
+         }
+      }
+
       private static readonly NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
       private bool blockExpireBox = false;
       readonly BackgroundWorkerEX bw = new BackgroundWorkerEX();
       static bool isLoading = false;
+      static bool restart = false;
+      static bool isVisible = false;
       static bool isFirstRun = true;
       private object _lock = new object();
       Loading LoadingFrm = null;
@@ -187,6 +204,7 @@ namespace ForgeOfBots.Forms
             Controls.Clear();
             logger.Info($"check available languages");
             Task.Factory.StartNew(CheckLanguages).Wait();
+
             InitializeComponent();
             FillArmyControl();
             i18n.TranslateForm();
@@ -436,6 +454,8 @@ namespace ForgeOfBots.Forms
          UserData.SaveSettings();
          RunningTime.Stop();
          driver.Quit();
+         if (restart)
+            Application.Restart();
          logger.Info($"<<< Application_ApplicationExit");
       }
       private void workerComplete(object sender, RunWorkerCompletedEventArgs e)
@@ -549,7 +569,7 @@ namespace ForgeOfBots.Forms
             Enum.TryParse(ret.ToString(), out Result result);
             if (result == Result.Success)
             {
-               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Premium")}) | by TH3C0D3R");
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Premium")}) | by TH3C0D3R");
                object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
                if (retList is List<UCPremium> list)
                {
@@ -557,13 +577,13 @@ namespace ForgeOfBots.Forms
                   string userPremium = $"{UserData.Username} ({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
                   userPremiumEvent.Add(UserData.Username, userPremium);
                   Analytics.TrackEvent("UserHasPremium", userPremiumEvent);
-                  Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Premium")}) | by TH3C0D3R");
+                  Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Premium")}) | by TH3C0D3R");
                   e.Result = true;
                }
             }
             else if (result == Result.Expired)
             {
-               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Expired")}) | by TH3C0D3R");
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Expired")}) | by TH3C0D3R");
                if (!blockExpireBox)
                {
                   DialogResult dlgRes = MessageBox.Show(Owner, $"{i18n.getString("SubscriptionExpired")}", $"{i18n.getString("SubExpiredTitle")}", MessageBoxButtons.YesNo);
@@ -591,7 +611,7 @@ namespace ForgeOfBots.Forms
                string userPremium = $"{UserData.Username} ({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
                userPremiumEvent.Add(UserData.Username, userPremium);
                Analytics.TrackEvent("UserPremiumFailed", userPremiumEvent);
-               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R");
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} | by TH3C0D3R");
                MessageBox.Show(Owner, $"{i18n.getString("LicenceNotValid")}", $"{i18n.getString("FailedToActivate")}");
             }
          }
@@ -601,11 +621,14 @@ namespace ForgeOfBots.Forms
       {
          logger.Info($">>> ForgeHX_ForgeHXDownloaded");
          LoadWorlds();
-         logger.Info($"<<< ForgeHX_ForgeHXDownloaded");
          if (isLoading && LoadingFrm != null)
          {
+            isLoading = false;
             LoadingFrm.Close();
          }
+         ForgeHX.DownloadFile = null;
+         LoadingFrm = null;
+         logger.Info($"<<< ForgeHX_ForgeHXDownloaded");
       }
       private void LoadWorlds()
       {
@@ -670,6 +693,11 @@ namespace ForgeOfBots.Forms
          //UpdateChat();
          if (isFirstRun)
          {
+            isVisible = true;
+            Visible = true;
+            if (Program.LoadingFrm != null)
+               Program.LoadingFrm.Close();
+
             isFirstRun = false;
             if (UserData.SnipBot && !isFirstRun && !tSniper.Enabled)
             {
@@ -974,13 +1002,13 @@ namespace ForgeOfBots.Forms
             DialogResult dlgRes = usi.ShowDialog();
             if (dlgRes == DialogResult.Cancel) Environment.Exit(0);
             logger.Info($"userdata entered");
-            mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
+            mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} | by TH3C0D3R";
             return;
          }
          else
          {
             ContinueExecution();
-            mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
+            mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} | by TH3C0D3R";
          }
          var startEvent = new Dictionary<string, string>();
          string startUp = $"{Identifier.GetInfo(_WCS, _WCS_Model)}-{Identifier.GetInfo(_WCS, _WCS_SystemType)} ({Identifier.GetInfo(_WOS, _WOS_Caption)}) ({UserData.Username})";
@@ -991,8 +1019,11 @@ namespace ForgeOfBots.Forms
       }
       private void FrmMain_Shown(object sender, EventArgs e)
       {
-         if (Program.LoadingFrm != null)
-            Program.LoadingFrm.Close();
+         if (isFirstRun)
+         {
+            isVisible = false;
+            Visible = false;
+         }
       }
       private void BwUptime_DoWork(object sender, DoWorkEventArgs e)
       {
@@ -1589,7 +1620,7 @@ namespace ForgeOfBots.Forms
                break;
          }
       }
-      
+
       private void BtnShowList_Click(object sender, EventArgs e)
       {
          if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
@@ -1640,7 +1671,7 @@ namespace ForgeOfBots.Forms
                default:
                   break;
             }
-            return new EntityProd() { entity = ex, Name = ex.name, Value = exprods, Priority = prio ,Type = type};
+            return new EntityProd() { entity = ex, Name = ex.name, Value = exprods, Priority = prio, Type = type };
          }).ToList();
          items = items.OrderBy(o => o.Priority).ToList();
          fpf.AddItem(items.ToArray());
@@ -1658,10 +1689,6 @@ namespace ForgeOfBots.Forms
          entities = entities.OrderBy(o => o.Priority).ToList();
          TwoTArgs<RequestType, List<EntityProd>> param = new TwoTArgs<RequestType, List<EntityProd>> { RequestType = RequestType.CollectOtherProductions, argument2 = entities };
          bwScriptExecuter_DoWork(this, new DoWorkEventArgs(param));
-         if (ListClass.FinishedProductions.Count > 0)
-         {
-            Invoker.SetProperty(lblSumFinProdValue, () => lblSumFinProdValue.Text, ListClass.FinishedProductions.Count.ToString());
-         }
          if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
       }
       private void CollectAll(object sender, dynamic data = null)
@@ -1674,6 +1701,7 @@ namespace ForgeOfBots.Forms
          entities = entities.OrderBy(o => o.Priority).ToList();
          TwoTArgs<RequestType, List<EntityProd>> param = new TwoTArgs<RequestType, List<EntityProd>> { RequestType = RequestType.CollectOtherProductions, argument2 = entities };
          bwScriptExecuter_DoWork(this, new DoWorkEventArgs(param));
+         Invoker.SetProperty(lblSumFinProdValue, () => lblSumFinProdValue.Text, "0");
          if (Application.OpenForms["FinProdForm"] != null) Application.OpenForms["FinProdForm"].Close();
       }
 
@@ -1947,8 +1975,8 @@ namespace ForgeOfBots.Forms
          }
          UserData.LastWorld = $"{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldID}|{((PlayAbleWorldItem)mcbCitySelection.SelectedItem).WorldName}";
          UserData.SaveSettings();
-         Application.Restart();
-         Environment.Exit(0);
+         restart = true;
+         PbCLose_Click(null, null);
       }
       private void McbNotifyProd_CheckedChanged(object sender, EventArgs e)
       {
@@ -1985,7 +2013,7 @@ namespace ForgeOfBots.Forms
             if (result == Result.Success)
             {
 
-               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Premium")}) | by TH3C0D3R";
+               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Premium")}) | by TH3C0D3R";
                UserData.SerialKey = mtbSerialKey.Text;
                UserData.SaveSettings();
                object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
@@ -1997,14 +2025,14 @@ namespace ForgeOfBots.Forms
             }
             else if (result == Result.Expired)
             {
-               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} ({i18n.getString("Expired")}) | by TH3C0D3R");
+               Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Expired")}) | by TH3C0D3R");
                if (!blockExpireBox)
                   MessageBox.Show(Owner, $"{i18n.getString("SubscriptionExpired")}", $"{i18n.getString("SubExpiredTitle")}");
                blockExpireBox = true;
             }
             else
             {
-               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
+               mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} | by TH3C0D3R";
                MessageBox.Show(Owner, $"{i18n.getString("LicenceNotValid")}", $"{i18n.getString("FailedToActivate")}");
             }
          }
@@ -2452,6 +2480,10 @@ namespace ForgeOfBots.Forms
                var script = ReqBuilder.GetRequestScript(RequestType.CollectProduction, ids);
                _ = (string)jsExecutor.ExecuteAsyncScript(script);
                Updater.UpdateEntities();
+               if (ListClass.FinishedProductions.Count > 0)
+               {
+                  Invoker.SetProperty(lblSumFinProdValue, () => lblSumFinProdValue.Text, ListClass.FinishedProductions.Count.ToString());
+               }
                break;
             case RequestType.Motivate:
                E_Motivate e_Motivate = (E_Motivate)Enum.Parse(typeof(E_Motivate), param.argument2.ToString());
@@ -3415,6 +3447,8 @@ namespace ForgeOfBots.Forms
             Invoker.SetProperty(cbType, () => cbType.Enabled, false);
             Invoker.SetProperty(nudDelay, () => nudDelay.Enabled, false);
             Invoker.SetProperty(btnReloadGBG, () => btnReloadGBG.Enabled, false);
+            Invoker.SetProperty(lblCurrentAttrition, () => lblCurrentAttrition.Text, $"0");
+            Invoker.SetProperty(lblCurrentMultiplier, () => lblCurrentMultiplier.Text, $"x0 / +0%");
             return;
          }
          DebugWatch.Start("Get Provinces");
@@ -3868,6 +3902,7 @@ namespace ForgeOfBots.Forms
             LoadingFrm.lblPleaseLogin.Font = new Font(tmp.FontFamily, 16);
          }
          LoadingFrm.Show();
+         isLoading = true;
          for (int i = 0; i < 500; i++)
          {
             Thread.Sleep(2);

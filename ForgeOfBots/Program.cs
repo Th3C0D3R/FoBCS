@@ -82,7 +82,9 @@ namespace ForgeOfBots
          LoadingFrm = new Loading();
          LoadingFrm.Show();
 
-         Application.Run(new frmMain(args));
+         frmMain main = new frmMain(args);
+         //main.FormLoaded += (s, e) => main.Show();
+         Application.Run(main);
       }
       private static string GetCommandLine(this Process process)
       {

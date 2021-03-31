@@ -19,8 +19,8 @@ namespace ForgeOfBots.Forms
       {
          InitializeComponent();
          TopMost = true;
-         Text += $" | FoBots v{StaticData.Version.Major}.{StaticData.Version.Minor} by TH3C0D3R";
-         label2.Text += $"{StaticData.Version.Major}.{StaticData.Version.Minor}";
+         Text += $" | FoBots v{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} by TH3C0D3R";
+         label2.Text += $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build}";
          foreach (var item in serverList)
          {
             if (!cbCities.Items.Contains(item.Item1 + " (" + item.Item2 + ")"))

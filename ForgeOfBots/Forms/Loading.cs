@@ -18,7 +18,7 @@ namespace ForgeOfBots.Forms
       public Loading(bool translate = true)
       {
          InitializeComponent();
-         mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor} | by TH3C0D3R";
+         mlVersion.Text = mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} | by TH3C0D3R";
          if (!i18n.initialized)
          {
             if (Settings.SettingsExists())

@@ -16,7 +16,7 @@ namespace ForgeOfBots.Forms
       public About()
       {
          InitializeComponent();
-         lblTitle.Text += $"{StaticData.Version.Major}.{StaticData.Version.Minor}";
+         lblTitle.Text += $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build}";
          lblVersion.Text = GetVersionNumber(typeof(frmMain), false);
          lblInternalVersion.Text = GetVersionNumber(typeof(frmMain), true);
       }

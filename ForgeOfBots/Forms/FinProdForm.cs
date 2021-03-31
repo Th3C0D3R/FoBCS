@@ -73,7 +73,7 @@ namespace ForgeOfBots.Forms
       }
       private void BtnCollectSelected_Click(object sender, EventArgs e)
       {
-         _CollectSelected?.Invoke(null, lvFinProds.Items);
+         _CollectSelected?.Invoke(null, lvFinProds.CheckedItems);
       }
    }
 }
