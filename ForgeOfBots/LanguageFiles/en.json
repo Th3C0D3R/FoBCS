@@ -249,6 +249,11 @@
       },
       "Log": {
         "Snip": "Snip-Bot"
+      },
+      "Download": {
+        "Header": "Download ",
+        "Filename": "File:",
+        "Progress": "Progress:"
       }
     },
     "AskCrashLog": "Allow sending Crashlogs",
