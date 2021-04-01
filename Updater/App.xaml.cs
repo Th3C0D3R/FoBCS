@@ -21,6 +21,7 @@ namespace Updater
          {
             case "restart":
                Process.Start("ForgeOfBots.exe", args[1].ToString());
+               Current.Shutdown();
                break;
             default:
                MainWindow mw = new MainWindow();
