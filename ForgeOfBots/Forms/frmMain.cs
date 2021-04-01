@@ -24,7 +24,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UCPremiumLibrary;
-using static ForgeOfBots.FoBUpdater.FoBUpdater;
 using static ForgeOfBots.Utils.Helper;
 using static ForgeOfBots.Utils.Extensions;
 using static ForgeOfBots.Utils.StaticData;
@@ -210,7 +209,6 @@ namespace ForgeOfBots.Forms
             i18n.TranslateForm();
             i18n.TranslateCMS(cmsMainMenu);
             logger.Info($"check for updates");
-            CheckForUpdate();
             if (HasLastCrash)
             {
                if (UserData != null)
@@ -454,9 +452,12 @@ namespace ForgeOfBots.Forms
          UserData.SaveSettings();
          RunningTime.Stop();
          driver.Quit();
-         if (restart)
-            Application.Restart();
          logger.Info($"<<< Application_ApplicationExit");
+         if (restart)
+         {
+            restart = false;
+            Process.Start("Updater.exe", $"restart {(DEBUGMODE?"/debug":"")}");
+         }
       }
       private void workerComplete(object sender, RunWorkerCompletedEventArgs e)
       {
