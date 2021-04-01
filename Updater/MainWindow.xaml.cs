@@ -37,7 +37,7 @@ namespace Updater
             {
                if (Utils.Version.IsUpdateAvailable(ReleaseVersion))
                {
-
+                  //https://github.com/Th3C0D3R/ForgeOfBot/releases/download/v{version}/ForgeOfBots.exe
                }
             }
          }
