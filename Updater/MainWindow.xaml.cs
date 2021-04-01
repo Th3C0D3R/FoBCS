@@ -20,9 +20,11 @@ namespace Updater
    /// </summary>
    public partial class MainWindow : Window
    {
+      public static Utils.Version ReleaseVersion = null;
       public MainWindow()
       {
          InitializeComponent();
+         Utils.Version.Init();
       }
 
       private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -31,6 +33,13 @@ namespace Updater
          {
             pnlUpdate.Visibility = Visibility.Hidden;
             pnlUpdateAvailable.Visibility = Visibility.Visible;
+            if(ReleaseVersion != null)
+            {
+               if (Utils.Version.IsUpdateAvailable(ReleaseVersion))
+               {
+
+               }
+            }
          }
       }
 

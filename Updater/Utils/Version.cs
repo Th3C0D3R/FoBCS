@@ -1,0 +1,42 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Updater.Utils
+{
+   public class Version
+   {
+      public string version { get; set; }
+      public static bool IsUpdateAvailable(Version v)
+      {
+         System.Version current = AssemblyName.GetAssemblyName("ForgeOfBots.exe").Version;
+         bool update = false;
+         string[] versionSplit = v.version.Split('.');
+         return (int.Parse(versionSplit[0]) > current.Major || (int.Parse(versionSplit[1]) > current.Minor && int.Parse(versionSplit[0]) == current.Major));
+      }
+      public static void Init()
+      {
+         try
+         {
+            string URLLang = $"https://raw.githubusercontent.com/Th3C0D3R/FoBCS/master/ForgeOfBots/version.json";
+            using (var webClient = new WebClient())
+            {
+               int codePage = Encoding.Default.CodePage;
+               webClient.Encoding = Encoding.GetEncoding(codePage);
+               string resultStrings = webClient.DownloadString(URLLang);
+               MainWindow.ReleaseVersion = JsonConvert.DeserializeObject<Version>(resultStrings);
+            }
+         }
+         catch (WebException)
+         {
+            MainWindow.ReleaseVersion = new Version() { version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3) };
+         }
+      }
+   }
+
+}

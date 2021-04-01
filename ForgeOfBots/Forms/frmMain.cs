@@ -456,7 +456,8 @@ namespace ForgeOfBots.Forms
          if (restart)
          {
             restart = false;
-            Process.Start("Updater.exe", $"restart {(DEBUGMODE?"/debug":"")}");
+            Process.Start("Updater.exe", $"restart{(DEBUGMODE?" /debug":"")}");
+            Process.GetCurrentProcess().Kill();
          }
       }
       private void workerComplete(object sender, RunWorkerCompletedEventArgs e)
@@ -954,7 +955,7 @@ namespace ForgeOfBots.Forms
       }
       private void PbCLose_Click(object sender, EventArgs e)
       {
-         logger.Info($">>> PbCLose_Click");
+         logger.Info($">>> PbCLose_Click {(sender != null ? sender.ToString() : "null")}");
          if (ListClass.BackgroundWorkers.Count > 0)
          {
             foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
