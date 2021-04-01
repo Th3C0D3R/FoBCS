@@ -6,14 +6,16 @@
     "Text": "Forge of Bots Help\n\nChoose a category",
     "Children": [
       {
-        "Title": "Funktionen",
+        "Title": "Functions",
         "HasChildren": false,
-        "Text": "Die Funktionen sind im Gegensatz zu den vorherigen Versionen nicht mehr in einem Menü oder durch Buttons veranschaulicht!\n\nDie meisten Funktionen sind nun über das \"Rechts-Klick\"-Menü verfügbar und auch nur\nin den dafür vorgesehenen Tab-Seiten (bsp.: Moppel-Funktionen nur im \"Sozial\"-Tab.\nFunktionen die nicht kategorisiert sind (Login/Logout, Über, Neuladen) sind überall verfügbar.\n\n"
+        "Text": "In contrast to the previous versions, the functions are no longer illustrated in a menu or by buttons!\n\nMost of the functions are now available via the \"right-click\" menu, and only\nin the tab pages provided for this purpose (e.g. Motivate/Visit functions only in the \"Social\" tab.\nFunctions that are not categorized (login / logout, about, reload) are available everywhere.\n\n"
       },
       {
         "Title": "Sniper",
         "HasChildren": false,
-        "Text": "Erklärung \"Snipen\":\nMit \"Snipen\" bezeichnet man die Aktion, fremde LGs zu durchsuchen und ein Platz, der überversichert ist,\nmit weniger zu besetzen als man normal (1.9er Förderung) zahlen muss. Klingt kompliziert, ist es aber nicht.\n\nBeispiel:\nSpieler A hat min. eine 80er Arche!\n\nSpieler B hat ein LG mit insgesamt 200 eingezahlten FP von 300 FP bis zum Level (also 100 FP fehlen noch und es sind keine anderen Spieler vorhanden)\nPlatz 1 in diesem LG würde 60FP Belohnung geben (also 114FP mit 1.9er Arche)\nSpieler A kann nun NUR 50FP einzahlen um P1 zu sichern und kann somit ein Gewinn von 64FP einfahren\n\nDas ganze funktioniert natürlich nur dann wenn Spieler B aktiv ist und das LG auch levelt.\n\nDer Bot berücksichtigt automatisch das \"active\"-Flag, trotzdem kann es immer noch vorkommen\ndas der Spieler das LG dann nicht mehr weiter fördert."
+        "Text": "Explanation for \"Sniping\":
+\"Sniping\" is the name given to the action of searching through foreign GBs for one in which you can get a return on for more than you would
+normally have to invest (1.9 funding). Sounds complicated, but it is not.\n\nExample:\nPlayer A has at least a level 80 ark!\n\nPlayer B has a GB with a total of 200 deposited FP from 300 FP up to the level (i.e. 100 FP are still missing and there are no other players)\n1st place in this GB would give 60FP reward (i.e. 114FP with 1.9 Ark)\nPlayer A can ONLY deposit 50FP to secure P1 and can therefore make a profit of 64FP \n\nOf course, the whole thing only works when player B is active and the GB is also leveling.\n\nThe bot automatically takes the \"active\" flag into account, but it is still at your own risk, a player can go inactive at any time or decide not to level this GB."
       }
     ]
   }
