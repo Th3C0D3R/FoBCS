@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
 
 namespace Updater
@@ -17,6 +10,7 @@ namespace Updater
    {
       private void Application_Startup(object sender, StartupEventArgs e)
       {
+         Debugger.Launch();
          var args = e.Args;
          if (args.Length > 0)
          {
@@ -26,9 +20,22 @@ namespace Updater
                   Process.Start("ForgeOfBots.exe", (args.Length == 2 ? args[1].ToString() : ""));
                   Process.GetCurrentProcess().Kill();
                   break;
-               default:
+               case "check":
+                  Utils.Version.Init();
+                  if (Utils.Version.IsUpdateAvailable(Utils.Helper.ReleaseVersion))
+                  {
+                     Current.Shutdown(10);
+                  }
+                  else
+                  {
+                     Current.Shutdown(1);
+                  }
+                  break;
+               case "update":
                   MainWindow mw = new MainWindow();
                   mw.Show();
+                  break;
+               default:
                   break;
             }
          }

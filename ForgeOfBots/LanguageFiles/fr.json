@@ -99,7 +99,8 @@
         "Buildings": "Construction",
         "SumFinishedProductions": "Sum of all finished productions",
         "ShowList": "(Show list of finished productions)",
-        "ListFinProd": "Finished productions"
+        "ListFinProd": "Finished productions",
+        "AlcaUnit": "Alcatraz-Unit(s)"
       },
       "City": {
         "Header": "Ville"

@@ -62,18 +62,13 @@
     <StartupObject>Updater.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nevron.Nov.Barcode, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.Chart, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.Diagram, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.Grid, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.Host.Wpf, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.Presentation, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.Schedule, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.Text, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Nevron.Nov.WpfControls, Version=20.1.28.12, Culture=neutral, PublicKeyToken=b33b1a04bb5ca8ad, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="ByteSize, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ByteSize.2.0.0\lib\net45\ByteSize.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -88,7 +83,6 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +90,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\Helper.cs" />
     <Compile Include="Utils\i18n.cs" />
     <Compile Include="Utils\Version.cs" />
     <Page Include="MainWindow.xaml">

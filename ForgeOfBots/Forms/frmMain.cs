@@ -1639,8 +1639,16 @@ namespace ForgeOfBots.Forms
             {
                if (ex.state["current_product"]["goods"] == null)
                {
-                  MessageBox.Show("!!!! PLEASE REPORT THE TEXT INSIDE YOU CLIPBOARD TO THE DEV (GITHUB/DISCORD) !!!!", "PLEASE REPORT!!");
-                  Clipboard.SetText(ex.state.ToString());
+                  if (!string.Equals(ex.state["current_product"]["name"].ToString(), "penal_unit")){
+                     MessageBox.Show("!!!! PLEASE REPORT THE TEXT INSIDE YOU CLIPBOARD TO THE DEV (GITHUB/DISCORD) !!!!", "PLEASE REPORT!!");
+                     Clipboard.SetText(ex.state.ToString());
+                  }
+                  else
+                  {
+                     productName = i18n.getString("GUI.Production.AlcaUnit");
+                     productValue = ex.state["current_production"]["amount"].ToString();
+                     exprods = $"{productValue} {productName}";
+                  }
                }
                else
                {
@@ -2824,7 +2832,7 @@ namespace ForgeOfBots.Forms
                                  }
                                  if (!IsSelf)
                                  {
-                                    SnipeRankCosts[Rank] = (int)Math.Round((double)(Einzahlungen[Rank] + RestFP) / 2);
+                                    SnipeRankCosts[Rank] = (int)Math.Floor((double)(Einzahlungen[Rank] + RestFP) / 2);
                                     ForderRankCosts[Rank] = Math.Max(ForderFPRewards[Rank], SnipeRankCosts[Rank]);
                                     ForderRankCosts[Rank] = Math.Min(ForderRankCosts[Rank], RestFP);
                                     bool exitLoop = false;
@@ -3261,7 +3269,15 @@ namespace ForgeOfBots.Forms
          Invoker.CallMethode(lvWave, () => lvWave.Items.Clear());
          UpdateArmy();
          GEXHelper.UpdateGEX();
-         if (GEXHelper.GEXOverview.state.Equals("inactive"))
+         if(GEXHelper.GetCurrentState == -1)
+         {
+            Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {i18n.getString("GUI.Battle.GEX.NoGEX")}");
+            Invoker.SetProperty(lvWave, () => lvWave.Visible, false);
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Enabled, false);
+            Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.NoGEX"));
+            return;
+         }
+         if (string.Equals(GEXHelper.GEXOverview.state,"inactive"))
          {
             Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {i18n.getString("GUI.Battle.GEX.NoGEX")}");
             Invoker.SetProperty(lvWave, () => lvWave.Visible, false);

@@ -90,7 +90,7 @@ namespace ForgeOfBots.Utils
             if (SecretMatch.Success)
             {
                SettingData.Version_Secret = SecretMatch.Groups[1].Value;
-               _ForgeHXLoaded?.Invoke(null, null);
+               SECRET_LOADED = true;
             }
          }
          catch (Exception ex)
@@ -99,6 +99,12 @@ namespace ForgeOfBots.Utils
             fi.Delete();
             ForgeHXLoaded = false;
             DownloadForge();
+         }
+         finally
+         {
+            if(SECRET_LOADED)
+            _ForgeHXLoaded?.Invoke(null, null);
+            SECRET_LOADED = false;
          }
       }
 

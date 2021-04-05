@@ -12,10 +12,10 @@ namespace Updater.Utils
    public class Version
    {
       public string version { get; set; }
+      public string changelog { get; set; }
       public static bool IsUpdateAvailable(Version v)
       {
          System.Version current = AssemblyName.GetAssemblyName("ForgeOfBots.exe").Version;
-         bool update = false;
          string[] versionSplit = v.version.Split('.');
          return (int.Parse(versionSplit[0]) > current.Major || (int.Parse(versionSplit[1]) > current.Minor && int.Parse(versionSplit[0]) == current.Major));
       }
@@ -29,12 +29,12 @@ namespace Updater.Utils
                int codePage = Encoding.Default.CodePage;
                webClient.Encoding = Encoding.GetEncoding(codePage);
                string resultStrings = webClient.DownloadString(URLLang);
-               MainWindow.ReleaseVersion = JsonConvert.DeserializeObject<Version>(resultStrings);
+               Helper.ReleaseVersion = JsonConvert.DeserializeObject<Version>(resultStrings);
             }
          }
          catch (WebException)
          {
-            MainWindow.ReleaseVersion = new Version() { version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3) };
+            Helper.ReleaseVersion = new Version() { version = Assembly.GetExecutingAssembly().GetName().Version.ToString(3) };
          }
       }
    }

@@ -96,7 +96,8 @@
         "Buildings": "Gebäude",
         "SumFinishedProductions": "Summe aller fertigen Produktionen:",
         "ShowList": "(Zeigt eine Liste aller Produktionen)",
-        "ListFinProd": "Fertige Produktionen"
+        "ListFinProd": "Fertige Produktionen",
+        "AlcaUnit": "Alkatraz-Einheit(en)"
       },
       "City": {
         "Header": "Stadt"

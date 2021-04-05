@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Updater"
-        xmlns:WpfControls="clr-namespace:Nevron.Nov.WpfControls;assembly=Nevron.Nov.WpfControls" x:Class="Updater.MainWindow"
+    xmlns:local="clr-namespace:Updater"
         mc:Ignorable="d"
-        Title="Forge of Bots - Updater" Height="192.156" Width="370.127" Uid="frmUpdate" Icon="favicon.ico" WindowStartupLocation="CenterScreen" IsVisibleChanged="Window_IsVisibleChanged">
+        Title="Forge of Bots - Updater" Height="192.156" Width="370.127" Icon="favicon.ico" x:Class="Updater.MainWindow" WindowStartupLocation="CenterScreen" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid x:Name="pnlUpdateAvailable" Uid="pnlUpdateAvailable" RenderTransformOrigin="0.495,0.511" d:IsHidden="True">
             <Grid.RowDefinitions>
@@ -19,7 +18,7 @@
         </Grid>
         <Grid x:Name="pnlUpdate" Uid="pnlUpdate">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="99" Width="342" x:Name="tbUpdateProgress" Uid="tbUpdateProgress" Text="GUI.Updater.Changelog" Tag="GUI.Updater.Changelog"/>
-            <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,123,0,0" VerticalAlignment="Top" Width="342" Uid="pbUpdate" />
+            <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,123,0,0" VerticalAlignment="Top" Width="342" x:Name="pbProgress" Uid="pbProgress"  />
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,123,10,20" Width="342" Height="18" TextAlignment="Center" Panel.ZIndex="100" Uid="lblProgress">
       My Text
             </TextBlock>

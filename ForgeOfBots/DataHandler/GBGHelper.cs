@@ -36,11 +36,13 @@ namespace ForgeOfBots.DataHandler
       }
       public static void UpdateGBG()
       {
+         if (!IsParticipating) return;
          CurrentBattleground = GetBattleground();
          CurrentState = GetState();
       }
       public static ArmyData[] GetArmyInfo(int provinceID)
       {
+         if (!IsParticipating) return null;
          try
          {
             string script = ReqBuilder.GetRequestScript(RequestType.GBGgetArmyInfo, provinceID);

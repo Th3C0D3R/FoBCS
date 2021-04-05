@@ -27,7 +27,7 @@ namespace ForgeOfBots.DataHandler
          get
          {
             if (GEXOverview == null) return -1;
-            if (GEXOverview.state.Equals("inactive")) return -1;
+            if (string.Equals(GEXOverview.state,"inactive")) return -1;
             if (GEXOverview.progress.currentEntityId >= 127) return -1;
             if (GEXOverview.progress.isMapCompleted && GEXOverview.progress.difficulty == 3) return -1;
             return GEXOverview.progress.currentEntityId;
@@ -70,18 +70,25 @@ namespace ForgeOfBots.DataHandler
       }
       public static void UpdateGEX()
       {
-         GEXOverview = GetOverview();
-         if (GEXOverview.state == "inactive") return;
-         if (GEXOverview.progress.difficulty < 3 && GEXOverview.progress.isMapCompleted)
+         try
          {
-            if (NextDiffOpen(GEXOverview.progress.difficulty))
+            GEXOverview = GetOverview();
+            if (GEXOverview.state == "inactive") return;
+            if (GEXOverview.progress.difficulty < 3 && GEXOverview.progress.isMapCompleted)
             {
-               ChangeDiff(GEXOverview.progress.difficulty + 1);
+               if (NextDiffOpen(GEXOverview.progress.difficulty))
+               {
+                  ChangeDiff(GEXOverview.progress.difficulty + 1);
+               }
+               else
+               {
+                  GetCurrentState = -1;
+               }
             }
-            else
-            {
-               GetCurrentState = -1;
-            }
+         }
+         catch (Exception)
+         {
+            GetCurrentState = -1;
          }
       }
       public static OpenChest OpenChest(int id)
