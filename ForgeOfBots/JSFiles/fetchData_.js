@@ -10,7 +10,7 @@ const request = async () => {
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "same-origin",
             "signature": "##sig##",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+            "user-agent": "##UserAgent##"
         },
         "referrer": "https://##WorldID##.forgeofempires.com/game/index?",
         "referrerPolicy": "no-referrer-when-downgrade",

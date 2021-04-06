@@ -19,7 +19,7 @@ async function FoELogin() {
 		var x = await fetch("https://##server##.forgeofempires.com/glps/login_check", {
 			"credentials": "include",
 			"headers": {
-				"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0",
+				"User-Agent": "##UserAgent##",
 				"Accept": "application/json, text/plain, */*",
 				"Accept-Language": "de,en-US;q=0.7,en;q=0.3",
 				"X-XSRF-TOKEN": "###XSRF-TOKEN###",
@@ -40,6 +40,7 @@ async function FoELogin() {
 		var res = await fetch("https://##server##0.forgeofempires.com/start/index?action=fetch_worlds_for_login_page", {
 			"credentials": "include",
 			"headers": {
+				"User-Agent": "##UserAgent##",
 				"accept": "text/plain, */*; q=0.01",
 				"accept-language": "de",
 				"cache-control": "no-cache",
@@ -63,7 +64,7 @@ async function FoELogin() {
 			var res2 = await fetch("https://##server##0.forgeofempires.com/start/index?action=play_now_login", {
 				"credentials": "include",
 				"headers": {
-					"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0",
+					"User-Agent": "##UserAgent##",
 					"Accept": "text/plain, */*; q=0.01",
 					"Accept-Language": "de,en-US;q=0.7,en;q=0.3",
 					"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",

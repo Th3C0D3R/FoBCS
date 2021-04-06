@@ -346,6 +346,7 @@ namespace ForgeOfBots.Forms
                .Replace("###USERNAME###", UserData.Username)
                .Replace("###PASSWORD###", UserData.Password)
                .Replace("##server##", UserData.WorldServer)
+               .Replace("##UserAgent##", UserData.CustomUserAgent)
              .Replace("##t##", "false")
              .Replace("##city##", "\"" + UserData.LastWorld.Split('|')[0] + "\"");
             var x = jsExecutor.ExecuteAsyncScript(loginJS);
@@ -638,6 +639,7 @@ namespace ForgeOfBots.Forms
          ReqBuilder.User_Key = StaticData.BotData.UID;
          ReqBuilder.VersionSecret = StaticData.SettingData.Version_Secret;
          ReqBuilder.Version = StaticData.SettingData.Version;
+         ReqBuilder.UserAgent = StaticData.UserData.CustomUserAgent;
          ReqBuilder.WorldID = StaticData.BotData.WID;
          string script = ReqBuilder.GetRequestScript(RequestType.GetAllWorlds, "[]");
          var ret = (string)jsExecutor.ExecuteAsyncScript(script);

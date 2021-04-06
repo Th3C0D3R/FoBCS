@@ -19,6 +19,7 @@ namespace ForgeOfBots.DataHandler
       public string User_Key { get; set; }
       public string VersionSecret { get; set; }
       public string Version { get; set; }
+      public string UserAgent { get; set; } = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36";
       private static int requestID => _requestId++;
       public static int RequestID { get { return requestID; } private set { } }
       private static readonly ResourceManager resMgr = StaticData.resMgr;
@@ -239,7 +240,7 @@ namespace ForgeOfBots.DataHandler
                   ["provinceId"] = idData,
                   ["battlesWon"] = 0
                };
-               _data = new JArray(gbgstart,true);
+               _data = new JArray(gbgstart, true);
                _class = "BattlefieldService";
                _methode = "startByBattleType";
                break;
@@ -338,7 +339,7 @@ namespace ForgeOfBots.DataHandler
             {
                if (armyData.Length != 16) return "";
                string start = "[{\"__class__\":\"ServerRequest\",\"requestData\":[[{\"__class__\":\"ArmyPool\",\"units\":[";
-               string ids = string.Join(",", armyData.GetTroopRow(0)).Replace("0,","");
+               string ids = string.Join(",", armyData.GetTroopRow(0)).Replace("0,", "");
                string end = $"],\"type\":\"attacking\"}},{{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"defending\"}},{{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}}],{{\"__class__\":\"ArmyContext\",\"content\":\"main\"}}],\"requestClass\":\"ArmyUnitManagementService\",\"requestMethod\":\"updatePools\",\"requestId\":{RequestID}}}]";
                jsonString = $"{start}{ids}{end}";
             }
@@ -346,7 +347,7 @@ namespace ForgeOfBots.DataHandler
                jsonString = jsonString.Replace("\"requestData\":[", "\"requestData\":[[").Replace("],\"requestClass\"", "]],\"requestClass\"");
             else if (type == RequestType.contributeForgePoints)
                jsonString = jsonString.Replace(",0]", ",false]");
-            else if(type == RequestType.getContexts)
+            else if (type == RequestType.getContexts)
                jsonString = jsonString.Replace("[\"guildExpedition\"]", "[[\"guildExpedition\"]]");
          }
          //Console.WriteLine(jsonString);
@@ -355,6 +356,7 @@ namespace ForgeOfBots.DataHandler
             .Replace("##sig##", CalcSig(jsonString, User_Key, VersionSecret))
             .Replace("##WorldID##", WorldID)
             .Replace("##UserKey##", User_Key)
+            .Replace("##UserKey##", UserAgent)
             .Replace("##Version##", Version)
             .Replace("##methode##", _methode)
             .Replace("##onlyOne##", onlyOne)
@@ -373,6 +375,7 @@ namespace ForgeOfBots.DataHandler
          //Console.WriteLine(jsonString);
          RequestScript = RequestScript
             .Replace("##WorldID##", WorldID)
+               .Replace("##UserAgent##", UserAgent)
             .Replace("##url##", url);
          return RequestScript;
       }
