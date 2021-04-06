@@ -1,4 +1,4 @@
 ﻿{
   "version": "2.2.3",
-  "changelog": "---"
+  "changelog": "- Updated the Bot to auto check if an update is available\n- Fixed some stuff"
 }
