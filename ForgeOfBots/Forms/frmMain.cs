@@ -2902,7 +2902,7 @@ namespace ForgeOfBots.Forms
                                  if (lg.level == lg.maxLevel) continue;
                                  if (BestGewinn < UserData.MinProfit) continue;
                                  int SnipCost = FPRewards[RankProfit] - BestGewinn;
-                                 float Win = (FPRewards[RankProfit] - SnipCost) / SnipCost * 100;
+                                 float Win = (float)(FPRewards[RankProfit] - SnipCost) / SnipCost * 100;
                                  if ((int)Win < UserData.MinProfitPercentage) continue;
                                  if (SnipCost > UserData.MaxInvestment) continue;
                                  lg.KurzString = $"{(int)Win} %";

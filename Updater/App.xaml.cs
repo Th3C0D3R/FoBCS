@@ -10,7 +10,6 @@ namespace Updater
    {
       private void Application_Startup(object sender, StartupEventArgs e)
       {
-         Debugger.Launch();
          var args = e.Args;
          if (args.Length > 0)
          {

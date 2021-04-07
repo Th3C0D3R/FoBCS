@@ -1,4 +1,4 @@
 ﻿{
-  "version": "2.2.3",
-  "changelog": "- Snip: limit upper bound of invested FP and set % of Profit\n- exclude guildmates from friendlist\n- Make Ignorelist scrollable\n- right-click social list to ignore player\n- fix rounding issue"
+  "version": "2.2.4",
+  "changelog": "- Fixed cast issue for Sniping"
 }
