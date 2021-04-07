@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Management;
 using System.Linq;
+using System.IO;
 
 namespace ForgeOfBots
 {
@@ -31,6 +32,12 @@ namespace ForgeOfBots
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
          Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+
+         if (File.Exists("tmp_Updater.exe"))
+         {
+            File.Delete("Updater.exe");
+            File.Move("tmp_Updater.exe", "Updater.exe");
+         }
 
          Process updater = Process.Start("Updater.exe", "check");
          while (!updater.HasExited)

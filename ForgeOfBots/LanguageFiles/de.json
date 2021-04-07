@@ -120,8 +120,10 @@
               "WarningTitle": "!! ACHTUNG !!",
               "WarningText": "ES WIRD IN ALLE LGs INVESTIERT DIE BEIM DURCHSUCHEN PROFIT ABWERFEN!\nSOLANG FP VORHANDEN SIND!!\nREIHENFOLGE ENTSPRICHT DER REIHENFOLGE IN DEN JEWEILIGEN SPIELERLISTEN\n\nINAKTIVE SPIELER WERDEN NICHT BER�CKSICHTIGT"
             },
-            "MinProfit": "Min. Profit zum Snipen",
-            "SnipEvery": "Snipe jede x Minuten"
+            "MinProfit": "Min. Gewinn zum Snipen:",
+            "SnipEvery": "Snipe jede x Minuten:",
+            "PercProfit": "Min. Gewinn (%):",
+            "UpperInvestLimit": "Max. Einsatz:"
           },
           "Ignore": "Spieler die ignoriert werden sollen (Enter drücken zum hinzufügen)",
           "BGPrioList": "Priorität Blaue Galaxie:",
@@ -255,6 +257,9 @@
         "Header": "Download ",
         "Filename": "Datei:",
         "Progress": "Fortschritt:"
+      },
+      "Updater": {
+        "Update": "Update"
       }
     },
     "AskCrashLog": "Senden von Crashlogs",
@@ -275,7 +280,7 @@
     "Expired": "ABGELAUFEN",
     "FailedToActivate": "FEHLER BEIM AKTIVIEREN",
     "Friends": "Freund",
-    "PlayerLists": "Spieler-Listen",
+    "PlayerLists": "Spieler-Listen (zur Ignorliste hinzufügen)",
     "IncidentBot": "Ereignis Bot",
     "IncidentCollected": "Ereignisse eingesammelt",
     "LicenceNotValid": "Fehler beim Login mit dem Lizenzschlüssel und diesem Gerät!!\n\nEntweder wurde die Lizenz auf einem anderen Gerät aktiviert\noder die Lizenz ist nicht gültig!",

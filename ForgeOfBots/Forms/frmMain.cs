@@ -816,7 +816,7 @@ namespace ForgeOfBots.Forms
          Invoker.SetProperty(lblFriendsCount, () => lblFriendsCount.Text, $"{friendMotivate.Count}/{ListClass.FriendList.Count}");
          Invoker.SetProperty(lblClanMemberCount, () => lblClanMemberCount.Text, $"{clanMotivate.Count}/{ListClass.ClanMemberList.Count}");
          Invoker.SetProperty(lblNeighborCount, () => lblNeighborCount.Text, $"{neighborlist.Count}/{ListClass.NeighborList.Count}");
-         Invoker.SetProperty(lblInactiveFriends, () => lblInactiveFriends.Text, i18n.getString("PlayerLists"));
+         Invoker.SetProperty(lblPlayerLists, () => lblPlayerLists.Text, i18n.getString("PlayerLists"));
 
          if (!UserData.IgnoredPlayers.ContainsKey(UserData.LastWorld.Split('|')[0]))
             UserData.IgnoredPlayers.Add(UserData.LastWorld.Split('|')[0], new List<int>());
@@ -1784,6 +1784,8 @@ namespace ForgeOfBots.Forms
          mtDarkMode.Checked = UserData.DarkMode;
          mtbTelegramUsername.Text = UserData.TelegramUserName;
          nudMinProfit.Value = UserData.MinProfit;
+         nudMinProfitPerc.Value = UserData.MinProfitPercentage;
+         nudMaxInvest.Value = UserData.MaxInvestment;
          mcbAutoInvest.Checked = UserData.AutoInvest;
          mcbBlueGalaxiePrio.SelectedItem = UserData.BGPriority;
          mtSnipBot.Checked = UserData.SnipBot;
@@ -2108,6 +2110,16 @@ namespace ForgeOfBots.Forms
       private void nudMinProfit_ValueChanged(object sender, EventArgs e)
       {
          UserData.MinProfit = (int)nudMinProfit.Value;
+         UserData.SaveSettings();
+      }
+      private void NudMinProfitPerc_ValueChanged(object sender, EventArgs e)
+      {
+         UserData.MinProfitPercentage = (int)nudMinProfitPerc.Value;
+         UserData.SaveSettings();
+      }
+      private void NudMaxInvest_ValueChanged(object sender, EventArgs e)
+      {
+         UserData.MaxInvestment = (int)nudMaxInvest.Value;
          UserData.SaveSettings();
       }
       private void McbAutoInvest_CheckedChanged(object sender, EventArgs e)
@@ -2815,10 +2827,10 @@ namespace ForgeOfBots.Forms
                                  if (rang.reward.resources.medals >= 0)
                                     MedalRewards[Rank] = rang.reward.resources.medals;
 
-                                 FPRewards[Rank] = (int)Math.Round((double)FPNettoRewards[Rank] * arc);
-                                 BPRewards[Rank] = (int)Math.Round((double)BPRewards[Rank] * arc);
-                                 MedalRewards[Rank] = (int)Math.Round((double)MedalRewards[Rank] * arc);
-                                 ForderFPRewards[Rank] = (int)Math.Round((double)FPNettoRewards[Rank] * ForderArc);
+                                 FPRewards[Rank] = (int)Math.Floor((double)FPNettoRewards[Rank] * arc);
+                                 BPRewards[Rank] = (int)Math.Floor((double)BPRewards[Rank] * arc);
+                                 MedalRewards[Rank] = (int)Math.Floor((double)MedalRewards[Rank] * arc);
+                                 ForderFPRewards[Rank] = (int)Math.Floor((double)FPNettoRewards[Rank] * ForderArc);
 
                                  if (rang.player != null && Rankings[i].player.player_id == int.Parse(ListClass.UserData["player_id"].ToString()))
                                     IsSelf = true;
@@ -2890,7 +2902,10 @@ namespace ForgeOfBots.Forms
                                  if (lg.level == lg.maxLevel) continue;
                                  if (BestGewinn < UserData.MinProfit) continue;
                                  int SnipCost = FPRewards[RankProfit] - BestGewinn;
-                                 lg.KurzString = $"{(int)((float)FPRewards[RankProfit] / SnipCost * 100)} %";
+                                 float Win = (FPRewards[RankProfit] - SnipCost) / SnipCost * 100;
+                                 if ((int)Win < UserData.MinProfitPercentage) continue;
+                                 if (SnipCost > UserData.MaxInvestment) continue;
+                                 lg.KurzString = $"{(int)Win} %";
                                  lg.GewinnString = $"{BestGewinn}";
                                  lg.Invest = SnipCost;
                                  ListClass.SnipWithProfit.Add(lg);
@@ -2917,7 +2932,7 @@ namespace ForgeOfBots.Forms
                   {
                      LG = $"{item.player.name} ({i18n.getString($"GUI.Sniper.PlayerIndentifier.{PlayerIdentifier}")}) -> {item.name} ({item.level})",
                      LGSnip = item,
-                     Profit = $"{item.Invest} (+{item.GewinnString})"
+                     Profit = $"{item.Invest} (+{item.GewinnString} / +{item.KurzString})"
                   };
                   lsi.mcbSnip.Text = i18n.getString(lsi.mcbSnip.Tag.ToString());
                   lsi.Dock = DockStyle.Top;

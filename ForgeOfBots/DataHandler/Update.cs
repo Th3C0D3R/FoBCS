@@ -25,12 +25,12 @@ namespace ForgeOfBots.DataHandler
          string script = ReqBuilder.GetRequestScript(RequestType.GetClanMember, "");
          string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
          Root<ClanMember> clan = JsonConvert.DeserializeObject<Root<ClanMember>>(ret);
-         ListClass.ClanMemberList = clan.responseData.FindAll(c => c.is_self == false && c.is_friend == false);
+         ListClass.ClanMemberList = clan.responseData.FindAll(c => c.is_self == false);
 
          script = ReqBuilder.GetRequestScript(RequestType.GetFriends, "");
          ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
          Root<Friend> friends = JsonConvert.DeserializeObject<Root<Friend>>(ret);
-         ListClass.FriendList = friends.responseData.FindAll(f => f.is_self == false);
+         ListClass.FriendList = friends.responseData.FindAll(f => f.is_self == false && f.is_guild_member == false);
 
          script = ReqBuilder.GetRequestScript(RequestType.GetNeighbor, "");
          ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);

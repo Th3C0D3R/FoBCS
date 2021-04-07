@@ -84,7 +84,7 @@ namespace ForgeOfBots.Forms
          this.lvFriends = new System.Windows.Forms.ListView();
          this.lvNeighbor = new System.Windows.Forms.ListView();
          this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-         this.lblInactiveFriends = new System.Windows.Forms.Label();
+         this.lblPlayerLists = new System.Windows.Forms.Label();
          this.panel4 = new System.Windows.Forms.Panel();
          this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
          this.lblClanMemberCount = new System.Windows.Forms.Label();
@@ -202,6 +202,10 @@ namespace ForgeOfBots.Forms
          this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
          this.mtBuyAttempts = new MetroFramework.Controls.MetroToggle();
          this.groupBox2 = new System.Windows.Forms.GroupBox();
+         this.metroLabel18 = new MetroFramework.Controls.MetroLabel();
+         this.nudMinProfitPerc = new System.Windows.Forms.NumericUpDown();
+         this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+         this.nudMaxInvest = new System.Windows.Forms.NumericUpDown();
          this.panel2 = new System.Windows.Forms.Panel();
          this.pnlIgnore = new System.Windows.Forms.FlowLayoutPanel();
          this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
@@ -350,6 +354,8 @@ namespace ForgeOfBots.Forms
          this.mtcSettings.SuspendLayout();
          this.mtpProduction.SuspendLayout();
          this.groupBox2.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.nudMinProfitPerc)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.nudMaxInvest)).BeginInit();
          this.panel2.SuspendLayout();
          this.tableLayoutPanel12.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.nudSnipInterval)).BeginInit();
@@ -827,14 +833,14 @@ namespace ForgeOfBots.Forms
          // tableLayoutPanel3
          // 
          resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-         this.tableLayoutPanel3.Controls.Add(this.lblInactiveFriends, 0, 0);
+         this.tableLayoutPanel3.Controls.Add(this.lblPlayerLists, 0, 0);
          this.tableLayoutPanel3.Name = "tableLayoutPanel3";
          // 
-         // lblInactiveFriends
+         // lblPlayerLists
          // 
-         resources.ApplyResources(this.lblInactiveFriends, "lblInactiveFriends");
-         this.lblInactiveFriends.Name = "lblInactiveFriends";
-         this.lblInactiveFriends.Tag = "PlayerLists";
+         resources.ApplyResources(this.lblPlayerLists, "lblPlayerLists");
+         this.lblPlayerLists.Name = "lblPlayerLists";
+         this.lblPlayerLists.Tag = "PlayerLists";
          // 
          // panel4
          // 
@@ -1708,6 +1714,10 @@ namespace ForgeOfBots.Forms
          // groupBox2
          // 
          this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+         this.groupBox2.Controls.Add(this.metroLabel18);
+         this.groupBox2.Controls.Add(this.nudMinProfitPerc);
+         this.groupBox2.Controls.Add(this.metroLabel6);
+         this.groupBox2.Controls.Add(this.nudMaxInvest);
          this.groupBox2.Controls.Add(this.panel2);
          this.groupBox2.Controls.Add(this.metroLabel15);
          this.groupBox2.Controls.Add(this.nudSnipInterval);
@@ -1723,6 +1733,48 @@ namespace ForgeOfBots.Forms
          this.groupBox2.TabStop = false;
          this.groupBox2.Tag = "GUI.Settings.Production.AutoSnip.Options";
          // 
+         // metroLabel18
+         // 
+         resources.ApplyResources(this.metroLabel18, "metroLabel18");
+         this.metroLabel18.BackColor = System.Drawing.SystemColors.Control;
+         this.metroLabel18.CustomBackground = true;
+         this.metroLabel18.FontSize = MetroFramework.MetroLabelSize.Small;
+         this.metroLabel18.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+         this.metroLabel18.Name = "metroLabel18";
+         this.metroLabel18.Tag = "GUI.Settings.Production.AutoSnip.PercProfit";
+         // 
+         // nudMinProfitPerc
+         // 
+         resources.ApplyResources(this.nudMinProfitPerc, "nudMinProfitPerc");
+         this.nudMinProfitPerc.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+         this.nudMinProfitPerc.Name = "nudMinProfitPerc";
+         this.nudMinProfitPerc.ValueChanged += new System.EventHandler(this.NudMinProfitPerc_ValueChanged);
+         // 
+         // metroLabel6
+         // 
+         resources.ApplyResources(this.metroLabel6, "metroLabel6");
+         this.metroLabel6.BackColor = System.Drawing.SystemColors.Control;
+         this.metroLabel6.CustomBackground = true;
+         this.metroLabel6.FontSize = MetroFramework.MetroLabelSize.Small;
+         this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+         this.metroLabel6.Name = "metroLabel6";
+         this.metroLabel6.Tag = "GUI.Settings.Production.AutoSnip.UpperInvestLimit";
+         // 
+         // nudMaxInvest
+         // 
+         resources.ApplyResources(this.nudMaxInvest, "nudMaxInvest");
+         this.nudMaxInvest.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+         this.nudMaxInvest.Name = "nudMaxInvest";
+         this.nudMaxInvest.ValueChanged += new System.EventHandler(this.NudMaxInvest_ValueChanged);
+         // 
          // panel2
          // 
          this.panel2.Controls.Add(this.pnlIgnore);
@@ -1732,9 +1784,9 @@ namespace ForgeOfBots.Forms
          // 
          // pnlIgnore
          // 
+         resources.ApplyResources(this.pnlIgnore, "pnlIgnore");
          this.pnlIgnore.BackColor = System.Drawing.SystemColors.Window;
          this.pnlIgnore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-         resources.ApplyResources(this.pnlIgnore, "pnlIgnore");
          this.pnlIgnore.Name = "pnlIgnore";
          // 
          // tableLayoutPanel12
@@ -1765,6 +1817,11 @@ namespace ForgeOfBots.Forms
          // nudSnipInterval
          // 
          resources.ApplyResources(this.nudSnipInterval, "nudSnipInterval");
+         this.nudSnipInterval.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
          this.nudSnipInterval.Name = "nudSnipInterval";
          this.nudSnipInterval.ValueChanged += new System.EventHandler(this.nudSnipInterval_ValueChanged);
          // 
@@ -1800,6 +1857,11 @@ namespace ForgeOfBots.Forms
          // nudMinProfit
          // 
          resources.ApplyResources(this.nudMinProfit, "nudMinProfit");
+         this.nudMinProfit.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
          this.nudMinProfit.Name = "nudMinProfit";
          this.nudMinProfit.ValueChanged += new System.EventHandler(this.nudMinProfit_ValueChanged);
          // 
@@ -2483,6 +2545,8 @@ namespace ForgeOfBots.Forms
          this.mtpProduction.ResumeLayout(false);
          this.groupBox2.ResumeLayout(false);
          this.groupBox2.PerformLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.nudMinProfitPerc)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.nudMaxInvest)).EndInit();
          this.panel2.ResumeLayout(false);
          this.panel2.PerformLayout();
          this.tableLayoutPanel12.ResumeLayout(false);
@@ -2554,7 +2618,7 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Label lblNeighborCount;
       private System.Windows.Forms.Panel panel5;
       private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-      private System.Windows.Forms.Label lblInactiveFriends;
+      private System.Windows.Forms.Label lblPlayerLists;
       private System.Windows.Forms.TableLayoutPanel tlpPlayerLists;
       private System.Windows.Forms.TabPage tpTavern;
       private System.Windows.Forms.Panel panel6;
@@ -2761,5 +2825,9 @@ namespace ForgeOfBots.Forms
       private System.Windows.Forms.Button btnBuyAttempt;
       private MetroFramework.Controls.MetroLabel metroLabel4;
       private MetroFramework.Controls.MetroComboBox mcbBlueGalaxiePrio;
+      private MetroFramework.Controls.MetroLabel metroLabel18;
+      private System.Windows.Forms.NumericUpDown nudMinProfitPerc;
+      private MetroFramework.Controls.MetroLabel metroLabel6;
+      private System.Windows.Forms.NumericUpDown nudMaxInvest;
    }
 }

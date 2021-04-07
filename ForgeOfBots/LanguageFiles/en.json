@@ -124,7 +124,9 @@
               "WarningText": "THE BOT INVEST INTO EVERY GB WHICH RETURN PROFIT!\nAS LONG AS FP ARE AVAILABE!!\nORDER IS THE SAME AS THE ORDER OF PLAYERS IN THE RESPECTIVE LIST\n\nINACTIVE PLAYERS WILL BE IGNORED ADDITIONALLY"
             },
             "MinProfit": "Min. Profit to snip",
-            "SnipEvery": "Snip every x minutes"
+            "SnipEvery": "Snip every x minutes",
+            "PercProfit": "Min. Profit in %:",
+            "UpperInvestLimit": "Max. Investment:"
           },
           "Ignore": "Players to ignore by Snip-Bot (Press Enter to add)",
           "NoMatter": "doesn't matter",
@@ -255,6 +257,9 @@
         "Header": "Download ",
         "Filename": "File:",
         "Progress": "Progress:"
+      },
+      "Updater": {
+        "Update": "Update"
       }
     },
     "AskCrashLog": "Allow sending Crashlogs",
@@ -275,7 +280,7 @@
     "Expired": "EXPIRED",
     "FailedToActivate": "FAILED TO ACTIVATE",
     "Friends": "Friends",
-    "PlayerLists": "Player Lists",
+    "PlayerLists": "Player Lists (check box to add player to ignorelist)",
     "IncidentBot": "Incident Bot",
     "IncidentCollected": "Incident collected",
     "LicenceNotValid": "There was a problem using this Serial-Key with your Device!!\n\nEither you activated the Serial-Key on a other Device\nor the Serial-Key is not valid!",

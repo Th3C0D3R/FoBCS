@@ -124,7 +124,9 @@
               "WarningText": "LE BOT INVESTIT DANS CHAQUE GM QUI RENDENT UN BÉNÉFICE!\nAUSSI QUE LES PF SONT DISPONIBLES!!\nL'ORDRE EST LE MÊME QUE L'ORDRE DES JOUEURS DANS LA LISTE RESPECTIVE\n\nLES JOUEURS INACTIFS SERONT IGNORÉS DE PLUS"
             },
             "MinProfit": "Profit minimum pour Snip",
-            "SnipEvery": "Snip every x minutes"
+            "SnipEvery": "Snip every x minutes",
+            "PercProfit": "Min. Profit in %:",
+            "UpperInvestLimit": "Max. Investment:"
           },
           "Ignore": "Joueurs ignorés par le Snip-Bot (Presser Entrer pour ajouter)",
           "NoMatter": "doesn't matter",
@@ -255,6 +257,9 @@
         "Header": "Download ",
         "Filename": "File:",
         "Progress": "Progress:"
+      },
+      "Updater": {
+        "Update": "Update"
       }
     },
     "AskCrashLog": "Autoriser l'envoi de message d'erreur",
@@ -275,7 +280,7 @@
     "Expired": "EXPIRE",
     "FailedToActivate": "ECHEC D'ACTIVATION",
     "Friends": "Amis",
-    "PlayerLists": "Player Lists",
+    "PlayerLists": "Player Lists (check box to add player to ignorelist)",
     "IncidentBot": "Bot d'incident",
     "IncidentCollected": "Incident collecté",
     "LicenceNotValid": "Un problème est survenu lors de l'ulisation de cette clé de série avec votre appareil!!\n\nsoit vous avez activéla clé de série sur un autre appareil\nou la clé de série n'est pas valide!",

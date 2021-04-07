@@ -7,21 +7,22 @@
         mc:Ignorable="d"
         Title="Forge of Bots - Updater" Height="192.156" Width="370.127" Icon="favicon.ico" x:Class="Updater.MainWindow" WindowStartupLocation="CenterScreen" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
-        <Grid x:Name="pnlUpdateAvailable" Uid="pnlUpdateAvailable" RenderTransformOrigin="0.495,0.511" d:IsHidden="True">
+        <Grid x:Name="pnlUpdateAvailable" Uid="pnlUpdateAvailable" RenderTransformOrigin="0.495,0.511">
             <Grid.RowDefinitions>
-                <RowDefinition Height="17*"/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="122*"/>
+                <RowDefinition Height="39*"/>
             </Grid.RowDefinitions>
-            <Button HorizontalAlignment="Left" Margin="240,12,0,0" Grid.Row="1" VerticalAlignment="Top" Uid="btnUpdate" AutomationProperties.Name="btnUpdate" Tag="GUI.Updater.Update" Content="GUI.Updater.Update" Click="Button_Click"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="99" Width="342" x:Name="tbUpdateInfo" Uid="tbUpdateInfo" Tag="GUI.Updater.Changelog" Text="GUI.Updater.Changelog"/>
+            <Button HorizontalAlignment="Left" Margin="240,12,0,0" Grid.Row="1" VerticalAlignment="Top" Uid="btnUpdate" AutomationProperties.Name="btnUpdate" Tag="GUI.Updater.Update" Content="GUI.Updater.Update" Click="Button_Click" Height="20" Width="111"/>
+            <TextBlock TextWrapping="Wrap" x:Name="tbUpdateInfo" Uid="tbUpdateInfo" Tag="GUI.Updater.Changelog" Text="GUI.Updater.Changelog"/>
 
         </Grid>
-        <Grid x:Name="pnlUpdate" Uid="pnlUpdate">
-            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="99" Width="342" x:Name="tbUpdateProgress" Uid="tbUpdateProgress" Text="GUI.Updater.Changelog" Tag="GUI.Updater.Changelog"/>
-            <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,123,0,0" VerticalAlignment="Top" Width="342" x:Name="pbProgress" Uid="pbProgress"  />
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,123,10,20" Width="342" Height="18" TextAlignment="Center" Panel.ZIndex="100" Uid="lblProgress">
-      My Text
-            </TextBlock>
+        <Grid x:Name="pnlUpdate" Uid="pnlUpdate" d:IsHidden="True">
+            <TextBlock TextWrapping="Wrap" x:Name="tbUpdateProgress" Uid="tbUpdateProgress" Text="GUI.Updater.Changelog" Tag="GUI.Updater.Changelog" Margin="0,0,0,36"/>
+            <Grid Margin="0,130,0,0" >
+                <ProgressBar Height="19" Width="342" x:Name="pbProgress" Uid="pbProgress"  />
+                <TextBlock Width="342" Height="18" TextAlignment="Center" Panel.ZIndex="100" Uid="lblProgress" x:Name="lblProgress"><Run Text="0/0 (0 B/s)"/></TextBlock>
+            </Grid>
+
         </Grid>
     </Grid>
 </Window>

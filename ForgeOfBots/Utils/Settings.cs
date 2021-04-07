@@ -42,6 +42,8 @@ namespace ForgeOfBots.Utils
       public bool HideBrowser { get; set; } = true;
       public bool DarkMode { get; set; } = false;
       public int MinProfit { get; set; } = 20;
+      public int MaxInvestment { get; set; } = 1000;
+      public int MinProfitPercentage { get; set; } = 50;
       public int IntervalSnip { get; set; } = 60;
       public bool AutoInvest { get; set; } = false;
       public bool ShowWarning { get; set; } = true;
