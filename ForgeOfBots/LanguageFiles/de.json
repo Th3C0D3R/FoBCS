@@ -248,7 +248,7 @@
         "NoTelegramChatText": "Du hast noch kein Telegram-Chat mit dem Bot\nDeswegen kann keine Nachricht geschickt werden!\n\nBitte klicke auf folgenden Link um ein Chat zu starten:\nhttps://t.me/ForgeOfBot (Telegram-Client erforderlich)",
         "NoTelegramChatTitle": "Kein offener Chat",
         "NoTelegramNameText": "In den Einstellungen wurde kein Empfänger eingetragen!\nBitte trage in den Einstellungen unter \"Programm\"->\"Telegram Username\" dein Telegram-Username ein (ohne \"@\") und drücke auf Speichern!",
-        "NoTelegramNameTitle": "Kein hinterlegten Empf�nger"
+        "NoTelegramNameTitle": "Kein hinterlegten Empfänger"
       },
       "Log": {
         "Snip": "Snip-Bot"
