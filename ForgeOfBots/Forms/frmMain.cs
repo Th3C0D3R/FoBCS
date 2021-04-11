@@ -457,7 +457,7 @@ namespace ForgeOfBots.Forms
          if (restart)
          {
             restart = false;
-            Process.Start("Updater.exe", $"restart{(DEBUGMODE?" /debug":"")}");
+            Process.Start("Updater.exe", $"restart{(DEBUGMODE ? " /debug" : "")}");
             Process.GetCurrentProcess().Kill();
          }
       }
@@ -573,16 +573,16 @@ namespace ForgeOfBots.Forms
             if (result == Result.Success)
             {
                Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Premium")}) | by TH3C0D3R");
-               object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
-               if (retList is List<UCPremium> list)
-               {
-                  var userPremiumEvent = new Dictionary<string, string>();
-                  string userPremium = $"{UserData.Username} ({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
-                  userPremiumEvent.Add(UserData.Username, userPremium);
-                  Analytics.TrackEvent("UserHasPremium", userPremiumEvent);
-                  Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Premium")}) | by TH3C0D3R");
-                  e.Result = true;
-               }
+               //object retList = ExecuteMethod(PremAssembly, "EntryPoint", "AddPremiumControl", null);
+               //if (retList is List<UCPremium> list)
+               //{
+               //   var userPremiumEvent = new Dictionary<string, string>();
+               //   string userPremium = $"{UserData.Username} ({UserData.LastWorld.Split('|')[0]}) {UserData.SerialKey}";
+               //   userPremiumEvent.Add(UserData.Username, userPremium);
+               //   Analytics.TrackEvent("UserHasPremium", userPremiumEvent);
+               //   Invoker.SetProperty(mlVersion, () => mlVersion.Text, mlVersion.Tag.ToString() + $"{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} ({i18n.getString("Premium")}) | by TH3C0D3R");
+               e.Result = true;
+               //}
             }
             else if (result == Result.Expired)
             {
@@ -596,7 +596,7 @@ namespace ForgeOfBots.Forms
                   Analytics.TrackEvent("UserPremiumExpired", userPremiumEvent);
                   if (dlgRes == DialogResult.Yes)
                   {
-                     Process.Start("https://th3c0d3r.selly.store/");
+                     Process.Start("https://th3c0d3r.xyz/shop");
                      e.Result = false;
                   }
                   else if (dlgRes == DialogResult.No)
@@ -1641,7 +1641,8 @@ namespace ForgeOfBots.Forms
             {
                if (ex.state["current_product"]["goods"] == null)
                {
-                  if (!string.Equals(ex.state["current_product"]["name"].ToString(), "penal_unit")){
+                  if (!string.Equals(ex.state["current_product"]["name"].ToString(), "penal_unit"))
+                  {
                      MessageBox.Show("!!!! PLEASE REPORT THE TEXT INSIDE YOU CLIPBOARD TO THE DEV (GITHUB/DISCORD) !!!!", "PLEASE REPORT!!");
                      Clipboard.SetText(ex.state.ToString());
                   }
@@ -2706,6 +2707,10 @@ namespace ForgeOfBots.Forms
                ListClass.SnipWithProfit = new List<LGSnip>();
                ListClass.SnipablePlayers = new List<Player>();
                if (UserData.SelectedSnipTarget == SnipTarget.none) return;
+               if (HasPremium)
+               {
+
+               }
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.friends)) ListClass.SnipablePlayers.AddRange(ListClass.FriendList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.neighbors)) ListClass.SnipablePlayers.AddRange(ListClass.NeighborList);
                if (UserData.SelectedSnipTarget.HasFlag(SnipTarget.members)) ListClass.SnipablePlayers.AddRange(ListClass.ClanMemberList);
@@ -3286,7 +3291,7 @@ namespace ForgeOfBots.Forms
          Invoker.CallMethode(lvWave, () => lvWave.Items.Clear());
          UpdateArmy();
          GEXHelper.UpdateGEX();
-         if(GEXHelper.GetCurrentState == -1)
+         if (GEXHelper.GetCurrentState == -1)
          {
             Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {i18n.getString("GUI.Battle.GEX.NoGEX")}");
             Invoker.SetProperty(lvWave, () => lvWave.Visible, false);
@@ -3294,7 +3299,7 @@ namespace ForgeOfBots.Forms
             Invoker.SetProperty(btnDoGEXAction, () => btnDoGEXAction.Text, i18n.getString("GUI.Battle.GEX.NoGEX"));
             return;
          }
-         if (string.Equals(GEXHelper.GEXOverview.state,"inactive"))
+         if (string.Equals(GEXHelper.GEXOverview.state, "inactive"))
          {
             Invoker.SetProperty(lblStage, () => lblStage.Text, $"{i18n.getString("GUI.Battle.GEX.Stage")} {i18n.getString("GUI.Battle.GEX.NoGEX")}");
             Invoker.SetProperty(lvWave, () => lvWave.Visible, false);

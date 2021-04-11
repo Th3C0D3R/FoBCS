@@ -12,7 +12,7 @@ using ForgeOfBots.GameClasses.GBG.Map;
 
 namespace ForgeOfBots.GameClasses
 {
-   public static class ListClass
+   public class ListClass
    {
       public static List<Tuple<string, string, WorldState>> WorldList { get; set; } = new List<Tuple<string, string, WorldState>>();
       public static Dictionary<string, string> ServerList { get; set; } = new Dictionary<string, string>()

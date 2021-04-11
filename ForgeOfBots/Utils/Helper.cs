@@ -368,6 +368,11 @@ namespace ForgeOfBots.Utils
          Expired,
          Failed
       }
+
+      public enum ScriptRequest
+      {
+         Snip
+      }
       public enum Priority
       {
          NoMatter,

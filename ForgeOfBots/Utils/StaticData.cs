@@ -62,5 +62,6 @@ namespace ForgeOfBots.Utils
 
       public static bool HasLastCrash = false;
       public static bool DEBUGMODE = false;
+      public static bool HasPremium = false;
    }
 }
