@@ -1,4 +1,4 @@
 ﻿{
-  "version": "2.2.4",
-  "changelog": "- Fixed cast issue for Sniping"
+  "version": "2.2.5",
+  "changelog": "- Fixed Round issue for Sniping\n- Added more logging for sniping\n- Added higher Delay between snips and motivation"
 }
