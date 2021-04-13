@@ -12,7 +12,7 @@ using Newtonsoft;
 using Newtonsoft.Json;
 using MessageBox = System.Windows.MessageBox;
 
-namespace ForgeOfBots.Utils
+namespace Updater.Utils
 {
    public static class i18n
    {

@@ -24,7 +24,6 @@ namespace Updater.Utils
       {
          try
          {
-#if RELEASE
             string URLLang = $"https://raw.githubusercontent.com/Th3C0D3R/FoBCS/master/ForgeOfBots/version.json";
             using (var webClient = new WebClient())
             {
@@ -33,10 +32,6 @@ namespace Updater.Utils
                string resultStrings = webClient.DownloadString(URLLang);
                Helper.ReleaseVersion = JsonConvert.DeserializeObject<Version>(resultStrings);
             }
-#elif DEBUG
-            string versionFile = File.ReadAllText("version.json");
-            Helper.ReleaseVersion = JsonConvert.DeserializeObject<Version>(versionFile);
-#endif
          }
          catch (WebException)
          {

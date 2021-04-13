@@ -1,4 +1,5 @@
 ﻿using ByteSizeLib;
+using Updater.Utils;
 using System;
 using System.Diagnostics;
 using System.Net;
@@ -18,6 +19,7 @@ namespace Updater
       {
          InitializeComponent();
          Utils.Version.Init();
+         i18n.Initialize("en");
       }
 
       private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -26,10 +28,11 @@ namespace Updater
          {
             pnlUpdate.Visibility = Visibility.Hidden;
             pnlUpdateAvailable.Visibility = Visibility.Visible;
-            if (Utils.Helper.ReleaseVersion != null)
+            btnUpdate.Content = i18n.getString(btnUpdate.Tag.ToString());
+            if (Helper.ReleaseVersion != null)
             {
-               tbUpdateInfo.Text = $"{Utils.Helper.ReleaseVersion.version}\n\r";
-               tbUpdateInfo.Text += Utils.Helper.ReleaseVersion.changelog;
+               tbUpdateInfo.Text = $"{Helper.ReleaseVersion.version}\n\r";
+               tbUpdateInfo.Text += Helper.ReleaseVersion.changelog;
             }
          }
       }
