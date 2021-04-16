@@ -42,6 +42,9 @@
         "Battle": {
           "Won": "WON!",
           "Lost": "LOST!"
+        },
+        "Map": {
+          "IncidentsFound": "Es werden noch Relikte eingesammelt!"
         }
       },
       "GBG": {
