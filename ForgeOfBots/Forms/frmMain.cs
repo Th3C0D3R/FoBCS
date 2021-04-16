@@ -1607,6 +1607,7 @@ namespace ForgeOfBots.Forms
                UpdateHiddenRewardsView();
                Updater.UpdateResources();
                UpdateDashbord();
+               UpdateHiddenRewardsView();
                break;
             case RequestType.CollectOtherProductions:
                Updater.UpdateEntities(true);
@@ -1640,7 +1641,7 @@ namespace ForgeOfBots.Forms
                {
                   if (!string.Equals(ex.state["current_product"]["name"].ToString(), "penal_unit"))
                   {
-                     MessageBox.Show("!!!! PLEASE REPORT THE TEXT INSIDE YOU CLIPBOARD TO THE DEV (GITHUB/DISCORD) !!!!", "PLEASE REPORT!!");
+                     MessageBox.Show("!!!! PLEASE REPORT THE TEXT INSIDE YOU CLIPBOARD TO THE DEV (GITHUB/DISCORD) (COPY/PASTE) !!!!", "PLEASE REPORT!!");
                      Clipboard.SetText(ex.state.ToString());
                   }
                   else
@@ -3325,7 +3326,20 @@ namespace ForgeOfBots.Forms
          }
          if (GEXHelper.NeedChangeDiff() && GEXHelper.NextDiffOpen(GEXHelper.GEXOverview.progress.difficulty))
          {
-            GEXHelper.ChangeDiff(GEXHelper.GEXOverview.progress.difficulty + 1);
+            if(!GEXHelper.ChangeDiff(GEXHelper.GEXOverview.progress.difficulty + 1).Item1)
+            {
+               Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString("GUI.GEX.Map.IncidentsFound")}");
+               Updater.UpdateStartUp();
+               UpdateHiddenRewardsView();
+               OneTArgs<RequestType> param = new OneTArgs<RequestType> { t1 = RequestType.CollectIncident };
+               bwScriptExecuterOneArg_DoWork(this, new DoWorkEventArgs(param));
+               var ret = GEXHelper.ChangeDiff(GEXHelper.GEXOverview.progress.difficulty + 1);
+               if (!ret.Item1)
+               {
+                  MessageBox.Show("!!!! PLEASE REPORT THE TEXT INSIDE YOU CLIPBOARD TO THE DEV (GITHUB/DISCORD) (COPY/PASTE) !!!!", "PLEASE REPORT!!");
+                  Clipboard.SetText(ret.Item2);
+               }
+            }
          }
          else if (GEXHelper.NeedChangeDiff() && !GEXHelper.NextDiffOpen(GEXHelper.GEXOverview.progress.difficulty))
          {

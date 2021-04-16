@@ -156,19 +156,23 @@ namespace ForgeOfBots.DataHandler
             return null;
          }
       }
-      public static bool ChangeDiff(int newDiff)
+      public static (bool,string) ChangeDiff(int newDiff)
       {
          try
          {
             string script = ReqBuilder.GetRequestScript(RequestType.changeDifficulty, newDiff);
             string ret = (string)StaticData.jsExecutor.ExecuteAsyncScript(script);
+            if(ret.Contains("changeDifficulty") && ret.Contains("Error"))
+            {
+               return (false,ret);
+            }
             GetResponse getGEXresponse = JsonConvert.DeserializeObject<GetResponse>(ret);
             GEXOverview = getGEXresponse.responseData;
-            return getGEXresponse.responseData.progress.difficulty == newDiff && !getGEXresponse.responseData.progress.isMapCompleted;
+            return (getGEXresponse.responseData.progress.difficulty == newDiff && !getGEXresponse.responseData.progress.isMapCompleted,"");
          }
-         catch (Exception)
+         catch (Exception ex)
          {
-            return false;
+            return (false, ex.Message);
          }
       }
       public static bool NextDiffOpen(int currDiff)

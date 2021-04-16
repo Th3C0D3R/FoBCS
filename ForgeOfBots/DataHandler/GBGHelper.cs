@@ -36,9 +36,9 @@ namespace ForgeOfBots.DataHandler
       }
       public static void UpdateGBG()
       {
+         CurrentState = GetState();
          if (!IsParticipating) return;
          CurrentBattleground = GetBattleground();
-         CurrentState = GetState();
       }
       public static ArmyData[] GetArmyInfo(int provinceID)
       {
