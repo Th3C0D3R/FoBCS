@@ -8,7 +8,7 @@
 
 ## The only always-up-to-date & opensource Bot for ForgeOfEmipres!
 
-For implemented Premium Features you can get a Serial Key from here: [TH3C0D3R-Shop](https://th3c0d3r.selly.store/)
+You can support me here and as soon as premium features are available you can buy serial keys: [TH3C0D3R-Shop](https://th3c0d3r.xyz/shop/)
 
 Current Features:
 ### - Own Player Actions:
@@ -24,8 +24,8 @@ Current Features:
 10. Shows Help for each item and function (***Work-in-Progress***) 
 ### - Bots:
 1. **[FREE] Production Bot** (Start & Collects Productions)
-2. **[PREMIUM] Incident Bot** - Collects Incidents after a given time
-3. **[PREMIUM] Polivate Bot** - motivate/polish all Players after 24h
+2. **[PREMIUM] Incident Bot** - NOT IMPLEMENTED NOW (Collects Incidents after a given time)
+3. **[PREMIUM] Polivate Bot** - NOT IMPLEMENTED NOW (motivate/polish all Players after 24h)
 4. **[PREMIUM] RQ-Bot** - NOT IMPLEMENTED NOW (Will do selected Recurring Quests automatically after given time)
 5. **[PREMIUM] Tavern Bot** - NOT IMPLEMENTED NOW (Will collect own Tavern every time its full and sits every 24h at friends tavern)
 
