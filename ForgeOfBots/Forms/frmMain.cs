@@ -120,6 +120,7 @@ namespace ForgeOfBots.Forms
             }
          }
          Init();
+         Text = $"{Tag}{StaticData.Version.Major}.{StaticData.Version.Minor}.{StaticData.Version.Build} | by TH3C0D3R";
          logger.Info($"<<< frmMain");
       }
 
@@ -930,7 +931,7 @@ namespace ForgeOfBots.Forms
          {
             string playerid = sender.Tag.ToString();
             string script = ReqBuilder.GetRequestScript(RequestType.VisitTavern, playerid);
-            jsExecutor.ExecuteAsyncScript(script);
+            string ret = (string)jsExecutor.ExecuteAsyncScript(script);
             ReloadData();
          }
       }

@@ -80,6 +80,8 @@ namespace ForgeOfBots.DataHandler
                _methode = "getOverview";
                break;
             case RequestType.VisitTavern:
+               if (sData.Length > 0)
+                  int.TryParse(sData, out idData);
                _data = new JArray(idData);
                _class = "FriendsTavernService";
                _methode = "getOtherTavern";
@@ -356,7 +358,7 @@ namespace ForgeOfBots.DataHandler
             .Replace("##sig##", CalcSig(jsonString, User_Key, VersionSecret))
             .Replace("##WorldID##", WorldID)
             .Replace("##UserKey##", User_Key)
-            .Replace("##UserKey##", UserAgent)
+            .Replace("##UserAgent##", UserAgent)
             .Replace("##Version##", Version)
             .Replace("##methode##", _methode)
             .Replace("##onlyOne##", onlyOne)

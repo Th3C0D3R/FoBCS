@@ -1,4 +1,4 @@
 ﻿{
-  "version": "2.2.6",
-  "changelog": "- Fixed GBG not available if GEX is finished\n-Added auto-collect relicts in GEX if stage cannot be changed"
+  "version": "2.2.7",
+  "changelog": "- Fixed manual collecting Tavern\n- Fixed UserAgent (was not used)\n- Fixed production overview\n- Changed some visual stuff to look nicer"
 }

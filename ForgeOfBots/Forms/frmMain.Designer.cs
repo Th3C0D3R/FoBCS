@@ -1294,10 +1294,10 @@ namespace ForgeOfBots.Forms
          // 
          // pnlGEX
          // 
+         resources.ApplyResources(this.pnlGEX, "pnlGEX");
          this.pnlGEX.Controls.Add(this.lblStage);
          this.pnlGEX.Controls.Add(this.lvWave);
          this.pnlGEX.Controls.Add(this.btnDoGEXAction);
-         resources.ApplyResources(this.pnlGEX, "pnlGEX");
          this.pnlGEX.Name = "pnlGEX";
          // 
          // lblStage
@@ -1307,8 +1307,8 @@ namespace ForgeOfBots.Forms
          // 
          // lvWave
          // 
-         this.lvWave.AutoArrange = false;
          resources.ApplyResources(this.lvWave, "lvWave");
+         this.lvWave.AutoArrange = false;
          this.lvWave.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
          this.lvWave.HideSelection = false;
          this.lvWave.MultiSelect = false;
