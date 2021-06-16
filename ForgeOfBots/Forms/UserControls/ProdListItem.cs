@@ -104,9 +104,9 @@ namespace ForgeOfBots.Forms.UserControls
                   Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ProductionFinishedState"));
                else
                   lblState.Text = i18n.getString("ProductionFinishedState");
-               if (ProductionState == ProductionState.Finished)
+               if (ProductionState == ProductionState.Finished && !StaticData.UserData.ProductionBot)
                {
-                  _UpdateGUI?.Invoke(this);
+                 _UpdateGUI?.Invoke(this);
                }
                return;
             }
@@ -120,7 +120,7 @@ namespace ForgeOfBots.Forms.UserControls
                   Invoker.SetProperty(lblState, () => lblState.Text, i18n.getString("ProductionIdle"));
                else
                   lblState.Text = i18n.getString("ProductionIdle");
-               if (ProductionState == ProductionState.Idle)
+               if (ProductionState == ProductionState.Idle && !StaticData.UserData.ProductionBot)
                {
                   _UpdateGUI?.Invoke(this);
                }

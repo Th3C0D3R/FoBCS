@@ -420,7 +420,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD+
-        JwAAAk1TRnQBSQFMAgEBDAEAAcABAwHAAQMBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        JwAAAk1TRnQBSQFMAgEBDAEAAcgBAwHIAQMBIAEAASABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABgAMAAYADAAEBAQABCAYAAUAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -837,7 +837,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpMessageCenter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>868, 478</value>
+    <value>867, 478</value>
   </data>
   <data name="tpMessageCenter.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1259,21 +1259,6 @@
   <data name="tableLayoutPanel20.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="cbType.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Right</value>
-  </data>
-  <data name="cbType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 0</value>
-  </data>
-  <data name="cbType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="cbType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 21</value>
-  </data>
-  <data name="cbType.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
   <data name="&gt;&gt;cbType.Name" xml:space="preserve">
     <value>cbType</value>
   </data>
@@ -1285,21 +1270,6 @@
   </data>
   <data name="&gt;&gt;cbType.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="nudCount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="nudCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="nudCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="nudCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
-  </data>
-  <data name="nudCount.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
   </data>
   <data name="&gt;&gt;nudCount.Name" xml:space="preserve">
     <value>nudCount</value>
@@ -1577,30 +1547,6 @@
   <data name="tableLayoutPanel16.ColumnCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label9.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14.25pt, style=Bold</value>
-  </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 33</value>
-  </data>
-  <data name="label9.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>GUI.Battle.Header.GEX</value>
-  </data>
-  <data name="label9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
   <data name="&gt;&gt;label9.Name" xml:space="preserve">
     <value>label9</value>
   </data>
@@ -1612,108 +1558,6 @@
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="pnlGEX.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="lblStage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="lblStage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="lblStage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 60</value>
-  </data>
-  <data name="lblStage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lblStage.Text" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="lblStage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;lblStage.Name" xml:space="preserve">
-    <value>lblStage</value>
-  </data>
-  <data name="&gt;&gt;lblStage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblStage.Parent" xml:space="preserve">
-    <value>pnlGEX</value>
-  </data>
-  <data name="&gt;&gt;lblStage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lvWave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="lvWave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 60</value>
-  </data>
-  <data name="lvWave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="lvWave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 295</value>
-  </data>
-  <data name="lvWave.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lvWave.Name" xml:space="preserve">
-    <value>lvWave</value>
-  </data>
-  <data name="&gt;&gt;lvWave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lvWave.Parent" xml:space="preserve">
-    <value>pnlGEX</value>
-  </data>
-  <data name="&gt;&gt;lvWave.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="btnDoGEXAction.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="btnDoGEXAction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 355</value>
-  </data>
-  <data name="btnDoGEXAction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="btnDoGEXAction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 55</value>
-  </data>
-  <data name="btnDoGEXAction.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="btnDoGEXAction.Text" xml:space="preserve">
-    <value>button1</value>
-  </data>
-  <data name="&gt;&gt;btnDoGEXAction.Name" xml:space="preserve">
-    <value>btnDoGEXAction</value>
-  </data>
-  <data name="&gt;&gt;btnDoGEXAction.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnDoGEXAction.Parent" xml:space="preserve">
-    <value>pnlGEX</value>
-  </data>
-  <data name="&gt;&gt;btnDoGEXAction.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="pnlGEX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 33</value>
-  </data>
-  <data name="pnlGEX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="pnlGEX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 410</value>
-  </data>
-  <data name="pnlGEX.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;pnlGEX.Name" xml:space="preserve">
     <value>pnlGEX</value>
@@ -1760,24 +1604,6 @@
   <data name="tableLayoutPanel16.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label9" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pnlGEX" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,20" /&gt;&lt;Rows Styles="Percent,7,674943,Percent,92,32506" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="btnBuyAttempt.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="btnBuyAttempt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>698, 0</value>
-  </data>
-  <data name="btnBuyAttempt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="btnBuyAttempt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 35</value>
-  </data>
-  <data name="btnBuyAttempt.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="btnBuyAttempt.Text" xml:space="preserve">
-    <value>GUI.Battle.GEX.BuyAttempt</value>
-  </data>
   <data name="&gt;&gt;btnBuyAttempt.Name" xml:space="preserve">
     <value>btnBuyAttempt</value>
   </data>
@@ -1789,30 +1615,6 @@
   </data>
   <data name="&gt;&gt;btnBuyAttempt.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="lblResult.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="lblResult.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
-  </data>
-  <data name="lblResult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="lblResult.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="lblResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>698, 35</value>
-  </data>
-  <data name="lblResult.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblResult.Text" xml:space="preserve">
-    <value>Label</value>
-  </data>
-  <data name="lblResult.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;lblResult.Name" xml:space="preserve">
     <value>lblResult</value>
@@ -2223,7 +2025,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>868, 478</value>
+    <value>867, 478</value>
   </data>
   <data name="tpSettings.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2277,7 +2079,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>868, 478</value>
+    <value>867, 478</value>
   </data>
   <data name="tpHelp.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -3381,7 +3183,7 @@
     <value>1</value>
   </data>
   <data name="tlpPlayerLists.Size" type="System.Drawing.Size, System.Drawing">
-    <value>852, 355</value>
+    <value>850, 353</value>
   </data>
   <data name="tlpPlayerLists.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3405,13 +3207,13 @@
     <value>Fill</value>
   </data>
   <data name="lvMember.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 0</value>
+    <value>283, 0</value>
   </data>
   <data name="lvMember.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="lvMember.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 355</value>
+    <value>283, 355</value>
   </data>
   <data name="lvMember.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3438,7 +3240,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="lvFriends.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 355</value>
+    <value>283, 355</value>
   </data>
   <data name="lvFriends.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3459,7 +3261,7 @@
     <value>Fill</value>
   </data>
   <data name="lvNeighbor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>568, 0</value>
+    <value>566, 0</value>
   </data>
   <data name="lvNeighbor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -4542,7 +4344,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>862, 472</value>
+    <value>861, 472</value>
   </data>
   <data name="tableLayoutPanel15.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -4569,7 +4371,7 @@
     <value>3, 220</value>
   </data>
   <data name="lvMessages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>856, 249</value>
+    <value>855, 249</value>
   </data>
   <data name="lvMessages.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -4593,7 +4395,7 @@
     <value>3, 3</value>
   </data>
   <data name="lvWSMessages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>856, 211</value>
+    <value>855, 211</value>
   </data>
   <data name="lvWSMessages.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -4987,6 +4789,312 @@
   </data>
   <data name="&gt;&gt;lblDefensBoost.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="cbType.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="cbType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 0</value>
+  </data>
+  <data name="cbType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="cbType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 21</value>
+  </data>
+  <data name="cbType.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;cbType.Name" xml:space="preserve">
+    <value>cbType</value>
+  </data>
+  <data name="&gt;&gt;cbType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbType.Parent" xml:space="preserve">
+    <value>tableLayoutPanel20</value>
+  </data>
+  <data name="&gt;&gt;cbType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudCount.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="nudCount.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="nudCount.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="nudCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 20</value>
+  </data>
+  <data name="nudCount.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;nudCount.Name" xml:space="preserve">
+    <value>nudCount</value>
+  </data>
+  <data name="&gt;&gt;nudCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudCount.Parent" xml:space="preserve">
+    <value>tableLayoutPanel20</value>
+  </data>
+  <data name="&gt;&gt;nudCount.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label9.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14.25pt, style=Bold</value>
+  </data>
+  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>428, 33</value>
+  </data>
+  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>GUI.Battle.Header.GEX</value>
+  </data>
+  <data name="label9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>tableLayoutPanel16</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pnlGEX.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;lblStage.Name" xml:space="preserve">
+    <value>lblStage</value>
+  </data>
+  <data name="&gt;&gt;lblStage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStage.Parent" xml:space="preserve">
+    <value>pnlGEX</value>
+  </data>
+  <data name="&gt;&gt;lblStage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lvWave.Name" xml:space="preserve">
+    <value>lvWave</value>
+  </data>
+  <data name="&gt;&gt;lvWave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lvWave.Parent" xml:space="preserve">
+    <value>pnlGEX</value>
+  </data>
+  <data name="&gt;&gt;lvWave.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.Name" xml:space="preserve">
+    <value>btnDoGEXAction</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.Parent" xml:space="preserve">
+    <value>pnlGEX</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pnlGEX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 33</value>
+  </data>
+  <data name="pnlGEX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="pnlGEX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 410</value>
+  </data>
+  <data name="pnlGEX.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pnlGEX.Name" xml:space="preserve">
+    <value>pnlGEX</value>
+  </data>
+  <data name="&gt;&gt;pnlGEX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlGEX.Parent" xml:space="preserve">
+    <value>tableLayoutPanel16</value>
+  </data>
+  <data name="&gt;&gt;pnlGEX.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblStage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblStage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblStage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 60</value>
+  </data>
+  <data name="lblStage.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblStage.Text" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="lblStage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblStage.Name" xml:space="preserve">
+    <value>lblStage</value>
+  </data>
+  <data name="&gt;&gt;lblStage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblStage.Parent" xml:space="preserve">
+    <value>pnlGEX</value>
+  </data>
+  <data name="&gt;&gt;lblStage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lvWave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="lvWave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 60</value>
+  </data>
+  <data name="lvWave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lvWave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 295</value>
+  </data>
+  <data name="lvWave.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lvWave.Name" xml:space="preserve">
+    <value>lvWave</value>
+  </data>
+  <data name="&gt;&gt;lvWave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lvWave.Parent" xml:space="preserve">
+    <value>pnlGEX</value>
+  </data>
+  <data name="&gt;&gt;lvWave.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnDoGEXAction.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="btnDoGEXAction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 355</value>
+  </data>
+  <data name="btnDoGEXAction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="btnDoGEXAction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>434, 55</value>
+  </data>
+  <data name="btnDoGEXAction.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btnDoGEXAction.Text" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.Name" xml:space="preserve">
+    <value>btnDoGEXAction</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.Parent" xml:space="preserve">
+    <value>pnlGEX</value>
+  </data>
+  <data name="&gt;&gt;btnDoGEXAction.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnBuyAttempt.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="btnBuyAttempt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>698, 0</value>
+  </data>
+  <data name="btnBuyAttempt.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="btnBuyAttempt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 35</value>
+  </data>
+  <data name="btnBuyAttempt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnBuyAttempt.Text" xml:space="preserve">
+    <value>GUI.Battle.GEX.BuyAttempt</value>
+  </data>
+  <data name="&gt;&gt;btnBuyAttempt.Name" xml:space="preserve">
+    <value>btnBuyAttempt</value>
+  </data>
+  <data name="&gt;&gt;btnBuyAttempt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBuyAttempt.Parent" xml:space="preserve">
+    <value>panel8</value>
+  </data>
+  <data name="&gt;&gt;btnBuyAttempt.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblResult.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lblResult.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt, style=Bold</value>
+  </data>
+  <data name="lblResult.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblResult.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="lblResult.Size" type="System.Drawing.Size, System.Drawing">
+    <value>698, 35</value>
+  </data>
+  <data name="lblResult.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblResult.Text" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="lblResult.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;lblResult.Name" xml:space="preserve">
+    <value>lblResult</value>
+  </data>
+  <data name="&gt;&gt;lblResult.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblResult.Parent" xml:space="preserve">
+    <value>panel8</value>
+  </data>
+  <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel10.Name" xml:space="preserve">
     <value>tableLayoutPanel10</value>
@@ -6441,7 +6549,7 @@
     <value>3, 3</value>
   </data>
   <data name="mtcSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>862, 472</value>
+    <value>861, 472</value>
   </data>
   <data name="mtcSettings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -6630,7 +6738,7 @@
     <value>4, 35</value>
   </data>
   <data name="mtpProduction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>854, 433</value>
+    <value>853, 433</value>
   </data>
   <data name="mtpProduction.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -9900,7 +10008,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>185, 3</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>680, 472</value>
+    <value>679, 472</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -9927,7 +10035,7 @@ LOGIN WITH YOUR SERIALKEY AGAIN</value>
     <value>Vertical</value>
   </data>
   <data name="mlHelpText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>680, 472</value>
+    <value>679, 472</value>
   </data>
   <data name="mlHelpText.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

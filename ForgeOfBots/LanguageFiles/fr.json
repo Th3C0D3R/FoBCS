@@ -248,6 +248,10 @@
           "Text": "The UserData.json is incompatible with the current Bot-Version!\n\n Please first delete this file (File-Explorer: '%appdata%/ForgeOfBots') and restart (by pressing YES)",
           "Title": "Incompatible UserData.json found!"
         },
+        "ChromeDriverOutdated": {
+          "Text": "The ChromeDriver Version is older or newer than the installed Chrome Browser\n\nPlease delete the 'chromedriver.exe' file inside this folder: (Windows-Explorer: '%appdata%/ForgeOfBots') and restart the Bot (press Yes)",
+          "Title": "Incompatible ChromeDriver Version!"
+        },
         "NoTelegramChatText": "There is no active Chat with the Bot\nSo no message could be send!\n\nPlease follow the link to start a chat:\nhttps://t.me/ForgeOfBot (Telegram-Client required)",
         "NoTelegramChatTitle": "No active chat",
         "NoTelegramNameText": "No receiver was saved in the Settings!\nPlease save one in the Settings Tab under \"Misc\"->\"Telegram Username\"! (without \"@\")",

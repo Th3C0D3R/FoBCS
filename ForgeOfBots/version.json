@@ -1,4 +1,4 @@
 ﻿{
-  "version": "2.2.7",
-  "changelog": "- Fixed manual collecting Tavern\n- Fixed UserAgent (was not used)\n- Fixed production overview\n- Changed some visual stuff to look nicer"
+  "version": "2.2.8",
+  "changelog": "- Fixed Arena definding and City defending army reset after a battle\n- Fixed Army not set to full (8) Units\n- Added Message if ChromeDriver not working with installed Chrome Browser"
 }

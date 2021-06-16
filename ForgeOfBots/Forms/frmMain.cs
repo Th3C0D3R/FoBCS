@@ -298,7 +298,43 @@ namespace ForgeOfBots.Forms
          }
          catch (Exception ex)
          {
-            MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            if(ex.Message.ToLower().Contains("session not created") && ex.Message.ToLower().Contains("this version of chromedriver only supports"))
+            {
+               DialogResult dlg = MessageBox.Show(i18n.getString("GUI.MessageBox.ChromeDriverOutdated.Text"), i18n.getString("GUI.MessageBox.ChromeDriverOutdated.Title"),MessageBoxButtons.YesNo);
+               if(dlg == DialogResult.Yes)
+               {
+                  if (ListClass.BackgroundWorkers.Count > 0)
+                  {
+                     foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
+                     {
+                        backgroundWorker.CancelAsync();
+                        while (backgroundWorker.IsBusy) { Application.DoEvents(); }
+                     }
+                     ListClass.BackgroundWorkers.Clear();
+                  }
+                  Process.Start(Application.ExecutablePath);
+                  Environment.Exit(0);
+                  return;
+               }
+               else
+               {
+                  if (ListClass.BackgroundWorkers.Count > 0)
+                  {
+                     foreach (BackgroundWorkerEX backgroundWorker in ListClass.BackgroundWorkers)
+                     {
+                        backgroundWorker.CancelAsync();
+                        while (backgroundWorker.IsBusy) { Application.DoEvents(); }
+                     }
+                     ListClass.BackgroundWorkers.Clear();
+                  }
+                  Environment.Exit(0);
+                  return;
+               }
+            }
+            else
+            {
+               MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            }
          }
          logger.Info($"navigating to 'https://{UserData.WorldServer}0.forgeofempires.com/'");
          driver.Navigate().GoToUrl($"https://{UserData.WorldServer}0.forgeofempires.com/");
@@ -1185,6 +1221,7 @@ namespace ForgeOfBots.Forms
       private void UpdateProductionView()
       {
          Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Clear());
+         ListClass.ProductionItems.Clear();
          if (ListClass.ProductionList.Count > 0)
          {
             List<KeyValuePair<string, List<EntityEx>>> groupedList = new List<KeyValuePair<string, List<EntityEx>>>();
@@ -1223,7 +1260,8 @@ namespace ForgeOfBots.Forms
                   pli.ContextMenuStrip = cmsMainMenu;
                   pli.isGoodBuilding = false;
                   pli.AddEntities(item.Value.Select(i => i.id).ToList().ToArray());
-                  pli.UpdateGUIEvent += UpdateProdGUI;
+                  if(!UserData.ProductionBot)
+                     pli.UpdateGUIEvent += UpdateProdGUI;
                   pli.jsExecutor = jsExecutor;
                   pli.StartProductionGUI();
                   Invoker.CallMethode(pnlProductionList, () => pnlProductionList.Controls.Add(pli));
@@ -2999,7 +3037,7 @@ namespace ForgeOfBots.Forms
                }
                catch (Exception ex)
                {
-                  logger.Info(ex,$"!Snip-Modul catched an exception!");
+                  logger.Info(ex, $"!Snip-Modul catched an exception!");
                }
                break;
             default:
@@ -3327,7 +3365,7 @@ namespace ForgeOfBots.Forms
          }
          if (GEXHelper.NeedChangeDiff() && GEXHelper.NextDiffOpen(GEXHelper.GEXOverview.progress.difficulty))
          {
-            if(!GEXHelper.ChangeDiff(GEXHelper.GEXOverview.progress.difficulty + 1).Item1)
+            if (!GEXHelper.ChangeDiff(GEXHelper.GEXOverview.progress.difficulty + 1).Item1)
             {
                Invoker.SetProperty(lblResult, () => lblResult.Text, $"{i18n.getString("GUI.GEX.Map.IncidentsFound")}");
                Updater.UpdateStartUp();
@@ -3744,6 +3782,7 @@ namespace ForgeOfBots.Forms
             var ret = GBGHelper.StartFight(prov.id.Value);
             if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
             {
+               if (!Updater.UpdateAttackPool()) break;
                ret = GBGHelper.StartFight(prov.id.Value);
                if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
                {
@@ -3781,6 +3820,7 @@ namespace ForgeOfBots.Forms
             var ret = GBGHelper.StartFight(prov.id.Value);
             if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
             {
+               if (!Updater.UpdateAttackPool()) break;
                ret = GBGHelper.StartFight(prov.id.Value);
                if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
                {
@@ -3817,6 +3857,7 @@ namespace ForgeOfBots.Forms
             var ret = GBGHelper.StartFight(prov.id.Value);
             if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
             {
+               if (!Updater.UpdateAttackPool()) break;
                ret = GBGHelper.StartFight(prov.id.Value);
                if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
                {
@@ -3855,6 +3896,7 @@ namespace ForgeOfBots.Forms
          var ret = GBGHelper.StartFight(prov.id.Value);
          if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
          {
+            if (!Updater.UpdateAttackPool()) return;
             ret = GBGHelper.StartFight(prov.id.Value);
             if (ret.battleType.totalWaves == 2 && ret.state.winnerBit == 1)
             {

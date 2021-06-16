@@ -245,8 +245,12 @@
           "Title": "Alte UserData.json gefunden!"
         },
         "SettingsLoadedFailed": {
-          "Text": "Die UserData.json ist mit der aktuellen Bot-Version inkompatible!\n\n Lösche bitte die aktuelle Datei (Windows-Explorer: '%appdata%/ForgeOfBots') und starte de Bot neu (durch drücken auf JA)",
+          "Text": "Die UserData.json ist mit der aktuellen Bot-Version inkompatible!\n\n Lösche bitte die aktuelle Datei (Windows-Explorer: '%appdata%/ForgeOfBots') und starte den Bot neu (durch drücken auf JA)",
           "Title": "Inkompatible UserData.json gefunden!"
+        },
+        "ChromeDriverOutdated": {
+          "Text": "Die ChromeDriver Version ist älter oder neuer als der installierte Chrome Browser\n\nLösche bitte die 'chromedriver.exe' im Ordner: (Windows-Explorer: '%appdata%/ForgeOfBots') und starte den Bot neu (durch drücken auf JA)",
+          "Title": "Inkompatible ChromeDriver Version!"
         },
         "NoTelegramChatText": "Du hast noch kein Telegram-Chat mit dem Bot\nDeswegen kann keine Nachricht geschickt werden!\n\nBitte klicke auf folgenden Link um ein Chat zu starten:\nhttps://t.me/ForgeOfBot (Telegram-Client erforderlich)",
         "NoTelegramChatTitle": "Kein offener Chat",

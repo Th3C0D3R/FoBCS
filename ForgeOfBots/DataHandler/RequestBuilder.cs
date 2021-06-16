@@ -6,6 +6,8 @@ using System.Resources;
 using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
+using ForgeOfBots.GameClasses;
+using ForgeOfBots.GameClasses.ResponseClasses;
 using ForgeOfBots.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -341,8 +343,10 @@ namespace ForgeOfBots.DataHandler
             {
                if (armyData.Length != 16) return "";
                string start = "[{\"__class__\":\"ServerRequest\",\"requestData\":[[{\"__class__\":\"ArmyPool\",\"units\":[";
-               string ids = string.Join(",", armyData.GetTroopRow(0)).Replace("0,", "");
-               string end = $"],\"type\":\"attacking\"}},{{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"defending\"}},{{\"__class__\":\"ArmyPool\",\"units\":[],\"type\":\"arena_defending\"}}],{{\"__class__\":\"ArmyContext\",\"content\":\"main\"}}],\"requestClass\":\"ArmyUnitManagementService\",\"requestMethod\":\"updatePools\",\"requestId\":{RequestID}}}]";
+               string ids = string.Join(",", armyData.GetTroopRow(0));
+               string defIds = string.Join(",", ListClass.Army.responseData.units.ToList().FindAll((u) => u.is_defending).Select<GameUnit, int>((u) => u.unitId).ToArray());
+               string arenaIds = string.Join(",", ListClass.Army.responseData.units.ToList().FindAll((u) => u.isArenaDefending).Select<GameUnit, int>((u) => u.unitId).ToArray());
+               string end = $"],\"type\":\"attacking\"}},{{\"__class__\":\"ArmyPool\",\"units\":[{defIds}],\"type\":\"defending\"}},{{\"__class__\":\"ArmyPool\",\"units\":[{arenaIds}],\"type\":\"arena_defending\"}}],{{\"__class__\":\"ArmyContext\",\"content\":\"main\"}}],\"requestClass\":\"ArmyUnitManagementService\",\"requestMethod\":\"updatePools\",\"requestId\":{RequestID}}}]";
                jsonString = $"{start}{ids}{end}";
             }
             else if (type == RequestType.CollectProduction)
