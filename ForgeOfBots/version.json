@@ -1,4 +1,4 @@
 ﻿{
   "version": "2.2.8",
-  "changelog": "- Fixed Arena definding and City defending army reset after a battle\n- Fixed Army not set to full (8) Units\n- Added Message if ChromeDriver not working with installed Chrome Browser"
+  "changelog": "- Fixed Arena definding and City defending army reset after a battle\n- Fixed Army not set to full (8) Units\n- Added Message if ChromeDriver not working with installed Chrome Browser\n- Before each Fight your Units are replaced which means you will always fight with fully healed units in both waves in a 2-Waves-Battle"
 }
